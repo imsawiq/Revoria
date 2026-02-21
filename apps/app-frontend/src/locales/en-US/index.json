@@ -1,0 +1,2429 @@
+{
+	"app.auth-servers.unreachable.body": {
+		"message": "Minecraft authentication servers may be down right now. Check your internet connection and try again later."
+	},
+	"app.auth-servers.unreachable.header": {
+		"message": "Cannot reach authentication servers"
+	},
+	"app.settings.developer-mode-enabled": {
+		"message": "Developer mode enabled."
+	},
+	"app.settings.downloading": {
+		"message": "Downloading v{version}"
+	},
+	"app.settings.tabs.appearance": {
+		"message": "Appearance"
+	},
+	"app.settings.tabs.default-instance-options": {
+		"message": "Default instance options"
+	},
+	"app.settings.tabs.feature-flags": {
+		"message": "Feature flags"
+	},
+	"app.settings.tabs.java-installations": {
+		"message": "Java installations"
+	},
+	"app.settings.tabs.privacy": {
+		"message": "Privacy"
+	},
+	"app.settings.tabs.resource-management": {
+		"message": "Resource management"
+	},
+	"app.update-toast.body": {
+		"message": "Revoria v{version} is ready to install! Reload to update now, or automatically when you close Revoria."
+	},
+	"app.update-toast.body.download-complete": {
+		"message": "Revoria v{version} has finished downloading. Reload to update now, or automatically when you close Revoria."
+	},
+	"app.update-toast.body.metered": {
+		"message": "Revoria v{version} is available now! Since you're on a metered network, we didn't automatically download it."
+	},
+	"app.update-toast.changelog": {
+		"message": "Changelog"
+	},
+	"app.update-toast.download": {
+		"message": "Download ({size})"
+	},
+	"app.update-toast.downloading": {
+		"message": "Downloading..."
+	},
+	"app.update-toast.reload": {
+		"message": "Reload"
+	},
+	"settings.appearance.advanced-rendering.description": {
+		"message": "Enables advanced rendering such as blur effects that may cause performance issues without hardware-accelerated rendering."
+	},
+	"settings.appearance.advanced-rendering.title": {
+		"message": "Advanced rendering"
+	},
+	"settings.appearance.color-theme.description": {
+		"message": "Select your preferred color theme for Modrinth App."
+	},
+	"settings.appearance.color-theme.title": {
+		"message": "Color theme"
+	},
+	"settings.appearance.default-landing.description": {
+		"message": "Change the page to which the launcher opens on."
+	},
+	"settings.appearance.default-landing.home": {
+		"message": "Home"
+	},
+	"settings.appearance.default-landing.library": {
+		"message": "Library"
+	},
+	"settings.appearance.launcher-language.option.english": {
+		"message": "English"
+	},
+	"settings.appearance.launcher-language.option.russian": {
+		"message": "Russian"
+	},
+	"settings.appearance.default-landing.placeholder": {
+		"message": "Select an option"
+	},
+	"settings.appearance.default-landing.title": {
+		"message": "Default landing page"
+	},
+	"settings.appearance.hide-nametag.description": {
+		"message": "Disables the nametag above your player on the skins page."
+	},
+	"settings.appearance.hide-nametag.title": {
+		"message": "Hide nametag"
+	},
+	"settings.appearance.jump-back.description": {
+		"message": "Includes recent worlds in the \"Jump back in\" section on the Home page."
+	},
+	"settings.appearance.jump-back.title": {
+		"message": "Jump back into worlds"
+	},
+	"settings.appearance.launcher-language.description": {
+		"message": "Select the language used by Revoria UI."
+	},
+	"settings.appearance.launcher-language.title": {
+		"message": "Launcher language"
+	},
+	"settings.appearance.minimize-launcher.description": {
+		"message": "Minimize the launcher when a Minecraft process starts."
+	},
+	"settings.appearance.minimize-launcher.title": {
+		"message": "Minimize launcher"
+	},
+	"settings.appearance.native-decorations.description": {
+		"message": "Use system window frame (app restart required)."
+	},
+	"settings.appearance.native-decorations.title": {
+		"message": "Native decorations"
+	},
+	"settings.appearance.toggle-sidebar.description": {
+		"message": "Enables the ability to toggle the sidebar."
+	},
+	"settings.appearance.toggle-sidebar.title": {
+		"message": "Toggle sidebar"
+	},
+	"settings.default-instance.window-size.title": {
+		"message": "Window size"
+	},
+	"settings.default-instance.fullscreen.title": {
+		"message": "Fullscreen"
+	},
+	"settings.default-instance.fullscreen.description": {
+		"message": "Overwrites the options.txt file to start in full screen when launched."
+	},
+	"settings.default-instance.width.title": {
+		"message": "Width"
+	},
+	"settings.default-instance.width.description": {
+		"message": "The width of the game window when launched."
+	},
+	"settings.default-instance.width.placeholder": {
+		"message": "Enter width..."
+	},
+	"settings.default-instance.height.title": {
+		"message": "Height"
+	},
+	"settings.default-instance.height.description": {
+		"message": "The height of the game window when launched."
+	},
+	"settings.default-instance.height.placeholder": {
+		"message": "Enter height..."
+	},
+	"settings.default-instance.memory-allocated.title": {
+		"message": "Memory allocated"
+	},
+	"settings.default-instance.memory-allocated.description": {
+		"message": "The memory allocated to each instance when it is ran."
+	},
+	"settings.default-instance.java-arguments.title": {
+		"message": "Java arguments"
+	},
+	"settings.default-instance.java-arguments.placeholder": {
+		"message": "Enter java arguments..."
+	},
+	"settings.default-instance.environmental-variables.title": {
+		"message": "Environmental variables"
+	},
+	"settings.default-instance.environmental-variables.placeholder": {
+		"message": "Enter environmental variables..."
+	},
+	"settings.default-instance.hooks.title": {
+		"message": "Hooks"
+	},
+	"settings.default-instance.pre-launch.title": {
+		"message": "Pre launch"
+	},
+	"settings.default-instance.pre-launch.description": {
+		"message": "Ran before the instance is launched."
+	},
+	"settings.default-instance.pre-launch.placeholder": {
+		"message": "Enter pre-launch command..."
+	},
+	"settings.default-instance.wrapper.title": {
+		"message": "Wrapper"
+	},
+	"settings.default-instance.wrapper.description": {
+		"message": "Wrapper command for launching Minecraft."
+	},
+	"settings.default-instance.wrapper.placeholder": {
+		"message": "Enter wrapper command..."
+	},
+	"settings.default-instance.post-exit.title": {
+		"message": "Post exit"
+	},
+	"settings.default-instance.post-exit.description": {
+		"message": "Ran after the game closes."
+	},
+	"settings.default-instance.post-exit.placeholder": {
+		"message": "Enter post-exit command..."
+	},
+	"settings.java.location": {
+		"message": "Java {version} location"
+	},
+	"settings.privacy.personalized-ads.title": {
+		"message": "Personalized ads"
+	},
+	"settings.privacy.personalized-ads.description": {
+		"message": "Modrinth's ad provider, Aditude, shows ads based on your preferences. By disabling this option, you opt out and ads will no longer be shown based on your interests."
+	},
+	"settings.privacy.telemetry.title": {
+		"message": "Telemetry"
+	},
+	"settings.privacy.telemetry.description": {
+		"message": "Modrinth collects anonymized analytics and usage data to improve our user experience and customize your experience. By disabling this option, you opt out and your data will no longer be collected."
+	},
+	"settings.privacy.discord-rpc.title": {
+		"message": "Discord RPC"
+	},
+	"settings.privacy.discord-rpc.description": {
+		"message": "Manages the Discord Rich Presence integration. Disabling this will cause 'Modrinth' to no longer show up as a game or app you are using on your Discord profile."
+	},
+	"settings.privacy.discord-rpc.note": {
+		"message": "Note: This will not prevent any instance-specific Discord Rich Presence integrations, such as those added by mods. (app restart required to take effect)"
+	},
+	"settings.resource.select-new-app-directory": {
+		"message": "Select a new app directory"
+	},
+	"settings.resource.app-directory.title": {
+		"message": "App directory"
+	},
+	"settings.resource.app-directory.description": {
+		"message": "The directory where the launcher stores all of its files. Changes will be applied after restarting the launcher."
+	},
+	"settings.resource.purge-cache.confirm.title": {
+		"message": "Are you sure you want to purge the cache?"
+	},
+	"settings.resource.purge-cache.confirm.description": {
+		"message": "If you proceed, your entire cache will be purged. This may slow down the app temporarily."
+	},
+	"settings.resource.purge-cache.proceed": {
+		"message": "Purge cache"
+	},
+	"settings.resource.app-cache.title": {
+		"message": "App cache"
+	},
+	"settings.resource.app-cache.description": {
+		"message": "The Modrinth app stores a cache of data to speed up loading. This can be purged to force the app to reload data. This may slow down the app temporarily."
+	},
+	"settings.resource.max-concurrent-downloads.title": {
+		"message": "Maximum concurrent downloads"
+	},
+	"settings.resource.max-concurrent-downloads.description": {
+		"message": "The maximum amount of files the launcher can download at the same time. Set this to a lower value if you have a poor internet connection. (app restart required to take effect)"
+	},
+	"settings.resource.max-concurrent-writes.title": {
+		"message": "Maximum concurrent writes"
+	},
+	"settings.resource.max-concurrent-writes.description": {
+		"message": "The maximum amount of files the launcher can write to the disk at once. Set this to a lower value if you are frequently getting I/O errors. (app restart required to take effect)"
+	},
+	"app.settings.title": {
+		"message": "Settings"
+	},
+	"app.settings.footer.version": {
+		"message": "Revoria {version}"
+	},
+	"app.settings.footer.base-version": {
+		"message": "Based on Modrinth App {version}"
+	},
+	"app.nav.home": {
+		"message": "Home"
+	},
+	"app.nav.worlds": {
+		"message": "Worlds"
+	},
+	"app.worlds.page-title": {
+		"message": "Worlds"
+	},
+	"app.nav.servers": {
+		"message": "Servers"
+	},
+	"app.nav.discover": {
+		"message": "Discover content"
+	},
+	"app.nav.skins": {
+		"message": "Skins (Beta)"
+	},
+	"app.nav.maintenance": {
+		"message": "Maintenance"
+	},
+	"app.nav.library": {
+		"message": "Library"
+	},
+	"app.nav.create-instance": {
+		"message": "Create new instance"
+	},
+	"app.home.breadcrumb": {
+		"message": "Home"
+	},
+	"app.home.greeting.night": {
+		"message": "Good night"
+	},
+	"app.home.greeting.morning": {
+		"message": "Good morning"
+	},
+	"app.home.greeting.afternoon": {
+		"message": "Good afternoon"
+	},
+	"app.home.greeting.evening": {
+		"message": "Good evening"
+	},
+	"app.home.welcome.back": {
+		"message": "Welcome back!"
+	},
+	"app.home.welcome.new": {
+		"message": "Welcome to Revoria"
+	},
+	"app.home.instances.count": {
+		"message": "{count} instances"
+	},
+	"app.home.action.browse-content": {
+		"message": "Browse content"
+	},
+	"app.home.action.my-library": {
+		"message": "My library"
+	},
+	"app.home.row.discover-modpack": {
+		"message": "Discover a modpack"
+	},
+	"app.home.row.discover-mods": {
+		"message": "Discover mods"
+	},
+	"app.library.breadcrumb": {
+		"message": "Library"
+	},
+	"app.library.title": {
+		"message": "Library"
+	},
+	"app.library.subtitle": {
+		"message": "Your instances, organized."
+	},
+	"app.library.create": {
+		"message": "Create"
+	},
+	"app.library.tab.all": {
+		"message": "All instances"
+	},
+	"app.library.tab.downloaded": {
+		"message": "Downloaded"
+	},
+	"app.library.tab.custom": {
+		"message": "Custom"
+	},
+	"app.library.tab.shared": {
+		"message": "Shared with me"
+	},
+	"app.library.tab.saved": {
+		"message": "Saved"
+	},
+	"app.library.empty.title": {
+		"message": "No instances found"
+	},
+	"app.library.empty.create-new": {
+		"message": "Create new instance"
+	},
+	"java-selector.path-placeholder": {
+		"message": "/path/to/java"
+	},
+	"java-selector.installing": {
+		"message": "Installing..."
+	},
+	"java-selector.install-recommended": {
+		"message": "Install recommended"
+	},
+	"java-selector.detect": {
+		"message": "Detect"
+	},
+	"java-selector.browse": {
+		"message": "Browse"
+	},
+	"java-selector.testing": {
+		"message": "Testing..."
+	},
+	"java-selector.success": {
+		"message": "Success"
+	},
+	"java-selector.failed": {
+		"message": "Failed"
+	},
+	"java-selector.test": {
+		"message": "Test"
+	},
+	"app.account.menu": {
+		"message": "Modrinth account"
+	},
+	"app.account.signed-in-as": {
+		"message": "Signed in as"
+	},
+	"app.account.sign-out": {
+		"message": "Sign out"
+	},
+	"app.account.sign-in": {
+		"message": "Sign in to a Modrinth account"
+	},
+	"app.survey.title": {
+		"message": "Hey there Modrinth user!"
+	},
+	"app.survey.body": {
+		"message": "Would you mind answering a few questions about your experience with Modrinth App?"
+	},
+	"app.survey.body.secondary": {
+		"message": "This feedback will go directly to the Modrinth team and help guide future updates!"
+	},
+	"app.survey.take": {
+		"message": "Take survey"
+	},
+	"app.survey.decline": {
+		"message": "No thanks"
+	},
+	"app.sidebar.playing-as": {
+		"message": "Playing as"
+	},
+	"app.sidebar.friends": {
+		"message": "Friends"
+	},
+	"instance.logs.copy": {
+		"message": "Copy"
+	},
+	"instance.logs.copied": {
+		"message": "Copied"
+	},
+	"instance.logs.crash.analyze": {
+		"message": "Analyze crash log"
+	},
+	"instance.logs.crash.analyzing": {
+		"message": "Analyzing..."
+	},
+	"instance.logs.crash.api-key": {
+		"message": "API key"
+	},
+	"instance.logs.crash.description": {
+		"message": "Analyzes this instance’s crash logs via the Ollama cloud model."
+	},
+	"instance.logs.crash.dropdown": {
+		"message": "Crash log"
+	},
+	"instance.logs.crash.empty": {
+		"message": "No crash logs found."
+	},
+	"instance.logs.crash.endpoint": {
+		"message": "Endpoint"
+	},
+	"instance.logs.crash.fail": {
+		"message": "Failed to get a response from the model."
+	},
+	"instance.logs.crash.folder": {
+		"message": "Crash logs folder"
+	},
+	"instance.logs.crash.header": {
+		"message": "Crash Log Checker"
+	},
+	"instance.logs.crash.api-tutorial.title": {
+		"message": "How to get an Ollama API key:"
+	},
+	"instance.logs.crash.api-tutorial.step1": {
+		"message": "Sign in at https://ollama.com/"
+	},
+	"instance.logs.crash.api-tutorial.step2": {
+		"message": "Open settings keys: https://ollama.com/settings/keys"
+	},
+	"instance.logs.crash.api-tutorial.step3": {
+		"message": "Click Add API Key, copy it, and paste it into the API key field above."
+	},
+	"instance.logs.crash.model": {
+		"message": "Model"
+	},
+	"instance.logs.crash.refresh": {
+		"message": "Refresh"
+	},
+	"instance.logs.crash.result": {
+		"message": "Analysis result"
+	},
+	"instance.logs.crash.size": {
+		"message": "Size"
+	},
+	"instance.logs.delete": {
+		"message": "Delete"
+	},
+	"instance.logs.empty.subtitle": {
+		"message": "Start your game to proceed."
+	},
+	"instance.logs.empty.title": {
+		"message": "No live game detected."
+	},
+	"instance.logs.filter.placeholder": {
+		"message": "Type to filter logs..."
+	},
+	"instance.logs.level.comment": {
+		"message": "Comment"
+	},
+	"instance.logs.level.debug": {
+		"message": "Debug"
+	},
+	"instance.logs.level.error": {
+		"message": "Error"
+	},
+	"instance.logs.level.info": {
+		"message": "Info"
+	},
+	"instance.logs.level.trace": {
+		"message": "Trace"
+	},
+	"instance.logs.level.warn": {
+		"message": "Warn"
+	},
+	"instance.logs.live": {
+		"message": "Live Log"
+	},
+	"instance.logs.loading": {
+		"message": "Loading..."
+	},
+	"instance.logs.log-date": {
+		"message": "Log date"
+	},
+	"instance.logs.open-folder": {
+		"message": "Open folder"
+	},
+	"instance.logs.share": {
+		"message": "Share"
+	},
+	"instance.logs.share.header": {
+		"message": "Share Log"
+	},
+	"instance.logs.share.text": {
+		"message": "Check out this log from an instance on the Modrinth App"
+	},
+	"instance.logs.share.title": {
+		"message": "Instance Log"
+	},
+	"instance.logs.unknown": {
+		"message": "Unknown"
+	},
+	"instance.logs.clear": {
+		"message": "Clear"
+	},
+	"app.update-toast.title": {
+		"message": "Update available"
+	},
+	"app.update-toast.title.download-complete": {
+		"message": "Download complete"
+	},
+	"app.update.complete-toast.text": {
+		"message": "Click here to view the changelog."
+	},
+	"app.update.complete-toast.title": {
+		"message": "Version {version} was successfully installed!"
+	},
+	"app.update.download-update": {
+		"message": "Download update"
+	},
+	"app.revoria-update.header": {
+		"message": "New Revoria release available!"
+	},
+	"app.revoria-update.body": {
+		"message": "Revoria v{latestVersion} is out on GitHub. You are currently on v{currentVersion}."
+	},
+	"app.revoria-update.open": {
+		"message": "Open releases"
+	},
+	"app.revoria-update.dismiss": {
+		"message": "Hide this version"
+	},
+	"app.update.downloading-update": {
+		"message": "Downloading update ({percent}%)"
+	},
+	"app.update.reload-to-update": {
+		"message": "Reload to install update"
+	},
+	"friends.action.add-friend": {
+		"message": "Add a friend"
+	},
+	"friends.action.view-friend-requests": {
+		"message": "{count} friend {count, plural, one {request} other {requests}}"
+	},
+	"friends.add-friend.submit": {
+		"message": "Send friend request"
+	},
+	"friends.add-friend.title": {
+		"message": "Adding a friend"
+	},
+	"friends.add-friend.username.description": {
+		"message": "It may be different from their Minecraft username!"
+	},
+	"friends.add-friend.username.placeholder": {
+		"message": "Enter Modrinth username..."
+	},
+	"friends.add-friend.username.title": {
+		"message": "What's your friend's Modrinth username?"
+	},
+	"friends.add-friends-to-share": {
+		"message": "<link>Add friends</link> to see what they're playing!"
+	},
+	"friends.friend.cancel-request": {
+		"message": "Cancel request"
+	},
+	"friends.friend.remove-friend": {
+		"message": "Remove friend"
+	},
+	"friends.friend.request-sent": {
+		"message": "Friend request sent"
+	},
+	"friends.friend.view-profile": {
+		"message": "View profile"
+	},
+	"friends.heading": {
+		"message": "Friends"
+	},
+	"friends.heading.active": {
+		"message": "Active"
+	},
+	"friends.heading.offline": {
+		"message": "Offline"
+	},
+	"friends.heading.online": {
+		"message": "Online"
+	},
+	"friends.heading.pending": {
+		"message": "Pending"
+	},
+	"friends.no-friends-match": {
+		"message": "No friends matching ''{query}''"
+	},
+	"friends.search-friends-placeholder": {
+		"message": "Search friends..."
+	},
+	"friends.section.heading": {
+		"message": "{title} - {count}"
+	},
+	"friends.sign-in-to-add-friends": {
+		"message": "<link>Sign in to a Modrinth account</link> to add friends and see what they're playing!"
+	},
+	"instance.add-server.add-and-play": {
+		"message": "Add and play"
+	},
+	"instance.add-server.add-server": {
+		"message": "Add server"
+	},
+	"instance.add-server.resource-pack.disabled": {
+		"message": "Disabled"
+	},
+	"instance.add-server.resource-pack.enabled": {
+		"message": "Enabled"
+	},
+	"instance.add-server.resource-pack.prompt": {
+		"message": "Prompt"
+	},
+	"instance.add-server.title": {
+		"message": "Add a server"
+	},
+	"instance.edit-server.title": {
+		"message": "Edit server"
+	},
+	"instance.edit-world.hide-from-home": {
+		"message": "Hide from the Home page"
+	},
+	"instance.edit-world.name": {
+		"message": "Name"
+	},
+	"instance.edit-world.placeholder-name": {
+		"message": "Minecraft World"
+	},
+	"instance.edit-world.reset-icon": {
+		"message": "Reset icon"
+	},
+	"instance.edit-world.title": {
+		"message": "Edit world"
+	},
+	"instance.filter.disabled": {
+		"message": "Disabled projects"
+	},
+	"instance.filter.updates-available": {
+		"message": "Updates available"
+	},
+	"instance.server-modal.address": {
+		"message": "Address"
+	},
+	"instance.server-modal.name": {
+		"message": "Name"
+	},
+	"instance.server-modal.placeholder-name": {
+		"message": "Minecraft Server"
+	},
+	"instance.server-modal.resource-pack": {
+		"message": "Resource pack"
+	},
+	"instance.settings.tabs.general": {
+		"message": "General"
+	},
+	"instance.settings.tabs.general.delete": {
+		"message": "Delete instance"
+	},
+	"instance.settings.tabs.general.delete.button": {
+		"message": "Delete instance"
+	},
+	"instance.settings.tabs.general.delete.description": {
+		"message": "Permanently deletes an instance from your device, including your worlds, configs, and all installed content. Be careful, as once you delete a instance there is no way to recover it."
+	},
+	"instance.settings.tabs.general.deleting.button": {
+		"message": "Deleting..."
+	},
+	"instance.settings.tabs.general.duplicate-button": {
+		"message": "Duplicate"
+	},
+	"instance.settings.tabs.general.duplicate-button.tooltip.installing": {
+		"message": "Cannot duplicate while installing."
+	},
+	"instance.settings.tabs.general.duplicate-instance": {
+		"message": "Duplicate instance"
+	},
+	"instance.settings.tabs.general.duplicate-instance.description": {
+		"message": "Creates a copy of this instance, including worlds, configs, mods, etc."
+	},
+	"instance.settings.tabs.general.edit-icon": {
+		"message": "Edit icon"
+	},
+	"instance.settings.tabs.general.edit-icon.remove": {
+		"message": "Remove icon"
+	},
+	"instance.settings.tabs.general.edit-icon.replace": {
+		"message": "Replace icon"
+	},
+	"instance.settings.tabs.general.edit-icon.select": {
+		"message": "Select icon"
+	},
+	"instance.settings.tabs.general.library-groups": {
+		"message": "Library groups"
+	},
+	"instance.settings.tabs.general.library-groups.create": {
+		"message": "Create new group"
+	},
+	"instance.settings.tabs.general.library-groups.description": {
+		"message": "Library groups allow you to organize your instances into different sections in your library."
+	},
+	"instance.settings.tabs.general.library-groups.enter-name": {
+		"message": "Enter group name"
+	},
+	"instance.settings.tabs.general.name": {
+		"message": "Name"
+	},
+	"instance.settings.tabs.hooks": {
+		"message": "Launch hooks"
+	},
+	"instance.settings.tabs.hooks.custom-hooks": {
+		"message": "Custom launch hooks"
+	},
+	"instance.settings.tabs.hooks.description": {
+		"message": "Hooks allow advanced users to run certain system commands before and after launching the game."
+	},
+	"instance.settings.tabs.hooks.post-exit": {
+		"message": "Post-exit"
+	},
+	"instance.settings.tabs.hooks.post-exit.description": {
+		"message": "Ran after the game closes."
+	},
+	"instance.settings.tabs.hooks.post-exit.enter": {
+		"message": "Enter post-exit command..."
+	},
+	"instance.settings.tabs.hooks.pre-launch": {
+		"message": "Pre-launch"
+	},
+	"instance.settings.tabs.hooks.pre-launch.description": {
+		"message": "Ran before the instance is launched."
+	},
+	"instance.settings.tabs.hooks.pre-launch.enter": {
+		"message": "Enter pre-launch command..."
+	},
+	"instance.settings.tabs.hooks.title": {
+		"message": "Game launch hooks"
+	},
+	"instance.settings.tabs.hooks.wrapper": {
+		"message": "Wrapper"
+	},
+	"instance.settings.tabs.hooks.wrapper.description": {
+		"message": "Wrapper command for launching Minecraft."
+	},
+	"instance.settings.tabs.hooks.wrapper.enter": {
+		"message": "Enter wrapper command..."
+	},
+	"instance.settings.tabs.installation": {
+		"message": "Installation"
+	},
+	"instance.settings.tabs.installation.change-version.already-installed.modded": {
+		"message": "{platform} {version} for Minecraft {game_version} already installed"
+	},
+	"instance.settings.tabs.installation.change-version.already-installed.vanilla": {
+		"message": "Vanilla {game_version} already installed"
+	},
+	"instance.settings.tabs.installation.change-version.button": {
+		"message": "Change version"
+	},
+	"instance.settings.tabs.installation.change-version.button.install": {
+		"message": "Install"
+	},
+	"instance.settings.tabs.installation.change-version.button.installing": {
+		"message": "Installing"
+	},
+	"instance.settings.tabs.installation.change-version.cannot-while-fetching": {
+		"message": "Fetching modpack versions"
+	},
+	"instance.settings.tabs.installation.change-version.in-progress": {
+		"message": "Installing new version"
+	},
+	"instance.settings.tabs.installation.currently-installed": {
+		"message": "Currently installed"
+	},
+	"instance.settings.tabs.installation.debug-information": {
+		"message": "Debug information:"
+	},
+	"instance.settings.tabs.installation.fetching-modpack-details": {
+		"message": "Fetching modpack details"
+	},
+	"instance.settings.tabs.installation.game-version": {
+		"message": "Game version"
+	},
+	"instance.settings.tabs.installation.install": {
+		"message": "Install"
+	},
+	"instance.settings.tabs.installation.install.in-progress": {
+		"message": "Installation in progress"
+	},
+	"instance.settings.tabs.installation.loader-version": {
+		"message": "{loader} version"
+	},
+	"instance.settings.tabs.installation.minecraft-version": {
+		"message": "Minecraft {version}"
+	},
+	"instance.settings.tabs.installation.no-connection": {
+		"message": "Cannot fetch linked modpack details. Please check your internet connection."
+	},
+	"instance.settings.tabs.installation.no-loader-versions": {
+		"message": "{loader} is not available for Minecraft {version}. Try another mod loader."
+	},
+	"instance.settings.tabs.installation.no-modpack-found": {
+		"message": "This instance is linked to a modpack, but the modpack could not be found on Modrinth."
+	},
+	"instance.settings.tabs.installation.platform": {
+		"message": "Platform"
+	},
+	"instance.settings.tabs.installation.reinstall.button": {
+		"message": "Reinstall modpack"
+	},
+	"instance.settings.tabs.installation.reinstall.button.reinstalling": {
+		"message": "Reinstalling modpack"
+	},
+	"instance.settings.tabs.installation.reinstall.confirm.description": {
+		"message": "Reinstalling will reset all installed or modified content to what is provided by the modpack, removing any mods or content you have added on top of the original installation. This may fix unexpected behavior if changes have been made to the instance, but if your worlds now depend on additional installed content, it may break existing worlds."
+	},
+	"instance.settings.tabs.installation.reinstall.confirm.title": {
+		"message": "Are you sure you want to reinstall this instance?"
+	},
+	"instance.settings.tabs.installation.reinstall.description": {
+		"message": "Resets the instance's content to its original state, removing any mods or content you have added on top of the original modpack."
+	},
+	"instance.settings.tabs.installation.reinstall.title": {
+		"message": "Reinstall modpack"
+	},
+	"instance.settings.tabs.installation.repair.button": {
+		"message": "Repair"
+	},
+	"instance.settings.tabs.installation.repair.button.repairing": {
+		"message": "Repairing"
+	},
+	"instance.settings.tabs.installation.repair.confirm.description": {
+		"message": "Repairing reinstalls Minecraft dependencies and checks for corruption. This may resolve issues if your game is not launching due to launcher-related errors, but will not resolve issues or crashes related to installed mods."
+	},
+	"instance.settings.tabs.installation.repair.confirm.title": {
+		"message": "Repair instance?"
+	},
+	"instance.settings.tabs.installation.repair.in-progress": {
+		"message": "Repair in progress"
+	},
+	"instance.settings.tabs.installation.reset-selections": {
+		"message": "Reset to current"
+	},
+	"instance.settings.tabs.installation.show-all-versions": {
+		"message": "Show all versions"
+	},
+	"instance.settings.tabs.installation.tooltip.action.change-version": {
+		"message": "change version"
+	},
+	"instance.settings.tabs.installation.tooltip.action.install": {
+		"message": "install"
+	},
+	"instance.settings.tabs.installation.tooltip.action.reinstall": {
+		"message": "reinstall"
+	},
+	"instance.settings.tabs.installation.tooltip.action.repair": {
+		"message": "repair"
+	},
+	"instance.settings.tabs.installation.tooltip.cannot-while-installing": {
+		"message": "Cannot {action} while installing"
+	},
+	"instance.settings.tabs.installation.tooltip.cannot-while-offline": {
+		"message": "Cannot {action} while offline"
+	},
+	"instance.settings.tabs.installation.tooltip.cannot-while-repairing": {
+		"message": "Cannot {action} while repairing"
+	},
+	"instance.settings.tabs.installation.unknown-version": {
+		"message": "(unknown version)"
+	},
+	"instance.settings.tabs.installation.unlink.button": {
+		"message": "Unlink instance"
+	},
+	"instance.settings.tabs.installation.unlink.confirm.description": {
+		"message": "If you proceed, you will not be able to re-link it without creating an entirely new instance. You will no longer receive modpack updates and it will become a normal."
+	},
+	"instance.settings.tabs.installation.unlink.confirm.title": {
+		"message": "Are you sure you want to unlink this instance?"
+	},
+	"instance.settings.tabs.installation.unlink.description": {
+		"message": "This instance is linked to a modpack, which means mods can't be updated and you can't change the mod loader or Minecraft version. Unlinking will permanently disconnect this instance from the modpack."
+	},
+	"instance.settings.tabs.installation.unlink.title": {
+		"message": "Unlink from modpack"
+	},
+	"instance.settings.tabs.java": {
+		"message": "Java and memory"
+	},
+	"instance.settings.tabs.java.environment-variables": {
+		"message": "Environment variables"
+	},
+	"instance.settings.tabs.java.hooks": {
+		"message": "Hooks"
+	},
+	"instance.settings.tabs.java.java-arguments": {
+		"message": "Java arguments"
+	},
+	"instance.settings.tabs.java.java-installation": {
+		"message": "Java installation"
+	},
+	"instance.settings.tabs.java.java-memory": {
+		"message": "Memory allocated"
+	},
+	"instance.settings.tabs.window": {
+		"message": "Window"
+	},
+	"instance.settings.tabs.window.custom-window-settings": {
+		"message": "Custom window settings"
+	},
+	"instance.settings.tabs.window.fullscreen": {
+		"message": "Fullscreen"
+	},
+	"instance.settings.tabs.window.fullscreen.description": {
+		"message": "Make the game start in full screen when launched (using options.txt)."
+	},
+	"instance.settings.tabs.window.height": {
+		"message": "Height"
+	},
+	"instance.settings.tabs.window.height.description": {
+		"message": "The height of the game window when launched."
+	},
+	"instance.settings.tabs.window.height.enter": {
+		"message": "Enter height..."
+	},
+	"instance.settings.tabs.window.width": {
+		"message": "Width"
+	},
+	"instance.settings.tabs.window.width.description": {
+		"message": "The width of the game window when launched."
+	},
+	"instance.settings.tabs.window.width.enter": {
+		"message": "Enter width..."
+	},
+	"instance.settings.title": {
+		"message": "Settings"
+	},
+	"instance.worlds.a_minecraft_server": {
+		"message": "A Minecraft Server"
+	},
+	"instance.worlds.cant_connect": {
+		"message": "Can't connect to server"
+	},
+	"instance.worlds.copy_address": {
+		"message": "Copy address"
+	},
+	"instance.worlds.dont_show_on_home": {
+		"message": "Don't show on Home"
+	},
+	"instance.worlds.filter.available": {
+		"message": "Available"
+	},
+	"instance.worlds.game_already_open": {
+		"message": "Instance is already open"
+	},
+	"instance.worlds.hardcore": {
+		"message": "Hardcore mode"
+	},
+	"instance.worlds.incompatible_server": {
+		"message": "Server is incompatible"
+	},
+	"instance.worlds.no_contact": {
+		"message": "Server couldn't be contacted"
+	},
+	"instance.worlds.no_server_quick_play": {
+		"message": "You can only jump straight into servers on Minecraft Alpha 1.0.5+"
+	},
+	"instance.worlds.no_singleplayer_quick_play": {
+		"message": "You can only jump straight into singleplayer worlds on Minecraft 1.20+"
+	},
+	"instance.worlds.play_instance": {
+		"message": "Play instance"
+	},
+	"instance.worlds.type.server": {
+		"message": "Server"
+	},
+	"instance.worlds.type.singleplayer": {
+		"message": "Singleplayer"
+	},
+	"instance.worlds.view_instance": {
+		"message": "View instance"
+	},
+	"instance.worlds.world_in_use": {
+		"message": "World is in use"
+	},
+	"search.filter.locked.instance": {
+		"message": "Provided by the instance"
+	},
+	"search.filter.locked.instance-game-version.title": {
+		"message": "Game version is provided by the instance"
+	},
+	"search.filter.locked.instance-loader.title": {
+		"message": "Loader is provided by the instance"
+	},
+	"search.filter.locked.instance.sync": {
+		"message": "Sync with instance"
+	},
+	"browse.source.modrinth": {
+		"message": "Modrinth"
+	},
+	"browse.source.curseforge": {
+		"message": "CurseForge"
+	},
+	"browse.type.modpack": {
+		"message": "Modpacks"
+	},
+	"browse.type.mod": {
+		"message": "Mods"
+	},
+	"browse.type.resourcepack": {
+		"message": "Resource Packs"
+	},
+	"browse.type.datapack": {
+		"message": "Data Packs"
+	},
+	"browse.type.shader": {
+		"message": "Shaders"
+	},
+	"browse.install.title": {
+		"message": "Install project to instance"
+	},
+	"browse.install.description": {
+		"message": "Select an instance to install"
+	},
+	"browse.install.search": {
+		"message": "Search instances..."
+	},
+	"browse.install.action": {
+		"message": "Install"
+	},
+	"browse.install.installing": {
+		"message": "Installing..."
+	},
+	"browse.install.installed": {
+		"message": "Installed"
+	},
+	"browse.install.none": {
+		"message": "No compatible instances found."
+	},
+	"browse.filter.hide-installed": {
+		"message": "Hide installed content"
+	},
+	"browse.install.instance": {
+		"message": "Install content to instance"
+	},
+	"browse.search.placeholder": {
+		"message": "Search {type}..."
+	},
+	"browse.sort.label": {
+		"message": "Sort by"
+	},
+	"browse.view.label": {
+		"message": "View"
+	},
+	"browse.max-results.label": {
+		"message": "Max results"
+	},
+	"browse.offline": {
+		"message": "You are currently offline. Connect to the internet to browse Modrinth!"
+	},
+	"browse.context.open-curseforge": {
+		"message": "Open in CurseForge"
+	},
+	"browse.context.open-modrinth": {
+		"message": "Open in Modrinth"
+	},
+	"browse.context.copy-link": {
+		"message": "Copy link"
+	},
+	"browse.breadcrumb.discover-content": {
+		"message": "Discover content"
+	},
+	"browse.sort.relevancy": {
+		"message": "Relevancy"
+	},
+	"browse.sort.popularity": {
+		"message": "Popularity"
+	},
+	"browse.sort.latest-update": {
+		"message": "Latest update"
+	},
+	"browse.sort.creation-date": {
+		"message": "Creation Date"
+	},
+	"browse.sort.total-downloads": {
+		"message": "Total Downloads"
+	},
+	"browse.notification.manual-download-required.title": {
+		"message": "Manual download required"
+	},
+	"browse.error.invalid-curseforge-project-id": {
+		"message": "Invalid CurseForge project id."
+	},
+	"browse.error.no-files-available": {
+		"message": "No files available for this project."
+	},
+	"browse.notification.curseforge-manual-download-fallback": {
+		"message": "CurseForge could not provide a direct download. Opened the project page in your browser."
+	},
+	"browse.notification.curseforge-blocked-automated-download": {
+		"message": "CurseForge blocked automated download for this file (403). Opened the project page in your browser."
+	},
+	"instance.worlds.this-server": {
+		"message": "this server"
+	},
+	"instance.worlds.remove-server.title": {
+		"message": "Are you sure you want to remove {name}?"
+	},
+	"instance.worlds.remove-server.description": {
+		"message": "'{name}'{address} will be removed from your list, including in-game, and there will be no way to recover it."
+	},
+	"instance.worlds.delete-world.title": {
+		"message": "Are you sure you want to permanently delete this world?"
+	},
+	"instance.worlds.delete-world.description": {
+		"message": "'{name}' will be permanently deleted, and there will be no way to recover it."
+	},
+	"instance.worlds.search.placeholder": {
+		"message": "Search worlds..."
+	},
+	"instance.worlds.refreshing": {
+		"message": "Refreshing..."
+	},
+	"instance.worlds.refresh": {
+		"message": "Refresh"
+	},
+	"instance.worlds.add-server": {
+		"message": "Add a server"
+	},
+	"instance.worlds.empty": {
+		"message": "You don't have any worlds yet."
+	},
+	"skins.rate-limit.title": {
+		"message": "Slow down!"
+	},
+	"skins.rate-limit.skin": {
+		"message": "You're changing your skin too frequently. Mojang's servers have temporarily blocked further requests. Please wait a moment before trying again."
+	},
+	"skins.rate-limit.cape": {
+		"message": "You're changing your cape too frequently. Mojang's servers have temporarily blocked further requests. Please wait a moment before trying again."
+	},
+	"skins.delete.confirm.title": {
+		"message": "Are you sure you want to delete this skin?"
+	},
+	"skins.delete.confirm.description": {
+		"message": "This will permanently delete the selected skin. This action cannot be undone."
+	},
+	"skins.action.delete": {
+		"message": "Delete"
+	},
+	"skins.title": {
+		"message": "Skins"
+	},
+	"skins.beta": {
+		"message": "Beta"
+	},
+	"skins.tooltip.overriding-default-cape": {
+		"message": "The equipped skin is overriding the default cape."
+	},
+	"skins.action.change-cape": {
+		"message": "Change cape"
+	},
+	"skins.saved.heading": {
+		"message": "Saved skins"
+	},
+	"skins.action.add-skin": {
+		"message": "Add a skin"
+	},
+	"skins.action.edit-skin.aria": {
+		"message": "Edit skin"
+	},
+	"skins.action.edit": {
+		"message": "Edit"
+	},
+	"skins.action.delete-skin.aria": {
+		"message": "Delete skin"
+	},
+	"skins.action.delete-skin.tooltip": {
+		"message": "Delete skin"
+	},
+	"skins.default.heading": {
+		"message": "Default skins"
+	},
+	"skins.sign-in.title": {
+		"message": "Please sign-in"
+	},
+	"skins.sign-in.description": {
+		"message": "Please sign into your Minecraft account to use the skin management features of the Modrinth app."
+	},
+	"skins.action.sign-in": {
+		"message": "Sign In"
+	},
+	"maintenance.breadcrumb": {
+		"message": "Maintenance"
+	},
+	"maintenance.rule.logs": {
+		"message": "Logs"
+	},
+	"maintenance.rule.crash-reports": {
+		"message": "Crash reports"
+	},
+	"maintenance.rule.screenshots": {
+		"message": "Screenshots"
+	},
+	"maintenance.rule.new": {
+		"message": "New rule"
+	},
+	"maintenance.last-played.never": {
+		"message": "Never"
+	},
+	"maintenance.error.open-folder": {
+		"message": "Failed to open folder."
+	},
+	"maintenance.cleanup.complete.title": {
+		"message": "Cleanup complete"
+	},
+	"maintenance.cleanup.complete.text": {
+		"message": "Freed {size}"
+	},
+	"maintenance.section.memory-manager.title": {
+		"message": "Memory Manager"
+	},
+	"maintenance.section.memory-manager.description": {
+		"message": "Scans instances and helps clear safe junk fast."
+	},
+	"maintenance.action.scanning": {
+		"message": "Scanning..."
+	},
+	"maintenance.action.rescan": {
+		"message": "Rescan"
+	},
+	"maintenance.summary.total-instances": {
+		"message": "Total instances"
+	},
+	"maintenance.summary.total-size": {
+		"message": "Total size"
+	},
+	"maintenance.empty.no-instances": {
+		"message": "No instances to analyze."
+	},
+	"maintenance.action.clean": {
+		"message": "Clean"
+	},
+	"maintenance.action.folder": {
+		"message": "Folder"
+	},
+	"maintenance.action.delete": {
+		"message": "Delete"
+	},
+	"maintenance.rules.title": {
+		"message": "Cleanup rules"
+	},
+	"maintenance.rules.description": {
+		"message": "Paths are relative to the instance folder. Separate multiple paths with commas."
+	},
+	"maintenance.action.add-rule": {
+		"message": "Add rule"
+	},
+	"maintenance.rule-name.placeholder": {
+		"message": "Rule name"
+	},
+	"maintenance.rule-paths.placeholder": {
+		"message": "logs, crash-reports"
+	},
+	"maintenance.delete-instance.title": {
+		"message": "Delete instance {name}?"
+	},
+	"maintenance.delete-instance.description": {
+		"message": "All data will be removed and cannot be recovered."
+	},
+	"maintenance.cleanup.modal.header": {
+		"message": "Instance cleanup"
+	},
+	"maintenance.cleanup.safe-to-remove": {
+		"message": "Safe to remove"
+	},
+	"project.curseforge.heading": {
+		"message": "CurseForge Project"
+	},
+	"project.more": {
+		"message": "more"
+	},
+	"project.view-on-curseforge": {
+		"message": "View on CurseForge"
+	},
+	"project.install.already-installed": {
+		"message": "This project is already installed"
+	},
+	"project.install.installing": {
+		"message": "Installing..."
+	},
+	"project.install.installed": {
+		"message": "Installed"
+	},
+	"project.install.action": {
+		"message": "Install"
+	},
+	"project.more-options": {
+		"message": "More options"
+	},
+	"project.coming-soon": {
+		"message": "Coming soon"
+	},
+	"project.action.open-in-browser": {
+		"message": "Open in browser"
+	},
+	"project.action.follow": {
+		"message": "Follow"
+	},
+	"project.action.save": {
+		"message": "Save"
+	},
+	"project.action.report": {
+		"message": "Report"
+	},
+	"project.tab.description": {
+		"message": "Description"
+	},
+	"project.tab.files": {
+		"message": "Files"
+	},
+	"project.no-description": {
+		"message": "No description available."
+	},
+	"project.no-files-found": {
+		"message": "No files found."
+	},
+	"project.tab.versions": {
+		"message": "Versions"
+	},
+	"project.tab.gallery": {
+		"message": "Gallery"
+	},
+	"project.load-error": {
+		"message": "Project data couldn't not be loaded."
+	},
+	"project.action.open-in-modrinth": {
+		"message": "Open in Modrinth"
+	},
+	"project.action.copy-link": {
+		"message": "Copy link"
+	},
+	"project.notification.manual-download-required.title": {
+		"message": "Manual download required"
+	},
+	"project.error.loading": {
+		"message": "Error loading project"
+	},
+	"project.breadcrumb": {
+		"message": "Project"
+	},
+	"project.error.select-instance-first": {
+		"message": "Select an instance first."
+	},
+	"project.notification.curseforge-manual-download-fallback": {
+		"message": "CurseForge could not provide a direct download. Opened the project page in your browser."
+	},
+	"project.notification.curseforge-blocked-automated-download": {
+		"message": "CurseForge blocked automated download for this file (403). Opened the project page in your browser."
+	},
+	"project.error.no-files-available-to-install": {
+		"message": "No files available to install."
+	},
+	"view-profile": {
+		"message": "View profile"
+	},
+	"sign-out": {
+		"message": "Sign out"
+	},
+	"from_file": {
+		"message": "From file"
+	},
+	"remove-friend": {
+		"message": "Remove friend"
+	},
+	"select": {
+		"message": "Select"
+	},
+	"remove": {
+		"message": "Remove"
+	},
+	"open-instance": {
+		"message": "Open instance"
+	},
+	"open-folder": {
+		"message": "Open folder"
+	},
+	"play-instance": {
+		"message": "Play instance"
+	},
+	"refresh": {
+		"message": "Refresh"
+	},
+	"copy-address": {
+		"message": "Copy address"
+	},
+	"edit": {
+		"message": "Edit"
+	},
+	"dont-show-on-home": {
+		"message": "Don't show on Home"
+	},
+	"delete": {
+		"message": "Delete"
+	},
+	"action.cancel": {
+		"message": "Cancel"
+	},
+	"export-mrpack": {
+		"message": "Export .mrpack"
+	},
+	"share-names": {
+		"message": "Share names"
+	},
+	"share-file-names": {
+		"message": "Share file names"
+	},
+	"share-urls": {
+		"message": "Share URLs"
+	},
+	"share-markdown": {
+		"message": "Share markdown"
+	},
+	"show-file": {
+		"message": "Show file"
+	},
+	"copy-link": {
+		"message": "Copy link"
+	},
+	"updates": {
+		"message": "Updates"
+	},
+	"disabled": {
+		"message": "Disabled"
+	},
+	"singleplayer": {
+		"message": "Singleplayer"
+	},
+	"server": {
+		"message": "Server"
+	},
+	"available": {
+		"message": "Available"
+	},
+	"logs": {
+		"message": "Logs"
+	},
+	"crash-reports": {
+		"message": "Crash reports"
+	},
+	"screenshots": {
+		"message": "Screenshots"
+	},
+	"follow": {
+		"message": "Follow"
+	},
+	"save": {
+		"message": "Save"
+	},
+	"open-in-browser": {
+		"message": "Open in browser"
+	},
+	"report": {
+		"message": "Report"
+	},
+	"install-elsewhere": {
+		"message": "Install elsewhere"
+	},
+	"instance.breadcrumb.content": {
+		"message": "Content"
+	},
+	"instance.breadcrumb.logs": {
+		"message": "Logs"
+	},
+	"instance.breadcrumb.screenshots": {
+		"message": "Screenshots"
+	},
+	"running-app-bar.offline": {
+		"message": "Offline"
+	},
+	"running-app-bar.stop-instance": {
+		"message": "Stop instance"
+	},
+	"running-app-bar.view-logs": {
+		"message": "View logs"
+	},
+	"running-app-bar.no-instances-running": {
+		"message": "No instances running"
+	},
+	"skins.upload.modal.title": {
+		"message": "Upload skin texture"
+	},
+	"skins.upload.select-file": {
+		"message": "Select skin texture file"
+	},
+	"skins.upload.drag-or-browse": {
+		"message": "Drag and drop or click here to browse"
+	},
+	"skins.upload.error.processing-file.title": {
+		"message": "Error processing file"
+	},
+	"skins.upload.error.failed-to-read-dropped-file": {
+		"message": "Failed to read the dropped file."
+	},
+	"instance.create.modal.header": {
+		"message": "Creating an instance"
+	},
+	"instance.create.type.custom": {
+		"message": "custom"
+	},
+	"instance.create.type.from-file": {
+		"message": "from file"
+	},
+	"instance.create.type.import-launcher": {
+		"message": "import from launcher"
+	},
+	"instance.create.select-icon": {
+		"message": "Select icon"
+	},
+	"instance.create.remove-icon": {
+		"message": "Remove icon"
+	},
+	"instance.create.name": {
+		"message": "Name"
+	},
+	"instance.create.loader": {
+		"message": "Loader"
+	},
+	"instance.create.game-version": {
+		"message": "Game version"
+	},
+	"instance.create.select-game-version": {
+		"message": "Select game version"
+	},
+	"instance.create.show-all-versions": {
+		"message": "Show all versions"
+	},
+	"instance.create.loader-version": {
+		"message": "Loader version"
+	},
+	"instance.create.loader-version.stable": {
+		"message": "stable"
+	},
+	"instance.create.loader-version.latest": {
+		"message": "latest"
+	},
+	"instance.create.loader-version.other": {
+		"message": "other"
+	},
+	"instance.create.select-version": {
+		"message": "Select version"
+	},
+	"instance.create.select-loader-version": {
+		"message": "Select loader version"
+	},
+	"instance.create.warning.select-game-version-first": {
+		"message": "Select a game version before you select a loader version"
+	},
+	"instance.create.action.creating": {
+		"message": "Creating..."
+	},
+	"instance.create.action.create": {
+		"message": "Create"
+	},
+	"instance.create.action.import-from-file": {
+		"message": "Import from file"
+	},
+	"instance.create.hint.drag-drop-mrpack": {
+		"message": "Or drag and drop your .mrpack file"
+	},
+	"instance.create.launcher-path": {
+		"message": "{name} path"
+	},
+	"instance.create.path-to-launcher": {
+		"message": "Path to launcher"
+	},
+	"instance.create.profile-name": {
+		"message": "Profile name"
+	},
+	"instance.create.no-profiles-found": {
+		"message": "No profiles found"
+	},
+	"instance.create.import-from-profile-code": {
+		"message": "Import from Profile Code"
+	},
+	"instance.create.importing": {
+		"message": "Importing..."
+	},
+	"instance.create.import-profiles-count": {
+		"message": "Import {count} profiles"
+	},
+	"instance.create.select-profiles-to-import": {
+		"message": "Select profiles to import"
+	},
+	"skins.cape.none": {
+		"message": "No Cape"
+	},
+	"skins.none": {
+		"message": "None"
+	},
+	"search-card.compat.client-or-server": {
+		"message": "Client or server"
+	},
+	"search-card.compat.client": {
+		"message": "Client"
+	},
+	"search-card.compat.server": {
+		"message": "Server"
+	},
+	"search-card.compat.unsupported": {
+		"message": "Unsupported"
+	},
+	"search-card.compat.client-and-server": {
+		"message": "Client and server"
+	},
+	"search-card.downloads": {
+		"message": "downloads"
+	},
+	"search-card.followers": {
+		"message": "followers"
+	},
+	"search-card.installing": {
+		"message": "Installing"
+	},
+	"search-card.installed": {
+		"message": "Installed"
+	},
+	"search-card.install": {
+		"message": "Install"
+	},
+	"search-card.add-to-instance": {
+		"message": "Add to an instance"
+	},
+	"instance.worlds.loading": {
+		"message": "Loading..."
+	},
+	"instance.worlds.online": {
+		"message": "online"
+	},
+	"instance.worlds.offline": {
+		"message": "Offline"
+	},
+	"instance.worlds.not-played-yet": {
+		"message": "Not played yet"
+	},
+	"instance.worlds.incompatible-version": {
+		"message": "Incompatible version {version}"
+	},
+	"skins.editing": {
+		"message": "Editing skin"
+	},
+	"skins.adding": {
+		"message": "Adding a skin"
+	},
+	"skins.texture": {
+		"message": "Texture"
+	},
+	"skins.replace-texture": {
+		"message": "Replace texture"
+	},
+	"skins.arm-style": {
+		"message": "Arm style"
+	},
+	"skins.arm-style.wide": {
+		"message": "Wide"
+	},
+	"skins.arm-style.slim": {
+		"message": "Slim"
+	},
+	"skins.cape": {
+		"message": "Cape"
+	},
+	"skins.use-default-cape": {
+		"message": "Use default cape"
+	},
+	"skins.view-more-capes": {
+		"message": "View more capes"
+	},
+	"skins.action.save-skin": {
+		"message": "Save skin"
+	},
+	"skins.saving": {
+		"message": "Saving..."
+	},
+	"skins.upload-first": {
+		"message": "Upload a skin first!"
+	},
+	"skins.make-edit-first": {
+		"message": "Make an edit to the skin first!"
+	},
+	"project.modrinth-website": {
+		"message": "Modrinth website"
+	},
+	"project.changelog": {
+		"message": "Changelog"
+	},
+	"project.file.primary": {
+		"message": "Primary"
+	},
+	"project.dependencies": {
+		"message": "Dependencies"
+	},
+	"project.metadata": {
+		"message": "Metadata"
+	},
+	"project.metadata.release-channel": {
+		"message": "Release Channel"
+	},
+	"project.metadata.version-number": {
+		"message": "Version Number"
+	},
+	"project.metadata.loaders": {
+		"message": "Loaders"
+	},
+	"project.metadata.game-versions": {
+		"message": "Game Versions"
+	},
+	"project.metadata.downloads": {
+		"message": "Downloads"
+	},
+	"project.metadata.publication-date": {
+		"message": "Publication Date"
+	},
+	"project.metadata.at": {
+		"message": "at"
+	},
+	"project.metadata.author": {
+		"message": "Author"
+	},
+	"project.metadata.version-id": {
+		"message": "Version ID"
+	},
+	"project.breadcrumb.version": {
+		"message": "Version"
+	},
+	"project.dependency.version-is-type": {
+		"message": "Version {version} is {type}"
+	},
+	"project.dependency.added-via-overrides": {
+		"message": "Added via overrides"
+	},
+	"url-confirm.install-title": {
+		"message": "Install {project}"
+	},
+	"url-confirm.installing-version-from-modrinth": {
+		"message": "Installing {version} from Modrinth"
+	},
+	"home.jump-back-in": {
+		"message": "Jump back in"
+	},
+	"maintenance.action.select-all": {
+		"message": "Select all"
+	},
+	"maintenance.action.clear-selection": {
+		"message": "Clear"
+	},
+	"maintenance.cleanup.selected-count": {
+		"message": "{count} selected"
+	},
+	"maintenance.loading.instances": {
+		"message": "Loading instances..."
+	},
+	"maintenance.cleanup.no-targets": {
+		"message": "No cleanup files found for the selected rules."
+	},
+	"error-modal.title.error-occurred": {
+		"message": "An error occurred"
+	},
+	"error-modal.title.unable-sign-in": {
+		"message": "Unable to sign in to Minecraft"
+	},
+	"error-modal.title.sign-in": {
+		"message": "Sign in to Minecraft"
+	},
+	"error-modal.title.change-directory": {
+		"message": "Could not change app directory"
+	},
+	"error-modal.title.no-loader": {
+		"message": "No loader selected"
+	},
+	"error-modal.title.state-init": {
+		"message": "Error initializing Revoria"
+	},
+	"error-modal.no-error-message": {
+		"message": "No error message."
+	},
+	"error-modal.network-issues": {
+		"message": "Network issues"
+	},
+	"error-modal.minecraft-auth.network-text-start": {
+		"message": "It looks like there were issues with Revoria connecting to Microsoft's servers. This is often the result of a poor connection, so we recommend trying again to see if it works. If issues continue to persist, follow the steps in"
+	},
+	"error-modal.our-support-article": {
+		"message": "our support article"
+	},
+	"error-modal.minecraft-auth.network-text-end": {
+		"message": "to troubleshoot."
+	},
+	"error-modal.minecraft-auth.hosts-text-start": {
+		"message": "The Revoria launcher tried to connect to Microsoft / Xbox / Minecraft services, but the remote server rejected the connection. This may indicate that these services are blocked by the hosts file. Please visit"
+	},
+	"error-modal.minecraft-auth.hosts-text-end": {
+		"message": "for steps on how to fix the issue."
+	},
+	"error-modal.try-another-microsoft-account": {
+		"message": "Try another Microsoft account"
+	},
+	"error-modal.minecraft-auth.try-another-text": {
+		"message": "Double check you've signed in with the right account. You may own Minecraft on a different Microsoft account."
+	},
+	"error-modal.try-another-account": {
+		"message": "Try another account"
+	},
+	"error-modal.minecraft-auth.game-pass-heading": {
+		"message": "Using PC Game Pass, coming from Bedrock, or just bought the game?"
+	},
+	"error-modal.minecraft-auth.game-pass-text-start": {
+		"message": "Try signing in with the"
+	},
+	"error-modal.official-minecraft-launcher": {
+		"message": "official Minecraft Launcher"
+	},
+	"error-modal.minecraft-auth.game-pass-text-end": {
+		"message": "first. Once you're done, come back here and sign in!"
+	},
+	"error-modal.try-signing-in-again": {
+		"message": "Try signing in again"
+	},
+	"error-modal.change-directory-permissions": {
+		"message": "Change directory permissions"
+	},
+	"error-modal.directory-read-only-text": {
+		"message": "It looks like Revoria is unable to write to the directory you selected. Please adjust the permissions of the directory and try again or cancel the directory change."
+	},
+	"error-modal.not-enough-space": {
+		"message": "Not enough space"
+	},
+	"error-modal.not-enough-space-text": {
+		"message": "It looks like there is not enough space on the disk containing the directory you selected. Please free up some space and try again or cancel the directory change."
+	},
+	"error-modal.directory-move-generic-text": {
+		"message": "Revoria is unable to migrate to the new directory you selected. Please contact support for help or cancel the directory change."
+	},
+	"error-modal.retry-directory-change": {
+		"message": "Retry directory change"
+	},
+	"error-modal.cancel-directory-change": {
+		"message": "Cancel directory change"
+	},
+	"error-modal.minecraft-sign-in-text-start": {
+		"message": "To play this instance, you must sign in through Microsoft below. If you don't have a Minecraft account, you can purchase the game on the"
+	},
+	"error-modal.minecraft-website": {
+		"message": "Minecraft website"
+	},
+	"error-modal.sign-in-to-minecraft": {
+		"message": "Sign in to Minecraft"
+	},
+	"error-modal.state-init-text": {
+		"message": "Revoria failed to load correctly. This may be because of a corrupted file, or because the app is missing crucial files."
+	},
+	"error-modal.state-init-fix-ways": {
+		"message": "You may be able to fix it through one of the following ways:"
+	},
+	"error-modal.state-init-fix-internet": {
+		"message": "Ensuring you are connected to the internet, then try restarting the app."
+	},
+	"error-modal.state-init-fix-redownload": {
+		"message": "Redownloading the app."
+	},
+	"error-modal.no-loader-text": {
+		"message": "Revoria failed to find the loader version for this instance."
+	},
+	"error-modal.no-loader-repair-text": {
+		"message": "To resolve this, you need to repair the instance. Click the button below to do so."
+	},
+	"error-modal.repair-instance": {
+		"message": "Repair instance"
+	},
+	"error-modal.debug-help-text-start": {
+		"message": "If nothing is working and you need help, visit"
+	},
+	"error-modal.debug-help-support-page": {
+		"message": "our support page"
+	},
+	"error-modal.debug-help-text-end": {
+		"message": "and start a chat using the widget in the bottom right and we will be more than happy to assist! Make sure to provide the following debug information to the agent:"
+	},
+	"error-modal.get-support": {
+		"message": "Get support"
+	},
+	"error-modal.close": {
+		"message": "Close"
+	},
+	"error-modal.copied": {
+		"message": "Copied!"
+	},
+	"error-modal.copy-debug-info": {
+		"message": "Copy debug info"
+	},
+	"error-modal.debug-information": {
+		"message": "Debug information:"
+	},
+	"error-modal.migration.header": {
+		"message": "⚠️ Migration Issue • Important Notice"
+	},
+	"error-modal.migration.text-1": {
+		"message": "We've detected a problem with our database migration system caused by inconsistent line endings between operating systems (Windows vs. macOS/Linux). This may affect app stability."
+	},
+	"error-modal.migration.text-2": {
+		"message": "What’s happening? Our migration validator misreads modified migrations when line endings differ (CRLF ↔ LF), which can make the app unusable."
+	},
+	"error-modal.migration.text-3": {
+		"message": "Why? Git’s automatic line-ending conversions and OS differences can cause these inconsistencies during builds."
+	},
+	"error-modal.migration.text-4": {
+		"message": "What’s next? We’re working on a permanent fix. In the meantime, you can apply one of the quick fixes below depending on your system."
+	},
+	"error-modal.migration.need-fix-now": {
+		"message": "Do I need to apply a fix now?"
+	},
+	"error-modal.migration.help-text": {
+		"message": "If you are encountering an error while applying migrations, such as \"Error while applying migrations: migration XXXXXXXXXX was previously applied but has been modified\", or a similar issue with migration, the following actions might help:"
+	},
+	"error-modal.migration.backup-text": {
+		"message": "If none of the above steps help, you can try saving a copy of the file app.db to a safe location, such as %appdata%\\Roaming\\Revoria on Windows or ~/Library/Application Support/Revoria on macOS, then deleting the original file and letting the app re-create the database file. Note that this may cause data loss inside the app, so make sure to back up your launcher data before applying these fixes."
+	},
+	"error-modal.migration.fix-unix-title": {
+		"message": "Convert all line endings in migration files to LF (Unix-style: \\n)"
+	},
+	"error-modal.migration.fix-windows-title": {
+		"message": "Convert all line endings in migration files to CRLF (Windows-style: \\r\\n)"
+	},
+	"error-modal.migration.fix-unix-button": {
+		"message": "Apply fix for Unix like systems (Debian, Ubuntu, macOS and others)"
+	},
+	"error-modal.migration.fix-windows-button": {
+		"message": "Apply fix for Windows"
+	},
+	"error-modal.migration.report-header": {
+		"message": "💡 Migration fix report"
+	},
+	"error-modal.migration.fix-success": {
+		"message": "✅ The migration fix has been applied successfully. Please restart the launcher and try to log in to the game :)"
+	},
+	"error-modal.migration.fix-failed": {
+		"message": "❌ The migration fix failed or had no effect."
+	},
+	"error-modal.migration.try-other-fix": {
+		"message": "If the problem persists, please try the other fix."
+	},
+	"curseforge-import.header": {
+		"message": "Import from CurseForge Profile Code"
+	},
+	"curseforge-import.profile-code.label": {
+		"message": "Profile Code"
+	},
+	"curseforge-import.profile-code.placeholder": {
+		"message": "Enter CurseForge profile code"
+	},
+	"curseforge-import.name.label": {
+		"message": "Name:"
+	},
+	"curseforge-import.checking": {
+		"message": "Checking..."
+	},
+	"curseforge-import.check-profile": {
+		"message": "Check Profile"
+	},
+	"curseforge-import.importing": {
+		"message": "Importing..."
+	},
+	"curseforge-import.import-profile": {
+		"message": "Import Profile"
+	},
+	"curseforge-import.progress.starting": {
+		"message": "Starting import..."
+	},
+	"curseforge-import.progress.importing-profile": {
+		"message": "Importing profile..."
+	},
+	"curseforge-import.progress.completed": {
+		"message": "Import completed!"
+	},
+	"curseforge-import.error.fetch-metadata": {
+		"message": "Failed to fetch profile information. Please check the code and try again."
+	},
+	"curseforge-import.error.import-profile": {
+		"message": "Failed to import profile. Please try again."
+	},
+	"install-confirm.header": {
+		"message": "Are you sure?"
+	},
+	"install-confirm.description": {
+		"message": "You already have this modpack installed. Are you sure you want to install it again?"
+	},
+	"install-confirm.installing": {
+		"message": "Installing"
+	},
+	"install-confirm.install": {
+		"message": "Install"
+	},
+	"instance.screenshots.heading": {
+		"message": "Screenshots"
+	},
+	"action.refresh": {
+		"message": "Refresh"
+	},
+	"action.open-folder": {
+		"message": "Open folder"
+	},
+	"instance.screenshots.loading": {
+		"message": "Loading screenshots..."
+	},
+	"instance.screenshots.empty-title": {
+		"message": "No screenshots yet"
+	},
+	"instance.screenshots.empty-description": {
+		"message": "Press F2 in-game to take a screenshot"
+	},
+	"action.copy": {
+		"message": "Copy"
+	},
+	"action.close": {
+		"message": "Close"
+	},
+	"instance.screenshots.copy-tooltip": {
+		"message": "Copy screenshot"
+	},
+	"instance.screenshots.error.open-folder": {
+		"message": "Could not open screenshots folder."
+	},
+	"instance.screenshots.notification.copied.title": {
+		"message": "Copied"
+	},
+	"instance.screenshots.notification.copied.text": {
+		"message": "Screenshot copied to clipboard"
+	},
+	"instance.screenshots.notification.path-copied.title": {
+		"message": "Path copied"
+	},
+	"instance.screenshots.notification.path-copied.text": {
+		"message": "Could not copy image, copied path instead"
+	},
+	"instance.screenshots.error.copy-clipboard": {
+		"message": "Failed to copy to clipboard."
+	},
+	"export-modal.header": {
+		"message": "Export modpack"
+	},
+	"export-modal.modpack-name": {
+		"message": "Modpack Name"
+	},
+	"export-modal.modpack-name.placeholder": {
+		"message": "Modpack name"
+	},
+	"export-modal.version-number": {
+		"message": "Version number"
+	},
+	"export-modal.description": {
+		"message": "Description"
+	},
+	"export-modal.description.placeholder": {
+		"message": "Enter modpack description..."
+	},
+	"export-modal.select-files-heading": {
+		"message": "Select files and folders to include in pack"
+	},
+	"export-modal.export": {
+		"message": "Export"
+	},
+	"instance.index.never-played": {
+		"message": "Never played"
+	},
+	"instance.index.installing": {
+		"message": "Installing..."
+	},
+	"instance.index.loading": {
+		"message": "Loading..."
+	},
+	"instance.index.instance-settings": {
+		"message": "Instance settings"
+	},
+	"instance.index.repair": {
+		"message": "Repair"
+	},
+	"instance.index.stop": {
+		"message": "Stop"
+	},
+	"instance.index.play": {
+		"message": "Play"
+	},
+	"instance.index.share-instance": {
+		"message": "Share instance"
+	},
+	"instance.index.create-server": {
+		"message": "Create a server"
+	},
+	"instance.index.export-modpack": {
+		"message": "Export modpack"
+	},
+	"instance.index.add-content": {
+		"message": "Add content"
+	},
+	"instance.index.copy-path": {
+		"message": "Copy path"
+	},
+	"instance.index.open-in-modrinth": {
+		"message": "Open in Modrinth"
+	},
+	"instance.index.copy-names": {
+		"message": "Copy names"
+	},
+	"instance.index.copy-slugs": {
+		"message": "Copy slugs"
+	},
+	"instance.index.copy-links": {
+		"message": "Copy links"
+	},
+	"instance.index.toggle-selected": {
+		"message": "Toggle selected"
+	},
+	"instance.index.disable-selected": {
+		"message": "Disable selected"
+	},
+	"instance.index.enable-selected": {
+		"message": "Enable selected"
+	},
+	"instance.index.show-hide-unselected": {
+		"message": "Show/Hide unselected"
+	},
+	"instance.index.update-selected": {
+		"message": "Update selected"
+	},
+	"instance.index.update-all": {
+		"message": "Update all"
+	},
+	"instance.index.select-updatable": {
+		"message": "Select Updatable"
+	},
+	"instance.index.tab.worlds": {
+		"message": "Worlds"
+	},
+	"instance.index.breadcrumb.instance": {
+		"message": "Instance"
+	},
+	"instance.index.time.hour-singular": {
+		"message": "{count} hour"
+	},
+	"instance.index.time.hour-plural": {
+		"message": "{count} hours"
+	},
+	"instance.index.time.minute-singular": {
+		"message": "{count} minute"
+	},
+	"instance.index.time.minute-plural": {
+		"message": "{count} minutes"
+	},
+	"instance.index.time.second-singular": {
+		"message": "{count} second"
+	},
+	"instance.index.time.second-plural": {
+		"message": "{count} seconds"
+	},
+	"instance.mods.search-projects": {
+		"message": "Search {count} project{suffix}..."
+	},
+	"instance.mods.action.update": {
+		"message": "Update"
+	},
+	"instance.mods.action.share": {
+		"message": "Share"
+	},
+	"instance.mods.share.project-names": {
+		"message": "Project names"
+	},
+	"instance.mods.share.file-names": {
+		"message": "File names"
+	},
+	"instance.mods.share.project-links": {
+		"message": "Project links"
+	},
+	"instance.mods.share.markdown-links": {
+		"message": "Markdown links"
+	},
+	"instance.mods.action.enable": {
+		"message": "Enable"
+	},
+	"instance.mods.action.disable": {
+		"message": "Disable"
+	},
+	"instance.mods.action.update-all": {
+		"message": "Update all"
+	},
+	"instance.mods.action.update-pack": {
+		"message": "Update pack"
+	},
+	"instance.mods.tooltip.remove": {
+		"message": "Remove"
+	},
+	"instance.mods.empty.title": {
+		"message": "You haven't added any content to this instance yet."
+	},
+	"instance.mods.share-modal.title": {
+		"message": "Sharing modpack content"
+	},
+	"instance.mods.share-modal.text": {
+		"message": "Check out the projects I'm using in my modpack!"
+	},
+	"grid-display.library-fallback": {
+		"message": "Library"
+	},
+	"grid-display.instance-count.one": {
+		"message": "{count} instance"
+	},
+	"grid-display.instance-count.few": {
+		"message": "{count} instances"
+	},
+	"grid-display.instance-count.many": {
+		"message": "{count} instances"
+	},
+	"grid-display.instance-count.other": {
+		"message": "{count} instances"
+	},
+	"grid-display.search": {
+		"message": "Search"
+	},
+	"grid-display.sort-dropdown-name": {
+		"message": "Sort Dropdown"
+	},
+	"grid-display.group-dropdown-name": {
+		"message": "Group Dropdown"
+	},
+	"grid-display.select-placeholder": {
+		"message": "Select..."
+	},
+	"grid-display.label.sort": {
+		"message": "Sort"
+	},
+	"grid-display.label.group": {
+		"message": "Group"
+	},
+	"grid-display.option.name": {
+		"message": "Name"
+	},
+	"grid-display.option.last-played": {
+		"message": "Last played"
+	},
+	"grid-display.option.date-created": {
+		"message": "Date created"
+	},
+	"grid-display.option.date-modified": {
+		"message": "Date modified"
+	},
+	"grid-display.option.game-version": {
+		"message": "Game version"
+	},
+	"grid-display.option.group": {
+		"message": "Group"
+	},
+	"grid-display.option.loader": {
+		"message": "Loader"
+	},
+	"grid-display.option.none": {
+		"message": "None"
+	},
+	"grid-display.delete-instance.title": {
+		"message": "Are you sure you want to delete this instance?"
+	},
+	"grid-display.delete-instance.description": {
+		"message": "If you proceed, all data for your instance will be removed. You will not be able to recover it."
+	},
+	"row-display.view-instance": {
+		"message": "View instance"
+	},
+	"row-display.duplicate-instance": {
+		"message": "Duplicate instance"
+	},
+	"row-display.delete-instance.title": {
+		"message": "Are you sure you want to delete this instance?"
+	},
+	"row-display.delete-instance.description": {
+		"message": "If you proceed, all data for your instance will be removed. You will not be able to recover it."
+	},
+	"add-content-button.install-content": {
+		"message": "Install content"
+	},
+	"add-content-button.add-from-file": {
+		"message": "Add from file"
+	},
+	"accounts-card.select-account": {
+		"message": "Select account"
+	},
+	"accounts-card.minecraft-account": {
+		"message": "Minecraft account"
+	},
+	"accounts-card.selected": {
+		"message": "Selected"
+	},
+	"accounts-card.log-out": {
+		"message": "Log out"
+	},
+	"accounts-card.not-signed-in": {
+		"message": "Not signed in"
+	},
+	"accounts-card.log-via-microsoft": {
+		"message": "Log via Microsoft"
+	},
+	"accounts-card.add-offline-account": {
+		"message": "Add offline account"
+	},
+	"accounts-card.log-via-elyby": {
+		"message": "Log via Ely.by"
+	},
+	"accounts-card.authenticate-elyby": {
+		"message": "Authenticate with Ely.by"
+	},
+	"accounts-card.elyby-requested-2fa": {
+		"message": "Ely.by requested 2FA code for authentication"
+	},
+	"accounts-card.enter-2fa-code": {
+		"message": "Enter your 2FA code"
+	},
+	"accounts-card.2fa-placeholder": {
+		"message": "Your 2FA code here..."
+	},
+	"action.continue": {
+		"message": "Continue"
+	},
+	"accounts-card.enter-player-name-or-email": {
+		"message": "Enter your player name or email (preferred)"
+	},
+	"accounts-card.player-name-or-email-placeholder": {
+		"message": "Your player name or email here..."
+	},
+	"accounts-card.enter-password": {
+		"message": "Enter your password"
+	},
+	"accounts-card.password-placeholder": {
+		"message": "Your password here..."
+	},
+	"auth.login": {
+		"message": "Login"
+	},
+	"accounts-card.add-offline-account-header": {
+		"message": "Add new offline account"
+	},
+	"accounts-card.enter-player-name": {
+		"message": "Enter your player name"
+	},
+	"accounts-card.player-name-placeholder": {
+		"message": "Your player name here..."
+	},
+	"accounts-card.error-auth-elyby-header": {
+		"message": "Error while proceeding authentication event with Ely.by"
+	},
+	"accounts-card.error-while-logging-in": {
+		"message": "An error occurred while logging in."
+	},
+	"action.try-again": {
+		"message": "Try again"
+	},
+	"accounts-card.error-input-elyby-header": {
+		"message": "Error while proceeding input event with Ely.by"
+	},
+	"accounts-card.error-adding-elyby-account": {
+		"message": "An error occurred while adding the Ely.by account. Please follow the instructions below."
+	},
+	"accounts-card.check-player-name-or-email": {
+		"message": "Check that you have entered the correct player name or email."
+	},
+	"accounts-card.check-password": {
+		"message": "Check that you have entered the correct password."
+	},
+	"accounts-card.error-input-offline-header": {
+		"message": "Error while proceeding input event with offline account"
+	},
+	"accounts-card.error-adding-offline-account": {
+		"message": "An error occurred while adding the offline account. Please follow the instructions below."
+	},
+	"accounts-card.check-player-name": {
+		"message": "Check that you have entered the correct player name."
+	},
+	"accounts-card.player-name-length-rule": {
+		"message": "Player name must be at least {min} characters long and no more than {max} characters."
+	},
+	"accounts-card.unexpected-error-header": {
+		"message": "Unexpected error occurred"
+	},
+	"accounts-card.unexpected-error-body": {
+		"message": "An unexpected error has occurred. Please try again later."
+	}
+}
