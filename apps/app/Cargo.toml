@@ -53,6 +53,8 @@ default = ["custom-protocol"]
 # this feature is used for production builds where `devPath` points to the filesystem
 # DO NOT remove this
 custom-protocol = ["tauri/custom-protocol"]
+# declared to satisfy cfg(feature = "updater") checks in source
+updater = []
 
 [lints]
 workspace = true
