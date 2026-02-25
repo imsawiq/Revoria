@@ -90,6 +90,7 @@ import { get, set } from '@/helpers/settings.ts'
 const themeStore = useTheming()
 
 const REVORIA_RELEASES_API = 'https://api.github.com/repos/imsawiq/Revoria/releases/latest'
+const REVORIA_RELEASES_LIST_API = 'https://api.github.com/repos/imsawiq/Revoria/releases?per_page=20'
 const REVORIA_RELEASES_URL = 'https://github.com/imsawiq/Revoria/releases'
 
 const notificationManager = new AppNotificationManager()
@@ -134,12 +135,17 @@ const criticalErrorMessage = ref()
 const isMaximized = ref(false)
 const revoriaUpdate = ref(null)
 const revoriaCurrentVersion = ref('0.0.0')
-const skippedRevoriaUpdateVersion = ref(null)
 const releaseCheckIntervalId = ref(null)
 
 function normalizeVersion(value) {
 	if (!value) return ''
-	return String(value).trim().replace(/^revoria\s*v?/i, '').replace(/^v/i, '').trim()
+	return String(value)
+		.trim()
+		.replace(/^refs\/tags\//i, '')
+		.replace(/^revoria\s*v?/i, '')
+		.replace(/^release[-_\s]*/i, '')
+		.replace(/^v/i, '')
+		.trim()
 }
 
 function parseSemverParts(version) {
@@ -164,19 +170,28 @@ function isVersionGreater(candidate, current) {
 }
 
 function extractReleaseVersion(release) {
-	return normalizeVersion(release?.name || release?.tag_name || '')
+	return normalizeVersion(release?.tag_name || release?.name || '')
 }
 
-async function checkRevoriaReleaseForUpdates(currentVersion, skippedVersion = null) {
+async function fetchLatestRevoriaRelease() {
 	try {
-		const release = await $fetch(REVORIA_RELEASES_API)
+		return await $fetch(REVORIA_RELEASES_API)
+	} catch (error) {
+		const statusCode = error?.response?.status ?? error?.statusCode ?? error?.status
+		if (statusCode !== 404) throw error
+
+		const releases = await $fetch(REVORIA_RELEASES_LIST_API)
+		if (!Array.isArray(releases)) return null
+		return releases.find((release) => !release?.draft) || null
+	}
+}
+
+async function checkRevoriaReleaseForUpdates(currentVersion) {
+	try {
+		const release = await fetchLatestRevoriaRelease()
+		if (!release) return
 		const latestVersion = extractReleaseVersion(release)
 		if (!latestVersion) return
-
-		if (skippedVersion && normalizeVersion(skippedVersion) === latestVersion) {
-			revoriaUpdate.value = null
-			return
-		}
 
 		if (isVersionGreater(latestVersion, currentVersion)) {
 			revoriaUpdate.value = {
@@ -193,10 +208,6 @@ async function checkRevoriaReleaseForUpdates(currentVersion, skippedVersion = nu
 
 async function dismissRevoriaUpdate(versionToSkip) {
 	revoriaUpdate.value = null
-	skippedRevoriaUpdateVersion.value = normalizeVersion(versionToSkip)
-	const settings = await getSettings()
-	settings.skipped_update = skippedRevoriaUpdateVersion.value
-	await setSettings(settings)
 }
 
 const authUnreachableDebug = useDebugLogger('AuthReachableChecker')
@@ -401,7 +412,6 @@ async function setupApp() {
 	const dev = await isDev()
 	const version = await getVersion()
 	revoriaCurrentVersion.value = normalizeVersion(version)
-	skippedRevoriaUpdateVersion.value = normalizeVersion(settingsObj.skipped_update ?? '') || null
 	showOnboarding.value = !onboarded
 
 	nativeDecorations.value = native_decorations
@@ -486,18 +496,12 @@ async function setupApp() {
 		await setSettings(settings)
 	}
 
-	await checkRevoriaReleaseForUpdates(
-		revoriaCurrentVersion.value,
-		skippedRevoriaUpdateVersion.value,
-	)
+	await checkRevoriaReleaseForUpdates(revoriaCurrentVersion.value)
 	if (releaseCheckIntervalId.value !== null) {
 		clearInterval(releaseCheckIntervalId.value)
 	}
 	releaseCheckIntervalId.value = window.setInterval(() => {
-		void checkRevoriaReleaseForUpdates(
-			revoriaCurrentVersion.value,
-			skippedRevoriaUpdateVersion.value,
-		)
+		void checkRevoriaReleaseForUpdates(revoriaCurrentVersion.value)
 	}, 10 * 60 * 1000)
 
 	if (osType === 'windows') {
@@ -536,6 +540,8 @@ router.afterEach((to, from, failure) => {
 	})
 })
 const route = useRoute()
+
+const onHomeRoute = computed(() => route.path === '/' || route.path === '')
 
 const appPageTransitionKey = computed(() => {
 	const [section] = route.path.split('/').filter(Boolean)
@@ -801,7 +807,11 @@ async function processPendingSurveys() {
 			<InstanceCreationModal ref="installationModal" />
 		</Suspense>
 		<div class="app-grid-navbar flex flex-col p-3 pt-2 gap-2 w-[--left-bar-width]">
-			<NavButton v-tooltip.right="formatMessage(messages.navHome)" to="/">
+			<NavButton
+				v-tooltip.right="formatMessage(messages.navHome)"
+				to="/"
+				:highlight-override="!!revoriaUpdate"
+			>
 				<HomeIcon />
 			</NavButton>
 			<NavButton
@@ -1007,7 +1017,7 @@ async function processPendingSurveys() {
 				}"
 			></div>
 			<Admonition
-				v-if="revoriaUpdate"
+				v-if="revoriaUpdate && onHomeRoute"
 				type="warning"
 				:header="formatMessage(messages.revoriaUpdateHeader)"
 				class="m-6 mb-0 revoria-update-alert"

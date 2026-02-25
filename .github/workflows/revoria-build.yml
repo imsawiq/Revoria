@@ -105,6 +105,10 @@ jobs:
             xdg-utils \
             openjdk-17-jdk
 
+      - name: 🔐 Ensure Gradle wrapper is executable
+        if: matrix.platform == 'ubuntu-latest'
+        run: chmod +x packages/app-lib/java/gradlew
+
       - name: ⚙️ Set application environment
         shell: bash
         run: |
