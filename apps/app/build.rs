@@ -245,6 +245,8 @@ fn main() {
                         "get_dir_size",
                         "delete_paths",
                         "read_text_file",
+                        "read_binary_file",
+                        "copy_image_to_clipboard",
                     ])
                     .default_permission(
                         DefaultPermissionRule::AllowAllCommands,

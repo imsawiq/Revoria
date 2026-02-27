@@ -1,13 +1,13 @@
 <template>
 	<nav
+		ref="navElement"
 		class="experimental-styles-within relative flex w-full max-w-full overflow-x-auto overflow-y-hidden rounded-full bg-[--color-glass-bg-strong] p-1 text-sm font-bold border border-[--glass-border] shadow-[--glass-shadow]"
 	>
 		<RouterLink
 			v-for="(link, index) in filteredLinks"
-			v-show="link.shown === undefined ? true : link.shown"
-			:key="index"
-			ref="tabLinkElements"
+			:key="getTabKey(link)"
 			:to="buildTo(link)"
+			:data-tab-index="index"
 			:class="`navtab-link button-animation shrink-0 z-[1] flex flex-row items-center gap-2 px-4 py-2 focus:rounded-full ${activeIndex === index && !subpageSelected ? 'text-button-textSelected is-active' : activeIndex === index && subpageSelected ? 'text-contrast is-subpage' : 'text-primary'}`"
 		>
 			<component :is="link.icon" v-if="link.icon" class="size-5" />
@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import type { RouteLocationRaw } from 'vue-router'
 import { RouterLink, useRoute } from 'vue-router'
 
@@ -53,6 +53,7 @@ const sliderHeight = ref(0)
 const activeIndex = ref(-1)
 const oldIndex = ref(-1)
 const subpageSelected = ref(false)
+const navElement = ref<HTMLElement | null>(null)
 
 const filteredLinks = computed(() =>
 	props.links.filter((x) => (x.shown === undefined ? true : x.shown)),
@@ -74,6 +75,13 @@ function buildTo(link: Tab): RouteLocationRaw {
 		path: route.path,
 		query: nextQuery,
 	}
+}
+
+function getTabKey(link: Tab) {
+	if (typeof link.href === 'string') {
+		return `tab-${link.href}`
+	}
+	return `tab-${String(link.href.path ?? '')}-${JSON.stringify(link.href.query ?? {})}`
 }
 
 function pickLink() {
@@ -125,41 +133,39 @@ function pickLink() {
 	}
 }
 
-const tabLinkElements = ref()
+async function startAnimation() {
+	await nextTick()
+	if (!navElement.value || activeIndex.value < 0) return
+	const tabElements = navElement.value.querySelectorAll<HTMLElement>('.navtab-link')
+	const el = tabElements[activeIndex.value]
 
-function startAnimation() {
-	if (!tabLinkElements.value || !tabLinkElements.value[activeIndex.value]) return
-	const el = tabLinkElements.value[activeIndex.value].$el
+	if (!el) return
 
-	if (!el || !el.offsetParent) return
-
-	const parent = el.offsetParent
-	const parentRect = parent.getBoundingClientRect()
-	const elRect = el.getBoundingClientRect()
-	const scrollLeft = parent.scrollLeft ?? 0
-	const scrollTop = parent.scrollTop ?? 0
-
-	sliderX.value = Math.round(elRect.left - parentRect.left + scrollLeft - (parent.clientLeft || 0))
-	sliderY.value = Math.max(
-		0,
-		Math.round(elRect.top - parentRect.top + scrollTop - (parent.clientTop || 0)),
-	)
-	sliderWidth.value = Math.round(elRect.width)
-	sliderHeight.value = Math.round(elRect.height)
+	// Use local offset metrics to avoid desync when the tab container is horizontally scrolled.
+	sliderX.value = Math.max(0, Math.round(el.offsetLeft))
+	sliderY.value = Math.max(0, Math.round(el.offsetTop))
+	sliderWidth.value = Math.round(el.offsetWidth)
+	sliderHeight.value = Math.round(el.offsetHeight)
 }
 
 onMounted(() => {
 	window.addEventListener('resize', pickLink)
+	navElement.value?.addEventListener('scroll', startAnimation, { passive: true })
 	pickLink()
 })
 
 onUnmounted(() => {
 	window.removeEventListener('resize', pickLink)
+	navElement.value?.removeEventListener('scroll', startAnimation)
 })
 
-watch(route, () => {
-	pickLink()
-})
+watch(
+	[() => route.fullPath, filteredLinks],
+	() => {
+		pickLink()
+	},
+	{ deep: true, flush: 'post' },
+)
 </script>
 <style scoped>
 .navtabs-transition {

@@ -8,7 +8,7 @@
 			:class="[
 				triggerClasses,
 				{
-					'z-[9999]': isOpen,
+					'z-[10041]': isOpen,
 					'rounded-b-none': shouldRoundBottomCorners,
 					'rounded-t-none': shouldRoundTopCorners,
 					'cursor-not-allowed opacity-50': disabled,
@@ -36,15 +36,15 @@
 			</div>
 		</span>
 
-		<Teleport to="#teleports">
+		<Teleport to="body">
 			<div
 				v-if="isOpen"
 				ref="dropdownRef"
-				class="fixed z-[9999] flex flex-col overflow-hidden rounded-[14px] bg-surface-4 !border-solid border-0 shadow-2xl"
+				class="fixed z-[10040] flex flex-col overflow-hidden rounded-[14px] bg-bg-raised border border-divider shadow-2xl"
 				:class="[
 					shouldRoundBottomCorners
-						? 'rounded-t-none !border-t-[1px] !border-t-surface-5'
-						: 'rounded-b-none !border-b-[1px] !border-b-surface-5',
+						? 'rounded-t-none'
+						: 'rounded-b-none',
 				]"
 				:style="dropdownStyle"
 				:role="listbox ? 'listbox' : 'menu'"

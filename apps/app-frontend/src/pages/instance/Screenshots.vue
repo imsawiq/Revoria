@@ -69,6 +69,45 @@ const screenshots = ref<DirFileEntry[]>([])
 const loading = ref(true)
 const screenshotsPath = ref('')
 const selectedImage = ref<DirFileEntry | null>(null)
+const imageSrcByPath = ref<Record<string, string>>({})
+
+function cleanupImageUrls() {
+	for (const url of Object.values(imageSrcByPath.value)) {
+		try {
+			URL.revokeObjectURL(url)
+		} catch {
+			// Ignore invalid/already-revoked URLs.
+		}
+	}
+	imageSrcByPath.value = {}
+}
+
+function getMimeFromName(name: string): string {
+	const lower = name.toLowerCase()
+	if (lower.endsWith('.png')) return 'image/png'
+	if (lower.endsWith('.jpg') || lower.endsWith('.jpeg')) return 'image/jpeg'
+	if (lower.endsWith('.gif')) return 'image/gif'
+	if (lower.endsWith('.bmp')) return 'image/bmp'
+	if (lower.endsWith('.webp')) return 'image/webp'
+	return 'application/octet-stream'
+}
+
+async function preloadImageSrc(entries: DirFileEntry[]) {
+	cleanupImageUrls()
+	const pairs = await Promise.all(
+		entries.map(async (entry) => {
+			try {
+				const bytes = await invoke<number[]>('plugin:utils|read_binary_file', { path: entry.path })
+				const blob = new Blob([new Uint8Array(bytes)], { type: getMimeFromName(entry.name) })
+				return [entry.path, URL.createObjectURL(blob)] as const
+			} catch {
+				const normalizedPath = entry.path.replace(/\\/g, '/')
+				return [entry.path, convertFileSrc(normalizedPath)] as const
+			}
+		}),
+	)
+	imageSrcByPath.value = Object.fromEntries(pairs.filter(([, src]) => !!src))
+}
 
 function joinPath(base: string, child: string): string {
 	const sep = base.includes('\\') ? '\\' : '/'
@@ -112,8 +151,10 @@ async function loadScreenshots() {
 			extensions: ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp'],
 		})
 		screenshots.value = files
+		await preloadImageSrc(files)
 	} catch (e) {
 		screenshots.value = []
+		cleanupImageUrls()
 	} finally {
 		loading.value = false
 	}
@@ -130,8 +171,23 @@ async function openScreenshotsFolder() {
 
 async function copyScreenshot(entry: DirFileEntry) {
 	try {
-		const blob = await imageToBlob(getImageSrc(entry))
-		await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+		// Prefer native clipboard path (reliable in Tauri/WebView).
+		await invoke('plugin:utils|copy_image_to_clipboard', { path: entry.path })
+		addNotification({
+			title: formatMessage(messages.notificationCopiedTitle),
+			text: formatMessage(messages.notificationCopiedText),
+			type: 'success',
+		})
+		return
+	} catch {
+		// Fallback to web clipboard API if native path is unavailable.
+	}
+
+	try {
+		const bytes = await invoke<number[]>('plugin:utils|read_binary_file', { path: entry.path })
+		const blob = new Blob([new Uint8Array(bytes)], { type: getMimeFromName(entry.name) })
+		const mimeType = blob.type || 'application/octet-stream'
+		await navigator.clipboard.write([new ClipboardItem({ [mimeType]: blob })])
 		addNotification({
 			title: formatMessage(messages.notificationCopiedTitle),
 			text: formatMessage(messages.notificationCopiedText),
@@ -151,23 +207,6 @@ async function copyScreenshot(entry: DirFileEntry) {
 	}
 }
 
-function imageToBlob(src: string): Promise<Blob> {
-	return new Promise((resolve, reject) => {
-		const img = new Image()
-		img.crossOrigin = 'anonymous'
-		img.onload = () => {
-			const canvas = document.createElement('canvas')
-			canvas.width = img.naturalWidth
-			canvas.height = img.naturalHeight
-			const ctx = canvas.getContext('2d')!
-			ctx.drawImage(img, 0, 0)
-			canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('toBlob failed'))), 'image/png')
-		}
-		img.onerror = () => reject(new Error('Failed to load image'))
-		img.src = src
-	})
-}
-
 function formatSize(bytes: number): string {
 	if (bytes < 1024) return `${bytes} B`
 	if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
@@ -175,7 +214,7 @@ function formatSize(bytes: number): string {
 }
 
 function getImageSrc(entry: DirFileEntry): string {
-	return convertFileSrc(entry.path)
+	return imageSrcByPath.value[entry.path] || ''
 }
 
 onMounted(() => {
@@ -185,6 +224,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
 	selectedImage.value = null
 	screenshots.value = []
+	cleanupImageUrls()
 })
 
 watch(

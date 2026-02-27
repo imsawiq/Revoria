@@ -48,7 +48,7 @@
 		]
 	},
 	"productName": "Revoria",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"mainBinaryName": "Revoria",
 	"identifier": "sawiq.revoria",
 	"plugins": {

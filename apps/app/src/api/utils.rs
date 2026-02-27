@@ -1,3 +1,4 @@
+use arboard::{Clipboard, ImageData};
 use serde::{Deserialize, Serialize};
 use tauri::Runtime;
 use tauri_plugin_opener::OpenerExt;
@@ -8,6 +9,7 @@ use theseus::{
 
 use crate::api::{Result, TheseusSerializableError};
 use dashmap::DashMap;
+use std::borrow::Cow;
 use std::path::{Path, PathBuf};
 use tauri_plugin_http::reqwest;
 use tauri_plugin_http::reqwest::Client;
@@ -36,6 +38,8 @@ pub fn init<R: Runtime>() -> tauri::plugin::TauriPlugin<R> {
             get_dir_size,
             delete_paths,
             read_text_file,
+            read_binary_file,
+            copy_image_to_clipboard,
             ollama_chat
         ])
         .build()
@@ -357,6 +361,40 @@ pub async fn delete_paths(paths: Vec<String>) -> Result<u64> {
 pub async fn read_text_file(path: String) -> Result<String> {
     let content = fs::read_to_string(path).await?;
     Ok(content)
+}
+
+#[tauri::command]
+pub async fn read_binary_file(path: String) -> Result<Vec<u8>> {
+    let content = fs::read(path).await?;
+    Ok(content)
+}
+
+#[tauri::command]
+pub async fn copy_image_to_clipboard(path: String) -> Result<()> {
+    let path_for_decode = path.clone();
+    tokio::task::spawn_blocking(move || -> Result<()> {
+        let image = image::open(path_for_decode).map_err(|e| {
+            theseus::Error::from(std::io::Error::other(e.to_string()))
+        })?;
+        let rgba = image.to_rgba8();
+        let (width, height) = rgba.dimensions();
+        let mut clipboard = Clipboard::new().map_err(|e| {
+            theseus::Error::from(std::io::Error::other(e.to_string()))
+        })?;
+        clipboard
+            .set_image(ImageData {
+                width: width as usize,
+                height: height as usize,
+                bytes: Cow::Owned(rgba.into_raw()),
+            })
+            .map_err(|e| {
+                theseus::Error::from(std::io::Error::other(e.to_string()))
+            })?;
+        Ok(())
+    })
+    .await
+    .map_err(|e| theseus::Error::from(std::io::Error::other(e.to_string())))??;
+    Ok(())
 }
 
 #[tauri::command]

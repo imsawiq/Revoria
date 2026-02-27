@@ -857,16 +857,15 @@ onUnmounted(() => {
 	flex-direction: column;
 	gap: 1rem;
 	min-height: 60vh;
+	min-width: 0;
 }
 
 .log-select {
 	max-width: 18rem;
 	border-radius: 999px;
-	background: var(--color-glass-bg-strong);
+	background: var(--color-raised-bg);
 	border: 1px solid var(--glass-border);
 	box-shadow: var(--glass-shadow);
-	backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-	-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
 }
 
 .crash-card {
@@ -960,19 +959,17 @@ onUnmounted(() => {
 .crash-select {
 	max-width: 20rem;
 	border-radius: 999px;
-	background: var(--color-glass-bg-strong);
+	background: var(--color-raised-bg);
 	border: 1px solid var(--glass-border);
 	box-shadow: var(--glass-shadow);
-	backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-	-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
 }
 
 :global(.v-popper__inner) {
-	background: var(--color-glass-bg-strong);
+	background: var(--color-raised-bg) !important;
 	border: 1px solid var(--glass-border);
 	box-shadow: var(--glass-shadow);
-	backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-	-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
 	color: var(--color-contrast);
 }
 
@@ -995,15 +992,15 @@ onUnmounted(() => {
 
 .log-text {
 	width: 100%;
-	height: 100%;
+	flex: 1 1 auto;
+	min-height: 18rem;
+	height: clamp(20rem, 44vh, 34rem);
 	font-family: var(--mono-font);
 	background-color: var(--color-accent-contrast);
 	color: var(--color-contrast);
 	border-radius: var(--radius-lg);
-	padding-top: 1.5rem;
-	overflow-x: auto; /* Enables horizontal scrolling */
-	overflow-y: hidden; /* Disables vertical scrolling on this wrapper */
-	white-space: nowrap; /* Keeps content on a single line */
+	padding-top: 0.75rem;
+	overflow: hidden;
 	white-space: normal;
 	color-scheme: dark;
 }
@@ -1045,14 +1042,14 @@ onUnmounted(() => {
 
 .scroller {
 	height: 100%;
+	overflow: auto;
 }
 
 .user {
-	height: 32%;
+	min-height: 20px;
 	padding: 0 1.5rem;
 	display: flex;
-
-	align-items: center;
+	align-items: flex-start;
 	user-select: text;
 }
 </style>

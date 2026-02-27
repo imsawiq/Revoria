@@ -1,29 +1,30 @@
 <template>
-	<div
-		v-if="open"
-		:style="`${mouseX !== -1 ? `--_mouse-x: ${mouseX};` : ''} ${mouseY !== -1 ? `--_mouse-y: ${mouseY};` : ''}`"
-	>
+	<Teleport to="body">
 		<div
-			:class="{ shown: visible }"
-			class="tauri-overlay"
-			data-tauri-drag-region
-			@click="() => (closeOnClickOutside && closable ? hide() : {})"
-		/>
-		<div
-			:class="[
-				'modal-overlay',
-				{
-					shown: visible,
-					noblur: props.noblur,
-				},
-				computedFade,
-			]"
-			@click="() => (closeOnClickOutside && closable ? hide() : {})"
-		/>
-		<div class="modal-container experimental-styles-within" :class="{ shown: visible }">
+			v-if="open"
+			:style="`${mouseX !== -1 ? `--_mouse-x: ${mouseX};` : ''} ${mouseY !== -1 ? `--_mouse-y: ${mouseY};` : ''}`"
+		>
 			<div
-				class="modal-body flex flex-col bg-bg-raised rounded-2xl border border-divider glass-modal"
-			>
+				:class="{ shown: visible }"
+				class="tauri-overlay"
+				data-tauri-drag-region
+				@click="() => (closeOnClickOutside && closable ? hide() : {})"
+			/>
+			<div
+				:class="[
+					'modal-overlay',
+					{
+						shown: visible,
+						noblur: props.noblur,
+					},
+					computedFade,
+				]"
+				@click="() => (closeOnClickOutside && closable ? hide() : {})"
+			/>
+			<div class="modal-container experimental-styles-within" :class="{ shown: visible }">
+				<div
+					class="modal-body flex flex-col bg-bg-raised rounded-2xl border border-divider glass-modal"
+				>
 				<div
 					v-if="!hideHeader"
 					data-tauri-drag-region
@@ -95,22 +96,26 @@
 					</Transition>
 				</div>
 
-				<div v-else :class="['overflow-y-auto p-6', { 'pt-12': props.mergeHeader && closable }]">
-					<slot> You just lost the game.</slot>
-				</div>
+					<div
+						v-else
+						:class="['overflow-y-auto p-6', { 'pt-12': props.mergeHeader && closable }]"
+					>
+						<slot> You just lost the game.</slot>
+					</div>
 
-				<div v-if="$slots.actions" class="p-6 pt-0">
-					<slot name="actions" />
+					<div v-if="$slots.actions" class="p-6 pt-0">
+						<slot name="actions" />
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div v-else></div>
+	</Teleport>
+	<div v-if="!open"></div>
 </template>
 
 <script setup lang="ts">
 import { XIcon } from '@modrinth/assets'
-import { computed, ref } from 'vue'
+import { Teleport, computed, ref } from 'vue'
 
 import { useScrollIndicator } from '../../composables/scroll-indicator'
 import ButtonStyled from '../base/ButtonStyled.vue'
@@ -224,7 +229,7 @@ function handleKeyDown(event: KeyboardEvent) {
 	left: 0;
 	width: 100%;
 	height: 100px;
-	z-index: 20;
+	z-index: 10020;
 
 	&.shown {
 		opacity: 1;
@@ -234,8 +239,8 @@ function handleKeyDown(event: KeyboardEvent) {
 
 .modal-overlay {
 	position: fixed;
-	inset: -5rem;
-	z-index: 19;
+	inset: 0;
+	z-index: 10019;
 	opacity: 0;
 	transition: all 0.2s ease-out;
 	//transform: translate(
@@ -243,7 +248,7 @@ function handleKeyDown(event: KeyboardEvent) {
 	//    calc((-50vh + var(--_mouse-y, 50vh) * 1px) / 2)
 	//  )
 	//  scaleX(0.8) scaleY(0.5);
-	border-radius: 180px;
+	border-radius: 0;
 	//filter: blur(5px);
 
 	// Fade variants
@@ -290,7 +295,7 @@ function handleKeyDown(event: KeyboardEvent) {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	z-index: 21;
+	z-index: 10021;
 	visibility: hidden;
 	pointer-events: none;
 	transform: translate(

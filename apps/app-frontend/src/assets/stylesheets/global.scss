@@ -139,6 +139,28 @@ input {
 	background-clip: content-box;
 }
 
+.v-popper__popper {
+	z-index: 12000 !important;
+}
+
+.v-popper--theme-dropdown .v-popper__inner {
+	background: var(--color-raised-bg) !important;
+	border: 1px solid var(--color-button-border) !important;
+	box-shadow: var(--shadow-floating), var(--shadow-inset-sm);
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+	color: var(--color-contrast);
+	max-height: min(22rem, 50vh);
+}
+
+.v-popper--theme-dropdown .v-popper__arrow-inner {
+	border-color: var(--color-raised-bg) !important;
+}
+
+.v-popper--theme-dropdown .v-popper__arrow-outer {
+	border-color: var(--color-button-border) !important;
+}
+
 .highlighted {
 	box-shadow: 0 0 1rem var(--color-brand) !important;
 }

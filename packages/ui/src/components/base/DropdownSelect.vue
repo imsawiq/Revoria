@@ -212,7 +212,7 @@ const isChildOfDropdown = (element) => {
 		outline: 0;
 	}
 
-	.selected {
+		.selected {
 		height: 100%;
 		width: 100%;
 
@@ -220,7 +220,7 @@ const isChildOfDropdown = (element) => {
 		align-items: center;
 		justify-content: space-between;
 		padding: var(--gap-sm) var(--gap-lg);
-		background-color: var(--color-button-bg);
+		background-color: var(--color-raised-bg);
 		gap: var(--gap-md);
 		cursor: pointer;
 		user-select: none;
@@ -279,10 +279,11 @@ const isChildOfDropdown = (element) => {
 		max-height: v-bind('maxVisibleOptions ? `calc(${maxVisibleOptions} * 3rem)` : "18.75rem"');
 		overflow-y: auto;
 		border: 1px solid var(--color-button-border);
+		background-color: var(--color-raised-bg);
 		box-shadow: var(--shadow-inset-sm), var(--shadow-floating);
 
 		.option {
-			background-color: var(--color-button-bg);
+			background-color: var(--color-raised-bg);
 			display: flex;
 			align-items: center;
 			padding: var(--gap-md);
