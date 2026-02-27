@@ -114,7 +114,7 @@ jobs:
             openjdk-17-jdk
 
       - name: 🔐 Ensure Gradle wrapper is executable
-        if: matrix.platform == 'ubuntu-latest'
+        if: matrix.platform != 'windows-latest'
         run: chmod +x packages/app-lib/java/gradlew
 
       - name: ⚙️ Set application environment
