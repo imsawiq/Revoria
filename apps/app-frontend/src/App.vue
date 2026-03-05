@@ -90,7 +90,8 @@ import { get, set } from '@/helpers/settings.ts'
 const themeStore = useTheming()
 
 const REVORIA_RELEASES_API = 'https://api.github.com/repos/imsawiq/Revoria/releases/latest'
-const REVORIA_RELEASES_LIST_API = 'https://api.github.com/repos/imsawiq/Revoria/releases?per_page=20'
+const REVORIA_RELEASES_LIST_API =
+	'https://api.github.com/repos/imsawiq/Revoria/releases?per_page=20'
 const REVORIA_RELEASES_URL = 'https://github.com/imsawiq/Revoria/releases'
 
 const notificationManager = new AppNotificationManager()
@@ -500,9 +501,12 @@ async function setupApp() {
 	if (releaseCheckIntervalId.value !== null) {
 		clearInterval(releaseCheckIntervalId.value)
 	}
-	releaseCheckIntervalId.value = window.setInterval(() => {
-		void checkRevoriaReleaseForUpdates(revoriaCurrentVersion.value)
-	}, 10 * 60 * 1000)
+	releaseCheckIntervalId.value = window.setInterval(
+		() => {
+			void checkRevoriaReleaseForUpdates(revoriaCurrentVersion.value)
+		},
+		10 * 60 * 1000,
+	)
 
 	if (osType === 'windows') {
 		await processPendingSurveys()
@@ -1126,8 +1130,8 @@ async function processPendingSurveys() {
 </template>
 
 <style lang="scss" scoped>
-@import '../../../packages/assets/styles/neon-icon.scss';
-@import '../../../packages/assets/styles/neon-text.scss';
+@use '../../../packages/assets/styles/neon-icon.scss' as *;
+@use '../../../packages/assets/styles/neon-text.scss' as *;
 .window-controls {
 	z-index: 20;
 	display: none;

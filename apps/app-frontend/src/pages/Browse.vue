@@ -1,5 +1,13 @@
 <script setup lang="ts">
-import { CheckIcon, ClipboardCopyIcon, DownloadIcon, ExternalIcon, GlobeIcon, SearchIcon, XIcon } from '@modrinth/assets'
+import {
+	CheckIcon,
+	ClipboardCopyIcon,
+	DownloadIcon,
+	ExternalIcon,
+	GlobeIcon,
+	SearchIcon,
+	XIcon,
+} from '@modrinth/assets'
 import type { ProjectType, SortType, Tags } from '@modrinth/ui'
 import {
     Avatar,
@@ -13,12 +21,13 @@ import {
     SearchFilterControl,
     SearchSidebarFilter,
     useSearch,
+    useServerSearch,
 } from '@modrinth/ui'
 import { convertFileSrc } from '@tauri-apps/api/core'
 import { openUrl } from '@tauri-apps/plugin-opener'
 import { defineMessages, useVIntl } from '@vintl/vintl'
 import type { Ref } from 'vue'
-import { computed, nextTick, onMounted, ref, shallowRef, watch } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, ref, shallowRef, watch } from 'vue'
 import type { LocationQuery } from 'vue-router'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -27,7 +36,8 @@ import InstanceIndicator from '@/components/ui/InstanceIndicator.vue'
 import ModalWrapper from '@/components/ui/modal/ModalWrapper.vue'
 import NavTabs from '@/components/ui/NavTabs.vue'
 import SearchCard from '@/components/ui/SearchCard.vue'
-import { get_search_results } from '@/helpers/cache.js'
+import ServerSearchCard from '@/components/ui/ServerSearchCard.vue'
+import { get_search_results, get_version } from '@/helpers/cache.js'
 import {
     constructCurseForgeCdnUrl,
     getCurseForgeCategories,
@@ -38,13 +48,21 @@ import {
     searchCurseForgeMods,
 } from '@/helpers/curseforge'
 import {
-    add_project_from_path,
-    get as getInstance,
-    get_projects as getInstanceProjects,
-    list as listInstances,
+	add_project_from_path,
+	create as createInstanceProfile,
+	edit as editInstanceProfile,
+	get as getInstance,
+	get_projects as getInstanceProjects,
+	kill,
+	list as listInstances,
 } from '@/helpers/profile.js'
 import { get_categories, get_game_versions, get_loaders } from '@/helpers/tags'
 import { downloadUrlToTemp } from '@/helpers/utils'
+import { useFetch } from '@/helpers/fetch.js'
+import { process_listener } from '@/helpers/events'
+import { get_by_profile_path } from '@/helpers/process.js'
+import { install_to_existing_profile } from '@/helpers/pack.js'
+import { add_server_to_profile, get_profile_worlds, getServerLatency, start_join_server } from '@/helpers/worlds.ts'
 import { useBreadcrumbs } from '@/store/breadcrumbs'
 
 const { handleError, addNotification } = injectNotificationManager()
@@ -77,7 +95,7 @@ const projectTypes = computed(() => {
 const selectableSources = computed(() => {
 	const sources = [{ label: formatMessage(messages.sourceModrinth), href: 'modrinth' }]
 	// Hide CurseForge for modpacks — CF uses .zip, launcher uses .mrpack
-	if (projectType.value !== 'modpack') {
+	if (projectType.value !== 'modpack' && projectType.value !== 'server') {
 		sources.push({ label: formatMessage(messages.sourceCurseForge), href: 'curseforge' })
 	}
 	return sources
@@ -126,6 +144,14 @@ const cfInstallModal = ref<any>(null)
 const cfInstallTargetProject = ref<any>(null)
 const cfInstallProfiles = ref<any[]>([])
 const cfInstallSearching = ref('')
+const serverInstallModal = ref<any>(null)
+const serverInstallTargetProject = ref<ServerProject | null>(null)
+const serverInstallProfiles = ref<any[]>([])
+const serverInstallSearching = ref('')
+const onHideServerInstallModal = () => {
+	serverInstallTargetProject.value = null
+}
+let unlistenProcessEvents: (() => void) | null = null
 
 function cfLoaderIdToString(id: number): string | null {
 	switch (id) {
@@ -175,11 +201,49 @@ onMounted(async () => {
 			.then((v) => (v ?? []) as any[]),
 	])
 	modrinthCategoryList.value = categories
+
+	// Some launcher builds may cache old tag sets without server categories.
+	// Backfill server categories from public API so server filters stay complete.
+	const remoteServerCategories = await useFetch('https://api.modrinth.com/v2/tag/category', null, true)
+		.then(async (response) => {
+			if (!response?.ok) return []
+			const data = await response.json()
+			return Array.isArray(data)
+				? data.filter((x: any) => x.project_type === 'minecraft_java_server')
+				: []
+		})
+		.catch(() => [])
+
+	if (remoteServerCategories.length > 0) {
+		const existing = new Set(
+			modrinthCategoryList.value.map(
+				(x: any) => `${x.project_type}::${x.header ?? ''}::${x.name}`,
+			),
+		)
+		for (const cat of remoteServerCategories) {
+			const key = `${cat.project_type}::${cat.header ?? ''}::${cat.name}`
+			if (!existing.has(key)) {
+				modrinthCategoryList.value.push(cat)
+			}
+		}
+	}
+
 	loaderList.value = loaders
 	gameVersionList.value = availableGameVersions
 
 	await updateInstanceContext()
 	await refreshSearch()
+
+	unlistenProcessEvents = await process_listener((e: { event: string; profile_path_id: string }) => {
+		if (e.event !== 'finished') return
+		const projectId = Object.entries(runningServerProjects.value).find(
+			([, path]) => path === e.profile_path_id,
+		)?.[0]
+		if (projectId) {
+			const { [projectId]: _, ...remaining } = runningServerProjects.value
+			runningServerProjects.value = remaining
+		}
+	})
 
 	previousFilterState.value = JSON.stringify({
 		query: query.value,
@@ -188,6 +252,11 @@ onMounted(async () => {
 		maxResults: maxResults.value,
 		projectTypes: projectTypes.value,
 	})
+})
+
+onUnmounted(() => {
+	unlistenProcessEvents?.()
+	unlistenProcessEvents = null
 })
 
 watch(route, () => {
@@ -310,13 +379,22 @@ const curseForgeSortTypes = computed(() => [
 ])
 
 const sortTypesForSource = computed(() => (isCurseForge.value ? curseForgeSortTypes.value : sortTypes))
+const {
+	serverCurrentSortType,
+	serverCurrentFilters,
+	serverToggledGroups,
+	serverSortTypes,
+	serverFilterTypes,
+	serverRequestParams,
+	createServerPageParams,
+} = useServerSearch({ tags, query, maxResults, currentPage })
 
 watch(
 	() => isCurseForge.value,
 	(isCf) => {
 		if (!isCf) return
-		// Redirect away from modpacks when switching to CurseForge
-		if (projectType.value === 'modpack') {
+		// Redirect away from unsupported CurseForge project types
+		if (projectType.value === 'modpack' || projectType.value === 'server') {
 			router.replace({
 				path: '/browse/mod',
 				query: { ...route.query },
@@ -412,10 +490,49 @@ type SearchResults = {
 	hits: SearchResult[]
 }
 
+type ServerProject = {
+	project_id: string
+	slug?: string
+	name: string
+	summary: string
+	icon_url?: string | null
+	categories?: string[]
+	minecraft_server?: {
+		region?: string
+	}
+	minecraft_java_server?: {
+		address?: string
+		verified_plays_2w?: number
+		ping?: {
+			data?: {
+				players_online?: number
+			}
+		}
+		content?: {
+			kind?: string
+			project_id?: string
+			project_name?: string
+			project_icon?: string
+			version_id?: string
+		}
+	}
+}
+
 const results: Ref<SearchResults> = shallowRef({ total_hits: 0, limit: 1, hits: [] })
-const pageCount = computed(() =>
-	results.value ? Math.ceil(results.value.total_hits / results.value.limit) : 1,
-)
+const pageCount = computed(() => {
+	if (!results.value) return 1
+	const total = Number(results.value.total_hits)
+	const limit = Number(results.value.limit)
+	if (!Number.isFinite(total) || total <= 0) return 1
+	if (!Number.isFinite(limit) || limit <= 0) return 1
+	return Math.max(1, Math.ceil(total / limit))
+})
+const serverHits: Ref<ServerProject[]> = shallowRef([])
+const serverPings = ref<Record<string, number | undefined>>({})
+const serverPingUpdatedAt = ref<Record<string, number>>({})
+const runningServerProjects = ref<Record<string, string>>({})
+const installingServerProjects = ref<string[]>([])
+const addingServerProjects = ref<string[]>([])
 
 watch(
 	() => isCurseForge.value,
@@ -457,13 +574,244 @@ watch(
 	},
 )
 
-watch(requestParams, () => {
+const effectiveRequestParams = computed(() =>
+	projectType.value === 'server' ? serverRequestParams.value : requestParams.value,
+)
+
+watch(effectiveRequestParams, () => {
 	if (!route.params.projectType) return
 	if (isCurseForge.value) return
 	refreshSearch()
 })
 
+function getServerAddress(project: ServerProject) {
+	return project.minecraft_java_server?.address ?? null
+}
+
+async function fetchServerSearchResults(queryString: string): Promise<{
+	hits: ServerProject[]
+	total_hits: number
+	limit?: number
+}> {
+	const response = await useFetch(`https://api.modrinth.com/v3/search${queryString}`, null, false)
+	if (!response?.ok) {
+		throw new Error(`Server search failed with status ${response?.status ?? 'unknown'}`)
+	}
+	return await response.json()
+}
+
+async function pingServerHits(hits: ServerProject[]) {
+	const now = Date.now()
+	const freshForMs = 60_000
+	const toPing = hits
+		.filter((project) => !!getServerAddress(project))
+		.filter((project) => {
+			const ts = serverPingUpdatedAt.value[project.project_id] ?? 0
+			return now - ts > freshForMs
+		})
+		.slice(0, 8)
+
+	await Promise.all(
+		toPing.map(async (project) => {
+			const address = getServerAddress(project)
+			if (!address) return
+			const latency = await getServerLatency(address).catch(() => undefined)
+			serverPings.value[project.project_id] = latency
+			serverPingUpdatedAt.value[project.project_id] = Date.now()
+		}),
+	)
+}
+
+async function checkServerRunningStates(hits: ServerProject[]) {
+	const packs = await listInstances().catch(() => [])
+	const running: Record<string, string> = {}
+	for (const project of hits) {
+		const instance = packs.find((pack: any) => pack.linked_data?.project_id === project.project_id)
+		if (!instance?.path) continue
+		const processes = await get_by_profile_path(instance.path).catch(() => [])
+		if (Array.isArray(processes) && processes.length > 0) {
+			running[project.project_id] = instance.path
+		}
+	}
+	runningServerProjects.value = running
+}
+
+async function ensureServerInInstance(path: string, name: string, address: string) {
+	const worlds = await get_profile_worlds(path).catch(() => [])
+	const exists = worlds.some(
+		(world: any) =>
+			world.type === 'server' &&
+			(world.address === address || (address.endsWith(':25565') && world.address === address.split(':')[0])),
+	)
+	if (!exists) {
+		await add_server_to_profile(path, name, address, 'prompt')
+	}
+}
+
+const serverShownProfiles = computed(() => {
+	const q = serverInstallSearching.value.toLowerCase()
+	return (serverInstallProfiles.value ?? []).filter((p: any) =>
+		String(p?.name ?? '').toLowerCase().includes(q),
+	)
+})
+
+async function openAddServerToInstanceModal(project: ServerProject) {
+	serverInstallTargetProject.value = project
+	serverInstallSearching.value = ''
+	const packs = await listInstances().catch(() => [])
+	serverInstallProfiles.value = (packs ?? []).map((p: any) => ({
+		...p,
+		installing: false,
+		added: false,
+	}))
+	serverInstallModal.value?.show?.(undefined as any)
+}
+
+async function handleAddServerToCurrentInstance(project: ServerProject, instancePath?: string) {
+	const address = getServerAddress(project)
+	if (!address) {
+		addNotification({
+			title: 'Server address unavailable',
+			text: 'This server does not expose a join address.',
+			type: 'warning',
+		})
+		return false
+	}
+	if (!instancePath) {
+		return false
+	}
+
+	if (addingServerProjects.value.includes(project.project_id)) return
+	addingServerProjects.value.push(project.project_id)
+	try {
+		await ensureServerInInstance(instancePath, project.name, address)
+		addNotification({
+			title: 'Server added',
+			text: `${project.name} was added to ${instancePath}.`,
+			type: 'success',
+		})
+		return true
+	} catch (err) {
+		handleError(err instanceof Error ? err : new Error(String(err)))
+		return false
+	} finally {
+		addingServerProjects.value = addingServerProjects.value.filter((id) => id !== project.project_id)
+	}
+}
+
+async function handlePlayServerProject(project: ServerProject) {
+	if (installingServerProjects.value.includes(project.project_id)) return
+	installingServerProjects.value.push(project.project_id)
+
+	try {
+		const address = getServerAddress(project)
+		if (!address) {
+			throw new Error('This server has no join address.')
+		}
+
+		const allInstances = await listInstances()
+		let instance = allInstances.find(
+			(pack: any) => pack.linked_data?.project_id === project.project_id,
+		)
+
+		const content = project.minecraft_java_server?.content
+		if (content?.kind === 'modpack' && content.version_id) {
+			const version = await get_version(content.version_id, 'must_revalidate').catch(() => null)
+			const gameVersion = version?.game_versions?.[0]
+			const contentProjectId = content.project_id ?? version?.project_id ?? project.project_id
+
+			if (!instance) {
+				const profilePath = await createInstanceProfile(
+					project.name,
+					gameVersion ?? '1.21.1',
+					'vanilla',
+					null,
+					null,
+					true,
+				)
+				await install_to_existing_profile(
+					contentProjectId,
+					content.version_id,
+					project.name,
+					profilePath,
+				)
+				await editInstanceProfile(profilePath, {
+					linked_data: {
+						project_id: project.project_id,
+						version_id: content.version_id,
+						locked: true,
+					},
+				})
+				instance = await getInstance(profilePath)
+			} else if (instance.linked_data?.version_id !== content.version_id) {
+				await install_to_existing_profile(
+					contentProjectId,
+					content.version_id,
+					project.name,
+					instance.path,
+				)
+				await editInstanceProfile(instance.path, {
+					linked_data: {
+						project_id: project.project_id,
+						version_id: content.version_id,
+						locked: true,
+					},
+				})
+			}
+		} else if (!instance) {
+			const latestRelease =
+				gameVersionList.value.find((x: any) => x.version_type === 'release')?.version ?? '1.21.1'
+			const profilePath = await createInstanceProfile(
+				project.name,
+				latestRelease,
+				'vanilla',
+				null,
+				null,
+				false,
+			)
+			await editInstanceProfile(profilePath, {
+				linked_data: {
+					project_id: project.project_id,
+					version_id: '',
+					locked: false,
+				},
+			})
+			instance = await getInstance(profilePath)
+		}
+
+		if (!instance?.path) {
+			throw new Error('Failed to create/find an instance for this server.')
+		}
+
+		await ensureServerInInstance(instance.path, project.name, address)
+		await start_join_server(instance.path, address)
+		await checkServerRunningStates(serverHits.value)
+	} catch (err) {
+		handleError(err instanceof Error ? err : new Error(String(err)))
+	} finally {
+		installingServerProjects.value = installingServerProjects.value.filter(
+			(id) => id !== project.project_id,
+		)
+	}
+}
+
+async function handleStopServerProject(projectId: string) {
+	const instancePath = runningServerProjects.value[projectId]
+	if (!instancePath) return
+	await kill(instancePath).catch(handleError)
+	const { [projectId]: _, ...remaining } = runningServerProjects.value
+	runningServerProjects.value = remaining
+}
+
 async function refreshSearch() {
+	if (projectType.value === 'server' && isCurseForge.value) {
+		await router.replace({
+			path: route.path,
+			query: { ...route.query, source: 'modrinth' },
+		})
+		return
+	}
+
 	if (isCurseForge.value) {
 		loading.value = true
 		try {
@@ -545,40 +893,65 @@ async function refreshSearch() {
 			loading.value = false
 		}
 	} else {
-		let rawResults = await get_search_results(requestParams.value)
-		if (!rawResults) {
-			rawResults = {
-				result: {
-					hits: [],
-					total_hits: 0,
-					limit: 1,
-				},
+		if (projectType.value === 'server') {
+			const serverResults = await fetchServerSearchResults(serverRequestParams.value).catch(
+				handleError,
+			)
+			serverHits.value = serverResults?.hits ?? []
+			results.value = {
+				total_hits: serverResults?.total_hits ?? 0,
+				limit: serverResults?.limit ?? maxResults.value,
+				hits: [],
 			}
-		}
-		if (instance.value) {
-			for (const val of rawResults.result.hits as any[]) {
-				val.installed =
-					newlyInstalled.value.includes(val.project_id) ||
-					Object.values(instanceProjects.value ?? {}).some(
-						(x) => x?.metadata && x.metadata.project_id === val.project_id,
-					)
+			serverPings.value = {}
+			loading.value = false
+			void pingServerHits(serverHits.value)
+			void checkServerRunningStates(serverHits.value)
+		} else {
+			let rawResults = await get_search_results(requestParams.value)
+			if (!rawResults) {
+				rawResults = {
+					result: {
+						hits: [],
+						total_hits: 0,
+						limit: 1,
+					},
+				}
 			}
+			if (instance.value) {
+				for (const val of rawResults.result.hits as any[]) {
+					val.installed =
+						newlyInstalled.value.includes(val.project_id) ||
+						Object.values(instanceProjects.value ?? {}).some(
+							(x) => x?.metadata && x.metadata.project_id === val.project_id,
+						)
+				}
+			}
+			results.value = rawResults.result as SearchResults
+			results.value.hits = (results.value.hits ?? []).map((h: any) => ({
+				...h,
+				source: 'modrinth',
+			}))
 		}
-		results.value = rawResults.result as SearchResults
-		results.value.hits = (results.value.hits ?? []).map((h: any) => ({
-			...h,
-			source: 'modrinth',
-		}))
-		loading.value = false
+		if (projectType.value !== 'server') loading.value = false
 	}
 
-	const currentFilterState = JSON.stringify({
-		query: query.value,
-		filters: currentFilters.value,
-		sort: currentSortType.value,
-		maxResults: maxResults.value,
-		projectTypes: projectTypes.value,
-	})
+	const currentFilterState =
+		projectType.value === 'server'
+			? JSON.stringify({
+					query: query.value,
+					filters: serverCurrentFilters.value,
+					sort: serverCurrentSortType.value,
+					maxResults: maxResults.value,
+					projectTypes: projectTypes.value,
+				})
+			: JSON.stringify({
+					query: query.value,
+					filters: currentFilters.value,
+					sort: currentSortType.value,
+					maxResults: maxResults.value,
+					projectTypes: projectTypes.value,
+				})
 
 	if (previousFilterState.value && previousFilterState.value !== currentFilterState) {
 		currentPage.value = 1
@@ -602,7 +975,7 @@ async function refreshSearch() {
 
 	const params = {
 		...persistentParams,
-		...createPageParams(),
+		...(projectType.value === 'server' ? createServerPageParams() : createPageParams()),
 	}
 
 	breadcrumbs.setContext({
@@ -808,6 +1181,7 @@ const selectableProjectTypes = computed(() => {
 		{ label: formatMessage(messages.typeResourcePack), href: `/browse/resourcepack` },
 		{ label: formatMessage(messages.typeDatapack), href: `/browse/datapack`, shown: dataPacks },
 		{ label: formatMessage(messages.typeShader), href: `/browse/shader` },
+		{ label: formatMessage(messages.typeServer), href: `/browse/server`, shown: !instance.value },
 	]
 
 	if (params) {
@@ -853,6 +1227,10 @@ const messages = defineMessages({
 	typeShader: {
 		id: 'browse.type.shader',
 		defaultMessage: 'Shaders',
+	},
+	typeServer: {
+		id: 'browse.type.server',
+		defaultMessage: 'Servers',
 	},
 	installToInstanceTitle: {
 		id: 'browse.install.title',
@@ -996,6 +1374,7 @@ const projectTypeLabels = computed(() => ({
 	resourcepack: formatMessage(messages.typeResourcePack),
 	datapack: formatMessage(messages.typeDatapack),
 	shader: formatMessage(messages.typeShader),
+	server: formatMessage(messages.typeServer),
 }))
 
 const options = ref<any>(null)
@@ -1037,6 +1416,97 @@ const handleOptionsClick = (args: any) => {
 </script>
 
 <template>
+	<ModalWrapper
+		ref="serverInstallModal"
+		:header="'Add server to instance'"
+		:on-hide="onHideServerInstallModal"
+	>
+		<div class="flex flex-col gap-3 min-w-[400px] max-w-[500px]">
+			<p v-if="serverInstallTargetProject" class="m-0 text-sm text-secondary">
+				Select an instance to add
+				<strong class="text-contrast">{{ serverInstallTargetProject.name }}</strong>
+			</p>
+			<div class="flex items-center gap-2 rounded-xl bg-[--color-button-bg] px-3 py-2 border border-[--glass-border]">
+				<SearchIcon class="w-4 h-4 text-secondary shrink-0" />
+				<input
+					v-model="serverInstallSearching"
+					autocomplete="off"
+					type="text"
+					class="w-full bg-transparent border-none outline-none text-sm text-contrast placeholder:text-secondary"
+					placeholder="Search instances..."
+				/>
+			</div>
+			<div class="flex flex-col gap-1 max-h-[20rem] overflow-y-auto pr-1">
+				<div
+					v-for="profile in serverShownProfiles"
+					:key="profile.path"
+					class="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-[--color-button-bg] group"
+				>
+					<router-link
+						class="flex items-center gap-3 flex-1 min-w-0 no-underline text-contrast"
+						:to="`/instance/${encodeURIComponent(profile.path)}`"
+						@click="serverInstallModal?.hide?.()"
+					>
+						<Avatar
+							:src="profile.icon_path ? convertFileSrc(profile.icon_path) : undefined"
+							size="36px"
+							class="shrink-0 rounded-lg"
+						/>
+						<div class="flex flex-col min-w-0">
+							<span class="text-sm font-semibold text-contrast truncate">{{ profile.name }}</span>
+							<span class="text-xs text-secondary">
+								{{ profile.game_version }}
+								<template v-if="profile.loader && profile.loader !== 'vanilla'">
+									&middot; {{ profile.loader }}
+								</template>
+							</span>
+						</div>
+					</router-link>
+					<ButtonStyled
+						:color="profile.added ? 'green' : 'brand'"
+						:type="profile.added ? 'standard' : 'outlined'"
+					>
+						<button
+							class="shrink-0 text-xs min-w-[5rem] justify-center"
+							:disabled="profile.installing || profile.added || !serverInstallTargetProject"
+							@click.stop="
+								async () => {
+									if (!serverInstallTargetProject) return
+									profile.installing = true
+									const added = await handleAddServerToCurrentInstance(
+										serverInstallTargetProject,
+										profile.path,
+									)
+									profile.installing = false
+									if (added) {
+										profile.added = true
+									}
+								}
+							"
+						>
+							<PlusIcon v-if="!profile.added && !profile.installing" class="w-4 h-4" />
+							<CheckIcon v-else-if="profile.added" class="w-4 h-4" />
+							{{
+								profile.installing
+									? 'Adding...'
+									: profile.added
+										? 'Added'
+										: 'Add'
+							}}
+						</button>
+					</ButtonStyled>
+				</div>
+				<div v-if="serverShownProfiles.length === 0" class="py-6 text-center text-secondary text-sm">
+					No instances found.
+				</div>
+			</div>
+			<div class="flex justify-end pt-1">
+				<ButtonStyled>
+					<button @click="serverInstallModal?.hide?.()">Cancel</button>
+				</ButtonStyled>
+			</div>
+		</div>
+	</ModalWrapper>
 	<ModalWrapper
 		ref="cfInstallModal"
 		:header="formatMessage(messages.installToInstanceTitle)"
@@ -1136,33 +1606,53 @@ const handleOptionsClick = (args: any) => {
 				@click.prevent.stop
 			/>
 		</div>
-		<SearchSidebarFilter
-			v-for="filter in filtersForSource.filter((f) => f.display !== 'none')"
-			:key="`filter-${filter.id}`"
-			v-model:selected-filters="currentFilters"
-			v-model:toggled-groups="toggledGroups"
-			v-model:overridden-provided-filter-types="overriddenProvidedFilterTypes"
-			:provided-filters="instanceFilters"
-			:filter-type="filter"
-			class="border-0 border-b-[1px] [&:first-child>button]:pt-4 last:border-b-0 border-[--brand-gradient-border] border-solid"
-			button-class="button-animation flex flex-col gap-1 px-4 py-3 w-full bg-transparent cursor-pointer border-none hover:bg-button-bg"
-			content-class="mb-3"
-			inner-panel-class="ml-2 mr-3"
-			:open-by-default="
-				filter.id.startsWith('category') || filter.id === 'environment' || filter.id === 'license'
-			"
-		>
-			<template #header>
-				<h3 class="text-base m-0">{{ filter.formatted_name }}</h3>
-			</template>
-			<template #locked-game_version>
-				{{ formatMessage(messages.gameVersionProvidedByInstance) }}
-			</template>
-			<template #locked-mod_loader>
-				{{ formatMessage(messages.modLoaderProvidedByInstance) }}
-			</template>
-			<template #sync-button> {{ formatMessage(messages.syncFilterButton) }} </template>
-		</SearchSidebarFilter>
+		<template v-if="projectType === 'server'">
+			<SearchSidebarFilter
+				v-for="filterType in serverFilterTypes.filter((f) => f.options.length > 0)"
+				:key="`server-filter-${filterType.id}`"
+				v-model:selected-filters="serverCurrentFilters"
+				v-model:toggled-groups="serverToggledGroups"
+				:provided-filters="[]"
+				:filter-type="filterType"
+				class="border-0 border-b-[1px] [&:first-child>button]:pt-4 last:border-b-0 border-[--brand-gradient-border] border-solid"
+				button-class="button-animation flex flex-col gap-1 px-4 py-3 w-full bg-transparent cursor-pointer border-none hover:bg-button-bg"
+				content-class="mb-3"
+				inner-panel-class="ml-2 mr-3"
+			>
+				<template #header>
+					<h3 class="text-base m-0">{{ filterType.formatted_name }}</h3>
+				</template>
+			</SearchSidebarFilter>
+		</template>
+		<template v-else>
+			<SearchSidebarFilter
+				v-for="filter in filtersForSource.filter((f) => f.display !== 'none')"
+				:key="`filter-${filter.id}`"
+				v-model:selected-filters="currentFilters"
+				v-model:toggled-groups="toggledGroups"
+				v-model:overridden-provided-filter-types="overriddenProvidedFilterTypes"
+				:provided-filters="instanceFilters"
+				:filter-type="filter"
+				class="border-0 border-b-[1px] [&:first-child>button]:pt-4 last:border-b-0 border-[--brand-gradient-border] border-solid"
+				button-class="button-animation flex flex-col gap-1 px-4 py-3 w-full bg-transparent cursor-pointer border-none hover:bg-button-bg"
+				content-class="mb-3"
+				inner-panel-class="ml-2 mr-3"
+				:open-by-default="
+					filter.id.startsWith('category') || filter.id === 'environment' || filter.id === 'license'
+				"
+			>
+				<template #header>
+					<h3 class="text-base m-0">{{ filter.formatted_name }}</h3>
+				</template>
+				<template #locked-game_version>
+					{{ formatMessage(messages.gameVersionProvidedByInstance) }}
+				</template>
+				<template #locked-mod_loader>
+					{{ formatMessage(messages.modLoaderProvidedByInstance) }}
+				</template>
+				<template #sync-button> {{ formatMessage(messages.syncFilterButton) }} </template>
+			</SearchSidebarFilter>
+		</template>
 	</Teleport>
 	<div ref="searchWrapper" class="flex flex-col gap-3 p-6">
 		<template v-if="instance">
@@ -1192,12 +1682,21 @@ const handleOptionsClick = (args: any) => {
 		<div class="flex gap-2">
 			<DropdownSelect
 				v-slot="{ selected }"
-				v-model="currentSortType"
+				:model-value="projectType === 'server' ? serverCurrentSortType : currentSortType"
 				class="!w-auto flex-grow md:flex-grow-0"
 				:name="formatMessage(messages.sortByLabel)"
-				:options="[...sortTypesForSource]"
+				:options="projectType === 'server' ? serverSortTypes : [...sortTypesForSource]"
 				:display-name="(option?: SortType) => option?.display"
-				@change="onSearchChangeToTop()"
+				@update:model-value="
+					(v: SortType) => {
+						if (projectType === 'server') {
+							serverCurrentSortType = v
+						} else {
+							currentSortType = v
+						}
+						onSearchChangeToTop()
+					}
+				"
 			>
 				<span class="font-semibold text-primary">{{ formatMessage(messages.sortByLabel) }}: </span>
 				<span class="font-semibold text-secondary">{{ selected }}</span>
@@ -1215,6 +1714,14 @@ const handleOptionsClick = (args: any) => {
 			<Pagination :page="currentPage" :count="pageCount" class="ml-auto" @switch-page="setPage" />
 		</div>
 		<SearchFilterControl
+			v-if="projectType === 'server'"
+			v-model:selected-filters="serverCurrentFilters"
+			:filters="serverFilterTypes"
+			:provided-filters="[]"
+			:overridden-provided-filter-types="[]"
+		/>
+		<SearchFilterControl
+			v-else
 			v-model:selected-filters="currentFilters"
 			:filters="filtersForSource.filter((f) => f.display !== 'none')"
 			:provided-filters="instanceFilters"
@@ -1231,39 +1738,50 @@ const handleOptionsClick = (args: any) => {
 						{{ formatMessage(messages.offlineMessage) }}
 					</section>
 					<section v-else class="project-list display-mode--list instance-results" role="list">
-						<SearchCard
-							v-for="result in results.hits"
-							:key="result?.project_id"
-							:project="result"
-							:instance="instance ?? undefined"
-							:categories="
-								isCurseForge
-									? (result?.display_categories ?? []).map((name: string) => ({ name }))
-									: [
-											...categoryList.filter(
-												(cat: any) =>
-													(result?.display_categories ?? []).includes(cat.name) &&
-													cat.project_type === projectType,
-											),
-											...loaderList.filter(
-												(loader: any) =>
-													(result?.display_categories ?? []).includes(loader.name) &&
-													(loader.supported_project_types ?? []).includes(projectType),
-											),
-										]
-							"
-							:installed="result.installed || newlyInstalled.includes(result.project_id)"
-							@install="
-								(id) => {
-									if (isCurseForge) {
-										installCurseForgeProject(result)
-									} else {
-										newlyInstalled.push(id)
+						<template v-if="projectType === 'server'">
+							<ServerSearchCard
+								v-for="project in serverHits"
+								:key="`server-${project.project_id}`"
+								:project="project"
+								:tag-definitions="tags"
+								:ping="serverPings[project.project_id]"
+								:running="!!runningServerProjects[project.project_id]"
+								:installing="installingServerProjects.includes(project.project_id)"
+								:adding="addingServerProjects.includes(project.project_id)"
+								@add="openAddServerToInstanceModal(project)"
+								@play="handlePlayServerProject(project)"
+								@stop="handleStopServerProject(project.project_id)"
+								@contextmenu="
+									(event: MouseEvent) =>
+										handleRightClick(event, {
+											project_type: 'server',
+											slug: project.slug ?? project.project_id,
+											source: 'modrinth',
+										})
+								"
+							/>
+						</template>
+						<template v-else>
+							<SearchCard
+								v-for="result in results.hits"
+								:key="result?.project_id"
+								:project-type="projectType"
+								:project="result"
+								:tag-definitions="tags"
+								:instance="instance ?? undefined"
+								:installed="result.installed || newlyInstalled.includes(result.project_id)"
+								@install="
+									(id) => {
+										if (isCurseForge) {
+											installCurseForgeProject(result)
+										} else {
+											newlyInstalled.push(id)
+										}
 									}
-								}
-							"
-							@contextmenu.prevent.stop="(event: MouseEvent) => handleRightClick(event, result)"
-						/>
+								"
+								@contextmenu.prevent.stop="(event: MouseEvent) => handleRightClick(event, result)"
+							/>
+						</template>
 						<ContextMenu ref="options" @option-clicked="handleOptionsClick">
 							<template #open_link>
 								<GlobeIcon />
@@ -1296,6 +1814,11 @@ const handleOptionsClick = (args: any) => {
 <style scoped lang="scss">
 .browse-tab-swap-shell {
 	will-change: transform, opacity, filter;
+}
+
+:deep(.project-list) {
+	overflow: visible !important;
+	padding-top: 2px;
 }
 
 .browse-tab-swap-enter-active,

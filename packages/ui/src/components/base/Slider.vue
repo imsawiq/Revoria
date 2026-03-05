@@ -117,15 +117,14 @@ const onInput = (value: string) => {
 <style lang="scss" scoped>
 .root-container {
 	--transition-speed: 0.2s;
-
-	@media (prefers-reduced-motion) {
-		--transition-speed: 0s;
-	}
-
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	width: 100%;
+
+	@media (prefers-reduced-motion) {
+		--transition-speed: 0s;
+	}
 }
 
 .slider-component,

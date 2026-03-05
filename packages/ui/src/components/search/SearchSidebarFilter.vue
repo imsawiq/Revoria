@@ -95,7 +95,20 @@
 						@toggle-exclude="toggleNegativeFilter"
 					>
 						<slot name="option" :filter="filterType" :option="option">
-							<div v-if="typeof option.icon === 'string'" class="h-4 w-4" v-html="option.icon" />
+							<div
+								v-if="
+									typeof option.icon === 'string' &&
+									option.icon.trim().startsWith('<')
+								"
+								class="h-4 w-4"
+								v-html="option.icon"
+							/>
+							<img
+								v-else-if="typeof option.icon === 'string'"
+								class="h-4 w-4 object-contain"
+								:src="option.icon"
+								alt=""
+							/>
 							<component :is="option.icon" v-else-if="option.icon" class="h-4 w-4" />
 							<span class="truncate text-sm">{{ option.formatted_name ?? option.id }}</span>
 						</slot>

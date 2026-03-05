@@ -1,5 +1,5 @@
 import type { Labrinth } from '@modrinth/api-client'
-import { ClientIcon, ServerIcon } from '@modrinth/assets'
+import { ClientIcon, ServerIcon, TagIcon } from '@modrinth/assets'
 import { formatCategory, formatCategoryHeader, sortByNameOrNumber } from '@modrinth/utils'
 import { defineMessage, useVIntl } from '@vintl/vintl'
 import { type Component, computed, readonly, type Ref, ref } from 'vue'
@@ -57,7 +57,14 @@ export interface GameVersion {
 	major: boolean
 }
 
-export type ProjectType = 'mod' | 'modpack' | 'resourcepack' | 'shader' | 'datapack' | 'plugin'
+export type ProjectType =
+	| 'mod'
+	| 'modpack'
+	| 'resourcepack'
+	| 'shader'
+	| 'datapack'
+	| 'plugin'
+	| 'server'
 
 const ALL_PROJECT_TYPES: ProjectType[] = [
 	'mod',
@@ -66,6 +73,7 @@ const ALL_PROJECT_TYPES: ProjectType[] = [
 	'shader',
 	'datapack',
 	'plugin',
+	'server',
 ]
 
 export interface Tags {
@@ -81,11 +89,34 @@ export interface SortType {
 
 const PLUGIN_PLATFORMS = ['bungeecord', 'waterfall', 'velocity', 'geyser']
 
+function resolveFilterIcon(icon: unknown): string | Component | undefined {
+	if (!icon) return undefined
+	if (typeof icon !== 'string') return icon as Component
+	const trimmed = icon.trim()
+	if (
+		trimmed.startsWith('<svg') ||
+		trimmed.startsWith('<path') ||
+		trimmed.startsWith('http') ||
+		trimmed.startsWith('data:image') ||
+		trimmed.startsWith('/')
+	) {
+		return icon
+	}
+	return TagIcon
+}
+
 export function useSearch(
 	projectTypes: Ref<ProjectType[]>,
 	tags: Ref<Tags>,
 	providedFilters: Ref<FilterValue[]>,
 ) {
+	const toPositiveInt = (value: unknown, fallback: number) => {
+		const parsed = Number(value)
+		if (!Number.isFinite(parsed)) return fallback
+		const rounded = Math.floor(parsed)
+		return rounded > 0 ? rounded : fallback
+	}
+
 	const query = ref('')
 	const maxResults = ref(20)
 
@@ -130,7 +161,7 @@ export function useSearch(
 			categoryFilters[filterTypeId].options.push({
 				id: category.name,
 				formatted_name: formatCategory(category.name),
-				icon: category.icon,
+				icon: resolveFilterIcon(category.icon),
 				value: `categories:${category.name}`,
 				method: category.header === 'resolutions' ? 'or' : 'and',
 			})
@@ -237,7 +268,7 @@ export function useSearch(
 						return {
 							id: loader.name,
 							formatted_name: formatCategory(loader.name),
-							icon: loader.icon,
+							icon: resolveFilterIcon(loader.icon),
 							method: 'or',
 							value: `categories:${loader.name}`,
 						}
@@ -263,7 +294,7 @@ export function useSearch(
 						return {
 							id: loader.name,
 							formatted_name: formatCategory(loader.name),
-							icon: loader.icon,
+							icon: resolveFilterIcon(loader.icon),
 							method: 'or',
 							value: `categories:${loader.name}`,
 						}
@@ -292,7 +323,7 @@ export function useSearch(
 						return {
 							id: loader.name,
 							formatted_name: formatCategory(loader.name),
-							icon: loader.icon,
+							icon: resolveFilterIcon(loader.icon),
 							method: 'or',
 							value: `categories:${loader.name}`,
 						}
@@ -317,7 +348,7 @@ export function useSearch(
 						return {
 							id: loader.name,
 							formatted_name: formatCategory(loader.name),
-							icon: loader.icon,
+							icon: resolveFilterIcon(loader.icon),
 							method: 'or',
 							value: `categories:${loader.name}`,
 						}
@@ -342,7 +373,7 @@ export function useSearch(
 						return {
 							id: loader.name,
 							formatted_name: formatCategory(loader.name),
-							icon: loader.icon,
+							icon: resolveFilterIcon(loader.icon),
 							method: 'or',
 							value: `categories:${loader.name}`,
 						}
@@ -540,7 +571,7 @@ export function useSearch(
 			readParams.add('s')
 		})
 		loadQueryParam(['m'], (count) => {
-			maxResults.value = Number(count)
+			maxResults.value = toPositiveInt(count, 20)
 			readParams.add('m')
 		})
 		loadQueryParam(['o'], (offset) => {
@@ -548,7 +579,7 @@ export function useSearch(
 			readParams.add('o')
 		})
 		loadQueryParam(['page'], (page) => {
-			currentPage.value = Number(page)
+			currentPage.value = toPositiveInt(page, 1)
 			readParams.add('page')
 		})
 		loadQueryParam(['q'], (queryVal) => {

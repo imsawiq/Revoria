@@ -2402,6 +2402,9 @@
 	"accounts-card.error-adding-elyby-account": {
 		"message": "Произошла ошибка при добавлении аккаунта Ely.by. Следуйте инструкциям ниже."
 	},
+	"browse.type.server": {
+		"message": "Серверы"
+	},
 	"accounts-card.check-player-name-or-email": {
 		"message": "Проверьте, что никнейм или email введены правильно."
 	},
@@ -2420,6 +2423,19 @@
 	"accounts-card.player-name-length-rule": {
 		"message": "Никнейм должен содержать не менее {min} и не более {max} символов."
 	},
+	"browse.server.action.play": { "message": "Играть" },
+	"browse.server.action.stop": { "message": "Остановить" },
+	"browse.server.action.installing": { "message": "Установка..." },
+	"browse.server.action.add-to-instance": { "message": "Добавить в сборку" },
+
+	"browse.server.status.online": { "message": "Сервер онлайн" },
+	"browse.server.status.offline": { "message": "Сервер офлайн" },
+
+	"browse.server.players-online": { "message": "{count} онлайн" },
+	"browse.server.recent-plays": { "message": "{count} недавних запусков" },
+
+	"browse.server.ping.unavailable": { "message": "Пинг недоступен" },
+	"browse.server.ping.value": { "message": "{ping}мс" },
 	"accounts-card.unexpected-error-header": {
 		"message": "Произошла непредвиденная ошибка"
 	},

@@ -1,55 +1,85 @@
 <template>
-	<article class="project-card base-card" :aria-label="name" role="listitem">
-		<router-link class="icon" tabindex="-1" :to="`/${projectTypeUrl}/${id}`">
-			<Avatar :src="iconUrl" :alt="name" size="md" no-shadow loading="lazy" />
+	<article
+		class="project-card base-card"
+		:aria-label="displayName"
+		role="listitem"
+		@click="onCardClick"
+	>
+		<router-link class="icon" tabindex="-1" :to="projectLink">
+			<Avatar :src="iconUrl" :alt="displayName" size="md" no-shadow loading="lazy" />
 		</router-link>
 		<router-link
 			class="gallery"
-			:class="{ 'no-image': !featuredImage }"
+			:class="{ 'no-image': !displayFeaturedImage }"
 			tabindex="-1"
-			:to="`/${projectTypeUrl}/${id}`"
+			:to="projectLink"
 			:style="color ? `background-color: ${toColor};` : ''"
 		>
-			<img v-if="featuredImage" :src="featuredImage" alt="gallery image" loading="lazy" />
+			<img
+				v-if="displayFeaturedImage"
+				:src="displayFeaturedImage"
+				alt="gallery image"
+				loading="lazy"
+			/>
 		</router-link>
 		<div class="title">
-			<router-link :to="`/${projectTypeUrl}/${id}`">
+			<router-link :to="projectLink">
 				<h2 class="name">
-					{{ name }}
+					{{ displayName }}
 				</h2>
 			</router-link>
-			<p v-if="author" class="author">
+			<p v-if="displayAuthor" class="author">
 				by
-				<router-link class="title-link" :to="'/user/' + author">{{ author }} </router-link>
+				<router-link
+					v-if="authorHref && authorHref.startsWith('/')"
+					class="title-link"
+					:to="authorHref"
+				>
+					{{ displayAuthor }}
+				</router-link>
+				<a
+					v-else-if="authorHref"
+					class="title-link"
+					:href="authorHref"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					{{ displayAuthor }}
+				</a>
 			</p>
 			<Badge v-if="status && status !== 'approved'" :type="status" class="status" />
 		</div>
 		<p class="description">
-			{{ description }}
+			{{ displayDescription }}
 		</p>
-		<Categories :categories="categories" :type="type" class="tags">
+		<Categories :categories="displayCategories" :type="type" class="tags">
+			<slot name="tags-prefix" />
 			<EnvironmentIndicator
+				v-if="moderation || (displayClientSide && displayServerSide)"
 				:type-only="moderation"
-				:client-side="clientSide"
-				:server-side="serverSide"
-				:type="projectTypeDisplay"
+				:client-side="displayClientSide"
+				:server-side="displayServerSide"
+				:type="projectTypeDisplay ?? type ?? 'mod'"
 				:search="search"
-				:categories="categories"
+				:categories="displayCategories"
 			/>
+			<template #suffix>
+				<slot name="tags-suffix" />
+			</template>
 		</Categories>
 		<div class="stats">
-			<div v-if="downloads" class="stat">
+			<div v-if="numericDownloads !== null" class="stat">
 				<DownloadIcon aria-hidden="true" />
 				<p>
-					<strong>{{ formatNumber(downloads) }}</strong
-					><span class="stat-label"> download<span v-if="downloads !== '1'">s</span></span>
+					<strong>{{ formatNumber(numericDownloads) }}</strong
+					><span class="stat-label"> download<span v-if="numericDownloads !== 1">s</span></span>
 				</p>
 			</div>
-			<div v-if="follows" class="stat">
+			<div v-if="numericFollows !== null" class="stat">
 				<HeartIcon aria-hidden="true" />
 				<p>
-					<strong>{{ formatNumber(follows) }}</strong
-					><span class="stat-label"> follower<span v-if="follows !== '1'">s</span></span>
+					<strong>{{ formatNumber(numericFollows) }}</strong
+					><span class="stat-label"> follower<span v-if="numericFollows !== 1">s</span></span>
 				</p>
 			</div>
 			<div class="buttons">
@@ -73,6 +103,7 @@ import { formatNumber } from '@modrinth/utils'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime.js'
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 
 import { useRelativeTime } from '../../composables'
 import Categories from '../search/Categories.vue'
@@ -81,6 +112,7 @@ import EnvironmentIndicator from './EnvironmentIndicator.vue'
 import Badge from './SimpleBadge.vue'
 
 dayjs.extend(relativeTime)
+const router = useRouter()
 
 const props = defineProps({
 	id: {
@@ -95,13 +127,25 @@ const props = defineProps({
 		type: String,
 		default: 'Project Name',
 	},
-	author: {
+	title: {
 		type: String,
+		default: null,
+	},
+	author: {
+		type: [String, Object],
+		default: null,
+	},
+	authorLink: {
+		type: Function,
 		default: null,
 	},
 	description: {
 		type: String,
 		default: 'A _type description',
+	},
+	summary: {
+		type: String,
+		default: null,
 	},
 	iconUrl: {
 		type: String,
@@ -109,12 +153,17 @@ const props = defineProps({
 		required: false,
 	},
 	downloads: {
-		type: String,
+		type: [String, Number],
 		default: null,
 		required: false,
 	},
 	follows: {
-		type: String,
+		type: [String, Number],
+		default: null,
+		required: false,
+	},
+	followers: {
+		type: [String, Number],
 		default: null,
 		required: false,
 	},
@@ -126,7 +175,27 @@ const props = defineProps({
 		type: String,
 		default: null,
 	},
+	dateUpdated: {
+		type: String,
+		default: null,
+	},
+	datePublished: {
+		type: String,
+		default: null,
+	},
 	categories: {
+		type: Array,
+		default() {
+			return []
+		},
+	},
+	tags: {
+		type: Array,
+		default() {
+			return []
+		},
+	},
+	allTags: {
 		type: Array,
 		default() {
 			return []
@@ -144,7 +213,7 @@ const props = defineProps({
 	},
 	projectTypeUrl: {
 		type: String,
-		default: null,
+		default: 'project',
 	},
 	status: {
 		type: String,
@@ -175,6 +244,19 @@ const props = defineProps({
 		required: false,
 		default: null,
 	},
+	banner: {
+		type: String,
+		required: false,
+		default: null,
+	},
+	link: {
+		type: [String, Function],
+		default: null,
+	},
+	environment: {
+		type: Object,
+		default: null,
+	},
 	showUpdatedDate: {
 		type: Boolean,
 		required: false,
@@ -202,11 +284,70 @@ const toColor = computed(() => {
 	const r = (color & 0xff0000) >>> 16
 	return `rgba(${[r, g, b, 1].join(',')})`
 })
+const displayName = computed(() => props.title ?? props.name)
+const displayDescription = computed(() => props.summary ?? props.description)
+const displayCategories = computed(() => {
+	if (Array.isArray(props.tags) && props.tags.length > 0) return props.tags
+	if (Array.isArray(props.categories) && props.categories.length > 0) return props.categories
+	return props.allTags ?? []
+})
+const displayAuthor = computed(() =>
+	typeof props.author === 'string' ? props.author : props.author?.name ?? null,
+)
+const displayServerSide = computed(
+	() => props.environment?.serverSide ?? props.serverSide ?? '',
+)
+const displayClientSide = computed(
+	() => props.environment?.clientSide ?? props.clientSide ?? '',
+)
+const displayFeaturedImage = computed(() => props.banner ?? props.featuredImage ?? null)
+const displayUpdatedAt = computed(
+	() => props.dateUpdated ?? props.updatedAt ?? props.datePublished ?? props.createdAt,
+)
+const displayCreatedAt = computed(
+	() => props.datePublished ?? props.createdAt ?? props.dateUpdated ?? props.updatedAt,
+)
+const projectLink = computed(() => {
+	if (typeof props.link === 'string' && props.link.length > 0) return props.link
+	return `/${props.projectTypeUrl}/${props.id}`
+})
+function onCardClick(event) {
+	const target = event.target
+	if (target?.closest?.('a,button,input,textarea,select,label')) return
+	if (typeof props.link === 'function') {
+		props.link()
+		return
+	}
+	if (typeof projectLink.value === 'string' && projectLink.value.length > 0) {
+		router.push(projectLink.value)
+	}
+}
+const authorHref = computed(() => {
+	if (!displayAuthor.value) return null
+	if (props.author && typeof props.author === 'object' && props.author.link) {
+		return props.author.link
+	}
+	if (typeof props.authorLink === 'function') {
+		return props.authorLink(displayAuthor.value)
+	}
+	return `https://modrinth.com/user/${displayAuthor.value}`
+})
+const numericDownloads = computed(() => {
+	if (props.downloads == null) return null
+	const value = Number(props.downloads)
+	return Number.isFinite(value) ? value : null
+})
+const numericFollows = computed(() => {
+	const follows = props.followers ?? props.follows
+	if (follows == null) return null
+	const value = Number(follows)
+	return Number.isFinite(value) ? value : null
+})
 
-const createdDate = computed(() => dayjs(props.createdAt).format('MMMM D, YYYY [at] h:mm:ss A'))
-const sinceCreation = computed(() => formatRelativeTime(props.createdAt))
-const updatedDate = computed(() => dayjs(props.updatedAt).format('MMMM D, YYYY [at] h:mm:ss A'))
-const sinceUpdated = computed(() => formatRelativeTime(props.updatedAt))
+const createdDate = computed(() => dayjs(displayCreatedAt.value).format('MMMM D, YYYY [at] h:mm:ss A'))
+const sinceCreation = computed(() => formatRelativeTime(displayCreatedAt.value))
+const updatedDate = computed(() => dayjs(displayUpdatedAt.value).format('MMMM D, YYYY [at] h:mm:ss A'))
+const sinceUpdated = computed(() => formatRelativeTime(displayUpdatedAt.value))
 </script>
 
 <style lang="scss" scoped>
@@ -216,6 +357,19 @@ const sinceUpdated = computed(() => formatRelativeTime(props.updatedAt))
 	overflow: hidden;
 	margin: 0;
 	line-height: 1;
+	cursor: pointer;
+	transition:
+		background-color 0.15s ease,
+		border-color 0.15s ease,
+		box-shadow 0.15s ease,
+		transform 0.15s ease;
+}
+
+.project-card:hover {
+	background-color: color-mix(in srgb, var(--color-raised-bg) 70%, var(--color-button-bg-hover) 30%);
+	border-color: color-mix(in srgb, var(--color-button-border) 55%, var(--color-brand) 45%);
+	box-shadow: var(--shadow-raised);
+	transform: translateY(-1px);
 }
 
 .display-mode--list .project-card {
@@ -225,7 +379,7 @@ const sinceUpdated = computed(() => formatRelativeTime(props.updatedAt))
 		'icon tags stats';
 	grid-template-columns: min-content 1fr auto;
 	grid-template-rows: min-content 1fr min-content;
-	column-gap: var(--gap-md);
+	column-gap: var(--gap-lg);
 	row-gap: var(--gap-sm);
 	width: 100%;
 
@@ -251,7 +405,7 @@ const sinceUpdated = computed(() => formatRelativeTime(props.updatedAt))
 
 	h2 {
 		margin: 0;
-		font-size: 1.5rem;
+		font-size: 1.14rem;
 	}
 }
 
@@ -407,11 +561,13 @@ const sinceUpdated = computed(() => formatRelativeTime(props.updatedAt))
 	}
 
 	.title-link {
-		text-decoration: underline;
+		text-decoration: none;
+		color: var(--color-secondary);
+		font-weight: 600;
 
 		&:focus-visible,
 		&:hover {
-			color: var(--color-heading);
+			color: var(--color-brand);
 		}
 
 		&:active {
@@ -426,7 +582,7 @@ const sinceUpdated = computed(() => formatRelativeTime(props.updatedAt))
 	flex-direction: column;
 	flex-wrap: wrap;
 	align-items: flex-end;
-	gap: var(--gap-md);
+	gap: 0.625rem;
 
 	.stat {
 		display: flex;
@@ -434,7 +590,7 @@ const sinceUpdated = computed(() => formatRelativeTime(props.updatedAt))
 		align-items: center;
 		width: fit-content;
 		gap: var(--gap-xs);
-		--stat-strong-size: 1.25rem;
+		--stat-strong-size: 1rem;
 
 		strong {
 			font-size: var(--stat-strong-size);
@@ -442,6 +598,10 @@ const sinceUpdated = computed(() => formatRelativeTime(props.updatedAt))
 
 		p {
 			margin: 0;
+			display: flex;
+			align-items: baseline;
+			gap: 0.4rem;
+			font-size: 0.9rem;
 		}
 
 		svg {
@@ -452,6 +612,7 @@ const sinceUpdated = computed(() => formatRelativeTime(props.updatedAt))
 
 	.date {
 		margin-top: auto;
+		opacity: 0.9;
 	}
 
 	@media screen and (max-width: 750px) {
@@ -469,16 +630,14 @@ const sinceUpdated = computed(() => formatRelativeTime(props.updatedAt))
 	}
 }
 
-.environment {
-	color: var(--color-text) !important;
-	font-weight: bold;
-}
-
 .description {
 	grid-area: description;
 	margin-block: 0;
 	display: flex;
 	justify-content: flex-start;
+	font-size: 1.02rem;
+	line-height: 1.3;
+	color: var(--color-secondary);
 }
 
 .tags {
@@ -526,13 +685,18 @@ const sinceUpdated = computed(() => formatRelativeTime(props.updatedAt))
 }
 
 .base-card {
-	padding: var(--gap-lg);
+	padding: 1rem;
 
 	position: relative;
 	min-height: 2rem;
 
-	background-color: var(--color-raised-bg);
+	background: linear-gradient(
+		90deg,
+		color-mix(in srgb, var(--color-raised-bg) 86%, black 14%) 0%,
+		color-mix(in srgb, var(--color-raised-bg) 94%, black 6%) 100%
+	);
 	border-radius: var(--radius-lg);
+	border: 1px solid var(--color-button-border);
 
 	outline: 2px solid transparent;
 
@@ -567,5 +731,11 @@ const sinceUpdated = computed(() => formatRelativeTime(props.updatedAt))
 	&.moderation-card {
 		background-color: var(--color-banner-bg);
 	}
+}
+
+.icon :deep(.avatar) {
+	background: transparent;
+	border: none;
+	box-shadow: none;
 }
 </style>

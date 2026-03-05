@@ -1,153 +1,78 @@
 <template>
-	<div
-		class="p-4 bg-[--color-glass-bg-strong] border border-[--glass-border] shadow-[--glass-shadow] rounded-xl flex gap-3 group cursor-pointer transition-colors hover:bg-[--color-button-bg-hover]"
+	<ProjectCard
+		:title="project.title ?? project.name ?? 'Unknown project'"
+		:link="`/project/${project.project_id ?? project.id}`"
+		:author="{ name: authorName, link: authorHref }"
+		:icon-url="project.icon_url"
+		:summary="project.description ?? project.summary ?? ''"
+		:tags="displayTags"
+		:all-tags="project.categories ?? []"
+		:downloads="downloadsCount"
+		:followers="followsCount"
+		:date-updated="updatedAt"
+		:date-published="createdAt"
+		:banner="project.featured_gallery ?? undefined"
+		:color="project.color ?? undefined"
+		:environment="environment"
+		layout="list"
 		@click="
-			() => {
-				emit('open')
-				$router.push({
-					path: `/project/${project.project_id ?? project.id}`,
-					query: {
-						source: project.source === 'curseforge' ? 'curseforge' : undefined,
-						t: project.source === 'curseforge' ? project.project_type : undefined,
-						i: props.instance ? props.instance.path : undefined,
-					},
-				})
-			}
+			emit('open')
 		"
 	>
-		<div class="icon w-[96px] h-[96px] relative">
-			<Avatar :src="project.icon_url" size="96px" class="search-icon origin-top transition-all" />
-		</div>
-		<div class="flex flex-col gap-2 overflow-hidden">
-			<div class="gap-2 overflow-hidden no-wrap text-ellipsis">
-				<span class="text-lg font-extrabold text-contrast m-0 leading-none">
-					{{ project.title }}
-				</span>
-				<span v-if="project.author" class="text-secondary"> by {{ project.author }}</span>
-			</div>
-			<div class="m-0 line-clamp-2">
-				{{ project.description }}
-			</div>
-			<div v-if="categories.length > 0" class="mt-auto flex items-center gap-1 no-wrap">
-				<TagsIcon class="h-4 w-4 shrink-0" />
-				<div
-					v-if="project.project_type === 'mod' || project.project_type === 'modpack'"
-					class="text-sm font-semibold text-secondary flex gap-1 px-[0.375rem] py-0.5 bg-button-bg rounded-full"
-				>
-					<template v-if="project.client_side === 'optional' && project.server_side === 'optional'">
-						{{ formatMessage(messages.clientOrServer) }}
-					</template>
-					<template
-						v-else-if="
-							(project.client_side === 'optional' || project.client_side === 'required') &&
-							(project.server_side === 'optional' || project.server_side === 'unsupported')
-						"
-					>
-						{{ formatMessage(messages.client) }}
-					</template>
-					<template
-						v-else-if="
-							(project.server_side === 'optional' || project.server_side === 'required') &&
-							(project.client_side === 'optional' || project.client_side === 'unsupported')
-						"
-					>
-						{{ formatMessage(messages.server) }}
-					</template>
-					<template
-						v-else-if="
-							project.client_side === 'unsupported' && project.server_side === 'unsupported'
-						"
-					>
-						{{ formatMessage(messages.unsupported) }}
-					</template>
-					<template
-						v-else-if="project.client_side === 'required' && project.server_side === 'required'"
-					>
-						{{ formatMessage(messages.clientAndServer) }}
-					</template>
-				</div>
-				<div
-					v-for="tag in categories"
-					:key="tag"
-					class="text-sm font-semibold text-secondary flex gap-1 px-[0.375rem] py-0.5 bg-button-bg rounded-full"
-				>
-					{{ formatCategory(tag.name) }}
-				</div>
-			</div>
-		</div>
-		<div class="flex flex-col gap-2 items-end shrink-0 ml-auto">
-			<div class="flex items-center gap-2">
-				<DownloadIcon class="shrink-0" />
-				<span>
-					{{ formatNumber(project.downloads) }}
-					<span class="text-secondary">{{ formatMessage(messages.downloads) }}</span>
-				</span>
-			</div>
-			<div class="flex items-center gap-2">
-				<HeartIcon class="shrink-0" />
-				<span>
-					{{ formatNumber(project.follows ?? project.followers) }}
-					<span class="text-secondary">{{ formatMessage(messages.followers) }}</span>
-				</span>
-			</div>
-			<div class="mt-auto relative">
-				<div class="absolute bottom-0 right-0 w-fit">
-					<ButtonStyled color="brand" type="outlined">
-						<button
-							:disabled="installed || installing"
-							class="shrink-0 no-wrap"
-							@click.stop="install()"
-						>
-							<template v-if="!installed">
-								<DownloadIcon v-if="modpack || instance" />
-								<PlusIcon v-else />
-							</template>
-							<CheckIcon v-else />
-							{{
-								installing
-									? formatMessage(messages.installing)
-									: installed
-										? formatMessage(messages.installed)
-										: modpack || instance
-											? formatMessage(messages.install)
-											: formatMessage(messages.addToInstance)
-							}}
-						</button>
-					</ButtonStyled>
-				</div>
-			</div>
-		</div>
-	</div>
+		<ButtonStyled color="brand" type="outlined">
+			<button
+				:disabled="installed || installing"
+				class="shrink-0 no-wrap"
+				@click.stop="install()"
+			>
+				<template v-if="!installed">
+					<DownloadIcon v-if="modpack || instance" />
+					<PlusIcon v-else />
+				</template>
+				<CheckIcon v-else />
+				{{
+					installing
+						? formatMessage(messages.installing)
+						: installed
+							? formatMessage(messages.installed)
+							: modpack || instance
+								? formatMessage(messages.install)
+								: formatMessage(messages.addToInstance)
+				}}
+			</button>
+		</ButtonStyled>
+	</ProjectCard>
 </template>
 
 <script setup>
-import { CheckIcon, DownloadIcon, HeartIcon, PlusIcon, TagsIcon } from '@modrinth/assets'
-import { Avatar, ButtonStyled, injectNotificationManager } from '@modrinth/ui'
-import { formatCategory, formatNumber } from '@modrinth/utils'
+import { CheckIcon, DownloadIcon, PlusIcon } from '@modrinth/assets'
+import { ButtonStyled, injectNotificationManager, ProjectCard } from '@modrinth/ui'
 import { defineMessages, useVIntl } from '@vintl/vintl'
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { install as installVersion } from '@/store/install.js'
-dayjs.extend(relativeTime)
 
 const { handleError } = injectNotificationManager()
 const { formatMessage } = useVIntl()
 
 const messages = defineMessages({
-	clientOrServer: { id: 'search-card.compat.client-or-server', defaultMessage: 'Client or server' },
-	client: { id: 'search-card.compat.client', defaultMessage: 'Client' },
-	server: { id: 'search-card.compat.server', defaultMessage: 'Server' },
-	unsupported: { id: 'search-card.compat.unsupported', defaultMessage: 'Unsupported' },
-	clientAndServer: { id: 'search-card.compat.client-and-server', defaultMessage: 'Client and server' },
-	downloads: { id: 'search-card.downloads', defaultMessage: 'downloads' },
-	followers: { id: 'search-card.followers', defaultMessage: 'followers' },
-	installing: { id: 'search-card.installing', defaultMessage: 'Installing' },
-	installed: { id: 'search-card.installed', defaultMessage: 'Installed' },
-	install: { id: 'search-card.install', defaultMessage: 'Install' },
-	addToInstance: { id: 'search-card.add-to-instance', defaultMessage: 'Add to an instance' },
+	installing: {
+		id: 'search-card.installing',
+		defaultMessage: 'Installing',
+	},
+	installed: {
+		id: 'search-card.installed',
+		defaultMessage: 'Installed',
+	},
+	install: {
+		id: 'search-card.install',
+		defaultMessage: 'Install',
+	},
+	addToInstance: {
+		id: 'search-card.add-to-instance',
+		defaultMessage: 'Add to an instance',
+	},
 })
 
 const router = useRouter()
@@ -159,10 +84,6 @@ const props = defineProps({
 	},
 	project: {
 		type: Object,
-		required: true,
-	},
-	categories: {
-		type: Array,
 		required: true,
 	},
 	instance: {
@@ -177,17 +98,75 @@ const props = defineProps({
 		type: Boolean,
 		default: false,
 	},
+	projectType: {
+		type: String,
+		default: undefined,
+	},
+	tagDefinitions: {
+		type: Object,
+		default: () => ({}),
+	},
 })
 
 const emit = defineEmits(['open', 'install'])
 
 const installing = ref(false)
+const authorName = computed(() =>
+	typeof props.project.author === 'string' ? props.project.author : '',
+)
+const authorHref = computed(() =>
+	authorName.value ? `https://modrinth.com/user/${authorName.value}` : undefined,
+)
+const loaderIndex = computed(() => {
+	const map = new Map()
+	for (const loader of props.tagDefinitions?.loaders ?? []) {
+		if (loader?.name) map.set(String(loader.name).toLowerCase(), loader)
+	}
+	return map
+})
+const categoryIndex = computed(() => {
+	const map = new Map()
+	for (const category of props.tagDefinitions?.categories ?? []) {
+		if (category?.name) map.set(String(category.name).toLowerCase(), category)
+	}
+	return map
+})
+const displayTags = computed(() =>
+	(props.project.display_categories ?? props.project.categories ?? [])
+		.map((rawTag) => String(rawTag).trim())
+		.filter((tag) => tag.length > 0)
+		.map((tag) => {
+			const key = tag.toLowerCase()
+			const loader = loaderIndex.value.get(key)
+			const category = categoryIndex.value.get(key)
+			const matched = loader ?? category
+			return {
+				name: tag,
+				icon: typeof matched?.icon === 'string' ? matched.icon : '',
+				isLoader: Boolean(loader),
+			}
+		}),
+)
+const toFiniteNumber = (value) => {
+	const numeric = Number(value)
+	return Number.isFinite(numeric) ? numeric : null
+}
+const downloadsCount = computed(() => toFiniteNumber(props.project.downloads))
+const followsCount = computed(() => toFiniteNumber(props.project.follows))
+const createdAt = computed(
+	() => props.project.date_created ?? props.project.date_modified ?? '1970-01-01T00:00:00.000Z',
+)
+const updatedAt = computed(() => props.project.date_modified ?? createdAt.value)
+const environment = computed(() =>
+	props.projectType && ['mod', 'modpack'].includes(props.projectType)
+		? {
+				clientSide: props.project.client_side,
+				serverSide: props.project.server_side,
+			}
+		: undefined,
+)
 
 async function install() {
-	if (props.project?.source === 'curseforge') {
-		emit('install', props.project.project_id ?? props.project.id)
-		return
-	}
 	installing.value = true
 	await installVersion(
 		props.project.project_id ?? props.project.id,

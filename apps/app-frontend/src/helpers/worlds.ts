@@ -212,6 +212,25 @@ export function isServerWorld(world: World): world is ServerWorld {
 	return world.type === 'server'
 }
 
+export async function getServerLatency(
+	address: string,
+	protocolVersion: ProtocolVersion | null = null,
+): Promise<number | undefined> {
+	const pings: number[] = []
+	for (let i = 0; i < 3; i++) {
+		try {
+			const status = await get_server_status(address, protocolVersion)
+			if (status.ping != null) {
+				pings.push(status.ping)
+			}
+		} catch {
+			// Ignore individual ping failures
+		}
+	}
+	if (pings.length === 0) return undefined
+	return Math.round(pings.reduce((sum, p) => sum + p, 0) / pings.length)
+}
+
 export async function refreshServerData(
 	serverData: ServerData,
 	protocolVersion: ProtocolVersion | null,

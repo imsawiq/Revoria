@@ -1,7 +1,7 @@
 <template>
 	<span v-if="typeOnly" class="environment">
 		<InfoIcon aria-hidden="true" />
-		{{ formatMessage(messages.typeLabel, { type: type }) }}
+		{{ formatMessage(messages.typeLabel, { type: type ?? 'project' }) }}
 	</span>
 	<span
 		v-else-if="
@@ -43,7 +43,7 @@
 		</template>
 		<template v-else-if="alwaysShow">
 			<InfoIcon aria-hidden="true" />
-			{{ formatMessage(messages.typeLabel, { type: type }) }}
+			{{ formatMessage(messages.typeLabel, { type: type ?? 'project' }) }}
 		</template>
 	</span>
 </template>
@@ -81,7 +81,7 @@ const { formatMessage } = useVIntl()
 
 withDefaults(
 	defineProps<{
-		type: string
+		type?: string | null
 		serverSide?: string
 		clientSide?: string
 		typeOnly?: boolean
@@ -103,10 +103,8 @@ withDefaults(
 <style lang="scss" scoped>
 .environment {
 	display: flex;
-	color: var(--color-text) !important;
-	font-weight: bold;
-	font-size: 1rem;
 	align-items: center;
+
 	svg {
 		margin-right: 0.2rem;
 	}
