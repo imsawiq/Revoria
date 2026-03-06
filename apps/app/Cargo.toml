@@ -1,4 +1,5 @@
 [package]
+name = "theseus_gui"
 version = "1.1.7"
 edition.workspace = true
 description = "The Modrinth App is a desktop application for managing your Minecraft mods"
@@ -55,8 +56,6 @@ default = ["custom-protocol"]
 # DO NOT remove this
 custom-protocol = ["tauri/custom-protocol"]
 # declared to satisfy cfg(feature = "updater") checks in source
-name = "theseus_gui"
-# The actual version is set by the theseus-build workflow on tagging
 updater = []
 
 [lints]
