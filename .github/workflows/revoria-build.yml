@@ -286,12 +286,40 @@ jobs:
             windows-*.json
             latest.json
 
+      - name: Prepare release metadata
+        if: startsWith(github.ref, 'refs/tags/')
+        shell: bash
+        run: |
+          set -euo pipefail
+          VERSION="${GITHUB_REF_NAME#release-}"
+          VERSION="${VERSION#beta-}"
+          echo "REVORIA_RELEASE_VERSION=${VERSION}" >> "$GITHUB_ENV"
+          TAG_MESSAGE="$(git tag -l --format='%(contents)' "$GITHUB_REF_NAME" | sed '/^$/N;/^\n$/D')"
+          if [ -z "$TAG_MESSAGE" ]; then
+            TAG_MESSAGE="Опишите изменения этого релиза здесь."
+          fi
+          {
+            echo "REVORIA_RELEASE_NOTES<<EOF"
+            echo "$TAG_MESSAGE"
+            echo "EOF"
+          } >> "$GITHUB_ENV"
+
       - name: Publish GitHub Release (attach installers)
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
           fail_on_unmatched_files: false
-          generate_release_notes: true
+          name: v${{ env.REVORIA_RELEASE_VERSION }} Revoria
+          body: |
+            ## Изменения
+
+            ${{ env.REVORIA_RELEASE_NOTES }}
+
+            ## Скачать
+
+            Windows - https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/Revoria_${{ env.REVORIA_RELEASE_VERSION }}_x64-setup.exe
+            Linux - https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/Revoria_${{ env.REVORIA_RELEASE_VERSION }}_amd64.deb
+            macOS - https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/Revoria_${{ env.REVORIA_RELEASE_VERSION }}_universal.dmg
           files: |
             target/release/bundle/nsis/*.exe
             target/*/release/bundle/nsis/*.exe
