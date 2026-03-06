@@ -13,7 +13,7 @@
 	"plugins": {
 		"updater": {
 			"pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEY1MDBBRjUzMjkyOTE5MTAKUldRUUdTa3BVNjhBOVdLVnRPWUpZZlFLdjZ1Z3lQM0xIMlRBVnh6U3hzVW94c25PUnQ0blhaUFkK",
-			"endpoints": ["https://github.com/imsawiq/Revoria/releases/latest/download/latest.json"]
+			"endpoints": ["https://github.com/imsawiq/Revoria/releases/latest/download/{{target}}-{{arch}}.json"]
 		}
 	}
 }
