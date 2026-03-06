@@ -45,6 +45,10 @@ const messages = defineMessages({
 		id: 'app.update-toast.download',
 		defaultMessage: 'Download ({size})',
 	},
+	downloadUnknownSize: {
+		id: 'app.update-toast.download.unknown-size',
+		defaultMessage: 'Download',
+	},
 	downloading: {
 		id: 'app.update-toast.downloading',
 		defaultMessage: 'Downloading...',
@@ -112,9 +116,13 @@ const messages = defineMessages({
 					<SpinnerIcon v-if="downloading" class="animate-spin" />
 					<DownloadIcon v-else />
 					{{
-						formatMessage(downloading ? messages.downloading : messages.download, {
-							size: formatBytes(size ?? 0),
-						})
+						downloading
+							? formatMessage(messages.downloading)
+							: size == null
+								? formatMessage(messages.downloadUnknownSize)
+								: formatMessage(messages.download, {
+										size: formatBytes(size),
+									})
 					}}
 				</button>
 				<button v-else @click="emit('restart')">
@@ -122,7 +130,7 @@ const messages = defineMessages({
 				</button>
 			</ButtonStyled>
 			<ButtonStyled>
-				<a href="https://modrinth.com/news/changelog?filter=app">
+				<a href="https://github.com/imsawiq/Revoria/releases/latest">
 					{{ formatMessage(messages.changelog) }} <ExternalIcon />
 				</a>
 			</ButtonStyled>
