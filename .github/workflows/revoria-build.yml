@@ -185,3 +185,7 @@ jobs:
             target/*/release/bundle/deb/*.deb
             target/release/bundle/dmg/*.dmg
             target/*/release/bundle/dmg/*.dmg
+            target/release/bundle/**/*.sig
+            target/*/release/bundle/**/*.sig
+            target/release/bundle/**/latest*.json
+            target/*/release/bundle/**/latest*.json

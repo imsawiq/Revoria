@@ -30,6 +30,7 @@ tauri-plugin-http = { workspace = true }
 tauri-plugin-opener = { workspace = true }
 tauri-plugin-os = { workspace = true }
 tauri-plugin-single-instance = { workspace = true }
+tauri-plugin-updater = { workspace = true }
 tauri-plugin-window-state = { workspace = true }
 futures-util = { workspace = true }
 theseus = { workspace = true, features = ["tauri"] }

@@ -66,5 +66,9 @@ app-playground-data/*
 .astro
 .claude
 
+# tauri updater signing keys
+apps/app/tauri.updater.key
+apps/app/tauri.updater.key.pub
+
 # labrinth demo fixtures
 apps/labrinth/fixtures/demo

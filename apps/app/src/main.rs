@@ -5,6 +5,7 @@
 #![recursion_limit = "256"]
 
 use native_dialog::{DialogBuilder, MessageLevel};
+use std::env;
 use tauri::{Listener, Manager};
 use theseus::prelude::*;
 
@@ -13,6 +14,11 @@ mod error;
 
 #[cfg(target_os = "macos")]
 mod macos;
+
+#[cfg(feature = "updater")]
+mod updater_impl;
+#[cfg(not(feature = "updater"))]
+mod updater_impl_noop;
 
 // Should be called in launcher initialization
 #[tracing::instrument(skip_all)]
@@ -60,6 +66,18 @@ fn is_dev() -> bool {
     cfg!(debug_assertions)
 }
 
+#[tauri::command]
+fn are_updates_enabled() -> bool {
+    cfg!(feature = "updater")
+        && env::var("MODRINTH_EXTERNAL_UPDATE_PROVIDER").is_err()
+}
+
+#[cfg(feature = "updater")]
+pub use updater_impl::*;
+
+#[cfg(not(feature = "updater"))]
+pub use updater_impl_noop::*;
+
 // Toggles decorations
 #[tauri::command]
 async fn toggle_decorations(b: bool, window: tauri::Window) -> api::Result<()> {
@@ -98,6 +116,21 @@ fn main() {
     tracing::info!("Initialized tracing subscriber. Loading Revoria!");
 
     let mut builder = tauri::Builder::default();
+
+    #[cfg(feature = "updater")]
+    {
+        use tauri_plugin_http::reqwest::header::{HeaderValue, USER_AGENT};
+        builder = builder.plugin(
+            tauri_plugin_updater::Builder::new()
+                .header(
+                    USER_AGENT,
+                    HeaderValue::from_str(theseus::LAUNCHER_USER_AGENT)
+                        .unwrap(),
+                )
+                .unwrap()
+                .build(),
+        );
+    }
 
     builder = builder
         .plugin(tauri_plugin_single_instance::init(|app, args, _cwd| {
@@ -213,9 +246,14 @@ fn main() {
         .plugin(api::cache::init())
         .plugin(api::friends::init())
         .plugin(api::worlds::init())
+        .manage(PendingUpdateData::default())
         .invoke_handler(tauri::generate_handler![
             initialize_state,
             is_dev,
+            are_updates_enabled,
+            get_update_size,
+            enqueue_update_for_installation,
+            remove_enqueued_update,
             toggle_decorations,
             show_window,
             restart_app,
@@ -227,6 +265,48 @@ fn main() {
     match app {
         Ok(app) => {
             app.run(|app, event| {
+                #[cfg(feature = "updater")]
+                if matches!(event, tauri::RunEvent::Exit) {
+                    let update_data = app.state::<PendingUpdateData>().inner();
+                    if let Some((update, data)) =
+                        &*update_data.0.lock().unwrap()
+                    {
+                        fn set_changelog_toast(version: Option<String>) {
+                            let toast_result: theseus::Result<()> =
+                                tauri::async_runtime::block_on(async move {
+                                    let mut settings =
+                                        settings::get().await?;
+                                    settings.pending_update_toast_for_version =
+                                        version;
+                                    settings::set(settings).await?;
+                                    Ok(())
+                                });
+                            if let Err(e) = toast_result {
+                                tracing::warn!(
+                                    "Failed to set pending_update_toast: {e}"
+                                );
+                            }
+                        }
+
+                        set_changelog_toast(Some(update.version.clone()));
+                        if let Err(e) = update.install(data) {
+                            tracing::error!("Error while updating: {e}");
+                            set_changelog_toast(None);
+
+                            DialogBuilder::message()
+                                .set_level(MessageLevel::Error)
+                                .set_title("Update error")
+                                .set_text(format!(
+                                    "Failed to install update due to an error:\n{e}"
+                                ))
+                                .alert()
+                                .show()
+                                .unwrap();
+                        }
+                        app.restart();
+                    }
+                }
+
                 #[cfg(target_os = "macos")]
                 if let tauri::RunEvent::Opened { urls } = event {
                     tracing::info!("Handling webview open {urls:?}");
