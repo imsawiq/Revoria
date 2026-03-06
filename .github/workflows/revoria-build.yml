@@ -137,7 +137,7 @@ jobs:
           TAG_VERSION="${TAG_VERSION#beta-}"
           APP_VERSION=$(node -p "require('./apps/app-frontend/package.json').version")
           TAURI_VERSION=$(node -p "require('./apps/app/tauri.conf.json').version")
-          CARGO_VERSION=$(sed -n 's/^version = \"\\(.*\\)\"$/\\1/p' apps/app/Cargo.toml | head -n 1)
+          CARGO_VERSION=$(grep -m 1 '^version = "' apps/app/Cargo.toml | cut -d '"' -f 2 | tr -d '\r')
 
           echo "Tag version:   $TAG_VERSION"
           echo "Frontend ver.: $APP_VERSION"
