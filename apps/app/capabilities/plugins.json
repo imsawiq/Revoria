@@ -61,6 +61,7 @@
 		"profile:default",
 		"cache:default",
 		"settings:default",
+		"syncing:default",
 		"tags:default",
 		"utils:default",
 		"friends:default",

@@ -37,6 +37,10 @@ async fn initialize_state(app: tauri::AppHandle) -> api::Result<()> {
     app.asset_protocol_scope()
         .allow_directory(state.directories.profiles_dir(), true)?;
 
+    if let Err(err) = api::syncing::apply_configured_syncs().await {
+        tracing::warn!("Failed to apply configured sync targets: {err}");
+    }
+
     Ok(())
 }
 
@@ -241,6 +245,7 @@ fn main() {
         .plugin(api::profile::init())
         .plugin(api::profile_create::init())
         .plugin(api::settings::init())
+        .plugin(api::syncing::init())
         .plugin(api::tags::init())
         .plugin(api::utils::init())
         .plugin(api::cache::init())

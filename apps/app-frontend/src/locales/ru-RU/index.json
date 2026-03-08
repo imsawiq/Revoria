@@ -422,6 +422,9 @@
 	"app.nav.maintenance": {
 		"message": "Менеджер памяти"
 	},
+	"app.nav.syncing": {
+		"message": "Синхронизация"
+	},
 	"app.nav.library": {
 		"message": "Библиотека"
 	},
@@ -2422,6 +2425,96 @@
 	},
 	"accounts-card.player-name-length-rule": {
 		"message": "Никнейм должен содержать не менее {min} и не более {max} символов."
+	},
+	"syncing.breadcrumb": {
+		"message": "Синхронизация"
+	},
+	"syncing.title": {
+		"message": "Синхронизация сборок"
+	},
+	"syncing.description": {
+		"message": "Одна реальная папка или файл используется сразу во всех сборках."
+	},
+	"syncing.how-it-works": {
+		"message": "При включении существующие данные переносятся в общую папку синхронизации, а пути в сборках заменяются ссылками."
+	},
+	"syncing.action.open-folder": {
+		"message": "Открыть папку синхронизации"
+	},
+	"syncing.action.apply": {
+		"message": "Применить ко всем сборкам"
+	},
+	"syncing.action.reload": {
+		"message": "Обновить"
+	},
+	"syncing.shared-folder": {
+		"message": "Общая папка данных"
+	},
+	"syncing.shared-folder-hint": {
+		"message": "Здесь хранятся реальные общие файлы и папки."
+	},
+	"syncing.total-instances": {
+		"message": "Сборки"
+	},
+	"syncing.conflicts-hint": {
+		"message": "Конфликты означают, что в некоторых сборках по этому пути ещё лежат отдельные данные."
+	},
+	"syncing.section.default-folders": {
+		"message": "Стандартные папки"
+	},
+	"syncing.section.custom-folders": {
+		"message": "Пользовательские папки"
+	},
+	"syncing.section.custom-files": {
+		"message": "Пользовательские файлы"
+	},
+	"syncing.add-target": {
+		"message": "Добавить цель синхронизации"
+	},
+	"syncing.add-placeholder": {
+		"message": "resourcepacks или options.txt"
+	},
+	"syncing.target-type.folder": {
+		"message": "Папка"
+	},
+	"syncing.target-type.file": {
+		"message": "Файл"
+	},
+	"syncing.action.add": {
+		"message": "Добавить"
+	},
+	"syncing.empty.custom-folders": {
+		"message": "Пользовательских папок пока нет."
+	},
+	"syncing.empty.custom-files": {
+		"message": "Пользовательских файлов пока нет."
+	},
+	"syncing.target.synced": {
+		"message": "Синхронизировано {synced}/{total}"
+	},
+	"syncing.target.conflicts": {
+		"message": "Конфликтов: {count}"
+	},
+	"syncing.target.default": {
+		"message": "Стандарт"
+	},
+	"syncing.target.custom": {
+		"message": "Своя"
+	},
+	"syncing.notification.added": {
+		"message": "Цель синхронизации добавлена."
+	},
+	"syncing.notification.updated": {
+		"message": "Синхронизация обновлена."
+	},
+	"syncing.notification.removed": {
+		"message": "Цель синхронизации удалена."
+	},
+	"syncing.status.enabled": {
+		"message": "Включено"
+	},
+	"syncing.status.disabled": {
+		"message": "Выключено"
 	},
 	"browse.server.action.play": { "message": "Играть" },
 	"browse.server.action.stop": { "message": "Остановить" },

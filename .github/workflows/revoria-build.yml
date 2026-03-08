@@ -2,25 +2,9 @@ name: Revoria build
 
 on:
   push:
-    branches:
-      - main
-      - master
-      - prod
-      - release
-      - beta
-      - feature*
     tags:
       - release-*
       - beta-*
-    paths:
-      - .github/workflows/revoria-build.yml
-      - 'apps/app/**'
-      - 'apps/app-frontend/**'
-      - 'packages/app-lib/**'
-      - 'packages/app-macros/**'
-      - 'packages/assets/**'
-      - 'packages/ui/**'
-      - 'packages/utils/**'
   workflow_dispatch:
 
 permissions:
@@ -311,11 +295,11 @@ jobs:
           fail_on_unmatched_files: false
           name: v${{ env.REVORIA_RELEASE_VERSION }} Revoria
           body: |
-            ## Изменения
+            ## Changes
 
             ${{ env.REVORIA_RELEASE_NOTES }}
 
-            ## Скачать
+            ## Download
 
             Windows - https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/Revoria_${{ env.REVORIA_RELEASE_VERSION }}_x64-setup.exe
             Linux - https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/Revoria_${{ env.REVORIA_RELEASE_VERSION }}_amd64.deb

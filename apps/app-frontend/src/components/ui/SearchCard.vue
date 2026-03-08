@@ -1,7 +1,7 @@
 <template>
 	<ProjectCard
 		:title="project.title ?? project.name ?? 'Unknown project'"
-		:link="`/project/${project.project_id ?? project.id}`"
+		:link="projectLink"
 		:author="{ name: authorName, link: authorHref }"
 		:icon-url="project.icon_url"
 		:summary="project.description ?? project.summary ?? ''"
@@ -157,6 +157,20 @@ const createdAt = computed(
 	() => props.project.date_created ?? props.project.date_modified ?? '1970-01-01T00:00:00.000Z',
 )
 const updatedAt = computed(() => props.project.date_modified ?? createdAt.value)
+const projectLink = computed(() => {
+	const projectId = props.project.project_id ?? props.project.id
+	if (props.project?.source === 'curseforge') {
+		return () =>
+			router.push({
+				path: `/project/${projectId}`,
+				query: {
+					source: 'curseforge',
+					t: props.projectType ?? props.project.project_type ?? 'mod',
+				},
+			})
+	}
+	return `/project/${projectId}`
+})
 const environment = computed(() =>
 	props.projectType && ['mod', 'modpack'].includes(props.projectType)
 		? {

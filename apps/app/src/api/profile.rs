@@ -251,6 +251,7 @@ pub async fn profile_get_pack_export_candidates(
 // invoke('plugin:profile|profile_run', path)
 #[tauri::command]
 pub async fn profile_run(path: &str) -> Result<ProcessMetadata> {
+    super::syncing::apply_syncing_to_profile(path).await?;
     let process = profile::run(path, QuickPlayType::None).await?;
 
     Ok(process)

@@ -203,6 +203,7 @@ pub async fn start_join_singleplayer_world(
     path: &str,
     world: String,
 ) -> Result<ProcessMetadata> {
+    super::syncing::apply_syncing_to_profile(path).await?;
     let process =
         profile::run(path, QuickPlayType::Singleplayer(world)).await?;
 
@@ -214,6 +215,7 @@ pub async fn start_join_server(
     path: &str,
     address: &str,
 ) -> Result<ProcessMetadata> {
+    super::syncing::apply_syncing_to_profile(path).await?;
     let process = profile::run(
         path,
         QuickPlayType::Server(ServerAddress::Unresolved(address.to_owned())),

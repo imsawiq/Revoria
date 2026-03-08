@@ -284,6 +284,9 @@
 	"app.nav.maintenance": {
 		"message": "Maintenance"
 	},
+	"app.nav.syncing": {
+		"message": "Syncing"
+	},
 	"app.nav.library": {
 		"message": "Library"
 	},
@@ -2419,6 +2422,96 @@
 	},
 	"accounts-card.player-name-length-rule": {
 		"message": "Player name must be at least {min} characters long and no more than {max} characters."
+	},
+	"syncing.breadcrumb": {
+		"message": "Syncing"
+	},
+	"syncing.title": {
+		"message": "Instance syncing"
+	},
+	"syncing.description": {
+		"message": "Share one real folder or file across all instances."
+	},
+	"syncing.how-it-works": {
+		"message": "When enabled, existing data is moved into the shared sync folder and each instance path is replaced with a link."
+	},
+	"syncing.action.open-folder": {
+		"message": "Open sync folder"
+	},
+	"syncing.action.apply": {
+		"message": "Apply to all instances"
+	},
+	"syncing.action.reload": {
+		"message": "Reload"
+	},
+	"syncing.shared-folder": {
+		"message": "Shared data folder"
+	},
+	"syncing.shared-folder-hint": {
+		"message": "This folder stores the real shared files and folders."
+	},
+	"syncing.total-instances": {
+		"message": "Instances"
+	},
+	"syncing.conflicts-hint": {
+		"message": "Conflicts mean some instances still have separate data at that path."
+	},
+	"syncing.section.default-folders": {
+		"message": "Default folders"
+	},
+	"syncing.section.custom-folders": {
+		"message": "Custom folders"
+	},
+	"syncing.section.custom-files": {
+		"message": "Custom files"
+	},
+	"syncing.add-target": {
+		"message": "Add sync target"
+	},
+	"syncing.add-placeholder": {
+		"message": "resourcepacks or options.txt"
+	},
+	"syncing.target-type.folder": {
+		"message": "Folder"
+	},
+	"syncing.target-type.file": {
+		"message": "File"
+	},
+	"syncing.action.add": {
+		"message": "Add target"
+	},
+	"syncing.empty.custom-folders": {
+		"message": "No custom folder targets yet."
+	},
+	"syncing.empty.custom-files": {
+		"message": "No custom file targets yet."
+	},
+	"syncing.target.synced": {
+		"message": "{synced}/{total} synced"
+	},
+	"syncing.target.conflicts": {
+		"message": "{count} conflicting instances"
+	},
+	"syncing.target.default": {
+		"message": "Default"
+	},
+	"syncing.target.custom": {
+		"message": "Custom"
+	},
+	"syncing.notification.added": {
+		"message": "Sync target added."
+	},
+	"syncing.notification.updated": {
+		"message": "Sync targets updated."
+	},
+	"syncing.notification.removed": {
+		"message": "Sync target removed."
+	},
+	"syncing.status.enabled": {
+		"message": "Enabled"
+	},
+	"syncing.status.disabled": {
+		"message": "Disabled"
 	},
 	"accounts-card.unexpected-error-header": {
 		"message": "Unexpected error occurred"

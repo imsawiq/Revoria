@@ -1,6 +1,6 @@
 [package]
 name = "theseus_gui"
-version = "1.1.7"
+version = "1.2.0"
 edition.workspace = true
 description = "The Modrinth App is a desktop application for managing your Minecraft mods"
 repository = "https://github.com/modrinth/code/apps/app/"
@@ -16,9 +16,11 @@ enumset = { workspace = true, features = ["serde"] }
 hyper = { workspace = true, features = ["server"] }
 hyper-util = { workspace = true }
 image = { workspace = true }
+junction = "1.2.0"
 native-dialog = { workspace = true }
 paste = { workspace = true }
 path-util = { workspace = true }
+same-file = "1.0.6"
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
 serde_with = { workspace = true }

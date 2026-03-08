@@ -5,6 +5,7 @@ import {
 	DownloadIcon,
 	ExternalIcon,
 	GlobeIcon,
+	PlusIcon,
 	SearchIcon,
 	XIcon,
 } from '@modrinth/assets'

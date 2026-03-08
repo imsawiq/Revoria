@@ -211,6 +211,19 @@ fn main() {
                     ),
             )
             .plugin(
+                "syncing",
+                InlinedPlugin::new()
+                    .commands(&[
+                        "syncing_get_state",
+                        "syncing_set_target",
+                        "syncing_remove_target",
+                        "syncing_apply_all",
+                    ])
+                    .default_permission(
+                        DefaultPermissionRule::AllowAllCommands,
+                    ),
+            )
+            .plugin(
                 "tags",
                 InlinedPlugin::new()
                     .commands(&[

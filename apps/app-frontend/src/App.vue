@@ -8,6 +8,7 @@ import {
 	HomeIcon,
 	LeftArrowIcon,
 	LibraryIcon,
+	LinkIcon,
 	LogInIcon,
 	LogOutIcon,
 	MaximizeIcon,
@@ -233,6 +234,10 @@ const messages = defineMessages({
 	navMaintenance: {
 		id: 'app.nav.maintenance',
 		defaultMessage: 'Maintenance',
+	},
+	navSyncing: {
+		id: 'app.nav.syncing',
+		defaultMessage: 'Syncing',
 	},
 	navLibrary: {
 		id: 'app.nav.library',
@@ -838,6 +843,9 @@ async function processPendingSurveys() {
 			</NavButton>
 			<NavButton v-tooltip.right="formatMessage(messages.navMaintenance)" to="/maintenance">
 				<DatabaseIcon />
+			</NavButton>
+			<NavButton v-tooltip.right="formatMessage(messages.navSyncing)" to="/syncing">
+				<LinkIcon />
 			</NavButton>
 			<NavButton
 				v-tooltip.right="formatMessage(messages.navLibrary)"

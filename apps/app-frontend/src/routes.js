@@ -61,6 +61,14 @@ export default new createRouter({
 			},
 		},
 		{
+			path: '/syncing',
+			name: 'Syncing',
+			component: Pages.Syncing,
+			meta: {
+				breadcrumb: [{ name: 'Syncing' }],
+			},
+		},
+		{
 			path: '/library',
 			name: 'Library',
 			component: Library.Index,
