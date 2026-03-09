@@ -146,7 +146,7 @@ watch(
 		system-theme-color="system"
 	/>
 
-	<div class="mt-4 flex items-center justify-between">
+	<div class="settings-row mt-4 flex items-center justify-between">
 		<div>
 			<h2 class="m-0 text-lg font-extrabold text-contrast">
 				{{ formatMessage(messages.advancedRenderingTitle) }}
@@ -166,7 +166,7 @@ watch(
 		/>
 	</div>
 
-	<div class="mt-4 flex items-center justify-between">
+	<div class="settings-row mt-4 flex items-center justify-between">
 		<div>
 			<h2 class="m-0 text-lg font-extrabold text-contrast">
 				{{ formatMessage(messages.launcherLanguageTitle) }}
@@ -183,7 +183,7 @@ watch(
 		/>
 	</div>
 
-	<div class="mt-4 flex items-center justify-between">
+	<div class="settings-row mt-4 flex items-center justify-between">
 		<div>
 			<h2 class="m-0 text-lg font-extrabold text-contrast">
 				{{ formatMessage(messages.hideNametagTitle) }}
@@ -193,7 +193,7 @@ watch(
 		<Toggle id="hide-nametag-skins-page" v-model="settings.hide_nametag_skins_page" />
 	</div>
 
-	<div v-if="os !== 'MacOS'" class="mt-4 flex items-center justify-between gap-4">
+	<div v-if="os !== 'MacOS'" class="settings-row mt-4 flex items-center justify-between gap-4">
 		<div>
 			<h2 class="m-0 text-lg font-extrabold text-contrast">
 				{{ formatMessage(messages.nativeDecorationsTitle) }}
@@ -203,7 +203,7 @@ watch(
 		<Toggle id="native-decorations" v-model="settings.native_decorations" />
 	</div>
 
-	<div class="mt-4 flex items-center justify-between">
+	<div class="settings-row mt-4 flex items-center justify-between">
 		<div>
 			<h2 class="m-0 text-lg font-extrabold text-contrast">
 				{{ formatMessage(messages.minimizeLauncherTitle) }}
@@ -213,7 +213,7 @@ watch(
 		<Toggle id="minimize-launcher" v-model="settings.hide_on_process_start" />
 	</div>
 
-	<div class="mt-4 flex items-center justify-between">
+	<div class="settings-row mt-4 flex items-center justify-between">
 		<div>
 			<h2 class="m-0 text-lg font-extrabold text-contrast">
 				{{ formatMessage(messages.defaultLandingTitle) }}
@@ -241,7 +241,7 @@ watch(
 		/>
 	</div>
 
-	<div class="mt-4 flex items-center justify-between">
+	<div class="settings-row mt-4 flex items-center justify-between">
 		<div>
 			<h2 class="m-0 text-lg font-extrabold text-contrast">
 				{{ formatMessage(messages.jumpBackTitle) }}
@@ -260,7 +260,7 @@ watch(
 		/>
 	</div>
 
-	<div class="mt-4 flex items-center justify-between">
+	<div class="settings-row mt-4 flex items-center justify-between">
 		<div>
 			<h2 class="m-0 text-lg font-extrabold text-contrast">
 				{{ formatMessage(messages.toggleSidebarTitle) }}
@@ -279,3 +279,17 @@ watch(
 		/>
 	</div>
 </template>
+
+<style lang="scss" scoped>
+.settings-row {
+	padding: 1rem 1.125rem;
+	border: 1px solid var(--glass-border);
+	border-radius: var(--radius-xl);
+	background: linear-gradient(
+		180deg,
+		color-mix(in oklch, var(--color-glass-bg-strong) 88%, transparent),
+		color-mix(in oklch, var(--color-glass-bg) 94%, transparent)
+	);
+	box-shadow: var(--shadow-card);
+}
+</style>

@@ -1,16 +1,16 @@
 .light-properties {
-	--surface-1: #e7eceb;
-	--surface-2: #eff3f2;
-	--surface-3: #f6f8f7;
-	--surface-4: #fcfdfd;
-	--surface-5: #d4ddda;
+	--surface-1: #e8efec;
+	--surface-2: #eef4f1;
+	--surface-3: #f5f8f6;
+	--surface-4: #fbfcfb;
+	--surface-5: #d9e2de;
 
 	--glass-blur: 18px;
 	--glass-saturate: 160%;
-	--glass-border: rgba(20, 26, 33, 0.1);
-	--glass-shadow: 0 20px 48px -30px rgba(16, 29, 24, 0.24);
-	--glass-bg: rgba(252, 255, 254, 0.62);
-	--glass-bg-strong: rgba(252, 255, 254, 0.8);
+	--glass-border: rgba(20, 26, 33, 0.12);
+	--glass-shadow: 0 18px 42px -28px rgba(16, 29, 24, 0.18);
+	--glass-bg: rgba(252, 255, 254, 0.68);
+	--glass-bg-strong: rgba(252, 255, 254, 0.84);
 
 	--color-red-50: #fef2f2;
 	--color-red-100: #fee5e7;
@@ -107,7 +107,7 @@
 	--color-button-bg-active: var(--surface-5);
 	--color-button-text-hover: var(--color-text-primary);
 	--color-button-text-active: var(--color-text-primary);
-	--color-button-border: rgba(90, 114, 103, 0.24);
+	--color-button-border: rgba(84, 102, 93, 0.18);
 	--color-scrollbar: #8ea198;
 	--color-raised-bg-hover: var(--surface-4);
 
@@ -133,8 +133,8 @@
 	--color-purple-bg: rgba(142, 50, 243, 0.1);
 
 	--color-brand: var(--color-green);
-	--color-brand-highlight: rgba(0, 175, 92, 0.14);
-	--color-brand-shadow: rgba(0, 175, 92, 0.34);
+	--color-brand-highlight: rgba(0, 175, 92, 0.12);
+	--color-brand-shadow: rgba(0, 175, 92, 0.22);
 
 	--shadow-inset-lg: inset 0px -2px 2px hsla(221, 39%, 91%, 0.1);
 	--shadow-inset: inset 0px -2px 2px hsla(221, 39%, 91%, 0.05);
@@ -149,7 +149,7 @@
 		hsla(0, 0%, 0%, 0) 0px 0px 0px 0px, hsla(0, 0%, 0%, 0) 0px 0px 0px 0px,
 		hsla(0, 0%, 0%, 0.08) 0px 10px 20px -10px, hsla(0, 0%, 0%, 0.08) 0px 6px 12px -8px;
 
-	--shadow-card: rgba(16, 29, 24, 0.1) 0px 8px 22px -14px;
+	--shadow-card: rgba(16, 29, 24, 0.08) 0px 10px 24px -18px;
 
 	--brand-gradient-bg: linear-gradient(
 		0deg,
@@ -165,8 +165,8 @@
 	--brand-gradient-border: rgba(0, 175, 92, 0.12);
 	--brand-gradient-fade-out-color: linear-gradient(to bottom, rgba(213, 235, 224, 0), #cfe6da 70%);
 
-	--color-button-bg-selected: var(--color-brand);
-	--color-button-text-selected: var(--color-accent-contrast);
+	--color-button-bg-selected: rgba(0, 175, 92, 0.12);
+	--color-button-text-selected: #0d6b3e;
 
 	--color-gradient-button-bg: linear-gradient(180deg, #f8fbfa 0%, #d8e1de 100%);
 
@@ -239,18 +239,18 @@ html {
 .dark-mode,
 .dark,
 :root[data-theme='dark'] {
-	--surface-1: #0b0c0d;
-	--surface-2: #0f1113;
-	--surface-3: #14171a;
-	--surface-4: #1a1f23;
-	--surface-5: #22292f;
+	--surface-1: #0b0d10;
+	--surface-2: #101317;
+	--surface-3: #151a1f;
+	--surface-4: #1b2128;
+	--surface-5: #242c35;
 
 	--glass-blur: 20px;
 	--glass-saturate: 165%;
-	--glass-border: rgba(255, 255, 255, 0.08);
-	--glass-shadow: 0 26px 90px -54px rgba(0, 0, 0, 0.78);
-	--glass-bg: rgba(9, 10, 11, 0.6);
-	--glass-bg-strong: rgba(9, 10, 11, 0.78);
+	--glass-border: rgba(255, 255, 255, 0.075);
+	--glass-shadow: 0 24px 64px -40px rgba(0, 0, 0, 0.72);
+	--glass-bg: rgba(11, 13, 16, 0.7);
+	--glass-bg-strong: rgba(14, 17, 21, 0.86);
 
 	--color-red-50: #fff0f1;
 	--color-red-100: #ffe2e6;
@@ -330,9 +330,9 @@ html {
 	--color-gray-950: #303136;
 	--color-gray: var(--color-gray-500);
 
-	--color-text-primary: #ffffff;
-	--color-text-default: #b0bac5;
-	--color-text-tertiary: #96a2b0;
+	--color-text-primary: #f3f7fa;
+	--color-text-default: #b8c1cc;
+	--color-text-tertiary: #96a1ad;
 
 	// ===
 
@@ -345,12 +345,12 @@ html {
 	--color-button-bg-active: var(--surface-5);
 	--color-button-text-hover: var(--color-text-primary);
 	--color-button-text-active: var(--color-text-primary);
-	--color-button-border: rgba(193, 190, 209, 0.12);
+	--color-button-border: rgba(255, 255, 255, 0.09);
 	--color-scrollbar: var(--color-button-bg);
 	--color-raised-bg-hover: var(--surface-4);
 
-	--color-divider: var(--color-button-bg);
-	--color-divider-dark: #646c75;
+	--color-divider: #222a32;
+	--color-divider-dark: #2b3440;
 
 	--color-base: var(--color-text-default);
 	--color-secondary: var(--color-text-tertiary);
@@ -371,8 +371,8 @@ html {
 	--color-purple-bg: rgba(199, 138, 255, 0.2);
 
 	--color-brand: var(--color-green);
-	--color-brand-highlight: rgba(27, 217, 106, 0.18);
-	--color-brand-shadow: rgba(27, 217, 106, 0.5);
+	--color-brand-highlight: rgba(27, 217, 106, 0.14);
+	--color-brand-shadow: rgba(27, 217, 106, 0.22);
 	--color-glass-bg: var(--glass-bg);
 	--color-glass-bg-strong: var(--glass-bg-strong);
 
@@ -384,9 +384,9 @@ html {
 	--shadow-raised: 0px 2px 10px hsla(221, 39%, 5%, 0.25);
 	--shadow-floating:
 		hsla(0, 0%, 0%, 0) 0px 0px 0px 0px, hsla(0, 0%, 0%, 0) 0px 0px 0px 0px,
-		hsla(0, 0%, 0%, 0.22) 0px 12px 26px -16px, rgba(0, 0, 0, 0.18) 0px 8px 14px -12px;
+		hsla(0, 0%, 0%, 0.18) 0px 14px 28px -18px, rgba(0, 0, 0, 0.14) 0px 10px 18px -14px;
 
-	--shadow-card: rgba(0, 0, 0, 0.4) 0px 10px 26px -18px;
+	--shadow-card: rgba(0, 0, 0, 0.34) 0px 14px 28px -20px;
 
 	--brand-gradient-bg: linear-gradient(
 		0deg,
@@ -398,8 +398,8 @@ html {
 	--brand-gradient-border: rgba(27, 217, 106, 0.1);
 	--brand-gradient-fade-out-color: linear-gradient(to bottom, rgba(14, 18, 24, 0), #0e1014 80%);
 
-	--color-button-bg-selected: var(--color-brand-highlight);
-	--color-button-text-selected: var(--color-brand);
+	--color-button-bg-selected: rgba(27, 217, 106, 0.14);
+	--color-button-text-selected: #d9ffe8;
 
 	--color-gradient-button-bg: linear-gradient(180deg, #3a3d47 0%, #33363d 100%);
 

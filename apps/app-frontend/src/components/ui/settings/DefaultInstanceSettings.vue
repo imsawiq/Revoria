@@ -146,7 +146,7 @@ watch(
 			{{ formatMessage(messages.windowSizeTitle) }}
 		</h2>
 
-		<div class="flex items-center justify-between gap-4">
+		<div class="settings-row flex items-center justify-between gap-4">
 			<div>
 				<h3 class="mt-2 m-0 text-base font-extrabold text-primary">
 					{{ formatMessage(messages.fullscreenTitle) }}
@@ -159,7 +159,7 @@ watch(
 			<Toggle id="fullscreen" v-model="settings.force_fullscreen" />
 		</div>
 
-		<div class="flex items-center justify-between gap-4">
+		<div class="settings-row flex items-center justify-between gap-4">
 			<div>
 				<h3 class="mt-2 m-0 text-base font-extrabold text-primary">
 					{{ formatMessage(messages.widthTitle) }}
@@ -175,11 +175,12 @@ watch(
 				:disabled="settings.force_fullscreen"
 				autocomplete="off"
 				type="number"
+				class="settings-input"
 				:placeholder="formatMessage(messages.widthPlaceholder)"
 			/>
 		</div>
 
-		<div class="flex items-center justify-between gap-4">
+		<div class="settings-row flex items-center justify-between gap-4">
 			<div>
 				<h3 class="mt-2 m-0 text-base font-extrabold text-primary">
 					{{ formatMessage(messages.heightTitle) }}
@@ -195,7 +196,7 @@ watch(
 				:disabled="settings.force_fullscreen"
 				autocomplete="off"
 				type="number"
-				class="input"
+				class="settings-input"
 				:placeholder="formatMessage(messages.heightPlaceholder)"
 			/>
 		</div>
@@ -226,7 +227,7 @@ watch(
 			autocomplete="off"
 			type="text"
 			:placeholder="formatMessage(messages.javaArgumentsPlaceholder)"
-			class="w-full"
+			class="settings-input w-full"
 		/>
 
 		<h2 class="mt-4 mb-2 text-lg font-extrabold text-contrast">
@@ -238,7 +239,7 @@ watch(
 			autocomplete="off"
 			type="text"
 			:placeholder="formatMessage(messages.environmentalVariablesPlaceholder)"
-			class="w-full"
+			class="settings-input w-full"
 		/>
 
 		<hr class="mt-4 bg-button-border border-none h-[1px]" />
@@ -259,7 +260,7 @@ watch(
 			autocomplete="off"
 			type="text"
 			:placeholder="formatMessage(messages.preLaunchPlaceholder)"
-			class="w-full"
+			class="settings-input w-full"
 		/>
 
 		<h3 class="mt-2 m-0 text-base font-extrabold text-primary">
@@ -274,7 +275,7 @@ watch(
 			autocomplete="off"
 			type="text"
 			:placeholder="formatMessage(messages.wrapperPlaceholder)"
-			class="w-full"
+			class="settings-input w-full"
 		/>
 
 		<h3 class="mt-2 m-0 text-base font-extrabold text-primary">
@@ -289,7 +290,36 @@ watch(
 			autocomplete="off"
 			type="text"
 			:placeholder="formatMessage(messages.postExitPlaceholder)"
-			class="w-full"
+			class="settings-input w-full"
 		/>
 	</div>
 </template>
+
+<style lang="scss" scoped>
+.settings-row {
+	padding: 1rem 1.125rem;
+	border: 1px solid var(--glass-border);
+	border-radius: var(--radius-xl);
+	background: linear-gradient(
+		180deg,
+		color-mix(in oklch, var(--color-glass-bg-strong) 88%, transparent),
+		color-mix(in oklch, var(--color-glass-bg) 94%, transparent)
+	);
+	box-shadow: var(--shadow-card);
+}
+
+.settings-input {
+	min-height: 2.625rem;
+	padding: 0.625rem 0.875rem;
+	border: 1px solid var(--glass-border);
+	border-radius: var(--radius-lg);
+	background: color-mix(in oklch, var(--color-glass-bg-strong) 82%, transparent);
+	color: var(--color-contrast);
+
+	&:focus {
+		border-color: var(--color-brand-highlight);
+		box-shadow: 0 0 0 2px var(--color-brand-shadow);
+		outline: none;
+	}
+}
+</style>

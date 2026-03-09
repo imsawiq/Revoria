@@ -597,7 +597,14 @@ Button {
 	justify-content: center;
 	padding: 1rem;
 	gap: 0.5rem;
-	background: var(--color-raised-bg);
+	background: linear-gradient(
+		180deg,
+		color-mix(in oklch, var(--color-glass-bg-strong) 88%, transparent),
+		color-mix(in oklch, var(--color-glass-bg) 92%, transparent)
+	);
+	border: 1px solid var(--glass-border);
+	border-radius: var(--radius-xl);
+	box-shadow: var(--shadow-card);
 	height: 100%;
 }
 
@@ -674,15 +681,15 @@ Button {
 		box-shadow: none;
 
 		&.router-link-exact-active {
-			box-shadow: var(--shadow-inset-lg);
-			background: var(--color-button-bg);
+			box-shadow: 0 0 0 1px var(--color-brand-highlight);
+			background: var(--color-selected-button-bg);
 			color: var(--color-contrast);
 		}
 
 		&:hover {
-			background-color: var(--color-button-bg);
+			background-color: var(--color-button-bg-hover);
 			color: var(--color-contrast);
-			box-shadow: var(--shadow-inset-lg);
+			box-shadow: var(--shadow-card);
 			text-decoration: none;
 		}
 

@@ -25,7 +25,11 @@ watch(
 )
 </script>
 <template>
-	<div v-for="option in options" :key="option" class="mt-4 flex items-center justify-between">
+	<div
+		v-for="option in options"
+		:key="option"
+		class="settings-row mt-4 flex items-center justify-between"
+	>
 		<div>
 			<h2 class="m-0 text-lg font-extrabold text-contrast capitalize">
 				{{ option.replaceAll('_', ' ') }}
@@ -39,3 +43,17 @@ watch(
 		/>
 	</div>
 </template>
+
+<style lang="scss" scoped>
+.settings-row {
+	padding: 1rem 1.125rem;
+	border: 1px solid var(--glass-border);
+	border-radius: var(--radius-xl);
+	background: linear-gradient(
+		180deg,
+		color-mix(in oklch, var(--color-glass-bg-strong) 88%, transparent),
+		color-mix(in oklch, var(--color-glass-bg) 94%, transparent)
+	);
+	box-shadow: var(--shadow-card);
+}
+</style>

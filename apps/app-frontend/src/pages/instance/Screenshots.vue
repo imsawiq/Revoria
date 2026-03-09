@@ -289,7 +289,7 @@ watch(
 								class="max-w-full max-h-[80vh] rounded-xl shadow-2xl object-contain"
 							/>
 							<div
-								class="flex items-center gap-3 bg-[--color-raised-bg] rounded-xl px-4 py-2 border border-[--glass-border]"
+								class="flex items-center gap-3 rounded-xl px-4 py-2 border border-[--glass-border] bg-[--color-glass-bg-strong] shadow-card"
 							>
 								<span class="text-sm text-contrast font-medium">{{
 									getDisplayName(selectedImage)
@@ -317,7 +317,7 @@ watch(
 				<div
 					v-for="screenshot in screenshots"
 					:key="screenshot.path"
-					class="group relative rounded-xl overflow-hidden border border-[--glass-border] bg-[--color-button-bg] cursor-pointer transition-all hover:border-[--color-brand] hover:shadow-lg"
+					class="group relative rounded-xl overflow-hidden border border-[--glass-border] bg-[--color-glass-bg-strong] shadow-card cursor-pointer transition-all hover:border-[--color-brand] hover:shadow-floating"
 					@click="selectedImage = screenshot"
 				>
 					<div class="aspect-video overflow-hidden">
@@ -337,7 +337,7 @@ watch(
 						</div>
 						<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
 							<button
-								class="p-1 rounded-md bg-[--color-button-bg] hover:bg-[--color-button-bg-hover] border-none cursor-pointer text-secondary hover:text-contrast transition-colors"
+								class="p-1 rounded-md bg-[--color-button-bg] hover:bg-[--color-button-bg-hover] border border-[--glass-border] cursor-pointer text-secondary hover:text-contrast transition-colors"
 								:title="formatMessage(messages.copyTooltip)"
 								@click.stop="copyScreenshot(screenshot)"
 							>

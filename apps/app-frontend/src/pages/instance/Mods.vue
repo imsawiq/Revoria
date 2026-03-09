@@ -23,7 +23,7 @@
 					<button
 						v-for="filter in filterOptions"
 						:key="`content-filter-${filter.id}`"
-						:class="`px-2 py-1 rounded-full font-semibold leading-none cursor-pointer active:scale-[0.97] duration-100 transition-all ${selectedFilters.includes(filter.id) ? 'bg-brand-highlight text-brand border border-transparent' : 'bg-[--color-glass-bg-strong] text-secondary border border-[--glass-border]'}`"
+						:class="`px-2 py-1 rounded-full font-semibold leading-none cursor-pointer active:scale-[0.97] duration-100 transition-all ${selectedFilters.includes(filter.id) ? 'bg-[--color-selected-button-bg] text-contrast border border-[--color-brand-highlight] shadow-card' : 'bg-[--color-glass-bg-strong] text-secondary border border-[--glass-border]'}`"
 						@click="toggleArray(selectedFilters, filter.id)"
 					>
 						{{ filter.formattedName }}
@@ -1030,7 +1030,9 @@ onUnmounted(() => {
 	align-items: center;
 	gap: var(--gap-md);
 	justify-content: space-between;
-	background-color: var(--color-raised-bg);
+	background-color: var(--color-glass-bg-strong);
+	border: 1px solid var(--glass-border);
+	box-shadow: var(--shadow-card);
 }
 
 .mod-card {
@@ -1188,7 +1190,14 @@ onUnmounted(() => {
 
 .more-box {
 	display: flex;
-	background-color: var(--color-bg);
+	background: linear-gradient(
+		180deg,
+		color-mix(in oklch, var(--color-glass-bg-strong) 90%, transparent),
+		color-mix(in oklch, var(--color-glass-bg) 94%, transparent)
+	);
+	border: 1px solid var(--glass-border);
+	border-radius: var(--radius-xl);
+	box-shadow: var(--shadow-card);
 	padding: var(--gap-lg);
 
 	.options {
@@ -1258,13 +1267,13 @@ onUnmounted(() => {
 
 .search-input {
 	min-height: 2.25rem;
-	background-color: var(--color-raised-bg);
+	background-color: transparent;
 }
 
 .top-box {
 	background-image: radial-gradient(
 		50% 100% at 50% 100%,
-		var(--color-brand-highlight) 10%,
+		color-mix(in oklch, var(--color-brand-highlight) 50%, transparent) 10%,
 		#ffffff00 100%
 	);
 }

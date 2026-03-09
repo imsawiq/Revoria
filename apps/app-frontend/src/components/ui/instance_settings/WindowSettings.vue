@@ -92,7 +92,7 @@ const messages = defineMessages({
 			v-model="overrideWindowSettings"
 			:label="formatMessage(messages.customWindowSettings)"
 		/>
-		<div class="mt-2 flex items-center gap-4 justify-between">
+		<div class="settings-row mt-2 flex items-center gap-4 justify-between">
 			<div>
 				<h2 class="m-0 mb-1 text-lg font-extrabold text-contrast">
 					{{ formatMessage(messages.fullscreen) }}
@@ -113,7 +113,7 @@ const messages = defineMessages({
 			/>
 		</div>
 
-		<div class="mt-4 flex items-center gap-4 justify-between">
+		<div class="settings-row mt-4 flex items-center gap-4 justify-between">
 			<div>
 				<h2 class="m-0 mb-1 text-lg font-extrabold text-contrast">
 					{{ formatMessage(messages.width) }}
@@ -128,11 +128,12 @@ const messages = defineMessages({
 				autocomplete="off"
 				:disabled="!overrideWindowSettings || fullscreenSetting"
 				type="number"
+				class="settings-input"
 				:placeholder="formatMessage(messages.enterWidth)"
 			/>
 		</div>
 
-		<div class="mt-4 flex items-center gap-4 justify-between">
+		<div class="settings-row mt-4 flex items-center gap-4 justify-between">
 			<div>
 				<h2 class="m-0 mb-1 text-lg font-extrabold text-contrast">
 					{{ formatMessage(messages.height) }}
@@ -147,8 +148,38 @@ const messages = defineMessages({
 				autocomplete="off"
 				:disabled="!overrideWindowSettings || fullscreenSetting"
 				type="number"
+				class="settings-input"
 				:placeholder="formatMessage(messages.enterHeight)"
 			/>
 		</div>
 	</div>
 </template>
+
+<style lang="scss" scoped>
+.settings-row {
+	padding: 1rem 1.125rem;
+	border: 1px solid var(--glass-border);
+	border-radius: var(--radius-xl);
+	background: linear-gradient(
+		180deg,
+		color-mix(in oklch, var(--color-glass-bg-strong) 88%, transparent),
+		color-mix(in oklch, var(--color-glass-bg) 94%, transparent)
+	);
+	box-shadow: var(--shadow-card);
+}
+
+.settings-input {
+	min-height: 2.625rem;
+	padding: 0.625rem 0.875rem;
+	border: 1px solid var(--glass-border);
+	border-radius: var(--radius-lg);
+	background: color-mix(in oklch, var(--color-glass-bg-strong) 82%, transparent);
+	color: var(--color-contrast);
+
+	&:focus {
+		border-color: var(--color-brand-highlight);
+		box-shadow: 0 0 0 2px var(--color-brand-shadow);
+		outline: none;
+	}
+}
+</style>

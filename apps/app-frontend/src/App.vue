@@ -1185,9 +1185,17 @@ async function processPendingSurveys() {
 	grid-template-rows: auto 1fr;
 	position: relative;
 	background:
-		radial-gradient(1200px 700px at 20% 10%, rgba(27, 217, 106, 0.1), transparent 55%),
-		radial-gradient(1000px 600px at 80% 25%, rgba(255, 255, 255, 0.06), transparent 60%),
-		var(--color-raised-bg);
+		radial-gradient(
+			1000px 620px at 18% 8%,
+			color-mix(in srgb, var(--color-brand) 12%, transparent),
+			transparent 58%
+		),
+		radial-gradient(
+			860px 520px at 84% 16%,
+			color-mix(in srgb, var(--color-blue) 8%, transparent),
+			transparent 62%
+		),
+		linear-gradient(180deg, var(--color-bg) 0%, var(--color-raised-bg) 100%);
 	height: 100vh;
 }
 
@@ -1199,7 +1207,7 @@ async function processPendingSurveys() {
 	bottom: var(--shell-gap);
 	width: var(--left-bar-width);
 	border-radius: var(--radius-xl);
-	background: var(--color-glass-bg);
+	background: var(--color-glass-bg-strong);
 	border: 1px solid var(--glass-border);
 	box-shadow: var(--glass-shadow);
 	backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
@@ -1214,7 +1222,7 @@ async function processPendingSurveys() {
 	right: var(--shell-gap);
 	height: var(--top-bar-height);
 	border-radius: var(--radius-xl);
-	background: var(--color-glass-bg);
+	background: var(--color-glass-bg-strong);
 	border: 1px solid var(--glass-border);
 	box-shadow: var(--glass-shadow);
 	backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
@@ -1234,7 +1242,7 @@ async function processPendingSurveys() {
 	top: calc(var(--top-bar-height) + 2 * var(--shell-gap));
 	right: var(--shell-gap);
 	bottom: var(--shell-gap);
-	background: var(--color-glass-bg);
+	background: var(--color-glass-bg-strong);
 	border-radius: var(--radius-xl);
 	border: 1px solid var(--glass-border);
 	box-shadow: var(--glass-shadow);
@@ -1346,25 +1354,9 @@ async function processPendingSurveys() {
 }
 
 .revoria-update-alert {
-	border-color: color-mix(in srgb, var(--color-brand) 72%, var(--glass-border));
-	box-shadow:
-		0 0 0 1px color-mix(in srgb, var(--color-brand) 48%, transparent),
-		0 0 18px color-mix(in srgb, var(--color-brand) 28%, transparent);
-	animation: revoria-update-pulse 1.25s ease-in-out infinite;
-}
-
-@keyframes revoria-update-pulse {
-	0%,
-	100% {
-		box-shadow:
-			0 0 0 1px color-mix(in srgb, var(--color-brand) 44%, transparent),
-			0 0 12px color-mix(in srgb, var(--color-brand) 20%, transparent);
-	}
-	50% {
-		box-shadow:
-			0 0 0 1px color-mix(in srgb, var(--color-brand) 74%, transparent),
-			0 0 28px color-mix(in srgb, var(--color-brand) 38%, transparent);
-	}
+	border-color: var(--color-brand);
+	box-shadow: 0 0 0 2px var(--color-brand-highlight);
+	animation: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -116,7 +116,7 @@ const messages = defineMessages({
 			:disabled="!overrideHooks"
 			type="text"
 			:placeholder="formatMessage(messages.preLaunchEnter)"
-			class="w-full mt-2"
+			class="settings-input w-full mt-2"
 		/>
 
 		<h2 class="mt-4 mb-1 text-lg font-extrabold text-contrast">
@@ -132,7 +132,7 @@ const messages = defineMessages({
 			:disabled="!overrideHooks"
 			type="text"
 			:placeholder="formatMessage(messages.wrapperEnter)"
-			class="w-full mt-2"
+			class="settings-input w-full mt-2"
 		/>
 
 		<h2 class="mt-4 mb-1 text-lg font-extrabold text-contrast">
@@ -148,7 +148,24 @@ const messages = defineMessages({
 			:disabled="!overrideHooks"
 			type="text"
 			:placeholder="formatMessage(messages.postExitEnter)"
-			class="w-full mt-2"
+			class="settings-input w-full mt-2"
 		/>
 	</div>
 </template>
+
+<style lang="scss" scoped>
+.settings-input {
+	min-height: 2.625rem;
+	padding: 0.625rem 0.875rem;
+	border: 1px solid var(--glass-border);
+	border-radius: var(--radius-lg);
+	background: color-mix(in oklch, var(--color-glass-bg-strong) 82%, transparent);
+	color: var(--color-contrast);
+
+	&:focus {
+		border-color: var(--color-brand-highlight);
+		box-shadow: 0 0 0 2px var(--color-brand-shadow);
+		outline: none;
+	}
+}
+</style>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-	RevoriaLogo,
 	CoffeeIcon,
 	GameIcon,
 	GaugeIcon,
@@ -24,6 +23,7 @@ import PrivacySettings from '@/components/ui/settings/PrivacySettings.vue'
 import ResourceManagementSettings from '@/components/ui/settings/ResourceManagementSettings.vue'
 import { get, set } from '@/helpers/settings.ts'
 import { useTheming } from '@/store/state'
+import RevoriaMark from '../../../../../app/icons/128x128.png?url'
 
 const themeStore = useTheming()
 
@@ -168,7 +168,7 @@ const messages = defineMessages({
 							}"
 							@click="devModeCount"
 						>
-							<RevoriaLogo class="w-6 h-6" />
+							<img :src="RevoriaMark" alt="Revoria" class="settings-logo-image" />
 						</button>
 						<div>
 							<p class="m-0">{{ formatMessage(messages.appVersion, { version }) }}</p>
@@ -191,5 +191,32 @@ const messages = defineMessages({
 <style lang="scss" scoped>
 code {
 	color: var(--color-brand);
+}
+
+:deep(.tabbed-modal) {
+	background: linear-gradient(
+		180deg,
+		color-mix(in oklch, var(--color-glass-bg-strong) 92%, transparent),
+		color-mix(in oklch, var(--color-glass-bg) 96%, transparent)
+	);
+}
+
+:deep(.tabbed-modal__sidebar),
+:deep(.tabbed-modal__tabs) {
+	background: color-mix(in oklch, var(--color-glass-bg-strong) 86%, transparent);
+	border-right: 1px solid var(--glass-border);
+}
+
+:deep(.tabbed-modal__content) {
+	background: transparent;
+}
+
+.settings-logo-image {
+	display: block;
+	width: 1.5rem;
+	height: 1.5rem;
+	border-radius: 0.4rem;
+	object-fit: cover;
+	box-shadow: 0 0 0 1px var(--button-border);
 }
 </style>

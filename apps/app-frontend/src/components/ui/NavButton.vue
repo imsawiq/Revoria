@@ -85,29 +85,13 @@ a {
 }
 
 .nav-button-attention {
-	color: var(--color-brand);
-	background: color-mix(in srgb, var(--color-brand) 22%, transparent);
-	box-shadow:
-		0 0 0 1px color-mix(in srgb, var(--color-brand) 60%, transparent),
-		0 0 12px color-mix(in srgb, var(--color-brand) 30%, transparent);
-	animation: nav-button-attention-pulse 1.25s ease-in-out infinite;
+	color: var(--color-button-text-selected);
+	background: var(--color-button-bg-selected);
+	box-shadow: 0 0 0 1px var(--color-brand-highlight);
+	animation: none;
 
 	svg {
-		filter: drop-shadow(0 0 0.6rem color-mix(in srgb, var(--color-brand) 70%, transparent));
-	}
-}
-
-@keyframes nav-button-attention-pulse {
-	0%,
-	100% {
-		box-shadow:
-			0 0 0 1px color-mix(in srgb, var(--color-brand) 40%, transparent),
-			0 0 10px color-mix(in srgb, var(--color-brand) 20%, transparent);
-	}
-	50% {
-		box-shadow:
-			0 0 0 1px color-mix(in srgb, var(--color-brand) 75%, transparent),
-			0 0 18px color-mix(in srgb, var(--color-brand) 40%, transparent);
+		filter: none;
 	}
 }
 </style>

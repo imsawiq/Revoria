@@ -123,7 +123,7 @@ async function findLauncherDir() {
 	<div class="m-1 my-2">
 		<div class="iconified-input w-full">
 			<BoxIcon />
-			<input id="appDir" v-model="settings.custom_dir" type="text" class="input" />
+			<input id="appDir" v-model="settings.custom_dir" type="text" class="text-input" />
 			<Button class="r-btn" @click="findLauncherDir">
 				<FolderSearchIcon />
 			</Button>

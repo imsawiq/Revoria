@@ -249,7 +249,7 @@ const messages = defineMessages({
 				v-model="title"
 				autocomplete="off"
 				maxlength="80"
-				class="flex-grow"
+				class="settings-input flex-grow"
 				type="text"
 			/>
 		</div>
@@ -294,6 +294,7 @@ const messages = defineMessages({
 				<input
 					v-model="newCategoryInput"
 					type="text"
+					class="settings-input"
 					:placeholder="formatMessage(messages.libraryGroupsEnterName)"
 					@submit="() => addCategory"
 				/>
@@ -329,6 +330,21 @@ const messages = defineMessages({
 </template>
 <style scoped lang="scss">
 .hovering-icon-shadow {
-	box-shadow: var(--shadow-inset-sm), var(--glass-shadow);
+	box-shadow: var(--shadow-inset-sm), var(--shadow-card);
+}
+
+.settings-input {
+	min-height: 2.625rem;
+	padding: 0.625rem 0.875rem;
+	border: 1px solid var(--glass-border);
+	border-radius: var(--radius-lg);
+	background: color-mix(in oklch, var(--color-glass-bg-strong) 82%, transparent);
+	color: var(--color-contrast);
+
+	&:focus {
+		border-color: var(--color-brand-highlight);
+		box-shadow: 0 0 0 2px var(--color-brand-shadow);
+		outline: none;
+	}
 }
 </style>

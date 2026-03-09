@@ -328,9 +328,9 @@ const displayCategories = computed(() =>
 	color: var(--color-secondary);
 	font-size: 0.95rem;
 	padding: 0.12rem 0.62rem;
-	border: 1px solid var(--color-button-border);
+	border: 1px solid var(--glass-border);
 	border-radius: 999px;
-	background: color-mix(in srgb, var(--color-button-bg) 92%, transparent 8%);
+	background: var(--color-button-bg);
 	line-height: 1.1;
 }
 
@@ -347,9 +347,9 @@ const displayCategories = computed(() =>
 
 .server-ping-tag.is-good,
 .server-ping-tag.is-unknown {
-	border-color: var(--color-button-border);
+	border-color: var(--glass-border);
 	color: var(--color-secondary);
-	background: color-mix(in srgb, var(--color-button-bg) 92%, transparent 8%);
+	background: var(--color-button-bg);
 }
 
 .server-ping-tag.is-good {

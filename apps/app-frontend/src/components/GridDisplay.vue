@@ -451,9 +451,14 @@ const filteredResults = computed(() => {
 	z-index: 5;
 	padding: 0.25rem;
 	border-radius: 1.25rem;
-	background: var(--color-glass-bg);
+	background:
+		linear-gradient(
+			180deg,
+			color-mix(in srgb, var(--color-glass-bg-strong) 92%, transparent),
+			color-mix(in srgb, var(--color-glass-bg) 96%, transparent)
+		);
 	border: 1px solid var(--glass-border);
-	box-shadow: var(--glass-shadow);
+	box-shadow: var(--shadow-card);
 	backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
 	-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
 }
@@ -508,9 +513,9 @@ const filteredResults = computed(() => {
 .toolbar-select {
 	max-width: 16rem;
 	border-radius: 999px;
-	background: var(--color-glass-bg-strong);
+	background: color-mix(in srgb, var(--color-glass-bg-strong) 86%, transparent);
 	border: 1px solid var(--glass-border);
-	box-shadow: var(--glass-shadow);
+	box-shadow: var(--shadow-card);
 	backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
 	-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
 }
@@ -519,7 +524,7 @@ const filteredResults = computed(() => {
 :deep(.v-popper__inner) {
 	background: var(--color-glass-bg-strong);
 	border: 1px solid var(--glass-border);
-	box-shadow: var(--glass-shadow);
+	box-shadow: var(--shadow-floating);
 	backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
 	-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
 	color: var(--color-contrast);
@@ -552,24 +557,27 @@ const filteredResults = computed(() => {
 
 .group-section {
 	border-radius: 1.25rem;
-	background: var(--color-glass-bg);
-	border: 1px solid var(--glass-border);
-	box-shadow: var(--glass-shadow);
-	backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-	-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+	background: transparent;
+	border: 1px solid transparent;
+	box-shadow: none;
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
 	padding: 0.75rem;
 	transition:
 		transform 200ms cubic-bezier(0.2, 0.9, 0.2, 1),
 		box-shadow 200ms cubic-bezier(0.2, 0.9, 0.2, 1),
-		background-color 160ms ease;
+		background-color 160ms ease,
+		border-color 160ms ease;
 }
 
 .group-section:hover {
-	transform: translateY(-1px);
+	transform: none;
+	box-shadow: none;
+	border-color: transparent;
 }
 
 .group-section:active {
-	transform: translateY(0px) scale(0.995);
+	transform: none;
 }
 
 .group-section.is-none {
@@ -605,7 +613,7 @@ const filteredResults = computed(() => {
 	font-size: 0.75rem;
 	font-weight: 800;
 	color: var(--color-secondary);
-	background: var(--color-button-bg);
+	background: color-mix(in srgb, var(--color-button-bg) 92%, transparent);
 	border: 1px solid var(--glass-border);
 	border-radius: 999px;
 	padding: 0.1rem 0.5rem;

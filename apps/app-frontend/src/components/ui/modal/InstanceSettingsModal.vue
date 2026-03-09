@@ -98,3 +98,23 @@ const titleMessage = defineMessage({
 		<TabbedModal :tabs="tabs.map((tab) => ({ ...tab, props }))" />
 	</ModalWrapper>
 </template>
+
+<style lang="scss" scoped>
+:deep(.tabbed-modal) {
+	background: linear-gradient(
+		180deg,
+		color-mix(in oklch, var(--color-glass-bg-strong) 92%, transparent),
+		color-mix(in oklch, var(--color-glass-bg) 96%, transparent)
+	);
+}
+
+:deep(.tabbed-modal__sidebar),
+:deep(.tabbed-modal__tabs) {
+	background: color-mix(in oklch, var(--color-glass-bg-strong) 86%, transparent);
+	border-right: 1px solid var(--glass-border);
+}
+
+:deep(.tabbed-modal__content) {
+	background: transparent;
+}
+</style>

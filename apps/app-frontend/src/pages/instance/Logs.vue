@@ -863,9 +863,9 @@ onUnmounted(() => {
 .log-select {
 	max-width: 18rem;
 	border-radius: 999px;
-	background: var(--color-raised-bg);
+	background: color-mix(in oklch, var(--color-glass-bg-strong) 82%, transparent);
 	border: 1px solid var(--glass-border);
-	box-shadow: var(--glass-shadow);
+	box-shadow: var(--shadow-card);
 }
 
 .crash-card {
@@ -896,11 +896,12 @@ onUnmounted(() => {
 
 .crash-input {
 	width: 100%;
-	background: var(--color-raised-bg);
+	background: color-mix(in oklch, var(--color-glass-bg-strong) 82%, transparent);
 	border: 1px solid var(--glass-border);
 	border-radius: 0.75rem;
 	padding: 0.5rem 0.75rem;
 	color: var(--color-contrast);
+	box-shadow: inset 0 1px 0 color-mix(in oklch, white 4%, transparent);
 }
 
 .crash-logs {
@@ -912,7 +913,8 @@ onUnmounted(() => {
 .crash-meta {
 	padding: 0.5rem 0.75rem;
 	border-radius: 0.75rem;
-	background: var(--color-button-bg);
+	background: color-mix(in oklch, var(--color-button-bg) 88%, transparent);
+	border: 1px solid var(--glass-border);
 }
 
 .crash-actions {
@@ -959,15 +961,15 @@ onUnmounted(() => {
 .crash-select {
 	max-width: 20rem;
 	border-radius: 999px;
-	background: var(--color-raised-bg);
+	background: color-mix(in oklch, var(--color-glass-bg-strong) 82%, transparent);
 	border: 1px solid var(--glass-border);
-	box-shadow: var(--glass-shadow);
+	box-shadow: var(--shadow-card);
 }
 
 :global(.v-popper__inner) {
-	background: var(--color-raised-bg) !important;
+	background: var(--color-glass-bg-strong) !important;
 	border: 1px solid var(--glass-border);
-	box-shadow: var(--glass-shadow);
+	box-shadow: var(--shadow-floating);
 	backdrop-filter: none !important;
 	-webkit-backdrop-filter: none !important;
 	color: var(--color-contrast);

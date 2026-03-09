@@ -7,11 +7,22 @@ import {
 	TrashIcon,
 	UpdatedIcon,
 } from '@modrinth/assets'
-import { Button, Card, Checkbox, injectNotificationManager } from '@modrinth/ui'
+import {
+	ButtonStyled,
+	Card,
+	Checkbox,
+	DropdownSelect,
+	injectNotificationManager,
+} from '@modrinth/ui'
 import { defineMessages, useVIntl } from '@vintl/vintl'
 import { computed, onMounted, ref } from 'vue'
 
-import { applyAllSyncTargets, getSyncState, removeSyncTarget, setSyncTarget } from '@/helpers/syncing.js'
+import {
+	applyAllSyncTargets,
+	getSyncState,
+	removeSyncTarget,
+	setSyncTarget,
+} from '@/helpers/syncing.js'
 import { openPath } from '@/helpers/utils.js'
 import { useBreadcrumbs } from '@/store/breadcrumbs'
 
@@ -167,6 +178,7 @@ const loading = ref(false)
 const pendingKey = ref<string | null>(null)
 const newTargetPath = ref('')
 const newTargetType = ref<'folder' | 'file'>('folder')
+const targetTypeOptions: Array<'folder' | 'file'> = ['folder', 'file']
 
 const defaultFolders = computed(() =>
 	(syncState.value?.folders ?? []).filter((target) => target.default_target),
@@ -268,54 +280,64 @@ onMounted(loadState)
 </script>
 
 <template>
-	<section class="syncing-page">
-		<header class="page-header">
-			<div>
-				<h1>{{ formatMessage(messages.title) }}</h1>
-				<p class="description">{{ formatMessage(messages.description) }}</p>
-				<p class="description description-subtle">{{ formatMessage(messages.howItWorks) }}</p>
-			</div>
-			<div class="page-actions">
-				<Button @click="openSyncFolder">
-					<FolderOpenIcon />
-					{{ formatMessage(messages.openFolder) }}
-				</Button>
-				<Button color="primary" :disabled="pendingKey === 'apply-all'" @click="applyAll">
-					<UpdatedIcon />
-					{{ formatMessage(messages.applyAll) }}
-				</Button>
-				<Button :disabled="loading" @click="loadState">
-					<UpdatedIcon />
-					{{ formatMessage(messages.reload) }}
-				</Button>
-			</div>
-		</header>
-
-		<div class="summary-grid">
-			<Card class="summary-card">
-				<div class="summary-head">
-					<span class="summary-label">{{ formatMessage(messages.sharedFolder) }}</span>
-					<FolderIcon class="summary-symbol" />
+	<div class="syncing-page">
+		<Card class="section-card">
+			<header class="page-header">
+				<div>
+					<h2 class="page-title">{{ formatMessage(messages.title) }}</h2>
+					<p class="page-description">{{ formatMessage(messages.description) }}</p>
+					<p class="page-description page-description-subtle">
+						{{ formatMessage(messages.howItWorks) }}
+					</p>
 				</div>
-				<span class="summary-value path-value">{{ syncState?.sync_folder ?? '...' }}</span>
-				<p class="summary-help">{{ formatMessage(messages.sharedFolderHint) }}</p>
-			</Card>
-			<Card class="summary-card">
-				<div class="summary-head">
-					<span class="summary-label">{{ formatMessage(messages.totalInstances) }}</span>
-					<LinkIcon class="summary-symbol" />
+				<div class="page-actions">
+					<ButtonStyled color="brand">
+						<button :disabled="pendingKey === 'apply-all'" @click="applyAll">
+							<UpdatedIcon />
+							{{ formatMessage(messages.applyAll) }}
+						</button>
+					</ButtonStyled>
+					<ButtonStyled>
+						<button class="open-folder-button" @click="openSyncFolder">
+							<FolderOpenIcon />
+							{{ formatMessage(messages.openFolder) }}
+						</button>
+					</ButtonStyled>
+					<ButtonStyled>
+						<button :disabled="loading" @click="loadState">
+							<UpdatedIcon />
+							{{ formatMessage(messages.reload) }}
+						</button>
+					</ButtonStyled>
 				</div>
-				<span class="summary-value">{{ syncState?.total_count ?? 0 }}</span>
-				<p class="summary-help">{{ formatMessage(messages.conflictsHint) }}</p>
-			</Card>
-		</div>
+			</header>
 
-		<Card class="panel-card">
+			<div class="summary-row">
+				<div class="summary-card">
+					<div class="summary-head">
+						<span class="summary-label">{{ formatMessage(messages.sharedFolder) }}</span>
+						<FolderIcon class="summary-symbol" />
+					</div>
+					<span class="summary-value path-value">{{ syncState?.sync_folder ?? '...' }}</span>
+					<p class="summary-help">{{ formatMessage(messages.sharedFolderHint) }}</p>
+				</div>
+				<div class="summary-card">
+					<div class="summary-head">
+						<span class="summary-label">{{ formatMessage(messages.totalInstances) }}</span>
+						<LinkIcon class="summary-symbol" />
+					</div>
+					<span class="summary-value">{{ syncState?.total_count ?? 0 }}</span>
+					<p class="summary-help">{{ formatMessage(messages.conflictsHint) }}</p>
+				</div>
+			</div>
+		</Card>
+
+		<Card class="section-card">
 			<div class="section-heading">
-				<h2>{{ formatMessage(messages.addTarget) }}</h2>
+				<h2 class="section-title">{{ formatMessage(messages.addTarget) }}</h2>
 			</div>
 			<div class="add-row">
-				<div class="input-shell">
+				<div class="input-shell iconified-input">
 					<LinkIcon class="input-icon" />
 					<input
 						v-model="newTargetPath"
@@ -324,21 +346,31 @@ onMounted(loadState)
 						@keydown.enter.prevent="addTarget"
 					/>
 				</div>
-				<select v-model="newTargetType" class="type-select">
-					<option value="folder">{{ formatMessage(messages.targetTypeFolder) }}</option>
-					<option value="file">{{ formatMessage(messages.targetTypeFile) }}</option>
-				</select>
-				<Button color="primary" :disabled="!newTargetPath.trim()" @click="addTarget">
-					<PlusIcon />
-					{{ formatMessage(messages.add) }}
-				</Button>
+				<DropdownSelect
+					v-model="newTargetType"
+					class="type-select"
+					:name="formatMessage(messages.addTarget)"
+					:options="targetTypeOptions"
+					:display-name="
+						(option?: 'folder' | 'file') =>
+							option === 'file'
+								? formatMessage(messages.targetTypeFile)
+								: formatMessage(messages.targetTypeFolder)
+					"
+				/>
+				<ButtonStyled color="brand">
+					<button :disabled="!newTargetPath.trim()" @click="addTarget">
+						<PlusIcon />
+						{{ formatMessage(messages.add) }}
+					</button>
+				</ButtonStyled>
 			</div>
 		</Card>
 
-		<div class="panels-grid">
-			<Card class="panel-card">
+		<div class="section-grid">
+			<Card class="section-card">
 				<div class="section-heading">
-					<h2>{{ formatMessage(messages.defaultFolders) }}</h2>
+					<h2 class="section-title">{{ formatMessage(messages.defaultFolders) }}</h2>
 				</div>
 				<div class="targets-list">
 					<div v-for="target in defaultFolders" :key="`default-${target.path}`" class="target-row">
@@ -351,7 +383,11 @@ onMounted(loadState)
 									<span class="target-path">{{ target.path }}</span>
 									<span class="badge">{{ formatMessage(messages.defaultLabel) }}</span>
 									<span class="status-chip" :class="{ 'status-chip-off': !target.enabled }">
-										{{ formatMessage(target.enabled ? messages.statusEnabled : messages.statusDisabled) }}
+										{{
+											formatMessage(
+												target.enabled ? messages.statusEnabled : messages.statusDisabled,
+											)
+										}}
 									</span>
 								</div>
 								<div class="target-meta">
@@ -361,18 +397,24 @@ onMounted(loadState)
 											total: syncState?.total_count ?? 0,
 										})
 									}}</span>
-									<span v-if="target.cannot_sync_count > 0">{{ formatMessage(messages.conflicts, { count: target.cannot_sync_count }) }}</span>
+									<span v-if="target.cannot_sync_count > 0">{{
+										formatMessage(messages.conflicts, { count: target.cannot_sync_count })
+									}}</span>
 								</div>
 							</div>
 						</div>
-						<Checkbox :model-value="target.enabled" :disabled="isPending(target)" @update:model-value="toggleTarget(target, $event)" />
+						<Checkbox
+							:model-value="target.enabled"
+							:disabled="isPending(target)"
+							@update:model-value="toggleTarget(target, $event)"
+						/>
 					</div>
 				</div>
 			</Card>
 
-			<Card class="panel-card">
+			<Card class="section-card">
 				<div class="section-heading">
-					<h2>{{ formatMessage(messages.customFolders) }}</h2>
+					<h2 class="section-title">{{ formatMessage(messages.customFolders) }}</h2>
 				</div>
 				<div v-if="customFolders.length" class="targets-list">
 					<div v-for="target in customFolders" :key="`folder-${target.path}`" class="target-row">
@@ -385,7 +427,11 @@ onMounted(loadState)
 									<span class="target-path">{{ target.path }}</span>
 									<span class="badge badge-custom">{{ formatMessage(messages.customLabel) }}</span>
 									<span class="status-chip" :class="{ 'status-chip-off': !target.enabled }">
-										{{ formatMessage(target.enabled ? messages.statusEnabled : messages.statusDisabled) }}
+										{{
+											formatMessage(
+												target.enabled ? messages.statusEnabled : messages.statusDisabled,
+											)
+										}}
 									</span>
 								</div>
 								<div class="target-meta">
@@ -395,24 +441,34 @@ onMounted(loadState)
 											total: syncState?.total_count ?? 0,
 										})
 									}}</span>
-									<span v-if="target.cannot_sync_count > 0">{{ formatMessage(messages.conflicts, { count: target.cannot_sync_count }) }}</span>
+									<span v-if="target.cannot_sync_count > 0">{{
+										formatMessage(messages.conflicts, { count: target.cannot_sync_count })
+									}}</span>
 								</div>
 							</div>
 						</div>
 						<div class="target-actions">
-							<Checkbox :model-value="target.enabled" :disabled="isPending(target)" @update:model-value="toggleTarget(target, $event)" />
-							<button class="danger-button" :disabled="isPending(target)" @click="removeTarget(target)">
+							<Checkbox
+								:model-value="target.enabled"
+								:disabled="isPending(target)"
+								@update:model-value="toggleTarget(target, $event)"
+							/>
+							<button
+								class="danger-button"
+								:disabled="isPending(target)"
+								@click="removeTarget(target)"
+							>
 								<TrashIcon />
 							</button>
 						</div>
 					</div>
 				</div>
-				<p v-else class="empty">{{ formatMessage(messages.emptyCustomFolders) }}</p>
+				<div v-else class="empty-state">{{ formatMessage(messages.emptyCustomFolders) }}</div>
 			</Card>
 
-			<Card class="panel-card panels-wide">
+			<Card class="section-card section-card-wide">
 				<div class="section-heading">
-					<h2>{{ formatMessage(messages.customFiles) }}</h2>
+					<h2 class="section-title">{{ formatMessage(messages.customFiles) }}</h2>
 				</div>
 				<div v-if="customFiles.length" class="targets-list">
 					<div v-for="target in customFiles" :key="`file-${target.path}`" class="target-row">
@@ -435,27 +491,48 @@ onMounted(loadState)
 											total: syncState?.total_count ?? 0,
 										})
 									}}</span>
-									<span v-if="target.cannot_sync_count > 0">{{ formatMessage(messages.conflicts, { count: target.cannot_sync_count }) }}</span>
+									<span v-if="target.cannot_sync_count > 0">{{
+										formatMessage(messages.conflicts, { count: target.cannot_sync_count })
+									}}</span>
 								</div>
 							</div>
 						</div>
-						<button class="danger-button" :disabled="isPending(target)" @click="removeTarget(target)">
+						<button
+							class="danger-button"
+							:disabled="isPending(target)"
+							@click="removeTarget(target)"
+						>
 							<TrashIcon />
 						</button>
 					</div>
 				</div>
-				<p v-else class="empty">{{ formatMessage(messages.emptyCustomFiles) }}</p>
+				<div v-else class="empty-state">{{ formatMessage(messages.emptyCustomFiles) }}</div>
 			</Card>
 		</div>
-	</section>
+	</div>
 </template>
 
 <style scoped lang="scss">
 .syncing-page {
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
-	padding: 1rem;
+	gap: 1.5rem;
+	padding: 1.5rem;
+}
+
+.section-card {
+	padding: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	background:
+		linear-gradient(
+			180deg,
+			color-mix(in srgb, var(--color-glass-bg-strong) 88%, transparent),
+			color-mix(in srgb, var(--color-glass-bg) 92%, transparent)
+		);
+	border: 1px solid color-mix(in srgb, var(--glass-border) 84%, var(--color-brand-highlight));
+	box-shadow: var(--shadow-floating);
 }
 
 .page-header {
@@ -466,59 +543,15 @@ onMounted(loadState)
 	flex-wrap: wrap;
 }
 
-h1,
-h2 {
-	margin: 0;
-}
-
-h1 {
-	font-size: 1.45rem;
-	line-height: 1.1;
-	color: var(--color-contrast);
-}
-
-.description {
-	margin: 0.45rem 0 0;
-	max-width: 56rem;
-	color: var(--color-secondary-text);
-}
-
-.description-subtle {
-	font-size: 0.95rem;
-}
-
-.page-actions {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	gap: 0.75rem;
-	margin-left: auto;
-	justify-content: flex-end;
-}
-
-.summary-grid,
-.panels-grid {
-	display: grid;
-	gap: 1rem;
-}
-
-.summary-grid {
-	grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-}
-
-.summary-card,
-.panel-card {
+.summary-card {
+	background: color-mix(in srgb, var(--color-glass-bg) 92%, var(--color-button-bg) 8%);
+	border: 1px solid var(--glass-border);
+	border-radius: var(--radius-lg);
+	padding: 1rem;
 	display: flex;
 	flex-direction: column;
-	padding: 1rem 1.1rem;
-	border-radius: 1.25rem;
-	background: var(--color-bg-raised);
-	border: 1px solid var(--color-button-bg);
-	box-shadow: 0 8px 24px color-mix(in srgb, black 12%, transparent);
-}
-
-.summary-card {
 	gap: 0.45rem;
+	box-shadow: var(--shadow-card);
 }
 
 .summary-head {
@@ -538,7 +571,7 @@ h1 {
 	font-size: 0.82rem;
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
-	color: var(--color-secondary-text);
+	color: var(--color-secondary);
 }
 
 .summary-value {
@@ -550,7 +583,7 @@ h1 {
 .summary-help {
 	margin: 0;
 	font-size: 0.9rem;
-	color: var(--color-secondary-text);
+	color: var(--color-secondary);
 }
 
 .path-value {
@@ -558,28 +591,75 @@ h1 {
 	font-size: 0.98rem;
 }
 
+.page-title,
+.section-title {
+	margin: 0;
+	color: var(--color-contrast);
+}
+
+.page-title {
+	font-size: 1.25rem;
+	font-weight: 800;
+}
+
+.section-title {
+	font-size: 1rem;
+	font-weight: 700;
+}
+
+.page-description {
+	margin: 0.35rem 0 0;
+	max-width: 56rem;
+	color: var(--color-secondary);
+}
+
+.page-description-subtle {
+	font-size: 0.95rem;
+}
+
+.page-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5rem;
+	margin-left: auto;
+	justify-content: flex-end;
+}
+
+.open-folder-button {
+	background: color-mix(in srgb, var(--color-button-bg) 88%, var(--color-glass-bg-strong) 12%);
+	border: 1px solid var(--glass-border);
+	color: var(--color-contrast);
+	box-shadow: var(--shadow-card);
+}
+
+.open-folder-button:hover {
+	background: var(--color-button-bg-hover);
+	border-color: var(--color-brand-highlight);
+}
+
+.summary-row {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 1rem;
+}
+
 .section-heading {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-bottom: 0.9rem;
 }
 
 .add-row {
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: minmax(0, 4.5fr) minmax(11rem, 1.35fr) auto;
 	gap: 0.75rem;
+	align-items: center;
 }
 
 .input-shell {
-	display: flex;
-	flex: 1 1 26rem;
-	align-items: center;
-	gap: 0.65rem;
-	padding: 0.9rem 1rem;
-	border-radius: 1rem;
-	background: color-mix(in srgb, var(--color-button-bg) 82%, transparent);
-	border: 1px solid color-mix(in srgb, var(--color-button-bg-hover) 65%, transparent);
+	width: 100%;
+	min-width: 0;
 }
 
 .input-shell input,
@@ -593,27 +673,50 @@ h1 {
 .input-shell input {
 	flex: 1;
 	font: inherit;
+	height: 3rem;
+	background: color-mix(in oklch, var(--color-glass-bg-strong) 70%, transparent);
+	border: 1px solid var(--glass-border);
+	border-radius: var(--radius-md);
+	box-shadow:
+		var(--shadow-inset-sm),
+		0 0 0 0 transparent;
+	transition:
+		border-color 150ms ease,
+		box-shadow 150ms ease,
+		background-color 150ms ease;
+}
+
+.input-shell input:focus,
+.input-shell input:focus-visible {
+	border-color: var(--color-brand);
+	box-shadow:
+		var(--shadow-inset-sm),
+		0 0 0 0.2rem var(--color-brand-shadow);
+}
+
+.input-shell input::placeholder {
+	color: var(--color-base);
+	opacity: 0.6;
 }
 
 .type-select {
-	min-width: 8rem;
-	padding: 0.9rem 1rem;
-	border-radius: 1rem;
-	background: color-mix(in srgb, var(--color-button-bg) 82%, transparent);
-	border: 1px solid color-mix(in srgb, var(--color-button-bg-hover) 65%, transparent);
+	width: 100%;
+	min-width: 0;
 }
 
 .input-icon {
 	width: 1rem;
 	height: 1rem;
-	color: var(--color-secondary-text);
+	color: var(--color-secondary);
 }
 
-.panels-grid {
+.section-grid {
 	grid-template-columns: repeat(2, minmax(0, 1fr));
+	display: grid;
+	gap: 1rem;
 }
 
-.panels-wide {
+.section-card-wide {
 	grid-column: 1 / -1;
 }
 
@@ -629,9 +732,19 @@ h1 {
 	justify-content: space-between;
 	gap: 0.85rem;
 	padding: 0.85rem 0.95rem;
-	border-radius: 1rem;
-	background: color-mix(in srgb, var(--color-button-bg) 86%, transparent);
-	border: 1px solid color-mix(in srgb, var(--color-button-bg-hover) 45%, transparent);
+	border-radius: var(--radius-md);
+	background: color-mix(in srgb, var(--color-glass-bg) 88%, var(--color-button-bg) 12%);
+	border: 1px solid var(--glass-border);
+	box-shadow: var(--shadow-card);
+	transition:
+		border-color 180ms ease,
+		box-shadow 180ms ease,
+		background-color 180ms ease;
+}
+
+.target-row:hover {
+	border-color: var(--color-brand-highlight);
+	box-shadow: var(--shadow-floating);
 }
 
 .target-main,
@@ -652,6 +765,9 @@ h1 {
 }
 
 .target-topline {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
 	gap: 0.55rem;
 	margin-bottom: 0.2rem;
 }
@@ -659,7 +775,7 @@ h1 {
 .target-meta {
 	flex-wrap: wrap;
 	gap: 0.7rem;
-	color: var(--color-secondary-text);
+	color: var(--color-secondary);
 	font-size: 0.9rem;
 }
 
@@ -676,43 +792,59 @@ h1 {
 	width: 2.35rem;
 	height: 2.35rem;
 	border-radius: 0.9rem;
-	background: color-mix(in srgb, var(--color-button-bg-hover) 65%, transparent);
+	background: var(--color-button-bg);
 	color: var(--color-contrast);
 }
 
 .target-icon-file {
-	color: #7cc4ff;
-	background: color-mix(in srgb, #7cc4ff 14%, var(--color-button-bg));
+	color: var(--color-brand);
+	background: var(--color-button-bg);
 }
 
 .badge {
-	padding: 0.22rem 0.5rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.18rem 0.56rem;
+	height: 1.4rem;
 	border-radius: 999px;
 	font-size: 0.74rem;
 	font-weight: 700;
+	line-height: 1.05;
 	letter-spacing: 0.04em;
 	text-transform: uppercase;
-	color: var(--color-brand);
-	background: color-mix(in srgb, var(--color-brand) 16%, transparent);
+	color: var(--color-secondary);
+	background: var(--color-button-bg);
+	border: 1px solid var(--glass-border);
+	vertical-align: middle;
 }
 
 .badge-custom {
-	color: #7cc4ff;
-	background: color-mix(in srgb, #7cc4ff 14%, transparent);
+	color: var(--color-secondary);
+	background: var(--color-button-bg);
+	border: 1px solid var(--glass-border);
 }
 
 .status-chip {
-	padding: 0.22rem 0.5rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.18rem 0.56rem;
+	height: 1.4rem;
 	border-radius: 999px;
 	font-size: 0.74rem;
 	font-weight: 600;
-	color: var(--color-green-highlight);
-	background: color-mix(in srgb, var(--color-green) 14%, transparent);
+	line-height: 1.05;
+	color: var(--color-contrast);
+	background: var(--color-button-bg);
+	border: 1px solid var(--glass-border);
+	vertical-align: middle;
 }
 
 .status-chip-off {
-	color: var(--color-secondary-text);
-	background: color-mix(in srgb, var(--color-button-bg-hover) 75%, transparent);
+	color: var(--color-secondary);
+	background: var(--color-button-bg);
+	border: 1px solid var(--glass-border);
 }
 
 .target-actions {
@@ -726,7 +858,8 @@ h1 {
 	height: 2.25rem;
 	border: 0;
 	border-radius: 0.85rem;
-	background: color-mix(in srgb, var(--color-red) 14%, var(--color-button-bg));
+	background: var(--color-button-bg);
+	border: 1px solid var(--color-button-border);
 	color: var(--color-red-highlight);
 	cursor: pointer;
 }
@@ -736,14 +869,20 @@ h1 {
 	opacity: 0.55;
 }
 
-.empty {
-	margin: 0;
-	color: var(--color-secondary-text);
+.empty-state {
+	padding: 1rem;
+	border-radius: var(--radius-lg);
+	background: var(--color-button-bg);
+	color: var(--color-secondary);
+	text-align: center;
 }
 
 @media (max-width: 1100px) {
-	.summary-grid,
-	.panels-grid {
+	.section-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.add-row {
 		grid-template-columns: 1fr;
 	}
 
@@ -755,6 +894,5 @@ h1 {
 		margin-left: 0;
 		justify-content: flex-start;
 	}
-
 }
 </style>

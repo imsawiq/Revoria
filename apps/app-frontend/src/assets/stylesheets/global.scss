@@ -85,8 +85,12 @@ a {
 	}
 }
 
-input {
-	border: none !important;
+input,
+button,
+select,
+textarea {
+	font: inherit;
+	color: inherit;
 }
 
 .badge {
@@ -94,7 +98,9 @@ input {
 	border-radius: var(--radius-md);
 	white-space: nowrap;
 	align-items: center;
-	background-color: var(--color-bg);
+	background-color: var(--color-button-bg);
+	border: 1px solid var(--glass-border);
+	color: var(--color-secondary);
 	padding-block: var(--gap-sm);
 	padding-inline: var(--gap-lg);
 	width: min-content;
@@ -162,7 +168,9 @@ input {
 }
 
 .highlighted {
-	box-shadow: 0 0 1rem var(--color-brand) !important;
+	box-shadow:
+		0 0 0 2px var(--color-brand-highlight),
+		var(--shadow-card) !important;
 }
 
 .gecko {
