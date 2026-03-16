@@ -17,9 +17,6 @@
   "affiliate.create.user.description": {
     "defaultMessage": "アフィリエイトコードを作成するユーザー名"
   },
-  "affiliate.create.user.label": {
-    "defaultMessage": "ユーザーネーム"
-  },
   "affiliate.create.user.placeholder": {
     "defaultMessage": "ユーザーネームを入力…"
   },
@@ -43,6 +40,9 @@
   },
   "badge.new": {
     "defaultMessage": "New"
+  },
+  "button.accept": {
+    "defaultMessage": "承認"
   },
   "button.affiliate-links": {
     "defaultMessage": "アフィリエイトリンク"
@@ -73,6 +73,9 @@
   },
   "button.create-a-project": {
     "defaultMessage": "プロジェクトを作成"
+  },
+  "button.decline": {
+    "defaultMessage": "辞退"
   },
   "button.download": {
     "defaultMessage": "ダウンロード"
@@ -116,6 +119,9 @@
   "button.reset": {
     "defaultMessage": "リセット"
   },
+  "button.retry": {
+    "defaultMessage": "再試行"
+  },
   "button.save": {
     "defaultMessage": "保存"
   },
@@ -126,10 +132,10 @@
     "defaultMessage": "節約"
   },
   "button.sign-in": {
-    "defaultMessage": "ログイン"
+    "defaultMessage": "サインイン"
   },
   "button.sign-out": {
-    "defaultMessage": "ログアウト"
+    "defaultMessage": "サインアウト"
   },
   "button.sign-up": {
     "defaultMessage": "サインアップ"
@@ -139,6 +145,9 @@
   },
   "button.unfollow": {
     "defaultMessage": "フォロー解除"
+  },
+  "button.update": {
+    "defaultMessage": "更新"
   },
   "button.upload-image": {
     "defaultMessage": "画像のアップロード"
@@ -150,16 +159,16 @@
     "defaultMessage": "API"
   },
   "changelog.product.app": {
-    "defaultMessage": "APP"
+    "defaultMessage": "App"
   },
-  "changelog.product.servers": {
-    "defaultMessage": "サーバー"
+  "changelog.product.hosting": {
+    "defaultMessage": "ホスティング"
   },
   "changelog.product.web": {
     "defaultMessage": "ウェブ"
   },
-  "collection.label.private": {
-    "defaultMessage": "個人用"
+  "collections.label.private": {
+    "defaultMessage": "非公開"
   },
   "form.label.address-line": {
     "defaultMessage": "住所 1行目"
@@ -167,8 +176,14 @@
   "form.label.address-line-2": {
     "defaultMessage": "住所 2行目(任意)"
   },
+  "form.label.amount": {
+    "defaultMessage": "価格"
+  },
   "form.label.bank-name": {
     "defaultMessage": "銀行名"
+  },
+  "form.label.business-name": {
+    "defaultMessage": "会社名"
   },
   "form.label.city": {
     "defaultMessage": "市区町村"
@@ -200,6 +215,9 @@
   "form.placeholder.address-2": {
     "defaultMessage": "マンション名・部屋番号など。"
   },
+  "form.placeholder.amount": {
+    "defaultMessage": "金額を入力"
+  },
   "form.placeholder.bank-name": {
     "defaultMessage": "銀行名を入力"
   },
@@ -229,6 +247,45 @@
   },
   "form.placeholder.state": {
     "defaultMessage": "都道府県を入力"
+  },
+  "header.category.category": {
+    "defaultMessage": "カテゴリ"
+  },
+  "header.category.feature": {
+    "defaultMessage": "機能"
+  },
+  "header.category.minecraft-server-community": {
+    "defaultMessage": "コミュニティ"
+  },
+  "header.category.minecraft-server-features": {
+    "defaultMessage": "特徴"
+  },
+  "header.category.minecraft-server-gameplay": {
+    "defaultMessage": "ゲームプレイ"
+  },
+  "header.category.minecraft-server-meta": {
+    "defaultMessage": "要素"
+  },
+  "header.category.performance-impact": {
+    "defaultMessage": "パフォーマンスへの影響"
+  },
+  "header.category.resolutions": {
+    "defaultMessage": "解像度"
+  },
+  "hosting.specs.burst": {
+    "defaultMessage": "{cpus}個のCPUに増加"
+  },
+  "hosting.specs.burst.tooltip": {
+    "defaultMessage": "CPUバースト機能により、サーバーは一時的に追加のスレッドを使用してTPSの急増を緩和できます。詳細はこちらをクリックしてください。"
+  },
+  "hosting.specs.gb-ram": {
+    "defaultMessage": "{ram}GB RAM"
+  },
+  "hosting.specs.gb-storage": {
+    "defaultMessage": "{storage}GBストレージ"
+  },
+  "hosting.specs.shared-cpus": {
+    "defaultMessage": "{cpus}個の共有されたCPU"
   },
   "icon-select.edit": {
     "defaultMessage": "アイコンを編集"
@@ -269,14 +326,104 @@
   "instance.worlds.game_mode.unknown": {
     "defaultMessage": "不明なゲームモード"
   },
+  "instances.modpack-card.unlink": {
+    "defaultMessage": "Modパックのリンク解除"
+  },
+  "instances.modpack-content-modal.back-button": {
+    "defaultMessage": "戻る"
+  },
+  "instances.modpack-content-modal.copy-link": {
+    "defaultMessage": "リンクをコピー"
+  },
+  "instances.modpack-content-modal.disable": {
+    "defaultMessage": "無効"
+  },
+  "instances.modpack-content-modal.empty-description": {
+    "defaultMessage": "このMODパックに追加コンテンツは一切含まれていません。"
+  },
+  "instances.modpack-content-modal.empty-title": {
+    "defaultMessage": "コンテンツが見つかりません"
+  },
+  "instances.modpack-content-modal.enable": {
+    "defaultMessage": "有効"
+  },
+  "instances.modpack-content-modal.filter-all": {
+    "defaultMessage": "すべて"
+  },
+  "instances.modpack-content-modal.header": {
+    "defaultMessage": "Modpackコンテンツ"
+  },
+  "instances.modpack-content-modal.loading": {
+    "defaultMessage": "コンテンツを読み込み中…"
+  },
+  "instances.modpack-content-modal.no-results": {
+    "defaultMessage": "該当するプロジェクトがありません。"
+  },
+  "instances.modpack-content-modal.search-placeholder": {
+    "defaultMessage": "{count} 件のプロジェクトを検索"
+  },
+  "instances.modpack-content-modal.selected-count": {
+    "defaultMessage": "{count} 件 選択済"
+  },
+  "instances.updater-modal.badge.current": {
+    "defaultMessage": "現在"
+  },
+  "instances.updater-modal.badge.incompatible": {
+    "defaultMessage": "互換性無し"
+  },
+  "instances.updater-modal.downgrade-to": {
+    "defaultMessage": "v{version}にダウングレード"
+  },
+  "instances.updater-modal.header": {
+    "defaultMessage": "バージョンを更新"
+  },
+  "instances.updater-modal.hide-incompatible": {
+    "defaultMessage": "非互換を非表示"
+  },
+  "instances.updater-modal.no-changelog": {
+    "defaultMessage": "このバージョンには更新履歴が提供されていません。"
+  },
+  "instances.updater-modal.no-versions": {
+    "defaultMessage": "バージョンが見つかりません"
+  },
+  "instances.updater-modal.search-placeholder": {
+    "defaultMessage": "バージョンを検索..."
+  },
+  "instances.updater-modal.select-version": {
+    "defaultMessage": "バージョンを選択して更新履歴を表示"
+  },
+  "instances.updater-modal.show-incompatible": {
+    "defaultMessage": "非互換を表示"
+  },
+  "instances.updater-modal.update-to": {
+    "defaultMessage": "v{version}に更新"
+  },
+  "instances.updater-modal.warning.app": {
+    "defaultMessage": "更新がインスタンスで安全である保証ができません。全ての中間更新ログを確認し、バックアップを検討してください。"
+  },
+  "instances.updater-modal.warning.web": {
+    "defaultMessage": "更新がワールドで安全である保証ができません。全ての中間更新ログを確認し、バックアップを検討してください。"
+  },
+  "label.actions": {
+    "defaultMessage": "アクション"
+  },
   "label.available": {
-    "defaultMessage": "{amount}つが利用可能。"
+    "defaultMessage": "{amount}が利用可能。"
+  },
+  "label.changelog": {
+    "defaultMessage": "更新履歴"
   },
   "label.changes-saved": {
     "defaultMessage": "変更が保存されました"
   },
   "label.collections": {
     "defaultMessage": "コレクション"
+  },
+  "label.confirm-password": {
+    "defaultMessage": "パスワードの確認"
+  },
+  "label.content": {
+    "defaultMessage": "コンテンツ"
   },
   "label.created-ago": {
     "defaultMessage": "{ago} に作成"
@@ -290,8 +437,20 @@
   "label.description": {
     "defaultMessage": "説明"
   },
+  "label.details": {
+    "defaultMessage": "詳細"
+  },
+  "label.email": {
+    "defaultMessage": "メールアドレス"
+  },
+  "label.email-username": {
+    "defaultMessage": "メールアドレスまたはユーザー名"
+  },
   "label.error": {
     "defaultMessage": "エラー"
+  },
+  "label.filter-by": {
+    "defaultMessage": "フィルター"
   },
   "label.followed-projects": {
     "defaultMessage": "フォロー中のプロジェクト"
@@ -301,6 +460,12 @@
   },
   "label.moderation": {
     "defaultMessage": "管理"
+  },
+  "label.no": {
+    "defaultMessage": "いいえ"
+  },
+  "label.no-items": {
+    "defaultMessage": "アイテム無し"
   },
   "label.notifications": {
     "defaultMessage": "通知"
@@ -314,17 +479,26 @@
   "label.played": {
     "defaultMessage": "プレイ済み: {time}"
   },
+  "label.project": {
+    "defaultMessage": "プロジェクト"
+  },
   "label.public": {
     "defaultMessage": "公開"
   },
   "label.rejected": {
     "defaultMessage": "却下済み"
   },
+  "label.rewards-program-terms-agreement": {
+    "defaultMessage": "<terms-link>リワードプログラム規約</terms-link>に同意します"
+  },
   "label.saved": {
     "defaultMessage": "保存済み"
   },
   "label.scopes": {
     "defaultMessage": "スコープ"
+  },
+  "label.search": {
+    "defaultMessage": "検索"
   },
   "label.server": {
     "defaultMessage": "サーバー"
@@ -338,11 +512,26 @@
   "label.singleplayer": {
     "defaultMessage": "シングルプレイ"
   },
+  "label.sort-by": {
+    "defaultMessage": "並び替え"
+  },
+  "label.success": {
+    "defaultMessage": "成功"
+  },
   "label.title": {
     "defaultMessage": "タイトル"
   },
   "label.unlisted": {
     "defaultMessage": "限定公開"
+  },
+  "label.update-available": {
+    "defaultMessage": "更新が利用可能"
+  },
+  "label.username": {
+    "defaultMessage": "ユーザー名"
+  },
+  "label.version": {
+    "defaultMessage": "バージョン"
   },
   "label.visibility": {
     "defaultMessage": "公開"
@@ -350,11 +539,38 @@
   "label.visit-your-profile": {
     "defaultMessage": "プロフィールを開く"
   },
+  "label.yes": {
+    "defaultMessage": "はい"
+  },
   "modal.add-payment-method.action": {
     "defaultMessage": "支払い方法を追加する"
   },
   "modal.add-payment-method.title": {
     "defaultMessage": "支払い方法を追加"
+  },
+  "modal.open-in-app.benefit.install": {
+    "defaultMessage": "必要なコンテンツを自動でインストールする"
+  },
+  "modal.open-in-app.benefit.launch": {
+    "defaultMessage": "ゲームを起動するとそのままサーバーに入る"
+  },
+  "modal.open-in-app.benefit.update": {
+    "defaultMessage": "サーバーが変更したときにファイルを更新し続ける"
+  },
+  "modal.open-in-app.close": {
+    "defaultMessage": "閉じる"
+  },
+  "modal.open-in-app.get-app": {
+    "defaultMessage": "Modrinth Appを入手する"
+  },
+  "modal.open-in-app.opening-automatically": {
+    "defaultMessage": "Modrinth Appが自動で開きます…"
+  },
+  "modal.open-in-app.title": {
+    "defaultMessage": "Modrinth Appを開く"
+  },
+  "modal.open-in-app.why-use": {
+    "defaultMessage": "なぜModrinthアプリを使うのか"
   },
   "notification.error.title": {
     "defaultMessage": "エラーが発生しました"
@@ -404,6 +620,9 @@
   "omorphia.component.badge.label.returned": {
     "defaultMessage": "返却済み"
   },
+  "omorphia.component.badge.label.safe": {
+    "defaultMessage": "通過"
+  },
   "omorphia.component.badge.label.scheduled": {
     "defaultMessage": "スケジュール済み"
   },
@@ -412,6 +631,9 @@
   },
   "omorphia.component.badge.label.unlisted": {
     "defaultMessage": "限定公開"
+  },
+  "omorphia.component.badge.label.unsafe": {
+    "defaultMessage": "失敗"
   },
   "omorphia.component.badge.label.withheld": {
     "defaultMessage": "非公開"
@@ -437,47 +659,17 @@
   "omorphia.component.environment-indicator.label.unsupported": {
     "defaultMessage": "対応していません"
   },
-  "omorphia.component.purchase_modal.payment_method_card_display": {
-    "defaultMessage": "末尾 {last_four} の {card_brand}"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.amazon_pay": {
+  "payment-method.amazon_pay": {
     "defaultMessage": "Amazon Pay"
   },
-  "omorphia.component.purchase_modal.payment_method_type.amex": {
+  "payment-method.amex": {
     "defaultMessage": "American Express"
   },
-  "omorphia.component.purchase_modal.payment_method_type.cashapp": {
+  "payment-method.card_display": {
+    "defaultMessage": "末尾 {last_four} の {card_brand}"
+  },
+  "payment-method.cashapp": {
     "defaultMessage": "Cash App"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.diners": {
-    "defaultMessage": "Diners Club"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.discover": {
-    "defaultMessage": "Discover"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.eftpos": {
-    "defaultMessage": "EFTPOS"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.jcb": {
-    "defaultMessage": "JCB"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.mastercard": {
-    "defaultMessage": "MasterCard"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.paypal": {
-    "defaultMessage": "PayPal"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.paypal_international": {
-    "defaultMessage": "PayPal"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.unionpay": {
-    "defaultMessage": "UnionPay"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.unknown": {
-    "defaultMessage": "Unknown payment method"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.visa": {
-    "defaultMessage": "Visa"
   },
   "payment-method.charity": {
     "defaultMessage": "寄付"
@@ -485,11 +677,38 @@
   "payment-method.charity-plural": {
     "defaultMessage": "寄付"
   },
+  "payment-method.diners": {
+    "defaultMessage": "Diners Club"
+  },
+  "payment-method.discover": {
+    "defaultMessage": "発見"
+  },
+  "payment-method.eftpos": {
+    "defaultMessage": "EFTPOS"
+  },
   "payment-method.gift-card": {
     "defaultMessage": "ギフトカード"
   },
   "payment-method.gift-card-plural": {
     "defaultMessage": "ギフトカード"
+  },
+  "payment-method.jcb": {
+    "defaultMessage": "JCB"
+  },
+  "payment-method.mastercard": {
+    "defaultMessage": "MasterCard"
+  },
+  "payment-method.paypal": {
+    "defaultMessage": "PayPal"
+  },
+  "payment-method.paypal_international": {
+    "defaultMessage": "PayPal"
+  },
+  "payment-method.unionpay": {
+    "defaultMessage": "UnionPay"
+  },
+  "payment-method.unknown": {
+    "defaultMessage": "不明な支払い方法"
   },
   "payment-method.venmo": {
     "defaultMessage": "Venmo"
@@ -499,6 +718,21 @@
   },
   "payment-method.virtual-visa-plural": {
     "defaultMessage": "バーチャル Visa"
+  },
+  "payment-method.visa": {
+    "defaultMessage": "Visa"
+  },
+  "project-card.environment.client": {
+    "defaultMessage": "クライアント"
+  },
+  "project-card.environment.client-and-server": {
+    "defaultMessage": "クライアントとサーバー"
+  },
+  "project-card.environment.client-or-server": {
+    "defaultMessage": "クライアントまたはサーバー"
+  },
+  "project-card.environment.server": {
+    "defaultMessage": "サーバー"
   },
   "project-type.all": {
     "defaultMessage": "すべて"
@@ -513,22 +747,22 @@
     "defaultMessage": "データパック"
   },
   "project-type.mod.capital": {
-    "defaultMessage": "モッド"
+    "defaultMessage": "{count, plural, other{#個のMod}}"
   },
   "project-type.mod.category": {
-    "defaultMessage": "モッド"
+    "defaultMessage": "MOD"
   },
   "project-type.mod.lowercase": {
-    "defaultMessage": "モッド"
+    "defaultMessage": "{count, plural, other{#個のMod}}"
   },
   "project-type.modpack.capital": {
-    "defaultMessage": "モッドパック"
+    "defaultMessage": "{count}個のMODパック"
   },
   "project-type.modpack.category": {
-    "defaultMessage": "モッドパック"
+    "defaultMessage": "MODパック"
   },
   "project-type.modpack.lowercase": {
-    "defaultMessage": "モッドパック"
+    "defaultMessage": "{count}個のMODパック"
   },
   "project-type.plugin.capital": {
     "defaultMessage": "プラグイン"
@@ -537,7 +771,16 @@
     "defaultMessage": "プラグイン"
   },
   "project-type.plugin.lowercase": {
-    "defaultMessage": "プラグイン"
+    "defaultMessage": "{count}個のプラグイン"
+  },
+  "project-type.project.capital": {
+    "defaultMessage": "{count}個のプロジェクト"
+  },
+  "project-type.project.category": {
+    "defaultMessage": "プロジェクト"
+  },
+  "project-type.project.lowercase": {
+    "defaultMessage": "{count}個のプロジェクト"
   },
   "project-type.resourcepack.capital": {
     "defaultMessage": "リソースパック"
@@ -547,6 +790,15 @@
   },
   "project-type.resourcepack.lowercase": {
     "defaultMessage": "リソースパック"
+  },
+  "project-type.server.capital": {
+    "defaultMessage": "{count, plural,one {台のサーバー}other {台のサーバー}}"
+  },
+  "project-type.server.category": {
+    "defaultMessage": "サーバー"
+  },
+  "project-type.server.lowercase": {
+    "defaultMessage": "{count, plural,one {台のサーバー}other {台のサーバー}}"
   },
   "project-type.shader.capital": {
     "defaultMessage": "シェーダー"
@@ -567,19 +819,19 @@
     "defaultMessage": "クライアント側"
   },
   "project.about.compatibility.environments.dedicated-servers-only": {
-    "defaultMessage": "専用サーバー側のみ"
+    "defaultMessage": "専用サーバーのみ"
   },
   "project.about.compatibility.environments.server-side": {
     "defaultMessage": "サーバー側"
   },
   "project.about.compatibility.environments.singleplayer": {
-    "defaultMessage": "シングルプレイ"
+    "defaultMessage": "シングルプレイヤー"
   },
   "project.about.compatibility.environments.singleplayer-only": {
-    "defaultMessage": "シングルプレイのみ"
+    "defaultMessage": "シングルプレイヤー専用"
   },
   "project.about.compatibility.game.minecraftJava": {
-    "defaultMessage": "マインクラフト:Java Edition"
+    "defaultMessage": "Minecraft: Java Edition"
   },
   "project.about.compatibility.platforms": {
     "defaultMessage": "プラットフォーム"
@@ -594,7 +846,7 @@
     "defaultMessage": "クリエイター"
   },
   "project.about.details.created": {
-    "defaultMessage": "{date} に作成"
+    "defaultMessage": "{date}に作成"
   },
   "project.about.details.licensed": {
     "defaultMessage": "ライセンス: {license}"
@@ -603,10 +855,7 @@
     "defaultMessage": "{date} に公開"
   },
   "project.about.details.submitted": {
-    "defaultMessage": "決定時刻: {date}"
-  },
-  "project.about.details.title": {
-    "defaultMessage": "詳細"
+    "defaultMessage": "提出時刻: {date}"
   },
   "project.about.details.updated": {
     "defaultMessage": "{date} に更新"
@@ -635,8 +884,14 @@
   "project.about.links.issues": {
     "defaultMessage": "問題を報告"
   },
+  "project.about.links.site": {
+    "defaultMessage": "ウェブサイトを閲覧する"
+  },
   "project.about.links.source": {
     "defaultMessage": "ソースを見る"
+  },
+  "project.about.links.store": {
+    "defaultMessage": "ストアページに訪れる"
   },
   "project.about.links.title": {
     "defaultMessage": "リンク"
@@ -644,8 +899,104 @@
   "project.about.links.wiki": {
     "defaultMessage": "ウィキを訪問する"
   },
+  "project.about.server.copied": {
+    "defaultMessage": "コピーしました！"
+  },
+  "project.about.server.copiedText": {
+    "defaultMessage": "IPアドレスをクリップボードにコピーしました"
+  },
+  "project.about.server.latency": {
+    "defaultMessage": "遅延"
+  },
+  "project.about.server.title": {
+    "defaultMessage": "サーバーの詳細"
+  },
+  "project.download-count-tooltip": {
+    "defaultMessage": "{count}件のダウンロード"
+  },
+  "project.environment.client-and-server.description": {
+    "defaultMessage": "部分的ではありますが、クライアント側とサーバー側の両方にいくつかの機能があります。"
+  },
+  "project.environment.client-and-server.title": {
+    "defaultMessage": "クライアント側とサーバー側の両方で必要"
+  },
+  "project.environment.client-only-server-optional.description": {
+    "defaultMessage": "部分的ではありますが、クライアント側とサーバー側の両方にいくつかの機能があります。"
+  },
+  "project.environment.client-only-server-optional.title": {
+    "defaultMessage": "クライアントとサーバー、サーバー側ではオプション"
+  },
+  "project.environment.client-only.description": {
+    "defaultMessage": "全ての機能はクライアント側で実行され、バニラサーバーと互換性があります。"
+  },
+  "project.environment.client-only.title": {
+    "defaultMessage": "クライアント側のみ"
+  },
+  "project.environment.client-or-server-prefers-both.description": {
+    "defaultMessage": "部分的ではありますが、クライアント側とサーバー側の両方にいくつかの機能があります。"
+  },
+  "project.environment.client-or-server-prefers-both.title": {
+    "defaultMessage": "クライアントとサーバー、両方にインストールするのが最適"
+  },
+  "project.environment.client-or-server.description": {
+    "defaultMessage": "部分的ではありますが、クライアント側とサーバー側の両方にいくつかの機能があります。"
+  },
+  "project.environment.client-or-server.title": {
+    "defaultMessage": "クライアントとサーバー、双方でオプション"
+  },
+  "project.environment.dedicated-server-only.description": {
+    "defaultMessage": "全ての機能はサーバー側で実行され、バニラクライアントと互換性があります。"
+  },
+  "project.environment.dedicated-server-only.title": {
+    "defaultMessage": "サーバー側のみ"
+  },
+  "project.environment.server-only-client-optional.description": {
+    "defaultMessage": "部分的ではありますが、クライアント側とサーバー側の両方にいくつかの機能があります。"
+  },
+  "project.environment.server-only-client-optional.title": {
+    "defaultMessage": "クライアントとサーバー、クライアント側ではオプション"
+  },
+  "project.environment.server-only.description": {
+    "defaultMessage": "全ての機能はサーバー側で実行され、バニラクライアントと互換性があります。"
+  },
+  "project.environment.server-only.title": {
+    "defaultMessage": "サーバー側のみ、シングルプレイヤーでも動作します"
+  },
+  "project.environment.singleplayer-only.description": {
+    "defaultMessage": "シングルプレイヤーまたはマルチプレイヤーサーバーに接続されていないときに機能します。"
+  },
+  "project.environment.singleplayer-only.title": {
+    "defaultMessage": "シングルプレイのみ"
+  },
+  "project.environment.tag.not-applicable": {
+    "defaultMessage": "該当なし"
+  },
+  "project.environment.tag.unknown": {
+    "defaultMessage": "不明"
+  },
+  "project.environment.unknown.description": {
+    "defaultMessage": "このバージョンの環境を特定できませんでした。"
+  },
+  "project.environment.unknown.title": {
+    "defaultMessage": "不明な環境"
+  },
+  "project.follower-count-tooltip": {
+    "defaultMessage": "{count}件のフォロワー"
+  },
+  "project.online-player-count": {
+    "defaultMessage": "{count} {count, plural, one {online} other {online}}"
+  },
+  "project.recent-plays": {
+    "defaultMessage": "{count} {count, plural, one {recent play} other {recent plays}}"
+  },
+  "project.server.ping.ms": {
+    "defaultMessage": "{ping} ms"
+  },
   "project.settings.analytics.title": {
     "defaultMessage": "統計"
+  },
+  "project.settings.content.title": {
+    "defaultMessage": "コンテンツ"
   },
   "project.settings.description.title": {
     "defaultMessage": "概要"
@@ -677,6 +1028,30 @@
   "project.settings.environment.client_only.title": {
     "defaultMessage": "クライアント側のみ"
   },
+  "project.settings.environment.notice.missing-env.description": {
+    "defaultMessage": "プロジェクトに環境メタデータがありません。以下の適切なものを選択してください。"
+  },
+  "project.settings.environment.notice.missing-env.title": {
+    "defaultMessage": "プロジェクトの環境を選択して下さい。"
+  },
+  "project.settings.environment.notice.multiple-environments.description": {
+    "defaultMessage": "プロジェクトの異なるバージョンでは異なる環境が選択されているので、現時点では共通に編集することはできません。"
+  },
+  "project.settings.environment.notice.multiple-environments.title": {
+    "defaultMessage": "プロジェクトに複数の環境があります。"
+  },
+  "project.settings.environment.notice.review-options.description": {
+    "defaultMessage": "Modrinthの環境システムを刷新し、新しいオプションがご利用いただけるようになりました。以下のオプションが正しく選択されていることを確認し「確認」ボタンを押してください！"
+  },
+  "project.settings.environment.notice.review-options.title": {
+    "defaultMessage": "以下のオプションを確認してください"
+  },
+  "project.settings.environment.notice.wrong-project-type.description": {
+    "defaultMessage": "環境メタデータを持つことはできるのはmodまたはmodpackのみです。"
+  },
+  "project.settings.environment.notice.wrong-project-type.title": {
+    "defaultMessage": "このプロジェクトの種類は環境メタデータをサポートしていません"
+  },
   "project.settings.environment.server_only.dedicated_only.title": {
     "defaultMessage": "専用サーバー側のみ"
   },
@@ -704,6 +1079,12 @@
   "project.settings.environment.title": {
     "defaultMessage": "動作環境"
   },
+  "project.settings.environment.verification.verify-button": {
+    "defaultMessage": "確認"
+  },
+  "project.settings.environment.verification.verify-text": {
+    "defaultMessage": "このプロジェクトの環境が正しくセットされていることを確認してください。"
+  },
   "project.settings.gallery.title": {
     "defaultMessage": "ギャラリー"
   },
@@ -724,6 +1105,9 @@
   },
   "project.settings.notice.no-permission.title": {
     "defaultMessage": "権限なし"
+  },
+  "project.settings.server.title": {
+    "defaultMessage": "サーバー"
   },
   "project.settings.tags.title": {
     "defaultMessage": "タグ"
@@ -791,6 +1175,21 @@
   "search.filter.locked.default.unlock": {
     "defaultMessage": "フィルターを解除"
   },
+  "search.filter.option.exclusion.add.tooltip": {
+    "defaultMessage": "除外"
+  },
+  "search.filter.option.search.clear.aria_label": {
+    "defaultMessage": "検索をクリア"
+  },
+  "search.filter.option.search.placeholder": {
+    "defaultMessage": "検索…"
+  },
+  "search.filter.option.show_fewer": {
+    "defaultMessage": "表示を減らす"
+  },
+  "search.filter.option.show_more": {
+    "defaultMessage": "さらに表示"
+  },
   "search.filter_type.environment": {
     "defaultMessage": "環境"
   },
@@ -829,6 +1228,39 @@
   },
   "search.filter_type.shader_loader": {
     "defaultMessage": "ローダー"
+  },
+  "servers.backups.item.auto": {
+    "defaultMessage": "自動"
+  },
+  "servers.backups.item.backup-schedule": {
+    "defaultMessage": "バックアップスケジュール"
+  },
+  "servers.backups.item.creating-backup": {
+    "defaultMessage": "バックアップを作成中…"
+  },
+  "servers.backups.item.failed-to-create-backup": {
+    "defaultMessage": "バックアップの作成に失敗しました"
+  },
+  "servers.backups.item.failed-to-restore-backup": {
+    "defaultMessage": "バックアップからの復元に失敗しました"
+  },
+  "servers.backups.item.manual-backup": {
+    "defaultMessage": "手動バックアップ"
+  },
+  "servers.backups.item.queued-for-backup": {
+    "defaultMessage": "バックアップがキューに追加されました"
+  },
+  "servers.backups.item.queued-for-restore": {
+    "defaultMessage": "キューに追加されたものを復元する"
+  },
+  "servers.backups.item.rename": {
+    "defaultMessage": "リネーム"
+  },
+  "servers.backups.item.restore": {
+    "defaultMessage": "修復"
+  },
+  "servers.backups.item.restoring-backup": {
+    "defaultMessage": "バックアップから修復…"
   },
   "servers.notice.dismiss": {
     "defaultMessage": "閉じる"
@@ -876,10 +1308,10 @@
     "defaultMessage": "始めましょう"
   },
   "servers.purchase.step.plan.large.desc": {
-    "defaultMessage": "15~25人、modpackや重いmodを導入するなら最適"
+    "defaultMessage": "15~25人、MODパックや重いMODを導入するなら最適"
   },
   "servers.purchase.step.plan.medium.desc": {
-    "defaultMessage": "6~15人、複数のmodを導入するなら最適"
+    "defaultMessage": "6~15人、複数のMODを導入するなら最適"
   },
   "servers.purchase.step.plan.most-popular": {
     "defaultMessage": "最人気"
@@ -891,7 +1323,7 @@
     "defaultMessage": "プランを選択"
   },
   "servers.purchase.step.plan.small.desc": {
-    "defaultMessage": "1~5人、軽量なmodをいくつかに最適"
+    "defaultMessage": "1~5人、軽量なMODをいくつかに最適"
   },
   "servers.purchase.step.plan.subtitle": {
     "defaultMessage": "利用法に合ったRAM容量とスペックを選択してください。"
@@ -918,7 +1350,7 @@
     "defaultMessage": "サーバーをどこに設置しますか？"
   },
   "servers.region.region-unsupported": {
-    "defaultMessage": "リストにない地域ですか？<link>Modrinthサーバーを次のどこに設置したいかお知らせください。</link>"
+    "defaultMessage": "ご希望の地域が見つかりませんか？ <link>Modrinth Hostingを利用したい場所をお知らせください！</link>"
   },
   "servers.region.southeast-asia": {
     "defaultMessage": "東南アジア"
@@ -968,8 +1400,35 @@
   "settings.display.theme.title": {
     "defaultMessage": "カラーテーマ"
   },
+  "settings.language.categories.default": {
+    "defaultMessage": "一般的な言語"
+  },
+  "settings.language.categories.search-result": {
+    "defaultMessage": "検索結果"
+  },
+  "settings.language.description": {
+    "defaultMessage": "{platform}で使用する言語を選択してください。翻訳は<crowdin-link>Crowdin</crowdin-link>のボランティアによって提供されています。"
+  },
+  "settings.language.languages.search-field.placeholder": {
+    "defaultMessage": "言語を検索..."
+  },
+  "settings.language.languages.search-results-announcement": {
+    "defaultMessage": "検索条件に一致する{matches, plural, =0 {言語が見つかりませんでした} other {、#つの言語が見つかりました}}。"
+  },
+  "settings.language.languages.search.no-results": {
+    "defaultMessage": "検索条件に一致する言語はありませんでした"
+  },
+  "settings.language.platform.app": {
+    "defaultMessage": "アプリ"
+  },
+  "settings.language.platform.site": {
+    "defaultMessage": "サイト"
+  },
   "settings.language.title": {
     "defaultMessage": "言語"
+  },
+  "settings.language.warning": {
+    "defaultMessage": "{platform}の言語を変更すると、翻訳が利用可能でない場合にいくつかの内容が英語で表示される場合があります。{platform}はまだ完全に翻訳されていないので、一部の言語でいくつかの内容が英語のままになる場合があります。"
   },
   "settings.pats.title": {
     "defaultMessage": "個人用アクセストークン"
@@ -979,6 +1438,429 @@
   },
   "settings.sessions.title": {
     "defaultMessage": "セッション"
+  },
+  "tag.category.128x": {
+    "defaultMessage": "128x"
+  },
+  "tag.category.16x": {
+    "defaultMessage": "16x"
+  },
+  "tag.category.256x": {
+    "defaultMessage": "256x"
+  },
+  "tag.category.32x": {
+    "defaultMessage": "32x"
+  },
+  "tag.category.48x": {
+    "defaultMessage": "48x"
+  },
+  "tag.category.512x+": {
+    "defaultMessage": "512x以上"
+  },
+  "tag.category.64x": {
+    "defaultMessage": "64x"
+  },
+  "tag.category.8x-": {
+    "defaultMessage": "8x以下"
+  },
+  "tag.category.adventure": {
+    "defaultMessage": "アドベンチャー"
+  },
+  "tag.category.adventure-mode": {
+    "defaultMessage": "アドベンチャーモード"
+  },
+  "tag.category.anarchy": {
+    "defaultMessage": "アナーキー"
+  },
+  "tag.category.atmosphere": {
+    "defaultMessage": "アトモスフィア"
+  },
+  "tag.category.audio": {
+    "defaultMessage": "オーディオ"
+  },
+  "tag.category.battle-royale": {
+    "defaultMessage": "バトルロイヤル"
+  },
+  "tag.category.bedwars": {
+    "defaultMessage": "ベッドウォーズ"
+  },
+  "tag.category.blocks": {
+    "defaultMessage": "ブロック"
+  },
+  "tag.category.bloom": {
+    "defaultMessage": "光彩"
+  },
+  "tag.category.bosses": {
+    "defaultMessage": "ボス"
+  },
+  "tag.category.cartoon": {
+    "defaultMessage": "カートゥーン"
+  },
+  "tag.category.challenging": {
+    "defaultMessage": "高難易度"
+  },
+  "tag.category.classes": {
+    "defaultMessage": "クラス"
+  },
+  "tag.category.colored-lighting": {
+    "defaultMessage": "カラーライティング"
+  },
+  "tag.category.combat": {
+    "defaultMessage": "戦闘"
+  },
+  "tag.category.competitive": {
+    "defaultMessage": "競技"
+  },
+  "tag.category.core-shaders": {
+    "defaultMessage": "シェーダー本体"
+  },
+  "tag.category.creative-mode": {
+    "defaultMessage": "クリエイティブモード"
+  },
+  "tag.category.creator-community": {
+    "defaultMessage": "クリエイターコミュニティ"
+  },
+  "tag.category.crossplay": {
+    "defaultMessage": "クロスプレイ"
+  },
+  "tag.category.cursed": {
+    "defaultMessage": "奇妙"
+  },
+  "tag.category.custom-content": {
+    "defaultMessage": "カスタムコンテンツ"
+  },
+  "tag.category.decoration": {
+    "defaultMessage": "装飾"
+  },
+  "tag.category.dungeons": {
+    "defaultMessage": "ダンジョン"
+  },
+  "tag.category.economy": {
+    "defaultMessage": "経済"
+  },
+  "tag.category.entities": {
+    "defaultMessage": "エンティティ"
+  },
+  "tag.category.environment": {
+    "defaultMessage": "環境"
+  },
+  "tag.category.equipment": {
+    "defaultMessage": "装備"
+  },
+  "tag.category.factions": {
+    "defaultMessage": "覇権争い"
+  },
+  "tag.category.fantasy": {
+    "defaultMessage": "ファンタジー"
+  },
+  "tag.category.foliage": {
+    "defaultMessage": "植物"
+  },
+  "tag.category.fonts": {
+    "defaultMessage": "フォント"
+  },
+  "tag.category.food": {
+    "defaultMessage": "食べ物"
+  },
+  "tag.category.game-mechanics": {
+    "defaultMessage": "ゲームシステム"
+  },
+  "tag.category.gens": {
+    "defaultMessage": "Gens"
+  },
+  "tag.category.gui": {
+    "defaultMessage": "GUI"
+  },
+  "tag.category.hardcore-mode": {
+    "defaultMessage": "ハードコアモード"
+  },
+  "tag.category.high": {
+    "defaultMessage": "高負荷"
+  },
+  "tag.category.items": {
+    "defaultMessage": "アイテム"
+  },
+  "tag.category.keep-inventory": {
+    "defaultMessage": "キープインベントリ"
+  },
+  "tag.category.kitchen-sink": {
+    "defaultMessage": "総合"
+  },
+  "tag.category.kitpvp": {
+    "defaultMessage": "Kit PVP"
+  },
+  "tag.category.library": {
+    "defaultMessage": "前提MOD"
+  },
+  "tag.category.lifesteal": {
+    "defaultMessage": "ライフスティール"
+  },
+  "tag.category.lightweight": {
+    "defaultMessage": "軽量"
+  },
+  "tag.category.locale": {
+    "defaultMessage": "翻訳"
+  },
+  "tag.category.low": {
+    "defaultMessage": "軽量"
+  },
+  "tag.category.magic": {
+    "defaultMessage": "魔術"
+  },
+  "tag.category.management": {
+    "defaultMessage": "管理"
+  },
+  "tag.category.media": {
+    "defaultMessage": "メディア"
+  },
+  "tag.category.medium": {
+    "defaultMessage": "標準"
+  },
+  "tag.category.microgames": {
+    "defaultMessage": "マイクロゲーム"
+  },
+  "tag.category.minigame": {
+    "defaultMessage": "ミニゲーム"
+  },
+  "tag.category.minigames": {
+    "defaultMessage": "ミニゲーム"
+  },
+  "tag.category.mmo": {
+    "defaultMessage": "MMO"
+  },
+  "tag.category.mobs": {
+    "defaultMessage": "モブ"
+  },
+  "tag.category.modded": {
+    "defaultMessage": "MOD向け"
+  },
+  "tag.category.models": {
+    "defaultMessage": "モデル"
+  },
+  "tag.category.multiplayer": {
+    "defaultMessage": "マルチプレイヤー"
+  },
+  "tag.category.network": {
+    "defaultMessage": "ネットワーク"
+  },
+  "tag.category.offline-mode": {
+    "defaultMessage": "オフラインモード"
+  },
+  "tag.category.oneblock": {
+    "defaultMessage": "ワンブロック"
+  },
+  "tag.category.op": {
+    "defaultMessage": "OP"
+  },
+  "tag.category.optimization": {
+    "defaultMessage": "最適化"
+  },
+  "tag.category.parkour": {
+    "defaultMessage": "アスレチック"
+  },
+  "tag.category.path-tracing": {
+    "defaultMessage": "パストレーシング"
+  },
+  "tag.category.pbr": {
+    "defaultMessage": "PBR"
+  },
+  "tag.category.personal-worlds": {
+    "defaultMessage": "個人世界"
+  },
+  "tag.category.plots": {
+    "defaultMessage": "プロット"
+  },
+  "tag.category.pokemon": {
+    "defaultMessage": "ポケモン"
+  },
+  "tag.category.potato": {
+    "defaultMessage": "低負荷"
+  },
+  "tag.category.prison": {
+    "defaultMessage": "刑務所"
+  },
+  "tag.category.pve": {
+    "defaultMessage": "PVE"
+  },
+  "tag.category.pvp": {
+    "defaultMessage": "PVP"
+  },
+  "tag.category.questing": {
+    "defaultMessage": "クエスト"
+  },
+  "tag.category.quests": {
+    "defaultMessage": "クエスト"
+  },
+  "tag.category.racing": {
+    "defaultMessage": "レース"
+  },
+  "tag.category.realistic": {
+    "defaultMessage": "現実的"
+  },
+  "tag.category.recording-smp": {
+    "defaultMessage": "Recording SMP"
+  },
+  "tag.category.reflections": {
+    "defaultMessage": "反射"
+  },
+  "tag.category.roleplay": {
+    "defaultMessage": "ロールプレイ"
+  },
+  "tag.category.rpg": {
+    "defaultMessage": "RPG"
+  },
+  "tag.category.screenshot": {
+    "defaultMessage": "スクリーンショット"
+  },
+  "tag.category.semi-realistic": {
+    "defaultMessage": "半現実的"
+  },
+  "tag.category.shadows": {
+    "defaultMessage": "影"
+  },
+  "tag.category.simplistic": {
+    "defaultMessage": "単純"
+  },
+  "tag.category.skyblock": {
+    "defaultMessage": "スカイブロック"
+  },
+  "tag.category.smp": {
+    "defaultMessage": "SMP"
+  },
+  "tag.category.social": {
+    "defaultMessage": "ソーシャル"
+  },
+  "tag.category.storage": {
+    "defaultMessage": "ストレージ"
+  },
+  "tag.category.survival-mode": {
+    "defaultMessage": "サバイバルモード"
+  },
+  "tag.category.teams": {
+    "defaultMessage": "チーム"
+  },
+  "tag.category.technical": {
+    "defaultMessage": "技術"
+  },
+  "tag.category.technology": {
+    "defaultMessage": "技術"
+  },
+  "tag.category.themed": {
+    "defaultMessage": "テーマ別"
+  },
+  "tag.category.towns": {
+    "defaultMessage": "街"
+  },
+  "tag.category.transportation": {
+    "defaultMessage": "運送"
+  },
+  "tag.category.tweaks": {
+    "defaultMessage": "調整"
+  },
+  "tag.category.utility": {
+    "defaultMessage": "ユーティリティ"
+  },
+  "tag.category.vanilla-like": {
+    "defaultMessage": "バニラ風"
+  },
+  "tag.category.whitelisted": {
+    "defaultMessage": "ホワイトリスト登録済み"
+  },
+  "tag.category.world-resets": {
+    "defaultMessage": "ワールドリセット"
+  },
+  "tag.category.worldgen": {
+    "defaultMessage": "ワールド生成"
+  },
+  "tag.loader.babric": {
+    "defaultMessage": ""
+  },
+  "tag.loader.bta-babric": {
+    "defaultMessage": "BTA (Babric)"
+  },
+  "tag.loader.bukkit": {
+    "defaultMessage": "Bukkit"
+  },
+  "tag.loader.bungeecord": {
+    "defaultMessage": "BungeeCord"
+  },
+  "tag.loader.canvas": {
+    "defaultMessage": "Canvas"
+  },
+  "tag.loader.datapack": {
+    "defaultMessage": "データパック"
+  },
+  "tag.loader.fabric": {
+    "defaultMessage": "Fabric"
+  },
+  "tag.loader.folia": {
+    "defaultMessage": "Folia"
+  },
+  "tag.loader.forge": {
+    "defaultMessage": "Forge"
+  },
+  "tag.loader.geyser": {
+    "defaultMessage": "Geyser拡張機能"
+  },
+  "tag.loader.iris": {
+    "defaultMessage": "Iris"
+  },
+  "tag.loader.java-agent": {
+    "defaultMessage": "Java Agent"
+  },
+  "tag.loader.legacy-fabric": {
+    "defaultMessage": "Legacy Fabric"
+  },
+  "tag.loader.liteloader": {
+    "defaultMessage": "LiteLoader"
+  },
+  "tag.loader.minecraft": {
+    "defaultMessage": "リソースパック"
+  },
+  "tag.loader.modloader": {
+    "defaultMessage": "Risugami's ModLoader"
+  },
+  "tag.loader.mrpack": {
+    "defaultMessage": "MODパック"
+  },
+  "tag.loader.neoforge": {
+    "defaultMessage": "NeoForge"
+  },
+  "tag.loader.nilloader": {
+    "defaultMessage": "NilLoader"
+  },
+  "tag.loader.optifine": {
+    "defaultMessage": "OptiFine"
+  },
+  "tag.loader.ornithe": {
+    "defaultMessage": "Ornithe"
+  },
+  "tag.loader.paper": {
+    "defaultMessage": "Paper"
+  },
+  "tag.loader.purpur": {
+    "defaultMessage": "Purpur"
+  },
+  "tag.loader.quilt": {
+    "defaultMessage": "Quilt"
+  },
+  "tag.loader.rift": {
+    "defaultMessage": "Rift"
+  },
+  "tag.loader.spigot": {
+    "defaultMessage": "Spigot"
+  },
+  "tag.loader.sponge": {
+    "defaultMessage": "Sponge"
+  },
+  "tag.loader.vanilla": {
+    "defaultMessage": "Vanilla Shader"
+  },
+  "tag.loader.velocity": {
+    "defaultMessage": "Velocity"
+  },
+  "tag.loader.waterfall": {
+    "defaultMessage": "Waterfall"
   },
   "tooltip.date-at-time": {
     "defaultMessage": "{date, date, long} {time, time, short}"

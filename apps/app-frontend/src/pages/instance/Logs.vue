@@ -209,6 +209,10 @@ const props = defineProps({
 			return {}
 		},
 	},
+	openSettings: {
+		type: Function,
+		default: null,
+	},
 	options: {
 		type: Object,
 		default() {
@@ -238,6 +242,8 @@ const props = defineProps({
 		},
 	},
 })
+
+defineEmits(['play', 'stop'])
 
 const currentLiveLog = ref(null)
 const currentLiveLogCursor = ref(0)

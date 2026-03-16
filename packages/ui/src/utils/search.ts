@@ -120,15 +120,42 @@ export function useSearch(
 	const query = ref('')
 	const maxResults = ref(20)
 
+	const { formatMessage } = useVIntl()
+	const sortMessages = {
+		relevance: defineMessage({
+			id: 'search.sort.relevance',
+			defaultMessage: 'Relevance',
+		}),
+		downloads: defineMessage({
+			id: 'search.sort.downloads',
+			defaultMessage: 'Downloads',
+		}),
+		followers: defineMessage({
+			id: 'search.sort.followers',
+			defaultMessage: 'Followers',
+		}),
+		datePublished: defineMessage({
+			id: 'search.sort.date-published',
+			defaultMessage: 'Date published',
+		}),
+		dateUpdated: defineMessage({
+			id: 'search.sort.date-updated',
+			defaultMessage: 'Date updated',
+		}),
+	}
+
 	const sortTypes: readonly SortType[] = readonly([
-		{ display: 'Relevance', name: 'relevance' },
-		{ display: 'Downloads', name: 'downloads' },
-		{ display: 'Followers', name: 'follows' },
-		{ display: 'Date published', name: 'newest' },
-		{ display: 'Date updated', name: 'updated' },
+		{ display: formatMessage(sortMessages.relevance), name: 'relevance' },
+		{ display: formatMessage(sortMessages.downloads), name: 'downloads' },
+		{ display: formatMessage(sortMessages.followers), name: 'follows' },
+		{ display: formatMessage(sortMessages.datePublished), name: 'newest' },
+		{ display: formatMessage(sortMessages.dateUpdated), name: 'updated' },
 	])
 
-	const currentSortType: Ref<SortType> = ref({ name: 'relevance', display: 'Relevance' })
+	const currentSortType: Ref<SortType> = ref({
+		name: 'relevance',
+		display: formatMessage(sortMessages.relevance),
+	})
 
 	const route = useRoute()
 	const currentPage = ref(1)
@@ -136,8 +163,6 @@ export function useSearch(
 	const currentFilters: Ref<FilterValue[]> = ref<FilterValue[]>([])
 	const toggledGroups = ref<string[]>([])
 	const overriddenProvidedFilterTypes = ref<string[]>([])
-
-	const { formatMessage } = useVIntl()
 
 	const filters = computed(() => {
 		const categoryFilters: Record<string, FilterType> = {}

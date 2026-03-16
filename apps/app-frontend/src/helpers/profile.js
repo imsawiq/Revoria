@@ -57,6 +57,29 @@ export async function get_projects(path, cacheBehaviour) {
 	return await invoke('plugin:profile|profile_get_projects', { path, cacheBehaviour })
 }
 
+export async function get_installed_project_ids(path) {
+	return await invoke('plugin:profile|profile_get_installed_project_ids', { path })
+}
+
+export async function get_content_items(path, cacheBehaviour) {
+	return await invoke('plugin:profile|profile_get_content_items', { path, cacheBehaviour })
+}
+
+export async function get_linked_modpack_info(path, cacheBehaviour) {
+	return await invoke('plugin:profile|profile_get_linked_modpack_info', { path, cacheBehaviour })
+}
+
+export async function get_linked_modpack_content(path, cacheBehaviour) {
+	return await invoke('plugin:profile|profile_get_linked_modpack_content', { path, cacheBehaviour })
+}
+
+export async function get_dependencies_as_content_items(dependencies, cacheBehaviour) {
+	return await invoke('plugin:profile|profile_get_dependencies_as_content_items', {
+		dependencies,
+		cacheBehaviour,
+	})
+}
+
 // Get a profile's full fs path
 // Returns a path
 export async function get_full_path(path) {
@@ -83,6 +106,21 @@ export async function list() {
 
 export async function check_installed(path, projectId) {
 	return await invoke('plugin:profile|profile_check_installed', { path, projectId })
+}
+
+export async function check_installed_batch(projectId) {
+	const profiles = await list()
+	const results = await Promise.all(
+		profiles.map(async (profile) => {
+			try {
+				const installed = await check_installed(profile.path, projectId)
+				return [profile.path, installed]
+			} catch {
+				return [profile.path, false]
+			}
+		}),
+	)
+	return Object.fromEntries(results)
 }
 
 // Installs/Repairs a profile

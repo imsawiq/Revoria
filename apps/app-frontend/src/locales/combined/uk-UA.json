@@ -1,0 +1,5666 @@
+{
+  "instance.create.type.from-file": {
+    "message": "з файлу"
+  },
+  "tag.category.environment": {
+    "defaultMessage": "Навколишнє середовище"
+  },
+  "nags.summary-same-as-title.description": {
+    "defaultMessage": "Ваше резюме не може збігатися з назвою вашого проекту. Важливо створити інформативне та привабливе резюме."
+  },
+  "affiliate.create.title.label": {
+    "defaultMessage": "Назва партнерського посилання"
+  },
+  "instance.settings.tabs.java.java-memory": {
+    "message": "Виділена пам'ять"
+  },
+  "creation-flow.final.game-version.label": {
+    "defaultMessage": "Ігрова версія"
+  },
+  "project-type.shader.lowercase": {
+    "defaultMessage": "{count, plural, one {shader} other {shaders}}"
+  },
+  "project.coming-soon": {
+    "message": "Скоро буде"
+  },
+  "label.followed-projects": {
+    "defaultMessage": "Стежив за проектами"
+  },
+  "settings.default-instance.pre-launch.title": {
+    "message": "Перед запуском"
+  },
+  "creation-flow.custom.snapshots.show": {
+    "defaultMessage": "Показати всі версії"
+  },
+  "button.edit": {
+    "defaultMessage": "Редагувати"
+  },
+  "locale.sr-CS": {
+    "defaultMessage": "сербська (латиниця)"
+  },
+  "hosting.content.failed-to-toggle": {
+    "defaultMessage": "Не вдалося перемкнути {name}"
+  },
+  "form.placeholder.business-name": {
+    "defaultMessage": "Введіть назву підприємства"
+  },
+  "instance.settings.tabs.installation.change-version.button.install": {
+    "message": "встановити"
+  },
+  "instance.mods.action.update": {
+    "message": "оновлення"
+  },
+  "tag.category.recording-smp": {
+    "defaultMessage": "Запис SMP"
+  },
+  "home.jump-back-in": {
+    "message": "Застрибнути назад"
+  },
+  "skins.action.save-skin": {
+    "message": "Збережіть шкіру"
+  },
+  "instance.settings.tabs.installation.repair.confirm.description": {
+    "message": "Відновлення перевстановлює залежності Minecraft і перевіряє наявність пошкоджень. Це може вирішити проблеми, якщо ваша гра не запускається через помилки, пов’язані з програмою запуску, але не вирішить проблеми чи збої, пов’язані з установленими модами."
+  },
+  "error-modal.no-loader-repair-text": {
+    "message": "Щоб вирішити цю проблему, потрібно відремонтувати примірник. Для цього натисніть кнопку нижче."
+  },
+  "maintenance.action.clean": {
+    "message": "чистий"
+  },
+  "creation-flow.import.detecting": {
+    "defaultMessage": "Виявлення екземплярів програми запуску..."
+  },
+  "project.settings.environment.client_and_server.description": {
+    "defaultMessage": "Має певну функціональність як на клієнті, так і на сервері, навіть якщо лише частково."
+  },
+  "add-content-button.add-from-file": {
+    "message": "Додати з файлу"
+  },
+  "project-type.datapack.category": {
+    "defaultMessage": "Пакети даних"
+  },
+  "installation-settings.search-game-version": {
+    "defaultMessage": "Пошук версії гри..."
+  },
+  "accounts-card.log-via-microsoft": {
+    "message": "Увійдіть через Microsoft"
+  },
+  "settings.billing.title": {
+    "defaultMessage": "Виставлення рахунків і підписки"
+  },
+  "servers.backups.admonition.restore-queued.title": {
+    "defaultMessage": "Відновлення з резервної копії в черзі"
+  },
+  "button.cancel": {
+    "defaultMessage": "Скасувати"
+  },
+  "label.search": {
+    "defaultMessage": "Пошук"
+  },
+  "app.home.greeting.evening": {
+    "message": "добрий вечір"
+  },
+  "nags.description-too-short.title": {
+    "defaultMessage": "Розгорніть опис"
+  },
+  "servers.notice.dismissable": {
+    "defaultMessage": "Можна відкинути"
+  },
+  "button.show-all-versions": {
+    "defaultMessage": "Показати всі версії"
+  },
+  "settings.default-instance.height.description": {
+    "message": "Висота вікна гри при запуску."
+  },
+  "browse.sort.creation-date": {
+    "message": "Дата створення"
+  },
+  "instance.worlds.no_server_quick_play": {
+    "message": "Перейти безпосередньо до серверів можна лише на Minecraft Alpha 1.0.5+"
+  },
+  "instance.add-server.add-server": {
+    "message": "Додати сервер"
+  },
+  "instance.create.import-from-profile-code": {
+    "message": "Імпортувати з профілю Code"
+  },
+  "instance.logs.share.text": {
+    "message": "Перегляньте цей журнал із примірника в додатку Modrinth"
+  },
+  "settings.default-instance.height.title": {
+    "message": "Висота"
+  },
+  "instance.settings.tabs.installation.fetching-modpack-details": {
+    "message": "Отримання деталей modpack"
+  },
+  "label.changes-saved": {
+    "defaultMessage": "Зміни збережено"
+  },
+  "servers.backups.item.failed-to-restore-backup": {
+    "defaultMessage": "Не вдалося відновити з резервної копії"
+  },
+  "content.confirm-deletion.header": {
+    "defaultMessage": "Видалити {itemType}{count, plural, one {} other {s}}"
+  },
+  "label.server": {
+    "defaultMessage": "Сервер"
+  },
+  "project.metadata": {
+    "message": "Метадані"
+  },
+  "skins.replace-texture": {
+    "message": "Замінити текстуру"
+  },
+  "project.settings.license.title": {
+    "defaultMessage": "Ліцензія"
+  },
+  "nags.verify-external-links.title": {
+    "defaultMessage": "Перевірте зовнішні посилання"
+  },
+  "app.home.greeting.morning": {
+    "message": "доброго ранку"
+  },
+  "creation-flow.setup.option.modpack.title": {
+    "defaultMessage": "База Modpack"
+  },
+  "creation-flow.modpack.browse": {
+    "defaultMessage": "Перегляньте пакети модів"
+  },
+  "share-names": {
+    "message": "Поділіться іменами"
+  },
+  "project.settings.environment.client_only.description": {
+    "defaultMessage": "Уся функціональність виконана на стороні клієнта та сумісна з мініатюрними серверами."
+  },
+  "project.about.creators.owner": {
+    "defaultMessage": "Власник проекту"
+  },
+  "installation-settings.verifying": {
+    "defaultMessage": "Перевірка..."
+  },
+  "project.environment.client-or-server.title": {
+    "defaultMessage": "Клієнт і сервер, необов’язково для обох"
+  },
+  "project.error.select-instance-first": {
+    "message": "Спочатку виберіть примірник."
+  },
+  "servers.region.region-unsupported": {
+    "defaultMessage": "Регіон не вказано? <link>Повідомте нам, де ви б хотіли бачити Modrinth Hosting наступним чином!</link>"
+  },
+  "copy-address": {
+    "message": "Скопіюйте адресу"
+  },
+  "tag.category.realistic": {
+    "defaultMessage": "Реалістичний"
+  },
+  "available": {
+    "message": "в наявності"
+  },
+  "instance.mods.share.file-names": {
+    "message": "Імена файлів"
+  },
+  "instance.mods.share.markdown-links": {
+    "message": "Посилання на розмітку"
+  },
+  "label.project": {
+    "defaultMessage": "Демонструвати"
+  },
+  "error-modal.our-support-article": {
+    "message": "наша стаття підтримки"
+  },
+  "instance.settings.tabs.general.library-groups.description": {
+    "message": "Бібліотечні групи дозволяють упорядковувати екземпляри в різні розділи бібліотеки."
+  },
+  "browse.install.none": {
+    "message": "Сумісних екземплярів не знайдено."
+  },
+  "omorphia.component.badge.label.safe": {
+    "defaultMessage": "Пас"
+  },
+  "servers.purchase.step.plan.large.desc": {
+    "defaultMessage": "Ідеально підходить для 15–25 гравців, пакетів модів або важкого моддингу."
+  },
+  "error-modal.debug-information": {
+    "message": "Інформація про налагодження:"
+  },
+  "instance.worlds.loading": {
+    "message": "Завантаження..."
+  },
+  "button.sign-out": {
+    "defaultMessage": "Вийти"
+  },
+  "error-modal.official-minecraft-launcher": {
+    "message": "офіційна програма запуску Minecraft"
+  },
+  "settings.appearance.minimize-launcher.title": {
+    "message": "Згорнути панель запуску"
+  },
+  "tag.category.questing": {
+    "defaultMessage": "Квестування"
+  },
+  "instance.mods.action.enable": {
+    "message": "Увімкнути"
+  },
+  "locale.ru-RU": {
+    "defaultMessage": "російська"
+  },
+  "skins.action.delete": {
+    "message": "Видалити"
+  },
+  "instance.settings.tabs.window.fullscreen": {
+    "message": "Повний екран"
+  },
+  "payment-method.discover": {
+    "defaultMessage": "Відкрийте для себе"
+  },
+  "skins.editing": {
+    "message": "Редагування шкіри"
+  },
+  "content.page-layout.update-all": {
+    "defaultMessage": "Оновити все"
+  },
+  "instance.logs.unknown": {
+    "message": "Невідомий"
+  },
+  "tag.category.creator-community": {
+    "defaultMessage": "Спільнота творців"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "Скопіюйте код у буфер обміну"
+  },
+  "instance.index.never-played": {
+    "message": "Ніколи не грав"
+  },
+  "instance.settings.tabs.general.duplicate-button": {
+    "message": "дублікат"
+  },
+  "tag.category.op": {
+    "defaultMessage": "OP"
+  },
+  "syncing.empty.custom-files": {
+    "message": "Настроюваних файлів ще немає."
+  },
+  "servers.backups.admonition.restore-successful.title": {
+    "defaultMessage": "Успішне відновлення з резервної копії"
+  },
+  "instance.confirm-reinstall.header": {
+    "defaultMessage": "Перевстановіть modpack"
+  },
+  "locale.nl-NL": {
+    "defaultMessage": "голландська"
+  },
+  "project.settings.environment.notice.wrong-project-type.title": {
+    "defaultMessage": "Цей тип проекту не підтримує метадані середовища"
+  },
+  "label.modpack": {
+    "defaultMessage": "Modpack"
+  },
+  "project.recent-plays.tooltip": {
+    "defaultMessage": "{count} {countPlural, plural, one {recent play} other {recent plays}} з Modrinth за останні 2 тижні"
+  },
+  "servers.backups.item.rename": {
+    "defaultMessage": "Перейменувати"
+  },
+  "servers.backups.item.backup-schedule": {
+    "defaultMessage": "Розклад резервного копіювання"
+  },
+  "servers.purchase.step.plan.select": {
+    "defaultMessage": "Виберіть План"
+  },
+  "accounts-card.player-name-length-rule": {
+    "message": "Ім’я гравця має містити принаймні {min} символів і не більше ніж {max} символів."
+  },
+  "tag.category.items": {
+    "defaultMessage": "Предмети"
+  },
+  "instances.updater-modal.header": {
+    "defaultMessage": "Оновити версію"
+  },
+  "browse.view.label": {
+    "message": "Переглянути"
+  },
+  "tag.category.technology": {
+    "defaultMessage": "технології"
+  },
+  "action.open-folder": {
+    "message": "Відкрити папку"
+  },
+  "app.update-toast.downloading": {
+    "message": "Завантаження..."
+  },
+  "accounts-card.error-adding-elyby-account": {
+    "message": "Під час додавання облікового запису Ely.by сталася помилка. Дотримуйтеся наведених нижче інструкцій."
+  },
+  "skins.upload.username.not-found": {
+    "message": "Профіль не знайдено."
+  },
+  "java-selector.browse": {
+    "message": "переглядати"
+  },
+  "creation-flow.final.world-type.amplified": {
+    "defaultMessage": "Посилений"
+  },
+  "instance.index.time.hour-plural": {
+    "message": "{count} годин"
+  },
+  "servers.notice.undismissable": {
+    "defaultMessage": "Незвільнений"
+  },
+  "tag.category.parkour": {
+    "defaultMessage": "Паркур"
+  },
+  "project.visibility.scheduled": {
+    "defaultMessage": "За розкладом"
+  },
+  "installation-settings.edit.warning-instance": {
+    "defaultMessage": "Ми не рекомендуємо редагувати налаштування встановлення після встановлення вмісту. Якщо ви хочете їх редагувати, будьте обережні, оскільки це може спричинити проблеми."
+  },
+  "content.confirm-bulk-update.admonition-header": {
+    "defaultMessage": "Попередження про оновлення"
+  },
+  "error-modal.migration.text-4": {
+    "message": "Що далі? Ми працюємо над постійним виправленням. Тим часом ви можете застосувати одне з наведених нижче швидких виправлень залежно від вашої системи."
+  },
+  "instance.logs.level.comment": {
+    "message": "коментар"
+  },
+  "curseforge-import.profile-code.placeholder": {
+    "message": "Введіть код профілю CurseForge"
+  },
+  "project.about.compatibility.environments.singleplayer-only": {
+    "defaultMessage": "Тільки одиночна гра"
+  },
+  "content.page-layout.additional-content": {
+    "defaultMessage": "Додатковий контент"
+  },
+  "instance.create.launcher-path": {
+    "message": "Шлях {name}"
+  },
+  "settings.default-instance.post-exit.title": {
+    "message": "Поштовий вихід"
+  },
+  "project-type.modpack.category": {
+    "defaultMessage": "Паки модів"
+  },
+  "tag.category.teams": {
+    "defaultMessage": "Команди"
+  },
+  "tag.category.prison": {
+    "defaultMessage": "В'язниця"
+  },
+  "tag.category.towns": {
+    "defaultMessage": "Міста"
+  },
+  "maintenance.cleanup.no-targets": {
+    "message": "Для вибраних правил не знайдено файлів очищення."
+  },
+  "changelog.product.app": {
+    "defaultMessage": "додаток"
+  },
+  "syncing.total-instances": {
+    "message": "Примірники"
+  },
+  "remove-friend": {
+    "message": "Видалити друга"
+  },
+  "nags.upload-version.description": {
+    "defaultMessage": "Для подання проекту на рецензію необхідна принаймні одна версія."
+  },
+  "maintenance.breadcrumb": {
+    "message": "Технічне обслуговування"
+  },
+  "payment-method.mastercard": {
+    "defaultMessage": "MasterCard"
+  },
+  "button.remove": {
+    "defaultMessage": "видалити"
+  },
+  "app.sidebar.playing-as": {
+    "message": "Граючи як"
+  },
+  "instance.index.update-all": {
+    "message": "Оновити все"
+  },
+  "instance.worlds.online": {
+    "message": "онлайн"
+  },
+  "instances.content-install.new-tab": {
+    "defaultMessage": "Новий екземпляр"
+  },
+  "payment-method.paypal_international": {
+    "defaultMessage": "PayPal International"
+  },
+  "content.confirm-unlink.unlink-button": {
+    "defaultMessage": "Від’єднати"
+  },
+  "button.analytics": {
+    "defaultMessage": "Аналітика"
+  },
+  "settings.language.warning": {
+    "defaultMessage": "Якщо змінити мову {platform}, певний вміст може відображатися англійською мовою, якщо переклад недоступний. Платформу {platform} ще не повністю перекладено, тому деякий вміст може залишатися англійською для певних мов."
+  },
+  "servers.region.custom.prompt": {
+    "defaultMessage": "Скільки оперативної пам’яті ви хочете мати на своєму сервері?"
+  },
+  "creation-flow.setup.option.custom.title": {
+    "defaultMessage": "Індивідуальне налаштування"
+  },
+  "form.placeholder.city": {
+    "defaultMessage": "Введіть місто"
+  },
+  "instance.index.time.hour-singular": {
+    "message": "{count} годину"
+  },
+  "instances.modpack-content-modal.filter-all": {
+    "defaultMessage": "всі"
+  },
+  "instances.updater-modal.badge.current": {
+    "defaultMessage": "поточний"
+  },
+  "settings.default-instance.hooks.title": {
+    "message": "Гачки"
+  },
+  "servers.backups.item.failed-to-create-backup": {
+    "defaultMessage": "Не вдалося створити резервну копію"
+  },
+  "settings.appearance.jump-back.description": {
+    "message": "Включає нещодавні світи в розділі «Повернутися» на домашній сторінці."
+  },
+  "java-selector.testing": {
+    "message": "Тестування..."
+  },
+  "installation-settings.edit.warning-server": {
+    "defaultMessage": "Ми не рекомендуємо редагувати налаштування встановлення після встановлення вмісту. Якщо ви хочете їх редагувати, перезавантажте сервер."
+  },
+  "search.filter.locked.instance": {
+    "message": "Надано інстанцією"
+  },
+  "project.curseforge.heading": {
+    "message": "Проект CurseForge"
+  },
+  "grid-display.instance-count.many": {
+    "message": "{count} випадків"
+  },
+  "instance.settings.tabs.installation.change-version.cannot-while-fetching": {
+    "message": "Отримання версій modpack"
+  },
+  "settings.appearance.hide-nametag.description": {
+    "message": "Вимикає тег імені над гравцем на сторінці скінів."
+  },
+  "project-type.project.capital": {
+    "defaultMessage": "{count, plural, one {Project} other {Projects}}"
+  },
+  "skins.delete.confirm.title": {
+    "message": "Ви впевнені, що хочете видалити цю оболонку?"
+  },
+  "content.page-layout.empty.no-content-installed": {
+    "defaultMessage": "Вміст не встановлено"
+  },
+  "settings.appearance.launcher-language.description": {
+    "message": "Виберіть мову Revoria UI."
+  },
+  "skins.delete.confirm.description": {
+    "message": "Вибрану оболонку буде видалено назавжди. Цю дію не можна скасувати."
+  },
+  "nags.edit-license.title": {
+    "defaultMessage": "Редагувати ліцензію"
+  },
+  "app.home.instances.count": {
+    "message": "{count} випадків"
+  },
+  "instances.content-install.name-placeholder": {
+    "defaultMessage": "Введіть назву екземпляра"
+  },
+  "tag.category.lifesteal": {
+    "defaultMessage": "Викрадання життя"
+  },
+  "button.affiliate-links": {
+    "defaultMessage": "Партнерські посилання"
+  },
+  "tag.category.kitpvp": {
+    "defaultMessage": "Комплект PVP"
+  },
+  "project.settings.environment.notice.multiple-environments.description": {
+    "defaultMessage": "Для різних версій вашого проекту вибрано різні середовища, тому наразі ви не можете редагувати їх глобально."
+  },
+  "instance.settings.tabs.installation.unlink.title": {
+    "message": "Від’єднання від modpack"
+  },
+  "instance.settings.tabs.general.duplicate-instance": {
+    "message": "Дубльований екземпляр"
+  },
+  "instance.create.select-version": {
+    "message": "Виберіть версію"
+  },
+  "badge.beta-release": {
+    "defaultMessage": "Бета-версія"
+  },
+  "project.about.links.donate.github": {
+    "defaultMessage": "Спонсор на GitHub"
+  },
+  "settings.appearance.native-decorations.title": {
+    "message": "Рідні прикраси"
+  },
+  "servers.purchase.step.plan.small.desc": {
+    "defaultMessage": "Ідеально підходить для 1–5 друзів із кількома легкими модами."
+  },
+  "project.install.installed": {
+    "message": "встановлено"
+  },
+  "curseforge-import.progress.completed": {
+    "message": "Імпорт завершено!"
+  },
+  "tag.category.decoration": {
+    "defaultMessage": "Прикраса"
+  },
+  "instance.settings.tabs.window.custom-window-settings": {
+    "message": "Власні налаштування вікна"
+  },
+  "project.action.follow": {
+    "message": "Слідуйте"
+  },
+  "tag.category.personal-worlds": {
+    "defaultMessage": "Особисті світи"
+  },
+  "browse.offline": {
+    "message": "Ви зараз офлайн. Підключіться до Інтернету, щоб переглядати Modrinth!"
+  },
+  "app.worlds.page-title": {
+    "message": "Світи"
+  },
+  "button.sign-up": {
+    "defaultMessage": "Зареєструватися"
+  },
+  "instance.create.select-loader-version": {
+    "message": "Виберіть версію завантажувача"
+  },
+  "servers.region.north-america": {
+    "defaultMessage": "Північна Америка"
+  },
+  "header.category.performance-impact": {
+    "defaultMessage": "Вплив продуктивності"
+  },
+  "settings.appearance.launcher-language.option.russian": {
+    "message": "російська"
+  },
+  "nags.moderator-feedback.description": {
+    "defaultMessage": "Перегляньте та усуньте всі занепокоєння команди модераторів перед повторним надсиланням."
+  },
+  "project.environment.client-and-server.description": {
+    "defaultMessage": "Необхідно як на клієнті, так і на сервері."
+  },
+  "project.settings.environment.suboption.accessibility-suboption-group-label": {
+    "defaultMessage": "Підпараметри {option}"
+  },
+  "tag.category.game-mechanics": {
+    "defaultMessage": "Ігрова механіка"
+  },
+  "browse.install.description": {
+    "message": "Виберіть екземпляр для встановлення"
+  },
+  "creation-flow.action.finish": {
+    "defaultMessage": "Закінчити"
+  },
+  "hosting.content.copy-link": {
+    "defaultMessage": "Копіювати посилання"
+  },
+  "install-confirm.description": {
+    "message": "Ви вже встановили цей модпак. Ви впевнені, що хочете встановити його знову?"
+  },
+  "tag.loader.geyser": {
+    "defaultMessage": "Розширення Гейзера"
+  },
+  "project.settings.environment.client_and_server.title": {
+    "defaultMessage": "Клієнт і сервер"
+  },
+  "content.page-layout.empty.no-extra-content-installed": {
+    "defaultMessage": "Додатковий вміст не встановлено"
+  },
+  "nags.settings.description.title": {
+    "defaultMessage": "Відвідайте налаштування опису"
+  },
+  "creation-flow.setup.option.modpack.desc": {
+    "defaultMessage": "Використовуйте популярний модпак як відправну точку."
+  },
+  "settings.display.theme.preferred-dark-theme": {
+    "defaultMessage": "Переважна темна тема"
+  },
+  "browse.source.curseforge": {
+    "message": "CurseForge"
+  },
+  "project.load-error": {
+    "message": "Не вдалося завантажити дані проекту."
+  },
+  "instance.settings.tabs.window.height.enter": {
+    "message": "Введіть висоту..."
+  },
+  "instance.settings.tabs.hooks.custom-hooks": {
+    "message": "Спеціальні гачки для запуску"
+  },
+  "creation-flow.import.title": {
+    "defaultMessage": "Екземпляри програми запуску"
+  },
+  "app.update-toast.reload": {
+    "message": "Перезавантажити"
+  },
+  "settings.appearance.jump-back.title": {
+    "message": "Стрибайте назад у світи"
+  },
+  "search-card.install": {
+    "message": "встановити"
+  },
+  "label.sort-by": {
+    "defaultMessage": "Сортувати за"
+  },
+  "content.diff-modal.diff-type.removed": {
+    "defaultMessage": "Видалено"
+  },
+  "search.sort.relevance": {
+    "defaultMessage": "Актуальність"
+  },
+  "servers.backups.admonition.restore-failed.description": {
+    "defaultMessage": "Під час відновлення з {backupName} сталася помилка. Спробуйте ще раз або зверніться до служби підтримки, якщо проблема не зникне."
+  },
+  "button.play": {
+    "defaultMessage": "грати"
+  },
+  "nags.misused-discord-link.title": {
+    "defaultMessage": "Перемістіть запрошення Discord"
+  },
+  "project.about.compatibility.environments.client-and-server": {
+    "defaultMessage": "Клієнт і сервер"
+  },
+  "content.modpack-card.dismiss-hint": {
+    "defaultMessage": "Більше не показувати"
+  },
+  "search.filter_type.environment.client": {
+    "defaultMessage": "Клієнт"
+  },
+  "button.save": {
+    "defaultMessage": "зберегти"
+  },
+  "browse.sort.relevancy": {
+    "message": "Актуальність"
+  },
+  "instance.settings.tabs.installation.reinstall.confirm.description": {
+    "message": "Перевстановлення призведе до скидання всього встановленого або зміненого вмісту до того, що надано пакетом модів, видалення будь-яких модів або вмісту, які ви додали поверх початкової інсталяції. Це може виправити неочікувану поведінку, якщо в примірник були внесені зміни, але якщо ваші світи тепер залежать від додаткового встановленого вмісту, це може зламати існуючі світи."
+  },
+  "project.about.creators.title": {
+    "defaultMessage": "Творці"
+  },
+  "dont-show-on-home": {
+    "message": "Не показувати на головній сторінці"
+  },
+  "creation-flow.modpack.prompt": {
+    "defaultMessage": "Уже знаєте модпак, який хочете встановити?"
+  },
+  "nags.link-shortener-usage.description": {
+    "defaultMessage": "Використання засобів скорочення посилань або інших методів, щоб приховати, куди може вести посилання у ваших зовнішніх посиланнях або ліцензійних посиланнях, заборонено. Будь ласка, використовуйте лише відповідні повні посилання."
+  },
+  "creation-flow.custom.loader-version.stable": {
+    "defaultMessage": "Стабільний"
+  },
+  "grid-display.option.loader": {
+    "message": "Навантажувач"
+  },
+  "creation-flow.final.generate-structures.desc": {
+    "defaultMessage": "Контролює, чи генеруються нові блоки сіл, твердинь та інших структур."
+  },
+  "creation-flow.setup.instance.note": {
+    "defaultMessage": "Екземпляр — це налаштування Minecraft із певним завантажувачем, версією та модами."
+  },
+  "content.confirm-unlink.admonition-body": {
+    "defaultMessage": "Модифікації та вміст буде об’єднано з тим, що ви додали в пакет модів, і він перестане отримувати оновлення."
+  },
+  "creation-flow.stage.modpack.title": {
+    "defaultMessage": "Виберіть модпак"
+  },
+  "tag.category.entities": {
+    "defaultMessage": "Сутності"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "За розкладом"
+  },
+  "settings.resource.max-concurrent-downloads.description": {
+    "message": "Максимальна кількість файлів, які програма запуску може завантажити одночасно. Якщо у вас погане підключення до Інтернету, встановіть для цього значення менше значення. (для вступу в силу потрібно перезапустити програму)"
+  },
+  "instance.worlds.game_mode.survival": {
+    "defaultMessage": "Режим виживання"
+  },
+  "instance.logs.level.warn": {
+    "message": "Попередити"
+  },
+  "project.settings.server.title": {
+    "defaultMessage": "Сервер"
+  },
+  "content.inline-backup.backup-takes-a-while": {
+    "defaultMessage": "Створення резервної копії може зайняти кілька хвилин залежно від розміру вашого сервера."
+  },
+  "creation-flow.final.generator-settings.custom": {
+    "defaultMessage": "Custom"
+  },
+  "app.survey.body.secondary": {
+    "message": "Цей відгук буде надіслано безпосередньо команді Modrinth і допоможе керувати майбутніми оновленнями!"
+  },
+  "tag.category.combat": {
+    "defaultMessage": "Бойовий"
+  },
+  "add-content-button.install-content": {
+    "message": "Встановити контент"
+  },
+  "instance.index.copy-links": {
+    "message": "Копіювати посилання"
+  },
+  "servers.purchase.step.plan.get-started": {
+    "defaultMessage": "Почніть роботу"
+  },
+  "nags.image-heavy-description.description": {
+    "defaultMessage": "Ваш опис має містити достатню кількість простого тексту або альтернативного тексту зображення, щоб він був доступним для тих, хто використовує програми зчитування з екрана або має повільне підключення до Інтернету."
+  },
+  "error-modal.minecraft-auth.hosts-text-start": {
+    "message": "Засіб запуску Revoria намагався підключитися до служб Microsoft / Xbox / Minecraft, але віддалений сервер відхилив підключення. Це може означати, що ці служби заблоковано файлом hosts. Будь ласка, відвідайте"
+  },
+  "instance.settings.tabs.installation.repair.in-progress": {
+    "message": "Триває ремонт"
+  },
+  "project.about.links.donate.patreon": {
+    "defaultMessage": "Пожертвуйте на Patreon"
+  },
+  "export-modal.export": {
+    "message": "Експорт"
+  },
+  "button.repair": {
+    "defaultMessage": "Ремонт"
+  },
+  "tag.category.pokemon": {
+    "defaultMessage": "Покемон"
+  },
+  "project.environment.unknown.title": {
+    "defaultMessage": "Невідоме середовище"
+  },
+  "settings.display.theme.light": {
+    "defaultMessage": "світло"
+  },
+  "content.inline-backup.backup-in-progress": {
+    "defaultMessage": "Виконується резервне копіювання, рекомендується дочекатися його завершення, перш ніж виконувати цю дію."
+  },
+  "project.metadata.downloads": {
+    "message": "Завантаження"
+  },
+  "creation-flow.custom.build-number.label-value": {
+    "defaultMessage": "Build {build}"
+  },
+  "locale.de-CH": {
+    "defaultMessage": "німецька (Швейцарія)"
+  },
+  "syncing.target.default": {
+    "message": "За замовчуванням"
+  },
+  "instance.worlds.game_already_open": {
+    "message": "Екземпляр уже відкритий"
+  },
+  "skins.sign-in.title": {
+    "message": "Будь ласка, увійдіть"
+  },
+  "install-elsewhere": {
+    "message": "Встановити в іншому місці"
+  },
+  "browse.notification.manual-download-required.title": {
+    "message": "Потрібне ручне завантаження"
+  },
+  "collections.label.private": {
+    "defaultMessage": "Приватний"
+  },
+  "hosting.content.failed-to-upload": {
+    "defaultMessage": "Не вдалося завантажити файл"
+  },
+  "label.title": {
+    "defaultMessage": "Назва"
+  },
+  "syncing.notification.added": {
+    "message": "Ціль синхронізації додано."
+  },
+  "content.page-layout.sort.date-added-oldest": {
+    "defaultMessage": "Спочатку найстаріші"
+  },
+  "export-modal.modpack-name": {
+    "message": "Назва Modpack"
+  },
+  "button.reinstall-modpack": {
+    "defaultMessage": "Перевстановіть modpack"
+  },
+  "project.changelog": {
+    "message": "Журнал змін"
+  },
+  "content.confirm-bulk-update.header": {
+    "defaultMessage": "Оновлення проектів"
+  },
+  "servers.backups.admonition.restore-successful.description": {
+    "defaultMessage": "Ваш сервер відновлено до {backupName} і готовий до запуску."
+  },
+  "syncing.status.enabled": {
+    "message": "Увімкнено"
+  },
+  "label.installation-info": {
+    "defaultMessage": "Інформація про встановлення"
+  },
+  "instance.settings.tabs.installation.unlink.button": {
+    "message": "Від’єднати екземпляр"
+  },
+  "grid-display.search": {
+    "message": "Пошук"
+  },
+  "header.category.minecraft-server-features": {
+    "defaultMessage": "особливості"
+  },
+  "project.tab.files": {
+    "message": "Файли"
+  },
+  "instance.logs.empty.subtitle": {
+    "message": "Почніть гру, щоб продовжити."
+  },
+  "maintenance.rules.description": {
+    "message": "Шляхи вказуються відносно папки екземпляра. Розділіть кілька шляхів комами."
+  },
+  "instance.worlds.not-played-yet": {
+    "message": "Ще не грав"
+  },
+  "instances.updater-modal.header-switch": {
+    "defaultMessage": "Змінна версія"
+  },
+  "project.visibility.unlisted-by-staff": {
+    "defaultMessage": "Не зазначений персоналом"
+  },
+  "skins.rate-limit.cape": {
+    "message": "Ви занадто часто змінюєте накидку. Сервери Mojang тимчасово заблокували подальші запити. Зачекайте трохи, перш ніж спробувати знову."
+  },
+  "content.confirm-unlink.admonition-header": {
+    "defaultMessage": "Від’єднання modpack"
+  },
+  "instance.create.loader-version.latest": {
+    "message": "останній"
+  },
+  "creation-flow.setup.title.world": {
+    "defaultMessage": "Виберіть тип світу"
+  },
+  "skins.upload.option.file.desc": {
+    "message": "Імпортуйте текстуру шкіри PNG зі свого пристрою."
+  },
+  "project.about.links.source": {
+    "defaultMessage": "Переглянути джерело"
+  },
+  "label.selection-actions": {
+    "defaultMessage": "Вибіркові дії"
+  },
+  "tag.category.battle-royale": {
+    "defaultMessage": "Королівська битва"
+  },
+  "creation-flow.common.no-results": {
+    "defaultMessage": "Результатів не знайдено"
+  },
+  "button.accept": {
+    "defaultMessage": "прийняти"
+  },
+  "instance.worlds.game_mode.spectator": {
+    "defaultMessage": "Режим глядача"
+  },
+  "app.account.sign-out": {
+    "message": "Вийти"
+  },
+  "nags.select-tags.title": {
+    "defaultMessage": "Виберіть теги"
+  },
+  "button.open-folder": {
+    "defaultMessage": "Відкрити папку"
+  },
+  "project.tab.gallery": {
+    "message": "Галерея"
+  },
+  "project-type.mod.category": {
+    "defaultMessage": "Моди"
+  },
+  "servers.purchase.step.payment.title": {
+    "defaultMessage": "Спосіб оплати"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "Не підтримується"
+  },
+  "skins.rate-limit.title": {
+    "message": "Повільніше!"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "На розгляді"
+  },
+  "instance.worlds.refreshing": {
+    "message": "Оновлення..."
+  },
+  "creation-flow.setup.option.custom.desc": {
+    "defaultMessage": "Почніть з нуля, вибравши завантажувач і версію гри."
+  },
+  "creation-flow.final.difficulty.hard": {
+    "defaultMessage": "важко"
+  },
+  "error-modal.minecraft-auth.game-pass-heading": {
+    "message": "Ви використовуєте PC Game Pass, надходите від Bedrock або щойно купили гру?"
+  },
+  "content.diff-modal.updated-count": {
+    "defaultMessage": "{count} оновлено"
+  },
+  "tag.loader.datapack": {
+    "defaultMessage": "Пакет даних"
+  },
+  "project.about.links.donate.generic": {
+    "defaultMessage": "Пожертвуйте"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "Клієнт і сервер"
+  },
+  "project.settings.notice.no-permission.title": {
+    "defaultMessage": "Немає дозволу"
+  },
+  "skins.upload.username.importing": {
+    "message": "Імпорт..."
+  },
+  "project.environment.server-only.title": {
+    "defaultMessage": "Лише на стороні сервера, також працює в одиночній грі"
+  },
+  "app.account.signed-in-as": {
+    "message": "Ви ввійшли як"
+  },
+  "settings.account.title": {
+    "defaultMessage": "Обліковий запис і безпека"
+  },
+  "instance.logs.log-date": {
+    "message": "Дата реєстрації"
+  },
+  "skins.arm-style.wide": {
+    "message": "Широкий"
+  },
+  "maintenance.empty.no-instances": {
+    "message": "Немає випадків для аналізу."
+  },
+  "instance.create.action.creating": {
+    "message": "Створення..."
+  },
+  "skins.texture": {
+    "message": "Текстура"
+  },
+  "skins.cape": {
+    "message": "мис"
+  },
+  "instances.updater-modal.switch-to": {
+    "defaultMessage": "Перейти на {version}"
+  },
+  "tag.loader.fabric": {
+    "defaultMessage": "Тканина"
+  },
+  "project.action.copy-link": {
+    "message": "Копіювати посилання"
+  },
+  "nags.settings.title": {
+    "defaultMessage": "Відвідайте загальні налаштування"
+  },
+  "tag.category.competitive": {
+    "defaultMessage": "Змагальний"
+  },
+  "tag.category.fonts": {
+    "defaultMessage": "Шрифти"
+  },
+  "browse.context.open-curseforge": {
+    "message": "Відкрийте в CurseForge"
+  },
+  "app.update.downloading-update": {
+    "message": "Завантаження оновлення ({percent}%)"
+  },
+  "nags.title-contains-technical-info.description": {
+    "defaultMessage": "Дотримуючись чистоти назви вашого проекту, ви зможете запам’ятати його та легше знайти. Інформація про версію та завантажувач автоматично відображається поруч із вашим проектом."
+  },
+  "instances.content-install.loader-label": {
+    "defaultMessage": "Навантажувач"
+  },
+  "servers.purchase.step.payment.prompt": {
+    "defaultMessage": "Виберіть спосіб оплати"
+  },
+  "nags.title-contains-technical-info.title": {
+    "defaultMessage": "Очистіть назву"
+  },
+  "project.about.links.donate.bmac": {
+    "defaultMessage": "Купи мені каву"
+  },
+  "changelog.justNow": {
+    "defaultMessage": "Просто зараз"
+  },
+  "error-modal.migration.help-text": {
+    "message": "Якщо ви зіткнулися з помилкою під час застосування міграцій, як-от «Помилка під час застосування міграцій: міграція XXXXXXXXXX була застосована раніше, але була змінена», або подібна проблема з міграцією, такі дії можуть допомогти:"
+  },
+  "settings.resource.purge-cache.confirm.description": {
+    "message": "Якщо ви продовжите, весь ваш кеш буде очищено. Це може тимчасово сповільнити роботу програми."
+  },
+  "settings.appearance.native-decorations.description": {
+    "message": "Використовуйте рамку вікна системи (потрібно перезапустити програму)."
+  },
+  "browse.filter.hide-installed": {
+    "message": "Приховати встановлений вміст"
+  },
+  "content.page-layout.share.project-links": {
+    "defaultMessage": "Посилання на проект"
+  },
+  "tag.category.core-shaders": {
+    "defaultMessage": "Основні шейдери"
+  },
+  "modal.open-in-app.why-use": {
+    "defaultMessage": "Навіщо використовувати додаток Modrinth"
+  },
+  "nags.all-tags-selected.description": {
+    "defaultMessage": "Ви вибрали всі {totalAvailableTags, plural, one {# available tag} other {# available tags}}. Це перешкоджає меті тегів, які допомагають користувачам знаходити відповідні проекти. Виберіть лише ті теги, які відповідають вашому проекту."
+  },
+  "creation-flow.final.world-type.label": {
+    "defaultMessage": "Тип світу"
+  },
+  "browse.source.modrinth": {
+    "message": "Модрінт"
+  },
+  "payment-method.unionpay": {
+    "defaultMessage": "UnionPay"
+  },
+  "content.page-layout.empty.hint": {
+    "defaultMessage": "Перегляньте або завантажте {contentType}, щоб почати"
+  },
+  "servers.backups.admonition.creating-backup.title": {
+    "defaultMessage": "Створення резервної копії"
+  },
+  "creation-flow.loader.vanilla": {
+    "defaultMessage": "Ваніль"
+  },
+  "maintenance.loading.instances": {
+    "message": "Завантаження екземплярів..."
+  },
+  "app.home.greeting.afternoon": {
+    "message": "доброго дня"
+  },
+  "instance.logs.filter.placeholder": {
+    "message": "Введіть, щоб фільтрувати журнали..."
+  },
+  "servers.notice.heading.info": {
+    "defaultMessage": "Інформація"
+  },
+  "creation-flow.final.world-type.single-biome": {
+    "defaultMessage": "Єдиний біом"
+  },
+  "app.library.title": {
+    "message": "Бібліотека"
+  },
+  "accounts-card.add-offline-account-header": {
+    "message": "Додати новий обліковий запис офлайн"
+  },
+  "project.settings.environment.notice.wrong-project-type.description": {
+    "defaultMessage": "Лише проекти mod або modpack можуть мати метадані середовища."
+  },
+  "instance.settings.tabs.installation.change-version.in-progress": {
+    "message": "Встановлення нової версії"
+  },
+  "header.category.feature": {
+    "defaultMessage": "Особливість"
+  },
+  "instance.edit-world.title": {
+    "message": "Редагувати світ"
+  },
+  "app.account.menu": {
+    "message": "Акаунт Modrinth"
+  },
+  "tag.category.skyblock": {
+    "defaultMessage": "Skyblock"
+  },
+  "project.settings.environment.client_and_server.optional_client.title": {
+    "defaultMessage": "За бажанням клієнта"
+  },
+  "instance.confirm-repair.repair-button": {
+    "defaultMessage": "Ремонт"
+  },
+  "label.filter-by": {
+    "defaultMessage": "Фільтрувати за"
+  },
+  "instance.settings.tabs.installation.minecraft-version": {
+    "message": "Minecraft {version}"
+  },
+  "syncing.target.custom": {
+    "message": "Custom"
+  },
+  "tag.category.economy": {
+    "defaultMessage": "Економіка"
+  },
+  "settings.resource.select-new-app-directory": {
+    "message": "Виберіть новий каталог програми"
+  },
+  "export-modal.description.placeholder": {
+    "message": "Введіть опис modpack..."
+  },
+  "project.notification.manual-download-required.title": {
+    "message": "Потрібне ручне завантаження"
+  },
+  "creation-flow.modpack.search.placeholder": {
+    "defaultMessage": "Пошук modpack"
+  },
+  "project-card.stats.followers": {
+    "defaultMessage": "{count, plural, one {follower} other {followers}}"
+  },
+  "maintenance.cleanup.selected-count": {
+    "message": "Вибрано {count}"
+  },
+  "form.placeholder.postal-code": {
+    "defaultMessage": "Введіть поштовий індекс"
+  },
+  "accounts-card.error-auth-elyby-header": {
+    "message": "Помилка під час продовження події автентифікації з Ely.by"
+  },
+  "nags.gpl-license-source-required.title": {
+    "defaultMessage": "Надайте вихідний код"
+  },
+  "instance.create.remove-icon": {
+    "message": "Видалити значок"
+  },
+  "skins.upload.error.processing-file.title": {
+    "message": "Помилка обробки файлу"
+  },
+  "app.update.download-update": {
+    "message": "Завантажте оновлення"
+  },
+  "grid-display.select-placeholder": {
+    "message": "Виберіть..."
+  },
+  "error-modal.state-init-fix-ways": {
+    "message": "Ви можете виправити це одним із наведених нижче способів."
+  },
+  "instance.settings.tabs.installation.reinstall.title": {
+    "message": "Перевстановіть modpack"
+  },
+  "sign-out": {
+    "message": "Вийти"
+  },
+  "instance.create.importing": {
+    "message": "Імпорт..."
+  },
+  "locale.fr-FR": {
+    "defaultMessage": "французька"
+  },
+  "icon-select.select": {
+    "defaultMessage": "Виберіть значок"
+  },
+  "app.home.welcome.new": {
+    "message": "Ласкаво просимо до Revoria"
+  },
+  "error-modal.get-support": {
+    "message": "Отримати підтримку"
+  },
+  "instance.settings.tabs.general.duplicate-instance.description": {
+    "message": "Створює копію цього екземпляра, включаючи світи, конфігурації, модифікації тощо."
+  },
+  "settings.appearance.toggle-sidebar.title": {
+    "message": "Перемкнути бічну панель"
+  },
+  "search-card.compat.server": {
+    "message": "Сервер"
+  },
+  "servers.purchase.step.plan.medium.desc": {
+    "defaultMessage": "Чудово підходить для 6–15 гравців і кількох модів."
+  },
+  "browse.max-results.label": {
+    "message": "Максимальний результат"
+  },
+  "servers.region.western-europe": {
+    "defaultMessage": "Західна Європа"
+  },
+  "tag.category.medium": {
+    "defaultMessage": "Середній"
+  },
+  "app.nav.create-instance": {
+    "message": "Створити новий екземпляр"
+  },
+  "grid-display.option.none": {
+    "message": "Жодного"
+  },
+  "instance.settings.tabs.general.library-groups.enter-name": {
+    "message": "Введіть назву групи"
+  },
+  "project-card.environment.client-or-server": {
+    "defaultMessage": "Клієнт або сервер"
+  },
+  "creation-flow.custom.game-version.search": {
+    "defaultMessage": "Пошук версії гри..."
+  },
+  "project.environment.client-only.description": {
+    "defaultMessage": "Уся функціональність виконана на стороні клієнта та сумісна з мініатюрними серверами."
+  },
+  "project.metadata.game-versions": {
+    "message": "Версії гри"
+  },
+  "label.collections": {
+    "defaultMessage": "Колекції"
+  },
+  "settings.resource.app-directory.description": {
+    "message": "Каталог, у якому програма запуску зберігає всі свої файли. Зміни буде застосовано після перезапуску програми запуску."
+  },
+  "search-card.add-to-instance": {
+    "message": "Додати до екземпляра"
+  },
+  "tag.loader.optifine": {
+    "defaultMessage": "OptiFine"
+  },
+  "settings.appearance.hide-nametag.title": {
+    "message": "Приховати тег імені"
+  },
+  "creation-flow.setup.option.vanilla.desc": {
+    "defaultMessage": "Класичний Minecraft без модів і плагінів."
+  },
+  "tag.category.mobs": {
+    "defaultMessage": "Моби"
+  },
+  "instance.worlds.no_singleplayer_quick_play": {
+    "message": "У Minecraft 1.20+ ви можете переходити безпосередньо в одиночні світи"
+  },
+  "content.inline-backup.shift-click-hint": {
+    "defaultMessage": "Утримуйте Shift під час натискання, щоб пропустити підтвердження."
+  },
+  "instance.create.modal.header": {
+    "message": "Створення екземпляра"
+  },
+  "affiliate.create.title.description": {
+    "defaultMessage": "Дайте своєму партнерському посиланню назву, щоб знати, звідки приходять люди!"
+  },
+  "app.home.greeting.night": {
+    "message": "на добраніч"
+  },
+  "header.category.minecraft-server-meta": {
+    "defaultMessage": "Мета"
+  },
+  "content.diff-modal.diff-type.updated": {
+    "defaultMessage": "Оновлено"
+  },
+  "servers.purchase.step.plan.custom.desc": {
+    "defaultMessage": "Виберіть персоналізований план із потрібними специфікаціями."
+  },
+  "tag.category.cursed": {
+    "defaultMessage": "Проклятий"
+  },
+  "instance.index.add-content": {
+    "message": "Додайте вміст"
+  },
+  "share-file-names": {
+    "message": "Поділитися іменами файлів"
+  },
+  "project.action.open-in-browser": {
+    "message": "Відкрити в браузері"
+  },
+  "tag.loader.java-agent": {
+    "defaultMessage": "Агент Java"
+  },
+  "instance.settings.tabs.java.hooks": {
+    "message": "Гачки"
+  },
+  "form.label.country": {
+    "defaultMessage": "Країна"
+  },
+  "export-modal.description": {
+    "message": "опис"
+  },
+  "label.no": {
+    "defaultMessage": "немає"
+  },
+  "project.settings.general.title": {
+    "defaultMessage": "Загальний"
+  },
+  "project.environment.client-only-server-optional.title": {
+    "defaultMessage": "Клієнт і сервер, необов’язково на сервері"
+  },
+  "accounts-card.not-signed-in": {
+    "message": "Ви не ввійшли"
+  },
+  "search-card.compat.client-and-server": {
+    "message": "Клієнт і сервер"
+  },
+  "settings.default-instance.memory-allocated.description": {
+    "message": "Пам'ять, виділена кожному екземпляру під час його запуску."
+  },
+  "project.about.details.updated": {
+    "defaultMessage": "Оновлено {date}"
+  },
+  "creation-flow.final.generator-settings.flat": {
+    "defaultMessage": "Плоский"
+  },
+  "project.settings.description.title": {
+    "defaultMessage": "опис"
+  },
+  "settings.default-instance.post-exit.description": {
+    "message": "Побіг після закриття гри."
+  },
+  "tag.category.classes": {
+    "defaultMessage": "Заняття"
+  },
+  "creation-flow.custom.name.label": {
+    "defaultMessage": "Ім'я"
+  },
+  "project-card.date.updated": {
+    "defaultMessage": "Оновлено"
+  },
+  "instances.confirm-leave-modal.leave": {
+    "defaultMessage": "Залишити сторінку"
+  },
+  "error-modal.minecraft-auth.try-another-text": {
+    "message": "Ще раз перевірте, чи ввійшли ви в правильний обліковий запис. Ви можете бути власником Minecraft в іншому обліковому записі Microsoft."
+  },
+  "content.selection-bar.bulk.updating": {
+    "defaultMessage": "Оновлення {progress}/{total} {contentType}..."
+  },
+  "creation-flow.final.world-type.large-biomes": {
+    "defaultMessage": "Великі біоми"
+  },
+  "settings.resource.app-cache.description": {
+    "message": "Програма Modrinth зберігає кеш даних для пришвидшення завантаження. Це можна видалити, щоб програма перезавантажила дані. Це може тимчасово сповільнити роботу програми."
+  },
+  "settings.appearance.default-landing.description": {
+    "message": "Змініть сторінку, на якій відкривається панель запуску."
+  },
+  "skins.action.delete-skin.aria": {
+    "message": "Видалити шкіру"
+  },
+  "instance.screenshots.empty-description": {
+    "message": "Натисніть F2 у грі, щоб зробити знімок екрана"
+  },
+  "project.visibility.archived": {
+    "defaultMessage": "Архівовано"
+  },
+  "settings.appearance.default-landing.placeholder": {
+    "message": "Виберіть опцію"
+  },
+  "nags.add-description.description": {
+    "defaultMessage": "Потрібен опис, який чітко описує мету та функції проекту."
+  },
+  "error-modal.title.unable-sign-in": {
+    "message": "Не вдається ввійти в Minecraft"
+  },
+  "java-selector.installing": {
+    "message": "Встановлення..."
+  },
+  "project.settings.links.title": {
+    "defaultMessage": "Посилання"
+  },
+  "settings.appearance.launcher-language.option.romanian": {
+    "message": "румунська"
+  },
+  "error-modal.no-loader-text": {
+    "message": "Revoria не вдалося знайти версію завантажувача для цього екземпляра."
+  },
+  "nags.feature-gallery-image.description": {
+    "defaultMessage": "Зображення в галереї часто є тим, як ваш проект справляє перше враження."
+  },
+  "instance.settings.tabs.java.java-arguments": {
+    "message": "Аргументи Java"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "Сервер"
+  },
+  "logs": {
+    "message": "Журнали"
+  },
+  "maintenance.delete-instance.description": {
+    "message": "Усі дані буде видалено, і їх неможливо буде відновити."
+  },
+  "payment-method.card_display": {
+    "defaultMessage": "{card_brand}, що закінчується на {last_four}"
+  },
+  "project.about.links.title": {
+    "defaultMessage": "Посилання"
+  },
+  "project.about.links.discord": {
+    "defaultMessage": "Приєднайтеся до сервера Discord"
+  },
+  "content.diff-modal.removed-count": {
+    "defaultMessage": "{count} видалено"
+  },
+  "servers.region.central-europe": {
+    "defaultMessage": "Центральна Європа"
+  },
+  "tag.category.network": {
+    "defaultMessage": "Мережа"
+  },
+  "maintenance.cleanup.complete.text": {
+    "message": "Звільнено {size}"
+  },
+  "tag.category.vanilla-like": {
+    "defaultMessage": "Vanilla Like"
+  },
+  "instance.create.action.import-from-file": {
+    "message": "Імпортувати з файлу"
+  },
+  "instance.settings.tabs.general.library-groups": {
+    "message": "Бібліотечні групи"
+  },
+  "instance.settings.tabs.installation.loader-version": {
+    "message": "версія {loader}"
+  },
+  "export-mrpack": {
+    "message": "Експортувати .mrpack"
+  },
+  "instance.settings.tabs.window.fullscreen.description": {
+    "message": "Зробіть так, щоб гра запускалася на весь екран під час запуску (за допомогою options.txt)."
+  },
+  "locale.ja-JP": {
+    "defaultMessage": "Японський"
+  },
+  "installation-settings.removed-incompatible": {
+    "defaultMessage": "Видалено (несумісний)"
+  },
+  "error-modal.minecraft-auth.network-text-start": {
+    "message": "Схоже, виникли проблеми з підключенням Revoria до серверів Microsoft. Це часто є результатом поганого з’єднання, тому ми рекомендуємо спробувати ще раз, щоб перевірити, чи це працює. Якщо проблеми не зникають, виконайте дії, наведені в"
+  },
+  "nags.gpl-license-source-required.description": {
+    "defaultMessage": "Ваш {type, select, mod {mod} плагін {plugin} other {project}} використовує ліцензію, яка вимагає наявності вихідного коду. Будь ласка, надайте посилання на вихідний код або вихідний файл для кожної додаткової версії або розгляньте можливість використання іншої ліцензії."
+  },
+  "button.next": {
+    "defaultMessage": "Далі"
+  },
+  "settings.display.theme.description": {
+    "defaultMessage": "Виберіть потрібну колірну тему для Modrinth на цьому пристрої."
+  },
+  "project.settings.members.title": {
+    "defaultMessage": "Члени"
+  },
+  "tag.category.minigames": {
+    "defaultMessage": "Міні-ігри"
+  },
+  "installation-settings.platform-lock-tooltip": {
+    "defaultMessage": "Вам потрібно буде скинути налаштування сервера, щоб переключити завантажувач."
+  },
+  "settings.appearance.toggle-sidebar.description": {
+    "message": "Дозволяє перемикати бічну панель."
+  },
+  "instance.screenshots.notification.path-copied.text": {
+    "message": "Не вдалося скопіювати зображення, скопійовано шлях"
+  },
+  "error-modal.migration.fix-failed": {
+    "message": "❌ Виправлення міграції не вдалося або не дало ефекту."
+  },
+  "form.placeholder.email": {
+    "defaultMessage": "Введіть електронну адресу"
+  },
+  "app.library.tab.saved": {
+    "message": "Збережено"
+  },
+  "instance.settings.tabs.general": {
+    "message": "Загальний"
+  },
+  "app.update-toast.changelog": {
+    "message": "Журнал змін"
+  },
+  "project.versions.channel.beta.symbol": {
+    "defaultMessage": "Б"
+  },
+  "error-modal.close": {
+    "message": "Закрити"
+  },
+  "error-modal.migration.report-header": {
+    "message": "💡 Звіт про виправлення міграції"
+  },
+  "instances.content-install.instance-type": {
+    "defaultMessage": "Тип екземпляра"
+  },
+  "settings.appearance.launcher-language.option.german-germany": {
+    "message": "німецька (Німеччина)"
+  },
+  "error-modal.state-init-text": {
+    "message": "Revoria не вдалося завантажити належним чином. Це може бути через пошкоджений файл або тому, що в програмі відсутні важливі файли."
+  },
+  "search.filter_type.game_version": {
+    "defaultMessage": "Ігрова версія"
+  },
+  "content.inline-backup.create-backup": {
+    "defaultMessage": "Створити резервну копію"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "Оброблено"
+  },
+  "nags.edit-title.title": {
+    "defaultMessage": "Редагувати назву"
+  },
+  "skins.upload.username.fetch-failed": {
+    "message": "Не вдалося отримати оформлення для цього імені користувача."
+  },
+  "friends.search-friends-placeholder": {
+    "message": "Пошук друзів..."
+  },
+  "creation-flow.final.difficulty.easy": {
+    "defaultMessage": "легко"
+  },
+  "browse.error.invalid-curseforge-project-id": {
+    "message": "Недійсний ідентифікатор проекту CurseForge."
+  },
+  "maintenance.action.delete": {
+    "message": "Видалити"
+  },
+  "instance.create.select-game-version": {
+    "message": "Виберіть версію гри"
+  },
+  "button.decline": {
+    "defaultMessage": "відхилити"
+  },
+  "error-modal.not-enough-space": {
+    "message": "Недостатньо місця"
+  },
+  "search.filter_type.game_version.all_versions": {
+    "defaultMessage": "Показати всі версії"
+  },
+  "tag.category.48x": {
+    "defaultMessage": "48x"
+  },
+  "tag.loader.purpur": {
+    "defaultMessage": "Пурпур"
+  },
+  "settings.appearance.default-landing.title": {
+    "message": "Цільова сторінка за умовчанням"
+  },
+  "instance.index.create-server": {
+    "message": "Створіть сервер"
+  },
+  "project.action.open-in-modrinth": {
+    "message": "Відкрито в Модрінт"
+  },
+  "instance.breadcrumb.logs": {
+    "message": "Журнали"
+  },
+  "servers.notice.level.survey.name": {
+    "defaultMessage": "Опитування"
+  },
+  "instances.content-install.search-placeholder": {
+    "defaultMessage": "Пошуковий екземпляр"
+  },
+  "settings.default-instance.width.placeholder": {
+    "message": "Введіть ширину..."
+  },
+  "project.environment.singleplayer-only.title": {
+    "defaultMessage": "Тільки одиночна гра"
+  },
+  "accounts-card.selected": {
+    "message": "Вибране"
+  },
+  "app.account.sign-in": {
+    "message": "Увійдіть в обліковий запис Modrinth"
+  },
+  "creation-flow.setup.option.import.desc": {
+    "defaultMessage": "Імпортуйте екземпляр із Prism, CurseForge або подібного."
+  },
+  "browse.notification.curseforge-blocked-automated-download": {
+    "message": "CurseForge заблокував автоматичне завантаження цього файлу (403). Відкрито сторінку проекту у вашому браузері."
+  },
+  "skins.action.edit-skin.aria": {
+    "message": "Редагувати скін"
+  },
+  "project.about.compatibility.environments": {
+    "defaultMessage": "Підтримувані середовища"
+  },
+  "export-modal.version-number": {
+    "message": "Номер версії"
+  },
+  "project-type.all": {
+    "defaultMessage": "всі"
+  },
+  "nags.summary-too-short.title": {
+    "defaultMessage": "Розгорніть короткий зміст"
+  },
+  "creation-flow.title.server-onboarding": {
+    "defaultMessage": "Налаштувати сервер"
+  },
+  "creation-flow.setup.option.import.title": {
+    "defaultMessage": "Імпорт екземпляра"
+  },
+  "instance.index.tab.worlds": {
+    "message": "Світи"
+  },
+  "label.yes": {
+    "defaultMessage": "так"
+  },
+  "syncing.empty.custom-folders": {
+    "message": "Ще немає призначених для користувача папок."
+  },
+  "tag.loader.bukkit": {
+    "defaultMessage": "Bukkit"
+  },
+  "creation-flow.final.world-seed.hint": {
+    "defaultMessage": "Залиште поле порожнім для випадкового початкового числа."
+  },
+  "nags.too-many-tags.title": {
+    "defaultMessage": "Виберіть точні теги"
+  },
+  "button.remove-image": {
+    "defaultMessage": "Видалити зображення"
+  },
+  "tag.category.screenshot": {
+    "defaultMessage": "Скріншот"
+  },
+  "instance.logs.copied": {
+    "message": "Скопійовано"
+  },
+  "friends.add-friend.submit": {
+    "message": "Надіслати запит в друзі"
+  },
+  "project.environment.server-only-client-optional.title": {
+    "defaultMessage": "Клієнт і сервер, необов’язково для клієнта"
+  },
+  "project.follower-count-tooltip": {
+    "defaultMessage": "{count, number} {count, plural, one {follower} other {followers}}"
+  },
+  "tag.category.256x": {
+    "defaultMessage": "256x"
+  },
+  "instance.settings.tabs.hooks.post-exit.enter": {
+    "message": "Введіть команду після виходу..."
+  },
+  "instance.index.instance-settings": {
+    "message": "Налаштування примірника"
+  },
+  "instance.create.name": {
+    "message": "Ім'я"
+  },
+  "instance.settings.tabs.installation.no-modpack-found": {
+    "message": "Цей екземпляр пов’язано з пакетом модів, але цей пакет не вдалося знайти на Modrinth."
+  },
+  "button.unfollow": {
+    "defaultMessage": "Відписатися"
+  },
+  "error-modal.cancel-directory-change": {
+    "message": "Скасувати зміну каталогу"
+  },
+  "curseforge-import.progress.starting": {
+    "message": "Початок імпорту..."
+  },
+  "skins.action.add-skin": {
+    "message": "Додайте скін"
+  },
+  "app.nav.skins": {
+    "message": "Скіни (бета)"
+  },
+  "search.filter.locked.instance-game-version.title": {
+    "message": "Версія гри надається екземпляром"
+  },
+  "locale.da-DK": {
+    "defaultMessage": "датська"
+  },
+  "error-modal.migration.fix-windows-button": {
+    "message": "Застосувати виправлення для Windows"
+  },
+  "project.settings.upload.title": {
+    "defaultMessage": "Завантажити"
+  },
+  "content.selection-bar.bulk.disabling-waiting": {
+    "defaultMessage": "Вимкнення {contentType}..."
+  },
+  "tag.category.tweaks": {
+    "defaultMessage": "Твіки"
+  },
+  "tag.category.32x": {
+    "defaultMessage": "32x"
+  },
+  "instance.index.select-updatable": {
+    "message": "Виберіть Оновлюваний"
+  },
+  "project.about.links.donate.paypal": {
+    "defaultMessage": "Пожертвуйте через PayPal"
+  },
+  "project-card.environment.server": {
+    "defaultMessage": "Сервер"
+  },
+  "label.created-ago": {
+    "defaultMessage": "Created {ago}"
+  },
+  "instances.content-install.install-button": {
+    "defaultMessage": "встановити"
+  },
+  "tag.loader.ornithe": {
+    "defaultMessage": "Орніт"
+  },
+  "instance.worlds.remove-server.description": {
+    "message": "'{name}'{address} буде видалено з вашого списку, у тому числі в грі, і не буде можливості відновити його."
+  },
+  "content.selection-bar.bulk.deleting-waiting": {
+    "defaultMessage": "Видалення {contentType}..."
+  },
+  "app.settings.tabs.java-installations": {
+    "message": "Інсталяції Java"
+  },
+  "instance.settings.tabs.general.edit-icon.select": {
+    "message": "Виберіть значок"
+  },
+  "instance.logs.crash.analyze": {
+    "message": "Проаналізуйте журнал збоїв"
+  },
+  "label.select-all": {
+    "defaultMessage": "Вибрати все"
+  },
+  "follow": {
+    "message": "Слідуйте"
+  },
+  "action.try-again": {
+    "message": "Спробуйте знову"
+  },
+  "servers.backups.admonition.backup-queued.description": {
+    "defaultMessage": "{backupName} поставлено в чергу та незабаром розпочнеться."
+  },
+  "accounts-card.player-name-or-email-placeholder": {
+    "message": "Ваше ім'я гравця або електронна адреса тут..."
+  },
+  "app.nav.syncing": {
+    "message": "Синхронізація"
+  },
+  "search.filter.locked.default.title": {
+    "defaultMessage": "{type} заблоковано"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "Чернетка"
+  },
+  "modal.add-payment-method.title": {
+    "defaultMessage": "Додавання способу оплати"
+  },
+  "tag.category.transportation": {
+    "defaultMessage": "Транспорт"
+  },
+  "servers.backups.admonition.restore-failed.title": {
+    "defaultMessage": "Не вдалося відновити з резервної копії"
+  },
+  "app.settings.footer.base-version": {
+    "message": "На основі Modrinth App {version}"
+  },
+  "instance.server-modal.resource-pack": {
+    "message": "Пакет ресурсів"
+  },
+  "servers.purchase.step.plan.most-popular": {
+    "defaultMessage": "Найпопулярніший"
+  },
+  "creation-flow.final.gamemode.hardcore": {
+    "defaultMessage": "Хардкор"
+  },
+  "tag.category.anarchy": {
+    "defaultMessage": "Анархія"
+  },
+  "tag.category.adventure-mode": {
+    "defaultMessage": "Режим пригод"
+  },
+  "installation-settings.edit-installation.title": {
+    "defaultMessage": "Редагувати встановлення"
+  },
+  "instance.worlds.game_mode.unknown": {
+    "defaultMessage": "Невідомий режим гри"
+  },
+  "instances.updater-modal.warning-web": {
+    "defaultMessage": "Оновлення може зламати ваш світ. Спочатку перегляньте журнали змін версій і створіть резервну копію."
+  },
+  "grid-display.option.name": {
+    "message": "Ім'я"
+  },
+  "browse.install.installed": {
+    "message": "встановлено"
+  },
+  "label.dashboard": {
+    "defaultMessage": "Приладова панель"
+  },
+  "instances.modpack-content-modal.search-placeholder": {
+    "defaultMessage": "Пошук {count, number} {count, plural, one {project} other {projects}}"
+  },
+  "instance.confirm-repair.header": {
+    "defaultMessage": "Відновлення {type, select, server {server} other {instance}}"
+  },
+  "instances.content-install.name-label": {
+    "defaultMessage": "Ім'я"
+  },
+  "instances.updater-modal.no-versions": {
+    "defaultMessage": "Версій не знайдено"
+  },
+  "input.select-version.placeholder": {
+    "defaultMessage": "Виберіть версію"
+  },
+  "content.diff-modal.diff-type.added": {
+    "defaultMessage": "Додано (залежність)"
+  },
+  "skins.arm-style": {
+    "message": "Рука стиль"
+  },
+  "browse.sort.label": {
+    "message": "Сортувати за"
+  },
+  "instance.logs.crash.api-key": {
+    "message": "Ключ API"
+  },
+  "installation-settings.linked-instance.title": {
+    "defaultMessage": "Пов’язаний {projectType, select, server {server project} other {modpack}}"
+  },
+  "project-type.modpack.lowercase": {
+    "defaultMessage": "{count, plural, one {modpack} other {modpacks}}"
+  },
+  "button.change-version": {
+    "defaultMessage": "Змінити версію"
+  },
+  "button.save-changes": {
+    "defaultMessage": "Зберегти зміни"
+  },
+  "delete": {
+    "message": "Видалити"
+  },
+  "grid-display.label.group": {
+    "message": "Група"
+  },
+  "project.settings.content.title": {
+    "defaultMessage": "Зміст"
+  },
+  "form.label.bank-name": {
+    "defaultMessage": "Назва банку"
+  },
+  "header.category.category": {
+    "defaultMessage": "Категорія"
+  },
+  "browse.type.shader": {
+    "message": "Шейдери"
+  },
+  "app.library.tab.all": {
+    "message": "Всі екземпляри"
+  },
+  "app.update.reload-to-update": {
+    "message": "Перезавантажте, щоб установити оновлення"
+  },
+  "instance.logs.crash.api-tutorial.step3": {
+    "message": "Натисніть Додати ключ API, скопіюйте його та вставте в поле ключа API вище."
+  },
+  "tag.category.low": {
+    "defaultMessage": "Низький"
+  },
+  "label.success": {
+    "defaultMessage": "Успіх"
+  },
+  "tag.loader.liteloader": {
+    "defaultMessage": "LiteLoader"
+  },
+  "instance.create.loader-version.other": {
+    "message": "інші"
+  },
+  "nags.link-shortener-usage.title": {
+    "defaultMessage": "Не використовуйте скорочення посилань"
+  },
+  "servers.setup.upload-warning": {
+    "defaultMessage": "Будь ласка, не закривайте цю сторінку під час завантаження."
+  },
+  "accounts-card.authenticate-elyby": {
+    "message": "Пройдіть автентифікацію за допомогою Ely.by"
+  },
+  "tag.loader.neoforge": {
+    "defaultMessage": "NeoForge"
+  },
+  "creation-flow.world.default-name": {
+    "defaultMessage": "Світ {count}"
+  },
+  "servers.backups.admonition.restore-queued.description": {
+    "defaultMessage": "Відновлення з {backupName} поставлено в чергу та розпочнеться незабаром."
+  },
+  "project-type.plugin.category": {
+    "defaultMessage": "Плагіни"
+  },
+  "settings.pats.title": {
+    "defaultMessage": "Персональні маркери доступу"
+  },
+  "locale.it-IT": {
+    "defaultMessage": "італійська (Італія)"
+  },
+  "instance.settings.tabs.installation.reset-selections": {
+    "message": "Скинути до поточного"
+  },
+  "nags.upload-version.title": {
+    "defaultMessage": "Завантажте версію"
+  },
+  "search.filter.option.show_fewer": {
+    "defaultMessage": "Показувати менше"
+  },
+  "syncing.section.custom-files": {
+    "message": "Користувацькі файли"
+  },
+  "app.home.action.browse-content": {
+    "message": "Перегляд вмісту"
+  },
+  "maintenance.rule-name.placeholder": {
+    "message": "Назва правила"
+  },
+  "instance.index.copy-names": {
+    "message": "Скопіюйте імена"
+  },
+  "settings.privacy.personalized-ads.title": {
+    "message": "Персоналізовані оголошення"
+  },
+  "content.page-layout.no-content-found": {
+    "defaultMessage": "Вміст не знайдено."
+  },
+  "form.label.first-name": {
+    "defaultMessage": "ім'я"
+  },
+  "payment-method.venmo": {
+    "defaultMessage": "Венмо"
+  },
+  "content.selection-bar.bulk.enabling": {
+    "defaultMessage": "Увімкнення {progress}/{total} {contentType}..."
+  },
+  "search.filter_type.project_id": {
+    "defaultMessage": "ID проекту"
+  },
+  "action.refresh": {
+    "message": "Оновити"
+  },
+  "locale.fi-FI": {
+    "defaultMessage": "фінська"
+  },
+  "project.metadata.at": {
+    "message": "в"
+  },
+  "badge.beta": {
+    "defaultMessage": "Бета"
+  },
+  "tag.category.audio": {
+    "defaultMessage": "Аудіо"
+  },
+  "running-app-bar.offline": {
+    "message": "Офлайн"
+  },
+  "project-type.datapack.capital": {
+    "defaultMessage": "{count, plural, one {Data Pack} other {Data Packs}}"
+  },
+  "settings.privacy.discord-rpc.note": {
+    "message": "Примітка. Це не перешкоджатиме інтеграції Discord Rich Presence, що стосується конкретного екземпляра, наприклад, доданій модами. (для вступу в силу потрібно перезапустити програму)"
+  },
+  "tag.category.locale": {
+    "defaultMessage": "Локаль"
+  },
+  "tag.category.plots": {
+    "defaultMessage": "Ділянки"
+  },
+  "browse.install.search": {
+    "message": "Пошук екземплярів..."
+  },
+  "content.page-layout.share.label": {
+    "defaultMessage": "Поділіться"
+  },
+  "tag.category.world-resets": {
+    "defaultMessage": "Перезавантаження світу"
+  },
+  "project.more": {
+    "message": "більше"
+  },
+  "install-confirm.header": {
+    "message": "Ви впевнені?"
+  },
+  "project.about.links.wiki": {
+    "defaultMessage": "Відвідайте wiki"
+  },
+  "payment-method.cashapp": {
+    "defaultMessage": "Додаток «Готівка»."
+  },
+  "tag.category.food": {
+    "defaultMessage": "харчування"
+  },
+  "tag.category.simplistic": {
+    "defaultMessage": "Спрощений"
+  },
+  "creation-flow.import.path.placeholder": {
+    "defaultMessage": "Шлях до панелі запуску..."
+  },
+  "label.scopes": {
+    "defaultMessage": "Області застосування"
+  },
+  "project.modrinth-website": {
+    "message": "Веб-сайт Modrinth"
+  },
+  "tag.category.management": {
+    "defaultMessage": "управління"
+  },
+  "nags.select-tags.description": {
+    "defaultMessage": "Виберіть теги, які правильно застосовуються до вашого проекту, щоб допомогти потрібним користувачам знайти його."
+  },
+  "project.tab.description": {
+    "message": "опис"
+  },
+  "button.downloading": {
+    "defaultMessage": "Завантаження"
+  },
+  "project.error.loading": {
+    "message": "Помилка завантаження проекту"
+  },
+  "app.update-toast.title.download-complete": {
+    "message": "Завантаження завершено"
+  },
+  "instance.settings.tabs.installation.no-connection": {
+    "message": "Неможливо отримати пов’язані деталі пакета модів. Перевірте підключення до Інтернету."
+  },
+  "error-modal.state-init-fix-redownload": {
+    "message": "Повторне завантаження програми."
+  },
+  "skins.arm-style.slim": {
+    "message": "Стрункий"
+  },
+  "servers.backups.admonition.creating-backup.description": {
+    "defaultMessage": "Збереження глобальних даних і конфігурації сервера для {backupName}. Це може тривати кілька хвилин."
+  },
+  "header.category.resolutions": {
+    "defaultMessage": "роздільна здатність"
+  },
+  "app.library.tab.custom": {
+    "message": "Custom"
+  },
+  "app.settings.developer-mode-enabled": {
+    "message": "Режим розробника ввімкнено."
+  },
+  "curseforge-import.name.label": {
+    "message": "Ім'я:"
+  },
+  "row-display.delete-instance.description": {
+    "message": "Якщо ви продовжите, усі дані вашого екземпляра буде видалено. Ви не зможете його відновити."
+  },
+  "instances.updater-modal.loading-changelog": {
+    "defaultMessage": "Завантаження журналу змін..."
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "Клієнт"
+  },
+  "instance.create.type.import-launcher": {
+    "message": "імпорт із панелі запуску"
+  },
+  "nags.add-description.title": {
+    "defaultMessage": "Додайте опис"
+  },
+  "icon-select.replace": {
+    "defaultMessage": "Замінити значок"
+  },
+  "servers.purchase.step.plan.billed": {
+    "defaultMessage": "billed {interval}"
+  },
+  "hosting.content.failed-to-bulk-enable": {
+    "defaultMessage": "Не вдалося ввімкнути вміст"
+  },
+  "instance.mods.share.project-links": {
+    "message": "Посилання на проект"
+  },
+  "project.settings.view.title": {
+    "defaultMessage": "Переглянути"
+  },
+  "label.client-only-warning": {
+    "defaultMessage": "Це клієнтська модифікація, яка може викликати проблеми. Ми залишили його ввімкненим, оскільки деякі автори неправильно позначають середовища, і завантажувач повинен вирішити конфлікт."
+  },
+  "project-type.modpack.capital": {
+    "defaultMessage": "{count, plural, one {Modpack} other {Modpacks}}"
+  },
+  "project.environment.client-or-server-prefers-both.title": {
+    "defaultMessage": "Клієнт і сервер, найкраще, коли встановлено на обох"
+  },
+  "creation-flow.final.gamemode.label": {
+    "defaultMessage": "Ігровий режим"
+  },
+  "settings.default-instance.memory-allocated.title": {
+    "message": "Виділена пам'ять"
+  },
+  "browse.type.mod": {
+    "message": "Моди"
+  },
+  "creation-flow.custom.icon.select": {
+    "defaultMessage": "Виберіть значок"
+  },
+  "tag.category.512x+": {
+    "defaultMessage": "512x або вище"
+  },
+  "project.breadcrumb.version": {
+    "message": "Версія"
+  },
+  "skins.adding": {
+    "message": "Додавання скіна"
+  },
+  "nags.multiple-resolution-tags.description": {
+    "defaultMessage": "Ви вибрали {count, plural, one {# resolution tag} other {# resolution tags}} ({tags}). Пакети ресурсів зазвичай мають лише один тег роздільної здатності, який відповідає їх основній роздільній здатності."
+  },
+  "nags.settings.tags.title": {
+    "defaultMessage": "Відвідайте налаштування тегів"
+  },
+  "friends.heading": {
+    "message": "друзі"
+  },
+  "instance.logs.crash.dropdown": {
+    "message": "Журнал збоїв"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "В очікуванні"
+  },
+  "instance.logs.empty.title": {
+    "message": "Жива гра не виявлена."
+  },
+  "creation-flow.custom.build-number.search": {
+    "defaultMessage": "Шукати номер збірки..."
+  },
+  "refresh": {
+    "message": "Оновити"
+  },
+  "affiliate.create.user.placeholder": {
+    "defaultMessage": "Введіть ім'я користувача..."
+  },
+  "error-modal.migration.text-2": {
+    "message": "що відбувається Наш засіб перевірки міграції неправильно читає змінені міграції, коли закінчення рядків відрізняються (CRLF ↔ LF), що може зробити програму непридатною для використання."
+  },
+  "settings.display.theme.system": {
+    "defaultMessage": "Синхронізація з системою"
+  },
+  "creation-flow.custom.game-version.label": {
+    "defaultMessage": "Ігрова версія"
+  },
+  "instance.settings.tabs.installation.reinstall.button.reinstalling": {
+    "message": "Перевстановлення modpack"
+  },
+  "tag.category.mmo": {
+    "defaultMessage": "MMO"
+  },
+  "instance.mods.action.disable": {
+    "message": "Вимкнути"
+  },
+  "content.inline-backup.backup-complete": {
+    "defaultMessage": "Резервну копію створено успішно"
+  },
+  "syncing.action.add": {
+    "message": "Додати ціль"
+  },
+  "instance.edit-server.title": {
+    "message": "Редагувати сервер"
+  },
+  "notification.error.title": {
+    "defaultMessage": "Сталася помилка"
+  },
+  "label.actions": {
+    "defaultMessage": "Дії"
+  },
+  "tag.loader.legacy-fabric": {
+    "defaultMessage": "Застаріла тканина"
+  },
+  "maintenance.rules.title": {
+    "message": "Правила прибирання"
+  },
+  "nags.feature-gallery-image.title": {
+    "defaultMessage": "Показати зображення галереї"
+  },
+  "settings.resource.app-cache.title": {
+    "message": "Кеш програми"
+  },
+  "instance.worlds.world_in_use": {
+    "message": "Світ використовується"
+  },
+  "project-type.server.category": {
+    "defaultMessage": "Сервери"
+  },
+  "button.reset": {
+    "defaultMessage": "Скинути"
+  },
+  "instances.modpack-content-modal.back-button": {
+    "defaultMessage": "Назад"
+  },
+  "project.settings.environment.verification.verify-text": {
+    "defaultMessage": "Переконайтеся, що середовище цього проекту налаштовано правильно."
+  },
+  "instances.updater-modal.downgrade-to": {
+    "defaultMessage": "Повернутися до {version}"
+  },
+  "instance.index.copy-path": {
+    "message": "Копіювати шлях"
+  },
+  "button.reset-server": {
+    "defaultMessage": "Скинути сервер"
+  },
+  "friends.add-friend.username.title": {
+    "message": "Яке ім'я користувача Modrinth у вашого друга?"
+  },
+  "tag.category.pbr": {
+    "defaultMessage": "PBR"
+  },
+  "action.copy": {
+    "message": "Копія"
+  },
+  "settings.appearance.minimize-launcher.description": {
+    "message": "Згорніть панель запуску під час запуску процесу Minecraft."
+  },
+  "tag.category.cartoon": {
+    "defaultMessage": "Мультфільм"
+  },
+  "app.auth-servers.unreachable.header": {
+    "message": "Неможливо отримати доступ до серверів автентифікації"
+  },
+  "maintenance.rule.screenshots": {
+    "message": "Скріншоти"
+  },
+  "instance.settings.tabs.general.name": {
+    "message": "Ім'я"
+  },
+  "instance.logs.loading": {
+    "message": "Завантаження..."
+  },
+  "nags.select-license.title": {
+    "defaultMessage": "Виберіть ліцензію"
+  },
+  "instance.settings.tabs.window.width.enter": {
+    "message": "Введіть ширину..."
+  },
+  "project.settings.environment.server_only.description": {
+    "defaultMessage": "Усі функції виконуються на стороні сервера та сумісні з клієнтами типу vanilla."
+  },
+  "instance.settings.tabs.general.duplicate-button.tooltip.installing": {
+    "message": "Не можна дублювати під час встановлення."
+  },
+  "servers.purchase.step.region.title": {
+    "defaultMessage": "Регіон"
+  },
+  "friends.friend.cancel-request": {
+    "message": "Скасувати запит"
+  },
+  "error-modal.directory-read-only-text": {
+    "message": "Схоже, Revoria не може писати у вибраний каталог. Налаштуйте дозволи для каталогу та повторіть спробу або скасуйте зміну каталогу."
+  },
+  "app.survey.title": {
+    "message": "Привіт, користувач Modrinth!"
+  },
+  "affiliate.createdBy": {
+    "defaultMessage": "Створено користувачем {user}"
+  },
+  "project.settings.environment.client_and_server.required_both.title": {
+    "defaultMessage": "Обов’язковий для обох"
+  },
+  "app.revoria-update.dismiss": {
+    "message": "Сховати цю версію"
+  },
+  "friends.heading.active": {
+    "message": "Активний"
+  },
+  "project.environment.singleplayer-only.description": {
+    "defaultMessage": "Функціонує лише в одиночній грі або без підключення до сервера для кількох гравців."
+  },
+  "java-selector.failed": {
+    "message": "Не вдалося"
+  },
+  "creation-flow.custom.loader-version.other": {
+    "defaultMessage": "інше"
+  },
+  "project-type.shader.category": {
+    "defaultMessage": "Шейдери"
+  },
+  "locale.es-419": {
+    "defaultMessage": "Іспанська (Латинська Америка)"
+  },
+  "instance.index.time.minute-singular": {
+    "message": "{count} хвилина"
+  },
+  "nags.invalid-license-url.description.malformed": {
+    "defaultMessage": "Схоже, ваша URL-адреса ліцензії має неправильний формат. Укажіть дійсну URL-адресу тексту вашої ліцензії."
+  },
+  "button.update": {
+    "defaultMessage": "оновлення"
+  },
+  "error-modal.copied": {
+    "message": "Скопійовано!"
+  },
+  "settings.display.theme.title": {
+    "defaultMessage": "Кольорова тема"
+  },
+  "project.server.ping.ms": {
+    "defaultMessage": "{ping, number} мс"
+  },
+  "form.placeholder.state": {
+    "defaultMessage": "Введіть штат/провінцію"
+  },
+  "project.environment.client-or-server.description": {
+    "defaultMessage": "Має певну функціональність як на клієнті, так і на сервері, навіть якщо лише частково."
+  },
+  "project.versions.channel.release.symbol": {
+    "defaultMessage": "Р"
+  },
+  "instances.updater-modal.search-placeholder": {
+    "defaultMessage": "Пошук версії..."
+  },
+  "settings.default-instance.wrapper.placeholder": {
+    "message": "Введіть команду оболонки..."
+  },
+  "error-modal.migration.header": {
+    "message": "⚠️ Проблема міграції • Важливе повідомлення"
+  },
+  "maintenance.action.rescan": {
+    "message": "Повторне сканування"
+  },
+  "label.played": {
+    "message": "Зіграно {time}"
+  },
+  "error-modal.title.no-loader": {
+    "message": "Завантажувач не вибрано"
+  },
+  "syncing.title": {
+    "message": "Синхронізація екземпляра"
+  },
+  "instance.create.hint.drag-drop-mrpack": {
+    "message": "Або перетягніть файл .mrpack"
+  },
+  "content.diff-modal.unknown-content-body": {
+    "defaultMessage": "Деякий вміст на вашому сервері не вдалося проаналізувати, і на нього може вплинути ця зміна."
+  },
+  "instance.screenshots.error.copy-clipboard": {
+    "message": "Не вдалося скопіювати в буфер обміну."
+  },
+  "maintenance.summary.total-instances": {
+    "message": "Всього екземплярів"
+  },
+  "project.metadata.version-id": {
+    "message": "ID версії"
+  },
+  "instance.mods.search-projects": {
+    "message": "Search {count} project{suffix}..."
+  },
+  "instance.logs.level.trace": {
+    "message": "Слід"
+  },
+  "settings.default-instance.fullscreen.title": {
+    "message": "Повний екран"
+  },
+  "curseforge-import.checking": {
+    "message": "Перевірка..."
+  },
+  "error-modal.migration.text-3": {
+    "message": "чому Автоматичне перетворення кінців рядка Git і відмінності ОС можуть спричинити ці невідповідності під час збирання."
+  },
+  "skins.sign-in.description": {
+    "message": "Будь ласка, увійдіть у свій обліковий запис Minecraft, щоб використовувати функції керування скінами програми Modrinth."
+  },
+  "project-card.date.published.tooltip": {
+    "defaultMessage": "Published {date}"
+  },
+  "label.available": {
+    "defaultMessage": "Доступно {amount}."
+  },
+  "servers.purchase.step.plan.subtitle": {
+    "defaultMessage": "Виберіть обсяг оперативної пам’яті та характеристики, які відповідають вашим потребам."
+  },
+  "tag.loader.bta-babric": {
+    "defaultMessage": "BTA (Babric)"
+  },
+  "instance.create.action.create": {
+    "message": "Створити"
+  },
+  "content.page-layout.please-wait": {
+    "defaultMessage": "Будь ласка, зачекайте"
+  },
+  "search-card.compat.unsupported": {
+    "message": "Не підтримується"
+  },
+  "search.sort.date-published": {
+    "defaultMessage": "Дата публікації"
+  },
+  "content.confirm-deletion.delete-button": {
+    "defaultMessage": "Видалити {count} {itemType}{count, plural, one {} other {s}}"
+  },
+  "installation-settings.aria.select-platform": {
+    "defaultMessage": "Виберіть платформу"
+  },
+  "tag.category.foliage": {
+    "defaultMessage": "листя"
+  },
+  "instances.confirm-leave-modal.body": {
+    "defaultMessage": "Файли ще завантажуються. Якщо ви покинете цю сторінку, завантаження буде скасовано, і ваші зміни можуть бути втрачені."
+  },
+  "syncing.conflicts-hint": {
+    "message": "Конфлікти означають, що деякі екземпляри все ще мають окремі дані на цьому шляху."
+  },
+  "java-selector.success": {
+    "message": "Успіх"
+  },
+  "project.view-on-curseforge": {
+    "message": "Переглянути на CurseForge"
+  },
+  "instance.settings.tabs.installation.change-version.already-installed.vanilla": {
+    "message": "Vanilla {game_version} уже встановлено"
+  },
+  "nags.missing-alt-text.description": {
+    "defaultMessage": "На деяких ваших зображеннях відсутній альтернативний текст, що важливо для доступності, особливо для користувачів із вадами зору."
+  },
+  "friends.section.heading": {
+    "message": "{title} - {count}"
+  },
+  "project.environment.tag.not-applicable": {
+    "defaultMessage": "N/A"
+  },
+  "instance.logs.crash.refresh": {
+    "message": "Оновити"
+  },
+  "label.delete": {
+    "defaultMessage": "Видалити"
+  },
+  "error-modal.change-directory-permissions": {
+    "message": "Змінити права доступу до каталогу"
+  },
+  "app.nav.library": {
+    "message": "Бібліотека"
+  },
+  "instance.worlds.this-server": {
+    "message": "цей сервер"
+  },
+  "instances.content-install.installed-badge": {
+    "defaultMessage": "встановлено"
+  },
+  "instances.confirm-leave-modal.upload-in-progress": {
+    "defaultMessage": "Виконується завантаження"
+  },
+  "button.retry": {
+    "defaultMessage": "Повторіть спробу"
+  },
+  "servers.purchase.step.payment.description": {
+    "defaultMessage": "Плата ще не стягуватиметься."
+  },
+  "project.tab.versions": {
+    "message": "Версії"
+  },
+  "friends.heading.pending": {
+    "message": "В очікуванні"
+  },
+  "creation-flow.final.difficulty.peaceful": {
+    "defaultMessage": "мирний"
+  },
+  "instance.settings.tabs.general.delete": {
+    "message": "Видалити екземпляр"
+  },
+  "content.diff-modal.unknown-content-header": {
+    "defaultMessage": "Невідомий вміст"
+  },
+  "app.nav.discover": {
+    "message": "Відкрийте для себе вміст"
+  },
+  "input.view.gallery": {
+    "defaultMessage": "Перегляд галереї"
+  },
+  "creation-flow.final.world-seed.placeholder": {
+    "defaultMessage": "Введіть світове насіння"
+  },
+  "content.selection-bar.selected-count": {
+    "defaultMessage": "Вибрано {count} {contentType}"
+  },
+  "accounts-card.enter-2fa-code": {
+    "message": "Введіть свій код 2FA"
+  },
+  "from_file": {
+    "message": "З файлу"
+  },
+  "instance.mods.action.update-pack": {
+    "message": "Пакет оновлень"
+  },
+  "instance.settings.tabs.hooks.description": {
+    "message": "Хуки дозволяють досвідченим користувачам запускати певні системні команди до та після запуску гри."
+  },
+  "tag.loader.mrpack": {
+    "defaultMessage": "Modpack"
+  },
+  "instance.worlds.dont_show_on_home": {
+    "message": "Не показувати на головній сторінці"
+  },
+  "tag.category.fantasy": {
+    "defaultMessage": "Фантазія"
+  },
+  "tag.category.shadows": {
+    "defaultMessage": "Тіні"
+  },
+  "instances.content-install.compatible-count": {
+    "defaultMessage": "{count} сумісний {count, plural, one {instance} other {instances}}"
+  },
+  "locale.zh-TW": {
+    "defaultMessage": "Китайська (традиційна)"
+  },
+  "instance.settings.tabs.installation.change-version.already-installed.modded": {
+    "message": "{platform} {version} для Minecraft {game_version} уже встановлено"
+  },
+  "instance.logs.crash.header": {
+    "message": "Перевірка журналу збоїв"
+  },
+  "crash-reports": {
+    "message": "Звіти про збої"
+  },
+  "curseforge-import.error.import-profile": {
+    "message": "Не вдалося імпортувати профіль. Спробуйте ще раз."
+  },
+  "error-modal.migration.need-fix-now": {
+    "message": "Чи потрібно мені застосовувати виправлення зараз?"
+  },
+  "search-card.installed": {
+    "message": "встановлено"
+  },
+  "installation-settings.unlink.description": {
+    "defaultMessage": "Від’єднання назавжди відключає цей {type, select, server {server} other {instance}} від проекту {projectType, select, server {server} other {modpack}}, що дозволяє змінити завантажувач і версію Minecraft, але ви не отримуватимете майбутні оновлення."
+  },
+  "syncing.shared-folder-hint": {
+    "message": "У цій папці зберігаються справжні спільні файли та папки."
+  },
+  "syncing.notification.removed": {
+    "message": "Ціль синхронізації видалено."
+  },
+  "tag.category.oneblock": {
+    "defaultMessage": "Один блок"
+  },
+  "installation-settings.reinstall-modpack.description": {
+    "defaultMessage": "Повторне встановлення пакета модів скидає {type, select, server {server's} other {instance's}} вміст до початкового стану, видаляючи будь-які модифікації чи вміст, які ви додали."
+  },
+  "syncing.section.default-folders": {
+    "message": "Стандартні папки"
+  },
+  "nags.moderator-feedback.title": {
+    "defaultMessage": "Перегляньте відгук"
+  },
+  "skins.use-default-cape": {
+    "message": "Використовувати накидку за замовчуванням"
+  },
+  "instance.worlds.add-server": {
+    "message": "Додайте сервер"
+  },
+  "export-modal.modpack-name.placeholder": {
+    "message": "Назва Modpack"
+  },
+  "form.placeholder.amount": {
+    "defaultMessage": "Введіть суму"
+  },
+  "instance.filter.disabled": {
+    "message": "Інвалідні проекти"
+  },
+  "browse.context.open-modrinth": {
+    "message": "Відкрито в Модрінт"
+  },
+  "form.placeholder.country": {
+    "defaultMessage": "Виберіть країну"
+  },
+  "error-modal.migration.fix-unix-title": {
+    "message": "Перетворити всі закінчення рядків у файлах міграції на LF (стиль Unix: \\n)"
+  },
+  "error-modal.migration.text-1": {
+    "message": "Ми виявили проблему з нашою системою міграції бази даних, спричинену непослідовними закінченнями рядків між операційними системами (Windows проти macOS/Linux). Це може вплинути на стабільність програми."
+  },
+  "affiliate.creating.button": {
+    "defaultMessage": "Створення партнерського посилання..."
+  },
+  "app.settings.tabs.language": {
+    "message": "Мова"
+  },
+  "grid-display.delete-instance.description": {
+    "message": "Якщо ви продовжите, усі дані вашого екземпляра буде видалено. Ви не зможете його відновити."
+  },
+  "instance.create.select-icon": {
+    "message": "Виберіть значок"
+  },
+  "settings.language.platform.site": {
+    "defaultMessage": "сайт"
+  },
+  "locale.fil-PH": {
+    "defaultMessage": "філіппінець"
+  },
+  "creation-flow.custom.loader.label.content": {
+    "defaultMessage": "Завантажувач вмісту"
+  },
+  "project.about.compatibility.environments.dedicated-servers-only": {
+    "defaultMessage": "Лише виділені сервери"
+  },
+  "creation-flow.common.optional": {
+    "defaultMessage": "Додатково"
+  },
+  "instance.settings.tabs.installation.install": {
+    "message": "встановити"
+  },
+  "locale.es-ES": {
+    "defaultMessage": "Іспанська (Іспанія)"
+  },
+  "settings.display.theme.dark": {
+    "defaultMessage": "Темний"
+  },
+  "label.loading": {
+    "defaultMessage": "Завантаження..."
+  },
+  "grid-display.group-dropdown-name": {
+    "message": "Груповий спадний список"
+  },
+  "input.search.placeholder": {
+    "defaultMessage": "пошук..."
+  },
+  "label.confirm-password": {
+    "defaultMessage": "Підтвердьте пароль"
+  },
+  "locale.ms-MY": {
+    "defaultMessage": "малайська"
+  },
+  "project.install.action": {
+    "message": "встановити"
+  },
+  "project-type.shader.capital": {
+    "defaultMessage": "{count, plural, one {Shader} other {Shaders}}"
+  },
+  "content.page-layout.share.project-names": {
+    "defaultMessage": "Назви проектів"
+  },
+  "tag.category.models": {
+    "defaultMessage": "Моделі"
+  },
+  "project.about.links.site": {
+    "defaultMessage": "Відвідайте веб-сайт"
+  },
+  "copy-link": {
+    "message": "Копіювати посилання"
+  },
+  "nags.upload-gallery-image.description": {
+    "defaultMessage": "Потрібне принаймні одне зображення галереї, щоб продемонструвати вміст вашого {type, select, resourcepack {resource pack, except for audio or localization packs. If this describes your pack, please select the appropriate tag} shader {shader} other {project}}."
+  },
+  "instance.settings.tabs.hooks.pre-launch.description": {
+    "message": "Виконується перед запуском примірника."
+  },
+  "servers.notice.level.info.name": {
+    "defaultMessage": "Інформація"
+  },
+  "tag.category.modded": {
+    "defaultMessage": "Модифікований"
+  },
+  "creation-flow.import.search.placeholder": {
+    "defaultMessage": "Ім'я екземпляра пошуку"
+  },
+  "creation-flow.action.create-world": {
+    "defaultMessage": "Створити світ"
+  },
+  "creation-flow.action.create-instance": {
+    "defaultMessage": "Створити екземпляр"
+  },
+  "tag.category.16x": {
+    "defaultMessage": "16x"
+  },
+  "project.environment.client-or-server-prefers-both.description": {
+    "defaultMessage": "Має певну функціональність як на клієнті, так і на сервері, навіть якщо лише частково. Встановлення його на обох забезпечує найкращий досвід."
+  },
+  "creation-flow.import.add-launcher-path": {
+    "defaultMessage": "Додати шлях запуску"
+  },
+  "nags.missing-alt-text.title": {
+    "defaultMessage": "Додайте альтернативний текст зображення"
+  },
+  "form.placeholder.bank-name-dropdown": {
+    "defaultMessage": "Виберіть назву банку"
+  },
+  "servers.setup.reinstall-failed.text": {
+    "defaultMessage": "Під час перевстановлення сталася неочікувана помилка. Спробуйте пізніше."
+  },
+  "tag.category.media": {
+    "defaultMessage": "ЗМІ"
+  },
+  "label.no-items": {
+    "defaultMessage": "Немає елементів"
+  },
+  "project.environment.client-only.title": {
+    "defaultMessage": "Лише на стороні клієнта"
+  },
+  "tag.category.crossplay": {
+    "defaultMessage": "Кроссплей"
+  },
+  "nags.invalid-license-url.title": {
+    "defaultMessage": "Додайте дійсне посилання на ліцензію"
+  },
+  "nags.add-icon.title": {
+    "defaultMessage": "Додайте значок"
+  },
+  "export-modal.select-files-heading": {
+    "message": "Виберіть файли та папки для включення в пакет"
+  },
+  "tag.category.high": {
+    "defaultMessage": "Високий"
+  },
+  "accounts-card.log-out": {
+    "message": "Вийти"
+  },
+  "app.home.welcome.back": {
+    "message": "Ласкаво просимо назад!"
+  },
+  "skins.upload.back-to-options": {
+    "message": "Повернутися до параметрів"
+  },
+  "content.selection-bar.bulk.updating-waiting": {
+    "defaultMessage": "Оновлення {contentType}..."
+  },
+  "nags.long-headers.title": {
+    "defaultMessage": "Скоротіть заголовки"
+  },
+  "input.search-version.placeholder": {
+    "defaultMessage": "Пошук версії..."
+  },
+  "label.servers": {
+    "defaultMessage": "Сервери"
+  },
+  "hosting.specs.burst.tooltip": {
+    "defaultMessage": "Розрив ЦП дозволяє вашому серверу тимчасово використовувати додаткові потоки, щоб зменшити стрибки TPS. Натисніть, щоб дізнатися більше."
+  },
+  "form.placeholder.first-name": {
+    "defaultMessage": "Введіть ім'я"
+  },
+  "servers.notice.heading.attention": {
+    "defaultMessage": "Увага"
+  },
+  "nags.verify-external-links.description": {
+    "defaultMessage": "Деякі з ваших зовнішніх посилань можуть використовувати домени, які не підходять для такого типу посилань."
+  },
+  "label.public": {
+    "defaultMessage": "Громадський"
+  },
+  "project.about.details.published": {
+    "defaultMessage": "Published {date}"
+  },
+  "app.survey.take": {
+    "message": "Пройти опитування"
+  },
+  "label.rejected": {
+    "defaultMessage": "Відхилено"
+  },
+  "instance.index.time.minute-plural": {
+    "message": "{count} хвилин"
+  },
+  "form.label.email": {
+    "defaultMessage": "Електронна пошта"
+  },
+  "changelog.product.web": {
+    "defaultMessage": "Веб-сайт"
+  },
+  "installation-settings.aria.select-game-version": {
+    "defaultMessage": "Виберіть версію гри"
+  },
+  "instances.updater-modal.update-to": {
+    "defaultMessage": "Оновити до {version}"
+  },
+  "project-type.plugin.lowercase": {
+    "defaultMessage": "{count, plural, one {plugin} other {plugins}}"
+  },
+  "install-confirm.installing": {
+    "message": "Встановлення"
+  },
+  "tag.category.themed": {
+    "defaultMessage": "Тематичний"
+  },
+  "label.details": {
+    "defaultMessage": "Подробиці"
+  },
+  "instance.worlds.no_contact": {
+    "message": "Не вдалося зв'язатися з сервером"
+  },
+  "app.update-toast.title": {
+    "message": "Доступне оновлення"
+  },
+  "instance.settings.tabs.general.delete.description": {
+    "message": "Назавжди видаляє екземпляр із вашого пристрою, включаючи ваші світи, конфігурації та весь встановлений вміст. Будьте обережні, оскільки після видалення екземпляра його неможливо відновити."
+  },
+  "instance.mods.action.update-all": {
+    "message": "Оновити все"
+  },
+  "instance.logs.copy": {
+    "message": "Копія"
+  },
+  "creation-flow.final.generator-settings.hint": {
+    "defaultMessage": "Використовується для розширених налаштувань світу, таких як спеціальні шари Superflat."
+  },
+  "project.settings.environment.client_only.title": {
+    "defaultMessage": "Лише на стороні клієнта"
+  },
+  "settings.default-instance.fullscreen.description": {
+    "message": "Перезаписує файл options.txt для запуску на весь екран під час запуску."
+  },
+  "syncing.breadcrumb": {
+    "message": "Синхронізація"
+  },
+  "instance.settings.tabs.general.deleting.button": {
+    "message": "Видалення..."
+  },
+  "instance.settings.tabs.hooks.wrapper.enter": {
+    "message": "Введіть команду оболонки..."
+  },
+  "instance.worlds.cant_connect": {
+    "message": "Не вдається підключитися до сервера"
+  },
+  "open-instance": {
+    "message": "Відкритий екземпляр"
+  },
+  "locale.pt-BR": {
+    "defaultMessage": "португальська (Бразилія)"
+  },
+  "instances.updater-modal.badge.incompatible": {
+    "defaultMessage": "Несумісні"
+  },
+  "affiliate.viewAnalytics": {
+    "defaultMessage": "Переглянути аналітику"
+  },
+  "form.label.last-name": {
+    "defaultMessage": "Прізвище"
+  },
+  "button.copy-permalink": {
+    "defaultMessage": "Скопіюйте постійне посилання"
+  },
+  "hosting.content.failed-to-update": {
+    "defaultMessage": "Не вдалося оновити"
+  },
+  "instance.breadcrumb.screenshots": {
+    "message": "Скріншоти"
+  },
+  "instance.logs.open-folder": {
+    "message": "Відкрити папку"
+  },
+  "syncing.target-type.folder": {
+    "message": "Папка"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "Команда Модрінт"
+  },
+  "app.nav.servers": {
+    "message": "Сервери"
+  },
+  "settings.appearance.color-theme.title": {
+    "message": "Кольорова тема"
+  },
+  "tag.loader.vanilla": {
+    "defaultMessage": "Ванільний шейдер"
+  },
+  "app.nav.home": {
+    "message": "додому"
+  },
+  "label.email-username": {
+    "defaultMessage": "Електронна пошта або ім'я користувача"
+  },
+  "error-modal.title.state-init": {
+    "message": "Помилка ініціалізації Revoria"
+  },
+  "instance.settings.tabs.installation.unlink.description": {
+    "message": "Цей екземпляр пов’язано з пакетом модів, що означає, що моди не можна оновлювати, і ви не можете змінити завантажувач модів або версію Minecraft. Від’єднання назавжди від’єднає цей екземпляр від modpack."
+  },
+  "servers.purchase.step.review.title": {
+    "defaultMessage": "огляд"
+  },
+  "instance.add-server.resource-pack.prompt": {
+    "message": "Підкажіть"
+  },
+  "settings.privacy.telemetry.description": {
+    "message": "Modrinth збирає анонімну аналітику та дані про використання, щоб покращити наш досвід користувачів і персоналізувати ваш досвід. Вимкнувши цю опцію, ви відмовляєтеся, і ваші дані більше не збиратимуться."
+  },
+  "button.unlink-modpack": {
+    "defaultMessage": "Від’єднати modpack"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "A {type}"
+  },
+  "instance.logs.share.header": {
+    "message": "Поділитися журналом"
+  },
+  "browse.install.action": {
+    "message": "встановити"
+  },
+  "project-card.by": {
+    "defaultMessage": "за"
+  },
+  "tag.category.creative-mode": {
+    "defaultMessage": "Творчий режим"
+  },
+  "instance.index.play": {
+    "message": "грати"
+  },
+  "project.metadata.loaders": {
+    "message": "Вантажники"
+  },
+  "search.filter.locked.default": {
+    "defaultMessage": "Фільтр заблоковано"
+  },
+  "project.visibility.unlisted": {
+    "defaultMessage": "Не в списку"
+  },
+  "skins.cape.none": {
+    "message": "Без накидки"
+  },
+  "content.inline-backup.warning-body": {
+    "defaultMessage": "Ми рекомендуємо створити резервну копію, перш ніж продовжити, щоб ви могли відновити {type, select, server {world} other {instance}}, якщо щось зламається."
+  },
+  "button.sign-in": {
+    "defaultMessage": "Увійдіть"
+  },
+  "error-modal.network-issues": {
+    "message": "Проблеми з мережею"
+  },
+  "payment-method.visa": {
+    "defaultMessage": "Віза"
+  },
+  "app.library.create": {
+    "message": "Створити"
+  },
+  "nags.versions.title": {
+    "defaultMessage": "Відвідайте сторінку версій"
+  },
+  "locale.he-IL": {
+    "defaultMessage": "іврит"
+  },
+  "app.settings.tabs.appearance": {
+    "message": "Зовнішній вигляд"
+  },
+  "project-type.resourcepack.category": {
+    "defaultMessage": "Пакети ресурсів"
+  },
+  "action.close": {
+    "message": "Закрити"
+  },
+  "instance.edit-world.reset-icon": {
+    "message": "Значок скидання"
+  },
+  "project.environment.client-only-server-optional.description": {
+    "defaultMessage": "Більшість функціональних можливостей є на стороні клієнта, але їх встановлення на сервері забезпечує розширену функціональність."
+  },
+  "error-modal.title.error-occurred": {
+    "message": "Сталася помилка"
+  },
+  "nags.visit-links-settings.title": {
+    "defaultMessage": "Відвідайте налаштування посилань"
+  },
+  "content.page-layout.failed-to-load": {
+    "defaultMessage": "Не вдалося завантажити вміст"
+  },
+  "content.confirm-deletion.admonition-header": {
+    "defaultMessage": "Попередження про видалення"
+  },
+  "project.settings.environment.server_only.title": {
+    "defaultMessage": "Лише на стороні сервера"
+  },
+  "syncing.add-placeholder": {
+    "message": "resourcepacks або options.txt"
+  },
+  "action.continue": {
+    "message": "Продовжити"
+  },
+  "creation-flow.custom.name.placeholder": {
+    "defaultMessage": "Введіть назву екземпляра"
+  },
+  "search.filter.locked.default.description": {
+    "defaultMessage": "Якщо розблокувати цей фільтр, ви можете встановити несумісний вміст."
+  },
+  "settings.resource.purge-cache.proceed": {
+    "message": "Очистити кеш"
+  },
+  "project.visibility.draft": {
+    "defaultMessage": "Чернетка"
+  },
+  "payment-method.eftpos": {
+    "defaultMessage": "EFTPOS"
+  },
+  "hosting.specs.burst": {
+    "defaultMessage": "Вибухає до {cpus} ЦП"
+  },
+  "maintenance.cleanup.safe-to-remove": {
+    "message": "Безпечно видалити"
+  },
+  "search.sort.downloads": {
+    "defaultMessage": "Завантаження"
+  },
+  "instance.logs.crash.fail": {
+    "message": "Не вдалося отримати відповідь від моделі."
+  },
+  "maintenance.action.clear-selection": {
+    "message": "ясно"
+  },
+  "creation-flow.custom.loader-version.label": {
+    "defaultMessage": "Версія завантажувача"
+  },
+  "instance.logs.delete": {
+    "message": "Видалити"
+  },
+  "instance.create.show-all-versions": {
+    "message": "Показати всі версії"
+  },
+  "error-modal.title.sign-in": {
+    "message": "Увійдіть в Minecraft"
+  },
+  "label.username": {
+    "defaultMessage": "Ім'я користувача"
+  },
+  "project-card.environment.client": {
+    "defaultMessage": "Клієнт"
+  },
+  "search-card.installing": {
+    "message": "Встановлення"
+  },
+  "hosting.content.failed-to-bulk-update": {
+    "defaultMessage": "Не вдалося оновити вміст"
+  },
+  "project.settings.environment.title": {
+    "defaultMessage": "Навколишнє середовище"
+  },
+  "accounts-card.error-while-logging-in": {
+    "message": "Під час входу сталася помилка."
+  },
+  "project-type.project.category": {
+    "defaultMessage": "Проекти"
+  },
+  "instance.logs.clear": {
+    "message": "ясно"
+  },
+  "export-modal.header": {
+    "message": "Експорт modpack"
+  },
+  "browse.install.title": {
+    "message": "Встановити проект в екземпляр"
+  },
+  "hosting.content.failed-to-load-versions": {
+    "defaultMessage": "Не вдалося завантажити версії"
+  },
+  "creation-flow.modpack.import": {
+    "defaultMessage": "Імпорт modpack"
+  },
+  "accounts-card.error-input-offline-header": {
+    "message": "Помилка під час продовження події введення з автономним обліковим записом"
+  },
+  "instance.settings.tabs.installation.reinstall.description": {
+    "message": "Скидає вміст екземпляра до початкового стану, видаляючи будь-які модифікації чи вміст, які ви додали поверх оригінального модпакета."
+  },
+  "label.rewards-program-terms-agreement": {
+    "defaultMessage": "Я приймаю <terms-link>Умови програми винагород</terms-link>"
+  },
+  "friends.friend.view-profile": {
+    "message": "Переглянути профіль"
+  },
+  "remove": {
+    "message": "видалити"
+  },
+  "instances.content-install.hide-snapshots": {
+    "defaultMessage": "Приховати знімки"
+  },
+  "creation-flow.action.continue": {
+    "defaultMessage": "Продовжити"
+  },
+  "skins.upload.option.username.desc": {
+    "message": "Отримайте скін з імені користувача Minecraft."
+  },
+  "tag.loader.folia": {
+    "defaultMessage": "Фолія"
+  },
+  "locale.id-ID": {
+    "defaultMessage": "індонезійська"
+  },
+  "nags.gallery.title": {
+    "defaultMessage": "Відвідайте сторінку галереї"
+  },
+  "friends.sign-in-to-add-friends": {
+    "message": "<link>Увійдіть до облікового запису Modrinth</link>, щоб додати друзів і побачити, у що вони грають!"
+  },
+  "project.visibility.unknown": {
+    "defaultMessage": "Невідомий"
+  },
+  "app.settings.downloading": {
+    "message": "Завантаження v{version}"
+  },
+  "settings.language.languages.search-field.placeholder": {
+    "defaultMessage": "Пошук мови..."
+  },
+  "nags.summary-too-short.description": {
+    "defaultMessage": "Ваше резюме: {length, plural, one {# character} other {# characters}}. Рекомендується принаймні {minChars, plural, one {# character} other {# characters}} для створення інформативного та привабливого резюме."
+  },
+  "instance.server-modal.name": {
+    "message": "Ім'я"
+  },
+  "syncing.description": {
+    "message": "Спільний доступ до однієї справжньої папки чи файлу для всіх екземплярів."
+  },
+  "form.label.postal-code": {
+    "defaultMessage": "Поштовий індекс"
+  },
+  "instance.screenshots.error.open-folder": {
+    "message": "Не вдалося відкрити папку зі знімками екрана."
+  },
+  "syncing.shared-folder": {
+    "message": "Спільна папка даних"
+  },
+  "instances.updater-modal.warning-app": {
+    "defaultMessage": "Оновлення може зламати ваш екземпляр. Спочатку перегляньте журнали змін версій і створіть резервну копію."
+  },
+  "instance.settings.tabs.installation.game-version": {
+    "message": "Ігрова версія"
+  },
+  "search.filter.locked.default.sync": {
+    "defaultMessage": "Фільтр синхронізації"
+  },
+  "curseforge-import.error.fetch-metadata": {
+    "message": "Не вдалося отримати інформацію профілю. Перевірте код і повторіть спробу."
+  },
+  "content.page-layout.loading": {
+    "defaultMessage": "Завантаження вмісту..."
+  },
+  "edit": {
+    "message": "Редагувати"
+  },
+  "accounts-card.elyby-requested-2fa": {
+    "message": "Ely.by запросив код 2FA для автентифікації"
+  },
+  "instance.settings.tabs.installation.unlink.confirm.description": {
+    "message": "Якщо ви продовжите, ви не зможете повторно зв’язати його, не створивши повністю новий екземпляр. Ви більше не отримуватимете оновлення modpack, і це стане звичайним явищем."
+  },
+  "instance.edit-world.placeholder-name": {
+    "message": "Світ Майнкрафт"
+  },
+  "creation-flow.final.game-version.placeholder": {
+    "defaultMessage": "Виберіть версію гри"
+  },
+  "skins.saved.heading": {
+    "message": "Збережені скіни"
+  },
+  "instance.logs.level.debug": {
+    "message": "Налагодження"
+  },
+  "error-modal.migration.fix-success": {
+    "message": "✅ Виправлення міграції успішно застосовано. Будь ласка, перезапустіть лаунчер і спробуйте увійти в гру :)"
+  },
+  "label.delete-immediately": {
+    "defaultMessage": "Негайно видалити"
+  },
+  "form.placeholder.address": {
+    "defaultMessage": "Введіть адресу"
+  },
+  "nags.add-links.title": {
+    "defaultMessage": "Додайте зовнішні посилання"
+  },
+  "project.about.compatibility.title": {
+    "defaultMessage": "Сумісність"
+  },
+  "servers.region.prompt": {
+    "defaultMessage": "Де б ви хотіли, щоб ваш сервер був розташований?"
+  },
+  "content.confirm-unlink.header": {
+    "defaultMessage": "Від’єднати modpack"
+  },
+  "app.settings.tabs.privacy": {
+    "message": "Конфіденційність"
+  },
+  "creation-flow.final.gamemode.survival": {
+    "defaultMessage": "Виживання"
+  },
+  "instance.create.profile-name": {
+    "message": "Ім'я профілю"
+  },
+  "creation-flow.final.world-type.superflat": {
+    "defaultMessage": "Суперплоский"
+  },
+  "instance.confirm-repair.body": {
+    "defaultMessage": "Repairing reinstalls the loader and Minecraft dependencies without deleting your content. This may resolve issues if your {type, select, server {server is not starting correctly} other {game is not launching due to launcher-related errors}}."
+  },
+  "instance.logs.live": {
+    "message": "Живий журнал"
+  },
+  "instance.index.export-modpack": {
+    "message": "Експорт modpack"
+  },
+  "settings.language.description": {
+    "defaultMessage": "Choose your preferred language for the {platform}. Translations are contributed by volunteers <crowdin-link>on Crowdin</crowdin-link>."
+  },
+  "error-modal.migration.try-other-fix": {
+    "message": "Якщо проблема не зникає, спробуйте інше рішення."
+  },
+  "tag.category.utility": {
+    "defaultMessage": "Утиліта"
+  },
+  "grid-display.instance-count.one": {
+    "message": "{count} екземпляр"
+  },
+  "accounts-card.add-offline-account": {
+    "message": "Додати обліковий запис офлайн"
+  },
+  "settings.applications.title": {
+    "defaultMessage": "Ваші програми"
+  },
+  "locale.th-TH": {
+    "defaultMessage": "тайська"
+  },
+  "instance.confirm-reinstall.admonition-body": {
+    "defaultMessage": "Перевстановлення призведе до скидання всього встановленого або зміненого вмісту до того, що надано пакетом модів, видалення будь-яких модів або вмісту, які ви додали поверх початкової інсталяції."
+  },
+  "search.filter_type.license.open_source": {
+    "defaultMessage": "Відкритий код"
+  },
+  "installation-settings.repair.instance-title": {
+    "defaultMessage": "Ремонтний екземпляр"
+  },
+  "settings.display.theme.retro": {
+    "defaultMessage": "Ретро"
+  },
+  "instance.worlds.incompatible-version": {
+    "message": "Несумісна версія {version}"
+  },
+  "content.page-layout.sort.alphabetical": {
+    "defaultMessage": "Алфавітний"
+  },
+  "instance.settings.tabs.window": {
+    "message": "Вікно"
+  },
+  "skins.action.delete-skin.tooltip": {
+    "message": "Видалити шкіру"
+  },
+  "project-type.project.lowercase": {
+    "defaultMessage": "{count, plural, one {project} other {projects}}"
+  },
+  "content.diff-modal.added-count": {
+    "defaultMessage": "Додано {count}"
+  },
+  "syncing.action.apply": {
+    "message": "Застосовувати до всіх інстанцій"
+  },
+  "tag.category.bosses": {
+    "defaultMessage": "Боси"
+  },
+  "affiliate.create.title.placeholder": {
+    "defaultMessage": "напр. YouTube"
+  },
+  "nags.edit-description.title": {
+    "defaultMessage": "Редагувати опис"
+  },
+  "label.error": {
+    "defaultMessage": "Помилка"
+  },
+  "tag.category.whitelisted": {
+    "defaultMessage": "У білому списку"
+  },
+  "settings.default-instance.width.description": {
+    "message": "Ширина вікна гри при запуску."
+  },
+  "nags.settings.license.title": {
+    "defaultMessage": "Відвідайте налаштування ліцензії"
+  },
+  "content.selection-bar.selected-count-simple": {
+    "defaultMessage": "Вибрано {count, number}"
+  },
+  "settings.authorized-apps.title": {
+    "defaultMessage": "Авторизовані програми"
+  },
+  "instance.mods.tooltip.remove": {
+    "message": "видалити"
+  },
+  "project.visibility.private": {
+    "defaultMessage": "Приватний"
+  },
+  "instance.worlds.copy_address": {
+    "message": "Скопіюйте адресу"
+  },
+  "project.metadata.release-channel": {
+    "message": "Канал випуску"
+  },
+  "error-modal.title.change-directory": {
+    "message": "Не вдалося змінити каталог програми"
+  },
+  "grid-display.instance-count.few": {
+    "message": "{count} випадків"
+  },
+  "app.library.empty.create-new": {
+    "message": "Створити новий екземпляр"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "ЗАЧИНЕНО"
+  },
+  "servers.setup.uploading-modpack.header": {
+    "defaultMessage": "Завантаження modpack"
+  },
+  "nags.upload-gallery-image.title": {
+    "defaultMessage": "Завантажте зображення галереї"
+  },
+  "project.download-count-tooltip": {
+    "defaultMessage": "{count, number} {count, plural, one {download} other {downloads}}"
+  },
+  "instance.worlds.incompatible_server": {
+    "message": "Сервер несумісний"
+  },
+  "tag.category.technical": {
+    "defaultMessage": "технічний"
+  },
+  "browse.install.installing": {
+    "message": "Встановлення..."
+  },
+  "button.close": {
+    "defaultMessage": "Закрити"
+  },
+  "nags.moderation.title": {
+    "defaultMessage": "Відвідайте тему модерації"
+  },
+  "search.filter.locked.instance.sync": {
+    "message": "Синхронізувати з примірником"
+  },
+  "instance.settings.tabs.installation.tooltip.action.install": {
+    "message": "встановити"
+  },
+  "content.page-layout.share.markdown-links": {
+    "defaultMessage": "Посилання на розмітку"
+  },
+  "maintenance.section.memory-manager.title": {
+    "message": "Менеджер пам'яті"
+  },
+  "content.selection-bar.bulk.disabling": {
+    "defaultMessage": "Вимкнення {progress}/{total} {contentType}..."
+  },
+  "tag.category.quests": {
+    "defaultMessage": "Квести"
+  },
+  "project.action.report": {
+    "message": "звіт"
+  },
+  "settings.language.categories.default": {
+    "defaultMessage": "Стандартні мови"
+  },
+  "settings.appearance.advanced-rendering.title": {
+    "message": "Розширений рендеринг"
+  },
+  "creation-flow.custom.snapshots.hide": {
+    "defaultMessage": "Приховати знімки"
+  },
+  "changelog.product.api": {
+    "defaultMessage": "API"
+  },
+  "content.modpack-card.content-hint-description": {
+    "defaultMessage": "Вміст вашого modpack тепер можна знайти тут!"
+  },
+  "app.settings.tabs.feature-flags": {
+    "message": "Прапори функцій"
+  },
+  "instance.settings.tabs.installation": {
+    "message": "монтаж"
+  },
+  "project.settings.environment.client_and_server.optional_server.title": {
+    "defaultMessage": "Додатково на сервері"
+  },
+  "instance.settings.tabs.window.height.description": {
+    "message": "Висота вікна гри при запуску."
+  },
+  "payment-method.charity-plural": {
+    "defaultMessage": "Благодійність"
+  },
+  "button.switch-version": {
+    "defaultMessage": "Змінна версія"
+  },
+  "creation-flow.final.difficulty.label": {
+    "defaultMessage": "Складність"
+  },
+  "content.selection-bar.enable": {
+    "defaultMessage": "Увімкнути"
+  },
+  "settings.appearance.color-theme.description": {
+    "message": "Виберіть потрібну кольорову тему для програми Modrinth."
+  },
+  "tag.category.potato": {
+    "defaultMessage": "Картопля"
+  },
+  "error-modal.migration.fix-unix-button": {
+    "message": "Застосувати виправлення для Unix-подібних систем (Debian, Ubuntu, macOS та інших)"
+  },
+  "instance.index.open-in-modrinth": {
+    "message": "Відкрито в Модрінт"
+  },
+  "instances.updater-modal.show-incompatible": {
+    "defaultMessage": "Показати несумісне"
+  },
+  "project.about.details.submitted": {
+    "defaultMessage": "Submitted {date}"
+  },
+  "instance.settings.tabs.installation.show-all-versions": {
+    "message": "Показати всі версії"
+  },
+  "app.library.tab.downloaded": {
+    "message": "Завантажено"
+  },
+  "nags.summary-same-as-title.title": {
+    "defaultMessage": "Зробіть резюме унікальним"
+  },
+  "error-modal.sign-in-to-minecraft": {
+    "message": "Увійдіть в Minecraft"
+  },
+  "maintenance.rule.new": {
+    "message": "Нове правило"
+  },
+  "form.label.address-line-2": {
+    "defaultMessage": "Рядок адреси 2 (необов’язково)"
+  },
+  "instance.create.type.custom": {
+    "message": "звичай"
+  },
+  "project.visibility.rejected": {
+    "defaultMessage": "Відхилено"
+  },
+  "instance.settings.tabs.java.environment-variables": {
+    "message": "Змінні середовища"
+  },
+  "settings.language.title": {
+    "defaultMessage": "Мова"
+  },
+  "instance.screenshots.empty-title": {
+    "message": "Скріншотів ще немає"
+  },
+  "creation-flow.final.generate-structures.title": {
+    "defaultMessage": "Генеруйте структури"
+  },
+  "browse.type.resourcepack": {
+    "message": "Пакети ресурсів"
+  },
+  "creation-flow.title.world": {
+    "defaultMessage": "Створити світ"
+  },
+  "settings.appearance.launcher-language.option.english": {
+    "message": "англійська"
+  },
+  "grid-display.option.group": {
+    "message": "Група"
+  },
+  "instance.settings.title": {
+    "message": "Налаштування"
+  },
+  "tag.loader.quilt": {
+    "defaultMessage": "Ковдра"
+  },
+  "settings.profile.title": {
+    "defaultMessage": "Загальнодоступний профіль"
+  },
+  "settings.appearance.default-landing.library": {
+    "message": "Бібліотека"
+  },
+  "instance.logs.share.title": {
+    "message": "Журнал примірників"
+  },
+  "java-selector.install-recommended": {
+    "message": "Встановити"
+  },
+  "content.page-layout.busy-description": {
+    "defaultMessage": "Перш ніж редагувати вміст, дочекайтеся завершення операції."
+  },
+  "settings.default-instance.height.placeholder": {
+    "message": "Введіть висоту..."
+  },
+  "app.revoria-update.body": {
+    "message": "Revoria v{latestVersion} вийшла на GitHub. Зараз ви використовуєте v{currentVersion}."
+  },
+  "instance.server-modal.address": {
+    "message": "Адреса"
+  },
+  "accounts-card.unexpected-error-header": {
+    "message": "Сталася неочікувана помилка"
+  },
+  "button.clear": {
+    "defaultMessage": "ясно"
+  },
+  "instance.settings.tabs.installation.tooltip.cannot-while-installing": {
+    "message": "Неможливо {action} під час встановлення"
+  },
+  "instance.create.warning.select-game-version-first": {
+    "message": "Перш ніж вибрати версію завантажувача, виберіть версію гри"
+  },
+  "project.more-options": {
+    "message": "Більше варіантів"
+  },
+  "modal.open-in-app.get-app": {
+    "defaultMessage": "Отримати додаток Modrinth"
+  },
+  "instance.logs.crash.endpoint": {
+    "message": "Кінцева точка"
+  },
+  "tag.loader.iris": {
+    "defaultMessage": "Ірис"
+  },
+  "label.game-version": {
+    "defaultMessage": "Ігрова версія"
+  },
+  "error-modal.try-signing-in-again": {
+    "message": "Спробуйте ввійти знову"
+  },
+  "instances.content-install.select-icon": {
+    "defaultMessage": "Виберіть значок"
+  },
+  "error-modal.debug-help-support-page": {
+    "message": "наша сторінка підтримки"
+  },
+  "instance.settings.tabs.general.edit-icon.replace": {
+    "message": "Замінити значок"
+  },
+  "nags.settings.links.title": {
+    "defaultMessage": "Відвідайте налаштування посилань"
+  },
+  "creation-flow.final.world-name.label": {
+    "defaultMessage": "Світова назва"
+  },
+  "modal.open-in-app.benefit.launch": {
+    "defaultMessage": "Запустіть гру прямо на сервері"
+  },
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "прийнято"
+  },
+  "instance.settings.tabs.installation.repair.button.repairing": {
+    "message": "ремонт"
+  },
+  "tag.category.magic": {
+    "defaultMessage": "Магія"
+  },
+  "payment-method.amazon_pay": {
+    "defaultMessage": "Amazon Pay"
+  },
+  "creation-flow.custom.game-version.placeholder": {
+    "defaultMessage": "Виберіть версію гри"
+  },
+  "instance.settings.tabs.hooks": {
+    "message": "Пускові гаки"
+  },
+  "project-type.mod.lowercase": {
+    "defaultMessage": "{count, plural, one {mod} other {mods}}"
+  },
+  "url-confirm.installing-version-from-modrinth": {
+    "message": "Встановлення {version} з Modrinth"
+  },
+  "friends.add-friend.title": {
+    "message": "Додавання друга"
+  },
+  "instance.settings.tabs.installation.reinstall.button": {
+    "message": "Перевстановіть modpack"
+  },
+  "modal.add-payment-method.action": {
+    "defaultMessage": "Додати спосіб оплати"
+  },
+  "settings.display.theme.oled": {
+    "defaultMessage": "OLED"
+  },
+  "servers.region.southeast-asia": {
+    "defaultMessage": "Південно-Східна Азія"
+  },
+  "instance.settings.tabs.general.edit-icon.remove": {
+    "message": "Видалити значок"
+  },
+  "content.page-layout.upload-files": {
+    "defaultMessage": "Завантажте файли"
+  },
+  "accounts-card.password-placeholder": {
+    "message": "Ваш пароль тут..."
+  },
+  "instance.logs.level.info": {
+    "message": "Інформація"
+  },
+  "instance.index.enable-selected": {
+    "message": "Увімкнути вибране"
+  },
+  "tag.category.reflections": {
+    "defaultMessage": "Роздуми"
+  },
+  "affiliate.create.header": {
+    "defaultMessage": "Створення нового партнерського коду"
+  },
+  "hosting.content.failed-to-bulk-disable": {
+    "defaultMessage": "Не вдалося вимкнути вміст"
+  },
+  "instance.settings.tabs.window.height": {
+    "message": "Висота"
+  },
+  "servers.notice.level.critical.name": {
+    "defaultMessage": "Критичний"
+  },
+  "servers.purchase.step.plan.title": {
+    "defaultMessage": "План"
+  },
+  "nags.image-heavy-description.title": {
+    "defaultMessage": "Забезпечте доступність"
+  },
+  "search.sort.date-updated": {
+    "defaultMessage": "Дата оновлена"
+  },
+  "settings.privacy.telemetry.title": {
+    "message": "Телеметрія"
+  },
+  "maintenance.rule-paths.placeholder": {
+    "message": "логи, звіти про збої"
+  },
+  "button.download": {
+    "defaultMessage": "Завантажити"
+  },
+  "button.max": {
+    "defaultMessage": "Макс"
+  },
+  "creation-flow.common.or": {
+    "defaultMessage": "або"
+  },
+  "instance.index.share-instance": {
+    "message": "Поділіться екземпляром"
+  },
+  "tag.category.hardcore-mode": {
+    "defaultMessage": "Хардкорний режим"
+  },
+  "affiliate.revoke": {
+    "defaultMessage": "Скасувати партнерське посилання"
+  },
+  "tag.loader.bungeecord": {
+    "defaultMessage": "BungeeCord"
+  },
+  "action.cancel": {
+    "message": "Скасувати"
+  },
+  "skins.tooltip.overriding-default-cape": {
+    "message": "Екіпірована шкіра перекриває плащ за замовчуванням."
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "Відхилено"
+  },
+  "creation-flow.stage.import.title": {
+    "defaultMessage": "Імпорт екземпляра"
+  },
+  "button.repairing": {
+    "defaultMessage": "Ремонт..."
+  },
+  "label.visit-your-profile": {
+    "defaultMessage": "Відвідайте свій профіль"
+  },
+  "creation-flow.setup.title.server": {
+    "defaultMessage": "Виберіть тип установки"
+  },
+  "tag.loader.sponge": {
+    "defaultMessage": "Губка"
+  },
+  "instance.worlds.play_instance": {
+    "message": "Відтворити екземпляр"
+  },
+  "search.filter_type.environment": {
+    "defaultMessage": "Навколишнє середовище"
+  },
+  "content.page-layout.browse-content": {
+    "defaultMessage": "Перегляд вмісту"
+  },
+  "project.environment.unknown.description": {
+    "defaultMessage": "Не вдалося визначити середовище для цієї версії."
+  },
+  "accounts-card.unexpected-error-body": {
+    "message": "Сталася неочікувана помилка. Спробуйте пізніше."
+  },
+  "servers.backups.item.manual-backup": {
+    "defaultMessage": "Резервне копіювання вручну"
+  },
+  "nags.add-links.description": {
+    "defaultMessage": "Додайте будь-які відповідні посилання, спрямовані за межі Modrinth, наприклад вихідний код, засіб відстеження проблем або запрошення Discord."
+  },
+  "maintenance.action.folder": {
+    "message": "Папка"
+  },
+  "tag.category.storage": {
+    "defaultMessage": "Зберігання"
+  },
+  "app.settings.footer.version": {
+    "message": "Revoria {version}"
+  },
+  "instance.mods.empty.title": {
+    "message": "Ви ще не додали жодного вмісту до цього екземпляра."
+  },
+  "instances.content-install.remove-icon": {
+    "defaultMessage": "Видалити значок"
+  },
+  "content.page-layout.search-placeholder": {
+    "defaultMessage": "Пошук {count} {contentType}..."
+  },
+  "project.settings.environment.client_and_server.optional_both.title": {
+    "defaultMessage": "Додатково для обох, працює однаково, якщо встановлено з обох боків"
+  },
+  "instance.settings.tabs.installation.tooltip.action.reinstall": {
+    "message": "перевстановити"
+  },
+  "maintenance.summary.total-size": {
+    "message": "Загальний розмір"
+  },
+  "instance.create.no-profiles-found": {
+    "message": "Профілі не знайдено"
+  },
+  "hosting.specs.gb-ram": {
+    "defaultMessage": "{ram} Гб оперативної пам’яті"
+  },
+  "payment-method.virtual-visa": {
+    "defaultMessage": "Віртуальна віза"
+  },
+  "install-confirm.install": {
+    "message": "встановити"
+  },
+  "running-app-bar.stop-instance": {
+    "message": "Зупинити екземпляр"
+  },
+  "creation-flow.custom.loader-version.latest": {
+    "defaultMessage": "Останній"
+  },
+  "error-modal.minecraft-website": {
+    "message": "Майнкрафт сайт"
+  },
+  "instance.create.game-version": {
+    "message": "Ігрова версія"
+  },
+  "project.recent-plays": {
+    "defaultMessage": "{count} {countPlural, plural, one {recent play} other {recent plays}}"
+  },
+  "form.label.city": {
+    "defaultMessage": "місто"
+  },
+  "project.dependency.version-is-type": {
+    "message": "Версія {version} – {type}"
+  },
+  "maintenance.delete-instance.title": {
+    "message": "Видалити примірник {name}?"
+  },
+  "modal.open-in-app.benefit.update": {
+    "defaultMessage": "Оновлюйте файли, коли змінюється сервер"
+  },
+  "app.update-toast.body.metered": {
+    "message": "Revoria v{version} вже доступна! Оскільки ви перебуваєте в мережі з обмеженнями, ми не завантажили його автоматично."
+  },
+  "instance.filter.updates-available": {
+    "message": "Доступні оновлення"
+  },
+  "project.settings.versions.title": {
+    "defaultMessage": "Версії"
+  },
+  "project.dependency.added-via-overrides": {
+    "message": "Додано через перевизначення"
+  },
+  "installation-settings.unlink": {
+    "defaultMessage": "Від’єднати"
+  },
+  "syncing.action.open-folder": {
+    "message": "Відкрити папку синхронізації"
+  },
+  "tag.category.atmosphere": {
+    "defaultMessage": "атмосфера"
+  },
+  "instance.settings.tabs.hooks.post-exit": {
+    "message": "Після виходу"
+  },
+  "content.confirm-modpack-update.confirm-button": {
+    "defaultMessage": "{action, select, downgrade {Downgrade} other {Update}} modpack"
+  },
+  "search-card.compat.client-or-server": {
+    "message": "Клієнт або сервер"
+  },
+  "nags.minecraft-title-clause.title": {
+    "defaultMessage": "Уникайте порушення бренду"
+  },
+  "instance.settings.tabs.installation.repair.confirm.title": {
+    "message": "Відновити екземпляр?"
+  },
+  "servers.backups.admonition.restoring-backup.title": {
+    "defaultMessage": "Відновлення з резервної копії"
+  },
+  "tag.category.semi-realistic": {
+    "defaultMessage": "Напівреалістичний"
+  },
+  "instance.logs.crash.analyzing": {
+    "message": "Аналіз..."
+  },
+  "accounts-card.enter-player-name-or-email": {
+    "message": "Введіть ім'я гравця або електронну адресу (бажано)"
+  },
+  "project.breadcrumb": {
+    "message": "Демонструвати"
+  },
+  "auth.login": {
+    "message": "Логін"
+  },
+  "creation-flow.custom.loader-version.none": {
+    "defaultMessage": "Немає доступних версій"
+  },
+  "content.confirm-modpack-update.header": {
+    "defaultMessage": "{action, select, downgrade {Downgrade} other {Update}} modpack"
+  },
+  "project.environment.server-only-client-optional.description": {
+    "defaultMessage": "Більшість функціональних можливостей є на стороні сервера, але їх встановлення на клієнті забезпечує розширену функціональність."
+  },
+  "browse.breadcrumb.discover-content": {
+    "message": "Відкрийте для себе вміст"
+  },
+  "app.library.breadcrumb": {
+    "message": "Бібліотека"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "Модератор"
+  },
+  "search.filter_type.mod_loader": {
+    "defaultMessage": "Навантажувач"
+  },
+  "creation-flow.final.generator-settings.default": {
+    "defaultMessage": "За замовчуванням"
+  },
+  "installation-settings.reinstalling-modpack": {
+    "defaultMessage": "Перевстановлення modpack"
+  },
+  "project-card.stats.downloads": {
+    "defaultMessage": "{count, plural, one {download} other {downloads}}"
+  },
+  "instances.updater-modal.select-version": {
+    "defaultMessage": "Виберіть версію, щоб переглянути її журнал змін"
+  },
+  "project.settings.gallery.title": {
+    "defaultMessage": "Галерея"
+  },
+  "tag.category.gui": {
+    "defaultMessage": "GUI"
+  },
+  "project.environment.dedicated-server-only.description": {
+    "defaultMessage": "Усі функції виконуються на стороні сервера та сумісні з клієнтами типу vanilla. Працює лише на виділених серверах."
+  },
+  "servers.setup.rate-limit.text": {
+    "defaultMessage": "Вашу швидкість обмежено. Спробуйте пізніше."
+  },
+  "instance.settings.tabs.installation.repair.button": {
+    "message": "Ремонт"
+  },
+  "payment-method.jcb": {
+    "defaultMessage": "JCB"
+  },
+  "tag.category.social": {
+    "defaultMessage": "Соціальний"
+  },
+  "accounts-card.2fa-placeholder": {
+    "message": "Ваш код 2FA тут..."
+  },
+  "skins.upload.error.failed-to-read-dropped-file": {
+    "message": "Не вдалося прочитати скинутий файл."
+  },
+  "instances.content-install.game-version-placeholder": {
+    "defaultMessage": "Виберіть версію гри"
+  },
+  "instances.content-install.header": {
+    "defaultMessage": "Встановити проект"
+  },
+  "accounts-card.log-via-elyby": {
+    "message": "Увійдіть через Ely.by"
+  },
+  "tag.category.multiplayer": {
+    "defaultMessage": "Мультіплеер"
+  },
+  "accounts-card.enter-password": {
+    "message": "Введіть свій пароль"
+  },
+  "browse.type.modpack": {
+    "message": "Паки модів"
+  },
+  "settings.appearance.launcher-language.title": {
+    "message": "Мова програми запуску"
+  },
+  "syncing.action.reload": {
+    "message": "Перезавантажити"
+  },
+  "instance.create.loader-version.stable": {
+    "message": "стабільний"
+  },
+  "instance.mods.share.project-names": {
+    "message": "Назви проектів"
+  },
+  "search.filter.locked.default.unlock": {
+    "defaultMessage": "Розблокувати фільтр"
+  },
+  "skins.upload.select-file": {
+    "message": "Виберіть файл текстури шкіри"
+  },
+  "project.no-description": {
+    "message": "Немає опису."
+  },
+  "label.update-available": {
+    "defaultMessage": "Доступне оновлення"
+  },
+  "project.settings.environment.client_and_server.optional_both_prefers_both.title": {
+    "defaultMessage": "Додатково для обох, найкраще працює, якщо встановлено з обох сторін"
+  },
+  "curseforge-import.progress.importing-profile": {
+    "message": "Імпорт профілю..."
+  },
+  "maintenance.cleanup.complete.title": {
+    "message": "Очищення завершено"
+  },
+  "settings.privacy.discord-rpc.description": {
+    "message": "Керує інтеграцією Discord Rich Presence. Якщо вимкнути це, «Modrinth» більше не відображатиметься як гра чи програма, які ви використовуєте у своєму профілі Discord."
+  },
+  "label.notifications": {
+    "defaultMessage": "Сповіщення"
+  },
+  "search.sort.followers": {
+    "defaultMessage": "Послідовники"
+  },
+  "row-display.view-instance": {
+    "message": "Переглянути екземпляр"
+  },
+  "play-instance": {
+    "message": "Відтворити екземпляр"
+  },
+  "instance.add-server.title": {
+    "message": "Додайте сервер"
+  },
+  "button.saving": {
+    "defaultMessage": "Збереження"
+  },
+  "settings.resource.max-concurrent-writes.title": {
+    "message": "Максимальна кількість одночасних записів"
+  },
+  "skins.upload.drag-or-browse": {
+    "message": "Перетягніть або клацніть тут, щоб переглянути"
+  },
+  "instance.settings.tabs.installation.tooltip.cannot-while-offline": {
+    "message": "Неможливо {action} у режимі офлайн"
+  },
+  "maintenance.rule.logs": {
+    "message": "Журнали"
+  },
+  "skins.view-more-capes": {
+    "message": "Переглянути більше накидок"
+  },
+  "browse.install.instance": {
+    "message": "Встановити вміст до екземпляра"
+  },
+  "settings.language.categories.search-result": {
+    "defaultMessage": "Результати пошуку"
+  },
+  "skins.rate-limit.skin": {
+    "message": "Ви занадто часто змінюєте свою шкіру. Сервери Mojang тимчасово заблокували подальші запити. Зачекайте трохи, перш ніж спробувати знову."
+  },
+  "instance.index.show-hide-unselected": {
+    "message": "Показати/сховати невибрані"
+  },
+  "settings.appearance.launcher-language.option.german-switzerland": {
+    "message": "німецька (Швейцарія)"
+  },
+  "settings.language.languages.search-results-announcement": {
+    "defaultMessage": "{matches, plural, =0 {No languages match} one {# language matches} other {# languages match}} your search."
+  },
+  "error-modal.debug-help-text-end": {
+    "message": "і почніть чат за допомогою віджета в нижньому правому куті, і ми будемо раді допомогти! Обов’язково надайте агенту таку інформацію про налагодження:"
+  },
+  "instances.content-install.show-all-versions": {
+    "defaultMessage": "Показати всі версії"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "Перераховано"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "Творець"
+  },
+  "project.action.save": {
+    "message": "зберегти"
+  },
+  "settings.display.theme.preferred-light-theme": {
+    "defaultMessage": "Переважна світла тема"
+  },
+  "label.version": {
+    "defaultMessage": "Версія"
+  },
+  "form.placeholder.last-name": {
+    "defaultMessage": "Введіть прізвище"
+  },
+  "creation-flow.action.import-count": {
+    "defaultMessage": "Імпортувати {count, plural, one {{count} instance} other {{count} instances}}"
+  },
+  "instances.content-install.installing-label": {
+    "defaultMessage": "Встановлення..."
+  },
+  "instance.worlds.refresh": {
+    "message": "Оновити"
+  },
+  "settings.resource.app-directory.title": {
+    "message": "Каталог програм"
+  },
+  "installation-settings.saving": {
+    "defaultMessage": "Збереження..."
+  },
+  "friends.action.view-friend-requests": {
+    "message": "{count} друг {count, plural, one {request} other {requests}}"
+  },
+  "skins.upload.username.import": {
+    "message": "Імпорт"
+  },
+  "instance.worlds.view_instance": {
+    "message": "Переглянути екземпляр"
+  },
+  "skins.beta": {
+    "message": "Бета"
+  },
+  "locale.en-US": {
+    "defaultMessage": "англійська (Сполучені Штати)"
+  },
+  "error-modal.no-error-message": {
+    "message": "Немає повідомлення про помилку."
+  },
+  "nags.add-icon.description": {
+    "defaultMessage": "Додавання унікального, релевантного та привабливого значка робить ваш проект ідентифікованим і допомагає йому виділитися."
+  },
+  "project.about.links.issues": {
+    "defaultMessage": "Повідомити про проблеми"
+  },
+  "settings.resource.max-concurrent-writes.description": {
+    "message": "Максимальна кількість файлів, які програма запуску може записати на диск одночасно. Встановіть для цього нижче значення, якщо ви часто отримуєте помилки введення-виведення. (для вступу в силу потрібно перезапустити програму)"
+  },
+  "grid-display.sort-dropdown-name": {
+    "message": "Сортувати спадне меню"
+  },
+  "maintenance.action.add-rule": {
+    "message": "Додайте правило"
+  },
+  "save": {
+    "message": "зберегти"
+  },
+  "app.update-toast.body.download-complete": {
+    "message": "Revoria v{version} завантажено. Перезавантажте, щоб оновити зараз, або автоматично, коли ви закриєте Revoria."
+  },
+  "instance.index.installing": {
+    "message": "Встановлення..."
+  },
+  "settings.sessions.title": {
+    "defaultMessage": "Сеанси"
+  },
+  "settings.appearance.default-landing.home": {
+    "message": "додому"
+  },
+  "project.environment.tag.unknown": {
+    "defaultMessage": "Невідомий"
+  },
+  "curseforge-import.header": {
+    "message": "Імпортувати з коду профілю CurseForge"
+  },
+  "tag.loader.rift": {
+    "defaultMessage": "Розлом"
+  },
+  "project.metadata.author": {
+    "message": "Автор"
+  },
+  "project.metadata.publication-date": {
+    "message": "Дата публікації"
+  },
+  "creation-flow.setup.option.vanilla.title": {
+    "defaultMessage": "Ванільний Майнкрафт"
+  },
+  "project.about.server.latency": {
+    "defaultMessage": "Затримка"
+  },
+  "tag.loader.waterfall": {
+    "defaultMessage": "Водоспад"
+  },
+  "project.settings.environment.notice.missing-env.description": {
+    "defaultMessage": "У вашому проекті відсутні метадані середовища, виберіть відповідний параметр нижче."
+  },
+  "locale.uk-UA": {
+    "defaultMessage": "українська"
+  },
+  "syncing.notification.updated": {
+    "message": "Цілі синхронізації оновлено."
+  },
+  "locale.ro-RO": {
+    "defaultMessage": "румунська"
+  },
+  "installation-settings.repair.server-title": {
+    "defaultMessage": "Ремонт сервера"
+  },
+  "label.settings": {
+    "defaultMessage": "Налаштування"
+  },
+  "settings.language.note": {
+    "message": "Більше мов на шляху."
+  },
+  "search.filter_type.modpack_loader": {
+    "defaultMessage": "Навантажувач"
+  },
+  "content.modpack-card.updating": {
+    "defaultMessage": "Оновлення..."
+  },
+  "instance.logs.crash.api-tutorial.title": {
+    "message": "Як отримати ключ Ollama API:"
+  },
+  "settings.default-instance.post-exit.placeholder": {
+    "message": "Введіть команду після виходу..."
+  },
+  "project.settings.environment.singleplayer.title": {
+    "defaultMessage": "Тільки одиночна гра"
+  },
+  "instance.settings.tabs.hooks.wrapper.description": {
+    "message": "Команда Wrapper для запуску Minecraft."
+  },
+  "creation-flow.action.setup-server": {
+    "defaultMessage": "Сервер налаштування"
+  },
+  "tag.category.library": {
+    "defaultMessage": "Бібліотека"
+  },
+  "form.placeholder.address-2": {
+    "defaultMessage": "Квартира, люкс і т.д."
+  },
+  "instance.settings.tabs.window.width": {
+    "message": "Ширина"
+  },
+  "grid-display.option.last-played": {
+    "message": "Востаннє грали"
+  },
+  "label.password": {
+    "defaultMessage": "Пароль"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "Архівовано"
+  },
+  "browse.notification.curseforge-manual-download-fallback": {
+    "message": "CurseForge не може забезпечити пряме завантаження. Відкрито сторінку проекту у вашому браузері."
+  },
+  "instance.settings.tabs.hooks.pre-launch": {
+    "message": "Передпусковий"
+  },
+  "project.about.server.copiedText": {
+    "defaultMessage": "IP-адресу скопійовано в буфер обміну"
+  },
+  "screenshots": {
+    "message": "Скріншоти"
+  },
+  "error-modal.minecraft-auth.hosts-text-end": {
+    "message": "щоб дізнатися, як вирішити проблему."
+  },
+  "instances.modpack-content-modal.header": {
+    "defaultMessage": "Вміст Modpack"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "Не вдалося"
+  },
+  "maintenance.cleanup.modal.header": {
+    "message": "Очищення екземпляра"
+  },
+  "creation-flow.custom.loader.label.instance": {
+    "defaultMessage": "Навантажувач"
+  },
+  "tag.category.equipment": {
+    "defaultMessage": "Обладнання"
+  },
+  "project.error.no-files-available-to-install": {
+    "message": "Немає доступних файлів для встановлення."
+  },
+  "tag.category.adventure": {
+    "defaultMessage": "Пригода"
+  },
+  "report": {
+    "message": "звіт"
+  },
+  "instances.updater-modal.header-modpack": {
+    "defaultMessage": "Змінити версію modpack"
+  },
+  "locale.cs-CZ": {
+    "defaultMessage": "чеська"
+  },
+  "error-modal.minecraft-auth.network-text-end": {
+    "message": "для усунення несправностей."
+  },
+  "instance.mods.share-modal.text": {
+    "message": "Перегляньте проекти, які я використовую у своєму пакеті модів!"
+  },
+  "servers.backups.admonition.backup-failed.title": {
+    "defaultMessage": "Помилка резервного копіювання"
+  },
+  "locale.no-NO": {
+    "defaultMessage": "норвезька букмол"
+  },
+  "instance.settings.tabs.window.width.description": {
+    "message": "Ширина вікна гри при запуску."
+  },
+  "creation-flow.final.world-seed.label": {
+    "defaultMessage": "Світове насіння"
+  },
+  "content.confirm-deletion.admonition-body": {
+    "defaultMessage": "Видалення мода може назавжди вплинути на ваш світ і може спричинити відсутність вмісту або несподівані проблеми під час його повторного завантаження."
+  },
+  "search.filter.option.exclusion.add.tooltip": {
+    "defaultMessage": "Виключити"
+  },
+  "instance.settings.tabs.general.edit-icon": {
+    "message": "значок редагування"
+  },
+  "instance.settings.tabs.hooks.pre-launch.enter": {
+    "message": "Введіть команду перед запуском..."
+  },
+  "button.report": {
+    "defaultMessage": "звіт"
+  },
+  "instances.confirm-leave-modal.stay": {
+    "defaultMessage": "Залишайтеся на сторінці"
+  },
+  "skins.action.sign-in": {
+    "message": "Увійти"
+  },
+  "project.notification.curseforge-manual-download-fallback": {
+    "message": "CurseForge не може забезпечити пряме завантаження. Відкрито сторінку проекту у вашому браузері."
+  },
+  "instance.index.copy-slugs": {
+    "message": "Копіювати слимаки"
+  },
+  "project.environment.client-and-server.title": {
+    "defaultMessage": "Клієнт і сервер, потрібні на обох"
+  },
+  "label.content": {
+    "defaultMessage": "Зміст"
+  },
+  "app.library.tab.shared": {
+    "message": "Поділився зі мною"
+  },
+  "search-card.compat.client": {
+    "message": "Клієнт"
+  },
+  "syncing.target.synced": {
+    "message": "{synced}/{total} синхронізовано"
+  },
+  "nags.summary-special-formatting.title": {
+    "defaultMessage": "Очистіть резюме"
+  },
+  "instance.create.loader": {
+    "message": "Навантажувач"
+  },
+  "grid-display.library-fallback": {
+    "message": "Бібліотека"
+  },
+  "search-card.downloads": {
+    "message": "завантаження"
+  },
+  "project.about.server.title": {
+    "defaultMessage": "Деталі сервера"
+  },
+  "instance.screenshots.notification.copied.title": {
+    "message": "Скопійовано"
+  },
+  "instance.add-server.resource-pack.enabled": {
+    "message": "Увімкнено"
+  },
+  "instance.screenshots.notification.copied.text": {
+    "message": "Знімок екрана скопійовано в буфер обміну"
+  },
+  "tag.category.pve": {
+    "defaultMessage": "PVE"
+  },
+  "instance.settings.tabs.installation.unlink.confirm.title": {
+    "message": "Ви впевнені, що хочете від’єднати цей екземпляр?"
+  },
+  "button.back": {
+    "defaultMessage": "Назад"
+  },
+  "creation-flow.action.back": {
+    "defaultMessage": "Назад"
+  },
+  "instance.worlds.hardcore": {
+    "message": "Хардкорний режим"
+  },
+  "form.label.date-of-birth": {
+    "defaultMessage": "Дата народження"
+  },
+  "friends.heading.online": {
+    "message": "Онлайн"
+  },
+  "error-modal.repair-instance": {
+    "message": "Ремонтний екземпляр"
+  },
+  "servers.backups.item.restore": {
+    "defaultMessage": "Відновити"
+  },
+  "tag.category.64x": {
+    "defaultMessage": "64x"
+  },
+  "tag.loader.minecraft": {
+    "defaultMessage": "Пакет ресурсів"
+  },
+  "maintenance.rule.crash-reports": {
+    "message": "Звіти про збої"
+  },
+  "instance.confirm-reinstall.admonition-header": {
+    "defaultMessage": "Попередження про перевстановлення"
+  },
+  "locale.de-DE": {
+    "defaultMessage": "німецька (Німеччина)"
+  },
+  "instance.index.time.second-plural": {
+    "message": "{count} секунд"
+  },
+  "java-selector.path-placeholder": {
+    "message": "/шлях/до/java"
+  },
+  "skins.action.edit": {
+    "message": "Редагувати"
+  },
+  "instance.settings.tabs.hooks.wrapper": {
+    "message": "Обгортка"
+  },
+  "error-modal.debug-help-text-start": {
+    "message": "Якщо нічого не працює і вам потрібна допомога, відвідайте"
+  },
+  "form.label.state-province": {
+    "defaultMessage": "Штат/провінція"
+  },
+  "nags.all-tags-selected.title": {
+    "defaultMessage": "Виберіть точні теги"
+  },
+  "project.install.installing": {
+    "message": "Встановлення..."
+  },
+  "icon-select.edit": {
+    "defaultMessage": "значок редагування"
+  },
+  "creation-flow.common.loading": {
+    "defaultMessage": "Завантаження..."
+  },
+  "tag.category.8x-": {
+    "defaultMessage": "8x або менше"
+  },
+  "search.filter.option.show_more": {
+    "defaultMessage": "Показати більше"
+  },
+  "project.settings.environment.verification.verify-button": {
+    "defaultMessage": "Підтвердити"
+  },
+  "hosting.specs.gb-storage": {
+    "defaultMessage": "{storage} ГБ пам’яті"
+  },
+  "project.about.compatibility.environments.server-side": {
+    "defaultMessage": "На стороні сервера"
+  },
+  "running-app-bar.view-logs": {
+    "message": "Переглянути журнали"
+  },
+  "instances.content-install.game-version-label": {
+    "defaultMessage": "Ігрова версія"
+  },
+  "hosting.content.failed-to-unlink": {
+    "defaultMessage": "Не вдалося від’єднати modpack"
+  },
+  "servers.setup.reinstall-failed.title": {
+    "defaultMessage": "Не вдалося перевстановити"
+  },
+  "creation-flow.common.add": {
+    "defaultMessage": "додати"
+  },
+  "input.view.list": {
+    "defaultMessage": "Перегляд рядків"
+  },
+  "instance.create.import-profiles-count": {
+    "message": "Імпортувати {count} профілів"
+  },
+  "app.home.action.my-library": {
+    "message": "Моя бібліотека"
+  },
+  "app.home.row.discover-mods": {
+    "message": "Відкрийте для себе моди"
+  },
+  "browse.sort.latest-update": {
+    "message": "Останнє оновлення"
+  },
+  "instance.worlds.empty": {
+    "message": "У вас ще немає світів."
+  },
+  "project.about.server.copied": {
+    "defaultMessage": "Скопійовано!"
+  },
+  "share-urls": {
+    "message": "Поділіться URL-адресами"
+  },
+  "instance.settings.tabs.hooks.post-exit.description": {
+    "message": "Побіг після закриття гри."
+  },
+  "project.notification.curseforge-blocked-automated-download": {
+    "message": "CurseForge заблокував автоматичне завантаження цього файлу (403). Відкрито сторінку проекту у вашому браузері."
+  },
+  "instance.settings.tabs.general.library-groups.create": {
+    "message": "Створити нову групу"
+  },
+  "content.inline-backup.backing-up": {
+    "defaultMessage": "Створення резервної копії..."
+  },
+  "label.description": {
+    "defaultMessage": "опис"
+  },
+  "running-app-bar.no-instances-running": {
+    "message": "Немає запущених екземплярів"
+  },
+  "error-modal.state-init-fix-internet": {
+    "message": "Переконайтеся, що ви підключені до Інтернету, а потім спробуйте перезапустити програму."
+  },
+  "instance.index.time.second-singular": {
+    "message": "{count} секунда"
+  },
+  "label.visibility": {
+    "defaultMessage": "Видимість"
+  },
+  "changelog.product.hosting": {
+    "defaultMessage": "Хостинг"
+  },
+  "tag.category.kitchen-sink": {
+    "defaultMessage": "Кухонна мийка"
+  },
+  "tag.category.microgames": {
+    "defaultMessage": "Мікроігри"
+  },
+  "content.confirm-modpack-update.admonition-body": {
+    "defaultMessage": "Будь-які модифікації або вміст, який ви додали поверх модпакета, буде видалено."
+  },
+  "error-modal.migration.fix-windows-title": {
+    "message": "Перетворити всі закінчення рядків у файлах міграції на CRLF (у стилі Windows: \\r\\n)"
+  },
+  "content.page-layout.share.file-names": {
+    "defaultMessage": "Імена файлів"
+  },
+  "error-modal.migration.backup-text": {
+    "message": "Якщо жоден із наведених вище кроків не допоміг, ви можете спробувати зберегти копію файлу app.db у безпечному місці, наприклад %appdata%\\Roaming\\Revoria у Windows або ~/Library/Application Support/Revoria у macOS, а потім видалити вихідний файл і дозволити програмі повторно створити файл бази даних. Зауважте, що це може спричинити втрату даних у програмі, тому обов’язково створіть резервну копію даних панелі запуску, перш ніж застосовувати ці виправлення."
+  },
+  "instance.settings.tabs.java.java-installation": {
+    "message": "Установка Java"
+  },
+  "settings.appearance.title": {
+    "defaultMessage": "Зовнішній вигляд"
+  },
+  "row-display.delete-instance.title": {
+    "message": "Ви впевнені, що бажаєте видалити цей екземпляр?"
+  },
+  "locale.hu-HU": {
+    "defaultMessage": "угорська"
+  },
+  "friends.add-friends-to-share": {
+    "message": "<link>Додайте друзів</link>, щоб побачити, у що вони грають!"
+  },
+  "error-modal.minecraft-auth.game-pass-text-start": {
+    "message": "Спробуйте ввійти за допомогою"
+  },
+  "url-confirm.install-title": {
+    "message": "Встановити {project}"
+  },
+  "tag.category.lightweight": {
+    "defaultMessage": "Легкий"
+  },
+  "instance.worlds.delete-world.title": {
+    "message": "Ви впевнені, що хочете остаточно видалити цей світ?"
+  },
+  "instance.index.disable-selected": {
+    "message": "Вимкнути вибране"
+  },
+  "tag.category.128x": {
+    "defaultMessage": "128x"
+  },
+  "servers.backups.admonition.backup-queued.title": {
+    "defaultMessage": "Резервне копіювання в черзі"
+  },
+  "nags.invalid-license-url.description.domain": {
+    "defaultMessage": "URL-адреса вашої ліцензії вказує на {domain}, що не підходить для інформації про ліцензію. URL-адреси ліцензії мають посилатися безпосередньо на ваш файл ліцензії, а не на соціальні мережі, ігрові платформи тощо."
+  },
+  "app.settings.title": {
+    "message": "Налаштування"
+  },
+  "search-card.followers": {
+    "message": "послідовників"
+  },
+  "friends.friend.request-sent": {
+    "message": "Запит на дружбу надіслано"
+  },
+  "form.label.address-line": {
+    "defaultMessage": "Адресний рядок"
+  },
+  "app.auth-servers.unreachable.body": {
+    "message": "Сервери автентифікації Minecraft можуть зараз не працювати. Перевірте підключення до Інтернету та повторіть спробу пізніше."
+  },
+  "accounts-card.check-player-name-or-email": {
+    "message": "Переконайтеся, що ви ввели правильне ім'я гравця або електронну адресу."
+  },
+  "error-modal.retry-directory-change": {
+    "message": "Повторіть спробу змінити каталог"
+  },
+  "project.file.primary": {
+    "message": "Первинний"
+  },
+  "instance.logs.crash.size": {
+    "message": "Розмір"
+  },
+  "browse.error.no-files-available": {
+    "message": "Немає доступних файлів для цього проекту."
+  },
+  "content.selection-bar.disable": {
+    "defaultMessage": "Вимкнути"
+  },
+  "instances.content-install.existing-tab": {
+    "defaultMessage": "Існуючий екземпляр"
+  },
+  "settings.default-instance.pre-launch.description": {
+    "message": "Виконується перед запуском примірника."
+  },
+  "tag.loader.babric": {
+    "defaultMessage": "Бабрич"
+  },
+  "instance.settings.tabs.general.delete.button": {
+    "message": "Видалити екземпляр"
+  },
+  "locale.ko-KR": {
+    "defaultMessage": "корейська"
+  },
+  "settings.appearance.launcher-language.option.ukrainian": {
+    "message": "українська"
+  },
+  "creation-flow.custom.loader-version.placeholder": {
+    "defaultMessage": "Виберіть версію завантажувача"
+  },
+  "settings.default-instance.environmental-variables.placeholder": {
+    "message": "Введіть змінні середовища..."
+  },
+  "project-type.resourcepack.capital": {
+    "defaultMessage": "{count, plural, one {Resource Pack} other {Resource Packs}}"
+  },
+  "skins.upload-first": {
+    "message": "Спочатку завантажте скін!"
+  },
+  "label.installed-modpack": {
+    "defaultMessage": "Встановлений модпак"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "Повернувся"
+  },
+  "project.no-files-found": {
+    "message": "Файли не знайдено."
+  },
+  "instance.worlds.delete-world.description": {
+    "message": "'{name}' буде остаточно видалено, і не буде можливості відновити його."
+  },
+  "accounts-card.error-input-elyby-header": {
+    "message": "Помилка під час введення події з Ely.by"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "Приватний"
+  },
+  "label.or": {
+    "defaultMessage": "або"
+  },
+  "modal.open-in-app.benefit.install": {
+    "defaultMessage": "Автоматичне встановлення необхідного вмісту"
+  },
+  "instance.server-modal.placeholder-name": {
+    "message": "Майнкрафт сервер"
+  },
+  "locale.sv-SE": {
+    "defaultMessage": "шведська"
+  },
+  "settings.language.languages.search.no-results": {
+    "defaultMessage": "Жодна мова не відповідає вашому запиту."
+  },
+  "creation-flow.import.clear-all": {
+    "defaultMessage": "Очистити все"
+  },
+  "tag.category.survival-mode": {
+    "defaultMessage": "Режим виживання"
+  },
+  "creation-flow.final.difficulty.normal": {
+    "defaultMessage": "нормальний"
+  },
+  "project.settings.analytics.title": {
+    "defaultMessage": "Аналітика"
+  },
+  "tag.loader.velocity": {
+    "defaultMessage": "швидкість"
+  },
+  "instance.worlds.remove-server.title": {
+    "message": "Ви впевнені, що хочете видалити {name}?"
+  },
+  "creation-flow.custom.icon.remove": {
+    "defaultMessage": "Видалити значок"
+  },
+  "instance.screenshots.loading": {
+    "message": "Завантаження скріншотів..."
+  },
+  "form.label.business-name": {
+    "defaultMessage": "Назва компанії"
+  },
+  "instance.edit-world.name": {
+    "message": "Ім'я"
+  },
+  "project.settings.notice.no-permission.description": {
+    "defaultMessage": "Ви не маєте дозволу редагувати це."
+  },
+  "instance.logs.crash.folder": {
+    "message": "Папка журналів збоїв"
+  },
+  "servers.backups.admonition.restoring-backup.description": {
+    "defaultMessage": "Відновлення вашого сервера з {backupName}. Це може зайняти кілька хвилин."
+  },
+  "error-modal.minecraft-auth.game-pass-text-end": {
+    "message": "перший. Коли закінчите, поверніться сюди та ввійдіть!"
+  },
+  "content.page-layout.sort.label": {
+    "defaultMessage": "Сортувати за {mode}"
+  },
+  "syncing.target-type.file": {
+    "message": "Файл"
+  },
+  "browse.sort.popularity": {
+    "message": "Популярність"
+  },
+  "project.metadata.version-number": {
+    "message": "Номер версії"
+  },
+  "instance.logs.crash.api-tutorial.step2": {
+    "message": "Відкрийте клавіші налаштувань: https://ollama.com/settings/keys"
+  },
+  "tag.category.challenging": {
+    "defaultMessage": "Виклик"
+  },
+  "project.online-player-count": {
+    "defaultMessage": "{count, number} онлайн"
+  },
+  "tag.category.rpg": {
+    "defaultMessage": "RPG"
+  },
+  "tag.category.custom-content": {
+    "defaultMessage": "Спеціальний вміст"
+  },
+  "settings.privacy.personalized-ads.description": {
+    "message": "Постачальник реклами Modrinth, Aditude, показує рекламу на основі ваших уподобань. Вимкнувши цю опцію, ви відмовляєтеся, і реклама більше не відображатиметься на основі ваших інтересів."
+  },
+  "search.filter_type.environment.server": {
+    "defaultMessage": "Сервер"
+  },
+  "project.settings.environment.notice.missing-env.title": {
+    "defaultMessage": "Виберіть середовище для свого проекту"
+  },
+  "search.filter_type.plugin_platform": {
+    "defaultMessage": "Платформа"
+  },
+  "search.filter.option.search.placeholder": {
+    "defaultMessage": "пошук..."
+  },
+  "app.library.subtitle": {
+    "message": "Ваші випадки, організовані."
+  },
+  "nags.select-license.description": {
+    "defaultMessage": "Select the license your {type, select, mod {mod} modpack {modpack} resourcepack {resource pack} shader {shader} plugin {plugin} datapack {data pack} other {project}} is distributed under."
+  },
+  "row-display.duplicate-instance": {
+    "message": "Дубльований екземпляр"
+  },
+  "app.sidebar.friends": {
+    "message": "друзі"
+  },
+  "project.about.compatibility.game.minecraftJava": {
+    "defaultMessage": "Minecraft: Java Edition"
+  },
+  "instance.settings.tabs.installation.currently-installed": {
+    "message": "Наразі встановлено"
+  },
+  "nags.edit-summary.title": {
+    "defaultMessage": "Редагувати резюме"
+  },
+  "instances.modpack-content-modal.empty-description": {
+    "defaultMessage": "Цей пакет модів не містить додаткового вмісту."
+  },
+  "grid-display.delete-instance.title": {
+    "message": "Ви впевнені, що бажаєте видалити цей екземпляр?"
+  },
+  "installation-settings.confirm-version-change": {
+    "defaultMessage": "Підтвердити"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "Утримано"
+  },
+  "tag.category.racing": {
+    "defaultMessage": "Перегони"
+  },
+  "tag.category.factions": {
+    "defaultMessage": "Фракції"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "Клієнт або сервер"
+  },
+  "error-modal.copy-debug-info": {
+    "message": "Копіювати інформацію про налагодження"
+  },
+  "creation-flow.final.world-type.default": {
+    "defaultMessage": "За замовчуванням"
+  },
+  "settings.default-instance.environmental-variables.title": {
+    "message": "Змінні середовища"
+  },
+  "label.platform": {
+    "defaultMessage": "Платформа"
+  },
+  "maintenance.action.select-all": {
+    "message": "Вибрати все"
+  },
+  "settings.java.location": {
+    "message": "Java {version}"
+  },
+  "instance.settings.tabs.installation.change-version.button.installing": {
+    "message": "Встановлення"
+  },
+  "tag.category.bloom": {
+    "defaultMessage": "цвітіння"
+  },
+  "accounts-card.enter-player-name": {
+    "message": "Введіть своє ім'я гравця"
+  },
+  "syncing.section.custom-folders": {
+    "message": "Спеціальні папки"
+  },
+  "app.settings.tabs.default-instance-options": {
+    "message": "Параметри екземпляра"
+  },
+  "app.survey.body": {
+    "message": "Не могли б ви відповісти на кілька запитань про свій досвід роботи з додатком Modrinth?"
+  },
+  "tag.category.blocks": {
+    "defaultMessage": "Блоки"
+  },
+  "syncing.how-it-works": {
+    "message": "Якщо ввімкнено, наявні дані переміщуються до спільної папки синхронізації, а шлях кожного екземпляра замінюється посиланням."
+  },
+  "search.filter_type.license": {
+    "defaultMessage": "Ліцензія"
+  },
+  "tag.loader.nilloader": {
+    "defaultMessage": "NilLoader"
+  },
+  "tag.category.pvp": {
+    "defaultMessage": "PVP"
+  },
+  "accounts-card.select-account": {
+    "message": "Виберіть обліковий запис"
+  },
+  "app.library.empty.title": {
+    "message": "Примірників не знайдено"
+  },
+  "curseforge-import.check-profile": {
+    "message": "Перевірте профіль"
+  },
+  "instance.logs.share": {
+    "message": "Поділіться"
+  },
+  "instance.add-server.add-and-play": {
+    "message": "Додайте і грайте"
+  },
+  "content.confirm-modpack-update.admonition-header": {
+    "defaultMessage": "{action, select, downgrade {Downgrade} other {Update}} попередження"
+  },
+  "settings.appearance.advanced-rendering.description": {
+    "message": "Вмикає розширену візуалізацію, наприклад ефекти розмиття, які можуть спричинити проблеми з продуктивністю без апаратного прискорення рендерингу."
+  },
+  "settings.privacy.discord-rpc.title": {
+    "message": "Discord RPC"
+  },
+  "servers.notice.level.warn.name": {
+    "defaultMessage": "УВАГА"
+  },
+  "button.create-a-project": {
+    "defaultMessage": "Створіть проект"
+  },
+  "singleplayer": {
+    "message": "Одиночна гра"
+  },
+  "creation-flow.setup.title.instance": {
+    "defaultMessage": "Виберіть тип екземпляра"
+  },
+  "input.view.grid": {
+    "defaultMessage": "Вигляд сітки"
+  },
+  "tag.category.smp": {
+    "defaultMessage": "SMP"
+  },
+  "instance.screenshots.notification.path-copied.title": {
+    "message": "Шлях скопійовано"
+  },
+  "instance.settings.tabs.hooks.title": {
+    "message": "Гачки для запуску гри"
+  },
+  "tag.loader.spigot": {
+    "defaultMessage": "Втулка"
+  },
+  "servers.notice.dismiss": {
+    "defaultMessage": "Відхилити"
+  },
+  "omorphia.component.badge.label.unsafe": {
+    "defaultMessage": "Невдача"
+  },
+  "browse.search.placeholder": {
+    "message": "Пошук {type}..."
+  },
+  "settings.language.platform.app": {
+    "defaultMessage": "додаток"
+  },
+  "tag.category.bedwars": {
+    "defaultMessage": "Постільні війни"
+  },
+  "instance.confirm-reinstall.reinstall-button": {
+    "defaultMessage": "Перевстановіть modpack"
+  },
+  "content.confirm-bulk-update.admonition-body": {
+    "defaultMessage": "Ви впевнені, що бажаєте оновити {count, plural, one {# project} other {# projects}} до останньої сумісної версії? Рекомендується оновлювати вміст почергово."
+  },
+  "instance.worlds.type.singleplayer": {
+    "message": "Одиночна гра"
+  },
+  "payment-method.virtual-visa-plural": {
+    "defaultMessage": "Віртуальні візи"
+  },
+  "settings.default-instance.window-size.title": {
+    "message": "Розмір вікна"
+  },
+  "locale.pt-PT": {
+    "defaultMessage": "португальська (Португалія)"
+  },
+  "nags.description-too-short.description": {
+    "defaultMessage": "Ваш опис: {length, plural, one {# readable character} other {# readable characters}}. Для створення чіткого та інформативного опису рекомендується принаймні {minChars, plural, one {# character} other {# characters}}."
+  },
+  "skins.none": {
+    "message": "Жодного"
+  },
+  "instance.settings.tabs.installation.install.in-progress": {
+    "message": "Триває встановлення"
+  },
+  "instance.worlds.a_minecraft_server": {
+    "message": "Майнкрафт сервер"
+  },
+  "curseforge-import.import-profile": {
+    "message": "Імпорт профілю"
+  },
+  "instance.worlds.offline": {
+    "message": "Офлайн"
+  },
+  "button.refresh": {
+    "defaultMessage": "Оновити"
+  },
+  "creation-flow.custom.build-number.placeholder": {
+    "defaultMessage": "Виберіть номер збірки"
+  },
+  "button.more-options": {
+    "defaultMessage": "Більше варіантів"
+  },
+  "grid-display.instance-count.other": {
+    "message": "{count} випадків"
+  },
+  "project.environment.server-only.description": {
+    "defaultMessage": "Усі функції виконуються на стороні сервера та сумісні з клієнтами типу vanilla. Також працює на внутрішньому сервері в одиночній грі."
+  },
+  "search.filter_type.plugin_loader": {
+    "defaultMessage": "Навантажувач"
+  },
+  "installation-settings.reinstall-modpack.title": {
+    "defaultMessage": "Перевстановіть modpack"
+  },
+  "skins.upload.option.username.title": {
+    "message": "Імпортувати за іменем користувача"
+  },
+  "nags.invalid-license-url.description.default": {
+    "defaultMessage": "URL-адреса ліцензії недійсна."
+  },
+  "updates": {
+    "message": "Оновлення"
+  },
+  "nags.edit-tags.title": {
+    "defaultMessage": "Редагувати теги"
+  },
+  "project.settings.environment.server_only.supports_singleplayer.title": {
+    "defaultMessage": "Також працює в одиночній грі"
+  },
+  "hosting.content.failed-to-remove": {
+    "defaultMessage": "Не вдалося видалити вміст"
+  },
+  "tag.loader.forge": {
+    "defaultMessage": "Кузня"
+  },
+  "tag.category.worldgen": {
+    "defaultMessage": "Покоління світу"
+  },
+  "project-card.environment.client-and-server": {
+    "defaultMessage": "Клієнт і сервер"
+  },
+  "instance.index.stop": {
+    "message": "СТІЙ"
+  },
+  "instances.updater-modal.no-changelog": {
+    "defaultMessage": "Журнал змін для цієї версії не надано."
+  },
+  "creation-flow.final.additional-settings": {
+    "defaultMessage": "Додаткові налаштування"
+  },
+  "form.label.amount": {
+    "defaultMessage": "Сума"
+  },
+  "content.inline-backup.backup-failed": {
+    "defaultMessage": "Не вдалося створити резервну копію. Ви все ще можете продовжити."
+  },
+  "accounts-card.error-adding-offline-account": {
+    "message": "Під час додавання офлайн-облікового запису сталася помилка. Дотримуйтеся наведених нижче інструкцій."
+  },
+  "servers.purchase.step.plan.prompt": {
+    "defaultMessage": "Виберіть план"
+  },
+  "installation-settings.repair.server-description": {
+    "defaultMessage": "Перевстановлює завантажувач і залежності Minecraft без видалення вашого вмісту. Це може вирішити проблеми, якщо ваш сервер не запускається належним чином."
+  },
+  "label.installing": {
+    "defaultMessage": "Встановлення..."
+  },
+  "nags.long-headers.description": {
+    "defaultMessage": "{count, plural, one {# header} other {# headers}} у вашому описі {count, plural, one {is} other {are}} задовге. Заголовки мають бути лаконічними та виступати як заголовки розділів, а не повні речення."
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "Затверджено"
+  },
+  "creation-flow.setup.backup.name": {
+    "defaultMessage": "Перед перевстановленням"
+  },
+  "server": {
+    "message": "Сервер"
+  },
+  "project.about.links.store": {
+    "defaultMessage": "Відвідайте сторінку магазину"
+  },
+  "creation-flow.custom.loader-version.search": {
+    "defaultMessage": "Пошук версії завантажувача..."
+  },
+  "skins.upload.modal.title": {
+    "message": "Завантажте текстуру шкіри"
+  },
+  "creation-flow.title.reset-server": {
+    "defaultMessage": "Скинути сервер"
+  },
+  "settings.default-instance.pre-launch.placeholder": {
+    "message": "Введіть команду перед запуском..."
+  },
+  "instance.create.loader-version": {
+    "message": "Версія завантажувача"
+  },
+  "instance.settings.tabs.installation.no-loader-versions": {
+    "message": "{loader} недоступний для Minecraft {version}. Спробуйте інший завантажувач модів."
+  },
+  "tag.category.keep-inventory": {
+    "defaultMessage": "Зберігайте інвентар"
+  },
+  "installation-settings.confirm-version-change-header": {
+    "defaultMessage": "Перегляньте зміни вмісту"
+  },
+  "project.about.compatibility.platforms": {
+    "defaultMessage": "Платформи"
+  },
+  "app.update-toast.body": {
+    "message": "Revoria v{version} готова до встановлення! Перезавантажте, щоб оновити зараз, або автоматично, коли ви закриєте Revoria."
+  },
+  "button.continue": {
+    "defaultMessage": "Продовжити"
+  },
+  "app.revoria-update.open": {
+    "message": "Відкриті випуски"
+  },
+  "project-type.datapack.lowercase": {
+    "defaultMessage": "{count, plural, one {data pack} other {data packs}}"
+  },
+  "project-type.plugin.capital": {
+    "defaultMessage": "{count, plural, one {Plugin} other {Plugins}}"
+  },
+  "servers.backups.admonition.fallback-name": {
+    "defaultMessage": "ваша резервна копія"
+  },
+  "project.visibility.public": {
+    "defaultMessage": "Громадський"
+  },
+  "instance.logs.crash.result": {
+    "message": "Результат аналізу"
+  },
+  "project-card.date.published": {
+    "defaultMessage": "Опубліковано"
+  },
+  "project.about.compatibility.environments.singleplayer": {
+    "defaultMessage": "Одиночна гра"
+  },
+  "instances.updater-modal.hide-incompatible": {
+    "defaultMessage": "Приховати несумісне"
+  },
+  "project.settings.tags.title": {
+    "defaultMessage": "Теги"
+  },
+  "instance.edit-world.hide-from-home": {
+    "message": "Приховати з домашньої сторінки"
+  },
+  "java-selector.detect": {
+    "message": "Виявляти"
+  },
+  "syncing.status.disabled": {
+    "message": "Вимкнено"
+  },
+  "header.category.minecraft-server-gameplay": {
+    "defaultMessage": "Геймплей"
+  },
+  "project.settings.environment.notice.multiple-environments.title": {
+    "defaultMessage": "Ваш проект має кілька середовищ"
+  },
+  "app.home.breadcrumb": {
+    "message": "додому"
+  },
+  "button.stop": {
+    "defaultMessage": "СТІЙ"
+  },
+  "instance.logs.crash.api-tutorial.step1": {
+    "message": "Увійдіть на https://ollama.com/"
+  },
+  "content.selection-bar.bulk.enabling-waiting": {
+    "defaultMessage": "Увімкнення {contentType}..."
+  },
+  "instance.logs.level.error": {
+    "message": "Помилка"
+  },
+  "disabled": {
+    "message": "Вимкнено"
+  },
+  "instance.mods.action.share": {
+    "message": "Поділіться"
+  },
+  "project.install.already-installed": {
+    "message": "Цей проект уже встановлено"
+  },
+  "affiliate.create.button": {
+    "defaultMessage": "Створіть партнерське посилання"
+  },
+  "instances.modpack-content-modal.empty-title": {
+    "defaultMessage": "Вміст не знайдено"
+  },
+  "error-modal.directory-move-generic-text": {
+    "message": "Revoria не може перейти до нового вибраного каталогу. Зверніться до служби підтримки або скасуйте зміну каталогу."
+  },
+  "payment-method.gift-card": {
+    "defaultMessage": "Подарункова карта"
+  },
+  "instances.modpack-content-modal.no-results": {
+    "defaultMessage": "Жоден проект не відповідає вашому пошуку."
+  },
+  "curseforge-import.profile-code.label": {
+    "message": "Код профілю"
+  },
+  "search.filter.option.search.clear.aria_label": {
+    "defaultMessage": "Очистити пошук"
+  },
+  "accounts-card.check-password": {
+    "message": "Переконайтеся, що ви ввели правильний пароль."
+  },
+  "accounts-card.minecraft-account": {
+    "message": "Аккаунт Minecraft"
+  },
+  "error-modal.try-another-account": {
+    "message": "Спробуйте інший обліковий запис"
+  },
+  "servers.backups.admonition.backup-failed.description": {
+    "defaultMessage": "Під час створення {backupName} сталася помилка. Спробуйте ще раз або зверніться до служби підтримки, якщо проблема не зникне."
+  },
+  "skins.upload.username.label": {
+    "message": "Ім'я користувача Minecraft"
+  },
+  "instances.modpack-content-modal.loading": {
+    "defaultMessage": "Завантаження вмісту..."
+  },
+  "project.about.details.created": {
+    "defaultMessage": "Created {date}"
+  },
+  "app.update.complete-toast.title": {
+    "message": "Версію {version} успішно встановлено!"
+  },
+  "instance.settings.tabs.installation.debug-information": {
+    "message": "Інформація про налагодження:"
+  },
+  "button.hide-snapshots": {
+    "defaultMessage": "Приховати знімки"
+  },
+  "tag.category.optimization": {
+    "defaultMessage": "Оптимізація"
+  },
+  "instances.content-install.no-instances": {
+    "defaultMessage": "Сумісних екземплярів не знайдено"
+  },
+  "instances.confirm-leave-modal.title": {
+    "defaultMessage": "Залишити сторінку?"
+  },
+  "installation-settings.confirm-version-change-description": {
+    "defaultMessage": "Зміна на {gameVersion} призведе до зміни вказаного нижче вмісту на вашому сервері."
+  },
+  "browse.context.copy-link": {
+    "message": "Копіювати посилання"
+  },
+  "open-in-browser": {
+    "message": "Відкрити в браузері"
+  },
+  "instance.add-server.resource-pack.disabled": {
+    "message": "Вимкнено"
+  },
+  "content.page-layout.empty.modpack-hint": {
+    "defaultMessage": "Додайте додатковий вміст поверх цього пакета модів"
+  },
+  "skins.action.change-cape": {
+    "message": "Змінити накидку"
+  },
+  "skins.make-edit-first": {
+    "message": "Спочатку відредагуйте скін!"
+  },
+  "creation-flow.custom.loader-version.stable-suffix": {
+    "defaultMessage": "{version} (stable)"
+  },
+  "nags.too-many-tags.description": {
+    "defaultMessage": "Ви вибрали {tagCount, plural, one {# tag} other {# tags}}. Розгляньте можливість скорочення до {maxTagCount} або менше, щоб ваш проект відображався в релевантних результатах пошуку."
+  },
+  "skins.saving": {
+    "message": "Збереження..."
+  },
+  "project.settings.environment.notice.review-options.title": {
+    "defaultMessage": "Перегляньте варіанти нижче"
+  },
+  "project.dependencies": {
+    "message": "Залежності"
+  },
+  "project.settings.environment.suboption.accessibility-option-label": {
+    "defaultMessage": "{title}: {description}"
+  },
+  "ui.component.unsaved-changes-popup.body": {
+    "defaultMessage": "У вас є незбережені зміни."
+  },
+  "nags.misused-discord-link-description": {
+    "defaultMessage": "Запрошення Discord не можна використовувати для інших типів посилань. Будь ласка, розмістіть своє посилання на Discord лише в полі посилання Discord Invite."
+  },
+  "share-markdown": {
+    "message": "Поділитися уцінкою"
+  },
+  "view-profile": {
+    "message": "Переглянути профіль"
+  },
+  "modal.open-in-app.title": {
+    "defaultMessage": "Відкриття програми Modrinth"
+  },
+  "grid-display.option.game-version": {
+    "message": "Ігрова версія"
+  },
+  "hosting.content.failed-to-bulk-delete": {
+    "defaultMessage": "Не вдалося видалити вміст"
+  },
+  "app.survey.decline": {
+    "message": "Ні, дякую"
+  },
+  "servers.backups.item.auto": {
+    "defaultMessage": "Авто"
+  },
+  "instance.settings.tabs.installation.platform": {
+    "message": "Платформа"
+  },
+  "instance.logs.crash.model": {
+    "message": "Модель"
+  },
+  "error-modal.minecraft-sign-in-text-start": {
+    "message": "Щоб відтворити цей екземпляр, ви повинні ввійти через Microsoft нижче. Якщо у вас немає облікового запису Minecraft, ви можете придбати гру на"
+  },
+  "project-type.server.lowercase": {
+    "defaultMessage": "{count, plural, one {server} other {servers}}"
+  },
+  "accounts-card.player-name-placeholder": {
+    "message": "Ваше ім'я гравця тут..."
+  },
+  "instance.index.loading": {
+    "message": "Завантаження..."
+  },
+  "label.saved": {
+    "defaultMessage": "Збережено"
+  },
+  "skins.title": {
+    "message": "Скіни"
+  },
+  "browse.type.datapack": {
+    "message": "Пакети даних"
+  },
+  "instance.screenshots.copy-tooltip": {
+    "message": "Копіювати знімок екрана"
+  },
+  "instance.worlds.search.placeholder": {
+    "message": "Пошук світів..."
+  },
+  "skins.default.heading": {
+    "message": "Скіни за замовчуванням"
+  },
+  "maintenance.error.open-folder": {
+    "message": "Не вдалося відкрити папку."
+  },
+  "instance.settings.tabs.java": {
+    "message": "Java і пам'ять"
+  },
+  "friends.add-friend.username.placeholder": {
+    "message": "Введіть ім'я користувача Modrinth..."
+  },
+  "project.visibility.under-review": {
+    "defaultMessage": "На розгляді"
+  },
+  "nags.minecraft-title-clause.description": {
+    "defaultMessage": "Проекти не повинні використовувати бренд Minecraft або включати «Minecraft» як значну частину назви."
+  },
+  "payment-method.gift-card-plural": {
+    "defaultMessage": "Подарункові карти"
+  },
+  "affiliate.create.user.description": {
+    "defaultMessage": "Ім’я користувача, для якого потрібно створити партнерський код"
+  },
+  "content.page-layout.uploading-files": {
+    "defaultMessage": "Завантаження файлів ({completed}/{total})"
+  },
+  "project.about.details.licensed": {
+    "defaultMessage": "Licensed {license}"
+  },
+  "maintenance.action.scanning": {
+    "message": "Сканування..."
+  },
+  "tag.category.dungeons": {
+    "defaultMessage": "Підземелля"
+  },
+  "creation-flow.title.instance": {
+    "defaultMessage": "Створити екземпляр"
+  },
+  "creation-flow.final.world-name.placeholder": {
+    "defaultMessage": "Введіть назву світу"
+  },
+  "instance.index.update-selected": {
+    "message": "Вибрано оновлення"
+  },
+  "tag.category.gens": {
+    "defaultMessage": "Gens"
+  },
+  "creation-flow.final.gamemode.creative": {
+    "defaultMessage": "Творчий"
+  },
+  "tag.category.roleplay": {
+    "defaultMessage": "Рольова гра"
+  },
+  "locale.vi-VN": {
+    "defaultMessage": "в'єтнамська"
+  },
+  "label.unlisted": {
+    "defaultMessage": "Не в списку"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "Не в списку"
+  },
+  "app.nav.maintenance": {
+    "message": "Технічне обслуговування"
+  },
+  "tag.category.colored-lighting": {
+    "defaultMessage": "Кольорове освітлення"
+  },
+  "project-type.resourcepack.lowercase": {
+    "defaultMessage": "{count, plural, one {resource pack} other {resource packs}}"
+  },
+  "project-type.mod.capital": {
+    "defaultMessage": "{count, plural, one {Mod} other {Mods}}"
+  },
+  "label.changelog": {
+    "defaultMessage": "Журнал змін"
+  },
+  "hosting.content.switch-version": {
+    "defaultMessage": "Змінна версія"
+  },
+  "friends.friend.remove-friend": {
+    "message": "Видалити друга"
+  },
+  "grid-display.label.sort": {
+    "message": "Сортувати"
+  },
+  "tag.loader.paper": {
+    "defaultMessage": "Папір"
+  },
+  "settings.default-instance.wrapper.description": {
+    "message": "Команда Wrapper для запуску Minecraft."
+  },
+  "syncing.add-target": {
+    "message": "Додайте ціль синхронізації"
+  },
+  "app.settings.tabs.resource-management": {
+    "message": "Управління ресурсами"
+  },
+  "instance.settings.tabs.installation.reinstall.confirm.title": {
+    "message": "Ви впевнені, що бажаєте перевстановити цей екземпляр?"
+  },
+  "maintenance.section.memory-manager.description": {
+    "message": "Сканує екземпляри та допомагає швидко очистити безпечне сміття."
+  },
+  "instance.index.toggle-selected": {
+    "message": "Перемкнути вибране"
+  },
+  "app.home.row.discover-modpack": {
+    "message": "Відкрийте для себе модпак"
+  },
+  "project.versions.channel.alpha.symbol": {
+    "defaultMessage": "А"
+  },
+  "label.singleplayer": {
+    "defaultMessage": "Одиночна гра"
+  },
+  "project.about.compatibility.environments.client-side": {
+    "defaultMessage": "На стороні клієнта"
+  },
+  "skins.upload.username.placeholder": {
+    "message": "Введіть ім'я користувача..."
+  },
+  "instance.worlds.type.server": {
+    "message": "Сервер"
+  },
+  "project.environment.dedicated-server-only.title": {
+    "defaultMessage": "Лише на стороні сервера"
+  },
+  "friends.no-friends-match": {
+    "message": "Немає друзів за запитом ''{query}''"
+  },
+  "error-modal.try-another-microsoft-account": {
+    "message": "Спробуйте інший обліковий запис Microsoft"
+  },
+  "instance.worlds.game_mode.adventure": {
+    "defaultMessage": "Режим пригод"
+  },
+  "payment-method.diners": {
+    "defaultMessage": "Diners Club"
+  },
+  "open-folder": {
+    "message": "Відкрити папку"
+  },
+  "instance.worlds.filter.available": {
+    "message": "в наявності"
+  },
+  "instance.index.breadcrumb.instance": {
+    "message": "Екземпляр"
+  },
+  "payment-method.amex": {
+    "defaultMessage": "American Express"
+  },
+  "settings.default-instance.width.title": {
+    "message": "Ширина"
+  },
+  "instance.settings.tabs.installation.tooltip.action.repair": {
+    "message": "ремонт"
+  },
+  "grid-display.option.date-created": {
+    "message": "Дата створення"
+  },
+  "installation-settings.aria.select-loader-version": {
+    "defaultMessage": "Виберіть версію {loader}"
+  },
+  "select": {
+    "message": "Виберіть"
+  },
+  "payment-method.paypal": {
+    "defaultMessage": "PayPal"
+  },
+  "java-selector.test": {
+    "message": "Тест"
+  },
+  "payment-method.unknown": {
+    "defaultMessage": "Невідомий спосіб оплати"
+  },
+  "settings.default-instance.java-arguments.placeholder": {
+    "message": "Введіть аргументи Java..."
+  },
+  "tag.category.path-tracing": {
+    "defaultMessage": "Трасування шляху"
+  },
+  "content.confirm-bulk-update.update-button": {
+    "defaultMessage": "Оновити {count, plural, one {# project} other {# projects}}"
+  },
+  "creation-flow.custom.build-number.label": {
+    "defaultMessage": "Номер збірки"
+  },
+  "creation-flow.final.generator-settings.input": {
+    "defaultMessage": "Введіть налаштування генератора JSON"
+  },
+  "instance.worlds.game_mode.creative": {
+    "defaultMessage": "Творчий режим"
+  },
+  "header.category.minecraft-server-community": {
+    "defaultMessage": "Спільнота"
+  },
+  "friends.add-friend.username.description": {
+    "message": "Воно може відрізнятися від імені користувача Minecraft!"
+  },
+  "modal.open-in-app.opening-automatically": {
+    "defaultMessage": "Програма Modrinth відкриється автоматично..."
+  },
+  "project.settings.environment.singleplayer.description": {
+    "defaultMessage": "Функціонує лише в одиночній грі або без підключення до сервера для кількох гравців."
+  },
+  "friends.heading.offline": {
+    "message": "Офлайн"
+  },
+  "servers.setup.rate-limit.title": {
+    "defaultMessage": "Неможливо перевстановити сервер"
+  },
+  "project.online-player-count.tooltip": {
+    "defaultMessage": "{count} {countPlural, plural, one {player} other {players}} онлайн"
+  },
+  "label.email": {
+    "defaultMessage": "Електронна пошта"
+  },
+  "label.unknown": {
+    "defaultMessage": "Невідомий"
+  },
+  "tag.category.offline-mode": {
+    "defaultMessage": "Автономний режим"
+  },
+  "project.settings.environment.server_only.dedicated_only.title": {
+    "defaultMessage": "Лише виділений сервер"
+  },
+  "content.page-layout.sort.date-added-newest": {
+    "defaultMessage": "Спочатку найновіші"
+  },
+  "app.update.complete-toast.text": {
+    "message": "Натисніть тут, щоб переглянути журнал змін."
+  },
+  "instance.create.select-profiles-to-import": {
+    "message": "Виберіть профілі для імпорту"
+  },
+  "nags.multiple-resolution-tags.title": {
+    "defaultMessage": "Виберіть правильну роздільну здатність"
+  },
+  "badge.new": {
+    "defaultMessage": "новий"
+  },
+  "creation-flow.final.generator-settings.label": {
+    "defaultMessage": "Налаштування генератора"
+  },
+  "locale.zh-CN": {
+    "defaultMessage": "китайська (спрощена)"
+  },
+  "button.upload-image": {
+    "defaultMessage": "Завантажити зображення"
+  },
+  "project.about.links.donate.kofi": {
+    "defaultMessage": "Пожертвуйте на Ko-fi"
+  },
+  "icon-select.remove": {
+    "defaultMessage": "Видалити значок"
+  },
+  "tag.loader.canvas": {
+    "defaultMessage": "Полотно"
+  },
+  "hosting.content.failed-to-load-modpack-content": {
+    "defaultMessage": "Не вдалося завантажити вміст modpack"
+  },
+  "instance.logs.crash.empty": {
+    "message": "Журнали збоїв не знайдено."
+  },
+  "instance.mods.share-modal.title": {
+    "message": "Обмін вмістом modpack"
+  },
+  "creation-flow.action.reset-server": {
+    "defaultMessage": "Скинути сервер"
+  },
+  "creation-flow.final.world-type.placeholder": {
+    "defaultMessage": "Виберіть тип світу"
+  },
+  "instances.updater-modal.loading-versions": {
+    "defaultMessage": "Завантаження версій..."
+  },
+  "form.placeholder.bank-name": {
+    "defaultMessage": "Введіть назву банку"
+  },
+  "grid-display.option.date-modified": {
+    "message": "Дата змінена"
+  },
+  "instance.settings.tabs.installation.tooltip.cannot-while-repairing": {
+    "message": "Неможливо {action} під час ремонту"
+  },
+  "show-file": {
+    "message": "Показати файл"
+  },
+  "curseforge-import.importing": {
+    "message": "Імпорт..."
+  },
+  "instances.modpack-content-modal.copy-link": {
+    "defaultMessage": "Копіювати посилання"
+  },
+  "instance.screenshots.heading": {
+    "message": "Скріншоти"
+  },
+  "button.copy-id": {
+    "defaultMessage": "Копіювати ідентифікатор"
+  },
+  "modal.open-in-app.close": {
+    "defaultMessage": "Закрити"
+  },
+  "locale.pl-PL": {
+    "defaultMessage": "польський"
+  },
+  "payment-method.charity": {
+    "defaultMessage": "Благодійність"
+  },
+  "instance.settings.tabs.installation.tooltip.action.change-version": {
+    "message": "змінити версію"
+  },
+  "maintenance.last-played.never": {
+    "message": "Ніколи"
+  },
+  "project-card.date.updated.tooltip": {
+    "defaultMessage": "Оновлено {date}"
+  },
+  "error-modal.not-enough-space-text": {
+    "message": "Схоже, на диску, що містить вибраний каталог, недостатньо місця. Звільніть місце та повторіть спробу або скасуйте зміну каталогу."
+  },
+  "nags.summary-special-formatting.description": {
+    "defaultMessage": "Ваше резюме не повинно містити форматування, розривів рядків, спеціальних символів або посилань, оскільки в резюме відображатиметься лише звичайний текст."
+  },
+  "search.filter_type.shader_loader": {
+    "defaultMessage": "Навантажувач"
+  },
+  "hosting.specs.shared-cpus": {
+    "defaultMessage": "{cpus} Спільні ЦП"
+  },
+  "project.settings.environment.notice.review-options.description": {
+    "defaultMessage": "Ми щойно оновили систему середовища на Modrinth, і тепер доступні нові параметри. Переконайтеся, що нижче вибрано правильний параметр, а потім натисніть «Підтвердити», коли закінчите!"
+  },
+  "settings.resource.purge-cache.confirm.title": {
+    "message": "Ви впевнені, що бажаєте очистити кеш?"
+  },
+  "tag.loader.modloader": {
+    "defaultMessage": "ModLoader Risugami"
+  },
+  "installation-settings.loader-version": {
+    "defaultMessage": "версія {loader}"
+  },
+  "instance.create.path-to-launcher": {
+    "message": "Шлях до панелі запуску"
+  },
+  "accounts-card.check-player-name": {
+    "message": "Переконайтеся, що ви ввели правильне ім'я гравця."
+  },
+  "instance.breadcrumb.content": {
+    "message": "Зміст"
+  },
+  "instance.settings.tabs.installation.unknown-version": {
+    "message": "(невідома версія)"
+  },
+  "friends.action.add-friend": {
+    "message": "Додати друга"
+  },
+  "instance.index.repair": {
+    "message": "Ремонт"
+  },
+  "settings.resource.max-concurrent-downloads.title": {
+    "message": "Максимальна кількість одночасних завантажень"
+  },
+  "browse.sort.total-downloads": {
+    "message": "Загальна кількість завантажень"
+  },
+  "locale.tr-TR": {
+    "defaultMessage": "турецька"
+  },
+  "button.follow": {
+    "defaultMessage": "Слідуйте"
+  },
+  "search.filter.locked.instance-loader.title": {
+    "message": "Завантажувач надається екземпляром"
+  },
+  "app.update-toast.download": {
+    "message": "Завантажити ({size})"
+  },
+  "syncing.target.conflicts": {
+    "message": "{count} конфліктних випадків"
+  },
+  "content.modpack-card.content-hint-title": {
+    "defaultMessage": "Вміст Modpack переміщено"
+  },
+  "app.nav.worlds": {
+    "message": "Світи"
+  },
+  "tag.category.minigame": {
+    "defaultMessage": "Міні-гра"
+  },
+  "skins.upload.option.file.title": {
+    "message": "Завантажити з файлу"
+  },
+  "instance.settings.tabs.installation.change-version.button": {
+    "message": "Змінити версію"
+  },
+  "app.revoria-update.header": {
+    "message": "Доступний новий випуск Revoria!"
+  },
+  "settings.default-instance.java-arguments.title": {
+    "message": "Аргументи Java"
+  },
+  "creation-flow.final.generator-settings.placeholder": {
+    "defaultMessage": "Виберіть параметри генератора"
+  },
+  "installation-settings.repair.instance-description": {
+    "defaultMessage": "Перевстановлює залежності Minecraft і перевіряє на пошкодження. Це може вирішити проблеми, якщо ваша гра не запускається через помилки, пов’язані з програмою запуску."
+  },
+  "instance.logs.crash.description": {
+    "message": "Аналізує журнали збоїв цього екземпляра за допомогою хмарної моделі Ollama."
+  },
+  "project-type.server.capital": {
+    "defaultMessage": "{count, plural, one {Server} other {Servers}}"
+  },
+  "label.moderation": {
+    "defaultMessage": "Модерація"
+  },
+  "settings.default-instance.wrapper.title": {
+    "message": "Обгортка"
+  },
+  "content.selection-bar.bulk.deleting": {
+    "defaultMessage": "Видалення {progress}/{total} {contentType}..."
+  },
+  "creation-flow.action.import": {
+    "defaultMessage": "Імпорт"
+  },
+  "app.instance.mods.share-text": {
+    "message": "Перегляньте проекти, які я використовую у своєму пакеті модів!"
+  },
+  "app.instance.mods.installing": {
+    "message": "Встановлення..."
+  },
+  "app.instance.mods.share-title": {
+    "message": "Обмін вмістом modpack"
+  },
+  "app.instance.mods.show-file": {
+    "message": "Показати файл"
+  },
+  "app.instance.mods.copy-link": {
+    "message": "Копіювати посилання"
+  },
+  "app.instance.mods.switch-version": {
+    "message": "Змінна версія"
+  },
+  "app.instance.mods.unknown-version": {
+    "message": "Невідомий"
+  },
+  "browse.type.server": {
+    "message": "Сервери"
+  },
+  "content.page-layout.filter.updates": {
+    "message": "Оновлення"
+  },
+  "content.page-layout.filter.client-only": {
+    "message": "Тільки клієнт"
+  },
+  "content.page-layout.filter.disabled": {
+    "message": "Вимкнено"
+  },
+  "installation.info.title": {
+    "message": "Інформація про встановлення"
+  },
+  "installation.installed-modpack.title": {
+    "message": "Встановлений модпак"
+  }
+}

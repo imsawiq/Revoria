@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { Combobox, ThemeSelector, Toggle } from '@modrinth/ui'
 import { defineMessages, useVIntl } from '@vintl/vintl'
-import { useStorage } from '@vueuse/core'
-import { computed, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 
 import { get, set } from '@/helpers/settings.ts'
 import { getOS } from '@/helpers/utils'
@@ -28,14 +27,6 @@ const messages = defineMessages({
 		id: 'settings.appearance.advanced-rendering.description',
 		defaultMessage:
 			'Enables advanced rendering such as blur effects that may cause performance issues without hardware-accelerated rendering.',
-	},
-	launcherLanguageTitle: {
-		id: 'settings.appearance.launcher-language.title',
-		defaultMessage: 'Launcher language',
-	},
-	launcherLanguageDescription: {
-		id: 'settings.appearance.launcher-language.description',
-		defaultMessage: 'Select the language used by Revoria UI.',
 	},
 	hideNametagTitle: {
 		id: 'settings.appearance.hide-nametag.title',
@@ -97,29 +88,10 @@ const messages = defineMessages({
 		id: 'settings.appearance.default-landing.library',
 		defaultMessage: 'Library',
 	},
-	languageEnglish: {
-		id: 'settings.appearance.launcher-language.option.english',
-		defaultMessage: 'English',
-	},
-	languageRussian: {
-		id: 'settings.appearance.launcher-language.option.russian',
-		defaultMessage: 'Russian',
-	},
 })
 
 const os = ref(await getOS())
 const settings = ref(await get())
-const launcherLanguage = useStorage('launcher-language', 'en')
-const languageOptions = computed(() => [
-	{ value: 'en', label: formatMessage(messages.languageEnglish) },
-	{ value: 'ru', label: formatMessage(messages.languageRussian) },
-])
-const selectedLanguageLabel = computed(
-	() =>
-		languageOptions.value.find((option) => option.value === launcherLanguage.value)?.label ??
-		formatMessage(messages.languageEnglish),
-)
-
 watch(
 	settings,
 	async () => {
@@ -163,23 +135,6 @@ watch(
 					settings.advanced_rendering = themeStore.advancedRendering
 				}
 			"
-		/>
-	</div>
-
-	<div class="settings-row mt-4 flex items-center justify-between">
-		<div>
-			<h2 class="m-0 text-lg font-extrabold text-contrast">
-				{{ formatMessage(messages.launcherLanguageTitle) }}
-			</h2>
-			<p class="m-0 mt-1">{{ formatMessage(messages.launcherLanguageDescription) }}</p>
-		</div>
-		<Combobox
-			id="launcher-language"
-			v-model="launcherLanguage"
-			:name="formatMessage(messages.launcherLanguageTitle)"
-			class="w-40"
-			:options="languageOptions"
-			:display-value="selectedLanguageLabel"
 		/>
 	</div>
 

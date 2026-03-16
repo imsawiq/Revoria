@@ -29,7 +29,7 @@
 				</h2>
 			</router-link>
 			<p v-if="displayAuthor" class="author">
-				by
+				{{ formatMessage(messages.by) }}
 				<router-link
 					v-if="authorHref && authorHref.startsWith('/')"
 					class="title-link"
@@ -71,15 +71,19 @@
 			<div v-if="numericDownloads !== null" class="stat">
 				<DownloadIcon aria-hidden="true" />
 				<p>
-					<strong>{{ formatNumber(numericDownloads) }}</strong
-					><span class="stat-label"> download<span v-if="numericDownloads !== 1">s</span></span>
+					<strong>{{ formatNumber(numericDownloads) }}</strong>
+					<span class="stat-label">
+						{{ formatMessage(messages.downloads, { count: numericDownloads }) }}
+					</span>
 				</p>
 			</div>
 			<div v-if="numericFollows !== null" class="stat">
 				<HeartIcon aria-hidden="true" />
 				<p>
-					<strong>{{ formatNumber(numericFollows) }}</strong
-					><span class="stat-label"> follower<span v-if="numericFollows !== 1">s</span></span>
+					<strong>{{ formatNumber(numericFollows) }}</strong>
+					<span class="stat-label">
+						{{ formatMessage(messages.followers, { count: numericFollows }) }}
+					</span>
 				</p>
 			</div>
 			<div class="buttons">
@@ -87,11 +91,13 @@
 			</div>
 			<div v-if="showUpdatedDate" v-tooltip="updatedDate" class="stat date">
 				<EditIcon aria-hidden="true" />
-				<span class="date-label">Updated </span> {{ sinceUpdated }}
+				<span class="date-label">{{ formatMessage(messages.updated) }} </span>
+				{{ sinceUpdated }}
 			</div>
 			<div v-else v-tooltip="createdDate" class="stat date">
 				<CalendarIcon aria-hidden="true" />
-				<span class="date-label">Published </span>{{ sinceCreation }}
+				<span class="date-label">{{ formatMessage(messages.published) }} </span>
+				{{ sinceCreation }}
 			</div>
 		</div>
 	</article>
@@ -100,6 +106,7 @@
 <script setup>
 import { CalendarIcon, DownloadIcon, EditIcon, HeartIcon } from '@modrinth/assets'
 import { formatNumber } from '@modrinth/utils'
+import { defineMessages, useVIntl } from '@vintl/vintl'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime.js'
 import { computed } from 'vue'
@@ -113,6 +120,30 @@ import Badge from './SimpleBadge.vue'
 
 dayjs.extend(relativeTime)
 const router = useRouter()
+const { formatMessage } = useVIntl()
+
+const messages = defineMessages({
+	by: {
+		id: 'project-card.by',
+		defaultMessage: 'by',
+	},
+	downloads: {
+		id: 'project-card.stats.downloads',
+		defaultMessage: '{count, plural, one {download} other {downloads}}',
+	},
+	followers: {
+		id: 'project-card.stats.followers',
+		defaultMessage: '{count, plural, one {follower} other {followers}}',
+	},
+	updated: {
+		id: 'project-card.date.updated',
+		defaultMessage: 'Updated',
+	},
+	published: {
+		id: 'project-card.date.published',
+		defaultMessage: 'Published',
+	},
+})
 
 const props = defineProps({
 	id: {

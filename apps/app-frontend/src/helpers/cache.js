@@ -8,12 +8,32 @@ export async function get_project_many(ids, cacheBehaviour) {
 	return await invoke('plugin:cache|get_project_many', { ids, cacheBehaviour })
 }
 
+export async function get_project_v3(id, cacheBehaviour) {
+	return await invoke('plugin:cache|get_project', { id, cacheBehaviour })
+}
+
+export async function get_project_v3_many(ids, cacheBehaviour) {
+	return await invoke('plugin:cache|get_project_many', { ids, cacheBehaviour })
+}
+
 export async function get_version(id, cacheBehaviour) {
 	return await invoke('plugin:cache|get_version', { id, cacheBehaviour })
 }
 
 export async function get_version_many(ids, cacheBehaviour) {
 	return await invoke('plugin:cache|get_version_many', { ids, cacheBehaviour })
+}
+
+export async function get_project_versions(projectId, cacheBehaviour) {
+	try {
+		return await invoke('plugin:cache|get_project_versions', { projectId, cacheBehaviour })
+	} catch {
+		const project = await get_project(projectId, cacheBehaviour)
+		if (!project?.versions?.length) {
+			return []
+		}
+		return await get_version_many(project.versions, cacheBehaviour)
+	}
 }
 
 export async function get_user(id, cacheBehaviour) {
@@ -45,6 +65,14 @@ export async function get_search_results(id, cacheBehaviour) {
 }
 
 export async function get_search_results_many(ids, cacheBehaviour) {
+	return await invoke('plugin:cache|get_search_results_many', { ids, cacheBehaviour })
+}
+
+export async function get_search_results_v3(id, cacheBehaviour) {
+	return await invoke('plugin:cache|get_search_results', { id, cacheBehaviour })
+}
+
+export async function get_search_results_v3_many(ids, cacheBehaviour) {
 	return await invoke('plugin:cache|get_search_results_many', { ids, cacheBehaviour })
 }
 

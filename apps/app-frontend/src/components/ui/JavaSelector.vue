@@ -1,6 +1,6 @@
 <template>
 	<JavaDetectionModal ref="detectJavaModal" @submit="(val) => emit('update:modelValue', val)" />
-	<div class="toggle-setting" :class="{ compact }">
+	<div class="toggle-setting" :class="{ compact }" v-bind="$attrs">
 		<input
 			autocomplete="off"
 			:disabled="props.disabled"
@@ -72,6 +72,8 @@ import { ref } from 'vue'
 import JavaDetectionModal from '@/components/ui/JavaDetectionModal.vue'
 import { trackEvent } from '@/helpers/analytics'
 import { auto_install_java, find_filtered_jres, get_jre, test_jre } from '@/helpers/jre.js'
+
+defineOptions({ inheritAttrs: false })
 
 const { handleError } = injectNotificationManager()
 const { formatMessage } = useVIntl()

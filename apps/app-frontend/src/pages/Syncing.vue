@@ -281,7 +281,7 @@ onMounted(loadState)
 
 <template>
 	<div class="syncing-page">
-		<Card class="section-card">
+		<Card class="section-card add-target-card">
 			<header class="page-header">
 				<div>
 					<h2 class="page-title">{{ formatMessage(messages.title) }}</h2>
@@ -518,6 +518,7 @@ onMounted(loadState)
 	flex-direction: column;
 	gap: 1.5rem;
 	padding: 1.5rem;
+	overflow: visible;
 }
 
 .section-card {
@@ -533,8 +534,18 @@ onMounted(loadState)
 		);
 	border: 1px solid color-mix(in srgb, var(--glass-border) 84%, var(--color-brand-highlight));
 	box-shadow: var(--shadow-floating);
+	position: relative;
+	z-index: 1;
 }
 
+.add-target-card {
+	z-index: 30;
+	overflow: visible;
+}
+
+.add-row {
+	z-index: 31;
+}
 .page-header {
 	display: flex;
 	align-items: flex-start;
@@ -714,6 +725,8 @@ onMounted(loadState)
 	grid-template-columns: repeat(2, minmax(0, 1fr));
 	display: grid;
 	gap: 1rem;
+	position: relative;
+	z-index: 0;
 }
 
 .section-card-wide {

@@ -3,6 +3,7 @@ import {
 	CoffeeIcon,
 	GameIcon,
 	GaugeIcon,
+	LanguagesIcon,
 	PaintbrushIcon,
 	ReportIcon,
 	SettingsIcon,
@@ -19,6 +20,7 @@ import AppearanceSettings from '@/components/ui/settings/AppearanceSettings.vue'
 import DefaultInstanceSettings from '@/components/ui/settings/DefaultInstanceSettings.vue'
 import FeatureFlagSettings from '@/components/ui/settings/FeatureFlagSettings.vue'
 import JavaSettings from '@/components/ui/settings/JavaSettings.vue'
+import LanguageSettings from '@/components/ui/settings/LanguageSettings.vue'
 import PrivacySettings from '@/components/ui/settings/PrivacySettings.vue'
 import ResourceManagementSettings from '@/components/ui/settings/ResourceManagementSettings.vue'
 import { get, set } from '@/helpers/settings.ts'
@@ -44,6 +46,14 @@ const tabs = [
 		}),
 		icon: PaintbrushIcon,
 		content: AppearanceSettings,
+	},
+	{
+		name: defineMessage({
+			id: 'app.settings.tabs.language',
+			defaultMessage: 'Language',
+		}),
+		icon: LanguagesIcon,
+		content: LanguageSettings,
 	},
 	{
 		name: defineMessage({
@@ -145,14 +155,22 @@ const messages = defineMessages({
 })
 </script>
 <template>
-	<ModalWrapper ref="modal">
+	<ModalWrapper
+		ref="modal"
+		:width="'928px'"
+		:min-width="'928px'"
+		:max-width="'928px'"
+	>
 		<template #title>
 			<span class="flex items-center gap-2 text-lg font-extrabold text-contrast">
 				<SettingsIcon /> {{ formatMessage(messages.settingsTitle) }}
 			</span>
 		</template>
 
-		<TabbedModal :tabs="tabs.filter((t) => !t.developerOnly || themeStore.devMode)">
+		<TabbedModal
+			class="app-settings-tabs"
+			:tabs="tabs.filter((t) => !t.developerOnly || themeStore.devMode)"
+		>
 			<template #footer>
 				<div class="mt-auto text-secondary text-sm">
 					<div class="mb-3"></div>
@@ -193,22 +211,21 @@ code {
 	color: var(--color-brand);
 }
 
-:deep(.tabbed-modal) {
-	background: linear-gradient(
-		180deg,
-		color-mix(in oklch, var(--color-glass-bg-strong) 92%, transparent),
-		color-mix(in oklch, var(--color-glass-bg) 96%, transparent)
-	);
+:deep(.app-settings-tabs .tabbed-modal) {
+	grid-template-columns: 220px minmax(0, 1fr);
 }
 
-:deep(.tabbed-modal__sidebar),
-:deep(.tabbed-modal__tabs) {
-	background: color-mix(in oklch, var(--color-glass-bg-strong) 86%, transparent);
-	border-right: 1px solid var(--glass-border);
+:deep(.app-settings-tabs .tabbed-modal__sidebar) {
+	width: 220px;
+	min-width: 220px;
+	max-width: 220px;
+	overflow: hidden;
 }
 
-:deep(.tabbed-modal__content) {
-	background: transparent;
+:deep(.app-settings-tabs .tabbed-modal__sidebar button) {
+	white-space: normal !important;
+	line-height: 1.2;
+	max-width: 100%;
 }
 
 .settings-logo-image {

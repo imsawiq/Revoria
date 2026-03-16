@@ -207,6 +207,7 @@ const isChildOfDropdown = (element) => {
 	height: 40px;
 	position: relative;
 	display: inline-block;
+	z-index: 20;
 
 	&:focus {
 		outline: 0;
@@ -275,7 +276,7 @@ const isChildOfDropdown = (element) => {
 	}
 
 	.options {
-		z-index: 10;
+		z-index: 60;
 		max-height: v-bind('maxVisibleOptions ? `calc(${maxVisibleOptions} * 3rem)` : "18.75rem"');
 		overflow-y: auto;
 		border: 1px solid var(--color-button-border);
@@ -346,7 +347,7 @@ const isChildOfDropdown = (element) => {
 	position: absolute;
 	width: 100%;
 	overflow: auto;
-	z-index: 9;
+	z-index: 50;
 
 	&.up {
 		top: 0;

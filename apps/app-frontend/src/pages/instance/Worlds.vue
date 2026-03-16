@@ -207,6 +207,7 @@ const props = defineProps<{
 	playing: boolean
 	versions: Version[]
 	installed: boolean
+	openSettings?: () => void
 }>()
 
 const instance = computed(() => props.instance)

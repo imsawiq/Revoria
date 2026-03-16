@@ -7,18 +7,23 @@ import {
 	MonitorIcon,
 	WrenchIcon,
 } from '@modrinth/assets'
-import { Avatar, TabbedModal, type TabbedModalTab } from '@modrinth/ui'
+import {
+	Avatar,
+	commonMessages,
+	defineMessage,
+	NewModal,
+	TabbedModal,
+	type TabbedModalTab,
+	useVIntl,
+} from '@modrinth/ui'
 import { convertFileSrc } from '@tauri-apps/api/core'
-import { defineMessage, useVIntl } from '@vintl/vintl'
-import { ref } from 'vue'
+import { nextTick, ref, watch } from 'vue'
 
 import GeneralSettings from '@/components/ui/instance_settings/GeneralSettings.vue'
 import HooksSettings from '@/components/ui/instance_settings/HooksSettings.vue'
 import InstallationSettings from '@/components/ui/instance_settings/InstallationSettings.vue'
 import JavaSettings from '@/components/ui/instance_settings/JavaSettings.vue'
 import WindowSettings from '@/components/ui/instance_settings/WindowSettings.vue'
-import ModalWrapper from '@/components/ui/modal/ModalWrapper.vue'
-
 import type { InstanceSettingsTabProps } from '../../../helpers/types'
 
 const { formatMessage } = useVIntl()
@@ -69,20 +74,58 @@ const tabs: TabbedModalTab<InstanceSettingsTabProps>[] = [
 ]
 
 const modal = ref()
+const tabbedModal = ref<InstanceType<typeof TabbedModal> | null>(null)
+const pendingTab = ref<InstanceSettingsTabId | null>(null)
 
-function show() {
-	modal.value.show()
+type InstanceSettingsTabId = 'general' | 'installation' | 'window' | 'java' | 'hooks'
+const tabIdToIndex: Record<InstanceSettingsTabId, number> = {
+	general: 0,
+	installation: 1,
+	window: 2,
+	java: 3,
+	hooks: 4,
 }
+
+function show(tab?: InstanceSettingsTabId) {
+	if (tab !== undefined) {
+		pendingTab.value = tab
+	}
+	modal.value.show()
+	nextTick(() => {
+		requestAnimationFrame(() => applyPendingTab())
+	})
+}
+
+function applyPendingTab() {
+	if (pendingTab.value && tabbedModal.value) {
+		tabbedModal.value.setTab(tabIdToIndex[pendingTab.value])
+		pendingTab.value = null
+	}
+}
+
+function handleModalShow() {
+	// Ensure the tab is applied after the modal is fully shown
+	requestAnimationFrame(() => applyPendingTab())
+}
+
+watch(
+	tabbedModal,
+	(value) => {
+		if (value) applyPendingTab()
+	},
+	{ flush: 'post' },
+)
 
 defineExpose({ show })
 
-const titleMessage = defineMessage({
-	id: 'instance.settings.title',
-	defaultMessage: 'Settings',
-})
 </script>
 <template>
-	<ModalWrapper ref="modal">
+	<NewModal
+		ref="modal"
+		:max-width="'min(928px, calc(95vw - 10rem))'"
+		:width="'min(928px, calc(95vw - 10rem))'"
+		:on-show="handleModalShow"
+	>
 		<template #title>
 			<span class="flex items-center gap-2 text-lg font-semibold text-primary">
 				<Avatar
@@ -91,30 +134,15 @@ const titleMessage = defineMessage({
 					:tint-by="props.instance.path"
 				/>
 				{{ instance.name }} <ChevronRightIcon />
-				<span class="font-extrabold text-contrast">{{ formatMessage(titleMessage) }}</span>
+				<span class="font-extrabold text-contrast">
+					{{ formatMessage(commonMessages.settingsLabel) }}
+				</span>
 			</span>
 		</template>
 
-		<TabbedModal :tabs="tabs.map((tab) => ({ ...tab, props }))" />
-	</ModalWrapper>
+		<TabbedModal ref="tabbedModal" :tabs="tabs.map((tab) => ({ ...tab, props }))" />
+	</NewModal>
 </template>
 
 <style lang="scss" scoped>
-:deep(.tabbed-modal) {
-	background: linear-gradient(
-		180deg,
-		color-mix(in oklch, var(--color-glass-bg-strong) 92%, transparent),
-		color-mix(in oklch, var(--color-glass-bg) 96%, transparent)
-	);
-}
-
-:deep(.tabbed-modal__sidebar),
-:deep(.tabbed-modal__tabs) {
-	background: color-mix(in oklch, var(--color-glass-bg-strong) 86%, transparent);
-	border-right: 1px solid var(--glass-border);
-}
-
-:deep(.tabbed-modal__content) {
-	background: transparent;
-}
 </style>

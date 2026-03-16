@@ -1,4 +1,5 @@
 import vue from '@vitejs/plugin-vue'
+import { templateCompilerOptions } from '@tresjs/core'
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import svgLoader from 'vite-svg-loader'
@@ -15,10 +16,14 @@ export default defineConfig({
 				find: '@',
 				replacement: resolve(projectRootDir, 'src'),
 			},
+			{
+				find: '#ui',
+				replacement: resolve(projectRootDir, '../../packages/ui/src'),
+			},
 		],
 	},
 	plugins: [
-		vue(),
+		vue(templateCompilerOptions),
 		svgLoader({
 			svgoConfig: {
 				plugins: [

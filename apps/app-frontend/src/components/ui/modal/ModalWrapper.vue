@@ -1,6 +1,8 @@
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { NewModal as Modal } from '@modrinth/ui'
-import { useTemplateRef } from 'vue'
+import { useAttrs, useTemplateRef } from 'vue'
 
 // import { hide_ads_window, show_ads_window } from '@/helpers/ads.js'
 import { useTheming } from '@/store/theme.ts'
@@ -32,6 +34,7 @@ const props = defineProps({
 	// },
 })
 const modal = useTemplateRef('modal')
+const attrs = useAttrs()
 
 defineExpose({
 	show: (e: MouseEvent) => {
@@ -55,6 +58,7 @@ function onModalHide() {
 <template>
 	<Modal
 		ref="modal"
+		v-bind="attrs"
 		:header="header"
 		:noblur="!themeStore.advancedRendering"
 		:closable="closable"

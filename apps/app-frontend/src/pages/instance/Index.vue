@@ -128,12 +128,7 @@
 								<div :key="route.path" class="instance-tab-swap-shell">
 									<component
 										:is="Component"
-										:instance="instance"
-										:options="options"
-										:offline="offline"
-										:playing="playing"
-										:versions="modrinthVersions"
-										:installed="instance.install_stage === 'installed'"
+										v-bind="instanceComponentProps"
 										@play="updatePlayState"
 										@stop="() => stopInstance('InstanceSubpage')"
 									></component>
@@ -518,6 +513,20 @@ const icon = computed(() =>
 )
 
 const settingsModal = ref()
+
+function openInstallationSettings() {
+	settingsModal.value?.show('installation')
+}
+
+const instanceComponentProps = computed(() => ({
+	instance: instance.value,
+	options: options.value,
+	offline: offline.value,
+	playing: playing.value,
+	versions: modrinthVersions.value,
+	installed: instance.value?.install_stage === 'installed',
+	openSettings: openInstallationSettings,
+}))
 
 const timePlayed = computed(() => {
 	if (!instance.value) return 0

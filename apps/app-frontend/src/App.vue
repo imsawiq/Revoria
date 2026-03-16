@@ -29,8 +29,10 @@ import {
 	Button,
 	ButtonStyled,
 	commonMessages,
+	CreationFlowModal,
 	NotificationPanel,
 	OverflowMenu,
+	provideI18n,
 	provideModrinthClient,
 	provideNotificationManager,
 	providePageContext,
@@ -46,8 +48,14 @@ import { type } from '@tauri-apps/plugin-os'
 import { saveWindowState, StateFlags } from '@tauri-apps/plugin-window-state'
 import { defineMessages, useVIntl } from '@vintl/vintl'
 import { $fetch } from 'ofetch'
-import { computed, nextTick, onMounted, onUnmounted, provide, ref } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, provide, ref, watch } from 'vue'
 import { RouterView, useRoute, useRouter } from 'vue-router'
+import { useStorage } from '@vueuse/core'
+import allEnMessages from '@/locales/combined/en-US.json'
+import allRuMessages from '@/locales/combined/ru-RU.json'
+import allUkMessages from '@/locales/combined/uk-UA.json'
+import allDeDeMessages from '@/locales/combined/de-DE.json'
+import allRoMessages from '@/locales/combined/ro-RO.json'
 
 import ModrinthLoadingIndicator from '@/components/LoadingIndicatorBar.vue'
 import AccountsCard from '@/components/ui/AccountsCard.vue'
@@ -57,7 +65,6 @@ import FriendsList from '@/components/ui/friends/FriendsList.vue'
 import IncompatibilityWarningModal from '@/components/ui/install_flow/IncompatibilityWarningModal.vue'
 import InstallConfirmModal from '@/components/ui/install_flow/InstallConfirmModal.vue'
 import ModInstallModal from '@/components/ui/install_flow/ModInstallModal.vue'
-import InstanceCreationModal from '@/components/ui/InstanceCreationModal.vue'
 import AppSettingsModal from '@/components/ui/modal/AppSettingsModal.vue'
 import AuthGrantFlowWaitModal from '@/components/ui/modal/AuthGrantFlowWaitModal.vue'
 import UpdateToast from '@/components/ui/UpdateToast.vue'
@@ -88,6 +95,8 @@ import {
 	provideAppUpdateDownloadProgress,
 	subscribeToDownloadProgress,
 } from '@/providers/download-progress.ts'
+import { createContentInstall, provideContentInstall } from '@/providers/content-install'
+import { setupProviders } from '@/providers/setup'
 import { useError } from '@/store/error.js'
 import { useInstall } from '@/store/install.js'
 import { useLoading, useTheming } from '@/store/state'
@@ -120,6 +129,25 @@ providePageContext({
 	hierarchicalSidebarAvailable: ref(true),
 	showAds: ref(false),
 })
+
+const {
+	installationModal,
+	fetchExistingInstanceNames,
+	handleCreate,
+	handleBrowseModpacks,
+	searchModpacks,
+	getProjectVersions,
+} = setupProviders(notificationManager)
+
+const launcherLanguage = useStorage('launcher-language', 'en')
+const languageToLocale = {
+	en: 'en-US',
+	ru: 'ru-RU',
+	uk: 'uk-UA',
+	de: 'de-DE',
+	ro: 'ro-RO',
+}
+const i18nLocale = ref(languageToLocale[launcherLanguage.value] ?? 'en-US')
 const availableSurvey = ref(false)
 
 const urlModal = ref(null)
@@ -180,7 +208,56 @@ onUnmounted(async () => {
 	await unlistenUpdateDownload?.()
 })
 
-const { formatMessage } = useVIntl()
+const vintl = useVIntl()
+const { formatMessage } = vintl
+const normalizeMessages = (messages) =>
+	Object.fromEntries(
+		Object.entries(messages ?? {}).map(([key, value]) => [
+			key,
+			value?.message ?? value?.defaultMessage ?? value,
+		]),
+	)
+let langSwitchTimeout
+function triggerLanguageTransition() {
+	const root = document.documentElement
+	root.classList.add('lang-switching')
+	// Force reflow so the transition applies reliably.
+	void root.offsetHeight
+	root.classList.add('lang-switching-active')
+	if (langSwitchTimeout) {
+		clearTimeout(langSwitchTimeout)
+	}
+	langSwitchTimeout = window.setTimeout(() => {
+		root.classList.remove('lang-switching-active')
+		root.classList.remove('lang-switching')
+	}, 260)
+}
+watch(
+	launcherLanguage,
+	async (lang) => {
+		triggerLanguageTransition()
+		const nextLocale = languageToLocale[lang] ?? 'en-US'
+		i18nLocale.value = nextLocale
+		const allMessagesByLocale = {
+			'en-US': allEnMessages,
+			'ru-RU': allRuMessages,
+			'uk-UA': allUkMessages,
+			'de-DE': allDeDeMessages,
+			'ro-RO': allRoMessages,
+		}
+		const allMessages = allMessagesByLocale[nextLocale] ?? allEnMessages
+		vintl.addMessages(nextLocale, normalizeMessages(allMessages))
+	},
+	{ immediate: true },
+)
+provideI18n({
+	locale: i18nLocale,
+	t: (key, values) => formatMessage({ id: key, defaultMessage: key }, values),
+	setLocale: async (locale) => {
+		i18nLocale.value = locale
+		await vintl.changeLocale(locale)
+	},
+})
 const messages = defineMessages({
 	updateInstalledToastTitle: {
 		id: 'app.update.complete-toast.title',
@@ -475,6 +552,9 @@ const install = useInstall()
 const modInstallModal = ref()
 const installConfirmModal = ref()
 const incompatibilityWarningModal = ref()
+
+const contentInstall = createContentInstall({ router, handleError })
+provideContentInstall(contentInstall)
 
 const credentials = ref()
 
@@ -809,9 +889,16 @@ async function processPendingSurveys() {
 		<Suspense>
 			<AuthGrantFlowWaitModal ref="modrinthLoginFlowWaitModal" @flow-cancel="cancelLogin" />
 		</Suspense>
-		<Suspense>
-			<InstanceCreationModal ref="installationModal" />
-		</Suspense>
+		<CreationFlowModal
+			ref="installationModal"
+			type="instance"
+			show-snapshot-toggle
+			:fetch-existing-instance-names="fetchExistingInstanceNames"
+			:search-modpacks="searchModpacks"
+			:get-project-versions="getProjectVersions"
+			@create="handleCreate"
+			@browse-modpacks="handleBrowseModpacks"
+		/>
 		<div class="app-grid-navbar flex flex-col p-3 pt-2 gap-2 w-[--left-bar-width]">
 			<NavButton v-tooltip.right="formatMessage(messages.navHome)" to="/">
 				<HomeIcon />
@@ -1429,6 +1516,29 @@ async function processPendingSurveys() {
 }
 </style>
 <style>
+html.lang-switching .app-grid-layout,
+html.lang-switching .app-contents {
+	transition: opacity 220ms ease, filter 220ms ease;
+}
+
+html.lang-switching.lang-switching-active .app-grid-layout,
+html.lang-switching.lang-switching-active .app-contents {
+	opacity: 0.7;
+	filter: blur(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html.lang-switching .app-grid-layout,
+	html.lang-switching .app-contents {
+		transition: none;
+	}
+	html.lang-switching.lang-switching-active .app-grid-layout,
+	html.lang-switching.lang-switching-active .app-contents {
+		opacity: 1;
+		filter: none;
+	}
+}
+
 .mac {
 	.app-grid-statusbar {
 		padding-left: 5rem;

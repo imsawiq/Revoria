@@ -81,8 +81,8 @@ function toggleItem(item: T) {
 		color: var(--color-contrast);
 		background-color: var(--color-brand-highlight);
 		box-shadow:
-			inset 0 0 0 transparent,
-			0 0 0 2px var(--color-brand);
+			inset 0 0 0 1.5px var(--color-brand),
+			0 0 0 1px rgba(0, 0, 0, 0.2);
 	}
 }
 </style>

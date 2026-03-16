@@ -17,11 +17,8 @@
   "affiliate.create.user.description": {
     "defaultMessage": "Nazwa użytkownika, któremu ma być utworzony ten kod"
   },
-  "affiliate.create.user.label": {
-    "defaultMessage": "Nazwa użytkownika"
-  },
   "affiliate.create.user.placeholder": {
-    "defaultMessage": "Podaj nazwę użytkownika..."
+    "defaultMessage": "Wprowadź nazwę użytkownika..."
   },
   "affiliate.createdBy": {
     "defaultMessage": "Stworzony przez {user}"
@@ -43,6 +40,9 @@
   },
   "badge.new": {
     "defaultMessage": "Nowe"
+  },
+  "button.accept": {
+    "defaultMessage": "Akceptuj"
   },
   "button.affiliate-links": {
     "defaultMessage": "Linki afiliacyjne"
@@ -74,6 +74,9 @@
   "button.create-a-project": {
     "defaultMessage": "Utwórz projekt"
   },
+  "button.decline": {
+    "defaultMessage": "Odrzuć"
+  },
   "button.download": {
     "defaultMessage": "Pobierz"
   },
@@ -87,7 +90,7 @@
     "defaultMessage": "Obserwuj"
   },
   "button.max": {
-    "defaultMessage": "Maks."
+    "defaultMessage": "Maks"
   },
   "button.more-options": {
     "defaultMessage": "Więcej opcji"
@@ -116,6 +119,9 @@
   "button.reset": {
     "defaultMessage": "Resetuj"
   },
+  "button.retry": {
+    "defaultMessage": "Spróbuj ponownie"
+  },
   "button.save": {
     "defaultMessage": "Zapisz"
   },
@@ -123,7 +129,7 @@
     "defaultMessage": "Zapisz zmiany"
   },
   "button.saving": {
-    "defaultMessage": "Oszczędzanie"
+    "defaultMessage": "Zapisywanie"
   },
   "button.sign-in": {
     "defaultMessage": "Zaloguj się"
@@ -140,6 +146,9 @@
   "button.unfollow": {
     "defaultMessage": "Przestań obserwować"
   },
+  "button.update": {
+    "defaultMessage": "Aktualizuj"
+  },
   "button.upload-image": {
     "defaultMessage": "Prześlij obraz"
   },
@@ -152,13 +161,13 @@
   "changelog.product.app": {
     "defaultMessage": "Aplikacja"
   },
-  "changelog.product.servers": {
-    "defaultMessage": "Serwery"
+  "changelog.product.hosting": {
+    "defaultMessage": "Hosting"
   },
   "changelog.product.web": {
     "defaultMessage": "Strona internetowa"
   },
-  "collection.label.private": {
+  "collections.label.private": {
     "defaultMessage": "Prywatna"
   },
   "form.label.address-line": {
@@ -201,22 +210,22 @@
     "defaultMessage": "Województwo"
   },
   "form.placeholder.address": {
-    "defaultMessage": "Podaj adres"
+    "defaultMessage": "Wprowadź adres"
   },
   "form.placeholder.address-2": {
-    "defaultMessage": "Aparatament, mieszkanie, itp."
+    "defaultMessage": "Apartament, mieszkanie, itp."
   },
   "form.placeholder.amount": {
-    "defaultMessage": "Podaj kwotę"
+    "defaultMessage": "Wprowadź kwotę"
   },
   "form.placeholder.bank-name": {
-    "defaultMessage": "Podaj nazwę banku"
+    "defaultMessage": "Wprowadź nazwę banku"
   },
   "form.placeholder.bank-name-dropdown": {
     "defaultMessage": "Wybierz nazwę banku"
   },
   "form.placeholder.business-name": {
-    "defaultMessage": "Podaj nazwę przedsiębiorczości"
+    "defaultMessage": "Wprowadź nazwę przedsiębiorczości"
   },
   "form.placeholder.city": {
     "defaultMessage": "Podaj miasto"
@@ -238,6 +247,45 @@
   },
   "form.placeholder.state": {
     "defaultMessage": "Wprowadź województwo"
+  },
+  "header.category.category": {
+    "defaultMessage": "Kategoria"
+  },
+  "header.category.feature": {
+    "defaultMessage": "Funkcje"
+  },
+  "header.category.minecraft-server-community": {
+    "defaultMessage": "Społeczność"
+  },
+  "header.category.minecraft-server-features": {
+    "defaultMessage": "Funkcje"
+  },
+  "header.category.minecraft-server-gameplay": {
+    "defaultMessage": "Tryb gry"
+  },
+  "header.category.minecraft-server-meta": {
+    "defaultMessage": "Inne"
+  },
+  "header.category.performance-impact": {
+    "defaultMessage": "Wpływ na wydajność"
+  },
+  "header.category.resolutions": {
+    "defaultMessage": "Rozdzielczości"
+  },
+  "hosting.specs.burst": {
+    "defaultMessage": "Możliwość burstu do {cpus} procesorów"
+  },
+  "hosting.specs.burst.tooltip": {
+    "defaultMessage": "Funkcja burstingu procesora pozwala Twojemu serwerowi tymczasowo korzystać z dodatkowych wątków, aby pomóc złagodzić skoki TPS. Kliknij, aby dowiedzieć się więcej."
+  },
+  "hosting.specs.gb-ram": {
+    "defaultMessage": "{ram} GB pamięci RAM"
+  },
+  "hosting.specs.gb-storage": {
+    "defaultMessage": "{storage} GB miejsca na dysku"
+  },
+  "hosting.specs.shared-cpus": {
+    "defaultMessage": "{cpus} współdzielonych procesorów"
   },
   "icon-select.edit": {
     "defaultMessage": "Edytuj ikonę"
@@ -278,14 +326,104 @@
   "instance.worlds.game_mode.unknown": {
     "defaultMessage": "Nieznany tryb gry"
   },
+  "instances.modpack-card.unlink": {
+    "defaultMessage": "Rozłącz od paczki modów"
+  },
+  "instances.modpack-content-modal.back-button": {
+    "defaultMessage": "Powrót"
+  },
+  "instances.modpack-content-modal.copy-link": {
+    "defaultMessage": "Kopiuj łącze"
+  },
+  "instances.modpack-content-modal.disable": {
+    "defaultMessage": "Wyłącz"
+  },
+  "instances.modpack-content-modal.empty-description": {
+    "defaultMessage": "Ta paczka modów nie zawiera żadnych innych treści."
+  },
+  "instances.modpack-content-modal.empty-title": {
+    "defaultMessage": "Nie znaleziono treści"
+  },
+  "instances.modpack-content-modal.enable": {
+    "defaultMessage": "Włącz"
+  },
+  "instances.modpack-content-modal.filter-all": {
+    "defaultMessage": "Wszystko"
+  },
+  "instances.modpack-content-modal.header": {
+    "defaultMessage": "Zawartość paczki modów"
+  },
+  "instances.modpack-content-modal.loading": {
+    "defaultMessage": "Ładowanie treści..."
+  },
+  "instances.modpack-content-modal.no-results": {
+    "defaultMessage": "Nie znaleziono żadnego projektu pasującego do Twojego wyszukiwania."
+  },
+  "instances.modpack-content-modal.search-placeholder": {
+    "defaultMessage": "Szukaj wśród {count} {count, plural, one {projektu} other {projektów}}"
+  },
+  "instances.modpack-content-modal.selected-count": {
+    "defaultMessage": "Wybrano {count}"
+  },
+  "instances.updater-modal.badge.current": {
+    "defaultMessage": "Aktualny"
+  },
+  "instances.updater-modal.badge.incompatible": {
+    "defaultMessage": "Niekompatybilny"
+  },
+  "instances.updater-modal.downgrade-to": {
+    "defaultMessage": "Powrót do v{version}"
+  },
+  "instances.updater-modal.header": {
+    "defaultMessage": "Zaktualizuj wersje"
+  },
+  "instances.updater-modal.hide-incompatible": {
+    "defaultMessage": "Ukryj niekompatybilne"
+  },
+  "instances.updater-modal.no-changelog": {
+    "defaultMessage": "Nie ma zmian dla ter wersji."
+  },
+  "instances.updater-modal.no-versions": {
+    "defaultMessage": "Nie znaleziono żadnej wersji"
+  },
+  "instances.updater-modal.search-placeholder": {
+    "defaultMessage": "Szukaj wersji..."
+  },
+  "instances.updater-modal.select-version": {
+    "defaultMessage": "Wybierz wersję, by zobaczyć jej dziennik zmian"
+  },
+  "instances.updater-modal.show-incompatible": {
+    "defaultMessage": "Pokaż niekompatybilne"
+  },
+  "instances.updater-modal.update-to": {
+    "defaultMessage": "Zaktualizuj do v{version}"
+  },
+  "instances.updater-modal.warning.app": {
+    "defaultMessage": "Nie możemy zapewnić, że aktualizacje są bezpieczne dla twojej instalacji. Przejrzyj dziennik zmian wszystkich wersji między starą a aktualną i rozważ zrobienie kopii zapasowej."
+  },
+  "instances.updater-modal.warning.web": {
+    "defaultMessage": "Nie możemy zagwarantować, że aktualizacje są bezpieczna dla Twoich światów. Przejrzyj dzienniki zmian dla wszystkich wersji między starą a aktualną i rozważ zrobienie kopii zapasowej."
+  },
+  "label.actions": {
+    "defaultMessage": "Akcje"
+  },
   "label.available": {
     "defaultMessage": "{amount} dostępne."
+  },
+  "label.changelog": {
+    "defaultMessage": "Dziennik zmian"
   },
   "label.changes-saved": {
     "defaultMessage": "Zmiany zapisane"
   },
   "label.collections": {
     "defaultMessage": "Kolekcje"
+  },
+  "label.confirm-password": {
+    "defaultMessage": "Potwierdź hasło"
+  },
+  "label.content": {
+    "defaultMessage": "Treść"
   },
   "label.created-ago": {
     "defaultMessage": "Utworzony {ago}"
@@ -299,8 +437,20 @@
   "label.description": {
     "defaultMessage": "Opis"
   },
+  "label.details": {
+    "defaultMessage": "Szczegóły"
+  },
+  "label.email": {
+    "defaultMessage": "E-mail"
+  },
+  "label.email-username": {
+    "defaultMessage": "E-mail lub nazwa użytkownika"
+  },
   "label.error": {
     "defaultMessage": "Błąd"
+  },
+  "label.filter-by": {
+    "defaultMessage": "Filtruj według"
   },
   "label.followed-projects": {
     "defaultMessage": "Obserwowane projekty"
@@ -310,6 +460,12 @@
   },
   "label.moderation": {
     "defaultMessage": "Moderacja"
+  },
+  "label.no": {
+    "defaultMessage": "Nie"
+  },
+  "label.no-items": {
+    "defaultMessage": "Puste"
   },
   "label.notifications": {
     "defaultMessage": "Powiadomienia"
@@ -322,6 +478,9 @@
   },
   "label.played": {
     "defaultMessage": "Grano {time}"
+  },
+  "label.project": {
+    "defaultMessage": "Projekt"
   },
   "label.public": {
     "defaultMessage": "Publiczny"
@@ -338,6 +497,9 @@
   "label.scopes": {
     "defaultMessage": "Zakresy"
   },
+  "label.search": {
+    "defaultMessage": "Szukaj"
+  },
   "label.server": {
     "defaultMessage": "Serwer"
   },
@@ -350,11 +512,26 @@
   "label.singleplayer": {
     "defaultMessage": "Tryb jednoosobowy"
   },
+  "label.sort-by": {
+    "defaultMessage": "Sortuj według"
+  },
+  "label.success": {
+    "defaultMessage": "Sukces"
+  },
   "label.title": {
     "defaultMessage": "Tytuł"
   },
   "label.unlisted": {
     "defaultMessage": "Niewymieniony"
+  },
+  "label.update-available": {
+    "defaultMessage": "Dostępna aktualizacja"
+  },
+  "label.username": {
+    "defaultMessage": "Nazwa użytkownika"
+  },
+  "label.version": {
+    "defaultMessage": "Wersja"
   },
   "label.visibility": {
     "defaultMessage": "Widoczność"
@@ -362,11 +539,38 @@
   "label.visit-your-profile": {
     "defaultMessage": "Odwiedź swój profil"
   },
+  "label.yes": {
+    "defaultMessage": "Tak"
+  },
   "modal.add-payment-method.action": {
     "defaultMessage": "Dodaj metodę płatności"
   },
   "modal.add-payment-method.title": {
     "defaultMessage": "Dodawanie metody płatności"
+  },
+  "modal.open-in-app.benefit.install": {
+    "defaultMessage": "Automatycznie pobierz wymagane treści"
+  },
+  "modal.open-in-app.benefit.launch": {
+    "defaultMessage": "Włącz grę i automatycznie połącz się z serwerem"
+  },
+  "modal.open-in-app.benefit.update": {
+    "defaultMessage": "Otrzymuj aktualizacje plików, gdy zmienione są na serwerze"
+  },
+  "modal.open-in-app.close": {
+    "defaultMessage": "Zamknij"
+  },
+  "modal.open-in-app.get-app": {
+    "defaultMessage": "Pobierz Modrinth App"
+  },
+  "modal.open-in-app.opening-automatically": {
+    "defaultMessage": "Modrinth App zostanie otwarte automatycznie..."
+  },
+  "modal.open-in-app.title": {
+    "defaultMessage": "Otwieranie Modrinth App"
+  },
+  "modal.open-in-app.why-use": {
+    "defaultMessage": "Czemu warto używać Modrinth App"
   },
   "notification.error.title": {
     "defaultMessage": "Wystąpił błąd"
@@ -381,7 +585,7 @@
     "defaultMessage": "Zarchiwizowany"
   },
   "omorphia.component.badge.label.closed": {
-    "defaultMessage": "Zamknięty"
+    "defaultMessage": "Zamknięte"
   },
   "omorphia.component.badge.label.creator": {
     "defaultMessage": "Twórca"
@@ -416,6 +620,9 @@
   "omorphia.component.badge.label.returned": {
     "defaultMessage": "Zwrócony"
   },
+  "omorphia.component.badge.label.safe": {
+    "defaultMessage": "Zaakceptowany"
+  },
   "omorphia.component.badge.label.scheduled": {
     "defaultMessage": "Zaplanowany"
   },
@@ -424,6 +631,9 @@
   },
   "omorphia.component.badge.label.unlisted": {
     "defaultMessage": "Niewymieniony"
+  },
+  "omorphia.component.badge.label.unsafe": {
+    "defaultMessage": "Odrzucony"
   },
   "omorphia.component.badge.label.withheld": {
     "defaultMessage": "Wstrzymany"
@@ -449,47 +659,17 @@
   "omorphia.component.environment-indicator.label.unsupported": {
     "defaultMessage": "Nieobsługiwany"
   },
-  "omorphia.component.purchase_modal.payment_method_card_display": {
-    "defaultMessage": "{card_brand} zakończony {last_four}"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.amazon_pay": {
+  "payment-method.amazon_pay": {
     "defaultMessage": "Amazon Pay"
   },
-  "omorphia.component.purchase_modal.payment_method_type.amex": {
+  "payment-method.amex": {
     "defaultMessage": "American Express"
   },
-  "omorphia.component.purchase_modal.payment_method_type.cashapp": {
+  "payment-method.card_display": {
+    "defaultMessage": "{card_brand} kończące się na {last_four}"
+  },
+  "payment-method.cashapp": {
     "defaultMessage": "Cash App"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.diners": {
-    "defaultMessage": "Diners Club"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.discover": {
-    "defaultMessage": "Odkryj"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.eftpos": {
-    "defaultMessage": "EFTPOS"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.jcb": {
-    "defaultMessage": "JCB"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.mastercard": {
-    "defaultMessage": "MasterCard"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.paypal": {
-    "defaultMessage": "PayPal"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.paypal_international": {
-    "defaultMessage": "Międzynarodowy PayPal"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.unionpay": {
-    "defaultMessage": "UnionPay"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.unknown": {
-    "defaultMessage": "Nieznana metoda płatności"
-  },
-  "omorphia.component.purchase_modal.payment_method_type.visa": {
-    "defaultMessage": "Visa"
   },
   "payment-method.charity": {
     "defaultMessage": "Organizacja charytatywna"
@@ -497,11 +677,38 @@
   "payment-method.charity-plural": {
     "defaultMessage": "Organizacje charytatywne"
   },
+  "payment-method.diners": {
+    "defaultMessage": "Diners Club"
+  },
+  "payment-method.discover": {
+    "defaultMessage": "Discover"
+  },
+  "payment-method.eftpos": {
+    "defaultMessage": "EFTPOS"
+  },
   "payment-method.gift-card": {
     "defaultMessage": "Karta podarunkowa"
   },
   "payment-method.gift-card-plural": {
     "defaultMessage": "Karty podarunkowe"
+  },
+  "payment-method.jcb": {
+    "defaultMessage": "JCB"
+  },
+  "payment-method.mastercard": {
+    "defaultMessage": "MasterCard"
+  },
+  "payment-method.paypal": {
+    "defaultMessage": "PayPal"
+  },
+  "payment-method.paypal_international": {
+    "defaultMessage": "Międzynarodowy PayPal"
+  },
+  "payment-method.unionpay": {
+    "defaultMessage": "UnionPay"
+  },
+  "payment-method.unknown": {
+    "defaultMessage": "Nieznana metoda płatności"
   },
   "payment-method.venmo": {
     "defaultMessage": "Venmo"
@@ -511,6 +718,21 @@
   },
   "payment-method.virtual-visa-plural": {
     "defaultMessage": "Wirtualne karty Visa"
+  },
+  "payment-method.visa": {
+    "defaultMessage": "Visa"
+  },
+  "project-card.environment.client": {
+    "defaultMessage": "Klient"
+  },
+  "project-card.environment.client-and-server": {
+    "defaultMessage": "Klient i serwer"
+  },
+  "project-card.environment.client-or-server": {
+    "defaultMessage": "Klient lub serwer"
+  },
+  "project-card.environment.server": {
+    "defaultMessage": "Serwer"
   },
   "project-type.all": {
     "defaultMessage": "Wszystko"
@@ -551,6 +773,15 @@
   "project-type.plugin.lowercase": {
     "defaultMessage": "{count, plural, one {plugin} few {pluginy} other {pluginów}}"
   },
+  "project-type.project.capital": {
+    "defaultMessage": "{count, plural, one {Projekt} few {Projekty} other {Projektów}}"
+  },
+  "project-type.project.category": {
+    "defaultMessage": "Projekty"
+  },
+  "project-type.project.lowercase": {
+    "defaultMessage": "{count, plural, one {projekt} few {projekty} other {projektów}}"
+  },
   "project-type.resourcepack.capital": {
     "defaultMessage": "{count, plural, one {Paczka zasobów} few {Paczki zasobów} other {Paczek zasobów}}"
   },
@@ -559,6 +790,15 @@
   },
   "project-type.resourcepack.lowercase": {
     "defaultMessage": "{count, plural, one {paczka zasobów} few {paczki zasobów} other {paczek zasobów}}"
+  },
+  "project-type.server.capital": {
+    "defaultMessage": "{count, plural, one {Serwer} few {Serwery} other {Serwerów}}"
+  },
+  "project-type.server.category": {
+    "defaultMessage": "Serwery"
+  },
+  "project-type.server.lowercase": {
+    "defaultMessage": "{count, plural, one {serwer} few {serwery} other {serwerów}}"
   },
   "project-type.shader.capital": {
     "defaultMessage": "{count, plural, one {Shader} few {Shadery} other {Shaderów}}"
@@ -588,7 +828,7 @@
     "defaultMessage": "Tryb jednoosobowy"
   },
   "project.about.compatibility.environments.singleplayer-only": {
-    "defaultMessage": "Tylko dla jednego gracza"
+    "defaultMessage": "Tylko tryb jednoosobowy"
   },
   "project.about.compatibility.game.minecraftJava": {
     "defaultMessage": "Minecraft: Java Edition"
@@ -617,9 +857,6 @@
   "project.about.details.submitted": {
     "defaultMessage": "Przesłany {date}"
   },
-  "project.about.details.title": {
-    "defaultMessage": "Szczegóły"
-  },
   "project.about.details.updated": {
     "defaultMessage": "Zaktualizowany {date}"
   },
@@ -636,7 +873,7 @@
     "defaultMessage": "Zasponsoruj na GitHub"
   },
   "project.about.links.donate.kofi": {
-    "defaultMessage": "Przekaż darowiznę na Ko-fi"
+    "defaultMessage": "Wesprzyj na Ko-fi"
   },
   "project.about.links.donate.patreon": {
     "defaultMessage": "Przekaż darowiznę na Patreon"
@@ -647,8 +884,14 @@
   "project.about.links.issues": {
     "defaultMessage": "Zgłoś problemy"
   },
+  "project.about.links.site": {
+    "defaultMessage": "Odwiedź stronę"
+  },
   "project.about.links.source": {
     "defaultMessage": "Zobacz źródło"
+  },
+  "project.about.links.store": {
+    "defaultMessage": "Odwiedź sklep"
   },
   "project.about.links.title": {
     "defaultMessage": "Załączniki"
@@ -656,8 +899,104 @@
   "project.about.links.wiki": {
     "defaultMessage": "Odwiedź wiki"
   },
+  "project.about.server.copied": {
+    "defaultMessage": "Skopiowano!"
+  },
+  "project.about.server.copiedText": {
+    "defaultMessage": "Skopiowano adres IP do schowka"
+  },
+  "project.about.server.latency": {
+    "defaultMessage": "Opóźnienie"
+  },
+  "project.about.server.title": {
+    "defaultMessage": "Szczegóły o serwerze"
+  },
+  "project.download-count-tooltip": {
+    "defaultMessage": "{count} {count, plural, one {pobranie} few {pobrania} other {pobrań}}"
+  },
+  "project.environment.client-and-server.description": {
+    "defaultMessage": "Posiada pewne funkcje zarówno po stronie klienta i serwera, nawet jeśli tylko częściowo."
+  },
+  "project.environment.client-and-server.title": {
+    "defaultMessage": "Klient i serwer, wymagane po obu stronach"
+  },
+  "project.environment.client-only-server-optional.description": {
+    "defaultMessage": "Posiada pewne funkcje zarówno po stronie klienta, jak i serwera, nawet jeśli tylko częściowo."
+  },
+  "project.environment.client-only-server-optional.title": {
+    "defaultMessage": "Klient i serwer, opcjonalne na serwerze"
+  },
+  "project.environment.client-only.description": {
+    "defaultMessage": "Wszystkie funkcje są realizowane po stronie klienta i są kompatybilne z serwerami vanilla."
+  },
+  "project.environment.client-only.title": {
+    "defaultMessage": "Tylko po stronie klienta"
+  },
+  "project.environment.client-or-server-prefers-both.description": {
+    "defaultMessage": "Posiada pewne funkcje zarówno po stronie klienta, jak i serwera, nawet jeśli tylko częściowo."
+  },
+  "project.environment.client-or-server-prefers-both.title": {
+    "defaultMessage": "Klient i serwer, najlepiej zainstalowane po obu stronach"
+  },
+  "project.environment.client-or-server.description": {
+    "defaultMessage": "Posiada pewne funkcje zarówno po stronie klienta i serwera, nawet jeśli tylko częściowo."
+  },
+  "project.environment.client-or-server.title": {
+    "defaultMessage": "Klient i serwer, opcjonalne po obu stronach"
+  },
+  "project.environment.dedicated-server-only.description": {
+    "defaultMessage": "Wszystkie funkcje są realizowane po stronie serwera i są kompatybilne z klientami vanilla."
+  },
+  "project.environment.dedicated-server-only.title": {
+    "defaultMessage": "Tylko po stronie serwera"
+  },
+  "project.environment.server-only-client-optional.description": {
+    "defaultMessage": "Posiada pewne funkcje zarówno po stronie klienta i serwera, nawet jeśli tylko częściowo."
+  },
+  "project.environment.server-only-client-optional.title": {
+    "defaultMessage": "Klient i serwer, opcjonalne na kliencie"
+  },
+  "project.environment.server-only.description": {
+    "defaultMessage": "Wszystkie funkcje są realizowane po stronie serwera i są kompatybilne z klientami vanilla."
+  },
+  "project.environment.server-only.title": {
+    "defaultMessage": "Tylko po stronie serwera, działa też w trybie jednoosobowym"
+  },
+  "project.environment.singleplayer-only.description": {
+    "defaultMessage": "Działa tylko w trybie jednoosobowym albo kiedy nie ma połączenia z serwerem."
+  },
+  "project.environment.singleplayer-only.title": {
+    "defaultMessage": "Tylko tryb jednoosobowy"
+  },
+  "project.environment.tag.not-applicable": {
+    "defaultMessage": "Nie dotyczy"
+  },
+  "project.environment.tag.unknown": {
+    "defaultMessage": "Nieznane"
+  },
+  "project.environment.unknown.description": {
+    "defaultMessage": "Środowisko dla tej wersji nie może być określone."
+  },
+  "project.environment.unknown.title": {
+    "defaultMessage": "Nieznane środowisko"
+  },
+  "project.follower-count-tooltip": {
+    "defaultMessage": "{count} {count, plural, one {obserwujący} other {obserwujących}}"
+  },
+  "project.online-player-count": {
+    "defaultMessage": "{count} {count, plural, one {gracz online} other {graczy online}}"
+  },
+  "project.recent-plays": {
+    "defaultMessage": "{count} {count, plural, one {grał ostatnio} other {grało ostatnio}}"
+  },
+  "project.server.ping.ms": {
+    "defaultMessage": "{ping} ms"
+  },
   "project.settings.analytics.title": {
     "defaultMessage": "Analityka"
+  },
+  "project.settings.content.title": {
+    "defaultMessage": "Treść"
   },
   "project.settings.description.title": {
     "defaultMessage": "Opis"
@@ -672,10 +1011,10 @@
     "defaultMessage": "Opcjonalne w obu przypadkach, działa najlepiej po zainstalowaniu po obu stronach"
   },
   "project.settings.environment.client_and_server.optional_client.title": {
-    "defaultMessage": "Opcjonalnie po stronie klienta"
+    "defaultMessage": "Opcjonalne po stronie klienta"
   },
   "project.settings.environment.client_and_server.optional_server.title": {
-    "defaultMessage": "Opcjonalnie po stronie serwera"
+    "defaultMessage": "Opcjonalne po stronie serwera"
   },
   "project.settings.environment.client_and_server.required_both.title": {
     "defaultMessage": "Wymagane po obu stronach"
@@ -688,6 +1027,30 @@
   },
   "project.settings.environment.client_only.title": {
     "defaultMessage": "Tylko po stronie klienta"
+  },
+  "project.settings.environment.notice.missing-env.description": {
+    "defaultMessage": "W Twoim projekcie brakuje metadanych dotyczących środowiska. Wybierz odpowiednią opcję poniżej."
+  },
+  "project.settings.environment.notice.missing-env.title": {
+    "defaultMessage": "Proszę wybierz środowisko dla swojego projektu"
+  },
+  "project.settings.environment.notice.multiple-environments.description": {
+    "defaultMessage": "Różne wersje twojego projektu mają wybrane różne środowiska, więc nie możesz ich obecnie edytować globalnie."
+  },
+  "project.settings.environment.notice.multiple-environments.title": {
+    "defaultMessage": "Twój projekt ma wiele środowisk"
+  },
+  "project.settings.environment.notice.review-options.description": {
+    "defaultMessage": "Właśnie zmodernizowaliśmy system środowisk w Modrinth i nowe opcje są teraz dostępne. Upewnij się, że poniżej wybrano właściwą opcję, a następnie kliknij 'Weryfikuj' gdy skończysz!"
+  },
+  "project.settings.environment.notice.review-options.title": {
+    "defaultMessage": "Proszę zapoznać się z opcjami poniżej"
+  },
+  "project.settings.environment.notice.wrong-project-type.description": {
+    "defaultMessage": "Tylko mody lub paczki modów mogą posiadać metadane środowiska."
+  },
+  "project.settings.environment.notice.wrong-project-type.title": {
+    "defaultMessage": "Ten projekt nie obsługuje metadanych środowiska"
   },
   "project.settings.environment.server_only.dedicated_only.title": {
     "defaultMessage": "Tylko serwer dedykowany"
@@ -705,7 +1068,7 @@
     "defaultMessage": "Działa tylko w trybie dla jednego gracza lub gdy nie ma połączenia z serwerem."
   },
   "project.settings.environment.singleplayer.title": {
-    "defaultMessage": "Tylko dla jednego gracza"
+    "defaultMessage": "Tylko tryb jednoosobowy"
   },
   "project.settings.environment.suboption.accessibility-option-label": {
     "defaultMessage": "{title}: {description}"
@@ -715,6 +1078,12 @@
   },
   "project.settings.environment.title": {
     "defaultMessage": "Środowisko"
+  },
+  "project.settings.environment.verification.verify-button": {
+    "defaultMessage": "Zweryfikuj"
+  },
+  "project.settings.environment.verification.verify-text": {
+    "defaultMessage": "Sprawdź, czy środowisko tego projektu jest poprawnie skonfigurowane."
   },
   "project.settings.gallery.title": {
     "defaultMessage": "Galeria"
@@ -732,13 +1101,16 @@
     "defaultMessage": "Członkowie"
   },
   "project.settings.notice.no-permission.description": {
-    "defaultMessage": "Nie masz uprawnień do edycji tego elementu."
+    "defaultMessage": "Nie masz uprawnień do edytowania tego elementu."
   },
   "project.settings.notice.no-permission.title": {
     "defaultMessage": "Brak uprawnień"
   },
+  "project.settings.server.title": {
+    "defaultMessage": "Serwer"
+  },
   "project.settings.tags.title": {
-    "defaultMessage": "Tagi"
+    "defaultMessage": "Etykiety"
   },
   "project.settings.upload.title": {
     "defaultMessage": "Prześlij"
@@ -783,10 +1155,10 @@
     "defaultMessage": "Nieznany"
   },
   "project.visibility.unlisted": {
-    "defaultMessage": "Niewymieniony"
+    "defaultMessage": "Niepubliczny"
   },
   "project.visibility.unlisted-by-staff": {
-    "defaultMessage": "Nie wymienione przez personel"
+    "defaultMessage": "Ukryty przez personel"
   },
   "search.filter.locked.default": {
     "defaultMessage": "Filtr zablokowany"
@@ -802,6 +1174,21 @@
   },
   "search.filter.locked.default.unlock": {
     "defaultMessage": "Odblokuj filtr"
+  },
+  "search.filter.option.exclusion.add.tooltip": {
+    "defaultMessage": "Wyklucz"
+  },
+  "search.filter.option.search.clear.aria_label": {
+    "defaultMessage": "Wyczyść pole wyszukiwania"
+  },
+  "search.filter.option.search.placeholder": {
+    "defaultMessage": "Szukaj..."
+  },
+  "search.filter.option.show_fewer": {
+    "defaultMessage": "Pokaż mniej"
+  },
+  "search.filter.option.show_more": {
+    "defaultMessage": "Pokaż więcej"
   },
   "search.filter_type.environment": {
     "defaultMessage": "Środowisko"
@@ -822,7 +1209,7 @@
     "defaultMessage": "Licencja"
   },
   "search.filter_type.license.open_source": {
-    "defaultMessage": "Otwarte źródło"
+    "defaultMessage": "Otwarte oprogramowanie"
   },
   "search.filter_type.mod_loader": {
     "defaultMessage": "Loader"
@@ -841,6 +1228,39 @@
   },
   "search.filter_type.shader_loader": {
     "defaultMessage": "Loader"
+  },
+  "servers.backups.item.auto": {
+    "defaultMessage": "Automatyczne"
+  },
+  "servers.backups.item.backup-schedule": {
+    "defaultMessage": "Harmonogram kopii zapasowych"
+  },
+  "servers.backups.item.creating-backup": {
+    "defaultMessage": "Tworzenie kopii zapasowej..."
+  },
+  "servers.backups.item.failed-to-create-backup": {
+    "defaultMessage": "Nie udało się utworzyć kopii zapasowej"
+  },
+  "servers.backups.item.failed-to-restore-backup": {
+    "defaultMessage": "Nie udało się przywrócić danych z kopii zapasowej"
+  },
+  "servers.backups.item.manual-backup": {
+    "defaultMessage": "Ręczne kopie zapasowe"
+  },
+  "servers.backups.item.queued-for-backup": {
+    "defaultMessage": "Kopia zapasowa w kolejce"
+  },
+  "servers.backups.item.queued-for-restore": {
+    "defaultMessage": "Przywrócenie kopii zapasowej w kolejce"
+  },
+  "servers.backups.item.rename": {
+    "defaultMessage": "Zmień nazwę"
+  },
+  "servers.backups.item.restore": {
+    "defaultMessage": "Przywróć"
+  },
+  "servers.backups.item.restoring-backup": {
+    "defaultMessage": "Przywracanie z kopii zapasowej..."
   },
   "servers.notice.dismiss": {
     "defaultMessage": "Odrzuć"
@@ -930,7 +1350,7 @@
     "defaultMessage": "Gdzie chciałbyś(-abyś), aby znajdował się Twój serwer?"
   },
   "servers.region.region-unsupported": {
-    "defaultMessage": "Nie ma na liście lokalizacji, którą potrzebujesz? <link>Daj nam znać, gdzie chcesz zobaczyć Serwery Modrinth w następnej kolejności!</link>"
+    "defaultMessage": "Nie ma na liście lokalizacji, którą potrzebujesz? <link>Daj nam znać, gdzie chcesz zobaczyć Modrinth Hosting!</link>"
   },
   "servers.region.southeast-asia": {
     "defaultMessage": "Azja Południowo-Wschodnia"
@@ -980,8 +1400,35 @@
   "settings.display.theme.title": {
     "defaultMessage": "Motyw"
   },
+  "settings.language.categories.default": {
+    "defaultMessage": "Języki standardowe"
+  },
+  "settings.language.categories.search-result": {
+    "defaultMessage": "Wyniki wyszukiwania"
+  },
+  "settings.language.description": {
+    "defaultMessage": "Wybierz preferowany język, w którym ma być wyświetlana strona. Tłumaczenia są wykonywane przez chętnych <crowdin-link>na stronie Crowdin</crowdin-link>."
+  },
+  "settings.language.languages.search-field.placeholder": {
+    "defaultMessage": "Szukaj język..."
+  },
+  "settings.language.languages.search-results-announcement": {
+    "defaultMessage": "{matches, plural, =0 {Żaden język nie pasuje} one {# język pasuje} few {# języki pasują} other {# języków pasuje}} do Twojego wyszukiwania."
+  },
+  "settings.language.languages.search.no-results": {
+    "defaultMessage": "Nie znaleziono żadnego języka pasującego do Twojego wyszukiwania."
+  },
+  "settings.language.platform.app": {
+    "defaultMessage": "aplikacji"
+  },
+  "settings.language.platform.site": {
+    "defaultMessage": "strony"
+  },
   "settings.language.title": {
     "defaultMessage": "Język"
+  },
+  "settings.language.warning": {
+    "defaultMessage": "Zmiana języka {platform} może spowodować, że niektóre treści będą wyświetlane w języku angielskim, jeśli tłumaczenie nie będzie dostępne. Tłumaczenie {platform} jest niekompletne, więc niektóre treści mogą pozostać w języku angielskim w przypadku niektórych języków."
   },
   "settings.pats.title": {
     "defaultMessage": "Osobiste tokeny dostępu"
@@ -991,6 +1438,429 @@
   },
   "settings.sessions.title": {
     "defaultMessage": "Sesje"
+  },
+  "tag.category.128x": {
+    "defaultMessage": "128x"
+  },
+  "tag.category.16x": {
+    "defaultMessage": "16x"
+  },
+  "tag.category.256x": {
+    "defaultMessage": "256x"
+  },
+  "tag.category.32x": {
+    "defaultMessage": "32x"
+  },
+  "tag.category.48x": {
+    "defaultMessage": "48x"
+  },
+  "tag.category.512x+": {
+    "defaultMessage": "512x lub wyższe"
+  },
+  "tag.category.64x": {
+    "defaultMessage": "64x"
+  },
+  "tag.category.8x-": {
+    "defaultMessage": "8x lub niższe"
+  },
+  "tag.category.adventure": {
+    "defaultMessage": "Przygoda"
+  },
+  "tag.category.adventure-mode": {
+    "defaultMessage": "Tryb przygodowy"
+  },
+  "tag.category.anarchy": {
+    "defaultMessage": "Anarchia"
+  },
+  "tag.category.atmosphere": {
+    "defaultMessage": "Atmosfera"
+  },
+  "tag.category.audio": {
+    "defaultMessage": "Dźwięk"
+  },
+  "tag.category.battle-royale": {
+    "defaultMessage": "Battle Royale"
+  },
+  "tag.category.bedwars": {
+    "defaultMessage": "Bed Wars"
+  },
+  "tag.category.blocks": {
+    "defaultMessage": "Bloki"
+  },
+  "tag.category.bloom": {
+    "defaultMessage": "Bloom"
+  },
+  "tag.category.bosses": {
+    "defaultMessage": "Bossy"
+  },
+  "tag.category.cartoon": {
+    "defaultMessage": "Kreskówkowe"
+  },
+  "tag.category.challenging": {
+    "defaultMessage": "Wyzwanie"
+  },
+  "tag.category.classes": {
+    "defaultMessage": "Klasy"
+  },
+  "tag.category.colored-lighting": {
+    "defaultMessage": "Kolorowe oświetlenie"
+  },
+  "tag.category.combat": {
+    "defaultMessage": "Walka"
+  },
+  "tag.category.competitive": {
+    "defaultMessage": "Konkurencja"
+  },
+  "tag.category.core-shaders": {
+    "defaultMessage": "Core Shaders"
+  },
+  "tag.category.creative-mode": {
+    "defaultMessage": "Tryb kreatywny"
+  },
+  "tag.category.creator-community": {
+    "defaultMessage": "Społeczność twórców"
+  },
+  "tag.category.crossplay": {
+    "defaultMessage": "Międzyplatformowe"
+  },
+  "tag.category.cursed": {
+    "defaultMessage": "Przeklęte"
+  },
+  "tag.category.custom-content": {
+    "defaultMessage": "Niestandardowa zawartość"
+  },
+  "tag.category.decoration": {
+    "defaultMessage": "Dekoracje"
+  },
+  "tag.category.dungeons": {
+    "defaultMessage": "Lochy"
+  },
+  "tag.category.economy": {
+    "defaultMessage": "Ekonomia"
+  },
+  "tag.category.entities": {
+    "defaultMessage": "Byty"
+  },
+  "tag.category.environment": {
+    "defaultMessage": "Środowisko"
+  },
+  "tag.category.equipment": {
+    "defaultMessage": "Wyposażenie"
+  },
+  "tag.category.factions": {
+    "defaultMessage": "Fakcje"
+  },
+  "tag.category.fantasy": {
+    "defaultMessage": "Fantastyka"
+  },
+  "tag.category.foliage": {
+    "defaultMessage": "Liście"
+  },
+  "tag.category.fonts": {
+    "defaultMessage": "Czcionki"
+  },
+  "tag.category.food": {
+    "defaultMessage": "Jedzenie"
+  },
+  "tag.category.game-mechanics": {
+    "defaultMessage": "Mechaniki gry"
+  },
+  "tag.category.gens": {
+    "defaultMessage": "Gens"
+  },
+  "tag.category.gui": {
+    "defaultMessage": "Interfejs"
+  },
+  "tag.category.hardcore-mode": {
+    "defaultMessage": "Tryb hardcore"
+  },
+  "tag.category.high": {
+    "defaultMessage": "Wysoki"
+  },
+  "tag.category.items": {
+    "defaultMessage": "Przedmioty"
+  },
+  "tag.category.keep-inventory": {
+    "defaultMessage": "Zachowany ekwipunek"
+  },
+  "tag.category.kitchen-sink": {
+    "defaultMessage": "Zlew kuchenny"
+  },
+  "tag.category.kitpvp": {
+    "defaultMessage": "Kit PVP"
+  },
+  "tag.category.library": {
+    "defaultMessage": "Biblioteki"
+  },
+  "tag.category.lifesteal": {
+    "defaultMessage": "Lifesteal"
+  },
+  "tag.category.lightweight": {
+    "defaultMessage": "Lekki"
+  },
+  "tag.category.locale": {
+    "defaultMessage": "Tłumaczenia"
+  },
+  "tag.category.low": {
+    "defaultMessage": "Niski"
+  },
+  "tag.category.magic": {
+    "defaultMessage": "Magiczne"
+  },
+  "tag.category.management": {
+    "defaultMessage": "Zarządzanie"
+  },
+  "tag.category.media": {
+    "defaultMessage": "Media"
+  },
+  "tag.category.medium": {
+    "defaultMessage": "Średni"
+  },
+  "tag.category.microgames": {
+    "defaultMessage": "Mikrogry"
+  },
+  "tag.category.minigame": {
+    "defaultMessage": "Minigry"
+  },
+  "tag.category.minigames": {
+    "defaultMessage": "Minigry"
+  },
+  "tag.category.mmo": {
+    "defaultMessage": "MMO"
+  },
+  "tag.category.mobs": {
+    "defaultMessage": "Moby"
+  },
+  "tag.category.modded": {
+    "defaultMessage": "Zmodyfikowany"
+  },
+  "tag.category.models": {
+    "defaultMessage": "Modele"
+  },
+  "tag.category.multiplayer": {
+    "defaultMessage": "Tryb wieloosobowy"
+  },
+  "tag.category.network": {
+    "defaultMessage": "Sieć"
+  },
+  "tag.category.offline-mode": {
+    "defaultMessage": "Tryb offline"
+  },
+  "tag.category.oneblock": {
+    "defaultMessage": "One Block"
+  },
+  "tag.category.op": {
+    "defaultMessage": "OP"
+  },
+  "tag.category.optimization": {
+    "defaultMessage": "Optymalizacja"
+  },
+  "tag.category.parkour": {
+    "defaultMessage": "Parkour"
+  },
+  "tag.category.path-tracing": {
+    "defaultMessage": "Śledzenie ścieżki"
+  },
+  "tag.category.pbr": {
+    "defaultMessage": "PBR"
+  },
+  "tag.category.personal-worlds": {
+    "defaultMessage": "Personalne światy"
+  },
+  "tag.category.plots": {
+    "defaultMessage": "Działki"
+  },
+  "tag.category.pokemon": {
+    "defaultMessage": "Pokemon"
+  },
+  "tag.category.potato": {
+    "defaultMessage": "Ziemniak"
+  },
+  "tag.category.prison": {
+    "defaultMessage": "Więzienie"
+  },
+  "tag.category.pve": {
+    "defaultMessage": "PVE"
+  },
+  "tag.category.pvp": {
+    "defaultMessage": "PVP"
+  },
+  "tag.category.questing": {
+    "defaultMessage": "Zadania"
+  },
+  "tag.category.quests": {
+    "defaultMessage": "Zadania"
+  },
+  "tag.category.racing": {
+    "defaultMessage": "Wyścigi"
+  },
+  "tag.category.realistic": {
+    "defaultMessage": "Realistyczny"
+  },
+  "tag.category.recording-smp": {
+    "defaultMessage": "Nagrywane SMP"
+  },
+  "tag.category.reflections": {
+    "defaultMessage": "Odbicia"
+  },
+  "tag.category.roleplay": {
+    "defaultMessage": "Odgrywanie ról"
+  },
+  "tag.category.rpg": {
+    "defaultMessage": "RPG"
+  },
+  "tag.category.screenshot": {
+    "defaultMessage": "Zrzut ekranu"
+  },
+  "tag.category.semi-realistic": {
+    "defaultMessage": "Semi-realistyczne"
+  },
+  "tag.category.shadows": {
+    "defaultMessage": "Cienie"
+  },
+  "tag.category.simplistic": {
+    "defaultMessage": "Proste"
+  },
+  "tag.category.skyblock": {
+    "defaultMessage": "Skyblock"
+  },
+  "tag.category.smp": {
+    "defaultMessage": "SMP"
+  },
+  "tag.category.social": {
+    "defaultMessage": "Społeczne"
+  },
+  "tag.category.storage": {
+    "defaultMessage": "Magazynowanie"
+  },
+  "tag.category.survival-mode": {
+    "defaultMessage": "Tryb przetrwania"
+  },
+  "tag.category.teams": {
+    "defaultMessage": "Zespoły"
+  },
+  "tag.category.technical": {
+    "defaultMessage": "Techniczne"
+  },
+  "tag.category.technology": {
+    "defaultMessage": "Technologia"
+  },
+  "tag.category.themed": {
+    "defaultMessage": "Tematyczne"
+  },
+  "tag.category.towns": {
+    "defaultMessage": "Miasta"
+  },
+  "tag.category.transportation": {
+    "defaultMessage": "Transport"
+  },
+  "tag.category.tweaks": {
+    "defaultMessage": "Drobne zmiany"
+  },
+  "tag.category.utility": {
+    "defaultMessage": "Narzędzia"
+  },
+  "tag.category.vanilla-like": {
+    "defaultMessage": "Jak vanilla"
+  },
+  "tag.category.whitelisted": {
+    "defaultMessage": "Biała lista"
+  },
+  "tag.category.world-resets": {
+    "defaultMessage": "Resetowany świat"
+  },
+  "tag.category.worldgen": {
+    "defaultMessage": "Generacja świata"
+  },
+  "tag.loader.babric": {
+    "defaultMessage": "Babric"
+  },
+  "tag.loader.bta-babric": {
+    "defaultMessage": "BTA (Babric)"
+  },
+  "tag.loader.bukkit": {
+    "defaultMessage": "Bukkit"
+  },
+  "tag.loader.bungeecord": {
+    "defaultMessage": "BungeeCord"
+  },
+  "tag.loader.canvas": {
+    "defaultMessage": "Canvas"
+  },
+  "tag.loader.datapack": {
+    "defaultMessage": "Paczka danych"
+  },
+  "tag.loader.fabric": {
+    "defaultMessage": "Fabric"
+  },
+  "tag.loader.folia": {
+    "defaultMessage": "Folia"
+  },
+  "tag.loader.forge": {
+    "defaultMessage": "Forge"
+  },
+  "tag.loader.geyser": {
+    "defaultMessage": "Wtyczka Geyser"
+  },
+  "tag.loader.iris": {
+    "defaultMessage": "Iris"
+  },
+  "tag.loader.java-agent": {
+    "defaultMessage": "Agent Java"
+  },
+  "tag.loader.legacy-fabric": {
+    "defaultMessage": "Stary Fabric"
+  },
+  "tag.loader.liteloader": {
+    "defaultMessage": "LiteLoader"
+  },
+  "tag.loader.minecraft": {
+    "defaultMessage": "Paczka zasobów"
+  },
+  "tag.loader.modloader": {
+    "defaultMessage": "Risugami's ModLoader"
+  },
+  "tag.loader.mrpack": {
+    "defaultMessage": "Paczka modów"
+  },
+  "tag.loader.neoforge": {
+    "defaultMessage": "NeoForge"
+  },
+  "tag.loader.nilloader": {
+    "defaultMessage": "NilLoader"
+  },
+  "tag.loader.optifine": {
+    "defaultMessage": "OptiFine"
+  },
+  "tag.loader.ornithe": {
+    "defaultMessage": "Ornithe"
+  },
+  "tag.loader.paper": {
+    "defaultMessage": "Paper"
+  },
+  "tag.loader.purpur": {
+    "defaultMessage": "Purpur"
+  },
+  "tag.loader.quilt": {
+    "defaultMessage": "Quilt"
+  },
+  "tag.loader.rift": {
+    "defaultMessage": "Rift"
+  },
+  "tag.loader.spigot": {
+    "defaultMessage": "Spigot"
+  },
+  "tag.loader.sponge": {
+    "defaultMessage": "Sponge"
+  },
+  "tag.loader.vanilla": {
+    "defaultMessage": "Shader vanilla"
+  },
+  "tag.loader.velocity": {
+    "defaultMessage": "Velocity"
+  },
+  "tag.loader.waterfall": {
+    "defaultMessage": "Waterfall"
   },
   "tooltip.date-at-time": {
     "defaultMessage": "{date, date, long} o {time, time, short}"

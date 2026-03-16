@@ -6,7 +6,7 @@ import { onUnmounted, ref, shallowRef } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { NewInstanceImage } from '@/assets/icons'
-import InstanceCreationModal from '@/components/ui/InstanceCreationModal.vue'
+import { inject } from 'vue'
 import NavTabs from '@/components/ui/NavTabs.vue'
 import { profile_listener } from '@/helpers/events.js'
 import { list } from '@/helpers/profile.js'
@@ -15,6 +15,7 @@ import { useBreadcrumbs } from '@/store/breadcrumbs.js'
 const { handleError } = injectNotificationManager()
 const route = useRoute()
 const breadcrumbs = useBreadcrumbs()
+const showCreationModal = inject('showCreationModal')
 const { formatMessage } = useVIntl()
 
 const messages = defineMessages({
@@ -93,7 +94,7 @@ onUnmounted(() => {
 					{{ formatMessage(messages.subtitle) }}
 				</div>
 			</div>
-			<Button color="primary" :disabled="offline" @click="$refs.installationModal.show()">
+			<Button color="primary" :disabled="offline" @click="showCreationModal?.()">
 				<PlusIcon />
 				{{ formatMessage(messages.create) }}
 			</Button>
@@ -124,12 +125,11 @@ onUnmounted(() => {
 				<NewInstanceImage />
 			</div>
 			<h3 class="text-contrast">{{ formatMessage(messages.emptyTitle) }}</h3>
-			<Button color="primary" :disabled="offline" @click="$refs.installationModal.show()">
+			<Button color="primary" :disabled="offline" @click="showCreationModal?.()">
 				<PlusIcon />
 				{{ formatMessage(messages.createNewInstance) }}
 			</Button>
 		</div>
-		<InstanceCreationModal ref="installationModal" />
 	</div>
 </template>
 

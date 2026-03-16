@@ -10,6 +10,8 @@ pub fn init<R: tauri::Runtime>() -> tauri::plugin::TauriPlugin<R> {
         .invoke_handler(tauri::generate_handler![
             get_available_capes,
             get_available_skins,
+            get_skin_history,
+            get_skin_by_username,
             add_and_equip_custom_skin,
             set_default_cape,
             equip_skin,
@@ -35,6 +37,22 @@ pub async fn get_available_capes() -> Result<Vec<Cape>> {
 #[tauri::command]
 pub async fn get_available_skins() -> Result<Vec<Skin>> {
     Ok(minecraft_skins::get_available_skins().await?)
+}
+
+/// `invoke('plugin:minecraft-skins|get_skin_history')`
+///
+/// See also: [minecraft_skins::get_skin_history]
+#[tauri::command]
+pub async fn get_skin_history() -> Result<Vec<Skin>> {
+    Ok(minecraft_skins::get_skin_history().await?)
+}
+
+/// `invoke('plugin:minecraft-skins|get_skin_by_username', username)`
+///
+/// See also: [minecraft_skins::get_skin_by_username]
+#[tauri::command]
+pub async fn get_skin_by_username(username: String) -> Result<Bytes> {
+    Ok(minecraft_skins::get_skin_by_username(username).await?)
 }
 
 /// `invoke('plugin:minecraft-skins|add_and_equip_custom_skin', texture_blob, variant, cape_override)`

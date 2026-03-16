@@ -1,0 +1,5666 @@
+{
+  "instance.create.type.from-file": {
+    "message": "aus Datei"
+  },
+  "tag.category.environment": {
+    "defaultMessage": "Umfeld"
+  },
+  "nags.summary-same-as-title.description": {
+    "defaultMessage": "Ihre Zusammenfassung darf nicht mit dem Namen Ihres Projekts identisch sein. Es ist wichtig, eine informative und ansprechende Zusammenfassung zu erstellen."
+  },
+  "affiliate.create.title.label": {
+    "defaultMessage": "Titel des Affiliate-Links"
+  },
+  "instance.settings.tabs.java.java-memory": {
+    "message": "Speicher zugewiesen"
+  },
+  "creation-flow.final.game-version.label": {
+    "defaultMessage": "Spielversion"
+  },
+  "project-type.shader.lowercase": {
+    "defaultMessage": "{count, plural, one {shader} other {shaders}}"
+  },
+  "project.coming-soon": {
+    "message": "Kommt bald"
+  },
+  "label.followed-projects": {
+    "defaultMessage": "Verfolgte Projekte"
+  },
+  "settings.default-instance.pre-launch.title": {
+    "message": "Vor dem Start"
+  },
+  "creation-flow.custom.snapshots.show": {
+    "defaultMessage": "Alle Versionen anzeigen"
+  },
+  "button.edit": {
+    "defaultMessage": "Bearbeiten"
+  },
+  "locale.sr-CS": {
+    "defaultMessage": "Serbisch (Latein)"
+  },
+  "hosting.content.failed-to-toggle": {
+    "defaultMessage": "Failed to toggle {name}"
+  },
+  "form.placeholder.business-name": {
+    "defaultMessage": "Geben Sie den Firmennamen ein"
+  },
+  "instance.settings.tabs.installation.change-version.button.install": {
+    "message": "Installieren"
+  },
+  "instance.mods.action.update": {
+    "message": "Aktualisieren"
+  },
+  "tag.category.recording-smp": {
+    "defaultMessage": "Aufnahme von SMP"
+  },
+  "home.jump-back-in": {
+    "message": "Spring wieder rein"
+  },
+  "skins.action.save-skin": {
+    "message": "Haut retten"
+  },
+  "instance.settings.tabs.installation.repair.confirm.description": {
+    "message": "Beim Reparieren werden Minecraft-Abhängigkeiten neu installiert und auf Beschädigung überprüft. Dadurch können möglicherweise Probleme behoben werden, wenn Ihr Spiel aufgrund von Fehlern im Zusammenhang mit dem Launcher nicht gestartet wird. Probleme oder Abstürze im Zusammenhang mit installierten Mods werden jedoch nicht behoben."
+  },
+  "error-modal.no-loader-repair-text": {
+    "message": "Um dieses Problem zu beheben, müssen Sie die Instanz reparieren. Klicken Sie dazu auf die Schaltfläche unten."
+  },
+  "maintenance.action.clean": {
+    "message": "Sauber"
+  },
+  "creation-flow.import.detecting": {
+    "defaultMessage": "Launcher-Instanzen werden erkannt..."
+  },
+  "project.settings.environment.client_and_server.description": {
+    "defaultMessage": "Verfügt sowohl auf dem Client als auch auf dem Server über einige Funktionen, wenn auch nur teilweise."
+  },
+  "add-content-button.add-from-file": {
+    "message": "Aus Datei hinzufügen"
+  },
+  "project-type.datapack.category": {
+    "defaultMessage": "Datenpakete"
+  },
+  "installation-settings.search-game-version": {
+    "defaultMessage": "Spielversion suchen..."
+  },
+  "accounts-card.log-via-microsoft": {
+    "message": "Melden Sie sich über Microsoft an"
+  },
+  "settings.billing.title": {
+    "defaultMessage": "Abrechnung und Abonnements"
+  },
+  "servers.backups.admonition.restore-queued.title": {
+    "defaultMessage": "Wiederherstellung aus Backup in der Warteschlange"
+  },
+  "button.cancel": {
+    "defaultMessage": "Stornieren"
+  },
+  "label.search": {
+    "defaultMessage": "Suchen"
+  },
+  "app.home.greeting.evening": {
+    "message": "Guten Abend"
+  },
+  "nags.description-too-short.title": {
+    "defaultMessage": "Erweitern Sie die Beschreibung"
+  },
+  "servers.notice.dismissable": {
+    "defaultMessage": "Abzuweisen"
+  },
+  "button.show-all-versions": {
+    "defaultMessage": "Alle Versionen anzeigen"
+  },
+  "settings.default-instance.height.description": {
+    "message": "Die Höhe des Spielfensters beim Start."
+  },
+  "browse.sort.creation-date": {
+    "message": "Erstellungsdatum"
+  },
+  "instance.worlds.no_server_quick_play": {
+    "message": "Sie können nur mit Minecraft Alpha 1.0.5+ direkt auf Server zugreifen"
+  },
+  "instance.add-server.add-server": {
+    "message": "Server hinzufügen"
+  },
+  "instance.create.import-from-profile-code": {
+    "message": "Aus Profilcode importieren"
+  },
+  "instance.logs.share.text": {
+    "message": "Sehen Sie sich dieses Protokoll einer Instanz in der Modrinth-App an"
+  },
+  "settings.default-instance.height.title": {
+    "message": "Höhe"
+  },
+  "instance.settings.tabs.installation.fetching-modpack-details": {
+    "message": "Modpack-Details abrufen"
+  },
+  "label.changes-saved": {
+    "defaultMessage": "Änderungen gespeichert"
+  },
+  "servers.backups.item.failed-to-restore-backup": {
+    "defaultMessage": "Die Wiederherstellung aus der Sicherung ist fehlgeschlagen"
+  },
+  "content.confirm-deletion.header": {
+    "defaultMessage": "{itemType}{count, plural, one {} other {s}} löschen"
+  },
+  "label.server": {
+    "defaultMessage": "Server"
+  },
+  "project.metadata": {
+    "message": "Metadaten"
+  },
+  "skins.replace-texture": {
+    "message": "Textur ersetzen"
+  },
+  "project.settings.license.title": {
+    "defaultMessage": "Lizenz"
+  },
+  "nags.verify-external-links.title": {
+    "defaultMessage": "Überprüfen Sie externe Links"
+  },
+  "app.home.greeting.morning": {
+    "message": "Guten Morgen"
+  },
+  "creation-flow.setup.option.modpack.title": {
+    "defaultMessage": "Modpack-Basis"
+  },
+  "creation-flow.modpack.browse": {
+    "defaultMessage": "Durchsuchen Sie Modpacks"
+  },
+  "share-names": {
+    "message": "Teilen Sie Namen"
+  },
+  "project.settings.environment.client_only.description": {
+    "defaultMessage": "Alle Funktionen werden clientseitig ausgeführt und sind mit Vanilla-Servern kompatibel."
+  },
+  "project.about.creators.owner": {
+    "defaultMessage": "Projektinhaber"
+  },
+  "installation-settings.verifying": {
+    "defaultMessage": "Überprüfung..."
+  },
+  "project.environment.client-or-server.title": {
+    "defaultMessage": "Client und Server, optional auf beiden"
+  },
+  "project.error.select-instance-first": {
+    "message": "Wählen Sie zunächst eine Instanz aus."
+  },
+  "servers.region.region-unsupported": {
+    "defaultMessage": "Region nicht aufgeführt? <link>Teilen Sie uns mit, wo Sie Modrinth Hosting als nächstes sehen möchten!</link>"
+  },
+  "copy-address": {
+    "message": "Adresse kopieren"
+  },
+  "tag.category.realistic": {
+    "defaultMessage": "Realistisch"
+  },
+  "available": {
+    "message": "Verfügbar"
+  },
+  "instance.mods.share.file-names": {
+    "message": "Dateinamen"
+  },
+  "instance.mods.share.markdown-links": {
+    "message": "Markdown-Links"
+  },
+  "label.project": {
+    "defaultMessage": "Projekt"
+  },
+  "error-modal.our-support-article": {
+    "message": "Unser Support-Artikel"
+  },
+  "instance.settings.tabs.general.library-groups.description": {
+    "message": "Mit Bibliotheksgruppen können Sie Ihre Instanzen in verschiedenen Abschnitten Ihrer Bibliothek organisieren."
+  },
+  "browse.install.none": {
+    "message": "Keine kompatiblen Instanzen gefunden."
+  },
+  "omorphia.component.badge.label.safe": {
+    "defaultMessage": "Passieren"
+  },
+  "servers.purchase.step.plan.large.desc": {
+    "defaultMessage": "Ideal für 15–25 Spieler, Modpacks oder schweres Modding."
+  },
+  "error-modal.debug-information": {
+    "message": "Debug-Informationen:"
+  },
+  "instance.worlds.loading": {
+    "message": "Laden..."
+  },
+  "button.sign-out": {
+    "defaultMessage": "Abmelden"
+  },
+  "error-modal.official-minecraft-launcher": {
+    "message": "offizieller Minecraft Launcher"
+  },
+  "settings.appearance.minimize-launcher.title": {
+    "message": "Launcher minimieren"
+  },
+  "tag.category.questing": {
+    "defaultMessage": "Suchen"
+  },
+  "instance.mods.action.enable": {
+    "message": "Aktivieren"
+  },
+  "locale.ru-RU": {
+    "defaultMessage": "Russisch"
+  },
+  "skins.action.delete": {
+    "message": "Löschen"
+  },
+  "instance.settings.tabs.window.fullscreen": {
+    "message": "Vollbild"
+  },
+  "payment-method.discover": {
+    "defaultMessage": "Entdecken"
+  },
+  "skins.editing": {
+    "message": "Skin bearbeiten"
+  },
+  "content.page-layout.update-all": {
+    "defaultMessage": "Alles aktualisieren"
+  },
+  "instance.logs.unknown": {
+    "message": "Unbekannt"
+  },
+  "tag.category.creator-community": {
+    "defaultMessage": "Creator-Community"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "Code in die Zwischenablage kopieren"
+  },
+  "instance.index.never-played": {
+    "message": "Nie gespielt"
+  },
+  "instance.settings.tabs.general.duplicate-button": {
+    "message": "Duplikat"
+  },
+  "tag.category.op": {
+    "defaultMessage": "OP"
+  },
+  "syncing.empty.custom-files": {
+    "message": "Noch keine benutzerdefinierten Dateiziele."
+  },
+  "servers.backups.admonition.restore-successful.title": {
+    "defaultMessage": "Wiederherstellung aus Sicherung erfolgreich"
+  },
+  "instance.confirm-reinstall.header": {
+    "defaultMessage": "Modpack neu installieren"
+  },
+  "locale.nl-NL": {
+    "defaultMessage": "Niederländisch"
+  },
+  "project.settings.environment.notice.wrong-project-type.title": {
+    "defaultMessage": "Dieser Projekttyp unterstützt keine Umgebungsmetadaten"
+  },
+  "label.modpack": {
+    "defaultMessage": "Modpack"
+  },
+  "project.recent-plays.tooltip": {
+    "defaultMessage": "{count} {countPlural, plural, one {recent play} other {recent plays}} aus Modrinth in den letzten 2 Wochen"
+  },
+  "servers.backups.item.rename": {
+    "defaultMessage": "Umbenennen"
+  },
+  "servers.backups.item.backup-schedule": {
+    "defaultMessage": "Backup-Zeitplan"
+  },
+  "servers.purchase.step.plan.select": {
+    "defaultMessage": "Wählen Sie Planen aus"
+  },
+  "accounts-card.player-name-length-rule": {
+    "message": "Der Spielername muss mindestens {min} Zeichen lang sein und darf nicht mehr als {max} Zeichen lang sein."
+  },
+  "tag.category.items": {
+    "defaultMessage": "Artikel"
+  },
+  "instances.updater-modal.header": {
+    "defaultMessage": "Version aktualisieren"
+  },
+  "browse.view.label": {
+    "message": "Sicht"
+  },
+  "tag.category.technology": {
+    "defaultMessage": "Technologie"
+  },
+  "action.open-folder": {
+    "message": "Ordner öffnen"
+  },
+  "app.update-toast.downloading": {
+    "message": "Herunterladen..."
+  },
+  "accounts-card.error-adding-elyby-account": {
+    "message": "Beim Hinzufügen des Ely.by-Kontos ist ein Fehler aufgetreten. Bitte befolgen Sie die nachstehenden Anweisungen."
+  },
+  "skins.upload.username.not-found": {
+    "message": "Profil nicht gefunden."
+  },
+  "java-selector.browse": {
+    "message": "Durchsuchen"
+  },
+  "creation-flow.final.world-type.amplified": {
+    "defaultMessage": "Verstärkt"
+  },
+  "instance.index.time.hour-plural": {
+    "message": "{count} Stunden"
+  },
+  "servers.notice.undismissable": {
+    "defaultMessage": "Unverzichtbar"
+  },
+  "tag.category.parkour": {
+    "defaultMessage": "Parkour"
+  },
+  "project.visibility.scheduled": {
+    "defaultMessage": "Geplant"
+  },
+  "installation-settings.edit.warning-instance": {
+    "defaultMessage": "Wir raten davon ab, Ihre Installationseinstellungen nach der Installation von Inhalten zu bearbeiten. Wenn Sie sie bearbeiten möchten, seien Sie vorsichtig, da dies zu Problemen führen kann."
+  },
+  "content.confirm-bulk-update.admonition-header": {
+    "defaultMessage": "Update-Warnung"
+  },
+  "error-modal.migration.text-4": {
+    "message": "Was kommt als nächstes? Wir arbeiten an einer dauerhaften Lösung. In der Zwischenzeit können Sie je nach System eine der folgenden Schnellkorrekturen anwenden."
+  },
+  "instance.logs.level.comment": {
+    "message": "Kommentar"
+  },
+  "curseforge-import.profile-code.placeholder": {
+    "message": "Geben Sie den CurseForge-Profilcode ein"
+  },
+  "project.about.compatibility.environments.singleplayer-only": {
+    "defaultMessage": "Nur Einzelspieler"
+  },
+  "content.page-layout.additional-content": {
+    "defaultMessage": "Zusätzlicher Inhalt"
+  },
+  "instance.create.launcher-path": {
+    "message": "{name} path"
+  },
+  "settings.default-instance.post-exit.title": {
+    "message": "Postausgang"
+  },
+  "project-type.modpack.category": {
+    "defaultMessage": "Modpacks"
+  },
+  "tag.category.teams": {
+    "defaultMessage": "Mannschaften"
+  },
+  "tag.category.prison": {
+    "defaultMessage": "Gefängnis"
+  },
+  "tag.category.towns": {
+    "defaultMessage": "Städte"
+  },
+  "maintenance.cleanup.no-targets": {
+    "message": "Für die ausgewählten Regeln wurden keine Bereinigungsdateien gefunden."
+  },
+  "changelog.product.app": {
+    "defaultMessage": "App"
+  },
+  "syncing.total-instances": {
+    "message": "Instanzen"
+  },
+  "remove-friend": {
+    "message": "Freund entfernen"
+  },
+  "nags.upload-version.description": {
+    "defaultMessage": "Damit ein Projekt zur Prüfung eingereicht werden kann, ist mindestens eine Version erforderlich."
+  },
+  "maintenance.breadcrumb": {
+    "message": "Wartung"
+  },
+  "payment-method.mastercard": {
+    "defaultMessage": "MasterCard"
+  },
+  "button.remove": {
+    "defaultMessage": "Entfernen"
+  },
+  "app.sidebar.playing-as": {
+    "message": "Spielen als"
+  },
+  "instance.index.update-all": {
+    "message": "Alles aktualisieren"
+  },
+  "instance.worlds.online": {
+    "message": "online"
+  },
+  "instances.content-install.new-tab": {
+    "defaultMessage": "Neue Instanz"
+  },
+  "payment-method.paypal_international": {
+    "defaultMessage": "PayPal International"
+  },
+  "content.confirm-unlink.unlink-button": {
+    "defaultMessage": "Verknüpfung aufheben"
+  },
+  "button.analytics": {
+    "defaultMessage": "Analytik"
+  },
+  "settings.language.warning": {
+    "defaultMessage": "Changing the {platform} language may cause some content to appear in English if a translation is not available. The {platform} is not yet fully translated, so some content may remain in English for certain languages."
+  },
+  "servers.region.custom.prompt": {
+    "defaultMessage": "Wie viel RAM soll Ihr Server haben?"
+  },
+  "creation-flow.setup.option.custom.title": {
+    "defaultMessage": "Benutzerdefinierte Einrichtung"
+  },
+  "form.placeholder.city": {
+    "defaultMessage": "Geben Sie die Stadt ein"
+  },
+  "instance.index.time.hour-singular": {
+    "message": "{count} Stunde"
+  },
+  "instances.modpack-content-modal.filter-all": {
+    "defaultMessage": "Alle"
+  },
+  "instances.updater-modal.badge.current": {
+    "defaultMessage": "Aktuell"
+  },
+  "settings.default-instance.hooks.title": {
+    "message": "Haken"
+  },
+  "servers.backups.item.failed-to-create-backup": {
+    "defaultMessage": "Backup konnte nicht erstellt werden"
+  },
+  "settings.appearance.jump-back.description": {
+    "message": "Enthält aktuelle Welten im Abschnitt „Zurückspringen“ auf der Startseite."
+  },
+  "java-selector.testing": {
+    "message": "Testen..."
+  },
+  "installation-settings.edit.warning-server": {
+    "defaultMessage": "Wir raten davon ab, Ihre Installationseinstellungen nach der Installation von Inhalten zu bearbeiten. Wenn Sie sie bearbeiten möchten, setzen Sie Ihren Server zurück."
+  },
+  "search.filter.locked.instance": {
+    "message": "Von der Instanz bereitgestellt"
+  },
+  "project.curseforge.heading": {
+    "message": "CurseForge-Projekt"
+  },
+  "grid-display.instance-count.many": {
+    "message": "{count} Instanzen"
+  },
+  "instance.settings.tabs.installation.change-version.cannot-while-fetching": {
+    "message": "Modpack-Versionen abrufen"
+  },
+  "settings.appearance.hide-nametag.description": {
+    "message": "Deaktiviert das Namensschild über Ihrem Player auf der Skins-Seite."
+  },
+  "project-type.project.capital": {
+    "defaultMessage": "{count, plural, one {Project} other {Projects}}"
+  },
+  "skins.delete.confirm.title": {
+    "message": "Sind Sie sicher, dass Sie diesen Skin löschen möchten?"
+  },
+  "content.page-layout.empty.no-content-installed": {
+    "defaultMessage": "Kein Inhalt installiert"
+  },
+  "settings.appearance.launcher-language.description": {
+    "message": "Wählen Sie die von der Revoria-Benutzeroberfläche verwendete Sprache aus."
+  },
+  "skins.delete.confirm.description": {
+    "message": "Dadurch wird der ausgewählte Skin dauerhaft gelöscht. Diese Aktion kann nicht rückgängig gemacht werden."
+  },
+  "nags.edit-license.title": {
+    "defaultMessage": "Lizenz bearbeiten"
+  },
+  "app.home.instances.count": {
+    "message": "{count} Instanzen"
+  },
+  "instances.content-install.name-placeholder": {
+    "defaultMessage": "Geben Sie den Instanznamen ein"
+  },
+  "tag.category.lifesteal": {
+    "defaultMessage": "Lebensraub"
+  },
+  "button.affiliate-links": {
+    "defaultMessage": "Affiliate-Links"
+  },
+  "tag.category.kitpvp": {
+    "defaultMessage": "Kit PVP"
+  },
+  "project.settings.environment.notice.multiple-environments.description": {
+    "defaultMessage": "Für verschiedene Versionen Ihres Projekts sind unterschiedliche Umgebungen ausgewählt, sodass Sie sie derzeit nicht global bearbeiten können."
+  },
+  "instance.settings.tabs.installation.unlink.title": {
+    "message": "Verknüpfung zum Modpack aufheben"
+  },
+  "instance.settings.tabs.general.duplicate-instance": {
+    "message": "Doppelte Instanz"
+  },
+  "instance.create.select-version": {
+    "message": "Version auswählen"
+  },
+  "badge.beta-release": {
+    "defaultMessage": "Beta-Version"
+  },
+  "project.about.links.donate.github": {
+    "defaultMessage": "Sponsor auf GitHub"
+  },
+  "settings.appearance.native-decorations.title": {
+    "message": "Einheimische Dekorationen"
+  },
+  "servers.purchase.step.plan.small.desc": {
+    "defaultMessage": "Perfekt für 1–5 Freunde mit ein paar leichten Mods."
+  },
+  "project.install.installed": {
+    "message": "Installiert"
+  },
+  "curseforge-import.progress.completed": {
+    "message": "Import abgeschlossen!"
+  },
+  "tag.category.decoration": {
+    "defaultMessage": "Dekoration"
+  },
+  "instance.settings.tabs.window.custom-window-settings": {
+    "message": "Benutzerdefinierte Fenstereinstellungen"
+  },
+  "project.action.follow": {
+    "message": "Folgen"
+  },
+  "tag.category.personal-worlds": {
+    "defaultMessage": "Persönliche Welten"
+  },
+  "browse.offline": {
+    "message": "Sie sind derzeit offline. Stellen Sie eine Verbindung zum Internet her, um Modrinth zu durchsuchen!"
+  },
+  "app.worlds.page-title": {
+    "message": "Welten"
+  },
+  "button.sign-up": {
+    "defaultMessage": "Melden Sie sich an"
+  },
+  "instance.create.select-loader-version": {
+    "message": "Wählen Sie die Loader-Version aus"
+  },
+  "servers.region.north-america": {
+    "defaultMessage": "Nordamerika"
+  },
+  "header.category.performance-impact": {
+    "defaultMessage": "Auswirkungen auf die Leistung"
+  },
+  "settings.appearance.launcher-language.option.russian": {
+    "message": "Russisch"
+  },
+  "nags.moderator-feedback.description": {
+    "defaultMessage": "Überprüfen Sie alle Bedenken des Moderationsteams und gehen Sie darauf ein, bevor Sie sie erneut einreichen."
+  },
+  "project.environment.client-and-server.description": {
+    "defaultMessage": "Erforderlich sowohl auf dem Client als auch auf dem Server."
+  },
+  "project.settings.environment.suboption.accessibility-suboption-group-label": {
+    "defaultMessage": "Unteroptionen von {option}"
+  },
+  "tag.category.game-mechanics": {
+    "defaultMessage": "Spielmechanik"
+  },
+  "browse.install.description": {
+    "message": "Wählen Sie eine Instanz zur Installation aus"
+  },
+  "creation-flow.action.finish": {
+    "defaultMessage": "Beenden"
+  },
+  "hosting.content.copy-link": {
+    "defaultMessage": "Link kopieren"
+  },
+  "install-confirm.description": {
+    "message": "Sie haben dieses Modpack bereits installiert. Sind Sie sicher, dass Sie es erneut installieren möchten?"
+  },
+  "tag.loader.geyser": {
+    "defaultMessage": "Geysir-Erweiterung"
+  },
+  "project.settings.environment.client_and_server.title": {
+    "defaultMessage": "Client und Server"
+  },
+  "content.page-layout.empty.no-extra-content-installed": {
+    "defaultMessage": "Kein zusätzlicher Inhalt installiert"
+  },
+  "nags.settings.description.title": {
+    "defaultMessage": "Besuchen Sie die Beschreibungseinstellungen"
+  },
+  "creation-flow.setup.option.modpack.desc": {
+    "defaultMessage": "Verwenden Sie ein beliebtes Modpack als Ausgangspunkt."
+  },
+  "settings.display.theme.preferred-dark-theme": {
+    "defaultMessage": "Bevorzugtes dunkles Thema"
+  },
+  "browse.source.curseforge": {
+    "message": "CurseForge"
+  },
+  "project.load-error": {
+    "message": "Projektdaten konnten nicht geladen werden."
+  },
+  "instance.settings.tabs.window.height.enter": {
+    "message": "Höhe eingeben..."
+  },
+  "instance.settings.tabs.hooks.custom-hooks": {
+    "message": "Benutzerdefinierte Starthaken"
+  },
+  "creation-flow.import.title": {
+    "defaultMessage": "Launcher-Instanzen"
+  },
+  "app.update-toast.reload": {
+    "message": "Neu laden"
+  },
+  "settings.appearance.jump-back.title": {
+    "message": "Springe zurück in Welten"
+  },
+  "search-card.install": {
+    "message": "Installieren"
+  },
+  "label.sort-by": {
+    "defaultMessage": "Sortieren nach"
+  },
+  "content.diff-modal.diff-type.removed": {
+    "defaultMessage": "ENTFERNT"
+  },
+  "search.sort.relevance": {
+    "defaultMessage": "Relevanz"
+  },
+  "servers.backups.admonition.restore-failed.description": {
+    "defaultMessage": "Beim Wiederherstellen von {backupName} ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder wenden Sie sich an den Support, wenn das Problem weiterhin besteht."
+  },
+  "button.play": {
+    "defaultMessage": "Spielen"
+  },
+  "nags.misused-discord-link.title": {
+    "defaultMessage": "Discord-Einladung verschieben"
+  },
+  "project.about.compatibility.environments.client-and-server": {
+    "defaultMessage": "Client und Server"
+  },
+  "content.modpack-card.dismiss-hint": {
+    "defaultMessage": "Nicht mehr anzeigen"
+  },
+  "search.filter_type.environment.client": {
+    "defaultMessage": "Kunde"
+  },
+  "button.save": {
+    "defaultMessage": "Speichern"
+  },
+  "browse.sort.relevancy": {
+    "message": "Relevanz"
+  },
+  "instance.settings.tabs.installation.reinstall.confirm.description": {
+    "message": "Durch die Neuinstallation werden alle installierten oder geänderten Inhalte auf die vom Modpack bereitgestellten Inhalte zurückgesetzt und alle Mods oder Inhalte entfernt, die Sie zusätzlich zur Originalinstallation hinzugefügt haben. Dadurch kann unerwartetes Verhalten behoben werden, wenn Änderungen an der Instanz vorgenommen wurden. Wenn Ihre Welten jedoch jetzt von zusätzlich installierten Inhalten abhängig sind, kann dies dazu führen, dass bestehende Welten beschädigt werden."
+  },
+  "project.about.creators.title": {
+    "defaultMessage": "Schöpfer"
+  },
+  "dont-show-on-home": {
+    "message": "Nicht auf der Startseite anzeigen"
+  },
+  "creation-flow.modpack.prompt": {
+    "defaultMessage": "Kennen Sie bereits das Modpack, das Sie installieren möchten?"
+  },
+  "nags.link-shortener-usage.description": {
+    "defaultMessage": "Die Verwendung von Linkkürzern oder anderen Methoden, um zu verschleiern, wohin ein Link in Ihren externen Links oder Lizenzlinks führen könnte, ist verboten. Bitte verwenden Sie nur geeignete Links in voller Länge."
+  },
+  "creation-flow.custom.loader-version.stable": {
+    "defaultMessage": "Stabil"
+  },
+  "grid-display.option.loader": {
+    "message": "Lader"
+  },
+  "creation-flow.final.generate-structures.desc": {
+    "defaultMessage": "Steuert, ob Dörfer, Festungen und andere Strukturen in neuen Blöcken entstehen."
+  },
+  "creation-flow.setup.instance.note": {
+    "defaultMessage": "Eine Instanz ist ein Minecraft-Setup mit einem bestimmten Loader, einer bestimmten Version und Mods."
+  },
+  "content.confirm-unlink.admonition-body": {
+    "defaultMessage": "Mods und Inhalte werden mit dem zusammengeführt, was Sie dem Modpack hinzugefügt haben, und es werden keine Updates mehr empfangen."
+  },
+  "creation-flow.stage.modpack.title": {
+    "defaultMessage": "Wählen Sie Modpack"
+  },
+  "tag.category.entities": {
+    "defaultMessage": "Entitäten"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "Geplant"
+  },
+  "settings.resource.max-concurrent-downloads.description": {
+    "message": "Die maximale Anzahl an Dateien, die der Launcher gleichzeitig herunterladen kann. Stellen Sie diesen Wert auf einen niedrigeren Wert ein, wenn Sie über eine schlechte Internetverbindung verfügen. (App-Neustart erforderlich, um wirksam zu werden)"
+  },
+  "instance.worlds.game_mode.survival": {
+    "defaultMessage": "Überlebensmodus"
+  },
+  "instance.logs.level.warn": {
+    "message": "Warnen"
+  },
+  "project.settings.server.title": {
+    "defaultMessage": "Server"
+  },
+  "content.inline-backup.backup-takes-a-while": {
+    "defaultMessage": "Das Erstellen eines Backups kann je nach Größe Ihres Servers mehrere Minuten dauern."
+  },
+  "creation-flow.final.generator-settings.custom": {
+    "defaultMessage": "Brauch"
+  },
+  "app.survey.body.secondary": {
+    "message": "Dieses Feedback geht direkt an das Modrinth-Team und hilft als Leitfaden für zukünftige Updates!"
+  },
+  "tag.category.combat": {
+    "defaultMessage": "Kampf"
+  },
+  "add-content-button.install-content": {
+    "message": "Inhalte installieren"
+  },
+  "instance.index.copy-links": {
+    "message": "Links kopieren"
+  },
+  "servers.purchase.step.plan.get-started": {
+    "defaultMessage": "Fangen Sie an"
+  },
+  "nags.image-heavy-description.description": {
+    "defaultMessage": "Ihre Beschreibung sollte ausreichend einfachen Text oder Bild-Alternativtext enthalten, damit sie für Benutzer von Bildschirmleseprogrammen oder mit langsamen Internetverbindungen zugänglich bleibt."
+  },
+  "error-modal.minecraft-auth.hosts-text-start": {
+    "message": "Der Revoria-Launcher hat versucht, eine Verbindung zu Microsoft-/Xbox-/Minecraft-Diensten herzustellen, aber der Remote-Server hat die Verbindung abgelehnt. Dies kann darauf hindeuten, dass diese Dienste durch die Hosts-Datei blockiert werden. Bitte besuchen Sie uns"
+  },
+  "instance.settings.tabs.installation.repair.in-progress": {
+    "message": "Reparatur läuft"
+  },
+  "project.about.links.donate.patreon": {
+    "defaultMessage": "Spenden Sie auf Patreon"
+  },
+  "export-modal.export": {
+    "message": "Export"
+  },
+  "button.repair": {
+    "defaultMessage": "Reparieren"
+  },
+  "tag.category.pokemon": {
+    "defaultMessage": "Pokémon"
+  },
+  "project.environment.unknown.title": {
+    "defaultMessage": "Unbekannte Umgebung"
+  },
+  "settings.display.theme.light": {
+    "defaultMessage": "Licht"
+  },
+  "content.inline-backup.backup-in-progress": {
+    "defaultMessage": "Es wird gerade eine Sicherung ausgeführt. Es wird empfohlen, den Abschluss abzuwarten, bevor Sie diese Aktion ausführen."
+  },
+  "project.metadata.downloads": {
+    "message": "Downloads"
+  },
+  "creation-flow.custom.build-number.label-value": {
+    "defaultMessage": "Bauen {build}"
+  },
+  "locale.de-CH": {
+    "defaultMessage": "Deutsch (Schweiz)"
+  },
+  "syncing.target.default": {
+    "message": "Standard"
+  },
+  "instance.worlds.game_already_open": {
+    "message": "Instanz ist bereits geöffnet"
+  },
+  "skins.sign-in.title": {
+    "message": "Bitte melden Sie sich an"
+  },
+  "install-elsewhere": {
+    "message": "Woanders installieren"
+  },
+  "browse.notification.manual-download-required.title": {
+    "message": "Manueller Download erforderlich"
+  },
+  "collections.label.private": {
+    "defaultMessage": "Privat"
+  },
+  "hosting.content.failed-to-upload": {
+    "defaultMessage": "Datei konnte nicht hochgeladen werden"
+  },
+  "label.title": {
+    "defaultMessage": "Titel"
+  },
+  "syncing.notification.added": {
+    "message": "Synchronisierungsziel hinzugefügt."
+  },
+  "content.page-layout.sort.date-added-oldest": {
+    "defaultMessage": "Älteste zuerst"
+  },
+  "export-modal.modpack-name": {
+    "message": "Modpack-Name"
+  },
+  "button.reinstall-modpack": {
+    "defaultMessage": "Modpack neu installieren"
+  },
+  "project.changelog": {
+    "message": "Änderungsprotokoll"
+  },
+  "content.confirm-bulk-update.header": {
+    "defaultMessage": "Projekte aktualisieren"
+  },
+  "servers.backups.admonition.restore-successful.description": {
+    "defaultMessage": "Ihr Server wurde auf {backupName} wiederhergestellt und ist startbereit."
+  },
+  "syncing.status.enabled": {
+    "message": "Ermöglicht"
+  },
+  "label.installation-info": {
+    "defaultMessage": "Installationsinformationen"
+  },
+  "instance.settings.tabs.installation.unlink.button": {
+    "message": "Verknüpfung der Instanz aufheben"
+  },
+  "grid-display.search": {
+    "message": "Suchen"
+  },
+  "header.category.minecraft-server-features": {
+    "defaultMessage": "Merkmale"
+  },
+  "project.tab.files": {
+    "message": "Dateien"
+  },
+  "instance.logs.empty.subtitle": {
+    "message": "Starten Sie Ihr Spiel, um fortzufahren."
+  },
+  "maintenance.rules.description": {
+    "message": "Pfade sind relativ zum Instanzordner. Trennen Sie mehrere Pfade durch Kommas."
+  },
+  "instance.worlds.not-played-yet": {
+    "message": "Noch nicht gespielt"
+  },
+  "instances.updater-modal.header-switch": {
+    "defaultMessage": "Switch-Version"
+  },
+  "project.visibility.unlisted-by-staff": {
+    "defaultMessage": "Vom Personal nicht aufgeführt"
+  },
+  "skins.rate-limit.cape": {
+    "message": "Du wechselst deinen Umhang zu häufig. Die Server von Mojang haben weitere Anfragen vorübergehend blockiert. Bitte warten Sie einen Moment, bevor Sie es erneut versuchen."
+  },
+  "content.confirm-unlink.admonition-header": {
+    "defaultMessage": "Verknüpfung des Modpacks wird aufgehoben"
+  },
+  "instance.create.loader-version.latest": {
+    "message": "letzte"
+  },
+  "creation-flow.setup.title.world": {
+    "defaultMessage": "Wählen Sie den Welttyp aus"
+  },
+  "skins.upload.option.file.desc": {
+    "message": "Importieren Sie eine PNG-Skintextur von Ihrem Gerät."
+  },
+  "project.about.links.source": {
+    "defaultMessage": "Quelle ansehen"
+  },
+  "label.selection-actions": {
+    "defaultMessage": "Auswahlaktionen"
+  },
+  "tag.category.battle-royale": {
+    "defaultMessage": "Battle Royale"
+  },
+  "creation-flow.common.no-results": {
+    "defaultMessage": "Keine Ergebnisse gefunden"
+  },
+  "button.accept": {
+    "defaultMessage": "Akzeptieren"
+  },
+  "instance.worlds.game_mode.spectator": {
+    "defaultMessage": "Zuschauermodus"
+  },
+  "app.account.sign-out": {
+    "message": "Abmelden"
+  },
+  "nags.select-tags.title": {
+    "defaultMessage": "Wählen Sie Tags aus"
+  },
+  "button.open-folder": {
+    "defaultMessage": "Ordner öffnen"
+  },
+  "project.tab.gallery": {
+    "message": "Galerie"
+  },
+  "project-type.mod.category": {
+    "defaultMessage": "Mods"
+  },
+  "servers.purchase.step.payment.title": {
+    "defaultMessage": "Zahlungsart"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "Nicht unterstützt"
+  },
+  "skins.rate-limit.title": {
+    "message": "Verlangsamen!"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "Wird überprüft"
+  },
+  "instance.worlds.refreshing": {
+    "message": "Erfrischend..."
+  },
+  "creation-flow.setup.option.custom.desc": {
+    "defaultMessage": "Beginnen Sie von vorne, indem Sie einen Loader und eine Spielversion auswählen."
+  },
+  "creation-flow.final.difficulty.hard": {
+    "defaultMessage": "Hart"
+  },
+  "error-modal.minecraft-auth.game-pass-heading": {
+    "message": "Benutzen Sie den PC Game Pass, kommen Sie von Bedrock oder haben Sie das Spiel einfach gekauft?"
+  },
+  "content.diff-modal.updated-count": {
+    "defaultMessage": "{count} aktualisiert"
+  },
+  "tag.loader.datapack": {
+    "defaultMessage": "Datenpaket"
+  },
+  "project.about.links.donate.generic": {
+    "defaultMessage": "Spenden"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "Client und Server"
+  },
+  "project.settings.notice.no-permission.title": {
+    "defaultMessage": "Keine Erlaubnis"
+  },
+  "skins.upload.username.importing": {
+    "message": "Importieren..."
+  },
+  "project.environment.server-only.title": {
+    "defaultMessage": "Nur serverseitig, funktioniert auch im Einzelspielermodus"
+  },
+  "app.account.signed-in-as": {
+    "message": "Angemeldet als"
+  },
+  "settings.account.title": {
+    "defaultMessage": "Konto und Sicherheit"
+  },
+  "instance.logs.log-date": {
+    "message": "Protokolldatum"
+  },
+  "skins.arm-style.wide": {
+    "message": "Breit"
+  },
+  "maintenance.empty.no-instances": {
+    "message": "Keine Instanzen zum Analysieren."
+  },
+  "instance.create.action.creating": {
+    "message": "Erstellen..."
+  },
+  "skins.texture": {
+    "message": "Textur"
+  },
+  "skins.cape": {
+    "message": "Kap"
+  },
+  "instances.updater-modal.switch-to": {
+    "defaultMessage": "Switch to {version}"
+  },
+  "tag.loader.fabric": {
+    "defaultMessage": "Stoff"
+  },
+  "project.action.copy-link": {
+    "message": "Link kopieren"
+  },
+  "nags.settings.title": {
+    "defaultMessage": "Besuchen Sie die allgemeinen Einstellungen"
+  },
+  "tag.category.competitive": {
+    "defaultMessage": "Wettbewerbsfähig"
+  },
+  "tag.category.fonts": {
+    "defaultMessage": "Schriftarten"
+  },
+  "browse.context.open-curseforge": {
+    "message": "In CurseForge öffnen"
+  },
+  "app.update.downloading-update": {
+    "message": "Update wird heruntergeladen ({percent}%)"
+  },
+  "nags.title-contains-technical-info.description": {
+    "defaultMessage": "Wenn Sie den Namen Ihres Projekts sauber halten, ist es einprägsam und leichter zu finden. Versions- und Loader-Informationen werden automatisch neben Ihrem Projekt angezeigt."
+  },
+  "instances.content-install.loader-label": {
+    "defaultMessage": "Lader"
+  },
+  "servers.purchase.step.payment.prompt": {
+    "defaultMessage": "Wählen Sie eine Zahlungsmethode aus"
+  },
+  "nags.title-contains-technical-info.title": {
+    "defaultMessage": "Bereinigen Sie den Namen"
+  },
+  "project.about.links.donate.bmac": {
+    "defaultMessage": "Kauf mir einen Kaffee"
+  },
+  "changelog.justNow": {
+    "defaultMessage": "Soeben"
+  },
+  "error-modal.migration.help-text": {
+    "message": "Wenn beim Anwenden von Migrationen ein Fehler auftritt, z. B. „Fehler beim Anwenden von Migrationen: Migration XXXXXXXXXX wurde zuvor angewendet, aber geändert“ oder ein ähnliches Problem bei der Migration, können die folgenden Maßnahmen hilfreich sein:"
+  },
+  "settings.resource.purge-cache.confirm.description": {
+    "message": "Wenn Sie fortfahren, wird Ihr gesamter Cache geleert. Dies kann die App vorübergehend verlangsamen."
+  },
+  "settings.appearance.native-decorations.description": {
+    "message": "Systemfensterrahmen verwenden (App-Neustart erforderlich)."
+  },
+  "browse.filter.hide-installed": {
+    "message": "Installierte Inhalte ausblenden"
+  },
+  "content.page-layout.share.project-links": {
+    "defaultMessage": "Projektlinks"
+  },
+  "tag.category.core-shaders": {
+    "defaultMessage": "Kern-Shader"
+  },
+  "modal.open-in-app.why-use": {
+    "defaultMessage": "Warum die Modrinth-App verwenden?"
+  },
+  "nags.all-tags-selected.description": {
+    "defaultMessage": "Sie haben alle {totalAvailableTags, Plural, ein {# available tag} und andere {# available tags}} ausgewählt. Dies macht den Zweck von Tags zunichte, die Benutzern dabei helfen sollen, relevante Projekte zu finden. Bitte wählen Sie nur die Tags aus, die für Ihr Projekt relevant sind."
+  },
+  "creation-flow.final.world-type.label": {
+    "defaultMessage": "Welttyp"
+  },
+  "browse.source.modrinth": {
+    "message": "Modrinth"
+  },
+  "payment-method.unionpay": {
+    "defaultMessage": "UnionPay"
+  },
+  "content.page-layout.empty.hint": {
+    "defaultMessage": "Durchsuchen oder laden Sie {contentType} hoch, um loszulegen"
+  },
+  "servers.backups.admonition.creating-backup.title": {
+    "defaultMessage": "Backup erstellen"
+  },
+  "creation-flow.loader.vanilla": {
+    "defaultMessage": "Vanille"
+  },
+  "maintenance.loading.instances": {
+    "message": "Lade Instanzen..."
+  },
+  "app.home.greeting.afternoon": {
+    "message": "Guten Tag"
+  },
+  "instance.logs.filter.placeholder": {
+    "message": "Geben Sie Folgendes ein, um Protokolle zu filtern..."
+  },
+  "servers.notice.heading.info": {
+    "defaultMessage": "Info"
+  },
+  "creation-flow.final.world-type.single-biome": {
+    "defaultMessage": "Einzelnes Biom"
+  },
+  "app.library.title": {
+    "message": "Bibliothek"
+  },
+  "accounts-card.add-offline-account-header": {
+    "message": "Neues Offline-Konto hinzufügen"
+  },
+  "project.settings.environment.notice.wrong-project-type.description": {
+    "defaultMessage": "Nur Mod- oder Modpack-Projekte können Umgebungsmetadaten haben."
+  },
+  "instance.settings.tabs.installation.change-version.in-progress": {
+    "message": "Neue Version installieren"
+  },
+  "header.category.feature": {
+    "defaultMessage": "Besonderheit"
+  },
+  "instance.edit-world.title": {
+    "message": "Welt bearbeiten"
+  },
+  "app.account.menu": {
+    "message": "Modrinth-Konto"
+  },
+  "tag.category.skyblock": {
+    "defaultMessage": "Skyblock"
+  },
+  "project.settings.environment.client_and_server.optional_client.title": {
+    "defaultMessage": "Optional auf dem Client"
+  },
+  "instance.confirm-repair.repair-button": {
+    "defaultMessage": "Reparieren"
+  },
+  "label.filter-by": {
+    "defaultMessage": "Filtern nach"
+  },
+  "instance.settings.tabs.installation.minecraft-version": {
+    "message": "Minecraft {version}"
+  },
+  "syncing.target.custom": {
+    "message": "Brauch"
+  },
+  "tag.category.economy": {
+    "defaultMessage": "Wirtschaft"
+  },
+  "settings.resource.select-new-app-directory": {
+    "message": "Wählen Sie ein neues App-Verzeichnis"
+  },
+  "export-modal.description.placeholder": {
+    "message": "Modpack-Beschreibung eingeben..."
+  },
+  "project.notification.manual-download-required.title": {
+    "message": "Manueller Download erforderlich"
+  },
+  "creation-flow.modpack.search.placeholder": {
+    "defaultMessage": "Suchen Sie nach Modpack"
+  },
+  "project-card.stats.followers": {
+    "defaultMessage": "{count, plural, one {follower} other {followers}}"
+  },
+  "maintenance.cleanup.selected-count": {
+    "message": "{count} ausgewählt"
+  },
+  "form.placeholder.postal-code": {
+    "defaultMessage": "Postleitzahl eingeben"
+  },
+  "accounts-card.error-auth-elyby-header": {
+    "message": "Fehler beim Fortfahren des Authentifizierungsereignisses mit Ely.by"
+  },
+  "nags.gpl-license-source-required.title": {
+    "defaultMessage": "Geben Sie den Quellcode an"
+  },
+  "instance.create.remove-icon": {
+    "message": "Symbol entfernen"
+  },
+  "skins.upload.error.processing-file.title": {
+    "message": "Fehler bei der Verarbeitung der Datei"
+  },
+  "app.update.download-update": {
+    "message": "Update herunterladen"
+  },
+  "grid-display.select-placeholder": {
+    "message": "Wählen..."
+  },
+  "error-modal.state-init-fix-ways": {
+    "message": "Möglicherweise können Sie das Problem auf eine der folgenden Arten beheben:"
+  },
+  "instance.settings.tabs.installation.reinstall.title": {
+    "message": "Modpack neu installieren"
+  },
+  "sign-out": {
+    "message": "Abmelden"
+  },
+  "instance.create.importing": {
+    "message": "Importieren..."
+  },
+  "locale.fr-FR": {
+    "defaultMessage": "Französisch"
+  },
+  "icon-select.select": {
+    "defaultMessage": "Symbol auswählen"
+  },
+  "app.home.welcome.new": {
+    "message": "Willkommen in Revoria"
+  },
+  "error-modal.get-support": {
+    "message": "Holen Sie sich Unterstützung"
+  },
+  "instance.settings.tabs.general.duplicate-instance.description": {
+    "message": "Erstellt eine Kopie dieser Instanz, einschließlich Welten, Konfigurationen, Mods usw."
+  },
+  "settings.appearance.toggle-sidebar.title": {
+    "message": "Seitenleiste umschalten"
+  },
+  "search-card.compat.server": {
+    "message": "Server"
+  },
+  "servers.purchase.step.plan.medium.desc": {
+    "defaultMessage": "Ideal für 6–15 Spieler und mehrere Mods."
+  },
+  "browse.max-results.label": {
+    "message": "Maximale Ergebnisse"
+  },
+  "servers.region.western-europe": {
+    "defaultMessage": "Westeuropa"
+  },
+  "tag.category.medium": {
+    "defaultMessage": "Medium"
+  },
+  "app.nav.create-instance": {
+    "message": "Neue Instanz erstellen"
+  },
+  "grid-display.option.none": {
+    "message": "Keiner"
+  },
+  "instance.settings.tabs.general.library-groups.enter-name": {
+    "message": "Geben Sie den Gruppennamen ein"
+  },
+  "project-card.environment.client-or-server": {
+    "defaultMessage": "Client oder Server"
+  },
+  "creation-flow.custom.game-version.search": {
+    "defaultMessage": "Spielversion suchen..."
+  },
+  "project.environment.client-only.description": {
+    "defaultMessage": "Alle Funktionen werden clientseitig ausgeführt und sind mit Vanilla-Servern kompatibel."
+  },
+  "project.metadata.game-versions": {
+    "message": "Spielversionen"
+  },
+  "label.collections": {
+    "defaultMessage": "Sammlungen"
+  },
+  "settings.resource.app-directory.description": {
+    "message": "Das Verzeichnis, in dem der Launcher alle seine Dateien speichert. Änderungen werden nach dem Neustart des Launchers übernommen."
+  },
+  "search-card.add-to-instance": {
+    "message": "Zu einer Instanz hinzufügen"
+  },
+  "tag.loader.optifine": {
+    "defaultMessage": "OptiFine"
+  },
+  "settings.appearance.hide-nametag.title": {
+    "message": "Namensschild ausblenden"
+  },
+  "creation-flow.setup.option.vanilla.desc": {
+    "defaultMessage": "Klassisches Minecraft ohne Mods oder Plugins."
+  },
+  "tag.category.mobs": {
+    "defaultMessage": "Mobs"
+  },
+  "instance.worlds.no_singleplayer_quick_play": {
+    "message": "Mit Minecraft 1.20+ können Sie nur direkt in Einzelspielerwelten eintauchen"
+  },
+  "content.inline-backup.shift-click-hint": {
+    "defaultMessage": "Halten Sie beim Klicken die Umschalttaste gedrückt, um die Bestätigung zu überspringen."
+  },
+  "instance.create.modal.header": {
+    "message": "Eine Instanz erstellen"
+  },
+  "affiliate.create.title.description": {
+    "defaultMessage": "Geben Sie Ihrem Affiliate-Link einen Namen, damit Sie wissen, woher die Leute kommen!"
+  },
+  "app.home.greeting.night": {
+    "message": "Gute Nacht"
+  },
+  "header.category.minecraft-server-meta": {
+    "defaultMessage": "Meta"
+  },
+  "content.diff-modal.diff-type.updated": {
+    "defaultMessage": "Aktualisiert"
+  },
+  "servers.purchase.step.plan.custom.desc": {
+    "defaultMessage": "Wählen Sie einen maßgeschneiderten Plan mit genau den Spezifikationen, die Sie benötigen."
+  },
+  "tag.category.cursed": {
+    "defaultMessage": "Verflucht"
+  },
+  "instance.index.add-content": {
+    "message": "Inhalte hinzufügen"
+  },
+  "share-file-names": {
+    "message": "Geben Sie Dateinamen frei"
+  },
+  "project.action.open-in-browser": {
+    "message": "Im Browser öffnen"
+  },
+  "tag.loader.java-agent": {
+    "defaultMessage": "Java-Agent"
+  },
+  "instance.settings.tabs.java.hooks": {
+    "message": "Haken"
+  },
+  "form.label.country": {
+    "defaultMessage": "Land"
+  },
+  "export-modal.description": {
+    "message": "Beschreibung"
+  },
+  "label.no": {
+    "defaultMessage": "NEIN"
+  },
+  "project.settings.general.title": {
+    "defaultMessage": "Allgemein"
+  },
+  "project.environment.client-only-server-optional.title": {
+    "defaultMessage": "Client und Server, optional auf dem Server"
+  },
+  "accounts-card.not-signed-in": {
+    "message": "Nicht angemeldet"
+  },
+  "search-card.compat.client-and-server": {
+    "message": "Client und Server"
+  },
+  "settings.default-instance.memory-allocated.description": {
+    "message": "Der jeder Instanz zugewiesene Speicher, wenn sie ausgeführt wird."
+  },
+  "project.about.details.updated": {
+    "defaultMessage": "Updated {date}"
+  },
+  "creation-flow.final.generator-settings.flat": {
+    "defaultMessage": "Wohnung"
+  },
+  "project.settings.description.title": {
+    "defaultMessage": "Beschreibung"
+  },
+  "settings.default-instance.post-exit.description": {
+    "message": "Ran, nachdem das Spiel zu Ende ist."
+  },
+  "tag.category.classes": {
+    "defaultMessage": "Klassen"
+  },
+  "creation-flow.custom.name.label": {
+    "defaultMessage": "Name"
+  },
+  "project-card.date.updated": {
+    "defaultMessage": "Aktualisiert"
+  },
+  "instances.confirm-leave-modal.leave": {
+    "defaultMessage": "Seite verlassen"
+  },
+  "error-modal.minecraft-auth.try-another-text": {
+    "message": "Überprüfen Sie noch einmal, ob Sie sich mit dem richtigen Konto angemeldet haben. Möglicherweise besitzen Sie Minecraft auf einem anderen Microsoft-Konto."
+  },
+  "content.selection-bar.bulk.updating": {
+    "defaultMessage": "{progress}/{total} {contentType} wird aktualisiert..."
+  },
+  "creation-flow.final.world-type.large-biomes": {
+    "defaultMessage": "Große Biome"
+  },
+  "settings.resource.app-cache.description": {
+    "message": "Die Modrinth-App speichert einen Datencache, um das Laden zu beschleunigen. Dies kann gelöscht werden, um die App zum Neuladen der Daten zu zwingen. Dies kann die App vorübergehend verlangsamen."
+  },
+  "settings.appearance.default-landing.description": {
+    "message": "Ändern Sie die Seite, auf der der Launcher geöffnet wird."
+  },
+  "skins.action.delete-skin.aria": {
+    "message": "Skin löschen"
+  },
+  "instance.screenshots.empty-description": {
+    "message": "Drücken Sie im Spiel F2, um einen Screenshot zu machen"
+  },
+  "project.visibility.archived": {
+    "defaultMessage": "Archiviert"
+  },
+  "settings.appearance.default-landing.placeholder": {
+    "message": "Wählen Sie eine Option"
+  },
+  "nags.add-description.description": {
+    "defaultMessage": "Es ist eine Beschreibung erforderlich, die den Zweck und die Funktion des Projekts klar beschreibt."
+  },
+  "error-modal.title.unable-sign-in": {
+    "message": "Anmeldung bei Minecraft nicht möglich"
+  },
+  "java-selector.installing": {
+    "message": "Installieren..."
+  },
+  "project.settings.links.title": {
+    "defaultMessage": "Links"
+  },
+  "settings.appearance.launcher-language.option.romanian": {
+    "message": "rumänisch"
+  },
+  "error-modal.no-loader-text": {
+    "message": "Revoria konnte die Loader-Version für diese Instanz nicht finden."
+  },
+  "nags.feature-gallery-image.description": {
+    "defaultMessage": "Das vorgestellte Galeriebild ist oft der erste Eindruck Ihres Projekts."
+  },
+  "instance.settings.tabs.java.java-arguments": {
+    "message": "Java-Argumente"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "Server"
+  },
+  "logs": {
+    "message": "Protokolle"
+  },
+  "maintenance.delete-instance.description": {
+    "message": "Alle Daten werden entfernt und können nicht wiederhergestellt werden."
+  },
+  "payment-method.card_display": {
+    "defaultMessage": "{card_brand} endet auf {last_four}"
+  },
+  "project.about.links.title": {
+    "defaultMessage": "Links"
+  },
+  "project.about.links.discord": {
+    "defaultMessage": "Treten Sie dem Discord-Server bei"
+  },
+  "content.diff-modal.removed-count": {
+    "defaultMessage": "{count} entfernt"
+  },
+  "servers.region.central-europe": {
+    "defaultMessage": "Mitteleuropa"
+  },
+  "tag.category.network": {
+    "defaultMessage": "Netzwerk"
+  },
+  "maintenance.cleanup.complete.text": {
+    "message": "Befreit {size}"
+  },
+  "tag.category.vanilla-like": {
+    "defaultMessage": "Vanilleartig"
+  },
+  "instance.create.action.import-from-file": {
+    "message": "Aus Datei importieren"
+  },
+  "instance.settings.tabs.general.library-groups": {
+    "message": "Bibliotheksgruppen"
+  },
+  "instance.settings.tabs.installation.loader-version": {
+    "message": "{loader}-Version"
+  },
+  "export-mrpack": {
+    "message": ".mrpack exportieren"
+  },
+  "instance.settings.tabs.window.fullscreen.description": {
+    "message": "Lassen Sie das Spiel beim Start im Vollbildmodus starten (mithilfe von „options.txt“)."
+  },
+  "locale.ja-JP": {
+    "defaultMessage": "japanisch"
+  },
+  "installation-settings.removed-incompatible": {
+    "defaultMessage": "Entfernt (inkompatibel)"
+  },
+  "error-modal.minecraft-auth.network-text-start": {
+    "message": "Offenbar gab es Probleme mit der Verbindung von Revoria zu den Servern von Microsoft. Dies ist häufig auf eine schlechte Verbindung zurückzuführen. Wir empfehlen daher, es erneut zu versuchen, um zu sehen, ob es funktioniert. Wenn die Probleme weiterhin bestehen, befolgen Sie die Schritte unter"
+  },
+  "nags.gpl-license-source-required.description": {
+    "defaultMessage": "Ihr {type, select, mod {mod} Plugin {plugin} other {project}} verwendet eine Lizenz, die die Verfügbarkeit des Quellcodes erfordert. Bitte geben Sie für jede weitere Version einen Quellcode-Link oder eine Quelldatei an oder erwägen Sie die Verwendung einer anderen Lizenz."
+  },
+  "button.next": {
+    "defaultMessage": "Nächste"
+  },
+  "settings.display.theme.description": {
+    "defaultMessage": "Wählen Sie Ihr bevorzugtes Farbthema für Modrinth auf diesem Gerät."
+  },
+  "project.settings.members.title": {
+    "defaultMessage": "Mitglieder"
+  },
+  "tag.category.minigames": {
+    "defaultMessage": "Minispiele"
+  },
+  "installation-settings.platform-lock-tooltip": {
+    "defaultMessage": "Sie müssen Ihren Server zurücksetzen, um den Loader zu wechseln."
+  },
+  "settings.appearance.toggle-sidebar.description": {
+    "message": "Ermöglicht das Umschalten der Seitenleiste."
+  },
+  "instance.screenshots.notification.path-copied.text": {
+    "message": "Das Bild konnte nicht kopiert werden. Stattdessen wurde der Pfad kopiert"
+  },
+  "error-modal.migration.fix-failed": {
+    "message": "❌ Der Migrationsfix ist fehlgeschlagen oder hatte keine Wirkung."
+  },
+  "form.placeholder.email": {
+    "defaultMessage": "Geben Sie die E-Mail-Adresse ein"
+  },
+  "app.library.tab.saved": {
+    "message": "Gespeichert"
+  },
+  "instance.settings.tabs.general": {
+    "message": "Allgemein"
+  },
+  "app.update-toast.changelog": {
+    "message": "Änderungsprotokoll"
+  },
+  "project.versions.channel.beta.symbol": {
+    "defaultMessage": "B"
+  },
+  "error-modal.close": {
+    "message": "Schließen"
+  },
+  "error-modal.migration.report-header": {
+    "message": "💡Migrationsfixbericht"
+  },
+  "instances.content-install.instance-type": {
+    "defaultMessage": "Instanztyp"
+  },
+  "settings.appearance.launcher-language.option.german-germany": {
+    "message": "Deutsch (Deutschland)"
+  },
+  "error-modal.state-init-text": {
+    "message": "Revoria konnte nicht richtig geladen werden. Dies kann an einer beschädigten Datei liegen oder daran, dass der App wichtige Dateien fehlen."
+  },
+  "search.filter_type.game_version": {
+    "defaultMessage": "Spielversion"
+  },
+  "content.inline-backup.create-backup": {
+    "defaultMessage": "Backup erstellen"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "Verarbeitet"
+  },
+  "nags.edit-title.title": {
+    "defaultMessage": "Titel bearbeiten"
+  },
+  "skins.upload.username.fetch-failed": {
+    "message": "Der Skin für diesen Benutzernamen konnte nicht abgerufen werden."
+  },
+  "friends.search-friends-placeholder": {
+    "message": "Freunde suchen..."
+  },
+  "creation-flow.final.difficulty.easy": {
+    "defaultMessage": "Einfach"
+  },
+  "browse.error.invalid-curseforge-project-id": {
+    "message": "Ungültige CurseForge-Projekt-ID."
+  },
+  "maintenance.action.delete": {
+    "message": "Löschen"
+  },
+  "instance.create.select-game-version": {
+    "message": "Spielversion auswählen"
+  },
+  "button.decline": {
+    "defaultMessage": "Abfall"
+  },
+  "error-modal.not-enough-space": {
+    "message": "Nicht genügend Platz"
+  },
+  "search.filter_type.game_version.all_versions": {
+    "defaultMessage": "Alle Versionen anzeigen"
+  },
+  "tag.category.48x": {
+    "defaultMessage": "48x"
+  },
+  "tag.loader.purpur": {
+    "defaultMessage": "Purpur"
+  },
+  "settings.appearance.default-landing.title": {
+    "message": "Standard-Landingpage"
+  },
+  "instance.index.create-server": {
+    "message": "Erstellen Sie einen Server"
+  },
+  "project.action.open-in-modrinth": {
+    "message": "Geöffnet in Modrinth"
+  },
+  "instance.breadcrumb.logs": {
+    "message": "Protokolle"
+  },
+  "servers.notice.level.survey.name": {
+    "defaultMessage": "Umfrage"
+  },
+  "instances.content-install.search-placeholder": {
+    "defaultMessage": "Suchinstanz"
+  },
+  "settings.default-instance.width.placeholder": {
+    "message": "Breite eingeben..."
+  },
+  "project.environment.singleplayer-only.title": {
+    "defaultMessage": "Nur Einzelspieler"
+  },
+  "accounts-card.selected": {
+    "message": "Ausgewählt"
+  },
+  "app.account.sign-in": {
+    "message": "Melden Sie sich bei einem Modrinth-Konto an"
+  },
+  "creation-flow.setup.option.import.desc": {
+    "defaultMessage": "Importieren Sie eine Instanz aus Prism, CurseForge oder ähnlichem."
+  },
+  "browse.notification.curseforge-blocked-automated-download": {
+    "message": "CurseForge hat den automatischen Download dieser Datei blockiert (403). Die Projektseite in Ihrem Browser geöffnet."
+  },
+  "skins.action.edit-skin.aria": {
+    "message": "Skin bearbeiten"
+  },
+  "project.about.compatibility.environments": {
+    "defaultMessage": "Unterstützte Umgebungen"
+  },
+  "export-modal.version-number": {
+    "message": "Versionsnummer"
+  },
+  "project-type.all": {
+    "defaultMessage": "Alle"
+  },
+  "nags.summary-too-short.title": {
+    "defaultMessage": "Erweitern Sie die Zusammenfassung"
+  },
+  "creation-flow.title.server-onboarding": {
+    "defaultMessage": "Server einrichten"
+  },
+  "creation-flow.setup.option.import.title": {
+    "defaultMessage": "Instanz importieren"
+  },
+  "instance.index.tab.worlds": {
+    "message": "Welten"
+  },
+  "label.yes": {
+    "defaultMessage": "Ja"
+  },
+  "syncing.empty.custom-folders": {
+    "message": "Noch keine benutzerdefinierten Ordnerziele."
+  },
+  "tag.loader.bukkit": {
+    "defaultMessage": "Bukkit"
+  },
+  "creation-flow.final.world-seed.hint": {
+    "defaultMessage": "Für einen zufälligen Startwert leer lassen."
+  },
+  "nags.too-many-tags.title": {
+    "defaultMessage": "Wählen Sie genaue Tags aus"
+  },
+  "button.remove-image": {
+    "defaultMessage": "Bild entfernen"
+  },
+  "tag.category.screenshot": {
+    "defaultMessage": "Screenshot"
+  },
+  "instance.logs.copied": {
+    "message": "Kopiert"
+  },
+  "friends.add-friend.submit": {
+    "message": "Freundschaftsanfrage senden"
+  },
+  "project.environment.server-only-client-optional.title": {
+    "defaultMessage": "Client und Server, optional auf dem Client"
+  },
+  "project.follower-count-tooltip": {
+    "defaultMessage": "{count, number} {count, plural, one {follower} other {followers}}"
+  },
+  "tag.category.256x": {
+    "defaultMessage": "256x"
+  },
+  "instance.settings.tabs.hooks.post-exit.enter": {
+    "message": "Geben Sie den Post-Exit-Befehl ein..."
+  },
+  "instance.index.instance-settings": {
+    "message": "Instanzeinstellungen"
+  },
+  "instance.create.name": {
+    "message": "Name"
+  },
+  "instance.settings.tabs.installation.no-modpack-found": {
+    "message": "Diese Instanz ist mit einem Modpack verknüpft, aber das Modpack konnte auf Modrinth nicht gefunden werden."
+  },
+  "button.unfollow": {
+    "defaultMessage": "Nicht mehr folgen"
+  },
+  "error-modal.cancel-directory-change": {
+    "message": "Verzeichniswechsel abbrechen"
+  },
+  "curseforge-import.progress.starting": {
+    "message": "Import wird gestartet..."
+  },
+  "skins.action.add-skin": {
+    "message": "Fügen Sie eine Haut hinzu"
+  },
+  "app.nav.skins": {
+    "message": "Skins (Beta)"
+  },
+  "search.filter.locked.instance-game-version.title": {
+    "message": "Die Spielversion wird von der Instanz bereitgestellt"
+  },
+  "locale.da-DK": {
+    "defaultMessage": "dänisch"
+  },
+  "error-modal.migration.fix-windows-button": {
+    "message": "Wenden Sie den Fix für Windows an"
+  },
+  "project.settings.upload.title": {
+    "defaultMessage": "Hochladen"
+  },
+  "content.selection-bar.bulk.disabling-waiting": {
+    "defaultMessage": "{contentType} wird deaktiviert..."
+  },
+  "tag.category.tweaks": {
+    "defaultMessage": "Optimierungen"
+  },
+  "tag.category.32x": {
+    "defaultMessage": "32x"
+  },
+  "instance.index.select-updatable": {
+    "message": "Wählen Sie Aktualisierbar aus"
+  },
+  "project.about.links.donate.paypal": {
+    "defaultMessage": "Spenden Sie auf PayPal"
+  },
+  "project-card.environment.server": {
+    "defaultMessage": "Server"
+  },
+  "label.created-ago": {
+    "defaultMessage": "Created {ago}"
+  },
+  "instances.content-install.install-button": {
+    "defaultMessage": "Installieren"
+  },
+  "tag.loader.ornithe": {
+    "defaultMessage": "Ornithe"
+  },
+  "instance.worlds.remove-server.description": {
+    "message": "„{name}“{address} wird aus Ihrer Liste entfernt, auch im Spiel, und es gibt keine Möglichkeit, es wiederherzustellen."
+  },
+  "content.selection-bar.bulk.deleting-waiting": {
+    "defaultMessage": "{contentType} wird gelöscht..."
+  },
+  "app.settings.tabs.java-installations": {
+    "message": "Java-Installationen"
+  },
+  "instance.settings.tabs.general.edit-icon.select": {
+    "message": "Symbol auswählen"
+  },
+  "instance.logs.crash.analyze": {
+    "message": "Absturzprotokoll analysieren"
+  },
+  "label.select-all": {
+    "defaultMessage": "Alles auswählen"
+  },
+  "follow": {
+    "message": "Folgen"
+  },
+  "action.try-again": {
+    "message": "Versuchen Sie es erneut"
+  },
+  "servers.backups.admonition.backup-queued.description": {
+    "defaultMessage": "{backupName} befindet sich in der Warteschlange und wird in Kürze gestartet."
+  },
+  "accounts-card.player-name-or-email-placeholder": {
+    "message": "Hier Ihren Spielernamen oder Ihre E-Mail-Adresse..."
+  },
+  "app.nav.syncing": {
+    "message": "Synchronisierung"
+  },
+  "search.filter.locked.default.title": {
+    "defaultMessage": "{type} ist gesperrt"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "Entwurf"
+  },
+  "modal.add-payment-method.title": {
+    "defaultMessage": "Eine Zahlungsmethode hinzufügen"
+  },
+  "tag.category.transportation": {
+    "defaultMessage": "Transport"
+  },
+  "servers.backups.admonition.restore-failed.title": {
+    "defaultMessage": "Die Wiederherstellung aus der Sicherung ist fehlgeschlagen"
+  },
+  "app.settings.footer.base-version": {
+    "message": "Basierend auf der Modrinth-App {version}"
+  },
+  "instance.server-modal.resource-pack": {
+    "message": "Ressourcenpaket"
+  },
+  "servers.purchase.step.plan.most-popular": {
+    "defaultMessage": "Am beliebtesten"
+  },
+  "creation-flow.final.gamemode.hardcore": {
+    "defaultMessage": "Hardcore"
+  },
+  "tag.category.anarchy": {
+    "defaultMessage": "Anarchie"
+  },
+  "tag.category.adventure-mode": {
+    "defaultMessage": "Abenteuermodus"
+  },
+  "installation-settings.edit-installation.title": {
+    "defaultMessage": "Installation bearbeiten"
+  },
+  "instance.worlds.game_mode.unknown": {
+    "defaultMessage": "Unbekannter Spielmodus"
+  },
+  "instances.updater-modal.warning-web": {
+    "defaultMessage": "Ein Update kann Ihre Welt zerstören. Überprüfen Sie zunächst die Versionsänderungsprotokolle und sichern Sie sie."
+  },
+  "grid-display.option.name": {
+    "message": "Name"
+  },
+  "browse.install.installed": {
+    "message": "Installiert"
+  },
+  "label.dashboard": {
+    "defaultMessage": "Armaturenbrett"
+  },
+  "instances.modpack-content-modal.search-placeholder": {
+    "defaultMessage": "Suche {count, number} {count, plural, one {project} other {projects}}"
+  },
+  "instance.confirm-repair.header": {
+    "defaultMessage": "Reparieren Sie {type, select, server {server} other {instance}}"
+  },
+  "instances.content-install.name-label": {
+    "defaultMessage": "Name"
+  },
+  "instances.updater-modal.no-versions": {
+    "defaultMessage": "Keine Versionen gefunden"
+  },
+  "input.select-version.placeholder": {
+    "defaultMessage": "Version auswählen"
+  },
+  "content.diff-modal.diff-type.added": {
+    "defaultMessage": "Hinzugefügt (Abhängigkeit)"
+  },
+  "skins.arm-style": {
+    "message": "Armstil"
+  },
+  "browse.sort.label": {
+    "message": "Sortieren nach"
+  },
+  "instance.logs.crash.api-key": {
+    "message": "API-Schlüssel"
+  },
+  "installation-settings.linked-instance.title": {
+    "defaultMessage": "Verknüpft mit {projectType, select, server {server project} other {modpack}}"
+  },
+  "project-type.modpack.lowercase": {
+    "defaultMessage": "{count, plural, one {modpack} other {modpacks}}"
+  },
+  "button.change-version": {
+    "defaultMessage": "Version ändern"
+  },
+  "button.save-changes": {
+    "defaultMessage": "Änderungen speichern"
+  },
+  "delete": {
+    "message": "Löschen"
+  },
+  "grid-display.label.group": {
+    "message": "Gruppe"
+  },
+  "project.settings.content.title": {
+    "defaultMessage": "Inhalt"
+  },
+  "form.label.bank-name": {
+    "defaultMessage": "Name der Bank"
+  },
+  "header.category.category": {
+    "defaultMessage": "Kategorie"
+  },
+  "browse.type.shader": {
+    "message": "Shader"
+  },
+  "app.library.tab.all": {
+    "message": "Alle Instanzen"
+  },
+  "app.update.reload-to-update": {
+    "message": "Neu laden, um das Update zu installieren"
+  },
+  "instance.logs.crash.api-tutorial.step3": {
+    "message": "Klicken Sie auf „API-Schlüssel hinzufügen“, kopieren Sie ihn und fügen Sie ihn in das Feld „API-Schlüssel“ oben ein."
+  },
+  "tag.category.low": {
+    "defaultMessage": "Niedrig"
+  },
+  "label.success": {
+    "defaultMessage": "Erfolg"
+  },
+  "tag.loader.liteloader": {
+    "defaultMessage": "LiteLoader"
+  },
+  "instance.create.loader-version.other": {
+    "message": "andere"
+  },
+  "nags.link-shortener-usage.title": {
+    "defaultMessage": "Verwenden Sie keine Link-Shortener"
+  },
+  "servers.setup.upload-warning": {
+    "defaultMessage": "Bitte schließen Sie diese Seite während des Hochladens nicht."
+  },
+  "accounts-card.authenticate-elyby": {
+    "message": "Authentifizieren Sie sich bei Ely.by"
+  },
+  "tag.loader.neoforge": {
+    "defaultMessage": "NeoForge"
+  },
+  "creation-flow.world.default-name": {
+    "defaultMessage": "Welt {count}"
+  },
+  "servers.backups.admonition.restore-queued.description": {
+    "defaultMessage": "Die Wiederherstellung von {backupName} befindet sich in der Warteschlange und wird in Kürze beginnen."
+  },
+  "project-type.plugin.category": {
+    "defaultMessage": "Plugins"
+  },
+  "settings.pats.title": {
+    "defaultMessage": "Persönliche Zugangstoken"
+  },
+  "locale.it-IT": {
+    "defaultMessage": "Italienisch (Italien)"
+  },
+  "instance.settings.tabs.installation.reset-selections": {
+    "message": "Auf den aktuellen Stand zurücksetzen"
+  },
+  "nags.upload-version.title": {
+    "defaultMessage": "Laden Sie eine Version hoch"
+  },
+  "search.filter.option.show_fewer": {
+    "defaultMessage": "Weniger anzeigen"
+  },
+  "syncing.section.custom-files": {
+    "message": "Benutzerdefinierte Dateien"
+  },
+  "app.home.action.browse-content": {
+    "message": "Inhalte durchsuchen"
+  },
+  "maintenance.rule-name.placeholder": {
+    "message": "Regelname"
+  },
+  "instance.index.copy-names": {
+    "message": "Namen kopieren"
+  },
+  "settings.privacy.personalized-ads.title": {
+    "message": "Personalisierte Anzeigen"
+  },
+  "content.page-layout.no-content-found": {
+    "defaultMessage": "Kein Inhalt gefunden."
+  },
+  "form.label.first-name": {
+    "defaultMessage": "Vorname"
+  },
+  "payment-method.venmo": {
+    "defaultMessage": "Venmo"
+  },
+  "content.selection-bar.bulk.enabling": {
+    "defaultMessage": "{progress}/{total} {contentType} wird aktiviert..."
+  },
+  "search.filter_type.project_id": {
+    "defaultMessage": "Projekt-ID"
+  },
+  "action.refresh": {
+    "message": "Aktualisieren"
+  },
+  "locale.fi-FI": {
+    "defaultMessage": "finnisch"
+  },
+  "project.metadata.at": {
+    "message": "bei"
+  },
+  "badge.beta": {
+    "defaultMessage": "Beta"
+  },
+  "tag.category.audio": {
+    "defaultMessage": "Audio"
+  },
+  "running-app-bar.offline": {
+    "message": "Offline"
+  },
+  "project-type.datapack.capital": {
+    "defaultMessage": "{count, plural, one {Data Pack} other {Data Packs}}"
+  },
+  "settings.privacy.discord-rpc.note": {
+    "message": "Hinweis: Dies verhindert keine instanzspezifischen Discord Rich Presence-Integrationen, wie sie beispielsweise von Mods hinzugefügt werden. (App-Neustart erforderlich, um wirksam zu werden)"
+  },
+  "tag.category.locale": {
+    "defaultMessage": "Gebietsschema"
+  },
+  "tag.category.plots": {
+    "defaultMessage": "Grundstücke"
+  },
+  "browse.install.search": {
+    "message": "Instanzen durchsuchen..."
+  },
+  "content.page-layout.share.label": {
+    "defaultMessage": "Aktie"
+  },
+  "tag.category.world-resets": {
+    "defaultMessage": "Welt-Resets"
+  },
+  "project.more": {
+    "message": "mehr"
+  },
+  "install-confirm.header": {
+    "message": "Bist du sicher?"
+  },
+  "project.about.links.wiki": {
+    "defaultMessage": "Besuchen Sie Wiki"
+  },
+  "payment-method.cashapp": {
+    "defaultMessage": "Cash-App"
+  },
+  "tag.category.food": {
+    "defaultMessage": "Essen"
+  },
+  "tag.category.simplistic": {
+    "defaultMessage": "Vereinfacht"
+  },
+  "creation-flow.import.path.placeholder": {
+    "defaultMessage": "Pfad zum Launcher..."
+  },
+  "label.scopes": {
+    "defaultMessage": "Bereiche"
+  },
+  "project.modrinth-website": {
+    "message": "Modrinth-Website"
+  },
+  "tag.category.management": {
+    "defaultMessage": "Management"
+  },
+  "nags.select-tags.description": {
+    "defaultMessage": "Wählen Sie die Tags aus, die richtig auf Ihr Projekt zutreffen, damit die richtigen Benutzer es finden."
+  },
+  "project.tab.description": {
+    "message": "Beschreibung"
+  },
+  "button.downloading": {
+    "defaultMessage": "Herunterladen"
+  },
+  "project.error.loading": {
+    "message": "Fehler beim Laden des Projekts"
+  },
+  "app.update-toast.title.download-complete": {
+    "message": "Download abgeschlossen"
+  },
+  "instance.settings.tabs.installation.no-connection": {
+    "message": "Verlinkte Modpack-Details können nicht abgerufen werden. Bitte überprüfen Sie Ihre Internetverbindung."
+  },
+  "error-modal.state-init-fix-redownload": {
+    "message": "Erneutes Herunterladen der App."
+  },
+  "skins.arm-style.slim": {
+    "message": "Schlank"
+  },
+  "servers.backups.admonition.creating-backup.description": {
+    "defaultMessage": "Weltdaten und Serverkonfiguration für {backupName} werden gespeichert. Dies kann einige Minuten dauern."
+  },
+  "header.category.resolutions": {
+    "defaultMessage": "Auflösung"
+  },
+  "app.library.tab.custom": {
+    "message": "Brauch"
+  },
+  "app.settings.developer-mode-enabled": {
+    "message": "Entwicklermodus aktiviert."
+  },
+  "curseforge-import.name.label": {
+    "message": "Name:"
+  },
+  "row-display.delete-instance.description": {
+    "message": "Wenn Sie fortfahren, werden alle Daten für Ihre Instanz entfernt. Sie können es nicht wiederherstellen."
+  },
+  "instances.updater-modal.loading-changelog": {
+    "defaultMessage": "Änderungsprotokoll wird geladen..."
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "Kunde"
+  },
+  "instance.create.type.import-launcher": {
+    "message": "Vom Launcher importieren"
+  },
+  "nags.add-description.title": {
+    "defaultMessage": "Fügen Sie eine Beschreibung hinzu"
+  },
+  "icon-select.replace": {
+    "defaultMessage": "Symbol ersetzen"
+  },
+  "servers.purchase.step.plan.billed": {
+    "defaultMessage": "billed {interval}"
+  },
+  "hosting.content.failed-to-bulk-enable": {
+    "defaultMessage": "Inhalt konnte nicht aktiviert werden"
+  },
+  "instance.mods.share.project-links": {
+    "message": "Projektlinks"
+  },
+  "project.settings.view.title": {
+    "defaultMessage": "Sicht"
+  },
+  "label.client-only-warning": {
+    "defaultMessage": "Dies ist ein clientseitiger Mod und kann Probleme verursachen. Wir haben es aktiviert gelassen, da einige Autoren Umgebungen falsch kennzeichnen und der Loader den Konflikt lösen sollte."
+  },
+  "project-type.modpack.capital": {
+    "defaultMessage": "{count, plural, one {Modpack} other {Modpacks}}"
+  },
+  "project.environment.client-or-server-prefers-both.title": {
+    "defaultMessage": "Client und Server, am besten auf beiden installiert"
+  },
+  "creation-flow.final.gamemode.label": {
+    "defaultMessage": "Spielmodus"
+  },
+  "settings.default-instance.memory-allocated.title": {
+    "message": "Speicher zugewiesen"
+  },
+  "browse.type.mod": {
+    "message": "Mods"
+  },
+  "creation-flow.custom.icon.select": {
+    "defaultMessage": "Symbol auswählen"
+  },
+  "tag.category.512x+": {
+    "defaultMessage": "512x oder höher"
+  },
+  "project.breadcrumb.version": {
+    "message": "Version"
+  },
+  "skins.adding": {
+    "message": "Hinzufügen eines Skins"
+  },
+  "nags.multiple-resolution-tags.description": {
+    "defaultMessage": "Sie haben {count, plural, one {# resolution tag} other {# resolution tags}} ({tags}) ausgewählt. Ressourcenpakete sollten normalerweise nur ein Auflösungs-Tag haben, das ihrer primären Auflösung entspricht."
+  },
+  "nags.settings.tags.title": {
+    "defaultMessage": "Besuchen Sie die Tag-Einstellungen"
+  },
+  "friends.heading": {
+    "message": "Freunde"
+  },
+  "instance.logs.crash.dropdown": {
+    "message": "Absturzprotokoll"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "Ausstehend"
+  },
+  "instance.logs.empty.title": {
+    "message": "Kein Live-Spiel erkannt."
+  },
+  "creation-flow.custom.build-number.search": {
+    "defaultMessage": "Build-Nummer suchen..."
+  },
+  "refresh": {
+    "message": "Aktualisieren"
+  },
+  "affiliate.create.user.placeholder": {
+    "defaultMessage": "Benutzernamen eingeben..."
+  },
+  "error-modal.migration.text-2": {
+    "message": "Was passiert? Unser Migrationsvalidator liest geänderte Migrationen falsch, wenn sich die Zeilenenden unterscheiden (CRLF ↔ LF), was dazu führen kann, dass die App unbrauchbar wird."
+  },
+  "settings.display.theme.system": {
+    "defaultMessage": "Mit dem System synchronisieren"
+  },
+  "creation-flow.custom.game-version.label": {
+    "defaultMessage": "Spielversion"
+  },
+  "instance.settings.tabs.installation.reinstall.button.reinstalling": {
+    "message": "Modpack neu installieren"
+  },
+  "tag.category.mmo": {
+    "defaultMessage": "MMO"
+  },
+  "instance.mods.action.disable": {
+    "message": "Deaktivieren"
+  },
+  "content.inline-backup.backup-complete": {
+    "defaultMessage": "Backup erfolgreich erstellt"
+  },
+  "syncing.action.add": {
+    "message": "Ziel hinzufügen"
+  },
+  "instance.edit-server.title": {
+    "message": "Server bearbeiten"
+  },
+  "notification.error.title": {
+    "defaultMessage": "Es ist ein Fehler aufgetreten"
+  },
+  "label.actions": {
+    "defaultMessage": "Aktionen"
+  },
+  "tag.loader.legacy-fabric": {
+    "defaultMessage": "Legacy-Stoff"
+  },
+  "maintenance.rules.title": {
+    "message": "Aufräumregeln"
+  },
+  "nags.feature-gallery-image.title": {
+    "defaultMessage": "Präsentieren Sie ein Galeriebild"
+  },
+  "settings.resource.app-cache.title": {
+    "message": "App-Cache"
+  },
+  "instance.worlds.world_in_use": {
+    "message": "Welt ist im Einsatz"
+  },
+  "project-type.server.category": {
+    "defaultMessage": "Server"
+  },
+  "button.reset": {
+    "defaultMessage": "Zurücksetzen"
+  },
+  "instances.modpack-content-modal.back-button": {
+    "defaultMessage": "Zurück"
+  },
+  "project.settings.environment.verification.verify-text": {
+    "defaultMessage": "Stellen Sie sicher, dass die Umgebung dieses Projekts richtig eingestellt ist."
+  },
+  "instances.updater-modal.downgrade-to": {
+    "defaultMessage": "Downgrade auf {version}"
+  },
+  "instance.index.copy-path": {
+    "message": "Pfad kopieren"
+  },
+  "button.reset-server": {
+    "defaultMessage": "Server zurücksetzen"
+  },
+  "friends.add-friend.username.title": {
+    "message": "Wie lautet der Modrinth-Benutzername Ihres Freundes?"
+  },
+  "tag.category.pbr": {
+    "defaultMessage": "PBR"
+  },
+  "action.copy": {
+    "message": "Kopie"
+  },
+  "settings.appearance.minimize-launcher.description": {
+    "message": "Minimieren Sie den Launcher, wenn ein Minecraft-Prozess startet."
+  },
+  "tag.category.cartoon": {
+    "defaultMessage": "Karikatur"
+  },
+  "app.auth-servers.unreachable.header": {
+    "message": "Authentifizierungsserver können nicht erreicht werden"
+  },
+  "maintenance.rule.screenshots": {
+    "message": "Screenshots"
+  },
+  "instance.settings.tabs.general.name": {
+    "message": "Name"
+  },
+  "instance.logs.loading": {
+    "message": "Laden..."
+  },
+  "nags.select-license.title": {
+    "defaultMessage": "Wählen Sie eine Lizenz aus"
+  },
+  "instance.settings.tabs.window.width.enter": {
+    "message": "Breite eingeben..."
+  },
+  "project.settings.environment.server_only.description": {
+    "defaultMessage": "Alle Funktionen werden serverseitig ausgeführt und sind mit Vanilla-Clients kompatibel."
+  },
+  "instance.settings.tabs.general.duplicate-button.tooltip.installing": {
+    "message": "Kann während der Installation nicht dupliziert werden."
+  },
+  "servers.purchase.step.region.title": {
+    "defaultMessage": "Region"
+  },
+  "friends.friend.cancel-request": {
+    "message": "Anfrage abbrechen"
+  },
+  "error-modal.directory-read-only-text": {
+    "message": "Offenbar kann Revoria nicht in das von Ihnen ausgewählte Verzeichnis schreiben. Bitte passen Sie die Berechtigungen des Verzeichnisses an und versuchen Sie es erneut oder brechen Sie den Verzeichniswechsel ab."
+  },
+  "app.survey.title": {
+    "message": "Hallo Modrinth-Benutzer!"
+  },
+  "affiliate.createdBy": {
+    "defaultMessage": "Erstellt von {user}"
+  },
+  "project.settings.environment.client_and_server.required_both.title": {
+    "defaultMessage": "Auf beiden erforderlich"
+  },
+  "app.revoria-update.dismiss": {
+    "message": "Diese Version ausblenden"
+  },
+  "friends.heading.active": {
+    "message": "Aktiv"
+  },
+  "project.environment.singleplayer-only.description": {
+    "defaultMessage": "Funktioniert nur im Einzelspielermodus oder wenn keine Verbindung zu einem Mehrspielerserver besteht."
+  },
+  "java-selector.failed": {
+    "message": "Fehlgeschlagen"
+  },
+  "creation-flow.custom.loader-version.other": {
+    "defaultMessage": "Andere"
+  },
+  "project-type.shader.category": {
+    "defaultMessage": "Shader"
+  },
+  "locale.es-419": {
+    "defaultMessage": "Spanisch (Lateinamerika)"
+  },
+  "instance.index.time.minute-singular": {
+    "message": "{count} Minute"
+  },
+  "nags.invalid-license-url.description.malformed": {
+    "defaultMessage": "Ihre Lizenz-URL scheint fehlerhaft zu sein. Bitte geben Sie eine gültige URL zu Ihrem Lizenztext an."
+  },
+  "button.update": {
+    "defaultMessage": "Aktualisieren"
+  },
+  "error-modal.copied": {
+    "message": "Kopiert!"
+  },
+  "settings.display.theme.title": {
+    "defaultMessage": "Farbthema"
+  },
+  "project.server.ping.ms": {
+    "defaultMessage": "{ping, number} ms"
+  },
+  "form.placeholder.state": {
+    "defaultMessage": "Geben Sie Bundesland/Provinz ein"
+  },
+  "project.environment.client-or-server.description": {
+    "defaultMessage": "Verfügt sowohl auf dem Client als auch auf dem Server über einige Funktionen, wenn auch nur teilweise."
+  },
+  "project.versions.channel.release.symbol": {
+    "defaultMessage": "R"
+  },
+  "instances.updater-modal.search-placeholder": {
+    "defaultMessage": "Version suchen..."
+  },
+  "settings.default-instance.wrapper.placeholder": {
+    "message": "Geben Sie den Wrapper-Befehl ein..."
+  },
+  "error-modal.migration.header": {
+    "message": "⚠️ Migrationsproblem • Wichtiger Hinweis"
+  },
+  "maintenance.action.rescan": {
+    "message": "Erneut scannen"
+  },
+  "label.played": {
+    "message": "Gespielt {time}"
+  },
+  "error-modal.title.no-loader": {
+    "message": "Kein Lader ausgewählt"
+  },
+  "syncing.title": {
+    "message": "Instanzsynchronisierung"
+  },
+  "instance.create.hint.drag-drop-mrpack": {
+    "message": "Oder ziehen Sie Ihre .mrpack-Datei per Drag & Drop"
+  },
+  "content.diff-modal.unknown-content-body": {
+    "defaultMessage": "Einige Inhalte auf Ihrem Server konnten nicht analysiert werden und sind möglicherweise von dieser Änderung betroffen."
+  },
+  "instance.screenshots.error.copy-clipboard": {
+    "message": "Kopieren in die Zwischenablage fehlgeschlagen."
+  },
+  "maintenance.summary.total-instances": {
+    "message": "Gesamtzahl der Instanzen"
+  },
+  "project.metadata.version-id": {
+    "message": "Versions-ID"
+  },
+  "instance.mods.search-projects": {
+    "message": "Durchsuchen Sie {count} project{suffix}..."
+  },
+  "instance.logs.level.trace": {
+    "message": "Verfolgen"
+  },
+  "settings.default-instance.fullscreen.title": {
+    "message": "Vollbild"
+  },
+  "curseforge-import.checking": {
+    "message": "Überprüfung..."
+  },
+  "error-modal.migration.text-3": {
+    "message": "Warum? Die automatischen Zeilenendkonvertierungen und Betriebssystemunterschiede von Git können diese Inkonsistenzen während der Erstellung verursachen."
+  },
+  "skins.sign-in.description": {
+    "message": "Bitte melden Sie sich bei Ihrem Minecraft-Konto an, um die Skin-Verwaltungsfunktionen der Modrinth-App zu nutzen."
+  },
+  "project-card.date.published.tooltip": {
+    "defaultMessage": "Published {date}"
+  },
+  "label.available": {
+    "defaultMessage": "{amount} available."
+  },
+  "servers.purchase.step.plan.subtitle": {
+    "defaultMessage": "Wählen Sie die Menge an RAM und die Spezifikationen, die Ihren Anforderungen entsprechen."
+  },
+  "tag.loader.bta-babric": {
+    "defaultMessage": "BTA (babrisch)"
+  },
+  "instance.create.action.create": {
+    "message": "Erstellen"
+  },
+  "content.page-layout.please-wait": {
+    "defaultMessage": "Bitte warten"
+  },
+  "search-card.compat.unsupported": {
+    "message": "Nicht unterstützt"
+  },
+  "search.sort.date-published": {
+    "defaultMessage": "Datum der Veröffentlichung"
+  },
+  "content.confirm-deletion.delete-button": {
+    "defaultMessage": "{count} {itemType}{count, plural, one {} other {s}} löschen"
+  },
+  "installation-settings.aria.select-platform": {
+    "defaultMessage": "Plattform auswählen"
+  },
+  "tag.category.foliage": {
+    "defaultMessage": "Laub"
+  },
+  "instances.confirm-leave-modal.body": {
+    "defaultMessage": "Dateien werden noch hochgeladen. Wenn Sie diese Seite verlassen, wird der Upload abgebrochen und Ihre Änderungen gehen möglicherweise verloren."
+  },
+  "syncing.conflicts-hint": {
+    "message": "Konflikte bedeuten, dass einige Instanzen noch separate Daten auf diesem Pfad haben."
+  },
+  "java-selector.success": {
+    "message": "Erfolg"
+  },
+  "project.view-on-curseforge": {
+    "message": "Auf CurseForge ansehen"
+  },
+  "instance.settings.tabs.installation.change-version.already-installed.vanilla": {
+    "message": "Vanilla {game_version} bereits installiert"
+  },
+  "nags.missing-alt-text.description": {
+    "defaultMessage": "In einigen Ihrer Bilder fehlt Alternativtext, was für die Barrierefreiheit wichtig ist, insbesondere für sehbehinderte Benutzer."
+  },
+  "friends.section.heading": {
+    "message": "{title} – {count}"
+  },
+  "project.environment.tag.not-applicable": {
+    "defaultMessage": "N / A"
+  },
+  "instance.logs.crash.refresh": {
+    "message": "Aktualisieren"
+  },
+  "label.delete": {
+    "defaultMessage": "Löschen"
+  },
+  "error-modal.change-directory-permissions": {
+    "message": "Verzeichnisberechtigungen ändern"
+  },
+  "app.nav.library": {
+    "message": "Bibliothek"
+  },
+  "instance.worlds.this-server": {
+    "message": "diesen Server"
+  },
+  "instances.content-install.installed-badge": {
+    "defaultMessage": "Installiert"
+  },
+  "instances.confirm-leave-modal.upload-in-progress": {
+    "defaultMessage": "Hochladen läuft"
+  },
+  "button.retry": {
+    "defaultMessage": "Wiederholen"
+  },
+  "servers.purchase.step.payment.description": {
+    "defaultMessage": "Ihnen wird noch kein Betrag in Rechnung gestellt."
+  },
+  "project.tab.versions": {
+    "message": "Versionen"
+  },
+  "friends.heading.pending": {
+    "message": "Ausstehend"
+  },
+  "creation-flow.final.difficulty.peaceful": {
+    "defaultMessage": "Friedlich"
+  },
+  "instance.settings.tabs.general.delete": {
+    "message": "Instanz löschen"
+  },
+  "content.diff-modal.unknown-content-header": {
+    "defaultMessage": "Unbekannter Inhalt"
+  },
+  "app.nav.discover": {
+    "message": "Inhalte entdecken"
+  },
+  "input.view.gallery": {
+    "defaultMessage": "Galerieansicht"
+  },
+  "creation-flow.final.world-seed.placeholder": {
+    "defaultMessage": "Betreten Sie den Weltsamen"
+  },
+  "content.selection-bar.selected-count": {
+    "defaultMessage": "{count} {contentType} ausgewählt"
+  },
+  "accounts-card.enter-2fa-code": {
+    "message": "Geben Sie Ihren 2FA-Code ein"
+  },
+  "from_file": {
+    "message": "Aus Datei"
+  },
+  "instance.mods.action.update-pack": {
+    "message": "Update-Paket"
+  },
+  "instance.settings.tabs.hooks.description": {
+    "message": "Mit Hooks können fortgeschrittene Benutzer bestimmte Systembefehle vor und nach dem Start des Spiels ausführen."
+  },
+  "tag.loader.mrpack": {
+    "defaultMessage": "Modpack"
+  },
+  "instance.worlds.dont_show_on_home": {
+    "message": "Nicht auf der Startseite anzeigen"
+  },
+  "tag.category.fantasy": {
+    "defaultMessage": "Fantasie"
+  },
+  "tag.category.shadows": {
+    "defaultMessage": "Schatten"
+  },
+  "instances.content-install.compatible-count": {
+    "defaultMessage": "{count} kompatibel {count, plural, one {instance} other {instances}}"
+  },
+  "locale.zh-TW": {
+    "defaultMessage": "Chinesisch (traditionell)"
+  },
+  "instance.settings.tabs.installation.change-version.already-installed.modded": {
+    "message": "{platform} {version} für Minecraft {game_version} bereits installiert"
+  },
+  "instance.logs.crash.header": {
+    "message": "Crash-Log-Checker"
+  },
+  "crash-reports": {
+    "message": "Absturzberichte"
+  },
+  "curseforge-import.error.import-profile": {
+    "message": "Profil konnte nicht importiert werden. Bitte versuchen Sie es erneut."
+  },
+  "error-modal.migration.need-fix-now": {
+    "message": "Muss ich jetzt einen Fix anwenden?"
+  },
+  "search-card.installed": {
+    "message": "Installiert"
+  },
+  "installation-settings.unlink.description": {
+    "defaultMessage": "Durch das Aufheben der Verknüpfung wird dieses {type, select, server {server} other {instance}} dauerhaft vom Projekt {projectType, select, server {server} other {modpack}} getrennt, sodass Sie den Loader und die Minecraft-Version ändern können, Sie erhalten jedoch keine zukünftigen Updates mehr."
+  },
+  "syncing.shared-folder-hint": {
+    "message": "In diesem Ordner werden die tatsächlich freigegebenen Dateien und Ordner gespeichert."
+  },
+  "syncing.notification.removed": {
+    "message": "Synchronisierungsziel entfernt."
+  },
+  "tag.category.oneblock": {
+    "defaultMessage": "Ein Block"
+  },
+  "installation-settings.reinstall-modpack.description": {
+    "defaultMessage": "Durch die Neuinstallation des Modpacks wird der Inhalt von {type, select, server {server's} other {instance's}} auf seinen ursprünglichen Zustand zurückgesetzt und alle von Ihnen hinzugefügten Mods oder Inhalte entfernt."
+  },
+  "syncing.section.default-folders": {
+    "message": "Standardordner"
+  },
+  "nags.moderator-feedback.title": {
+    "defaultMessage": "Überprüfen Sie das Feedback"
+  },
+  "skins.use-default-cape": {
+    "message": "Verwenden Sie den Standardumhang"
+  },
+  "instance.worlds.add-server": {
+    "message": "Fügen Sie einen Server hinzu"
+  },
+  "export-modal.modpack-name.placeholder": {
+    "message": "Modpack-Name"
+  },
+  "form.placeholder.amount": {
+    "defaultMessage": "Geben Sie den Betrag ein"
+  },
+  "instance.filter.disabled": {
+    "message": "Deaktivierte Projekte"
+  },
+  "browse.context.open-modrinth": {
+    "message": "Geöffnet in Modrinth"
+  },
+  "form.placeholder.country": {
+    "defaultMessage": "Land auswählen"
+  },
+  "error-modal.migration.fix-unix-title": {
+    "message": "Konvertieren Sie alle Zeilenenden in Migrationsdateien in LF (Unix-Stil: \\n)"
+  },
+  "error-modal.migration.text-1": {
+    "message": "Wir haben ein Problem mit unserem Datenbankmigrationssystem festgestellt, das durch inkonsistente Zeilenenden zwischen Betriebssystemen (Windows vs. macOS/Linux) verursacht wird. Dies kann die Stabilität der App beeinträchtigen."
+  },
+  "affiliate.creating.button": {
+    "defaultMessage": "Affiliate-Link erstellen..."
+  },
+  "app.settings.tabs.language": {
+    "message": "Sprache"
+  },
+  "grid-display.delete-instance.description": {
+    "message": "Wenn Sie fortfahren, werden alle Daten für Ihre Instanz entfernt. Sie können es nicht wiederherstellen."
+  },
+  "instance.create.select-icon": {
+    "message": "Symbol auswählen"
+  },
+  "settings.language.platform.site": {
+    "defaultMessage": "Website"
+  },
+  "locale.fil-PH": {
+    "defaultMessage": "Philippinisch"
+  },
+  "creation-flow.custom.loader.label.content": {
+    "defaultMessage": "Inhaltslader"
+  },
+  "project.about.compatibility.environments.dedicated-servers-only": {
+    "defaultMessage": "Nur dedizierte Server"
+  },
+  "creation-flow.common.optional": {
+    "defaultMessage": "Optional"
+  },
+  "instance.settings.tabs.installation.install": {
+    "message": "Installieren"
+  },
+  "locale.es-ES": {
+    "defaultMessage": "Spanisch (Spanien)"
+  },
+  "settings.display.theme.dark": {
+    "defaultMessage": "Dunkel"
+  },
+  "label.loading": {
+    "defaultMessage": "Laden..."
+  },
+  "grid-display.group-dropdown-name": {
+    "message": "Gruppen-Dropdown"
+  },
+  "input.search.placeholder": {
+    "defaultMessage": "Suchen..."
+  },
+  "label.confirm-password": {
+    "defaultMessage": "Passwort bestätigen"
+  },
+  "locale.ms-MY": {
+    "defaultMessage": "malaiisch"
+  },
+  "project.install.action": {
+    "message": "Installieren"
+  },
+  "project-type.shader.capital": {
+    "defaultMessage": "{count, plural, one {Shader} other {Shaders}}"
+  },
+  "content.page-layout.share.project-names": {
+    "defaultMessage": "Projektnamen"
+  },
+  "tag.category.models": {
+    "defaultMessage": "Modelle"
+  },
+  "project.about.links.site": {
+    "defaultMessage": "Besuchen Sie die Website"
+  },
+  "copy-link": {
+    "message": "Link kopieren"
+  },
+  "nags.upload-gallery-image.description": {
+    "defaultMessage": "At least one gallery image is required to showcase the content of your {type, select, resourcepack {resource pack, except for audio or localization packs. If this describes your pack, please select the appropriate tag} shader {shader} other {project}}."
+  },
+  "instance.settings.tabs.hooks.pre-launch.description": {
+    "message": "Wird ausgeführt, bevor die Instanz gestartet wird."
+  },
+  "servers.notice.level.info.name": {
+    "defaultMessage": "Info"
+  },
+  "tag.category.modded": {
+    "defaultMessage": "Modifiziert"
+  },
+  "creation-flow.import.search.placeholder": {
+    "defaultMessage": "Name der Suchinstanz"
+  },
+  "creation-flow.action.create-world": {
+    "defaultMessage": "Welt erschaffen"
+  },
+  "creation-flow.action.create-instance": {
+    "defaultMessage": "Instanz erstellen"
+  },
+  "tag.category.16x": {
+    "defaultMessage": "16x"
+  },
+  "project.environment.client-or-server-prefers-both.description": {
+    "defaultMessage": "Verfügt sowohl auf dem Client als auch auf dem Server über einige Funktionen, wenn auch nur teilweise. Die Installation auf beiden Seiten führt zum besten Erlebnis."
+  },
+  "creation-flow.import.add-launcher-path": {
+    "defaultMessage": "Launcher-Pfad hinzufügen"
+  },
+  "nags.missing-alt-text.title": {
+    "defaultMessage": "Fügen Sie Bild-Alternativtext hinzu"
+  },
+  "form.placeholder.bank-name-dropdown": {
+    "defaultMessage": "Wählen Sie den Banknamen aus"
+  },
+  "servers.setup.reinstall-failed.text": {
+    "defaultMessage": "Bei der Neuinstallation ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es später noch einmal."
+  },
+  "tag.category.media": {
+    "defaultMessage": "Medien"
+  },
+  "label.no-items": {
+    "defaultMessage": "Keine Artikel"
+  },
+  "project.environment.client-only.title": {
+    "defaultMessage": "Nur clientseitig"
+  },
+  "tag.category.crossplay": {
+    "defaultMessage": "Crossplay"
+  },
+  "nags.invalid-license-url.title": {
+    "defaultMessage": "Fügen Sie einen gültigen Lizenzlink hinzu"
+  },
+  "nags.add-icon.title": {
+    "defaultMessage": "Fügen Sie ein Symbol hinzu"
+  },
+  "export-modal.select-files-heading": {
+    "message": "Wählen Sie Dateien und Ordner aus, die in das Paket aufgenommen werden sollen"
+  },
+  "tag.category.high": {
+    "defaultMessage": "Hoch"
+  },
+  "accounts-card.log-out": {
+    "message": "Abmelden"
+  },
+  "app.home.welcome.back": {
+    "message": "Willkommen zurück!"
+  },
+  "skins.upload.back-to-options": {
+    "message": "Zurück zu den Optionen"
+  },
+  "content.selection-bar.bulk.updating-waiting": {
+    "defaultMessage": "{contentType} wird aktualisiert..."
+  },
+  "nags.long-headers.title": {
+    "defaultMessage": "Kopfzeilen kürzen"
+  },
+  "input.search-version.placeholder": {
+    "defaultMessage": "Version suchen..."
+  },
+  "label.servers": {
+    "defaultMessage": "Server"
+  },
+  "hosting.specs.burst.tooltip": {
+    "defaultMessage": "Durch CPU-Bursting kann Ihr Server vorübergehend zusätzliche Threads verwenden, um TPS-Spitzen abzumildern. Klicken Sie für weitere Informationen."
+  },
+  "form.placeholder.first-name": {
+    "defaultMessage": "Geben Sie den Vornamen ein"
+  },
+  "servers.notice.heading.attention": {
+    "defaultMessage": "Aufmerksamkeit"
+  },
+  "nags.verify-external-links.description": {
+    "defaultMessage": "Einige Ihrer externen Links verwenden möglicherweise Domains, die für diese Art von Link ungeeignet sind."
+  },
+  "label.public": {
+    "defaultMessage": "Öffentlich"
+  },
+  "project.about.details.published": {
+    "defaultMessage": "Published {date}"
+  },
+  "app.survey.take": {
+    "message": "Nehmen Sie an der Umfrage teil"
+  },
+  "label.rejected": {
+    "defaultMessage": "Abgelehnt"
+  },
+  "instance.index.time.minute-plural": {
+    "message": "{count} Minuten"
+  },
+  "form.label.email": {
+    "defaultMessage": "E-Mail"
+  },
+  "changelog.product.web": {
+    "defaultMessage": "Webseite"
+  },
+  "installation-settings.aria.select-game-version": {
+    "defaultMessage": "Spielversion auswählen"
+  },
+  "instances.updater-modal.update-to": {
+    "defaultMessage": "Update auf {version}"
+  },
+  "project-type.plugin.lowercase": {
+    "defaultMessage": "{count, plural, one {plugin} other {plugins}}"
+  },
+  "install-confirm.installing": {
+    "message": "Installieren"
+  },
+  "tag.category.themed": {
+    "defaultMessage": "Themenorientiert"
+  },
+  "label.details": {
+    "defaultMessage": "Details"
+  },
+  "instance.worlds.no_contact": {
+    "message": "Der Server konnte nicht kontaktiert werden"
+  },
+  "app.update-toast.title": {
+    "message": "Update verfügbar"
+  },
+  "instance.settings.tabs.general.delete.description": {
+    "message": "Löscht eine Instanz dauerhaft von Ihrem Gerät, einschließlich Ihrer Welten, Konfigurationen und aller installierten Inhalte. Seien Sie vorsichtig, denn sobald Sie eine Instanz gelöscht haben, gibt es keine Möglichkeit, sie wiederherzustellen."
+  },
+  "instance.mods.action.update-all": {
+    "message": "Alles aktualisieren"
+  },
+  "instance.logs.copy": {
+    "message": "Kopie"
+  },
+  "creation-flow.final.generator-settings.hint": {
+    "defaultMessage": "Wird für erweiterte Weltanpassungen wie benutzerdefinierte Superflat-Ebenen verwendet."
+  },
+  "project.settings.environment.client_only.title": {
+    "defaultMessage": "Nur clientseitig"
+  },
+  "settings.default-instance.fullscreen.description": {
+    "message": "Überschreibt die Datei „options.txt“, um beim Start im Vollbildmodus zu starten."
+  },
+  "syncing.breadcrumb": {
+    "message": "Synchronisierung"
+  },
+  "instance.settings.tabs.general.deleting.button": {
+    "message": "Löschen..."
+  },
+  "instance.settings.tabs.hooks.wrapper.enter": {
+    "message": "Geben Sie den Wrapper-Befehl ein..."
+  },
+  "instance.worlds.cant_connect": {
+    "message": "Es kann keine Verbindung zum Server hergestellt werden"
+  },
+  "open-instance": {
+    "message": "Instanz öffnen"
+  },
+  "locale.pt-BR": {
+    "defaultMessage": "Portugiesisch (Brasilien)"
+  },
+  "instances.updater-modal.badge.incompatible": {
+    "defaultMessage": "Unvereinbar"
+  },
+  "affiliate.viewAnalytics": {
+    "defaultMessage": "Analysen anzeigen"
+  },
+  "form.label.last-name": {
+    "defaultMessage": "Nachname"
+  },
+  "button.copy-permalink": {
+    "defaultMessage": "Permanenten Link kopieren"
+  },
+  "hosting.content.failed-to-update": {
+    "defaultMessage": "Aktualisierung fehlgeschlagen"
+  },
+  "instance.breadcrumb.screenshots": {
+    "message": "Screenshots"
+  },
+  "instance.logs.open-folder": {
+    "message": "Ordner öffnen"
+  },
+  "syncing.target-type.folder": {
+    "message": "Ordner"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "Modrinth-Team"
+  },
+  "app.nav.servers": {
+    "message": "Server"
+  },
+  "settings.appearance.color-theme.title": {
+    "message": "Farbthema"
+  },
+  "tag.loader.vanilla": {
+    "defaultMessage": "Vanille-Shader"
+  },
+  "app.nav.home": {
+    "message": "Heim"
+  },
+  "label.email-username": {
+    "defaultMessage": "E-Mail oder Benutzername"
+  },
+  "error-modal.title.state-init": {
+    "message": "Fehler beim Initialisieren von Revoria"
+  },
+  "instance.settings.tabs.installation.unlink.description": {
+    "message": "Diese Instanz ist mit einem Modpack verknüpft, was bedeutet, dass Mods nicht aktualisiert werden können und Sie den Mod-Loader oder die Minecraft-Version nicht ändern können. Durch das Aufheben der Verknüpfung wird diese Instanz dauerhaft vom Modpack getrennt."
+  },
+  "servers.purchase.step.review.title": {
+    "defaultMessage": "Rezension"
+  },
+  "instance.add-server.resource-pack.prompt": {
+    "message": "Prompt"
+  },
+  "settings.privacy.telemetry.description": {
+    "message": "Modrinth sammelt anonymisierte Analyse- und Nutzungsdaten, um unsere Benutzererfahrung zu verbessern und Ihre Erfahrung anzupassen. Durch die Deaktivierung dieser Option erklären Sie sich damit einverstanden und Ihre Daten werden nicht mehr erfasst."
+  },
+  "button.unlink-modpack": {
+    "defaultMessage": "Verknüpfung des Modpacks aufheben"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "A {type}"
+  },
+  "instance.logs.share.header": {
+    "message": "Protokoll teilen"
+  },
+  "browse.install.action": {
+    "message": "Installieren"
+  },
+  "project-card.by": {
+    "defaultMessage": "von"
+  },
+  "tag.category.creative-mode": {
+    "defaultMessage": "Kreativmodus"
+  },
+  "instance.index.play": {
+    "message": "Spielen"
+  },
+  "project.metadata.loaders": {
+    "message": "Lader"
+  },
+  "search.filter.locked.default": {
+    "defaultMessage": "Filter gesperrt"
+  },
+  "project.visibility.unlisted": {
+    "defaultMessage": "Nicht gelistet"
+  },
+  "skins.cape.none": {
+    "message": "Kein Umhang"
+  },
+  "content.inline-backup.warning-body": {
+    "defaultMessage": "Wir empfehlen, vor dem Fortfahren ein Backup zu erstellen, damit Sie Ihren {type, select, server {world} other {instance}} wiederherstellen können, falls etwas kaputt geht."
+  },
+  "button.sign-in": {
+    "defaultMessage": "anmelden"
+  },
+  "error-modal.network-issues": {
+    "message": "Netzwerkprobleme"
+  },
+  "payment-method.visa": {
+    "defaultMessage": "Visum"
+  },
+  "app.library.create": {
+    "message": "Erstellen"
+  },
+  "nags.versions.title": {
+    "defaultMessage": "Besuchen Sie die Versionsseite"
+  },
+  "locale.he-IL": {
+    "defaultMessage": "hebräisch"
+  },
+  "app.settings.tabs.appearance": {
+    "message": "Aussehen"
+  },
+  "project-type.resourcepack.category": {
+    "defaultMessage": "Ressourcenpakete"
+  },
+  "action.close": {
+    "message": "Schließen"
+  },
+  "instance.edit-world.reset-icon": {
+    "message": "Symbol „Zurücksetzen“."
+  },
+  "project.environment.client-only-server-optional.description": {
+    "defaultMessage": "Die meisten Funktionen sind clientseitig, aber die Installation auf dem Server ermöglicht erweiterte Funktionen."
+  },
+  "error-modal.title.error-occurred": {
+    "message": "Es ist ein Fehler aufgetreten"
+  },
+  "nags.visit-links-settings.title": {
+    "defaultMessage": "Besuchen Sie die Linkeinstellungen"
+  },
+  "content.page-layout.failed-to-load": {
+    "defaultMessage": "Der Inhalt konnte nicht geladen werden"
+  },
+  "content.confirm-deletion.admonition-header": {
+    "defaultMessage": "Löschwarnung"
+  },
+  "project.settings.environment.server_only.title": {
+    "defaultMessage": "Nur serverseitig"
+  },
+  "syncing.add-placeholder": {
+    "message": "resourcespacks oder options.txt"
+  },
+  "action.continue": {
+    "message": "Weitermachen"
+  },
+  "creation-flow.custom.name.placeholder": {
+    "defaultMessage": "Geben Sie den Instanznamen ein"
+  },
+  "search.filter.locked.default.description": {
+    "defaultMessage": "Wenn Sie diesen Filter entsperren, können Sie möglicherweise inkompatible Inhalte installieren."
+  },
+  "settings.resource.purge-cache.proceed": {
+    "message": "Cache leeren"
+  },
+  "project.visibility.draft": {
+    "defaultMessage": "Entwurf"
+  },
+  "payment-method.eftpos": {
+    "defaultMessage": "EFTPOS"
+  },
+  "hosting.specs.burst": {
+    "defaultMessage": "Bursts bis zu {cpus} CPUs"
+  },
+  "maintenance.cleanup.safe-to-remove": {
+    "message": "Sicher zu entfernen"
+  },
+  "search.sort.downloads": {
+    "defaultMessage": "Downloads"
+  },
+  "instance.logs.crash.fail": {
+    "message": "Es konnte keine Antwort vom Modell erhalten werden."
+  },
+  "maintenance.action.clear-selection": {
+    "message": "Klar"
+  },
+  "creation-flow.custom.loader-version.label": {
+    "defaultMessage": "Loader-Version"
+  },
+  "instance.logs.delete": {
+    "message": "Löschen"
+  },
+  "instance.create.show-all-versions": {
+    "message": "Alle Versionen anzeigen"
+  },
+  "error-modal.title.sign-in": {
+    "message": "Melden Sie sich bei Minecraft an"
+  },
+  "label.username": {
+    "defaultMessage": "Benutzername"
+  },
+  "project-card.environment.client": {
+    "defaultMessage": "Kunde"
+  },
+  "search-card.installing": {
+    "message": "Installieren"
+  },
+  "hosting.content.failed-to-bulk-update": {
+    "defaultMessage": "Der Inhalt konnte nicht aktualisiert werden"
+  },
+  "project.settings.environment.title": {
+    "defaultMessage": "Umfeld"
+  },
+  "accounts-card.error-while-logging-in": {
+    "message": "Beim Anmelden ist ein Fehler aufgetreten."
+  },
+  "project-type.project.category": {
+    "defaultMessage": "Projekte"
+  },
+  "instance.logs.clear": {
+    "message": "Klar"
+  },
+  "export-modal.header": {
+    "message": "Modpack exportieren"
+  },
+  "browse.install.title": {
+    "message": "Projekt auf Instanz installieren"
+  },
+  "hosting.content.failed-to-load-versions": {
+    "defaultMessage": "Versionen konnten nicht geladen werden"
+  },
+  "creation-flow.modpack.import": {
+    "defaultMessage": "Modpack importieren"
+  },
+  "accounts-card.error-input-offline-header": {
+    "message": "Fehler beim Fortfahren des Eingabeereignisses mit Offline-Konto"
+  },
+  "instance.settings.tabs.installation.reinstall.description": {
+    "message": "Setzt den Inhalt der Instanz auf seinen ursprünglichen Zustand zurück und entfernt alle Mods oder Inhalte, die Sie über dem ursprünglichen Modpack hinzugefügt haben."
+  },
+  "label.rewards-program-terms-agreement": {
+    "defaultMessage": "Ich stimme den <terms-link>Bedingungen des Prämienprogramms</terms-link> zu"
+  },
+  "friends.friend.view-profile": {
+    "message": "Profil ansehen"
+  },
+  "remove": {
+    "message": "Entfernen"
+  },
+  "instances.content-install.hide-snapshots": {
+    "defaultMessage": "Schnappschüsse ausblenden"
+  },
+  "creation-flow.action.continue": {
+    "defaultMessage": "Weitermachen"
+  },
+  "skins.upload.option.username.desc": {
+    "message": "Rufen Sie einen Skin von einem Minecraft-Benutzernamen ab."
+  },
+  "tag.loader.folia": {
+    "defaultMessage": "Folia"
+  },
+  "locale.id-ID": {
+    "defaultMessage": "Indonesisch"
+  },
+  "nags.gallery.title": {
+    "defaultMessage": "Besuchen Sie die Galerieseite"
+  },
+  "friends.sign-in-to-add-friends": {
+    "message": "<link>Melden Sie sich bei einem Modrinth-Konto an</link>, um Freunde hinzuzufügen und zu sehen, was sie spielen!"
+  },
+  "project.visibility.unknown": {
+    "defaultMessage": "Unbekannt"
+  },
+  "app.settings.downloading": {
+    "message": "v{version} wird heruntergeladen"
+  },
+  "settings.language.languages.search-field.placeholder": {
+    "defaultMessage": "Nach einer Sprache suchen..."
+  },
+  "nags.summary-too-short.description": {
+    "defaultMessage": "Your summary is {length, plural, one {# character} other {# characters}}. At least {minChars, plural, one {# character} other {# characters}} is recommended to create an informative and enticing summary."
+  },
+  "instance.server-modal.name": {
+    "message": "Name"
+  },
+  "syncing.description": {
+    "message": "Geben Sie einen echten Ordner oder eine echte Datei für alle Instanzen frei."
+  },
+  "form.label.postal-code": {
+    "defaultMessage": "Postleitzahl/Postleitzahl"
+  },
+  "instance.screenshots.error.open-folder": {
+    "message": "Der Screenshot-Ordner konnte nicht geöffnet werden."
+  },
+  "syncing.shared-folder": {
+    "message": "Freigegebener Datenordner"
+  },
+  "instances.updater-modal.warning-app": {
+    "defaultMessage": "Eine Aktualisierung kann Ihre Instanz beschädigen. Überprüfen Sie zunächst die Versionsänderungsprotokolle und sichern Sie sie."
+  },
+  "instance.settings.tabs.installation.game-version": {
+    "message": "Spielversion"
+  },
+  "search.filter.locked.default.sync": {
+    "defaultMessage": "Synchronisierungsfilter"
+  },
+  "curseforge-import.error.fetch-metadata": {
+    "message": "Profilinformationen konnten nicht abgerufen werden. Bitte überprüfen Sie den Code und versuchen Sie es erneut."
+  },
+  "content.page-layout.loading": {
+    "defaultMessage": "Inhalt wird geladen..."
+  },
+  "edit": {
+    "message": "Bearbeiten"
+  },
+  "accounts-card.elyby-requested-2fa": {
+    "message": "Ely.by hat einen 2FA-Code zur Authentifizierung angefordert"
+  },
+  "instance.settings.tabs.installation.unlink.confirm.description": {
+    "message": "Wenn Sie fortfahren, können Sie es nicht erneut verknüpfen, ohne eine völlig neue Instanz zu erstellen. Sie erhalten keine Modpack-Updates mehr und es wird zur Normalität."
+  },
+  "instance.edit-world.placeholder-name": {
+    "message": "Minecraft-Welt"
+  },
+  "creation-flow.final.game-version.placeholder": {
+    "defaultMessage": "Spielversion auswählen"
+  },
+  "skins.saved.heading": {
+    "message": "Gespeicherte Skins"
+  },
+  "instance.logs.level.debug": {
+    "message": "Debuggen"
+  },
+  "error-modal.migration.fix-success": {
+    "message": "✅ Der Migrationsfix wurde erfolgreich angewendet. Bitte starten Sie den Launcher neu und versuchen Sie, sich beim Spiel anzumelden :)"
+  },
+  "label.delete-immediately": {
+    "defaultMessage": "Sofort löschen"
+  },
+  "form.placeholder.address": {
+    "defaultMessage": "Adresse eingeben"
+  },
+  "nags.add-links.title": {
+    "defaultMessage": "Fügen Sie externe Links hinzu"
+  },
+  "project.about.compatibility.title": {
+    "defaultMessage": "Kompatibilität"
+  },
+  "servers.region.prompt": {
+    "defaultMessage": "Wo soll Ihr Server stehen?"
+  },
+  "content.confirm-unlink.header": {
+    "defaultMessage": "Verknüpfung des Modpacks aufheben"
+  },
+  "app.settings.tabs.privacy": {
+    "message": "Privatsphäre"
+  },
+  "creation-flow.final.gamemode.survival": {
+    "defaultMessage": "Überleben"
+  },
+  "instance.create.profile-name": {
+    "message": "Profilname"
+  },
+  "creation-flow.final.world-type.superflat": {
+    "defaultMessage": "Superflach"
+  },
+  "instance.confirm-repair.body": {
+    "defaultMessage": "Repairing reinstalls the loader and Minecraft dependencies without deleting your content. This may resolve issues if your {type, select, server {server is not starting correctly} other {game is not launching due to launcher-related errors}}."
+  },
+  "instance.logs.live": {
+    "message": "Live-Protokoll"
+  },
+  "instance.index.export-modpack": {
+    "message": "Modpack exportieren"
+  },
+  "settings.language.description": {
+    "defaultMessage": "Choose your preferred language for the {platform}. Translations are contributed by volunteers <crowdin-link>on Crowdin</crowdin-link>."
+  },
+  "error-modal.migration.try-other-fix": {
+    "message": "Wenn das Problem weiterhin besteht, versuchen Sie es bitte mit der anderen Lösung."
+  },
+  "tag.category.utility": {
+    "defaultMessage": "Dienstprogramm"
+  },
+  "grid-display.instance-count.one": {
+    "message": "{count} Instanz"
+  },
+  "accounts-card.add-offline-account": {
+    "message": "Offline-Konto hinzufügen"
+  },
+  "settings.applications.title": {
+    "defaultMessage": "Ihre Bewerbungen"
+  },
+  "locale.th-TH": {
+    "defaultMessage": "Thailändisch"
+  },
+  "instance.confirm-reinstall.admonition-body": {
+    "defaultMessage": "Durch die Neuinstallation werden alle installierten oder geänderten Inhalte auf die vom Modpack bereitgestellten Inhalte zurückgesetzt und alle Mods oder Inhalte entfernt, die Sie zusätzlich zur Originalinstallation hinzugefügt haben."
+  },
+  "search.filter_type.license.open_source": {
+    "defaultMessage": "Open Source"
+  },
+  "installation-settings.repair.instance-title": {
+    "defaultMessage": "Instanz reparieren"
+  },
+  "settings.display.theme.retro": {
+    "defaultMessage": "Retro"
+  },
+  "instance.worlds.incompatible-version": {
+    "message": "Inkompatible Version {version}"
+  },
+  "content.page-layout.sort.alphabetical": {
+    "defaultMessage": "Alphabetisch"
+  },
+  "instance.settings.tabs.window": {
+    "message": "Fenster"
+  },
+  "skins.action.delete-skin.tooltip": {
+    "message": "Skin löschen"
+  },
+  "project-type.project.lowercase": {
+    "defaultMessage": "{count, plural, one {project} other {projects}}"
+  },
+  "content.diff-modal.added-count": {
+    "defaultMessage": "{count} hinzugefügt"
+  },
+  "syncing.action.apply": {
+    "message": "Auf alle Instanzen anwenden"
+  },
+  "tag.category.bosses": {
+    "defaultMessage": "Bosse"
+  },
+  "affiliate.create.title.placeholder": {
+    "defaultMessage": "z.B. YouTube"
+  },
+  "nags.edit-description.title": {
+    "defaultMessage": "Beschreibung bearbeiten"
+  },
+  "label.error": {
+    "defaultMessage": "Fehler"
+  },
+  "tag.category.whitelisted": {
+    "defaultMessage": "Auf der Whitelist"
+  },
+  "settings.default-instance.width.description": {
+    "message": "Die Breite des Spielfensters beim Start."
+  },
+  "nags.settings.license.title": {
+    "defaultMessage": "Besuchen Sie die Lizenzeinstellungen"
+  },
+  "content.selection-bar.selected-count-simple": {
+    "defaultMessage": "{count, number} ausgewählt"
+  },
+  "settings.authorized-apps.title": {
+    "defaultMessage": "Autorisierte Apps"
+  },
+  "instance.mods.tooltip.remove": {
+    "message": "Entfernen"
+  },
+  "project.visibility.private": {
+    "defaultMessage": "Privat"
+  },
+  "instance.worlds.copy_address": {
+    "message": "Adresse kopieren"
+  },
+  "project.metadata.release-channel": {
+    "message": "Release-Kanal"
+  },
+  "error-modal.title.change-directory": {
+    "message": "Das App-Verzeichnis konnte nicht geändert werden"
+  },
+  "grid-display.instance-count.few": {
+    "message": "{count} Instanzen"
+  },
+  "app.library.empty.create-new": {
+    "message": "Neue Instanz erstellen"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "Geschlossen"
+  },
+  "servers.setup.uploading-modpack.header": {
+    "defaultMessage": "Modpack hochladen"
+  },
+  "nags.upload-gallery-image.title": {
+    "defaultMessage": "Laden Sie ein Galeriebild hoch"
+  },
+  "project.download-count-tooltip": {
+    "defaultMessage": "{count, number} {count, plural, one {download} other {downloads}}"
+  },
+  "instance.worlds.incompatible_server": {
+    "message": "Server ist inkompatibel"
+  },
+  "tag.category.technical": {
+    "defaultMessage": "Technisch"
+  },
+  "browse.install.installing": {
+    "message": "Installieren..."
+  },
+  "button.close": {
+    "defaultMessage": "Schließen"
+  },
+  "nags.moderation.title": {
+    "defaultMessage": "Besuchen Sie den Moderationsthread"
+  },
+  "search.filter.locked.instance.sync": {
+    "message": "Mit Instanz synchronisieren"
+  },
+  "instance.settings.tabs.installation.tooltip.action.install": {
+    "message": "installieren"
+  },
+  "content.page-layout.share.markdown-links": {
+    "defaultMessage": "Markdown-Links"
+  },
+  "maintenance.section.memory-manager.title": {
+    "message": "Speichermanager"
+  },
+  "content.selection-bar.bulk.disabling": {
+    "defaultMessage": "{progress}/{total} {contentType} wird deaktiviert..."
+  },
+  "tag.category.quests": {
+    "defaultMessage": "Quests"
+  },
+  "project.action.report": {
+    "message": "Bericht"
+  },
+  "settings.language.categories.default": {
+    "defaultMessage": "Standardsprachen"
+  },
+  "settings.appearance.advanced-rendering.title": {
+    "message": "Erweitertes Rendering"
+  },
+  "creation-flow.custom.snapshots.hide": {
+    "defaultMessage": "Schnappschüsse ausblenden"
+  },
+  "changelog.product.api": {
+    "defaultMessage": "API"
+  },
+  "content.modpack-card.content-hint-description": {
+    "defaultMessage": "Den Inhalt Ihres Modpacks finden Sie jetzt hier!"
+  },
+  "app.settings.tabs.feature-flags": {
+    "message": "Feature-Flags"
+  },
+  "instance.settings.tabs.installation": {
+    "message": "Installation"
+  },
+  "project.settings.environment.client_and_server.optional_server.title": {
+    "defaultMessage": "Optional auf dem Server"
+  },
+  "instance.settings.tabs.window.height.description": {
+    "message": "Die Höhe des Spielfensters beim Start."
+  },
+  "payment-method.charity-plural": {
+    "defaultMessage": "Wohltätigkeitsorganisationen"
+  },
+  "button.switch-version": {
+    "defaultMessage": "Switch-Version"
+  },
+  "creation-flow.final.difficulty.label": {
+    "defaultMessage": "Schwierigkeit"
+  },
+  "content.selection-bar.enable": {
+    "defaultMessage": "Aktivieren"
+  },
+  "settings.appearance.color-theme.description": {
+    "message": "Wählen Sie Ihr bevorzugtes Farbthema für die Modrinth-App."
+  },
+  "tag.category.potato": {
+    "defaultMessage": "Kartoffel"
+  },
+  "error-modal.migration.fix-unix-button": {
+    "message": "Wenden Sie den Fix für Unix-ähnliche Systeme an (Debian, Ubuntu, macOS und andere)"
+  },
+  "instance.index.open-in-modrinth": {
+    "message": "Geöffnet in Modrinth"
+  },
+  "instances.updater-modal.show-incompatible": {
+    "defaultMessage": "Inkompatibel anzeigen"
+  },
+  "project.about.details.submitted": {
+    "defaultMessage": "Submitted {date}"
+  },
+  "instance.settings.tabs.installation.show-all-versions": {
+    "message": "Alle Versionen anzeigen"
+  },
+  "app.library.tab.downloaded": {
+    "message": "Heruntergeladen"
+  },
+  "nags.summary-same-as-title.title": {
+    "defaultMessage": "Machen Sie die Zusammenfassung einzigartig"
+  },
+  "error-modal.sign-in-to-minecraft": {
+    "message": "Melden Sie sich bei Minecraft an"
+  },
+  "maintenance.rule.new": {
+    "message": "Neue Regel"
+  },
+  "form.label.address-line-2": {
+    "defaultMessage": "Adresszeile 2 (optional)"
+  },
+  "instance.create.type.custom": {
+    "message": "Brauch"
+  },
+  "project.visibility.rejected": {
+    "defaultMessage": "Abgelehnt"
+  },
+  "instance.settings.tabs.java.environment-variables": {
+    "message": "Umgebungsvariablen"
+  },
+  "settings.language.title": {
+    "defaultMessage": "Sprache"
+  },
+  "instance.screenshots.empty-title": {
+    "message": "Noch keine Screenshots"
+  },
+  "creation-flow.final.generate-structures.title": {
+    "defaultMessage": "Strukturen generieren"
+  },
+  "browse.type.resourcepack": {
+    "message": "Ressourcenpakete"
+  },
+  "creation-flow.title.world": {
+    "defaultMessage": "Welt erschaffen"
+  },
+  "settings.appearance.launcher-language.option.english": {
+    "message": "Englisch"
+  },
+  "grid-display.option.group": {
+    "message": "Gruppe"
+  },
+  "instance.settings.title": {
+    "message": "Einstellungen"
+  },
+  "tag.loader.quilt": {
+    "defaultMessage": "Decke"
+  },
+  "settings.profile.title": {
+    "defaultMessage": "Öffentliches Profil"
+  },
+  "settings.appearance.default-landing.library": {
+    "message": "Bibliothek"
+  },
+  "instance.logs.share.title": {
+    "message": "Instanzprotokoll"
+  },
+  "java-selector.install-recommended": {
+    "message": "Installation empfohlen"
+  },
+  "content.page-layout.busy-description": {
+    "defaultMessage": "Bitte warten Sie, bis der Vorgang abgeschlossen ist, bevor Sie den Inhalt bearbeiten."
+  },
+  "settings.default-instance.height.placeholder": {
+    "message": "Höhe eingeben..."
+  },
+  "app.revoria-update.body": {
+    "message": "Revoria v{latestVersion} ist auf GitHub verfügbar. Sie befinden sich derzeit auf v{currentVersion}."
+  },
+  "instance.server-modal.address": {
+    "message": "Adresse"
+  },
+  "accounts-card.unexpected-error-header": {
+    "message": "Es ist ein unerwarteter Fehler aufgetreten"
+  },
+  "button.clear": {
+    "defaultMessage": "Klar"
+  },
+  "instance.settings.tabs.installation.tooltip.cannot-while-installing": {
+    "message": "Während der Installation kann {action} nicht ausgeführt werden"
+  },
+  "instance.create.warning.select-game-version-first": {
+    "message": "Wählen Sie eine Spielversion aus, bevor Sie eine Loader-Version auswählen"
+  },
+  "project.more-options": {
+    "message": "Weitere Optionen"
+  },
+  "modal.open-in-app.get-app": {
+    "defaultMessage": "Holen Sie sich die Modrinth-App"
+  },
+  "instance.logs.crash.endpoint": {
+    "message": "Endpunkt"
+  },
+  "tag.loader.iris": {
+    "defaultMessage": "Iris"
+  },
+  "label.game-version": {
+    "defaultMessage": "Spielversion"
+  },
+  "error-modal.try-signing-in-again": {
+    "message": "Versuchen Sie erneut, sich anzumelden"
+  },
+  "instances.content-install.select-icon": {
+    "defaultMessage": "Symbol auswählen"
+  },
+  "error-modal.debug-help-support-page": {
+    "message": "unsere Support-Seite"
+  },
+  "instance.settings.tabs.general.edit-icon.replace": {
+    "message": "Symbol ersetzen"
+  },
+  "nags.settings.links.title": {
+    "defaultMessage": "Besuchen Sie die Linkeinstellungen"
+  },
+  "creation-flow.final.world-name.label": {
+    "defaultMessage": "Weltname"
+  },
+  "modal.open-in-app.benefit.launch": {
+    "defaultMessage": "Starten Sie das Spiel direkt auf dem Server"
+  },
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "Akzeptiert"
+  },
+  "instance.settings.tabs.installation.repair.button.repairing": {
+    "message": "Reparieren"
+  },
+  "tag.category.magic": {
+    "defaultMessage": "Magie"
+  },
+  "payment-method.amazon_pay": {
+    "defaultMessage": "Amazon Pay"
+  },
+  "creation-flow.custom.game-version.placeholder": {
+    "defaultMessage": "Spielversion auswählen"
+  },
+  "instance.settings.tabs.hooks": {
+    "message": "Haken starten"
+  },
+  "project-type.mod.lowercase": {
+    "defaultMessage": "{count, plural, one {mod} other {mods}}"
+  },
+  "url-confirm.installing-version-from-modrinth": {
+    "message": "Installiere {version} von Modrinth"
+  },
+  "friends.add-friend.title": {
+    "message": "Einen Freund hinzufügen"
+  },
+  "instance.settings.tabs.installation.reinstall.button": {
+    "message": "Modpack neu installieren"
+  },
+  "modal.add-payment-method.action": {
+    "defaultMessage": "Zahlungsmethode hinzufügen"
+  },
+  "settings.display.theme.oled": {
+    "defaultMessage": "OLED"
+  },
+  "servers.region.southeast-asia": {
+    "defaultMessage": "Südostasien"
+  },
+  "instance.settings.tabs.general.edit-icon.remove": {
+    "message": "Symbol entfernen"
+  },
+  "content.page-layout.upload-files": {
+    "defaultMessage": "Dateien hochladen"
+  },
+  "accounts-card.password-placeholder": {
+    "message": "Ihr Passwort hier..."
+  },
+  "instance.logs.level.info": {
+    "message": "Info"
+  },
+  "instance.index.enable-selected": {
+    "message": "Ausgewählte aktivieren"
+  },
+  "tag.category.reflections": {
+    "defaultMessage": "Reflexionen"
+  },
+  "affiliate.create.header": {
+    "defaultMessage": "Erstellen eines neuen Affiliate-Codes"
+  },
+  "hosting.content.failed-to-bulk-disable": {
+    "defaultMessage": "Der Inhalt konnte nicht deaktiviert werden"
+  },
+  "instance.settings.tabs.window.height": {
+    "message": "Höhe"
+  },
+  "servers.notice.level.critical.name": {
+    "defaultMessage": "Kritisch"
+  },
+  "servers.purchase.step.plan.title": {
+    "defaultMessage": "Planen"
+  },
+  "nags.image-heavy-description.title": {
+    "defaultMessage": "Sorgen Sie für Barrierefreiheit"
+  },
+  "search.sort.date-updated": {
+    "defaultMessage": "Datum aktualisiert"
+  },
+  "settings.privacy.telemetry.title": {
+    "message": "Telemetrie"
+  },
+  "maintenance.rule-paths.placeholder": {
+    "message": "Protokolle, Absturzberichte"
+  },
+  "button.download": {
+    "defaultMessage": "Herunterladen"
+  },
+  "button.max": {
+    "defaultMessage": "Max"
+  },
+  "creation-flow.common.or": {
+    "defaultMessage": "oder"
+  },
+  "instance.index.share-instance": {
+    "message": "Instanz teilen"
+  },
+  "tag.category.hardcore-mode": {
+    "defaultMessage": "Hardcore-Modus"
+  },
+  "affiliate.revoke": {
+    "defaultMessage": "Affiliate-Link widerrufen"
+  },
+  "tag.loader.bungeecord": {
+    "defaultMessage": "BungeeCord"
+  },
+  "action.cancel": {
+    "message": "Stornieren"
+  },
+  "skins.tooltip.overriding-default-cape": {
+    "message": "Der ausgerüstete Skin überschreibt den Standardumhang."
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "Abgelehnt"
+  },
+  "creation-flow.stage.import.title": {
+    "defaultMessage": "Instanz importieren"
+  },
+  "button.repairing": {
+    "defaultMessage": "Reparieren..."
+  },
+  "label.visit-your-profile": {
+    "defaultMessage": "Besuchen Sie Ihr Profil"
+  },
+  "creation-flow.setup.title.server": {
+    "defaultMessage": "Wählen Sie den Installationstyp aus"
+  },
+  "tag.loader.sponge": {
+    "defaultMessage": "Schwamm"
+  },
+  "instance.worlds.play_instance": {
+    "message": "Instanz spielen"
+  },
+  "search.filter_type.environment": {
+    "defaultMessage": "Umfeld"
+  },
+  "content.page-layout.browse-content": {
+    "defaultMessage": "Inhalte durchsuchen"
+  },
+  "project.environment.unknown.description": {
+    "defaultMessage": "Die Umgebung für diese Version konnte nicht ermittelt werden."
+  },
+  "accounts-card.unexpected-error-body": {
+    "message": "Es ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es später noch einmal."
+  },
+  "servers.backups.item.manual-backup": {
+    "defaultMessage": "Manuelle Sicherung"
+  },
+  "nags.add-links.description": {
+    "defaultMessage": "Fügen Sie alle relevanten Links hinzu, die außerhalb von Modrinth ausgerichtet sind, z. B. Quellcode, einen Issue-Tracker oder eine Discord-Einladung."
+  },
+  "maintenance.action.folder": {
+    "message": "Ordner"
+  },
+  "tag.category.storage": {
+    "defaultMessage": "Lagerung"
+  },
+  "app.settings.footer.version": {
+    "message": "Revoria {version}"
+  },
+  "instance.mods.empty.title": {
+    "message": "Sie haben dieser Instanz noch keine Inhalte hinzugefügt."
+  },
+  "instances.content-install.remove-icon": {
+    "defaultMessage": "Symbol entfernen"
+  },
+  "content.page-layout.search-placeholder": {
+    "defaultMessage": "Suche nach {count} {contentType}..."
+  },
+  "project.settings.environment.client_and_server.optional_both.title": {
+    "defaultMessage": "Optional auf beiden Seiten, funktioniert gleich, wenn es auf beiden Seiten installiert wird"
+  },
+  "instance.settings.tabs.installation.tooltip.action.reinstall": {
+    "message": "neu installieren"
+  },
+  "maintenance.summary.total-size": {
+    "message": "Gesamtgröße"
+  },
+  "instance.create.no-profiles-found": {
+    "message": "Keine Profile gefunden"
+  },
+  "hosting.specs.gb-ram": {
+    "defaultMessage": "{ram} GB RAM"
+  },
+  "payment-method.virtual-visa": {
+    "defaultMessage": "Virtuelles Visum"
+  },
+  "install-confirm.install": {
+    "message": "Installieren"
+  },
+  "running-app-bar.stop-instance": {
+    "message": "Instanz stoppen"
+  },
+  "creation-flow.custom.loader-version.latest": {
+    "defaultMessage": "Letzte"
+  },
+  "error-modal.minecraft-website": {
+    "message": "Minecraft-Website"
+  },
+  "instance.create.game-version": {
+    "message": "Spielversion"
+  },
+  "project.recent-plays": {
+    "defaultMessage": "{count} {countPlural, plural, one {recent play} other {recent plays}}"
+  },
+  "form.label.city": {
+    "defaultMessage": "Stadt"
+  },
+  "project.dependency.version-is-type": {
+    "message": "Version {version} ist {type}"
+  },
+  "maintenance.delete-instance.title": {
+    "message": "Delete instance {name}?"
+  },
+  "modal.open-in-app.benefit.update": {
+    "defaultMessage": "Halten Sie die Dateien auf dem neuesten Stand, wenn sich der Server ändert"
+  },
+  "app.update-toast.body.metered": {
+    "message": "Revoria v{version} ist jetzt verfügbar! Da Sie sich in einem gebührenpflichtigen Netzwerk befinden, haben wir es nicht automatisch heruntergeladen."
+  },
+  "instance.filter.updates-available": {
+    "message": "Updates verfügbar"
+  },
+  "project.settings.versions.title": {
+    "defaultMessage": "Versionen"
+  },
+  "project.dependency.added-via-overrides": {
+    "message": "Über Overrides hinzugefügt"
+  },
+  "installation-settings.unlink": {
+    "defaultMessage": "Verknüpfung aufheben"
+  },
+  "syncing.action.open-folder": {
+    "message": "Öffnen Sie den Synchronisierungsordner"
+  },
+  "tag.category.atmosphere": {
+    "defaultMessage": "Atmosphäre"
+  },
+  "instance.settings.tabs.hooks.post-exit": {
+    "message": "Nach dem Ausstieg"
+  },
+  "content.confirm-modpack-update.confirm-button": {
+    "defaultMessage": "{action, select, downgrade {Downgrade} other {Update}} Modpack"
+  },
+  "search-card.compat.client-or-server": {
+    "message": "Client oder Server"
+  },
+  "nags.minecraft-title-clause.title": {
+    "defaultMessage": "Vermeiden Sie Markenverletzungen"
+  },
+  "instance.settings.tabs.installation.repair.confirm.title": {
+    "message": "Instanz reparieren?"
+  },
+  "servers.backups.admonition.restoring-backup.title": {
+    "defaultMessage": "Wiederherstellung aus Backup"
+  },
+  "tag.category.semi-realistic": {
+    "defaultMessage": "Halbrealistisch"
+  },
+  "instance.logs.crash.analyzing": {
+    "message": "Analysieren..."
+  },
+  "accounts-card.enter-player-name-or-email": {
+    "message": "Geben Sie Ihren Spielernamen oder Ihre E-Mail-Adresse ein (bevorzugt)"
+  },
+  "project.breadcrumb": {
+    "message": "Projekt"
+  },
+  "auth.login": {
+    "message": "Login"
+  },
+  "creation-flow.custom.loader-version.none": {
+    "defaultMessage": "Keine Versionen verfügbar"
+  },
+  "content.confirm-modpack-update.header": {
+    "defaultMessage": "{action, select, downgrade {Downgrade} other {Update}} Modpack"
+  },
+  "project.environment.server-only-client-optional.description": {
+    "defaultMessage": "Die meisten Funktionen sind serverseitig, aber die Installation auf dem Client ermöglicht erweiterte Funktionen."
+  },
+  "browse.breadcrumb.discover-content": {
+    "message": "Inhalte entdecken"
+  },
+  "app.library.breadcrumb": {
+    "message": "Bibliothek"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "Moderator"
+  },
+  "search.filter_type.mod_loader": {
+    "defaultMessage": "Lader"
+  },
+  "creation-flow.final.generator-settings.default": {
+    "defaultMessage": "Standard"
+  },
+  "installation-settings.reinstalling-modpack": {
+    "defaultMessage": "Modpack neu installieren"
+  },
+  "project-card.stats.downloads": {
+    "defaultMessage": "{count, plural, one {download} other {downloads}}"
+  },
+  "instances.updater-modal.select-version": {
+    "defaultMessage": "Wählen Sie eine Version aus, um deren Änderungsprotokoll anzuzeigen"
+  },
+  "project.settings.gallery.title": {
+    "defaultMessage": "Galerie"
+  },
+  "tag.category.gui": {
+    "defaultMessage": "GUI"
+  },
+  "project.environment.dedicated-server-only.description": {
+    "defaultMessage": "Alle Funktionen werden serverseitig ausgeführt und sind mit Vanilla-Clients kompatibel. Funktioniert nur auf dedizierten Servern."
+  },
+  "servers.setup.rate-limit.text": {
+    "defaultMessage": "Ihr Tarif ist begrenzt. Bitte versuchen Sie es später noch einmal."
+  },
+  "instance.settings.tabs.installation.repair.button": {
+    "message": "Reparieren"
+  },
+  "payment-method.jcb": {
+    "defaultMessage": "JCB"
+  },
+  "tag.category.social": {
+    "defaultMessage": "Sozial"
+  },
+  "accounts-card.2fa-placeholder": {
+    "message": "Ihr 2FA-Code hier..."
+  },
+  "skins.upload.error.failed-to-read-dropped-file": {
+    "message": "Die abgelegte Datei konnte nicht gelesen werden."
+  },
+  "instances.content-install.game-version-placeholder": {
+    "defaultMessage": "Spielversion auswählen"
+  },
+  "instances.content-install.header": {
+    "defaultMessage": "Projekt installieren"
+  },
+  "accounts-card.log-via-elyby": {
+    "message": "Melden Sie sich über Ely.by an"
+  },
+  "tag.category.multiplayer": {
+    "defaultMessage": "Mehrspieler"
+  },
+  "accounts-card.enter-password": {
+    "message": "Geben Sie Ihr Passwort ein"
+  },
+  "browse.type.modpack": {
+    "message": "Modpacks"
+  },
+  "settings.appearance.launcher-language.title": {
+    "message": "Launcher-Sprache"
+  },
+  "syncing.action.reload": {
+    "message": "Neu laden"
+  },
+  "instance.create.loader-version.stable": {
+    "message": "stabil"
+  },
+  "instance.mods.share.project-names": {
+    "message": "Projektnamen"
+  },
+  "search.filter.locked.default.unlock": {
+    "defaultMessage": "Filter entsperren"
+  },
+  "skins.upload.select-file": {
+    "message": "Wählen Sie die Hauttexturdatei aus"
+  },
+  "project.no-description": {
+    "message": "Keine Beschreibung verfügbar."
+  },
+  "label.update-available": {
+    "defaultMessage": "Update verfügbar"
+  },
+  "project.settings.environment.client_and_server.optional_both_prefers_both.title": {
+    "defaultMessage": "Optional auf beiden Seiten, funktioniert am besten, wenn es auf beiden Seiten installiert wird"
+  },
+  "curseforge-import.progress.importing-profile": {
+    "message": "Profil wird importiert..."
+  },
+  "maintenance.cleanup.complete.title": {
+    "message": "Aufräumarbeiten abgeschlossen"
+  },
+  "settings.privacy.discord-rpc.description": {
+    "message": "Verwaltet die Discord Rich Presence-Integration. Wenn Sie dies deaktivieren, wird „Modrinth“ nicht mehr als Spiel oder App angezeigt, die Sie in Ihrem Discord-Profil verwenden."
+  },
+  "label.notifications": {
+    "defaultMessage": "Benachrichtigungen"
+  },
+  "search.sort.followers": {
+    "defaultMessage": "Anhänger"
+  },
+  "row-display.view-instance": {
+    "message": "Instanz ansehen"
+  },
+  "play-instance": {
+    "message": "Instanz spielen"
+  },
+  "instance.add-server.title": {
+    "message": "Fügen Sie einen Server hinzu"
+  },
+  "button.saving": {
+    "defaultMessage": "Sparen"
+  },
+  "settings.resource.max-concurrent-writes.title": {
+    "message": "Maximale gleichzeitige Schreibvorgänge"
+  },
+  "skins.upload.drag-or-browse": {
+    "message": "Ziehen Sie es per Drag & Drop oder klicken Sie hier, um zu stöbern"
+  },
+  "instance.settings.tabs.installation.tooltip.cannot-while-offline": {
+    "message": "Cannot {action} while offline"
+  },
+  "maintenance.rule.logs": {
+    "message": "Protokolle"
+  },
+  "skins.view-more-capes": {
+    "message": "Weitere Umhänge ansehen"
+  },
+  "browse.install.instance": {
+    "message": "Inhalte auf Instanz installieren"
+  },
+  "settings.language.categories.search-result": {
+    "defaultMessage": "Suchergebnisse"
+  },
+  "skins.rate-limit.skin": {
+    "message": "Sie verändern Ihre Haut zu häufig. Die Server von Mojang haben weitere Anfragen vorübergehend blockiert. Bitte warten Sie einen Moment, bevor Sie es erneut versuchen."
+  },
+  "instance.index.show-hide-unselected": {
+    "message": "Nicht ausgewähltes anzeigen/ausblenden"
+  },
+  "settings.appearance.launcher-language.option.german-switzerland": {
+    "message": "Deutsch (Schweiz)"
+  },
+  "settings.language.languages.search-results-announcement": {
+    "defaultMessage": "{matches, plural, =0 {No languages match} eins {# language matches} andere {# languages match}} Ihre Suche."
+  },
+  "error-modal.debug-help-text-end": {
+    "message": "und starten Sie einen Chat über das Widget unten rechts. Wir helfen Ihnen gerne weiter! Stellen Sie sicher, dass Sie dem Agent die folgenden Debug-Informationen zur Verfügung stellen:"
+  },
+  "instances.content-install.show-all-versions": {
+    "defaultMessage": "Alle Versionen anzeigen"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "Gelistet"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "Schöpfer"
+  },
+  "project.action.save": {
+    "message": "Speichern"
+  },
+  "settings.display.theme.preferred-light-theme": {
+    "defaultMessage": "Bevorzugtes Lichtthema"
+  },
+  "label.version": {
+    "defaultMessage": "Version"
+  },
+  "form.placeholder.last-name": {
+    "defaultMessage": "Geben Sie den Nachnamen ein"
+  },
+  "creation-flow.action.import-count": {
+    "defaultMessage": "Importieren Sie {count, plural, one {{count} Instanz} andere {{count} Instanzen}}"
+  },
+  "instances.content-install.installing-label": {
+    "defaultMessage": "Installieren..."
+  },
+  "instance.worlds.refresh": {
+    "message": "Aktualisieren"
+  },
+  "settings.resource.app-directory.title": {
+    "message": "App-Verzeichnis"
+  },
+  "installation-settings.saving": {
+    "defaultMessage": "Sparen..."
+  },
+  "friends.action.view-friend-requests": {
+    "message": "{count} Freund {count, plural, one {request} other {requests}}"
+  },
+  "skins.upload.username.import": {
+    "message": "Import"
+  },
+  "instance.worlds.view_instance": {
+    "message": "Instanz ansehen"
+  },
+  "skins.beta": {
+    "message": "Beta"
+  },
+  "locale.en-US": {
+    "defaultMessage": "Englisch (USA)"
+  },
+  "error-modal.no-error-message": {
+    "message": "Keine Fehlermeldung."
+  },
+  "nags.add-icon.description": {
+    "defaultMessage": "Das Hinzufügen eines einzigartigen, relevanten und ansprechenden Symbols macht Ihr Projekt erkennbar und hebt es hervor."
+  },
+  "project.about.links.issues": {
+    "defaultMessage": "Melden Sie Probleme"
+  },
+  "settings.resource.max-concurrent-writes.description": {
+    "message": "Die maximale Anzahl an Dateien, die der Launcher gleichzeitig auf die Festplatte schreiben kann. Stellen Sie diesen Wert auf einen niedrigeren Wert ein, wenn häufig E/A-Fehler auftreten. (App-Neustart erforderlich, um wirksam zu werden)"
+  },
+  "grid-display.sort-dropdown-name": {
+    "message": "Dropdown-Liste sortieren"
+  },
+  "maintenance.action.add-rule": {
+    "message": "Regel hinzufügen"
+  },
+  "save": {
+    "message": "Speichern"
+  },
+  "app.update-toast.body.download-complete": {
+    "message": "Der Download von Revoria v{version} ist abgeschlossen. Laden Sie es neu, um es jetzt oder automatisch zu aktualisieren, wenn Sie Revoria schließen."
+  },
+  "instance.index.installing": {
+    "message": "Installieren..."
+  },
+  "settings.sessions.title": {
+    "defaultMessage": "Sitzungen"
+  },
+  "settings.appearance.default-landing.home": {
+    "message": "Heim"
+  },
+  "project.environment.tag.unknown": {
+    "defaultMessage": "Unbekannt"
+  },
+  "curseforge-import.header": {
+    "message": "Aus CurseForge-Profilcode importieren"
+  },
+  "tag.loader.rift": {
+    "defaultMessage": "Riss"
+  },
+  "project.metadata.author": {
+    "message": "Autor"
+  },
+  "project.metadata.publication-date": {
+    "message": "Veröffentlichungsdatum"
+  },
+  "creation-flow.setup.option.vanilla.title": {
+    "defaultMessage": "Vanille-Minecraft"
+  },
+  "project.about.server.latency": {
+    "defaultMessage": "Latenz"
+  },
+  "tag.loader.waterfall": {
+    "defaultMessage": "Wasserfall"
+  },
+  "project.settings.environment.notice.missing-env.description": {
+    "defaultMessage": "In Ihrem Projekt fehlen Umgebungsmetadaten. Bitte wählen Sie unten die entsprechende Option aus."
+  },
+  "locale.uk-UA": {
+    "defaultMessage": "ukrainisch"
+  },
+  "syncing.notification.updated": {
+    "message": "Synchronisierungsziele aktualisiert."
+  },
+  "locale.ro-RO": {
+    "defaultMessage": "rumänisch"
+  },
+  "installation-settings.repair.server-title": {
+    "defaultMessage": "Server reparieren"
+  },
+  "label.settings": {
+    "defaultMessage": "Einstellungen"
+  },
+  "settings.language.note": {
+    "message": "Weitere Sprachen sind in Vorbereitung."
+  },
+  "search.filter_type.modpack_loader": {
+    "defaultMessage": "Lader"
+  },
+  "content.modpack-card.updating": {
+    "defaultMessage": "Aktualisierung..."
+  },
+  "instance.logs.crash.api-tutorial.title": {
+    "message": "So erhalten Sie einen Ollama-API-Schlüssel:"
+  },
+  "settings.default-instance.post-exit.placeholder": {
+    "message": "Geben Sie den Post-Exit-Befehl ein..."
+  },
+  "project.settings.environment.singleplayer.title": {
+    "defaultMessage": "Nur Einzelspieler"
+  },
+  "instance.settings.tabs.hooks.wrapper.description": {
+    "message": "Wrapper-Befehl zum Starten von Minecraft."
+  },
+  "creation-flow.action.setup-server": {
+    "defaultMessage": "Setup-Server"
+  },
+  "tag.category.library": {
+    "defaultMessage": "Bibliothek"
+  },
+  "form.placeholder.address-2": {
+    "defaultMessage": "Apartment, Suite usw."
+  },
+  "instance.settings.tabs.window.width": {
+    "message": "Breite"
+  },
+  "grid-display.option.last-played": {
+    "message": "Zuletzt gespielt"
+  },
+  "label.password": {
+    "defaultMessage": "Passwort"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "Archiviert"
+  },
+  "browse.notification.curseforge-manual-download-fallback": {
+    "message": "CurseForge konnte keinen direkten Download bereitstellen. Die Projektseite in Ihrem Browser geöffnet."
+  },
+  "instance.settings.tabs.hooks.pre-launch": {
+    "message": "Vorab"
+  },
+  "project.about.server.copiedText": {
+    "defaultMessage": "IP-Adresse in die Zwischenablage kopiert"
+  },
+  "screenshots": {
+    "message": "Screenshots"
+  },
+  "error-modal.minecraft-auth.hosts-text-end": {
+    "message": "Schritte zur Behebung des Problems finden Sie hier."
+  },
+  "instances.modpack-content-modal.header": {
+    "defaultMessage": "Modpack-Inhalt"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "Fehlgeschlagen"
+  },
+  "maintenance.cleanup.modal.header": {
+    "message": "Instanzbereinigung"
+  },
+  "creation-flow.custom.loader.label.instance": {
+    "defaultMessage": "Lader"
+  },
+  "tag.category.equipment": {
+    "defaultMessage": "Ausrüstung"
+  },
+  "project.error.no-files-available-to-install": {
+    "message": "Keine Dateien zur Installation verfügbar."
+  },
+  "tag.category.adventure": {
+    "defaultMessage": "Abenteuer"
+  },
+  "report": {
+    "message": "Bericht"
+  },
+  "instances.updater-modal.header-modpack": {
+    "defaultMessage": "Modpack-Version wechseln"
+  },
+  "locale.cs-CZ": {
+    "defaultMessage": "tschechisch"
+  },
+  "error-modal.minecraft-auth.network-text-end": {
+    "message": "zur Fehlerbehebung."
+  },
+  "instance.mods.share-modal.text": {
+    "message": "Schauen Sie sich die Projekte an, die ich in meinem Modpack verwende!"
+  },
+  "servers.backups.admonition.backup-failed.title": {
+    "defaultMessage": "Die Sicherung ist fehlgeschlagen"
+  },
+  "locale.no-NO": {
+    "defaultMessage": "Norwegisches Bokmål"
+  },
+  "instance.settings.tabs.window.width.description": {
+    "message": "Die Breite des Spielfensters beim Start."
+  },
+  "creation-flow.final.world-seed.label": {
+    "defaultMessage": "Weltsamen"
+  },
+  "content.confirm-deletion.admonition-body": {
+    "defaultMessage": "Das Löschen eines Mods kann sich dauerhaft auf Ihre Welt auswirken und beim erneuten Laden zu fehlenden Inhalten oder unerwarteten Problemen führen."
+  },
+  "search.filter.option.exclusion.add.tooltip": {
+    "defaultMessage": "Ausschließen"
+  },
+  "instance.settings.tabs.general.edit-icon": {
+    "message": "Symbol „Bearbeiten“."
+  },
+  "instance.settings.tabs.hooks.pre-launch.enter": {
+    "message": "Geben Sie den Pre-Launch-Befehl ein..."
+  },
+  "button.report": {
+    "defaultMessage": "Bericht"
+  },
+  "instances.confirm-leave-modal.stay": {
+    "defaultMessage": "Bleiben Sie auf der Seite"
+  },
+  "skins.action.sign-in": {
+    "message": "Anmelden"
+  },
+  "project.notification.curseforge-manual-download-fallback": {
+    "message": "CurseForge konnte keinen direkten Download bereitstellen. Die Projektseite in Ihrem Browser geöffnet."
+  },
+  "instance.index.copy-slugs": {
+    "message": "Schnecken kopieren"
+  },
+  "project.environment.client-and-server.title": {
+    "defaultMessage": "Client und Server, auf beiden erforderlich"
+  },
+  "label.content": {
+    "defaultMessage": "Inhalt"
+  },
+  "app.library.tab.shared": {
+    "message": "Mit mir geteilt"
+  },
+  "search-card.compat.client": {
+    "message": "Kunde"
+  },
+  "syncing.target.synced": {
+    "message": "{synced}/{total} synchronisiert"
+  },
+  "nags.summary-special-formatting.title": {
+    "defaultMessage": "Klären Sie die Zusammenfassung auf"
+  },
+  "instance.create.loader": {
+    "message": "Lader"
+  },
+  "grid-display.library-fallback": {
+    "message": "Bibliothek"
+  },
+  "search-card.downloads": {
+    "message": "Downloads"
+  },
+  "project.about.server.title": {
+    "defaultMessage": "Serverdetails"
+  },
+  "instance.screenshots.notification.copied.title": {
+    "message": "Kopiert"
+  },
+  "instance.add-server.resource-pack.enabled": {
+    "message": "Ermöglicht"
+  },
+  "instance.screenshots.notification.copied.text": {
+    "message": "Screenshot in die Zwischenablage kopiert"
+  },
+  "tag.category.pve": {
+    "defaultMessage": "PVE"
+  },
+  "instance.settings.tabs.installation.unlink.confirm.title": {
+    "message": "Möchten Sie die Verknüpfung dieser Instanz wirklich aufheben?"
+  },
+  "button.back": {
+    "defaultMessage": "Zurück"
+  },
+  "creation-flow.action.back": {
+    "defaultMessage": "Zurück"
+  },
+  "instance.worlds.hardcore": {
+    "message": "Hardcore-Modus"
+  },
+  "form.label.date-of-birth": {
+    "defaultMessage": "Geburtsdatum"
+  },
+  "friends.heading.online": {
+    "message": "Online"
+  },
+  "error-modal.repair-instance": {
+    "message": "Instanz reparieren"
+  },
+  "servers.backups.item.restore": {
+    "defaultMessage": "Wiederherstellen"
+  },
+  "tag.category.64x": {
+    "defaultMessage": "64x"
+  },
+  "tag.loader.minecraft": {
+    "defaultMessage": "Ressourcenpaket"
+  },
+  "maintenance.rule.crash-reports": {
+    "message": "Absturzberichte"
+  },
+  "instance.confirm-reinstall.admonition-header": {
+    "defaultMessage": "Warnung zur Neuinstallation"
+  },
+  "locale.de-DE": {
+    "defaultMessage": "Deutsch (Deutschland)"
+  },
+  "instance.index.time.second-plural": {
+    "message": "{count} Sekunden"
+  },
+  "java-selector.path-placeholder": {
+    "message": "/pfad/zu/java"
+  },
+  "skins.action.edit": {
+    "message": "Bearbeiten"
+  },
+  "instance.settings.tabs.hooks.wrapper": {
+    "message": "Verpackung"
+  },
+  "error-modal.debug-help-text-start": {
+    "message": "Wenn nichts funktioniert und Sie Hilfe benötigen, besuchen Sie uns"
+  },
+  "form.label.state-province": {
+    "defaultMessage": "Staat/Provinz"
+  },
+  "nags.all-tags-selected.title": {
+    "defaultMessage": "Wählen Sie genaue Tags aus"
+  },
+  "project.install.installing": {
+    "message": "Installieren..."
+  },
+  "icon-select.edit": {
+    "defaultMessage": "Symbol „Bearbeiten“."
+  },
+  "creation-flow.common.loading": {
+    "defaultMessage": "Laden..."
+  },
+  "tag.category.8x-": {
+    "defaultMessage": "8x oder weniger"
+  },
+  "search.filter.option.show_more": {
+    "defaultMessage": "Mehr anzeigen"
+  },
+  "project.settings.environment.verification.verify-button": {
+    "defaultMessage": "Verifizieren"
+  },
+  "hosting.specs.gb-storage": {
+    "defaultMessage": "{storage} GB Speicher"
+  },
+  "project.about.compatibility.environments.server-side": {
+    "defaultMessage": "Serverseitig"
+  },
+  "running-app-bar.view-logs": {
+    "message": "Protokolle anzeigen"
+  },
+  "instances.content-install.game-version-label": {
+    "defaultMessage": "Spielversion"
+  },
+  "hosting.content.failed-to-unlink": {
+    "defaultMessage": "Die Verknüpfung des Modpacks konnte nicht aufgehoben werden"
+  },
+  "servers.setup.reinstall-failed.title": {
+    "defaultMessage": "Neuinstallation fehlgeschlagen"
+  },
+  "creation-flow.common.add": {
+    "defaultMessage": "Hinzufügen"
+  },
+  "input.view.list": {
+    "defaultMessage": "Zeilenansicht"
+  },
+  "instance.create.import-profiles-count": {
+    "message": "{count} Profile importieren"
+  },
+  "app.home.action.my-library": {
+    "message": "Meine Bibliothek"
+  },
+  "app.home.row.discover-mods": {
+    "message": "Entdecken Sie Mods"
+  },
+  "browse.sort.latest-update": {
+    "message": "Neuestes Update"
+  },
+  "instance.worlds.empty": {
+    "message": "Du hast noch keine Welten."
+  },
+  "project.about.server.copied": {
+    "defaultMessage": "Kopiert!"
+  },
+  "share-urls": {
+    "message": "Teilen Sie URLs"
+  },
+  "instance.settings.tabs.hooks.post-exit.description": {
+    "message": "Ran, nachdem das Spiel zu Ende ist."
+  },
+  "project.notification.curseforge-blocked-automated-download": {
+    "message": "CurseForge hat den automatischen Download dieser Datei blockiert (403). Die Projektseite in Ihrem Browser geöffnet."
+  },
+  "instance.settings.tabs.general.library-groups.create": {
+    "message": "Neue Gruppe erstellen"
+  },
+  "content.inline-backup.backing-up": {
+    "defaultMessage": "Backup wird erstellt..."
+  },
+  "label.description": {
+    "defaultMessage": "Beschreibung"
+  },
+  "running-app-bar.no-instances-running": {
+    "message": "Es werden keine Instanzen ausgeführt"
+  },
+  "error-modal.state-init-fix-internet": {
+    "message": "Stellen Sie sicher, dass Sie mit dem Internet verbunden sind, und versuchen Sie dann, die App neu zu starten."
+  },
+  "instance.index.time.second-singular": {
+    "message": "{count} Sekunde"
+  },
+  "label.visibility": {
+    "defaultMessage": "Sichtweite"
+  },
+  "changelog.product.hosting": {
+    "defaultMessage": "Hosting"
+  },
+  "tag.category.kitchen-sink": {
+    "defaultMessage": "Küchenspüle"
+  },
+  "tag.category.microgames": {
+    "defaultMessage": "Mikrospiele"
+  },
+  "content.confirm-modpack-update.admonition-body": {
+    "defaultMessage": "Alle Mods oder Inhalte, die Sie zusätzlich zum Modpack hinzugefügt haben, werden gelöscht."
+  },
+  "error-modal.migration.fix-windows-title": {
+    "message": "Konvertieren Sie alle Zeilenenden in Migrationsdateien in CRLF (Windows-Stil: \\r\\n)"
+  },
+  "content.page-layout.share.file-names": {
+    "defaultMessage": "Dateinamen"
+  },
+  "error-modal.migration.backup-text": {
+    "message": "Wenn keiner der oben genannten Schritte hilft, können Sie versuchen, eine Kopie der Datei app.db an einem sicheren Ort zu speichern, z. B. %appdata%\\Roaming\\Revoria unter Windows oder ~/Library/Application Support/Revoria unter macOS, dann die Originaldatei löschen und die App die Datenbankdatei neu erstellen lassen. Beachten Sie, dass dies zu Datenverlust innerhalb der App führen kann. Stellen Sie daher sicher, dass Sie Ihre Launcher-Daten sichern, bevor Sie diese Korrekturen anwenden."
+  },
+  "instance.settings.tabs.java.java-installation": {
+    "message": "Java-Installation"
+  },
+  "settings.appearance.title": {
+    "defaultMessage": "Aussehen"
+  },
+  "row-display.delete-instance.title": {
+    "message": "Sind Sie sicher, dass Sie diese Instanz löschen möchten?"
+  },
+  "locale.hu-HU": {
+    "defaultMessage": "ungarisch"
+  },
+  "friends.add-friends-to-share": {
+    "message": "<link>Fügen Sie Freunde hinzu</link>, um zu sehen, was sie spielen!"
+  },
+  "error-modal.minecraft-auth.game-pass-text-start": {
+    "message": "Versuchen Sie, sich mit dem anzumelden"
+  },
+  "url-confirm.install-title": {
+    "message": "{project} installieren"
+  },
+  "tag.category.lightweight": {
+    "defaultMessage": "Leicht"
+  },
+  "instance.worlds.delete-world.title": {
+    "message": "Sind Sie sicher, dass Sie diese Welt dauerhaft löschen möchten?"
+  },
+  "instance.index.disable-selected": {
+    "message": "Ausgewählte Option deaktivieren"
+  },
+  "tag.category.128x": {
+    "defaultMessage": "128x"
+  },
+  "servers.backups.admonition.backup-queued.title": {
+    "defaultMessage": "Backup in der Warteschlange"
+  },
+  "nags.invalid-license-url.description.domain": {
+    "defaultMessage": "Ihre Lizenz-URL verweist auf {domain}, was für Lizenzinformationen nicht geeignet ist. Lizenz-URLs sollten direkt auf Ihre Lizenzdatei verweisen, nicht auf soziale Medien, Spieleplattformen usw."
+  },
+  "app.settings.title": {
+    "message": "Einstellungen"
+  },
+  "search-card.followers": {
+    "message": "Anhänger"
+  },
+  "friends.friend.request-sent": {
+    "message": "Freundschaftsanfrage gesendet"
+  },
+  "form.label.address-line": {
+    "defaultMessage": "Adresszeile"
+  },
+  "app.auth-servers.unreachable.body": {
+    "message": "Möglicherweise sind die Minecraft-Authentifizierungsserver gerade ausgefallen. Überprüfen Sie Ihre Internetverbindung und versuchen Sie es später erneut."
+  },
+  "accounts-card.check-player-name-or-email": {
+    "message": "Überprüfen Sie, ob Sie den richtigen Spielernamen oder die richtige E-Mail-Adresse eingegeben haben."
+  },
+  "error-modal.retry-directory-change": {
+    "message": "Verzeichniswechsel erneut versuchen"
+  },
+  "project.file.primary": {
+    "message": "Primär"
+  },
+  "instance.logs.crash.size": {
+    "message": "Größe"
+  },
+  "browse.error.no-files-available": {
+    "message": "Für dieses Projekt sind keine Dateien verfügbar."
+  },
+  "content.selection-bar.disable": {
+    "defaultMessage": "Deaktivieren"
+  },
+  "instances.content-install.existing-tab": {
+    "defaultMessage": "Vorhandene Instanz"
+  },
+  "settings.default-instance.pre-launch.description": {
+    "message": "Wird ausgeführt, bevor die Instanz gestartet wird."
+  },
+  "tag.loader.babric": {
+    "defaultMessage": "Babric"
+  },
+  "instance.settings.tabs.general.delete.button": {
+    "message": "Instanz löschen"
+  },
+  "locale.ko-KR": {
+    "defaultMessage": "Koreanisch"
+  },
+  "settings.appearance.launcher-language.option.ukrainian": {
+    "message": "ukrainisch"
+  },
+  "creation-flow.custom.loader-version.placeholder": {
+    "defaultMessage": "Wählen Sie die Loader-Version aus"
+  },
+  "settings.default-instance.environmental-variables.placeholder": {
+    "message": "Umgebungsvariablen eingeben..."
+  },
+  "project-type.resourcepack.capital": {
+    "defaultMessage": "{count, plural, one {Resource Pack} other {Resource Packs}}"
+  },
+  "skins.upload-first": {
+    "message": "Laden Sie zuerst einen Skin hoch!"
+  },
+  "label.installed-modpack": {
+    "defaultMessage": "Modpack installiert"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "Zurückgegeben"
+  },
+  "project.no-files-found": {
+    "message": "Keine Dateien gefunden."
+  },
+  "instance.worlds.delete-world.description": {
+    "message": "„{name}“ wird dauerhaft gelöscht und es gibt keine Möglichkeit, es wiederherzustellen."
+  },
+  "accounts-card.error-input-elyby-header": {
+    "message": "Fehler beim Fortfahren des Eingabeereignisses mit Ely.by"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "Privat"
+  },
+  "label.or": {
+    "defaultMessage": "oder"
+  },
+  "modal.open-in-app.benefit.install": {
+    "defaultMessage": "Erforderliche Inhalte automatisch installieren"
+  },
+  "instance.server-modal.placeholder-name": {
+    "message": "Minecraft-Server"
+  },
+  "locale.sv-SE": {
+    "defaultMessage": "Schwedisch"
+  },
+  "settings.language.languages.search.no-results": {
+    "defaultMessage": "Zu Ihrer Suche passen keine Sprachen."
+  },
+  "creation-flow.import.clear-all": {
+    "defaultMessage": "Alles löschen"
+  },
+  "tag.category.survival-mode": {
+    "defaultMessage": "Überlebensmodus"
+  },
+  "creation-flow.final.difficulty.normal": {
+    "defaultMessage": "Normal"
+  },
+  "project.settings.analytics.title": {
+    "defaultMessage": "Analytik"
+  },
+  "tag.loader.velocity": {
+    "defaultMessage": "Geschwindigkeit"
+  },
+  "instance.worlds.remove-server.title": {
+    "message": "Sind Sie sicher, dass Sie {name} entfernen möchten?"
+  },
+  "creation-flow.custom.icon.remove": {
+    "defaultMessage": "Symbol entfernen"
+  },
+  "instance.screenshots.loading": {
+    "message": "Screenshots werden geladen..."
+  },
+  "form.label.business-name": {
+    "defaultMessage": "Firmenname"
+  },
+  "instance.edit-world.name": {
+    "message": "Name"
+  },
+  "project.settings.notice.no-permission.description": {
+    "defaultMessage": "Sie haben keine Berechtigung, dies zu bearbeiten."
+  },
+  "instance.logs.crash.folder": {
+    "message": "Ordner mit den Absturzprotokollen"
+  },
+  "servers.backups.admonition.restoring-backup.description": {
+    "defaultMessage": "Stellen Sie Ihren Server von {backupName} wieder her. Dies kann einige Minuten dauern."
+  },
+  "error-modal.minecraft-auth.game-pass-text-end": {
+    "message": "Erste. Wenn Sie fertig sind, kommen Sie hierher zurück und melden Sie sich an!"
+  },
+  "content.page-layout.sort.label": {
+    "defaultMessage": "Sortieren nach {mode}"
+  },
+  "syncing.target-type.file": {
+    "message": "Datei"
+  },
+  "browse.sort.popularity": {
+    "message": "Popularität"
+  },
+  "project.metadata.version-number": {
+    "message": "Versionsnummer"
+  },
+  "instance.logs.crash.api-tutorial.step2": {
+    "message": "Öffnen Sie die Einstellungsschlüssel: https://ollama.com/settings/keys"
+  },
+  "tag.category.challenging": {
+    "defaultMessage": "Herausfordernd"
+  },
+  "project.online-player-count": {
+    "defaultMessage": "{count, number} online"
+  },
+  "tag.category.rpg": {
+    "defaultMessage": "Rollenspiel"
+  },
+  "tag.category.custom-content": {
+    "defaultMessage": "Benutzerdefinierter Inhalt"
+  },
+  "settings.privacy.personalized-ads.description": {
+    "message": "Der Anzeigenanbieter von Modrinth, Aditude, zeigt Anzeigen basierend auf Ihren Präferenzen. Wenn Sie diese Option deaktivieren, deaktivieren Sie die Funktion und es werden Ihnen keine interessenbezogenen Anzeigen mehr angezeigt."
+  },
+  "search.filter_type.environment.server": {
+    "defaultMessage": "Server"
+  },
+  "project.settings.environment.notice.missing-env.title": {
+    "defaultMessage": "Bitte wählen Sie eine Umgebung für Ihr Projekt aus"
+  },
+  "search.filter_type.plugin_platform": {
+    "defaultMessage": "Plattform"
+  },
+  "search.filter.option.search.placeholder": {
+    "defaultMessage": "Suchen..."
+  },
+  "app.library.subtitle": {
+    "message": "Ihre Instanzen, organisiert."
+  },
+  "nags.select-license.description": {
+    "defaultMessage": "Select the license your {type, select, mod {mod} modpack {modpack} resourcepack {resource pack} shader {shader} plugin {plugin} datapack {data pack} other {project}} is distributed under."
+  },
+  "row-display.duplicate-instance": {
+    "message": "Doppelte Instanz"
+  },
+  "app.sidebar.friends": {
+    "message": "Freunde"
+  },
+  "project.about.compatibility.game.minecraftJava": {
+    "defaultMessage": "Minecraft: Java Edition"
+  },
+  "instance.settings.tabs.installation.currently-installed": {
+    "message": "Derzeit installiert"
+  },
+  "nags.edit-summary.title": {
+    "defaultMessage": "Zusammenfassung bearbeiten"
+  },
+  "instances.modpack-content-modal.empty-description": {
+    "defaultMessage": "Dieses Modpack enthält keine zusätzlichen Inhalte."
+  },
+  "grid-display.delete-instance.title": {
+    "message": "Sind Sie sicher, dass Sie diese Instanz löschen möchten?"
+  },
+  "installation-settings.confirm-version-change": {
+    "defaultMessage": "Bestätigen"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "Zurückgehalten"
+  },
+  "tag.category.racing": {
+    "defaultMessage": "Rennen"
+  },
+  "tag.category.factions": {
+    "defaultMessage": "Fraktionen"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "Client oder Server"
+  },
+  "error-modal.copy-debug-info": {
+    "message": "Debug-Informationen kopieren"
+  },
+  "creation-flow.final.world-type.default": {
+    "defaultMessage": "Standard"
+  },
+  "settings.default-instance.environmental-variables.title": {
+    "message": "Umgebungsvariablen"
+  },
+  "label.platform": {
+    "defaultMessage": "Plattform"
+  },
+  "maintenance.action.select-all": {
+    "message": "Alles auswählen"
+  },
+  "settings.java.location": {
+    "message": "Java {version} location"
+  },
+  "instance.settings.tabs.installation.change-version.button.installing": {
+    "message": "Installieren"
+  },
+  "tag.category.bloom": {
+    "defaultMessage": "Blühen"
+  },
+  "accounts-card.enter-player-name": {
+    "message": "Geben Sie Ihren Spielernamen ein"
+  },
+  "syncing.section.custom-folders": {
+    "message": "Benutzerdefinierte Ordner"
+  },
+  "app.settings.tabs.default-instance-options": {
+    "message": "Standardinstanzoptionen"
+  },
+  "app.survey.body": {
+    "message": "Würde es Ihnen etwas ausmachen, ein paar Fragen zu Ihren Erfahrungen mit der Modrinth App zu beantworten?"
+  },
+  "tag.category.blocks": {
+    "defaultMessage": "Blöcke"
+  },
+  "syncing.how-it-works": {
+    "message": "Wenn diese Option aktiviert ist, werden vorhandene Daten in den freigegebenen Synchronisierungsordner verschoben und jeder Instanzpfad wird durch einen Link ersetzt."
+  },
+  "search.filter_type.license": {
+    "defaultMessage": "Lizenz"
+  },
+  "tag.loader.nilloader": {
+    "defaultMessage": "NilLoader"
+  },
+  "tag.category.pvp": {
+    "defaultMessage": "PVP"
+  },
+  "accounts-card.select-account": {
+    "message": "Konto auswählen"
+  },
+  "app.library.empty.title": {
+    "message": "Keine Instanzen gefunden"
+  },
+  "curseforge-import.check-profile": {
+    "message": "Überprüfen Sie das Profil"
+  },
+  "instance.logs.share": {
+    "message": "Aktie"
+  },
+  "instance.add-server.add-and-play": {
+    "message": "Hinzufügen und spielen"
+  },
+  "content.confirm-modpack-update.admonition-header": {
+    "defaultMessage": "{action, select, downgrade {Downgrade} other {Update}} Warnung"
+  },
+  "settings.appearance.advanced-rendering.description": {
+    "message": "Ermöglicht erweitertes Rendering wie Unschärfeeffekte, die ohne hardwarebeschleunigtes Rendering zu Leistungsproblemen führen können."
+  },
+  "settings.privacy.discord-rpc.title": {
+    "message": "Discord RPC"
+  },
+  "servers.notice.level.warn.name": {
+    "defaultMessage": "Warnung"
+  },
+  "button.create-a-project": {
+    "defaultMessage": "Erstellen Sie ein Projekt"
+  },
+  "singleplayer": {
+    "message": "Einzelspieler"
+  },
+  "creation-flow.setup.title.instance": {
+    "defaultMessage": "Wählen Sie den Instanztyp"
+  },
+  "input.view.grid": {
+    "defaultMessage": "Rasteransicht"
+  },
+  "tag.category.smp": {
+    "defaultMessage": "SMP"
+  },
+  "instance.screenshots.notification.path-copied.title": {
+    "message": "Pfad kopiert"
+  },
+  "instance.settings.tabs.hooks.title": {
+    "message": "Spielstart-Hooks"
+  },
+  "tag.loader.spigot": {
+    "defaultMessage": "Zapfen"
+  },
+  "servers.notice.dismiss": {
+    "defaultMessage": "Zurückweisen"
+  },
+  "omorphia.component.badge.label.unsafe": {
+    "defaultMessage": "Scheitern"
+  },
+  "browse.search.placeholder": {
+    "message": "Search {type}..."
+  },
+  "settings.language.platform.app": {
+    "defaultMessage": "App"
+  },
+  "tag.category.bedwars": {
+    "defaultMessage": "Bettkriege"
+  },
+  "instance.confirm-reinstall.reinstall-button": {
+    "defaultMessage": "Modpack neu installieren"
+  },
+  "content.confirm-bulk-update.admonition-body": {
+    "defaultMessage": "Sind Sie sicher, dass Sie {count, plural, one {# projects} other {# project}} auf die neueste kompatible Version aktualisieren möchten? Es wird empfohlen, die Inhalte einzeln zu aktualisieren."
+  },
+  "instance.worlds.type.singleplayer": {
+    "message": "Einzelspieler"
+  },
+  "payment-method.virtual-visa-plural": {
+    "defaultMessage": "Virtuelle Visa"
+  },
+  "settings.default-instance.window-size.title": {
+    "message": "Fenstergröße"
+  },
+  "locale.pt-PT": {
+    "defaultMessage": "Portugiesisch (Portugal)"
+  },
+  "nags.description-too-short.description": {
+    "defaultMessage": "Your description is {length, plural, one {# readable character} other {# readable characters}}. At least {minChars, plural, one {# character} other {# characters}} is recommended to create a clear and informative description."
+  },
+  "skins.none": {
+    "message": "Keiner"
+  },
+  "instance.settings.tabs.installation.install.in-progress": {
+    "message": "Installation läuft"
+  },
+  "instance.worlds.a_minecraft_server": {
+    "message": "Ein Minecraft-Server"
+  },
+  "curseforge-import.import-profile": {
+    "message": "Profil importieren"
+  },
+  "instance.worlds.offline": {
+    "message": "Offline"
+  },
+  "button.refresh": {
+    "defaultMessage": "Aktualisieren"
+  },
+  "creation-flow.custom.build-number.placeholder": {
+    "defaultMessage": "Wählen Sie die Build-Nummer aus"
+  },
+  "button.more-options": {
+    "defaultMessage": "Weitere Optionen"
+  },
+  "grid-display.instance-count.other": {
+    "message": "{count} Instanzen"
+  },
+  "project.environment.server-only.description": {
+    "defaultMessage": "Alle Funktionen werden serverseitig ausgeführt und sind mit Vanilla-Clients kompatibel. Funktioniert auch auf dem internen Server im Einzelspielermodus."
+  },
+  "search.filter_type.plugin_loader": {
+    "defaultMessage": "Lader"
+  },
+  "installation-settings.reinstall-modpack.title": {
+    "defaultMessage": "Modpack neu installieren"
+  },
+  "skins.upload.option.username.title": {
+    "message": "Importieren nach Benutzername"
+  },
+  "nags.invalid-license-url.description.default": {
+    "defaultMessage": "Die Lizenz-URL ist ungültig."
+  },
+  "updates": {
+    "message": "Aktualisierungen"
+  },
+  "nags.edit-tags.title": {
+    "defaultMessage": "Tags bearbeiten"
+  },
+  "project.settings.environment.server_only.supports_singleplayer.title": {
+    "defaultMessage": "Funktioniert auch im Einzelspielermodus"
+  },
+  "hosting.content.failed-to-remove": {
+    "defaultMessage": "Der Inhalt konnte nicht entfernt werden"
+  },
+  "tag.loader.forge": {
+    "defaultMessage": "Schmiede"
+  },
+  "tag.category.worldgen": {
+    "defaultMessage": "Weltgeneration"
+  },
+  "project-card.environment.client-and-server": {
+    "defaultMessage": "Client und Server"
+  },
+  "instance.index.stop": {
+    "message": "Stoppen"
+  },
+  "instances.updater-modal.no-changelog": {
+    "defaultMessage": "Für diese Version ist kein Änderungsprotokoll verfügbar."
+  },
+  "creation-flow.final.additional-settings": {
+    "defaultMessage": "Zusätzliche Einstellungen"
+  },
+  "form.label.amount": {
+    "defaultMessage": "Menge"
+  },
+  "content.inline-backup.backup-failed": {
+    "defaultMessage": "Die Erstellung der Sicherung ist fehlgeschlagen. Sie können trotzdem fortfahren."
+  },
+  "accounts-card.error-adding-offline-account": {
+    "message": "Beim Hinzufügen des Offline-Kontos ist ein Fehler aufgetreten. Bitte befolgen Sie die nachstehenden Anweisungen."
+  },
+  "servers.purchase.step.plan.prompt": {
+    "defaultMessage": "Wählen Sie einen Plan"
+  },
+  "installation-settings.repair.server-description": {
+    "defaultMessage": "Installiert den Loader und die Minecraft-Abhängigkeiten neu, ohne Ihre Inhalte zu löschen. Dies kann Probleme beheben, wenn Ihr Server nicht ordnungsgemäß startet."
+  },
+  "label.installing": {
+    "defaultMessage": "Installieren..."
+  },
+  "nags.long-headers.description": {
+    "defaultMessage": "{count, plural, one {# header} other {# headers}} in Ihrer Beschreibung {count, plural, one {is} other {are}} zu lang. Überschriften sollten prägnant sein und als Abschnittsüberschriften dienen, nicht als vollständige Sätze."
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "Genehmigt"
+  },
+  "creation-flow.setup.backup.name": {
+    "defaultMessage": "Vor der Neuinstallation"
+  },
+  "server": {
+    "message": "Server"
+  },
+  "project.about.links.store": {
+    "defaultMessage": "Besuchen Sie die Store-Seite"
+  },
+  "creation-flow.custom.loader-version.search": {
+    "defaultMessage": "Loader-Version suchen..."
+  },
+  "skins.upload.modal.title": {
+    "message": "Hauttextur hochladen"
+  },
+  "creation-flow.title.reset-server": {
+    "defaultMessage": "Server zurücksetzen"
+  },
+  "settings.default-instance.pre-launch.placeholder": {
+    "message": "Geben Sie den Pre-Launch-Befehl ein..."
+  },
+  "instance.create.loader-version": {
+    "message": "Loader-Version"
+  },
+  "instance.settings.tabs.installation.no-loader-versions": {
+    "message": "{loader} ist für Minecraft {version} nicht verfügbar. Versuchen Sie es mit einem anderen Mod-Loader."
+  },
+  "tag.category.keep-inventory": {
+    "defaultMessage": "Behalten Sie das Inventar"
+  },
+  "installation-settings.confirm-version-change-header": {
+    "defaultMessage": "Überprüfen Sie Inhaltsänderungen"
+  },
+  "project.about.compatibility.platforms": {
+    "defaultMessage": "Plattformen"
+  },
+  "app.update-toast.body": {
+    "message": "Revoria v{version} ist zur Installation bereit! Laden Sie es neu, um es jetzt oder automatisch zu aktualisieren, wenn Sie Revoria schließen."
+  },
+  "button.continue": {
+    "defaultMessage": "Weitermachen"
+  },
+  "app.revoria-update.open": {
+    "message": "Offene Veröffentlichungen"
+  },
+  "project-type.datapack.lowercase": {
+    "defaultMessage": "{count, plural, one {data pack} other {data packs}}"
+  },
+  "project-type.plugin.capital": {
+    "defaultMessage": "{count, plural, one {Plugin} other {Plugins}}"
+  },
+  "servers.backups.admonition.fallback-name": {
+    "defaultMessage": "Ihr Backup"
+  },
+  "project.visibility.public": {
+    "defaultMessage": "Öffentlich"
+  },
+  "instance.logs.crash.result": {
+    "message": "Analyseergebnis"
+  },
+  "project-card.date.published": {
+    "defaultMessage": "Veröffentlicht"
+  },
+  "project.about.compatibility.environments.singleplayer": {
+    "defaultMessage": "Einzelspieler"
+  },
+  "instances.updater-modal.hide-incompatible": {
+    "defaultMessage": "Inkompatibel ausblenden"
+  },
+  "project.settings.tags.title": {
+    "defaultMessage": "Schlagworte"
+  },
+  "instance.edit-world.hide-from-home": {
+    "message": "Von der Startseite ausblenden"
+  },
+  "java-selector.detect": {
+    "message": "Erkennen"
+  },
+  "syncing.status.disabled": {
+    "message": "Deaktiviert"
+  },
+  "header.category.minecraft-server-gameplay": {
+    "defaultMessage": "Gameplay"
+  },
+  "project.settings.environment.notice.multiple-environments.title": {
+    "defaultMessage": "Ihr Projekt verfügt über mehrere Umgebungen"
+  },
+  "app.home.breadcrumb": {
+    "message": "Heim"
+  },
+  "button.stop": {
+    "defaultMessage": "Stoppen"
+  },
+  "instance.logs.crash.api-tutorial.step1": {
+    "message": "Melden Sie sich unter https://ollama.com/ an."
+  },
+  "content.selection-bar.bulk.enabling-waiting": {
+    "defaultMessage": "{contentType} wird aktiviert..."
+  },
+  "instance.logs.level.error": {
+    "message": "Fehler"
+  },
+  "disabled": {
+    "message": "Deaktiviert"
+  },
+  "instance.mods.action.share": {
+    "message": "Aktie"
+  },
+  "project.install.already-installed": {
+    "message": "Dieses Projekt ist bereits installiert"
+  },
+  "affiliate.create.button": {
+    "defaultMessage": "Affiliate-Link erstellen"
+  },
+  "instances.modpack-content-modal.empty-title": {
+    "defaultMessage": "Kein Inhalt gefunden"
+  },
+  "error-modal.directory-move-generic-text": {
+    "message": "Revoria kann nicht in das von Ihnen ausgewählte neue Verzeichnis migrieren. Bitte wenden Sie sich an den Support, um Hilfe zu erhalten, oder brechen Sie den Verzeichniswechsel ab."
+  },
+  "payment-method.gift-card": {
+    "defaultMessage": "Geschenkkarte"
+  },
+  "instances.modpack-content-modal.no-results": {
+    "defaultMessage": "Keine Projekte entsprechen Ihrer Suche."
+  },
+  "curseforge-import.profile-code.label": {
+    "message": "Profilcode"
+  },
+  "search.filter.option.search.clear.aria_label": {
+    "defaultMessage": "Suche löschen"
+  },
+  "accounts-card.check-password": {
+    "message": "Überprüfen Sie, ob Sie das richtige Passwort eingegeben haben."
+  },
+  "accounts-card.minecraft-account": {
+    "message": "Minecraft-Konto"
+  },
+  "error-modal.try-another-account": {
+    "message": "Versuchen Sie es mit einem anderen Konto"
+  },
+  "servers.backups.admonition.backup-failed.description": {
+    "defaultMessage": "Beim Erstellen von {backupName} ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder wenden Sie sich an den Support, wenn das Problem weiterhin besteht."
+  },
+  "skins.upload.username.label": {
+    "message": "Minecraft-Benutzername"
+  },
+  "instances.modpack-content-modal.loading": {
+    "defaultMessage": "Inhalt wird geladen..."
+  },
+  "project.about.details.created": {
+    "defaultMessage": "Created {date}"
+  },
+  "app.update.complete-toast.title": {
+    "message": "Version {version} wurde erfolgreich installiert!"
+  },
+  "instance.settings.tabs.installation.debug-information": {
+    "message": "Debug-Informationen:"
+  },
+  "button.hide-snapshots": {
+    "defaultMessage": "Schnappschüsse ausblenden"
+  },
+  "tag.category.optimization": {
+    "defaultMessage": "Optimierung"
+  },
+  "instances.content-install.no-instances": {
+    "defaultMessage": "Keine kompatiblen Instanzen gefunden"
+  },
+  "instances.confirm-leave-modal.title": {
+    "defaultMessage": "Seite verlassen?"
+  },
+  "installation-settings.confirm-version-change-description": {
+    "defaultMessage": "Durch den Wechsel zu {gameVersion} werden die folgenden Inhalte auf Ihrem Server geändert."
+  },
+  "browse.context.copy-link": {
+    "message": "Link kopieren"
+  },
+  "open-in-browser": {
+    "message": "Im Browser öffnen"
+  },
+  "instance.add-server.resource-pack.disabled": {
+    "message": "Deaktiviert"
+  },
+  "content.page-layout.empty.modpack-hint": {
+    "defaultMessage": "Fügen Sie diesem Modpack zusätzlichen Inhalt hinzu"
+  },
+  "skins.action.change-cape": {
+    "message": "Umhang wechseln"
+  },
+  "skins.make-edit-first": {
+    "message": "Nehmen Sie zuerst eine Bearbeitung am Skin vor!"
+  },
+  "creation-flow.custom.loader-version.stable-suffix": {
+    "defaultMessage": "{version} (stabil)"
+  },
+  "nags.too-many-tags.description": {
+    "defaultMessage": "Sie haben {tagCount, plural, one {# tag} other {# tags}} ausgewählt. Erwägen Sie eine Reduzierung auf {maxTagCount} oder weniger, um sicherzustellen, dass Ihr Projekt in relevanten Suchergebnissen erscheint."
+  },
+  "skins.saving": {
+    "message": "Sparen..."
+  },
+  "project.settings.environment.notice.review-options.title": {
+    "defaultMessage": "Bitte überprüfen Sie die Optionen unten"
+  },
+  "project.dependencies": {
+    "message": "Abhängigkeiten"
+  },
+  "project.settings.environment.suboption.accessibility-option-label": {
+    "defaultMessage": "{title}: {description}"
+  },
+  "ui.component.unsaved-changes-popup.body": {
+    "defaultMessage": "Sie haben nicht gespeicherte Änderungen."
+  },
+  "nags.misused-discord-link-description": {
+    "defaultMessage": "Discord-Einladungen können nicht für andere Linktypen verwendet werden. Bitte geben Sie Ihren Discord-Link nur in das Feld „Discord-Einladungslink“ ein."
+  },
+  "share-markdown": {
+    "message": "Abschlag teilen"
+  },
+  "view-profile": {
+    "message": "Profil ansehen"
+  },
+  "modal.open-in-app.title": {
+    "defaultMessage": "Öffnen der Modrinth-App"
+  },
+  "grid-display.option.game-version": {
+    "message": "Spielversion"
+  },
+  "hosting.content.failed-to-bulk-delete": {
+    "defaultMessage": "Inhalt konnte nicht gelöscht werden"
+  },
+  "app.survey.decline": {
+    "message": "Nein danke"
+  },
+  "servers.backups.item.auto": {
+    "defaultMessage": "Auto"
+  },
+  "instance.settings.tabs.installation.platform": {
+    "message": "Plattform"
+  },
+  "instance.logs.crash.model": {
+    "message": "Modell"
+  },
+  "error-modal.minecraft-sign-in-text-start": {
+    "message": "Um diese Instanz abzuspielen, müssen Sie sich unten über Microsoft anmelden. Wenn Sie kein Minecraft-Konto haben, können Sie das Spiel hier kaufen"
+  },
+  "project-type.server.lowercase": {
+    "defaultMessage": "{count, plural, one {server} other {servers}}"
+  },
+  "accounts-card.player-name-placeholder": {
+    "message": "Dein Spielername hier..."
+  },
+  "instance.index.loading": {
+    "message": "Laden..."
+  },
+  "label.saved": {
+    "defaultMessage": "Gespeichert"
+  },
+  "skins.title": {
+    "message": "Skins"
+  },
+  "browse.type.datapack": {
+    "message": "Datenpakete"
+  },
+  "instance.screenshots.copy-tooltip": {
+    "message": "Screenshot kopieren"
+  },
+  "instance.worlds.search.placeholder": {
+    "message": "Welten durchsuchen..."
+  },
+  "skins.default.heading": {
+    "message": "Standard-Skins"
+  },
+  "maintenance.error.open-folder": {
+    "message": "Ordner konnte nicht geöffnet werden."
+  },
+  "instance.settings.tabs.java": {
+    "message": "Java und Speicher"
+  },
+  "friends.add-friend.username.placeholder": {
+    "message": "Geben Sie den Modrinth-Benutzernamen ein..."
+  },
+  "project.visibility.under-review": {
+    "defaultMessage": "Wird überprüft"
+  },
+  "nags.minecraft-title-clause.description": {
+    "defaultMessage": "Projekte dürfen nicht das Minecraft-Branding verwenden oder „Minecraft“ als wesentlichen Teil des Namens enthalten."
+  },
+  "payment-method.gift-card-plural": {
+    "defaultMessage": "Geschenkkarten"
+  },
+  "affiliate.create.user.description": {
+    "defaultMessage": "Der Benutzername des Benutzers, für den der Affiliate-Code erstellt werden soll"
+  },
+  "content.page-layout.uploading-files": {
+    "defaultMessage": "Dateien werden hochgeladen ({completed}/{total})"
+  },
+  "project.about.details.licensed": {
+    "defaultMessage": "Lizenzierte {license}"
+  },
+  "maintenance.action.scanning": {
+    "message": "Scannen..."
+  },
+  "tag.category.dungeons": {
+    "defaultMessage": "Dungeons"
+  },
+  "creation-flow.title.instance": {
+    "defaultMessage": "Instanz erstellen"
+  },
+  "creation-flow.final.world-name.placeholder": {
+    "defaultMessage": "Geben Sie den Weltnamen ein"
+  },
+  "instance.index.update-selected": {
+    "message": "Update ausgewählt"
+  },
+  "tag.category.gens": {
+    "defaultMessage": "Gens"
+  },
+  "creation-flow.final.gamemode.creative": {
+    "defaultMessage": "Kreativ"
+  },
+  "tag.category.roleplay": {
+    "defaultMessage": "Rollenspiel"
+  },
+  "locale.vi-VN": {
+    "defaultMessage": "Vietnamesisch"
+  },
+  "label.unlisted": {
+    "defaultMessage": "Nicht gelistet"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "Nicht gelistet"
+  },
+  "app.nav.maintenance": {
+    "message": "Wartung"
+  },
+  "tag.category.colored-lighting": {
+    "defaultMessage": "Farbige Beleuchtung"
+  },
+  "project-type.resourcepack.lowercase": {
+    "defaultMessage": "{count, plural, one {resource pack} other {resource packs}}"
+  },
+  "project-type.mod.capital": {
+    "defaultMessage": "{count, plural, one {Mod} other {Mods}}"
+  },
+  "label.changelog": {
+    "defaultMessage": "Änderungsprotokoll"
+  },
+  "hosting.content.switch-version": {
+    "defaultMessage": "Switch-Version"
+  },
+  "friends.friend.remove-friend": {
+    "message": "Freund entfernen"
+  },
+  "grid-display.label.sort": {
+    "message": "Sortieren"
+  },
+  "tag.loader.paper": {
+    "defaultMessage": "Papier"
+  },
+  "settings.default-instance.wrapper.description": {
+    "message": "Wrapper-Befehl zum Starten von Minecraft."
+  },
+  "syncing.add-target": {
+    "message": "Synchronisierungsziel hinzufügen"
+  },
+  "app.settings.tabs.resource-management": {
+    "message": "Ressourcenmanagement"
+  },
+  "instance.settings.tabs.installation.reinstall.confirm.title": {
+    "message": "Sind Sie sicher, dass Sie diese Instanz neu installieren möchten?"
+  },
+  "maintenance.section.memory-manager.description": {
+    "message": "Scannt Instanzen und hilft dabei, sicheren Müll schnell zu beseitigen."
+  },
+  "instance.index.toggle-selected": {
+    "message": "Ausgewählt umschalten"
+  },
+  "app.home.row.discover-modpack": {
+    "message": "Entdecken Sie ein Modpack"
+  },
+  "project.versions.channel.alpha.symbol": {
+    "defaultMessage": "A"
+  },
+  "label.singleplayer": {
+    "defaultMessage": "Einzelspieler"
+  },
+  "project.about.compatibility.environments.client-side": {
+    "defaultMessage": "Client-seitig"
+  },
+  "skins.upload.username.placeholder": {
+    "message": "Geben Sie einen Benutzernamen ein..."
+  },
+  "instance.worlds.type.server": {
+    "message": "Server"
+  },
+  "project.environment.dedicated-server-only.title": {
+    "defaultMessage": "Nur serverseitig"
+  },
+  "friends.no-friends-match": {
+    "message": "Keine Freunde, die zu „{query}“ passen"
+  },
+  "error-modal.try-another-microsoft-account": {
+    "message": "Versuchen Sie es mit einem anderen Microsoft-Konto"
+  },
+  "instance.worlds.game_mode.adventure": {
+    "defaultMessage": "Abenteuermodus"
+  },
+  "payment-method.diners": {
+    "defaultMessage": "Diners Club"
+  },
+  "open-folder": {
+    "message": "Ordner öffnen"
+  },
+  "instance.worlds.filter.available": {
+    "message": "Verfügbar"
+  },
+  "instance.index.breadcrumb.instance": {
+    "message": "Beispiel"
+  },
+  "payment-method.amex": {
+    "defaultMessage": "American Express"
+  },
+  "settings.default-instance.width.title": {
+    "message": "Breite"
+  },
+  "instance.settings.tabs.installation.tooltip.action.repair": {
+    "message": "reparieren"
+  },
+  "grid-display.option.date-created": {
+    "message": "Erstellungsdatum"
+  },
+  "installation-settings.aria.select-loader-version": {
+    "defaultMessage": "Wählen Sie die {loader}-Version aus"
+  },
+  "select": {
+    "message": "Wählen"
+  },
+  "payment-method.paypal": {
+    "defaultMessage": "PayPal"
+  },
+  "java-selector.test": {
+    "message": "Prüfen"
+  },
+  "payment-method.unknown": {
+    "defaultMessage": "Unbekannte Zahlungsmethode"
+  },
+  "settings.default-instance.java-arguments.placeholder": {
+    "message": "Geben Sie Java-Argumente ein..."
+  },
+  "tag.category.path-tracing": {
+    "defaultMessage": "Pfadverfolgung"
+  },
+  "content.confirm-bulk-update.update-button": {
+    "defaultMessage": "Aktualisieren Sie {count, plural, one {# projects} other {# project}}"
+  },
+  "creation-flow.custom.build-number.label": {
+    "defaultMessage": "Build-Nummer"
+  },
+  "creation-flow.final.generator-settings.input": {
+    "defaultMessage": "Geben Sie die JSON-Generatoreinstellungen ein"
+  },
+  "instance.worlds.game_mode.creative": {
+    "defaultMessage": "Kreativmodus"
+  },
+  "header.category.minecraft-server-community": {
+    "defaultMessage": "Gemeinschaft"
+  },
+  "friends.add-friend.username.description": {
+    "message": "Es kann sich von ihrem Minecraft-Benutzernamen unterscheiden!"
+  },
+  "modal.open-in-app.opening-automatically": {
+    "defaultMessage": "Die Modrinth-App öffnet sich automatisch..."
+  },
+  "project.settings.environment.singleplayer.description": {
+    "defaultMessage": "Funktioniert nur im Einzelspielermodus oder wenn keine Verbindung zu einem Mehrspielerserver besteht."
+  },
+  "friends.heading.offline": {
+    "message": "Offline"
+  },
+  "servers.setup.rate-limit.title": {
+    "defaultMessage": "Der Server kann nicht neu installiert werden"
+  },
+  "project.online-player-count.tooltip": {
+    "defaultMessage": "{count} {countPlural, plural, one {player} other {players}} online"
+  },
+  "label.email": {
+    "defaultMessage": "E-Mail"
+  },
+  "label.unknown": {
+    "defaultMessage": "Unbekannt"
+  },
+  "tag.category.offline-mode": {
+    "defaultMessage": "Offline-Modus"
+  },
+  "project.settings.environment.server_only.dedicated_only.title": {
+    "defaultMessage": "Nur dedizierter Server"
+  },
+  "content.page-layout.sort.date-added-newest": {
+    "defaultMessage": "Das Neueste zuerst"
+  },
+  "app.update.complete-toast.text": {
+    "message": "Klicken Sie hier, um das Änderungsprotokoll anzuzeigen."
+  },
+  "instance.create.select-profiles-to-import": {
+    "message": "Wählen Sie die zu importierenden Profile aus"
+  },
+  "nags.multiple-resolution-tags.title": {
+    "defaultMessage": "Wählen Sie die richtige Auflösung"
+  },
+  "badge.new": {
+    "defaultMessage": "Neu"
+  },
+  "creation-flow.final.generator-settings.label": {
+    "defaultMessage": "Generatoreinstellungen"
+  },
+  "locale.zh-CN": {
+    "defaultMessage": "Chinesisch (vereinfacht)"
+  },
+  "button.upload-image": {
+    "defaultMessage": "Bild hochladen"
+  },
+  "project.about.links.donate.kofi": {
+    "defaultMessage": "Spenden Sie auf Ko-fi"
+  },
+  "icon-select.remove": {
+    "defaultMessage": "Symbol entfernen"
+  },
+  "tag.loader.canvas": {
+    "defaultMessage": "Leinwand"
+  },
+  "hosting.content.failed-to-load-modpack-content": {
+    "defaultMessage": "Modpack-Inhalt konnte nicht geladen werden"
+  },
+  "instance.logs.crash.empty": {
+    "message": "Keine Absturzprotokolle gefunden."
+  },
+  "instance.mods.share-modal.title": {
+    "message": "Teilen von Modpack-Inhalten"
+  },
+  "creation-flow.action.reset-server": {
+    "defaultMessage": "Server zurücksetzen"
+  },
+  "creation-flow.final.world-type.placeholder": {
+    "defaultMessage": "Wählen Sie den Welttyp aus"
+  },
+  "instances.updater-modal.loading-versions": {
+    "defaultMessage": "Lade Versionen..."
+  },
+  "form.placeholder.bank-name": {
+    "defaultMessage": "Geben Sie den Banknamen ein"
+  },
+  "grid-display.option.date-modified": {
+    "message": "Änderungsdatum"
+  },
+  "instance.settings.tabs.installation.tooltip.cannot-while-repairing": {
+    "message": "Cannot {action} while repairing"
+  },
+  "show-file": {
+    "message": "Datei anzeigen"
+  },
+  "curseforge-import.importing": {
+    "message": "Importieren..."
+  },
+  "instances.modpack-content-modal.copy-link": {
+    "defaultMessage": "Link kopieren"
+  },
+  "instance.screenshots.heading": {
+    "message": "Screenshots"
+  },
+  "button.copy-id": {
+    "defaultMessage": "Ausweis kopieren"
+  },
+  "modal.open-in-app.close": {
+    "defaultMessage": "Schließen"
+  },
+  "locale.pl-PL": {
+    "defaultMessage": "Polieren"
+  },
+  "payment-method.charity": {
+    "defaultMessage": "Wohltätigkeit"
+  },
+  "instance.settings.tabs.installation.tooltip.action.change-version": {
+    "message": "Version ändern"
+  },
+  "maintenance.last-played.never": {
+    "message": "Niemals"
+  },
+  "project-card.date.updated.tooltip": {
+    "defaultMessage": "Updated {date}"
+  },
+  "error-modal.not-enough-space-text": {
+    "message": "Anscheinend ist auf der Festplatte mit dem von Ihnen ausgewählten Verzeichnis nicht genügend Speicherplatz vorhanden. Bitte geben Sie Speicherplatz frei und versuchen Sie es erneut oder brechen Sie den Verzeichniswechsel ab."
+  },
+  "nags.summary-special-formatting.description": {
+    "defaultMessage": "Ihre Zusammenfassung sollte keine Formatierungen, Zeilenumbrüche, Sonderzeichen oder Links enthalten, da in der Zusammenfassung nur einfacher Text angezeigt wird."
+  },
+  "search.filter_type.shader_loader": {
+    "defaultMessage": "Lader"
+  },
+  "hosting.specs.shared-cpus": {
+    "defaultMessage": "{cpus} Gemeinsam genutzte CPUs"
+  },
+  "project.settings.environment.notice.review-options.description": {
+    "defaultMessage": "Wir haben gerade das Umgebungssystem auf Modrinth überarbeitet und jetzt sind neue Optionen verfügbar. Bitte stellen Sie sicher, dass unten die richtige Option ausgewählt ist, und klicken Sie dann auf „Bestätigen“, wenn Sie fertig sind!"
+  },
+  "settings.resource.purge-cache.confirm.title": {
+    "message": "Sind Sie sicher, dass Sie den Cache löschen möchten?"
+  },
+  "tag.loader.modloader": {
+    "defaultMessage": "Risugamis ModLoader"
+  },
+  "installation-settings.loader-version": {
+    "defaultMessage": "{loader}-Version"
+  },
+  "instance.create.path-to-launcher": {
+    "message": "Pfad zum Launcher"
+  },
+  "accounts-card.check-player-name": {
+    "message": "Überprüfen Sie, ob Sie den richtigen Spielernamen eingegeben haben."
+  },
+  "instance.breadcrumb.content": {
+    "message": "Inhalt"
+  },
+  "instance.settings.tabs.installation.unknown-version": {
+    "message": "(unbekannte Version)"
+  },
+  "friends.action.add-friend": {
+    "message": "Fügen Sie einen Freund hinzu"
+  },
+  "instance.index.repair": {
+    "message": "Reparieren"
+  },
+  "settings.resource.max-concurrent-downloads.title": {
+    "message": "Maximale gleichzeitige Downloads"
+  },
+  "browse.sort.total-downloads": {
+    "message": "Gesamtzahl der Downloads"
+  },
+  "locale.tr-TR": {
+    "defaultMessage": "Türkisch"
+  },
+  "button.follow": {
+    "defaultMessage": "Folgen"
+  },
+  "search.filter.locked.instance-loader.title": {
+    "message": "Der Loader wird von der Instanz bereitgestellt"
+  },
+  "app.update-toast.download": {
+    "message": "Herunterladen ({size})"
+  },
+  "syncing.target.conflicts": {
+    "message": "{count} widersprüchliche Instanzen"
+  },
+  "content.modpack-card.content-hint-title": {
+    "defaultMessage": "Modpack-Inhalt verschoben"
+  },
+  "app.nav.worlds": {
+    "message": "Welten"
+  },
+  "tag.category.minigame": {
+    "defaultMessage": "Minispiel"
+  },
+  "skins.upload.option.file.title": {
+    "message": "Aus Datei hochladen"
+  },
+  "instance.settings.tabs.installation.change-version.button": {
+    "message": "Version ändern"
+  },
+  "app.revoria-update.header": {
+    "message": "Neue Revoria-Veröffentlichung verfügbar!"
+  },
+  "settings.default-instance.java-arguments.title": {
+    "message": "Java-Argumente"
+  },
+  "creation-flow.final.generator-settings.placeholder": {
+    "defaultMessage": "Wählen Sie die Generatoreinstellungen aus"
+  },
+  "installation-settings.repair.instance-description": {
+    "defaultMessage": "Installiert Minecraft-Abhängigkeiten neu und prüft auf Beschädigung. Dies kann Probleme beheben, wenn Ihr Spiel aufgrund von Fehlern im Zusammenhang mit dem Launcher nicht startet."
+  },
+  "instance.logs.crash.description": {
+    "message": "Analysiert die Absturzprotokolle dieser Instanz über das Ollama-Cloud-Modell."
+  },
+  "project-type.server.capital": {
+    "defaultMessage": "{count, plural, one {Server} other {Servers}}"
+  },
+  "label.moderation": {
+    "defaultMessage": "Mäßigung"
+  },
+  "settings.default-instance.wrapper.title": {
+    "message": "Verpackung"
+  },
+  "content.selection-bar.bulk.deleting": {
+    "defaultMessage": "{progress}/{total} {contentType} wird gelöscht..."
+  },
+  "creation-flow.action.import": {
+    "defaultMessage": "Import"
+  },
+  "app.instance.mods.share-text": {
+    "message": "Schauen Sie sich die Projekte an, die ich in meinem Modpack verwende!"
+  },
+  "app.instance.mods.installing": {
+    "message": "Installieren..."
+  },
+  "app.instance.mods.share-title": {
+    "message": "Teilen von Modpack-Inhalten"
+  },
+  "app.instance.mods.show-file": {
+    "message": "Datei anzeigen"
+  },
+  "app.instance.mods.copy-link": {
+    "message": "Link kopieren"
+  },
+  "app.instance.mods.switch-version": {
+    "message": "Switch-Version"
+  },
+  "app.instance.mods.unknown-version": {
+    "message": "Unbekannt"
+  },
+  "browse.type.server": {
+    "message": "Server"
+  },
+  "content.page-layout.filter.updates": {
+    "message": "Updates"
+  },
+  "content.page-layout.filter.client-only": {
+    "message": "Nur Client"
+  },
+  "content.page-layout.filter.disabled": {
+    "message": "Deaktiviert"
+  },
+  "installation.info.title": {
+    "message": "Installationsinfo"
+  },
+  "installation.installed-modpack.title": {
+    "message": "Installiertes Modpack"
+  }
+}

@@ -6,6 +6,7 @@
 
 use native_dialog::{DialogBuilder, MessageLevel};
 use std::env;
+use std::time::Duration;
 use tauri::{Listener, Manager};
 use theseus::prelude::*;
 
@@ -270,6 +271,18 @@ fn main() {
     match app {
         Ok(app) => {
             app.run(|app, event| {
+                if cfg!(debug_assertions) {
+                    if matches!(event, tauri::RunEvent::Ready) {
+                        let app_handle = app.clone();
+                        tauri::async_runtime::spawn(async move {
+                            std::thread::sleep(Duration::from_millis(1500));
+                            if let Some(win) = app_handle.get_window("main") {
+                                let _ = win.show();
+                                let _ = win.set_focus();
+                            }
+                        });
+                    }
+                }
                 #[cfg(feature = "updater")]
                 if matches!(event, tauri::RunEvent::Exit) {
                     let update_data = app.state::<PendingUpdateData>().inner();

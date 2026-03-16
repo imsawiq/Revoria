@@ -11,15 +11,19 @@ import { useStorage } from '@vueuse/core'
 
 import App from '@/App.vue'
 import router from '@/routes'
-import appEnMessages from '@/locales/en-US/index.json'
-import appRuMessages from '@/locales/ru-RU/index.json'
-import uiEnMessages from '@modrinth/ui/src/locales/en-US/index.json'
-import uiRuMessages from '@modrinth/ui/src/locales/ru-RU/index.json'
+import allEnMessages from '@/locales/combined/en-US.json'
+import allRuMessages from '@/locales/combined/ru-RU.json'
+import allUkMessages from '@/locales/combined/uk-UA.json'
+import allDeDeMessages from '@/locales/combined/de-DE.json'
+import allRoMessages from '@/locales/combined/ro-RO.json'
 
 const launcherLanguage = useStorage('launcher-language', 'en')
 const localeMap = {
 	en: 'en-US',
 	ru: 'ru-RU',
+	uk: 'uk-UA',
+	de: 'de-DE',
+	ro: 'ro-RO',
 }
 const initialLocale = localeMap[launcherLanguage.value] ?? 'en-US'
 const normalizeMessages = (messages) =>
@@ -47,6 +51,24 @@ const VIntlPlugin = createPlugin({
 					displayName: 'Русский',
 				},
 			},
+			{
+				tag: 'uk-UA',
+				meta: {
+					displayName: 'Українська',
+				},
+			},
+			{
+				tag: 'de-DE',
+				meta: {
+					displayName: 'Deutsch (Deutschland)',
+				},
+			},
+			{
+				tag: 'ro-RO',
+				meta: {
+					displayName: 'Română',
+				},
+			},
 		],
 	},
 	globalMixin: true,
@@ -56,17 +78,15 @@ const VIntlPlugin = createPlugin({
 const vintlController = VIntlPlugin.getOrCreateController()
 vintlController.addEventListener('localeload', (event) => {
 	const tag = event.locale.tag
-	if (tag === 'ru-RU') {
-		event.addMessages({
-			...normalizeMessages(appRuMessages),
-			...normalizeMessages(uiRuMessages),
-		})
-		return
+	const messagesByLocale = {
+		'en-US': allEnMessages,
+		'ru-RU': allRuMessages,
+		'uk-UA': allUkMessages,
+		'de-DE': allDeDeMessages,
+		'ro-RO': allRoMessages,
 	}
-	event.addMessages({
-		...normalizeMessages(appEnMessages),
-		...normalizeMessages(uiEnMessages),
-	})
+	const messages = messagesByLocale[tag] ?? allEnMessages
+	event.addMessages(normalizeMessages(messages))
 })
 
 const vueScan = new VueScanPlugin({
@@ -104,13 +124,16 @@ app.use(FloatingVue, {
 })
 app.use(VIntlPlugin)
 
+let lastLocale = initialLocale
 watch(
 	launcherLanguage,
 	async (language) => {
 		const nextLocale = localeMap[language] ?? 'en-US'
+		if (nextLocale === lastLocale) return
+		lastLocale = nextLocale
 		await vintlController.changeLocale(nextLocale)
 	},
-	{ immediate: true },
+	{ immediate: false },
 )
 
 app.mount('#app')

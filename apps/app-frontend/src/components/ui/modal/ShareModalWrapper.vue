@@ -7,7 +7,7 @@ import { useTheming } from '@/store/theme.ts'
 
 const themeStore = useTheming()
 
-defineProps({
+const props = defineProps({
 	header: {
 		type: String,
 		default: 'Share',
@@ -28,6 +28,10 @@ defineProps({
 		type: Boolean,
 		default: true,
 	},
+	onHide: {
+		type: Function,
+		default: null,
+	},
 })
 
 const modal = ref<any>(null)
@@ -45,6 +49,7 @@ defineExpose({
 
 const onModalHide = () => {
 	// show_ads_window()
+	props.onHide?.()
 }
 </script>
 

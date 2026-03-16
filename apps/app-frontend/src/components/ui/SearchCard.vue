@@ -181,6 +181,10 @@ const environment = computed(() =>
 )
 
 async function install() {
+	if (props.project?.source === 'curseforge') {
+		emit('install', props.project.project_id ?? props.project.id)
+		return
+	}
 	installing.value = true
 	await installVersion(
 		props.project.project_id ?? props.project.id,

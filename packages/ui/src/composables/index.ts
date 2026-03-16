@@ -1,4 +1,7 @@
 export * from './debug-logger'
 export * from './dynamic-font-size'
 export * from './how-ago'
+export * from './i18n'
 export * from './scroll-indicator'
+export * from './sticky-observer'
+export * from './virtual-scroll'

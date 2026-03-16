@@ -38,14 +38,14 @@
 			@pointerleave="onPointerUp"
 		>
 			<Suspense>
-				<Group>
-					<Group
+				<TresGroup>
+					<TresGroup
 						:rotation="[0, modelRotation, 0]"
 						:position="[0, -0.05 * scale, 1.95]"
 						:scale="[0.8 * scale, 0.8 * scale, 0.8 * scale]"
 					>
 						<primitive v-if="scene" :object="scene" />
-					</Group>
+					</TresGroup>
 
 					<!-- <TresMesh
             :position="[0, -0.095 * scale, 2]"
@@ -60,7 +60,7 @@
               :depth-write="false"
             />
           </TresMesh> -->
-				</Group>
+				</TresGroup>
 			</Suspense>
 
 			<Suspense>
@@ -120,7 +120,6 @@ import {
 	onUnmounted,
 	ref,
 	shallowRef,
-	toRefs,
 	useTemplateRef,
 	watch,
 } from 'vue'
@@ -243,7 +242,9 @@ const radialSpotlightShader = computed(() => ({
 	depthTest: false,
 }))
 
-const { baseAnimation, randomAnimations } = toRefs(props.animationConfig)
+const animationConfig = computed(() => props.animationConfig)
+const baseAnimation = computed(() => animationConfig.value.baseAnimation)
+const randomAnimations = computed(() => animationConfig.value.randomAnimations)
 
 function initializeAnimations(loadedScene: THREE.Object3D, clips: THREE.AnimationClip[]) {
 	if (!clips || clips.length === 0) {

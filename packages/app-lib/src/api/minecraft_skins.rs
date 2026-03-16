@@ -6,7 +6,9 @@ use std::sync::{
 };
 
 pub use bytes::Bytes;
+use base64::Engine;
 use futures::{StreamExt, TryStreamExt, stream};
+use reqwest::StatusCode;
 use serde::{Deserialize, Serialize};
 use url::Url;
 use uuid::Uuid;
@@ -20,6 +22,7 @@ use crate::{
             CustomMinecraftSkin, DefaultMinecraftCape, mojang_api,
         },
     },
+    util::fetch::REQWEST_CLIENT,
 };
 
 use super::data::Credentials;
@@ -489,6 +492,104 @@ pub async fn get_dragged_skin_data(
     }
 }
 
+#[derive(Deserialize)]
+struct MojangProfileResponse {
+    id: String,
+}
+
+#[derive(Deserialize)]
+struct MojangSessionResponse {
+    properties: Vec<MojangSessionProperty>,
+}
+
+#[derive(Deserialize)]
+struct MojangSessionProperty {
+    name: String,
+    value: String,
+}
+
+#[derive(Deserialize)]
+struct MojangTexturesPayload {
+    textures: MojangTextures,
+}
+
+#[derive(Deserialize)]
+struct MojangTextures {
+    #[serde(rename = "SKIN")]
+    skin: Option<MojangSkinTexture>,
+}
+
+#[derive(Deserialize)]
+struct MojangSkinTexture {
+    url: String,
+}
+
+/// Fetches a Minecraft skin texture by username using Mojang APIs.
+#[tracing::instrument]
+pub async fn get_skin_by_username(
+    username: String,
+) -> crate::Result<Bytes> {
+    let profile_response = REQWEST_CLIENT
+        .get(format!(
+            "https://api.mojang.com/users/profiles/minecraft/{username}"
+        ))
+        .header("Accept", "application/json")
+        .send()
+        .await?;
+
+    if profile_response.status() == StatusCode::NO_CONTENT {
+        return Err(ErrorKind::OtherError("Profile not found".into()).into());
+    }
+
+    let profile_response = profile_response.error_for_status()?;
+
+    let profile: MojangProfileResponse = profile_response.json().await?;
+
+    let session_response = REQWEST_CLIENT
+        .get(format!(
+            "https://sessionserver.mojang.com/session/minecraft/profile/{}",
+            profile.id
+        ))
+        .header("Accept", "application/json")
+        .send()
+        .await
+        .and_then(|response| response.error_for_status())?;
+
+    let session: MojangSessionResponse = session_response.json().await?;
+    let textures_value = session
+        .properties
+        .iter()
+        .find(|property| property.name == "textures")
+        .and_then(|property| if property.value.is_empty() { None } else { Some(&property.value) })
+        .ok_or_else(|| ErrorKind::OtherError("Missing textures property".into()))?;
+
+    let decoded = base64::engine::general_purpose::STANDARD
+        .decode(textures_value)
+        .map_err(|_| ErrorKind::OtherError("Failed to decode textures payload".into()))?;
+
+    let decoded_str = String::from_utf8(decoded)
+        .map_err(|_| ErrorKind::OtherError("Invalid textures payload".into()))?;
+
+    let textures_payload: MojangTexturesPayload =
+        serde_json::from_str(&decoded_str)
+            .map_err(|_| ErrorKind::OtherError("Invalid textures payload".into()))?;
+
+    let skin_url = textures_payload
+        .textures
+        .skin
+        .and_then(|skin| if skin.url.is_empty() { None } else { Some(skin.url) })
+        .ok_or_else(|| ErrorKind::OtherError("Missing skin URL".into()))?;
+
+    let skin_response = REQWEST_CLIENT
+        .get(skin_url)
+        .header("Accept", "image/png")
+        .send()
+        .await
+        .and_then(|response| response.error_for_status())?;
+
+    Ok(skin_response.bytes().await?)
+}
+
 /// Synchronizes the equipped cape with the selected cape if necessary, taking into
 /// account the currently equipped cape, the default cape for the player, and if a
 /// cape override is provided.
@@ -525,4 +626,62 @@ async fn sync_cape(
     }
 
     Ok(())
+}
+
+/// Retrieves the skin history for the currently selected Minecraft profile from Mojang API.
+/// Returns all skins that have been used by the player.
+#[tracing::instrument]
+pub async fn get_skin_history() -> crate::Result<Vec<Skin>> {
+    let state = State::get().await?;
+
+    let Some(selected_credentials) =
+        Credentials::get_default_credential(&state.pool).await?
+    else {
+        return Ok(Vec::new());
+    };
+
+    let Some(profile) = selected_credentials.online_profile().await else {
+        return Ok(Vec::new());
+    };
+
+    let history_entries =
+        mojang_api::get_skin_history(&selected_credentials).await?;
+
+    let current_cape_id = profile.current_cape().map(|cape| cape.id);
+    let current_skin = profile.current_skin()?;
+    let current_skin_texture_key = current_skin.texture_key();
+
+    // Convert history entries to Skin objects
+    let skins = history_entries
+        .into_iter()
+        .map(|entry| {
+            let variant = match entry.variant.as_str() {
+                "slim" => MinecraftSkinVariant::Slim,
+                _ => MinecraftSkinVariant::Classic,
+            };
+
+            // Compare UUIDs by converting to hyphenated string
+            let is_equipped = entry.id.hyphenated().to_string()
+                == *current_skin_texture_key
+                && variant == current_skin.variant;
+
+            Skin {
+                texture_key: entry.id.hyphenated().to_string().into(),
+                name: entry.alias.map(Arc::from),
+                variant,
+                cape_id: current_cape_id,
+                texture: Url::parse(&entry.url)
+                    .map(Arc::new)
+                    .unwrap_or_else(|_| Arc::clone(&current_skin.url)),
+                source: SkinSource::CustomExternal,
+                is_equipped,
+            }
+        })
+        .collect::<Vec<_>>();
+
+    tracing::info!(
+        "Converted {} skin history entries to Skin objects",
+        skins.len()
+    );
+    Ok(skins)
 }

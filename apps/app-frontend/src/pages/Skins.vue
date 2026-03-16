@@ -500,7 +500,7 @@ onMounted(async () => {
 								<Button
 									color="green"
 									:aria-label="formatMessage(messages.editSkinAria)"
-									class="pointer-events-auto"
+									class="pointer-events-auto skin-overlay-button"
 									@click.stop="(e: MouseEvent) => editSkinModal?.show(e, skin)"
 								>
 									<EditIcon /> {{ formatMessage(messages.edit) }}
@@ -510,7 +510,7 @@ onMounted(async () => {
 									:v-tooltip="formatMessage(messages.deleteSkinTooltip)"
 									:aria-label="formatMessage(messages.deleteSkinAria)"
 									color="red"
-									class="!rounded-[100%] pointer-events-auto"
+									class="!rounded-[100%] pointer-events-auto skin-overlay-icon-button"
 									icon-only
 									@click.stop="() => confirmDeleteSkin(skin)"
 								>
@@ -697,6 +697,34 @@ $skin-card-gap: 4px;
 	background-color: transparent !important;
 	border: 0 !important;
 	box-shadow: none !important;
+}
+
+:deep(.skin-overlay-button.btn) {
+	background: rgba(6, 10, 8, 0.7) !important;
+	border: 1px solid rgba(27, 217, 106, 0.45) !important;
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45) !important;
+	color: var(--color-contrast) !important;
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+}
+
+:deep(.skin-overlay-button.btn:hover) {
+	background: rgba(14, 20, 16, 0.85) !important;
+	border-color: rgba(27, 217, 106, 0.7) !important;
+}
+
+:deep(.skin-overlay-icon-button.btn) {
+	background: rgba(8, 10, 12, 0.75) !important;
+	border: 1px solid rgba(255, 107, 107, 0.55) !important;
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45) !important;
+	color: var(--color-contrast) !important;
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+}
+
+:deep(.skin-overlay-icon-button.btn:hover) {
+	background: rgba(16, 12, 12, 0.9) !important;
+	border-color: rgba(255, 107, 107, 0.8) !important;
 }
 
 .skin-card:hover {

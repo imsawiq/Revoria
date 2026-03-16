@@ -169,6 +169,26 @@ export const commonMessages = defineMessages({
 		id: 'label.played',
 		defaultMessage: 'Played {time}',
 	},
+	selectAllLabel: {
+		id: 'label.select-all',
+		defaultMessage: 'Select all',
+	},
+	selectionActionsLabel: {
+		id: 'label.selection-actions',
+		defaultMessage: 'Selection actions',
+	},
+	updateAvailableLabel: {
+		id: 'label.update-available',
+		defaultMessage: 'Update available',
+	},
+	installingLabel: {
+		id: 'label.installing',
+		defaultMessage: 'Installing...',
+	},
+	changelogLabel: {
+		id: 'label.changelog',
+		defaultMessage: 'Changelog',
+	},
 	privateLabel: {
 		id: 'collection.label.private',
 		defaultMessage: 'Private',
@@ -200,6 +220,10 @@ export const commonMessages = defineMessages({
 	resetButton: {
 		id: 'button.reset',
 		defaultMessage: 'Reset',
+	},
+	retryButton: {
+		id: 'button.retry',
+		defaultMessage: 'Retry',
 	},
 	saveButton: {
 		id: 'button.save',
@@ -273,6 +297,66 @@ export const commonMessages = defineMessages({
 		id: 'button.upload-image',
 		defaultMessage: 'Upload image',
 	},
+	updateButton: {
+		id: 'button.update',
+		defaultMessage: 'Update',
+	},
+	installationInfoTitle: {
+		id: 'installation.info.title',
+		defaultMessage: 'Installation info',
+	},
+	installedModpackTitle: {
+		id: 'installation.installed-modpack.title',
+		defaultMessage: 'Installed modpack',
+	},
+	changeVersionButton: {
+		id: 'button.change-version',
+		defaultMessage: 'Change version',
+	},
+	unlinkModpackButton: {
+		id: 'button.unlink-modpack',
+		defaultMessage: 'Unlink modpack',
+	},
+	reinstallModpackButton: {
+		id: 'button.reinstall-modpack',
+		defaultMessage: 'Re-install modpack',
+	},
+	repairButton: {
+		id: 'button.repair',
+		defaultMessage: 'Repair',
+	},
+	repairingButton: {
+		id: 'button.repairing',
+		defaultMessage: 'Repairing...',
+	},
+	contentLabel: {
+		id: 'label.content',
+		defaultMessage: 'Content',
+	},
+	versionLabel: {
+		id: 'label.version',
+		defaultMessage: 'Version',
+	},
+	projectLabel: {
+		id: 'label.project',
+		defaultMessage: 'Project',
+	},
+	actionsLabel: {
+		id: 'label.actions',
+		defaultMessage: 'Actions',
+	},
+	platformLabel: {
+		id: 'label.platform',
+		defaultMessage: 'Platform',
+	},
+	gameVersionLabel: {
+		id: 'label.game-version',
+		defaultMessage: 'Game version',
+	},
+	noItemsLabel: {
+		id: 'label.no-items',
+		defaultMessage: 'No items',
+	},
 	visibilityLabel: {
 		id: 'label.visibility',
 		defaultMessage: 'Visibility',
@@ -284,6 +368,22 @@ export const commonMessages = defineMessages({
 	maxButton: {
 		id: 'button.max',
 		defaultMessage: 'Max',
+	},
+	selectVersionPlaceholder: {
+		id: 'input.select-version.placeholder',
+		defaultMessage: 'Select a version',
+	},
+	searchVersionPlaceholder: {
+		id: 'input.search-version.placeholder',
+		defaultMessage: 'Search versions',
+	},
+	showAllVersionsButton: {
+		id: 'button.show-all-versions',
+		defaultMessage: 'Show all versions',
+	},
+	hideSnapshotsButton: {
+		id: 'button.hide-snapshots',
+		defaultMessage: 'Hide snapshots',
 	},
 })
 

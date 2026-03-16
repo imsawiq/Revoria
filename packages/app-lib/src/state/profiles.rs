@@ -1045,6 +1045,78 @@ impl Profile {
         Ok(files)
     }
 
+    pub async fn get_installed_project_ids(
+        &self,
+        pool: &SqlitePool,
+        fetch_semaphore: &FetchSemaphore,
+    ) -> crate::Result<Vec<String>> {
+        let path = crate::api::profile::get_full_path(&self.path).await?;
+
+        struct InitialScanFile {
+            cache_key: String,
+        }
+
+        let mut keys = vec![];
+
+        for project_type in ProjectType::iterator() {
+            let folder = project_type.get_folder();
+            let path = path.join(folder);
+
+            if path.exists() {
+                for subdirectory in std::fs::read_dir(&path)
+                    .map_err(|e| io::IOError::with_path(e, &path))?
+                {
+                    let subdirectory =
+                        subdirectory.map_err(io::IOError::from)?.path();
+                    if subdirectory.is_file()
+                        && let Some(file_name) =
+                            subdirectory.file_name().and_then(|x| x.to_str())
+                    {
+                        let file_size = subdirectory
+                            .metadata()
+                            .map_err(io::IOError::from)?
+                            .len();
+
+                        keys.push(InitialScanFile {
+                            cache_key: format!(
+                                "{file_size}-{}/{folder}/{file_name}",
+                                self.path
+                            ),
+                        });
+                    }
+                }
+            }
+        }
+
+        let file_hashes = CachedEntry::get_file_hash_many(
+            &keys.iter().map(|s| &*s.cache_key).collect::<Vec<_>>(),
+            None,
+            pool,
+            fetch_semaphore,
+        )
+        .await?;
+
+        let file_hashes_ref =
+            file_hashes.iter().map(|x| &*x.hash).collect::<Vec<_>>();
+
+        let file_info = CachedEntry::get_file_many(
+            &file_hashes_ref,
+            None,
+            pool,
+            fetch_semaphore,
+        )
+        .await?;
+
+        let project_ids: Vec<String> = file_info
+            .into_iter()
+            .map(|f| f.project_id)
+            .collect::<HashSet<_>>()
+            .into_iter()
+            .collect();
+
+        Ok(project_ids)
+    }
+
     fn get_cache_key(file: &CachedFileHash, profile: &Profile) -> String {
         format!(
             "{}-{}-{}",
