@@ -9575,7 +9575,7 @@ dependencies = [
 
 [[package]]
 name = "theseus_gui"
-version = "1.3.0"
+version = "1.4.0"
 dependencies = [
  "arboard",
  "chrono",
