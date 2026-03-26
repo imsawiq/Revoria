@@ -212,6 +212,7 @@ fn main() {
                     .commands(&[
                         "settings_get",
                         "settings_set",
+                        "settings_test_proxy",
                         "cancel_directory_change",
                     ])
                     .default_permission(
@@ -256,6 +257,7 @@ fn main() {
                         "is_network_metered",
                         "should_disable_mouseover",
                         "download_url_to_temp",
+                        "proxy_get_json",
                         "highlight_in_folder",
                         "ollama_chat",
                         "open_path",
@@ -268,6 +270,7 @@ fn main() {
                         "read_text_file",
                         "read_binary_file",
                         "copy_image_to_clipboard",
+                        "set_theme_window_icon",
                     ])
                     .default_permission(
                         DefaultPermissionRule::AllowAllCommands,

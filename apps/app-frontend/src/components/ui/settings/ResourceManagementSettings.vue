@@ -1,6 +1,6 @@
 <script setup>
 import { BoxIcon, FolderSearchIcon, TrashIcon } from '@modrinth/assets'
-import { Button, injectNotificationManager, Slider } from '@modrinth/ui'
+import { Button, injectNotificationManager, Slider, Toggle } from '@modrinth/ui'
 import { open } from '@tauri-apps/plugin-dialog'
 import { defineMessages, useVIntl } from '@vintl/vintl'
 import { ref, watch } from 'vue'
@@ -12,6 +12,9 @@ import { get, set } from '@/helpers/settings.ts'
 const { handleError } = injectNotificationManager()
 const { formatMessage } = useVIntl()
 const settings = ref(await get())
+if (settings.value.auto_download_updates === null) {
+	settings.value.auto_download_updates = true
+}
 
 const messages = defineMessages({
 	selectNewAppDirectory: {
@@ -63,6 +66,15 @@ const messages = defineMessages({
 		id: 'settings.resource.max-concurrent-writes.description',
 		defaultMessage:
 			'The maximum amount of files the launcher can write to the disk at once. Set this to a lower value if you are frequently getting I/O errors. (app restart required to take effect)',
+	},
+	autoUpdatesTitle: {
+		id: 'settings.resource.auto-updates.title',
+		defaultMessage: 'Automatic updates',
+	},
+	autoUpdatesDescription: {
+		id: 'settings.resource.auto-updates.description',
+		defaultMessage:
+			'Automatically downloads launcher updates in the background when available. When disabled, the launcher only shows that an update is available on startup.',
 	},
 })
 
@@ -153,6 +165,18 @@ async function findLauncherDir() {
 		{{ formatMessage(messages.purgeCacheProceed) }}
 	</button>
 
+	<div class="settings-row mt-4 flex items-center justify-between gap-4">
+		<div>
+			<h2 class="m-0 text-lg font-extrabold text-contrast">
+				{{ formatMessage(messages.autoUpdatesTitle) }}
+			</h2>
+			<p class="m-0 mt-1 leading-tight text-secondary">
+				{{ formatMessage(messages.autoUpdatesDescription) }}
+			</p>
+		</div>
+		<Toggle id="auto-download-updates" v-model="settings.auto_download_updates" />
+	</div>
+
 	<h2 class="m-0 text-lg font-extrabold text-contrast mt-4">
 		{{ formatMessage(messages.maxConcurrentDownloadsTitle) }}
 	</h2>
@@ -175,3 +199,17 @@ async function findLauncherDir() {
 	</p>
 	<Slider id="max-writes" v-model="settings.max_concurrent_writes" :min="1" :max="50" :step="1" />
 </template>
+
+<style lang="scss" scoped>
+.settings-row {
+	padding: 1rem 1.125rem;
+	border: 1px solid var(--glass-border);
+	border-radius: var(--radius-xl);
+	background: linear-gradient(
+		180deg,
+		color-mix(in oklch, var(--color-glass-bg-strong) 88%, transparent),
+		color-mix(in oklch, var(--color-glass-bg) 94%, transparent)
+	);
+	box-shadow: var(--shadow-card);
+}
+</style>

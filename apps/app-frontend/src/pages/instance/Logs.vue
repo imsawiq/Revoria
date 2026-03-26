@@ -65,23 +65,14 @@
 				</div>
 			</div>
 			<div class="log-text">
-				<RecycleScroller
-					v-slot="{ item }"
-					ref="logContainer"
-					class="scroller"
-					:items="displayProcessedLogs"
-					direction="vertical"
-					:item-size="20"
-					key-field="id"
-					:buffer="200"
-				>
-					<div class="user no-wrap">
+				<div ref="logContainer" class="scroller">
+					<div v-for="item in displayProcessedLogs" :key="item.id" class="user no-wrap">
 						<span :style="{ color: item.prefixColor, 'font-weight': item.weight }">{{
 							item.prefix
 						}}</span>
 						<span :style="{ color: item.textColor }">{{ item.text }}</span>
 					</div>
-				</RecycleScroller>
+				</div>
 			</div>
 			<ShareModalWrapper
 				ref="shareModal"
@@ -181,7 +172,6 @@ import isYesterday from 'dayjs/plugin/isYesterday'
 import { ofetch } from 'ofetch'
 import { computed, nextTick, onBeforeUnmount, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { RecycleScroller } from 'vue-virtual-scroller'
 
 import ModalWrapper from '@/components/ui/modal/ModalWrapper.vue'
 import ShareModalWrapper from '@/components/ui/modal/ShareModalWrapper.vue'
@@ -804,15 +794,17 @@ function handleUserScroll() {
 interval.value = setInterval(async () => {
 	if (logs.value.length > 0) {
 		logs.value[0] = await getLiveStdLog()
-		const scroll = logContainer.value.getScroll()
+		const container = logContainer.value
+		if (!container) return
+		const scrollEnd = container.scrollTop + container.clientHeight
 
 		// Allow resetting of userScrolled if the user scrolls to the bottom
 		if (selectedLogIndex.value === 0) {
-			if (scroll.end >= logContainer.value.$el.scrollHeight - 10) userScrolled.value = false
+			if (scrollEnd >= container.scrollHeight - 10) userScrolled.value = false
 			if (!userScrolled.value) {
 				await nextTick()
 				isAutoScrolling.value = true
-				logContainer.value.scrollToItem(displayProcessedLogs.value.length - 1)
+				container.scrollTop = container.scrollHeight
 				setTimeout(() => (isAutoScrolling.value = false), 50)
 			}
 		}
@@ -824,7 +816,7 @@ let unlistenProcesses = null
 onMounted(async () => {
 	await setLogs()
 	await loadCrashLogs()
-	logContainer.value?.$el?.addEventListener('scroll', handleUserScroll)
+	logContainer.value?.addEventListener('scroll', handleUserScroll)
 
 	unlistenProcesses = await process_listener(async (e) => {
 		if (e.event === 'launched') {
@@ -843,7 +835,7 @@ onMounted(async () => {
 })
 
 onBeforeUnmount(() => {
-	logContainer.value?.$el?.removeEventListener('scroll', handleUserScroll)
+	logContainer.value?.removeEventListener('scroll', handleUserScroll)
 })
 onUnmounted(() => {
 	clearInterval(interval.value)
@@ -1002,7 +994,7 @@ onUnmounted(() => {
 	width: 100%;
 	flex: 1 1 auto;
 	min-height: 18rem;
-	height: clamp(20rem, 44vh, 34rem);
+	height: clamp(23rem, 50vh, 38rem);
 	font-family: var(--mono-font);
 	background-color: var(--color-accent-contrast);
 	color: var(--color-contrast);
@@ -1051,6 +1043,7 @@ onUnmounted(() => {
 .scroller {
 	height: 100%;
 	overflow: auto;
+	padding-bottom: 0.75rem;
 }
 
 .user {
@@ -1059,5 +1052,8 @@ onUnmounted(() => {
 	display: flex;
 	align-items: flex-start;
 	user-select: text;
+	-webkit-user-select: text;
+	white-space: pre-wrap;
+	word-break: break-word;
 }
 </style>

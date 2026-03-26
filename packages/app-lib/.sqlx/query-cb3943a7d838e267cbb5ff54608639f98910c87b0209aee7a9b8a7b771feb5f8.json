@@ -1,0 +1,284 @@
+{
+  "db_name": "SQLite",
+  "query": "\n            SELECT\n                max_concurrent_writes, max_concurrent_downloads,\n                theme, default_page, collapsed_navigation, hide_nametag_skins_page, advanced_rendering, native_decorations,\n                glass_blur, glass_border_opacity, background_effect, background_effect_intensity,\n                page_background_path, page_background_opacity,\n                proxy_enabled, proxy_type, proxy_host, proxy_port, proxy_auth_enabled, proxy_username, proxy_password,\n                discord_rpc, developer_mode, telemetry, personalized_ads,\n                onboarded,\n                json(extra_launch_args) extra_launch_args, json(custom_env_vars) custom_env_vars,\n                mc_memory_max, mc_force_fullscreen, mc_game_resolution_x, mc_game_resolution_y, hide_on_process_start,\n                hook_pre_launch, hook_wrapper, hook_post_exit,\n                custom_dir, prev_custom_dir, migrated, json(feature_flags) feature_flags, toggle_sidebar,\n                skipped_update, pending_update_toast_for_version, auto_download_updates,\n                version\n            FROM settings\n            ",
+  "describe": {
+    "columns": [
+      {
+        "name": "max_concurrent_writes",
+        "ordinal": 0,
+        "type_info": "Integer"
+      },
+      {
+        "name": "max_concurrent_downloads",
+        "ordinal": 1,
+        "type_info": "Integer"
+      },
+      {
+        "name": "theme",
+        "ordinal": 2,
+        "type_info": "Text"
+      },
+      {
+        "name": "default_page",
+        "ordinal": 3,
+        "type_info": "Text"
+      },
+      {
+        "name": "collapsed_navigation",
+        "ordinal": 4,
+        "type_info": "Integer"
+      },
+      {
+        "name": "hide_nametag_skins_page",
+        "ordinal": 5,
+        "type_info": "Integer"
+      },
+      {
+        "name": "advanced_rendering",
+        "ordinal": 6,
+        "type_info": "Integer"
+      },
+      {
+        "name": "native_decorations",
+        "ordinal": 7,
+        "type_info": "Integer"
+      },
+      {
+        "name": "glass_blur",
+        "ordinal": 8,
+        "type_info": "Integer"
+      },
+      {
+        "name": "glass_border_opacity",
+        "ordinal": 9,
+        "type_info": "Float"
+      },
+      {
+        "name": "background_effect",
+        "ordinal": 10,
+        "type_info": "Text"
+      },
+      {
+        "name": "background_effect_intensity",
+        "ordinal": 11,
+        "type_info": "Integer"
+      },
+      {
+        "name": "page_background_path",
+        "ordinal": 12,
+        "type_info": "Text"
+      },
+      {
+        "name": "page_background_opacity",
+        "ordinal": 13,
+        "type_info": "Float"
+      },
+      {
+        "name": "proxy_enabled",
+        "ordinal": 14,
+        "type_info": "Integer"
+      },
+      {
+        "name": "proxy_type",
+        "ordinal": 15,
+        "type_info": "Text"
+      },
+      {
+        "name": "proxy_host",
+        "ordinal": 16,
+        "type_info": "Text"
+      },
+      {
+        "name": "proxy_port",
+        "ordinal": 17,
+        "type_info": "Integer"
+      },
+      {
+        "name": "proxy_auth_enabled",
+        "ordinal": 18,
+        "type_info": "Integer"
+      },
+      {
+        "name": "proxy_username",
+        "ordinal": 19,
+        "type_info": "Text"
+      },
+      {
+        "name": "proxy_password",
+        "ordinal": 20,
+        "type_info": "Text"
+      },
+      {
+        "name": "discord_rpc",
+        "ordinal": 21,
+        "type_info": "Integer"
+      },
+      {
+        "name": "developer_mode",
+        "ordinal": 22,
+        "type_info": "Integer"
+      },
+      {
+        "name": "telemetry",
+        "ordinal": 23,
+        "type_info": "Integer"
+      },
+      {
+        "name": "personalized_ads",
+        "ordinal": 24,
+        "type_info": "Integer"
+      },
+      {
+        "name": "onboarded",
+        "ordinal": 25,
+        "type_info": "Integer"
+      },
+      {
+        "name": "extra_launch_args",
+        "ordinal": 26,
+        "type_info": "Text"
+      },
+      {
+        "name": "custom_env_vars",
+        "ordinal": 27,
+        "type_info": "Text"
+      },
+      {
+        "name": "mc_memory_max",
+        "ordinal": 28,
+        "type_info": "Integer"
+      },
+      {
+        "name": "mc_force_fullscreen",
+        "ordinal": 29,
+        "type_info": "Integer"
+      },
+      {
+        "name": "mc_game_resolution_x",
+        "ordinal": 30,
+        "type_info": "Integer"
+      },
+      {
+        "name": "mc_game_resolution_y",
+        "ordinal": 31,
+        "type_info": "Integer"
+      },
+      {
+        "name": "hide_on_process_start",
+        "ordinal": 32,
+        "type_info": "Integer"
+      },
+      {
+        "name": "hook_pre_launch",
+        "ordinal": 33,
+        "type_info": "Text"
+      },
+      {
+        "name": "hook_wrapper",
+        "ordinal": 34,
+        "type_info": "Text"
+      },
+      {
+        "name": "hook_post_exit",
+        "ordinal": 35,
+        "type_info": "Text"
+      },
+      {
+        "name": "custom_dir",
+        "ordinal": 36,
+        "type_info": "Text"
+      },
+      {
+        "name": "prev_custom_dir",
+        "ordinal": 37,
+        "type_info": "Text"
+      },
+      {
+        "name": "migrated",
+        "ordinal": 38,
+        "type_info": "Integer"
+      },
+      {
+        "name": "feature_flags",
+        "ordinal": 39,
+        "type_info": "Text"
+      },
+      {
+        "name": "toggle_sidebar",
+        "ordinal": 40,
+        "type_info": "Integer"
+      },
+      {
+        "name": "skipped_update",
+        "ordinal": 41,
+        "type_info": "Text"
+      },
+      {
+        "name": "pending_update_toast_for_version",
+        "ordinal": 42,
+        "type_info": "Text"
+      },
+      {
+        "name": "auto_download_updates",
+        "ordinal": 43,
+        "type_info": "Integer"
+      },
+      {
+        "name": "version",
+        "ordinal": 44,
+        "type_info": "Integer"
+      }
+    ],
+    "parameters": {
+      "Right": 0
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      null,
+      null,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      null,
+      false,
+      true,
+      true,
+      true,
+      false
+    ]
+  },
+  "hash": "cb3943a7d838e267cbb5ff54608639f98910c87b0209aee7a9b8a7b771feb5f8"
+}

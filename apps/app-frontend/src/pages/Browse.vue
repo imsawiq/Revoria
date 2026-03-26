@@ -21,6 +21,7 @@ import {
     Pagination,
     SearchFilterControl,
     SearchSidebarFilter,
+    StyledInput,
     useSearch,
     useServerSearch,
 } from '@modrinth/ui'
@@ -994,11 +995,30 @@ async function setPage(newPageNumber: number) {
 }
 
 const searchWrapper: Ref<HTMLElement | null> = ref(null)
+const pageJumpValue = ref('1')
 
 async function onSearchChangeToTop() {
 	await nextTick()
 
 	window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+watch(
+	currentPage,
+	(value) => {
+		pageJumpValue.value = String(value)
+	},
+	{ immediate: true },
+)
+
+async function jumpToPage() {
+	const parsed = Number.parseInt(pageJumpValue.value, 10)
+	if (!Number.isFinite(parsed)) {
+		pageJumpValue.value = String(currentPage.value)
+		return
+	}
+
+	await setPage(Math.min(Math.max(parsed, 1), pageCount.value))
 }
 
 function clearSearch() {
@@ -1288,6 +1308,22 @@ const messages = defineMessages({
 	maxResultsLabel: {
 		id: 'browse.max-results.label',
 		defaultMessage: 'Max results',
+	},
+	pageLabel: {
+		id: 'browse.pagination.page-label',
+		defaultMessage: 'Page',
+	},
+	pagePlaceholder: {
+		id: 'browse.pagination.page-placeholder',
+		defaultMessage: 'Number',
+	},
+	goToPage: {
+		id: 'browse.pagination.go',
+		defaultMessage: 'Go',
+	},
+	pageCountLabel: {
+		id: 'browse.pagination.page-count',
+		defaultMessage: 'of {count}',
 	},
 	offlineMessage: {
 		id: 'browse.offline',
@@ -1712,7 +1748,31 @@ const handleOptionsClick = (args: any) => {
 				<span class="font-semibold text-primary">{{ formatMessage(messages.viewLabel) }}: </span>
 				<span class="font-semibold text-secondary">{{ selected }}</span>
 			</DropdownSelect>
-			<Pagination :page="currentPage" :count="pageCount" class="ml-auto" @switch-page="setPage" />
+			<div class="ml-auto flex flex-wrap items-center justify-end gap-2">
+				<div class="flex items-center gap-2 rounded-2xl bg-bg-raised/70 px-2 py-1">
+					<span class="text-sm font-semibold text-secondary">
+						{{ formatMessage(messages.pageLabel) }}
+					</span>
+					<StyledInput
+						v-model="pageJumpValue"
+						type="number"
+						size="small"
+						:min="1"
+						:max="pageCount"
+						:placeholder="formatMessage(messages.pagePlaceholder)"
+						input-class="!w-20 !text-center"
+						wrapper-class="!w-20"
+						@keydown.enter="jumpToPage"
+					/>
+					<span class="text-sm text-secondary">
+						{{ formatMessage(messages.pageCountLabel, { count: pageCount }) }}
+					</span>
+					<ButtonStyled size="small" color="brand" @click="jumpToPage">
+						{{ formatMessage(messages.goToPage) }}
+					</ButtonStyled>
+				</div>
+				<Pagination :page="currentPage" :count="pageCount" @switch-page="setPage" />
+			</div>
 		</div>
 		<SearchFilterControl
 			v-if="projectType === 'server'"
@@ -1798,13 +1858,30 @@ const handleOptionsClick = (args: any) => {
 							</template>
 						</ContextMenu>
 					</section>
-					<div class="flex justify-end">
-						<Pagination
-							:page="currentPage"
-							:count="pageCount"
-							class="pagination-after"
-							@switch-page="setPage"
-						/>
+					<div class="flex flex-wrap justify-end gap-2 pb-4 pr-2">
+						<div class="flex items-center gap-2 rounded-2xl bg-bg-raised/70 px-2 py-1">
+							<span class="text-sm font-semibold text-secondary">
+								{{ formatMessage(messages.pageLabel) }}
+							</span>
+							<StyledInput
+								v-model="pageJumpValue"
+								type="number"
+								size="small"
+								:min="1"
+								:max="pageCount"
+								:placeholder="formatMessage(messages.pagePlaceholder)"
+								input-class="!w-20 !text-center"
+								wrapper-class="!w-20"
+								@keydown.enter="jumpToPage"
+							/>
+							<span class="text-sm text-secondary">
+								{{ formatMessage(messages.pageCountLabel, { count: pageCount }) }}
+							</span>
+							<ButtonStyled size="small" color="brand" @click="jumpToPage">
+								{{ formatMessage(messages.goToPage) }}
+							</ButtonStyled>
+						</div>
+						<Pagination :page="currentPage" :count="pageCount" @switch-page="setPage" />
 					</div>
 				</div>
 			</div>
@@ -1814,7 +1891,7 @@ const handleOptionsClick = (args: any) => {
 
 <style scoped lang="scss">
 .browse-tab-swap-shell {
-	will-change: transform, opacity, filter;
+	will-change: transform, opacity;
 }
 
 :deep(.project-list) {
@@ -1833,12 +1910,10 @@ const handleOptionsClick = (args: any) => {
 .browse-tab-swap-enter-from {
 	opacity: 0;
 	transform: translateY(10px) scale(0.99);
-	filter: blur(3px);
 }
 
 .browse-tab-swap-leave-to {
 	opacity: 0;
 	transform: translateY(-6px) scale(0.995);
-	filter: blur(2px);
 }
 </style>

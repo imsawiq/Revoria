@@ -313,14 +313,22 @@ defineExpose({ show, hide })
 	gap: 0.75rem;
 	border-radius: 20px;
 	padding: 0.75rem;
-	border: none;
+	border: 1px solid var(--glass-border);
 	text-align: left;
-	background: var(--surface-4);
-	transition: filter 120ms ease, transform 120ms ease;
+	background: var(--color-glass-bg);
+	box-shadow: var(--glass-shadow);
+	backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+	-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+	transition:
+		filter 120ms ease,
+		transform 120ms ease,
+		border-color 120ms ease,
+		background-color 120ms ease;
 }
 
 .skin-upload-option:hover {
 	filter: brightness(1.1);
+	border-color: color-mix(in srgb, var(--color-brand) 35%, var(--glass-border));
 }
 
 .skin-upload-option:active {
@@ -334,7 +342,8 @@ defineExpose({ show, hide })
 	align-items: center;
 	justify-content: center;
 	border-radius: 1rem;
-	border: 1px solid var(--surface-5);
+	border: 1px solid var(--glass-border);
+	background: color-mix(in srgb, var(--color-glass-bg-strong) 82%, transparent);
 }
 
 .skin-upload-option__text {

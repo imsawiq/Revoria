@@ -16,7 +16,19 @@ fn main() {
     println!("cargo::rerun-if-changed=java/gradle.properties");
 
     set_env();
+    if should_skip_java_build() {
+        set_java_jars_dir_placeholder();
+        return;
+    }
+
     build_java_jars();
+}
+
+fn should_skip_java_build() -> bool {
+    matches!(
+        env::var("THESEUS_SKIP_JAVA_BUILD").as_deref(),
+        Ok("1") | Ok("true") | Ok("TRUE") | Ok("yes") | Ok("YES")
+    )
 }
 
 fn set_env() {
@@ -134,4 +146,13 @@ fn build_java_jars() {
         println!("cargo::error=Gradle build failed with {exit_status}");
         exit(exit_status.code().unwrap_or(1));
     }
+}
+
+fn set_java_jars_dir_placeholder() {
+    let out_dir =
+        PathBuf::from(env::var_os("OUT_DIR").unwrap());
+    println!(
+        "cargo::rustc-env=JAVA_JARS_DIR={}",
+        out_dir.join("java/libs").display()
+    );
 }

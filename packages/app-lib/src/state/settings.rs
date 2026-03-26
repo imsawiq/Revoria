@@ -16,6 +16,19 @@ pub struct Settings {
     pub collapsed_navigation: bool,
     pub hide_nametag_skins_page: bool,
     pub advanced_rendering: bool,
+    pub glass_blur: i64,
+    pub glass_border_opacity: f64,
+    pub background_effect: String,
+    pub background_effect_intensity: i64,
+    pub page_background_path: String,
+    pub page_background_opacity: f64,
+    pub proxy_enabled: bool,
+    pub proxy_type: ProxyType,
+    pub proxy_host: String,
+    pub proxy_port: u16,
+    pub proxy_auth_enabled: bool,
+    pub proxy_username: String,
+    pub proxy_password: String,
     pub native_decorations: bool,
     pub toggle_sidebar: bool,
 
@@ -57,7 +70,7 @@ pub enum FeatureFlag {
 }
 
 impl Settings {
-    const CURRENT_VERSION: usize = 2;
+    const CURRENT_VERSION: usize = 7;
 
     pub async fn get(
         exec: impl sqlx::Executor<'_, Database = sqlx::Sqlite>,
@@ -67,6 +80,9 @@ impl Settings {
             SELECT
                 max_concurrent_writes, max_concurrent_downloads,
                 theme, default_page, collapsed_navigation, hide_nametag_skins_page, advanced_rendering, native_decorations,
+                glass_blur, glass_border_opacity, background_effect, background_effect_intensity,
+                page_background_path, page_background_opacity,
+                proxy_enabled, proxy_type, proxy_host, proxy_port, proxy_auth_enabled, proxy_username, proxy_password,
                 discord_rpc, developer_mode, telemetry, personalized_ads,
                 onboarded,
                 json(extra_launch_args) extra_launch_args, json(custom_env_vars) custom_env_vars,
@@ -89,6 +105,19 @@ impl Settings {
             collapsed_navigation: res.collapsed_navigation == 1,
             hide_nametag_skins_page: res.hide_nametag_skins_page == 1,
             advanced_rendering: res.advanced_rendering == 1,
+            glass_blur: res.glass_blur,
+            glass_border_opacity: res.glass_border_opacity,
+            background_effect: res.background_effect,
+            background_effect_intensity: res.background_effect_intensity,
+            page_background_path: res.page_background_path,
+            page_background_opacity: res.page_background_opacity,
+            proxy_enabled: res.proxy_enabled == 1,
+            proxy_type: ProxyType::from_string(&res.proxy_type),
+            proxy_host: res.proxy_host,
+            proxy_port: res.proxy_port as u16,
+            proxy_auth_enabled: res.proxy_auth_enabled == 1,
+            proxy_username: res.proxy_username,
+            proxy_password: res.proxy_password,
             native_decorations: res.native_decorations == 1,
             toggle_sidebar: res.toggle_sidebar == 1,
             telemetry: res.telemetry == 1,
@@ -144,6 +173,9 @@ impl Settings {
         let max_concurrent_downloads = self.max_concurrent_downloads as i32;
         let theme = self.theme.as_str();
         let default_page = self.default_page.as_str();
+        let background_effect = self.background_effect.as_str();
+        let page_background_path = self.page_background_path.as_str();
+        let proxy_type = self.proxy_type.as_str();
         let extra_launch_args = serde_json::to_string(&self.extra_launch_args)?;
         let custom_env_vars = serde_json::to_string(&self.custom_env_vars)?;
         let feature_flags = serde_json::to_string(&self.feature_flags)?;
@@ -162,38 +194,52 @@ impl Settings {
                 advanced_rendering = $6,
                 native_decorations = $7,
 
-                discord_rpc = $8,
-                developer_mode = $9,
-                telemetry = $10,
-                personalized_ads = $11,
+                glass_blur = $8,
+                glass_border_opacity = $9,
+                background_effect = $10,
+                background_effect_intensity = $11,
+                page_background_path = $12,
+                page_background_opacity = $13,
+                proxy_enabled = $14,
+                proxy_type = $15,
+                proxy_host = $16,
+                proxy_port = $17,
+                proxy_auth_enabled = $18,
+                proxy_username = $19,
+                proxy_password = $20,
 
-                onboarded = $12,
+                discord_rpc = $21,
+                developer_mode = $22,
+                telemetry = $23,
+                personalized_ads = $24,
 
-                extra_launch_args = jsonb($13),
-                custom_env_vars = jsonb($14),
-                mc_memory_max = $15,
-                mc_force_fullscreen = $16,
-                mc_game_resolution_x = $17,
-                mc_game_resolution_y = $18,
-                hide_on_process_start = $19,
+                onboarded = $25,
 
-                hook_pre_launch = $20,
-                hook_wrapper = $21,
-                hook_post_exit = $22,
+                extra_launch_args = json($26),
+                custom_env_vars = json($27),
+                mc_memory_max = $28,
+                mc_force_fullscreen = $29,
+                mc_game_resolution_x = $30,
+                mc_game_resolution_y = $31,
+                hide_on_process_start = $32,
 
-                custom_dir = $23,
-                prev_custom_dir = $24,
-                migrated = $25,
+                hook_pre_launch = $33,
+                hook_wrapper = $34,
+                hook_post_exit = $35,
 
-                toggle_sidebar = $26,
-                feature_flags = $27,
-                hide_nametag_skins_page = $28,
+                custom_dir = $36,
+                prev_custom_dir = $37,
+                migrated = $38,
 
-                skipped_update = $29,
-                pending_update_toast_for_version = $30,
-                auto_download_updates = $31,
+                toggle_sidebar = $39,
+                feature_flags = $40,
+                hide_nametag_skins_page = $41,
 
-                version = $32
+                skipped_update = $42,
+                pending_update_toast_for_version = $43,
+                auto_download_updates = $44,
+
+                version = $45
             ",
             max_concurrent_writes,
             max_concurrent_downloads,
@@ -202,6 +248,19 @@ impl Settings {
             self.collapsed_navigation,
             self.advanced_rendering,
             self.native_decorations,
+            self.glass_blur,
+            self.glass_border_opacity,
+            background_effect,
+            self.background_effect_intensity,
+            page_background_path,
+            self.page_background_opacity,
+            self.proxy_enabled,
+            proxy_type,
+            self.proxy_host,
+            self.proxy_port,
+            self.proxy_auth_enabled,
+            self.proxy_username,
+            self.proxy_password,
             self.discord_rpc,
             self.developer_mode,
             self.telemetry,
@@ -285,6 +344,73 @@ impl Settings {
 
                 self.version = 2;
             }
+            2 => {
+                // Settings schema v3 adds glass/effect settings. Clamp values to safe defaults.
+                if self.glass_blur < 0 {
+                    self.glass_blur = 0;
+                }
+                if self.glass_blur > 72 {
+                    self.glass_blur = 72;
+                }
+
+                if !(0.0..=1.0).contains(&self.glass_border_opacity) {
+                    self.glass_border_opacity = 0.075;
+                }
+
+                if !matches!(
+                    self.background_effect.as_str(),
+                    "off" | "snow" | "stars" | "rain"
+                ) {
+                    self.background_effect = "off".to_string();
+                }
+
+                self.version = 3;
+            }
+            3 => {
+                if self.background_effect_intensity < 10 {
+                    self.background_effect_intensity = 100;
+                }
+                if self.background_effect_intensity > 400 {
+                    self.background_effect_intensity = 400;
+                }
+
+                self.version = 4;
+            }
+            4 => {
+                if self.proxy_port == 0 {
+                    self.proxy_port = 8080;
+                }
+
+                self.proxy_host = self.proxy_host.trim().to_string();
+                if !matches!(
+                    self.proxy_type,
+                    ProxyType::Http | ProxyType::Https | ProxyType::Socks5
+                ) {
+                    self.proxy_type = ProxyType::Http;
+                }
+
+                if self.proxy_host.is_empty() {
+                    self.proxy_enabled = false;
+                }
+
+                self.version = 5;
+            }
+            5 => {
+                self.page_background_path = self.page_background_path.trim().to_string();
+
+                if !(0.0..=1.0).contains(&self.page_background_opacity) {
+                    self.page_background_opacity = 0.22;
+                }
+
+                self.version = 6;
+            }
+            6 => {
+                if self.auto_download_updates.is_none() {
+                    self.auto_download_updates = Some(true);
+                }
+
+                self.version = 7;
+            }
             version => {
                 return Err(crate::ErrorKind::OtherError(format!(
                     "Invalid settings version: {version}"
@@ -297,6 +423,33 @@ impl Settings {
     }
 }
 
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum ProxyType {
+    Http,
+    Https,
+    Socks5,
+}
+
+impl ProxyType {
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            ProxyType::Http => "http",
+            ProxyType::Https => "https",
+            ProxyType::Socks5 => "socks5",
+        }
+    }
+
+    pub fn from_string(string: &str) -> Self {
+        match string {
+            "http" => Self::Http,
+            "https" => Self::Https,
+            "socks5" => Self::Socks5,
+            _ => Self::Http,
+        }
+    }
+}
+
 /// Theseus theme
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
@@ -304,6 +457,17 @@ pub enum Theme {
     Dark,
     Light,
     Oled,
+    Retro,
+    Sapphire,
+    Amethyst,
+    Sunset,
+    Aurora,
+    #[serde(rename = "rose-gold")]
+    RoseGold,
+    #[serde(rename = "obsidian-gold")]
+    ObsidianGold,
+    #[serde(rename = "cherry-blossom")]
+    CherryBlossom,
     System,
 }
 
@@ -313,6 +477,14 @@ impl Theme {
             Theme::Dark => "dark",
             Theme::Light => "light",
             Theme::Oled => "oled",
+            Theme::Retro => "retro",
+            Theme::Sapphire => "sapphire",
+            Theme::Amethyst => "amethyst",
+            Theme::Sunset => "sunset",
+            Theme::Aurora => "aurora",
+            Theme::RoseGold => "rose-gold",
+            Theme::ObsidianGold => "obsidian-gold",
+            Theme::CherryBlossom => "cherry-blossom",
             Theme::System => "system",
         }
     }
@@ -322,6 +494,14 @@ impl Theme {
             "dark" => Theme::Dark,
             "light" => Theme::Light,
             "oled" => Theme::Oled,
+            "retro" => Theme::Retro,
+            "sapphire" => Theme::Sapphire,
+            "amethyst" => Theme::Amethyst,
+            "sunset" => Theme::Sunset,
+            "aurora" => Theme::Aurora,
+            "rose-gold" => Theme::RoseGold,
+            "obsidian-gold" => Theme::ObsidianGold,
+            "cherry-blossom" => Theme::CherryBlossom,
             "system" => Theme::System,
             _ => Theme::Dark,
         }

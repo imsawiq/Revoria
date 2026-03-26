@@ -5,13 +5,13 @@
 			<Avatar :src="ctx.instanceIconUrl.value ?? undefined" size="5rem" />
 			<div class="flex flex-col gap-2">
 				<ButtonStyled type="outlined">
-					<button class="!border-surface-5" @click="triggerIconInput">
+					<button class="!border-[--glass-border]" @click="triggerIconInput">
 						<UploadIcon />
 						{{ formatMessage(messages.selectIcon) }}
 					</button>
 				</ButtonStyled>
 				<ButtonStyled type="outlined">
-					<button class="!border-surface-5" :disabled="!ctx.instanceIcon.value" @click="removeIcon">
+					<button class="!border-[--glass-border]" :disabled="!ctx.instanceIcon.value" @click="removeIcon">
 						<XIcon />
 						{{ formatMessage(messages.removeIcon) }}
 					</button>
@@ -56,7 +56,7 @@
 			>
 				<template v-if="ctx.showSnapshotToggle" #dropdown-footer>
 					<button
-						class="flex w-full cursor-pointer items-center justify-center gap-1.5 border-0 border-t border-solid border-surface-5 bg-transparent py-3 text-center text-sm font-semibold text-secondary transition-colors hover:text-contrast"
+						class="flex w-full cursor-pointer items-center justify-center gap-1.5 border-0 border-t border-solid border-[--glass-border] bg-transparent py-3 text-center text-sm font-semibold text-secondary transition-colors hover:text-contrast"
 						@mousedown.prevent
 						@click="ctx.showSnapshots.value = !ctx.showSnapshots.value"
 					>

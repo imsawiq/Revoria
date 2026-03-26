@@ -1,5 +1,5 @@
 import { getVersion } from '@tauri-apps/api/app'
-import { fetch } from '@tauri-apps/plugin-http'
+import { invoke } from '@tauri-apps/api/core'
 
 export const CURSEFORGE_BASE_URL = 'https://api.curseforge.com/v1'
 
@@ -97,21 +97,14 @@ async function cfFetch<T>(
 		}
 	}
 
-	const res = await fetch(url.toString(), {
-		method: 'GET',
+	return (await invoke('plugin:utils|proxy_get_json', {
+		url: url.toString(),
 		headers: {
 			'User-Agent': `revoria/${version}`,
 			Accept: 'application/json',
 			'x-api-key': CURSEFORGE_API_KEY,
 		},
-	})
-
-	if (!res.ok) {
-		const text = await res.text().catch(() => '')
-		throw new Error(`CurseForge request failed (${res.status}): ${text}`)
-	}
-
-	return (await res.json()) as T
+	})) as T
 }
 
 export function getCurseForgeClassId(projectType: string): number | null {

@@ -33,11 +33,11 @@
 				<div
 					v-for="launcher in visibleLaunchers"
 					:key="launcher.name"
-					class="flex flex-col rounded-[20px] border border-solid border-surface-4 shadow-sm overflow-clip"
+					class="flex flex-col rounded-[20px] border border-solid border-[--glass-border] shadow-[--glass-shadow] overflow-clip bg-[--color-glass-bg]"
 				>
 					<!-- Launcher header -->
 					<button
-						class="flex w-full cursor-pointer items-center gap-3 border-none bg-surface-3 p-3 text-left transition-colors"
+						class="flex w-full cursor-pointer items-center gap-3 border-none bg-[--color-glass-bg-strong] p-3 text-left transition-colors"
 						@click="toggleLauncherExpanded(launcher.name)"
 					>
 						<ChevronRightIcon
@@ -58,8 +58,12 @@
 						<div class="flex flex-col">
 							<template v-for="(instance, i) in filteredInstances(launcher)" :key="instance">
 								<div
-									class="flex items-center gap-3 border-0 border-t border-solid border-surface-4 py-3 pr-3"
-									:class="i % 2 === 0 ? 'bg-surface-2' : 'bg-surface-1.5'"
+									class="flex items-center gap-3 border-0 border-t border-solid border-[--glass-border] py-3 pr-3"
+									:class="
+										i % 2 === 0
+											? 'bg-[color-mix(in_srgb,var(--color-glass-bg)_88%,transparent)]'
+											: 'bg-[color-mix(in_srgb,var(--color-glass-bg-strong)_78%,transparent)]'
+									"
 									style="padding-left: 2.75rem"
 								>
 									<Checkbox

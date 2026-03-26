@@ -459,8 +459,8 @@ const filteredResults = computed(() => {
 		);
 	border: 1px solid var(--glass-border);
 	box-shadow: var(--shadow-card);
-	backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-	-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+	backdrop-filter: blur(calc(var(--glass-blur) * 0.55)) saturate(var(--glass-saturate));
+	-webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.55)) saturate(var(--glass-saturate));
 }
 
 .toolbar-inner {
@@ -513,20 +513,20 @@ const filteredResults = computed(() => {
 .toolbar-select {
 	max-width: 16rem;
 	border-radius: 999px;
-	background: color-mix(in srgb, var(--color-glass-bg-strong) 86%, transparent);
+	background: color-mix(in srgb, var(--color-glass-bg-strong) 96%, transparent);
 	border: 1px solid var(--glass-border);
 	box-shadow: var(--shadow-card);
-	backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-	-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
 }
 
 /* DropdownSelect uses v-popper; teleported nodes still carry the scope attribute so this applies */
 :deep(.v-popper__inner) {
-	background: var(--color-glass-bg-strong);
+	background: color-mix(in srgb, var(--color-glass-bg-strong) 98%, transparent);
 	border: 1px solid var(--glass-border);
 	box-shadow: var(--shadow-floating);
-	backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-	-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
 	color: var(--color-contrast);
 }
 

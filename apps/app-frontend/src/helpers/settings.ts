@@ -8,6 +8,8 @@ import { invoke } from '@tauri-apps/api/core'
 import type { Hooks, MemorySettings, WindowSize } from '@/helpers/types'
 import type { ColorTheme, FeatureFlag } from '@/store/theme.ts'
 
+export type ProxyType = 'http' | 'https' | 'socks5'
+
 // Settings object
 /*
 
@@ -40,6 +42,19 @@ export type AppSettings = {
 	collapsed_navigation: boolean
 	hide_nametag_skins_page: boolean
 	advanced_rendering: boolean
+	glass_blur: number
+	glass_border_opacity: number
+	background_effect: 'off' | 'snow' | 'stars' | 'rain'
+	background_effect_intensity: number
+	page_background_path: string
+	page_background_opacity: number
+	proxy_enabled: boolean
+	proxy_type: ProxyType
+	proxy_host: string
+	proxy_port: number
+	proxy_auth_enabled: boolean
+	proxy_username: string
+	proxy_password: string
 	native_decorations: boolean
 	toggle_sidebar: boolean
 
@@ -71,6 +86,14 @@ export type AppSettings = {
 	version: number
 }
 
+export type ProxyTestResult = {
+	ok: boolean
+	message: string
+	ip: string | null
+	minecraft_status: number | null
+	xbox_status: number | null
+}
+
 // Get full settings object
 export async function get() {
 	return (await invoke('plugin:settings|settings_get')) as AppSettings
@@ -79,6 +102,12 @@ export async function get() {
 // Set full settings object
 export async function set(settings: AppSettings) {
 	return await invoke('plugin:settings|settings_set', { settings })
+}
+
+export async function testProxy(settings: AppSettings) {
+	return (await invoke('plugin:settings|settings_test_proxy', {
+		settings,
+	})) as ProxyTestResult
 }
 
 export async function cancel_directory_change(): Promise<void> {

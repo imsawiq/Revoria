@@ -1,5 +1,8 @@
 use arboard::{Clipboard, ImageData};
 use serde::{Deserialize, Serialize};
+use serde_json::Value;
+use tauri::image::Image;
+use tauri::{AppHandle, Manager};
 use tauri::Runtime;
 use tauri_plugin_opener::OpenerExt;
 use theseus::{
@@ -9,10 +12,9 @@ use theseus::{
 
 use crate::api::{Result, TheseusSerializableError};
 use dashmap::DashMap;
+use reqwest::{Client, Proxy};
 use std::borrow::Cow;
 use std::path::{Path, PathBuf};
-use tauri_plugin_http::reqwest;
-use tauri_plugin_http::reqwest::Client;
 use theseus::prelude::canonicalize;
 use theseus::util::utils;
 use tokio::io::AsyncWriteExt;
@@ -40,9 +42,96 @@ pub fn init<R: Runtime>() -> tauri::plugin::TauriPlugin<R> {
             read_text_file,
             read_binary_file,
             copy_image_to_clipboard,
+            set_theme_window_icon,
+            proxy_get_json,
             ollama_chat
         ])
         .build()
+}
+
+fn theme_icon_bytes(theme: &str, prefers_dark: bool) -> &'static [u8] {
+    match theme {
+        "light" => include_bytes!(
+            "../../../app-frontend/src/assets/theme-icons/white.png"
+        ),
+        "oled" => include_bytes!(
+            "../../../app-frontend/src/assets/theme-icons/oled.png"
+        ),
+        "retro" => include_bytes!(
+            "../../../app-frontend/src/assets/theme-icons/retro.png"
+        ),
+        "sapphire" => include_bytes!(
+            "../../../app-frontend/src/assets/theme-icons/sapphire.png"
+        ),
+        "amethyst" => include_bytes!(
+            "../../../app-frontend/src/assets/theme-icons/amethyst.png"
+        ),
+        "sunset" => include_bytes!(
+            "../../../app-frontend/src/assets/theme-icons/sunset.png"
+        ),
+        "aurora" => include_bytes!(
+            "../../../app-frontend/src/assets/theme-icons/aurora.png"
+        ),
+        "rose-gold" => include_bytes!(
+            "../../../app-frontend/src/assets/theme-icons/rose-gold.png"
+        ),
+        "obsidian-gold" => include_bytes!(
+            "../../../app-frontend/src/assets/theme-icons/obsidian-gold.png"
+        ),
+        "cherry-blossom" => include_bytes!(
+            "../../../app-frontend/src/assets/theme-icons/cherry-blossom.png"
+        ),
+        "system" => {
+            if prefers_dark {
+                include_bytes!(
+                    "../../../app-frontend/src/assets/theme-icons/default.png"
+                )
+            } else {
+                include_bytes!(
+                    "../../../app-frontend/src/assets/theme-icons/white.png"
+                )
+            }
+        }
+        _ => include_bytes!(
+            "../../../app-frontend/src/assets/theme-icons/default.png"
+        ),
+    }
+}
+
+#[tauri::command]
+pub async fn set_theme_window_icon<R: Runtime>(
+    app: AppHandle<R>,
+    theme: String,
+    prefers_dark: bool,
+) -> Result<()> {
+    let window = app
+        .get_webview_window("main")
+        .ok_or_else(|| std::io::Error::other("Main window not found"))?;
+
+    let image = Image::from_bytes(theme_icon_bytes(&theme, prefers_dark))
+        .map_err(|err| std::io::Error::other(err.to_string()))?;
+
+    window
+        .set_icon(image)
+        .map_err(|err| std::io::Error::other(err.to_string()))?;
+
+    Ok(())
+}
+
+pub(crate) async fn build_proxy_aware_client() -> Result<Client> {
+    let settings = theseus::settings::get().await?;
+    let mut builder =
+        Client::builder().user_agent(theseus::LAUNCHER_USER_AGENT);
+
+    if let Some(proxy_url) = theseus::util::fetch::proxy_url_from_settings(&settings)? {
+        let proxy = Proxy::all(&proxy_url)
+            .map_err(|err| std::io::Error::other(err.to_string()))?;
+        builder = builder.proxy(proxy);
+    }
+
+    builder
+        .build()
+        .map_err(|err| std::io::Error::other(err.to_string()).into())
 }
 
 #[tauri::command]
@@ -63,7 +152,12 @@ pub async fn download_url_to_temp(
         "Downloading file",
     )
     .await?;
-    let response = reqwest::get(&url).await.map_err(|e| {
+    let response = build_proxy_aware_client()
+        .await?
+        .get(&url)
+        .send()
+        .await
+        .map_err(|e| {
         std::io::Error::new(std::io::ErrorKind::Other, e.to_string())
     })?;
 
@@ -370,6 +464,35 @@ pub async fn read_binary_file(path: String) -> Result<Vec<u8>> {
 }
 
 #[tauri::command]
+pub async fn proxy_get_json(
+    url: String,
+    headers: Option<std::collections::HashMap<String, String>>,
+) -> Result<Value> {
+    let client = build_proxy_aware_client().await?;
+    let mut request = client.get(&url);
+
+    if let Some(headers) = headers {
+        for (key, value) in headers {
+            request = request.header(key, value);
+        }
+    }
+
+    let response = request.send().await.map_err(|e| {
+        std::io::Error::other(e.to_string())
+    })?;
+
+    let response = response.error_for_status().map_err(|e| {
+        std::io::Error::other(e.to_string())
+    })?;
+
+    let value = response.json::<Value>().await.map_err(|e| {
+        std::io::Error::other(e.to_string())
+    })?;
+
+    Ok(value)
+}
+
+#[tauri::command]
 pub async fn copy_image_to_clipboard(path: String) -> Result<()> {
     let path_for_decode = path.clone();
     tokio::task::spawn_blocking(move || -> Result<()> {
@@ -404,7 +527,7 @@ pub async fn ollama_chat(
     api_key: Option<String>,
     prompt: String,
 ) -> Result<String> {
-    let client = Client::new();
+    let client = build_proxy_aware_client().await?;
     let mut request = client
         .post(&endpoint)
         .header("Content-Type", "application/json")

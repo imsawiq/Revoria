@@ -3,8 +3,10 @@ import {
 	CoffeeIcon,
 	GameIcon,
 	GaugeIcon,
+	GlobeIcon,
 	LanguagesIcon,
 	PaintbrushIcon,
+	PaletteIcon,
 	ReportIcon,
 	SettingsIcon,
 	ShieldIcon,
@@ -17,15 +19,17 @@ import { computed, ref, watch } from 'vue'
 
 import ModalWrapper from '@/components/ui/modal/ModalWrapper.vue'
 import AppearanceSettings from '@/components/ui/settings/AppearanceSettings.vue'
+import ThemesSettings from '@/components/ui/settings/ThemesSettings.vue'
 import DefaultInstanceSettings from '@/components/ui/settings/DefaultInstanceSettings.vue'
 import FeatureFlagSettings from '@/components/ui/settings/FeatureFlagSettings.vue'
 import JavaSettings from '@/components/ui/settings/JavaSettings.vue'
 import LanguageSettings from '@/components/ui/settings/LanguageSettings.vue'
 import PrivacySettings from '@/components/ui/settings/PrivacySettings.vue'
+import ProxySettings from '@/components/ui/settings/ProxySettings.vue'
 import ResourceManagementSettings from '@/components/ui/settings/ResourceManagementSettings.vue'
 import { get, set } from '@/helpers/settings.ts'
+import { getThemeIconUrl } from '@/helpers/theme-icons'
 import { useTheming } from '@/store/state'
-import RevoriaMark from '../../../../../app/icons/128x128.png?url'
 
 const themeStore = useTheming()
 
@@ -46,6 +50,14 @@ const tabs = [
 		}),
 		icon: PaintbrushIcon,
 		content: AppearanceSettings,
+	},
+	{
+		name: defineMessage({
+			id: 'app.settings.tabs.themes',
+			defaultMessage: 'Themes',
+		}),
+		icon: PaletteIcon,
+		content: ThemesSettings,
 	},
 	{
 		name: defineMessage({
@@ -89,6 +101,14 @@ const tabs = [
 	},
 	{
 		name: defineMessage({
+			id: 'app.settings.tabs.proxy',
+			defaultMessage: 'Proxy',
+		}),
+		icon: GlobeIcon,
+		content: ProxySettings,
+	},
+	{
+		name: defineMessage({
 			id: 'app.settings.tabs.feature-flags',
 			defaultMessage: 'Feature flags',
 		}),
@@ -113,6 +133,11 @@ const modrinthBaseVersion = '0.10.2401'
 const osPlatform = getOsPlatform()
 const osVersion = getOsVersion()
 const settings = ref(await get())
+const systemThemeMediaQuery =
+	typeof window !== 'undefined' ? window.matchMedia('(prefers-color-scheme: dark)') : null
+const settingsLogoUrl = computed(() =>
+	getThemeIconUrl(themeStore.selectedTheme, systemThemeMediaQuery?.matches ?? false),
+)
 
 watch(
 	settings,
@@ -186,7 +211,7 @@ const messages = defineMessages({
 							}"
 							@click="devModeCount"
 						>
-							<img :src="RevoriaMark" alt="Revoria" class="settings-logo-image" />
+							<img :src="settingsLogoUrl" alt="Revoria" class="settings-logo-image" />
 						</button>
 						<div>
 							<p class="m-0">{{ formatMessage(messages.appVersion, { version }) }}</p>

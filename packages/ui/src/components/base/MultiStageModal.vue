@@ -157,6 +157,20 @@ export function resolveCtxFn<T, R>(value: MaybeCtxFn<T, R>, ctx: T): R {
 }
 </script>
 
+<style scoped lang="scss">
+:global(.light-mode),
+:global(.rose-gold-mode),
+:global(.cherry-blossom-mode) {
+	.text-contrast {
+		color: var(--color-contrast) !important;
+	}
+
+	.text-secondary {
+		color: var(--color-secondary) !important;
+	}
+}
+</style>
+
 <script setup lang="ts" generic="T">
 const props = withDefaults(
 	defineProps<{

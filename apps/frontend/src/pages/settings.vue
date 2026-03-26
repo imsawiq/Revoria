@@ -14,6 +14,11 @@
 								label: formatMessage(commonSettingsMessages.appearance),
 								icon: PaintbrushIcon,
 							},
+							{
+								link: '/settings/themes',
+								label: 'Themes',
+								icon: PaletteIcon,
+							},
 							isStaging
 								? {
 										link: '/settings/language',
@@ -91,6 +96,7 @@ import {
 	LanguagesIcon,
 	MonitorSmartphoneIcon,
 	PaintbrushIcon,
+	PaletteIcon,
 	ServerIcon,
 	ShieldIcon,
 	UserIcon,

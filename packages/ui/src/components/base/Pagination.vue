@@ -1,5 +1,5 @@
 <template>
-	<div v-if="count > 1" class="flex items-center gap-1">
+	<div v-if="count > 1" class="flex flex-wrap items-center gap-1">
 		<ButtonStyled v-if="page > 1" circular type="transparent">
 			<a
 				v-if="linkFunction"

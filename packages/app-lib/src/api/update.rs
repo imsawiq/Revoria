@@ -1,4 +1,3 @@
-use reqwest;
 use std::path::PathBuf;
 use tokio::fs::File as AsyncFile;
 use tokio::io::AsyncWriteExt;
@@ -14,7 +13,8 @@ pub(crate) async fn get_resource(
         .ok_or("[AR] • Failed to determine download directory")?;
     let full_path = download_dir.join(local_filename);
 
-    let response = reqwest::get(download_url).await?;
+    let response =
+        crate::util::fetch::REQWEST_CLIENT.get(download_url).send().await?;
     let bytes = response.bytes().await?;
     let mut dest_file = AsyncFile::create(&full_path).await?;
     dest_file.write_all(&bytes).await?;

@@ -312,7 +312,7 @@ async fn extract_elyby_authlib_metadata(
 ) -> Result<(String, String)> {
     const URL: &str = "https://api.github.com/repos/sawiq/ElyIntegration/releases/latest";
 
-    let response = reqwest::get(URL).await.map_err(|e| {
+    let response = crate::util::fetch::REQWEST_CLIENT.get(URL).send().await.map_err(|e| {
         tracing::error!(
             "[AR] • Failed to fetch ElyIntegration release JSON: {:?}",
             e
@@ -428,12 +428,11 @@ fn extract_minecraft_local_download_info(
 /// Downloads bytes from the provided URL with a 15 second timeout.
 async fn fetch_bytes_from_url(url: &str) -> Result<bytes::Bytes> {
     // Create client instance with request timeout.
-    let client = reqwest::Client::new();
     const TIMEOUT_SECONDS: u64 = 15;
 
     let response = tokio::time::timeout(
         std::time::Duration::from_secs(TIMEOUT_SECONDS),
-        client.get(url).send(),
+        crate::util::fetch::REQWEST_CLIENT.get(url).send(),
     )
     .await
     .map_err(|_| {

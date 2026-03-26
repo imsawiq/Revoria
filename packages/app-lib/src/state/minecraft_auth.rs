@@ -806,6 +806,8 @@ impl DeviceTokenPair {
 const MICROSOFT_CLIENT_ID: &str = "00000000402b5328";
 const AUTH_REPLY_URL: &str = "https://login.live.com/oauth20_desktop.srf";
 const REQUESTED_SCOPE: &str = "service::user.auth.xboxlive.com::MBI_SSL";
+const AUTH_REQUEST_TIMEOUT: std::time::Duration =
+    std::time::Duration::from_secs(12);
 
 pub struct RequestWithDate<T> {
     pub date: DateTime<Utc>,
@@ -948,6 +950,7 @@ async fn oauth_token(
             .post("https://login.live.com/oauth20_token.srf")
             .header("Accept", "application/json")
             .form(&query)
+            .timeout(AUTH_REQUEST_TIMEOUT)
             .send()
     })
     .await
@@ -996,6 +999,7 @@ async fn oauth_refresh(
             .post("https://login.live.com/oauth20_token.srf")
             .header("Accept", "application/json")
             .form(&query)
+            .timeout(AUTH_REQUEST_TIMEOUT)
             .send()
     })
     .await
@@ -1144,6 +1148,7 @@ async fn minecraft_token(
                 "platform": "PC_LAUNCHER",
                 "xtoken": format!("XBL3.0 x={uhs};{token}"),
             }))
+            .timeout(AUTH_REQUEST_TIMEOUT)
             .send()
     })
     .await
@@ -1420,6 +1425,7 @@ async fn minecraft_entitlements(
             .get(format!("https://api.minecraftservices.com/entitlements/license?requestId={}", Uuid::new_v4()))
             .header("Accept", "application/json")
             .bearer_auth(token)
+            .timeout(AUTH_REQUEST_TIMEOUT)
             .send()
     })
     .await.map_err(|source| MinecraftAuthenticationError::Request { source, step: MinecraftAuthStep::MinecraftEntitlements })?;
@@ -1564,7 +1570,8 @@ async fn send_signed_request<T: DeserializeOwned>(
             .post(url)
             .header("Content-Type", "application/json; charset=utf-8")
             .header("Accept", "application/json")
-            .header("Signature", &signature);
+            .header("Signature", &signature)
+            .timeout(AUTH_REQUEST_TIMEOUT);
 
         if url != "https://sisu.xboxlive.com/authorize" {
             request = request.header("x-xbl-contract-version", "1");

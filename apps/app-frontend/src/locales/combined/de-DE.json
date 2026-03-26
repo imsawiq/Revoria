@@ -1208,6 +1208,18 @@
   "browse.max-results.label": {
     "message": "Maximale Ergebnisse"
   },
+  "browse.pagination.go": {
+    "message": "Los"
+  },
+  "browse.pagination.page-count": {
+    "message": "von {count}"
+  },
+  "browse.pagination.page-label": {
+    "message": "Seite"
+  },
+  "browse.pagination.page-placeholder": {
+    "message": "Nummer"
+  },
   "servers.region.western-europe": {
     "defaultMessage": "Westeuropa"
   },
@@ -2028,7 +2040,7 @@
     "message": "Fehler beim Laden des Projekts"
   },
   "app.update-toast.title.download-complete": {
-    "message": "Download abgeschlossen"
+    "message": "Update bereit"
   },
   "instance.settings.tabs.installation.no-connection": {
     "message": "Verlinkte Modpack-Details können nicht abgerufen werden. Bitte überprüfen Sie Ihre Internetverbindung."
@@ -4032,7 +4044,7 @@
     "message": "Speichern"
   },
   "app.update-toast.body.download-complete": {
-    "message": "Der Download von Revoria v{version} ist abgeschlossen. Laden Sie es neu, um es jetzt oder automatisch zu aktualisieren, wenn Sie Revoria schließen."
+    "message": "Revoria v{version} wurde vollständig heruntergeladen. Starten Sie den Launcher jetzt neu, um das Update anzuwenden, oder es wird beim Schließen automatisch installiert."
   },
   "instance.index.installing": {
     "message": "Installieren..."
@@ -5662,5 +5674,233 @@
   },
   "installation.installed-modpack.title": {
     "message": "Installiertes Modpack"
+  },
+  "app.settings.tabs.themes": {
+    "message": "Themen"
+  },
+  "settings.themes.color-theme.title": {
+    "message": "Themen"
+  },
+  "settings.themes.color-theme.description": {
+    "message": "Wahle dein bevorzugtes Farbschema fur Revoria."
+  },
+  "settings.display.theme.sapphire": {
+    "message": "Saphir"
+  },
+  "settings.display.theme.amethyst": {
+    "message": "Amethyst"
+  },
+  "settings.display.theme.sunset": {
+    "message": "Sonnenuntergang"
+  },
+  "settings.display.theme.aurora": {
+    "message": "Aurora"
+  },
+  "settings.appearance.background-effects.stars": {
+    "message": "Sternenstaub"
+  },
+  "settings.appearance.background-effects-intensity.title": {
+    "message": "Effektdichte"
+  },
+  "settings.appearance.background-effects-intensity.description": {
+    "message": "Steuert, wie oft Partikel erscheinen und wie dicht der Effekt wirkt."
+  },
+  "app.settings.tabs.proxy": {
+    "message": "Proxy"
+  },
+  "settings.proxy.title": {
+    "message": "Launcher-Proxy"
+  },
+  "settings.proxy.description": {
+    "message": "Leitet Launcher-Netzwerkanfragen über einen Proxy. Änderungen werden direkt nach dem Speichern angewendet."
+  },
+  "settings.proxy.enable.title": {
+    "message": "Globalen Proxy aktivieren"
+  },
+  "settings.proxy.enable.description": {
+    "message": "Gilt für Launcher-API-Aufrufe, Downloads, Skins, Authentifizierung und Inhaltsanfragen."
+  },
+  "settings.proxy.type.title": {
+    "message": "Proxy-Typ"
+  },
+  "settings.proxy.type.description": {
+    "message": "Wähle das Protokoll, das dein Proxy-Server erwartet."
+  },
+  "settings.proxy.host.title": {
+    "message": "Host"
+  },
+  "settings.proxy.host.placeholder": {
+    "message": "127.0.0.1 oder proxy.example.com"
+  },
+  "settings.proxy.port.title": {
+    "message": "Port"
+  },
+  "settings.proxy.port.placeholder": {
+    "message": "8080"
+  },
+  "settings.proxy.auth.title": {
+    "message": "Authentifizierung"
+  },
+  "settings.proxy.auth.description": {
+    "message": "Aktiviere dies, wenn dein Proxy Benutzername und Passwort verlangt."
+  },
+  "settings.proxy.username.title": {
+    "message": "Benutzername"
+  },
+  "settings.proxy.username.placeholder": {
+    "message": "proxy-user"
+  },
+  "settings.proxy.password.title": {
+    "message": "Passwort"
+  },
+  "settings.proxy.password.placeholder": {
+    "message": "Passwort eingeben"
+  },
+  "settings.proxy.preview.title": {
+    "message": "Aktive Route"
+  },
+  "settings.proxy.preview.disabled": {
+    "message": "Proxy ist derzeit deaktiviert."
+  },
+  "settings.proxy.type.http": {
+    "message": "HTTP"
+  },
+  "settings.proxy.type.http.description": {
+    "message": "Am besten für die meisten Standard-Proxyserver geeignet."
+  },
+  "settings.proxy.type.https": {
+    "message": "HTTPS"
+  },
+  "settings.proxy.type.https.description": {
+    "message": "Verwende dies, wenn der Proxy-Endpunkt selbst über TLS läuft."
+  },
+  "settings.proxy.type.socks5": {
+    "message": "SOCKS5"
+  },
+  "settings.proxy.type.socks5.description": {
+    "message": "Gut geeignet, um den gesamten Datenverkehr über einen Socket zu tunneln."
+  },
+  "settings.proxy.actions.save": {
+    "message": "Proxy anwenden"
+  },
+  "settings.proxy.actions.reset": {
+    "message": "Zurücksetzen"
+  },
+  "settings.proxy.validation.host": {
+    "message": "Gib einen Proxy-Host ein, bevor du den Proxy aktivierst."
+  },
+  "settings.proxy.validation.port": {
+    "message": "Der Proxy-Port muss zwischen 1 und 65535 liegen."
+  },
+  "settings.appearance.glass-blur.title": {
+    "message": "Glasunsschärfe"
+  },
+  "settings.appearance.glass-blur.description": {
+    "message": "Passt die Stärke der Unschärfe für Glasflächen an."
+  },
+  "settings.appearance.glass-border-opacity.title": {
+    "message": "Deckkraft des Glasrands"
+  },
+  "settings.appearance.glass-border-opacity.description": {
+    "message": "Steuert, wie sichtbar Glasränder sind."
+  },
+  "settings.appearance.background-effects.title": {
+    "message": "Hintergrundeffekte"
+  },
+  "settings.appearance.background-effects.description": {
+    "message": "Dekorative Effekte, die hinter der Benutzeroberfläche gerendert werden."
+  },
+  "settings.appearance.background-effects.off": {
+    "message": "Aus"
+  },
+  "settings.appearance.background-effects.snow": {
+    "message": "Schnee"
+  },
+  "settings.appearance.background-effects.rain": {
+    "message": "Regen"
+  },
+  "settings.proxy.actions.test": {
+    "message": "Proxy testen"
+  },
+  "settings.proxy.status.idle": {
+    "message": "Starte einen Test, um zu prüfen, ob der Launcher Minecraft- und Xbox-Dienste über diesen Proxy erreichen kann."
+  },
+  "settings.proxy.status.testing": {
+    "message": "Proxy-Route wird getestet..."
+  },
+  "settings.proxy.status.success": {
+    "message": "Proxy-Test erfolgreich."
+  },
+  "settings.proxy.status.failed": {
+    "message": "Proxy-Test fehlgeschlagen."
+  },
+  "settings.proxy.status.ip": {
+    "message": "Ermittelte externe IP"
+  },
+  "settings.proxy.status.minecraft": {
+    "message": "Minecraft-Status"
+  },
+  "settings.proxy.status.xbox": {
+    "message": "Xbox-Status"
+  },
+  "settings.display.theme.rose-gold": {
+    "message": "Roségold"
+  },
+  "settings.display.theme.obsidian-gold": {
+    "message": "Obsidian Gold"
+  },
+  "settings.display.theme.cherry-blossom": {
+    "message": "Kirschblüte"
+  },
+  "settings.appearance.page-background-image.title": {
+    "message": "Seitenhintergrundbild"
+  },
+  "settings.appearance.page-background-image.description": {
+    "message": "Verwenden Sie ein PNG-, JPG- oder WebP-Bild hinter dem Seiteninhalt. Das Bild wird aus einer lokalen Datei auf Ihrem Gerät geladen."
+  },
+  "settings.appearance.page-background-image.select": {
+    "message": "Bild auswählen"
+  },
+  "settings.appearance.page-background-image.replace": {
+    "message": "Bild ersetzen"
+  },
+  "settings.appearance.page-background-image.remove": {
+    "message": "Entfernen"
+  },
+  "settings.appearance.page-background-image.empty": {
+    "message": "Kein Bild ausgewählt"
+  },
+  "settings.appearance.page-background-opacity.title": {
+    "message": "Deckkraft des Seitenhintergrunds"
+  },
+  "settings.appearance.page-background-opacity.description": {
+    "message": "Steuert, wie stark das Hintergrundbild der Seite hinter dem Inhalt sichtbar ist."
+  },
+  "app.nav.discord": {
+    "message": "Discord-Server"
+  },
+  "app.update-toast.body.auto-download": {
+    "message": "Revoria v{version} wird im Hintergrund vorbereitet. Wir informieren Sie, sobald das Update installiert werden kann."
+  },
+  "app.update-toast.title.downloading": {
+    "message": "Update wird heruntergeladen"
+  },
+  "app.update-toast.body.downloading": {
+    "message": "Revoria v{version} wird heruntergeladen. Sie können den Launcher währenddessen weiter verwenden."
+  },
+  "app.update-toast.progress": {
+    "message": "{percent}% heruntergeladen"
+  },
+  "app.update-toast.restart": {
+    "message": "Jetzt neu starten"
+  },
+  "app.update-toast.background-download": {
+    "message": "Download im Hintergrund"
+  },
+  "settings.resource.auto-updates.title": {
+    "message": "Automatische Updates"
+  },
+  "settings.resource.auto-updates.description": {
+    "message": "Laedt Launcher-Updates automatisch im Hintergrund herunter, sobald sie verfuegbar sind. Wenn deaktiviert, zeigt der Launcher beim Start nur an, dass ein Update verfuegbar ist."
   }
 }

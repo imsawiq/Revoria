@@ -214,8 +214,8 @@ onUnmounted(() => {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(8, 18, 14, 0.55);
-	backdrop-filter: blur(6px) saturate(120%);
+	background-color: rgba(8, 18, 14, 0.68);
+	backdrop-filter: blur(2px) saturate(110%);
 	display: flex;
 	justify-content: center;
 	align-items: center;

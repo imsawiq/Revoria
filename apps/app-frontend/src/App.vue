@@ -1,9 +1,15 @@
 <script setup>
+import allDeDeMessages from '@/locales/combined/de-DE.json'
+import allEnMessages from '@/locales/combined/en-US.json'
+import allRoMessages from '@/locales/combined/ro-RO.json'
+import allRuMessages from '@/locales/combined/ru-RU.json'
+import allUkMessages from '@/locales/combined/uk-UA.json'
 import { AuthFeature, PanelVersionFeature, TauriModrinthClient } from '@modrinth/api-client'
 import {
 	ChangeSkinIcon,
 	CompassIcon,
 	DatabaseIcon,
+	DiscordIcon,
 	ExternalIcon,
 	HomeIcon,
 	LeftArrowIcon,
@@ -47,18 +53,13 @@ import { openUrl } from '@tauri-apps/plugin-opener'
 import { type } from '@tauri-apps/plugin-os'
 import { saveWindowState, StateFlags } from '@tauri-apps/plugin-window-state'
 import { defineMessages, useVIntl } from '@vintl/vintl'
-import { $fetch } from 'ofetch'
+import { useStorage } from '@vueuse/core'
 import { computed, nextTick, onMounted, onUnmounted, provide, ref, watch } from 'vue'
 import { RouterView, useRoute, useRouter } from 'vue-router'
-import { useStorage } from '@vueuse/core'
-import allEnMessages from '@/locales/combined/en-US.json'
-import allRuMessages from '@/locales/combined/ru-RU.json'
-import allUkMessages from '@/locales/combined/uk-UA.json'
-import allDeDeMessages from '@/locales/combined/de-DE.json'
-import allRoMessages from '@/locales/combined/ro-RO.json'
 
 import ModrinthLoadingIndicator from '@/components/LoadingIndicatorBar.vue'
 import AccountsCard from '@/components/ui/AccountsCard.vue'
+import BackgroundEffects from '@/components/ui/BackgroundEffects.vue'
 import Breadcrumbs from '@/components/ui/Breadcrumbs.vue'
 import ErrorModal from '@/components/ui/ErrorModal.vue'
 import FriendsList from '@/components/ui/friends/FriendsList.vue'
@@ -67,11 +68,11 @@ import InstallConfirmModal from '@/components/ui/install_flow/InstallConfirmModa
 import ModInstallModal from '@/components/ui/install_flow/ModInstallModal.vue'
 import AppSettingsModal from '@/components/ui/modal/AppSettingsModal.vue'
 import AuthGrantFlowWaitModal from '@/components/ui/modal/AuthGrantFlowWaitModal.vue'
-import UpdateToast from '@/components/ui/UpdateToast.vue'
 import NavButton from '@/components/ui/NavButton.vue'
 import QuickInstanceSwitcher from '@/components/ui/QuickInstanceSwitcher.vue'
 import RunningAppBar from '@/components/ui/RunningAppBar.vue'
 import SplashScreen from '@/components/ui/SplashScreen.vue'
+import UpdateToast from '@/components/ui/UpdateToast.vue'
 import URLConfirmModal from '@/components/ui/URLConfirmModal.vue'
 import { useCheckDisableMouseover } from '@/composables/macCssFix.js'
 import { debugAnalytics, optOutAnalytics, trackEvent } from '@/helpers/analytics'
@@ -83,6 +84,7 @@ import { cancelLogin, get as getCreds, login, logout } from '@/helpers/mr_auth.t
 import { list } from '@/helpers/profile.js'
 import { get as getSettings, set as setSettings } from '@/helpers/settings.ts'
 import { get_opening_command, initialize_state } from '@/helpers/state'
+import { applyLauncherWindowIcon } from '@/helpers/theme-icons'
 import {
 	areUpdatesEnabled,
 	enqueueUpdateForInstallation,
@@ -91,11 +93,11 @@ import {
 	isDev,
 	isNetworkMetered,
 } from '@/helpers/utils.js'
+import { createContentInstall, provideContentInstall } from '@/providers/content-install'
 import {
 	provideAppUpdateDownloadProgress,
 	subscribeToDownloadProgress,
 } from '@/providers/download-progress.ts'
-import { createContentInstall, provideContentInstall } from '@/providers/content-install'
 import { setupProviders } from '@/providers/setup'
 import { useError } from '@/store/error.js'
 import { useInstall } from '@/store/install.js'
@@ -110,6 +112,22 @@ import { AppNotificationManager } from './providers/app-notifications'
 import { get, set } from '@/helpers/settings.ts'
 
 const themeStore = useTheming()
+
+themeStore.setThemeClass()
+
+const systemThemeMediaQuery =
+	typeof window !== 'undefined' ? window.matchMedia('(prefers-color-scheme: dark)') : null
+
+async function syncLauncherThemeIcon() {
+	try {
+		await applyLauncherWindowIcon(
+			themeStore.selectedTheme,
+			systemThemeMediaQuery?.matches ?? false,
+		)
+	} catch (error) {
+		console.warn('Failed to apply themed launcher icon', error)
+	}
+}
 
 const notificationManager = new AppNotificationManager()
 provideNotificationManager(notificationManager)
@@ -194,6 +212,7 @@ const authUnreachable = computed(() => {
 
 onMounted(async () => {
 	await useCheckDisableMouseover()
+	await syncLauncherThemeIcon()
 
 	document.querySelector('body').addEventListener('click', handleClick)
 	document.querySelector('body').addEventListener('auxclick', handleAuxClick)
@@ -207,6 +226,28 @@ onUnmounted(async () => {
 
 	await unlistenUpdateDownload?.()
 })
+
+watch(
+	() => themeStore.selectedTheme,
+	() => {
+		syncLauncherThemeIcon()
+	},
+)
+
+if (systemThemeMediaQuery) {
+	const handleSystemThemeChange = () => {
+		if (themeStore.selectedTheme === 'system') {
+			themeStore.setThemeClass()
+			syncLauncherThemeIcon()
+		}
+	}
+
+	systemThemeMediaQuery.addEventListener('change', handleSystemThemeChange)
+
+	onUnmounted(() => {
+		systemThemeMediaQuery.removeEventListener('change', handleSystemThemeChange)
+	})
+}
 
 const vintl = useVIntl()
 const { formatMessage } = vintl
@@ -324,6 +365,10 @@ const messages = defineMessages({
 		id: 'app.nav.create-instance',
 		defaultMessage: 'Create new instance',
 	},
+	navDiscord: {
+		id: 'app.nav.discord',
+		defaultMessage: 'Discord server',
+	},
 	accountMenu: {
 		id: 'app.account.menu',
 		defaultMessage: 'Modrinth account',
@@ -393,15 +438,22 @@ async function setupApp() {
 		personalized_ads,
 		collapsed_navigation,
 		advanced_rendering,
+		glass_blur,
+		glass_border_opacity,
+		background_effect,
+		background_effect_intensity,
+		page_background_path,
+		page_background_opacity,
 		onboarded,
 		default_page,
 		toggle_sidebar,
 		developer_mode,
 		feature_flags,
 		pending_update_toast_for_version,
+		auto_download_updates,
 	} = settingsObj
 
-	if (default_page === 'Library') {
+	if (default_page === 'library') {
 		await router.push('/library')
 	}
 
@@ -420,9 +472,16 @@ async function setupApp() {
 	}
 	themeStore.collapsedNavigation = collapsed_navigation
 	themeStore.advancedRendering = advanced_rendering
+	themeStore.glassBlur = glass_blur
+	themeStore.glassBorderOpacity = glass_border_opacity
+	themeStore.backgroundEffect = background_effect
+	themeStore.backgroundEffectIntensity = background_effect_intensity ?? 100
+	themeStore.setPageBackground(page_background_path, page_background_opacity ?? 0.22)
+	themeStore.applyGlassSettings()
 	themeStore.toggleSidebar = toggle_sidebar
 	themeStore.devMode = developer_mode
 	themeStore.featureFlags = feature_flags
+	autoDownloadUpdates.value = auto_download_updates ?? true
 
 	isMaximized.value = await getCurrentWindow().isMaximized()
 
@@ -644,16 +703,51 @@ async function handleCommand(e) {
 	}
 }
 
+const appUpdateDownloadProgress = ref(0)
+const appUpdateDownloadVersion = ref()
 const appUpdateDownload = {
-	progress: ref(0),
-	version: ref(),
+	progress: appUpdateDownloadProgress,
+	version: appUpdateDownloadVersion,
 }
 let unlistenUpdateDownload
 
 const metered = ref(true)
-const finishedDownloading = ref(false)
+const autoDownloadUpdates = ref(true)
 const availableUpdate = ref(null)
 const updateSize = ref(null)
+const updateToastStatus = ref('available')
+
+function openUpdateToast(status) {
+	updateToastStatus.value = status
+}
+
+function closeUpdateToast() {
+	if (updateToastStatus.value === 'downloading') {
+		return
+	}
+	availableUpdate.value = null
+	updateSize.value = null
+	appUpdateDownloadProgress.value = 0
+}
+
+if (typeof window !== 'undefined') {
+	window.__revoriaDebugShowUpdateToast = (overrides = {}) => {
+		const next =
+			overrides && typeof overrides === 'object' && !Array.isArray(overrides) ? overrides : {}
+
+		availableUpdate.value = {
+			version: '1.4.1',
+			rid: 0,
+			...next,
+		}
+		updateSize.value = typeof next.size === 'number' ? next.size : 128 * 1024 * 1024
+		metered.value = typeof next.metered === 'boolean' ? next.metered : false
+		appUpdateDownloadProgress.value =
+			typeof next.progress === 'number' ? next.progress : 0.42
+		updateToastStatus.value =
+			typeof next.status === 'string' ? next.status : 'downloading'
+	}
+}
 
 async function checkUpdates() {
 	if (!(await areUpdatesEnabled())) {
@@ -672,19 +766,26 @@ async function checkUpdates() {
 		return
 	}
 
-	appUpdateDownload.progress.value = 0
-	finishedDownloading.value = false
+	const latestSettings = await getSettings()
+	autoDownloadUpdates.value = latestSettings.auto_download_updates ?? true
+
+	appUpdateDownloadProgress.value = 0
 	availableUpdate.value = update
 	updateSize.value = await getUpdateSize(update.rid)
 	metered.value = await isNetworkMetered()
+	const shouldAutoDownload = autoDownloadUpdates.value && !metered.value
+	openUpdateToast(shouldAutoDownload ? 'downloading' : 'available')
 
-	if (!metered.value) {
+	if (shouldAutoDownload) {
 		await downloadUpdate(update)
 	}
 
-	setTimeout(() => {
-		void checkUpdates()
-	}, 5 * 60 * 1000)
+	setTimeout(
+		() => {
+			void checkUpdates()
+		},
+		5 * 60 * 1000,
+	)
 }
 
 async function downloadAvailableUpdate() {
@@ -697,18 +798,21 @@ async function downloadUpdate(versionToDownload) {
 		return
 	}
 
-	if (appUpdateDownload.progress.value !== 0 && appUpdateDownload.progress.value < 1) {
+	if (appUpdateDownloadProgress.value !== 0 && appUpdateDownloadProgress.value < 1) {
 		console.log(`Update ${versionToDownload.version} already downloading`)
 		return
 	}
 
 	try {
+		appUpdateDownloadProgress.value = 0
+		openUpdateToast('downloading')
 		unlistenUpdateDownload = await subscribeToDownloadProgress(
 			appUpdateDownload,
 			versionToDownload.version,
 		)
 		await enqueueUpdateForInstallation(versionToDownload.rid)
-		finishedDownloading.value = true
+		appUpdateDownloadProgress.value = 1
+		openUpdateToast('downloaded')
 		await unlistenUpdateDownload?.()
 		unlistenUpdateDownload = null
 	} catch (e) {
@@ -843,7 +947,12 @@ async function processPendingSurveys() {
 
 	let surveys = []
 	try {
-		surveys = await $fetch('https://api.modrinth.com/v2/surveys')
+		surveys = await invoke('plugin:utils|proxy_get_json', {
+			url: 'https://api.modrinth.com/v2/surveys',
+			headers: {
+				Accept: 'application/json',
+			},
+		})
 	} catch (e) {
 		console.error('Error fetching surveys:', e)
 	}
@@ -874,14 +983,19 @@ async function processPendingSurveys() {
 		class="app-grid-layout experimental-styles-within relative"
 		:class="{ 'disable-advanced-rendering': !themeStore.advancedRendering }"
 	>
+		<div class="app-effects-layer">
+			<BackgroundEffects />
+		</div>
 		<UpdateToast
-			v-if="availableUpdate && (metered || finishedDownloading)"
+			v-if="availableUpdate"
 			:version="availableUpdate.version"
 			:size="updateSize"
 			:metered="metered"
+			:progress="appUpdateDownloadProgress"
+			:status="updateToastStatus"
 			@download="downloadAvailableUpdate"
 			@restart="installUpdate"
-			@close="availableUpdate = null"
+			@close="closeUpdateToast"
 		/>
 		<Suspense>
 			<AppSettingsModal ref="settingsModal" />
@@ -958,6 +1072,12 @@ async function processPendingSurveys() {
 				<PlusIcon />
 			</NavButton>
 			<div class="flex flex-grow"></div>
+			<NavButton
+				v-tooltip.right="formatMessage(messages.navDiscord)"
+				:to="() => openUrl('https://discord.gg/Rjt9zZG7Dj')"
+			>
+				<DiscordIcon />
+			</NavButton>
 			<NavButton
 				v-tooltip.right="formatMessage(commonMessages.settingsLabel)"
 				:to="() => $refs.settingsModal.show()"
@@ -1057,123 +1177,130 @@ async function processPendingSurveys() {
 				</section>
 			</section>
 		</div>
-	</div>
-	<div
-		v-if="stateInitialized"
-		class="app-contents experimental-styles-within"
-		:class="{
-			'sidebar-enabled': sidebarVisible,
-			'disable-advanced-rendering': !themeStore.advancedRendering,
-		}"
-	>
-		<div class="app-viewport flex-grow router-view">
-			<transition name="popup-survey">
+		<div
+			class="app-contents experimental-styles-within"
+			:class="{
+				'sidebar-enabled': sidebarVisible,
+				'disable-advanced-rendering': !themeStore.advancedRendering,
+			}"
+		>
+			<div class="app-viewport flex-grow router-view">
 				<div
-					v-if="availableSurvey"
-					class="w-[400px] z-20 fixed -bottom-12 pb-16 right-[--right-bar-width] mr-4 rounded-t-2xl bg-[--color-glass-bg-strong] border border-[--glass-border] shadow-[--glass-shadow] border-b-0 p-4"
-				>
-					<h2 class="text-lg font-extrabold mt-0 mb-2">
-						{{ formatMessage(messages.surveyTitle) }}
-					</h2>
-					<p class="m-0 leading-tight">
-						{{ formatMessage(messages.surveyBody) }}
-					</p>
-					<p class="mt-3 mb-4 leading-tight">
-						{{ formatMessage(messages.surveyBodySecondary) }}
-					</p>
-					<div class="flex gap-2">
-						<ButtonStyled color="brand">
-							<button @click="openSurvey">
-								<NotepadTextIcon /> {{ formatMessage(messages.surveyTake) }}
-							</button>
-						</ButtonStyled>
-						<ButtonStyled>
-							<button @click="dismissSurvey">
-								<XIcon /> {{ formatMessage(messages.surveyDecline) }}
-							</button>
-						</ButtonStyled>
+					v-if="themeStore.pageBackgroundUrl"
+					class="app-page-background-layer"
+					:style="{
+						backgroundImage: `url(${themeStore.pageBackgroundUrl})`,
+						opacity: themeStore.pageBackgroundOpacity,
+					}"
+				></div>
+				<transition name="popup-survey">
+					<div
+						v-if="availableSurvey"
+						class="w-[400px] z-20 fixed -bottom-12 pb-16 right-[--right-bar-width] mr-4 rounded-t-2xl bg-[--color-glass-bg-strong] border border-[--glass-border] shadow-[--glass-shadow] border-b-0 p-4"
+					>
+						<h2 class="text-lg font-extrabold mt-0 mb-2">
+							{{ formatMessage(messages.surveyTitle) }}
+						</h2>
+						<p class="m-0 leading-tight">
+							{{ formatMessage(messages.surveyBody) }}
+						</p>
+						<p class="mt-3 mb-4 leading-tight">
+							{{ formatMessage(messages.surveyBodySecondary) }}
+						</p>
+						<div class="flex gap-2">
+							<ButtonStyled color="brand">
+								<button @click="openSurvey">
+									<NotepadTextIcon /> {{ formatMessage(messages.surveyTake) }}
+								</button>
+							</ButtonStyled>
+							<ButtonStyled>
+								<button @click="dismissSurvey">
+									<XIcon /> {{ formatMessage(messages.surveyDecline) }}
+								</button>
+							</ButtonStyled>
+						</div>
 					</div>
+				</transition>
+				<div
+					v-if="themeStore.featureFlags.page_path"
+					class="absolute bottom-0 left-0 m-2 bg-tooltip-bg text-tooltip-text font-semibold rounded-full px-2 py-1 text-xs z-50"
+				>
+					{{ route.fullPath }}
 				</div>
-			</transition>
-			<div
-				v-if="themeStore.featureFlags.page_path"
-				class="absolute bottom-0 left-0 m-2 bg-tooltip-bg text-tooltip-text font-semibold rounded-full px-2 py-1 text-xs z-50"
-			>
-				{{ route.fullPath }}
+				<div
+					id="background-teleport-target"
+					class="absolute h-full -z-10 rounded-tl-[--radius-xl] overflow-hidden"
+					:style="{
+						width: 'calc(100% - var(--right-bar-width))',
+					}"
+				></div>
+				<Admonition
+					v-if="criticalErrorMessage"
+					type="critical"
+					:header="criticalErrorMessage.header"
+					class="m-6 mb-0"
+				>
+					<div
+						class="markdown-body text-primary"
+						v-html="renderString(criticalErrorMessage.body ?? '')"
+					></div>
+				</Admonition>
+				<Admonition
+					v-if="authUnreachable"
+					type="warning"
+					:header="formatMessage(messages.authUnreachableHeader)"
+					class="m-6 mb-0"
+				>
+					{{ formatMessage(messages.authUnreachableBody) }}
+				</Admonition>
+				<RouterView v-slot="{ Component }">
+					<template v-if="Component">
+						<Suspense @pending="loading.startLoading()" @resolve="loading.stopLoading()">
+							<Transition name="app-page-swap" mode="out-in">
+								<div :key="appPageTransitionKey" class="app-page-swap-shell">
+									<component :is="Component"></component>
+								</div>
+							</Transition>
+						</Suspense>
+					</template>
+				</RouterView>
 			</div>
 			<div
-				id="background-teleport-target"
-				class="absolute h-full -z-10 rounded-tl-[--radius-xl] overflow-hidden"
-				:style="{
-					width: 'calc(100% - var(--right-bar-width))',
-				}"
-			></div>
-			<Admonition
-				v-if="criticalErrorMessage"
-				type="critical"
-				:header="criticalErrorMessage.header"
-				class="m-6 mb-0"
+				class="app-sidebar mt-px shrink-0 flex flex-col border-0 border-l border-divider border-solid overflow-auto"
+				:class="{ 'has-plus': hasPlus }"
 			>
 				<div
-					class="markdown-body text-primary"
-					v-html="renderString(criticalErrorMessage.body ?? '')"
-				></div>
-			</Admonition>
-			<Admonition
-				v-if="authUnreachable"
-				type="warning"
-				:header="formatMessage(messages.authUnreachableHeader)"
-				class="m-6 mb-0"
-			>
-				{{ formatMessage(messages.authUnreachableBody) }}
-			</Admonition>
-			<RouterView v-slot="{ Component }">
-				<template v-if="Component">
-					<Suspense @pending="loading.startLoading()" @resolve="loading.stopLoading()">
-						<Transition name="app-page-swap" mode="out-in">
-							<div :key="appPageTransitionKey" class="app-page-swap-shell">
-								<component :is="Component"></component>
+					class="app-sidebar-scrollable flex-grow shrink overflow-y-auto relative"
+					:class="{ 'pb-12': !hasPlus }"
+				>
+					<div id="sidebar-teleport-target" class="sidebar-teleport-content"></div>
+					<div class="sidebar-default-content" :class="{ 'sidebar-enabled': sidebarVisible }">
+						<div class="p-3 pr-2 flex flex-col gap-3">
+							<div
+								class="rounded-xl bg-[--color-glass-bg-strong] border border-[--glass-border] shadow-[--glass-shadow] p-3"
+							>
+								<h3 class="text-base text-primary font-medium m-0">
+									{{ formatMessage(messages.sidebarPlayingAs) }}
+								</h3>
+								<suspense>
+									<AccountsCard ref="accounts" mode="small" />
+								</suspense>
 							</div>
-						</Transition>
-					</Suspense>
-				</template>
-			</RouterView>
-		</div>
-		<div
-			class="app-sidebar mt-px shrink-0 flex flex-col border-0 border-l border-divider border-solid overflow-auto"
-			:class="{ 'has-plus': hasPlus }"
-		>
-			<div
-				class="app-sidebar-scrollable flex-grow shrink overflow-y-auto relative"
-				:class="{ 'pb-12': !hasPlus }"
-			>
-				<div id="sidebar-teleport-target" class="sidebar-teleport-content"></div>
-				<div class="sidebar-default-content" :class="{ 'sidebar-enabled': sidebarVisible }">
-					<div class="p-3 pr-2 flex flex-col gap-3">
-						<div
-							class="rounded-xl bg-[--color-glass-bg-strong] border border-[--glass-border] shadow-[--glass-shadow] p-3"
-						>
-							<h3 class="text-base text-primary font-medium m-0">
-								{{ formatMessage(messages.sidebarPlayingAs) }}
-							</h3>
-							<suspense>
-								<AccountsCard ref="accounts" mode="small" />
-							</suspense>
-						</div>
-						<div
-							class="rounded-xl bg-[--color-glass-bg-strong] border border-[--glass-border] shadow-[--glass-shadow] p-3"
-						>
-							<h3 class="text-base text-primary font-medium m-0">
-								{{ formatMessage(messages.sidebarFriends) }}
-							</h3>
-							<suspense>
-								<FriendsList
-									:credentials="credentials"
-									:sign-in="() => signIn()"
-									:refresh-credentials="fetchCredentials"
-									:hide-heading="true"
-								/>
-							</suspense>
+							<div
+								class="rounded-xl bg-[--color-glass-bg-strong] border border-[--glass-border] shadow-[--glass-shadow] p-3"
+							>
+								<h3 class="text-base text-primary font-medium m-0">
+									{{ formatMessage(messages.sidebarFriends) }}
+								</h3>
+								<suspense>
+									<FriendsList
+										:credentials="credentials"
+										:sign-in="() => signIn()"
+										:refresh-credentials="fetchCredentials"
+										:hide-heading="true"
+									/>
+								</suspense>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -1286,9 +1413,17 @@ async function processPendingSurveys() {
 	height: 100vh;
 }
 
+.app-effects-layer {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	overflow: hidden;
+}
+
 .app-grid-navbar {
 	grid-area: nav;
 	position: absolute;
+	z-index: 1;
 	top: calc(var(--top-bar-height) + 2 * var(--shell-gap));
 	left: var(--shell-gap);
 	bottom: var(--shell-gap);
@@ -1304,6 +1439,7 @@ async function processPendingSurveys() {
 .app-grid-statusbar {
 	grid-area: status;
 	position: absolute;
+	z-index: 1;
 	top: var(--shell-gap);
 	left: var(--shell-gap);
 	right: var(--shell-gap);
@@ -1372,6 +1508,23 @@ async function processPendingSurveys() {
 	height: 100%;
 	overflow: auto;
 	overflow-x: hidden;
+	position: relative;
+}
+
+.app-page-background-layer {
+	position: absolute;
+	inset: 0;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	pointer-events: none;
+	z-index: 0;
+	filter: saturate(1.04);
+}
+
+.app-page-swap-shell,
+#background-teleport-target {
+	z-index: 1;
 }
 
 .sidebar-teleport-content {
@@ -1417,27 +1570,24 @@ async function processPendingSurveys() {
 
 .app-page-swap-shell {
 	position: relative;
-	will-change: transform, opacity, filter;
+	will-change: transform, opacity;
 }
 
 .app-page-swap-enter-active,
 .app-page-swap-leave-active {
 	transition:
 		opacity 280ms cubic-bezier(0.2, 0.8, 0.2, 1),
-		transform 340ms cubic-bezier(0.16, 1, 0.3, 1),
-		filter 280ms ease;
+		transform 340ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .app-page-swap-enter-from {
 	opacity: 0;
-	transform: translateY(14px) scale(0.985);
-	filter: blur(4px);
+	transform: translateY(14px) scale(0.988);
 }
 
 .app-page-swap-leave-to {
 	opacity: 0;
-	transform: translateY(-8px) scale(0.992);
-	filter: blur(3px);
+	transform: translateY(-8px) scale(0.994);
 }
 
 .revoria-update-alert {
@@ -1518,13 +1668,15 @@ async function processPendingSurveys() {
 <style>
 html.lang-switching .app-grid-layout,
 html.lang-switching .app-contents {
-	transition: opacity 220ms ease, filter 220ms ease;
+	transition:
+		opacity 220ms ease,
+		filter 220ms ease;
 }
 
 html.lang-switching.lang-switching-active .app-grid-layout,
 html.lang-switching.lang-switching-active .app-contents {
-	opacity: 0.7;
-	filter: blur(2px);
+	opacity: 0.82;
+	filter: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

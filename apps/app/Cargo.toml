@@ -1,6 +1,6 @@
 [package]
 name = "theseus_gui"
-version = "1.4.0"
+version = "1.5.0"
 edition.workspace = true
 description = "The Modrinth App is a desktop application for managing your Minecraft mods"
 repository = "https://github.com/modrinth/code/apps/app/"
@@ -20,11 +20,17 @@ junction = "1.2.0"
 native-dialog = { workspace = true }
 paste = { workspace = true }
 path-util = { workspace = true }
+reqwest = { workspace = true, features = ["json", "rustls-tls-webpki-roots", "socks"] }
 same-file = "1.0.6"
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
 serde_with = { workspace = true }
-tauri = { workspace = true, features = ["devtools", "macos-private-api", "protocol-asset"] }
+tauri = { workspace = true, features = [
+	"devtools",
+	"image-png",
+	"macos-private-api",
+	"protocol-asset",
+] }
 tauri-plugin-deep-link = { workspace = true }
 tauri-plugin-dialog = { workspace = true }
 tauri-plugin-http = { workspace = true }

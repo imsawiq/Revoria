@@ -1208,6 +1208,18 @@
   "browse.max-results.label": {
     "message": "Max results"
   },
+  "browse.pagination.go": {
+    "message": "Go"
+  },
+  "browse.pagination.page-count": {
+    "message": "of {count}"
+  },
+  "browse.pagination.page-label": {
+    "message": "Page"
+  },
+  "browse.pagination.page-placeholder": {
+    "message": "Number"
+  },
   "servers.region.western-europe": {
     "defaultMessage": "Western Europe"
   },
@@ -2028,7 +2040,7 @@
     "message": "Error loading project"
   },
   "app.update-toast.title.download-complete": {
-    "message": "Download complete"
+    "message": "Update ready"
   },
   "instance.settings.tabs.installation.no-connection": {
     "message": "Cannot fetch linked modpack details. Please check your internet connection."
@@ -4032,7 +4044,7 @@
     "message": "Save"
   },
   "app.update-toast.body.download-complete": {
-    "message": "Revoria v{version} has finished downloading. Reload to update now, or automatically when you close Revoria."
+    "message": "Revoria v{version} has finished downloading. Restart now to apply the update, or install it automatically when you close the launcher."
   },
   "instance.index.installing": {
     "message": "Installing..."
@@ -5662,5 +5674,233 @@
   },
   "installation.installed-modpack.title": {
     "message": "Installed modpack"
+  },
+  "settings.appearance.glass-blur.title": {
+    "message": "Glass blur"
+  },
+  "settings.appearance.glass-blur.description": {
+    "message": "Adjust the blur strength used for glass surfaces."
+  },
+  "settings.appearance.glass-border-opacity.title": {
+    "message": "Glass border opacity"
+  },
+  "settings.appearance.glass-border-opacity.description": {
+    "message": "Controls how visible glass borders are."
+  },
+  "settings.appearance.background-effects.title": {
+    "message": "Background effects"
+  },
+  "settings.appearance.background-effects.description": {
+    "message": "Decorative effects rendered behind the UI."
+  },
+  "settings.appearance.background-effects.off": {
+    "message": "Off"
+  },
+  "settings.appearance.background-effects.snow": {
+    "message": "Snow"
+  },
+  "settings.appearance.background-effects.stars": {
+    "message": "Stardust"
+  },
+  "settings.appearance.background-effects.rain": {
+    "message": "Rain"
+  },
+  "settings.appearance.background-effects-intensity.title": {
+    "message": "Effect density"
+  },
+  "settings.appearance.background-effects-intensity.description": {
+    "message": "Controls how often particles appear and how dense the effect feels."
+  },
+  "app.settings.tabs.themes": {
+    "message": "Themes"
+  },
+  "settings.themes.color-theme.title": {
+    "message": "Themes"
+  },
+  "settings.themes.color-theme.description": {
+    "message": "Select your preferred color theme for Revoria."
+  },
+  "settings.display.theme.sapphire": {
+    "message": "Sapphire"
+  },
+  "settings.display.theme.amethyst": {
+    "message": "Amethyst"
+  },
+  "settings.display.theme.sunset": {
+    "message": "Sunset"
+  },
+  "settings.display.theme.aurora": {
+    "message": "Aurora"
+  },
+  "app.settings.tabs.proxy": {
+    "message": "Proxy"
+  },
+  "settings.proxy.title": {
+    "message": "Launcher proxy"
+  },
+  "settings.proxy.description": {
+    "message": "Route launcher network requests through a proxy. Changes apply immediately after saving."
+  },
+  "settings.proxy.enable.title": {
+    "message": "Enable global proxy"
+  },
+  "settings.proxy.enable.description": {
+    "message": "Applies to launcher API calls, downloads, skins, auth, and content requests."
+  },
+  "settings.proxy.type.title": {
+    "message": "Proxy type"
+  },
+  "settings.proxy.type.description": {
+    "message": "Choose the protocol your proxy server expects."
+  },
+  "settings.proxy.host.title": {
+    "message": "Host"
+  },
+  "settings.proxy.host.placeholder": {
+    "message": "127.0.0.1 or proxy.example.com"
+  },
+  "settings.proxy.port.title": {
+    "message": "Port"
+  },
+  "settings.proxy.port.placeholder": {
+    "message": "8080"
+  },
+  "settings.proxy.auth.title": {
+    "message": "Authentication"
+  },
+  "settings.proxy.auth.description": {
+    "message": "Enable this if your proxy requires a username and password."
+  },
+  "settings.proxy.username.title": {
+    "message": "Username"
+  },
+  "settings.proxy.username.placeholder": {
+    "message": "proxy-user"
+  },
+  "settings.proxy.password.title": {
+    "message": "Password"
+  },
+  "settings.proxy.password.placeholder": {
+    "message": "Enter password"
+  },
+  "settings.proxy.preview.title": {
+    "message": "Applied route"
+  },
+  "settings.proxy.preview.disabled": {
+    "message": "Proxy is currently disabled."
+  },
+  "settings.proxy.type.http": {
+    "message": "HTTP"
+  },
+  "settings.proxy.type.http.description": {
+    "message": "Best for most standard proxy servers."
+  },
+  "settings.proxy.type.https": {
+    "message": "HTTPS"
+  },
+  "settings.proxy.type.https.description": {
+    "message": "Use when the proxy endpoint itself is served over TLS."
+  },
+  "settings.proxy.type.socks5": {
+    "message": "SOCKS5"
+  },
+  "settings.proxy.type.socks5.description": {
+    "message": "Good for tunneling all traffic through a single socket."
+  },
+  "settings.proxy.actions.save": {
+    "message": "Apply proxy"
+  },
+  "settings.proxy.actions.reset": {
+    "message": "Reset"
+  },
+  "settings.proxy.validation.host": {
+    "message": "Enter a proxy host before enabling the proxy."
+  },
+  "settings.proxy.validation.port": {
+    "message": "Proxy port must be between 1 and 65535."
+  },
+  "settings.proxy.actions.test": {
+    "message": "Test proxy"
+  },
+  "settings.proxy.status.idle": {
+    "message": "Run a test to verify that the launcher can reach Minecraft and Xbox services through this proxy."
+  },
+  "settings.proxy.status.testing": {
+    "message": "Testing proxy route..."
+  },
+  "settings.proxy.status.success": {
+    "message": "Proxy test passed."
+  },
+  "settings.proxy.status.failed": {
+    "message": "Proxy test failed."
+  },
+  "settings.proxy.status.ip": {
+    "message": "Detected external IP"
+  },
+  "settings.proxy.status.minecraft": {
+    "message": "Minecraft status"
+  },
+  "settings.proxy.status.xbox": {
+    "message": "Xbox status"
+  },
+  "settings.display.theme.rose-gold": {
+    "message": "Rose Gold"
+  },
+  "settings.display.theme.obsidian-gold": {
+    "message": "Obsidian Gold"
+  },
+  "settings.display.theme.cherry-blossom": {
+    "message": "Cherry Blossom"
+  },
+  "settings.appearance.page-background-image.title": {
+    "message": "Page background image"
+  },
+  "settings.appearance.page-background-image.description": {
+    "message": "Use a PNG, JPG, or WebP image behind page content. The image is loaded from a local file on your device."
+  },
+  "settings.appearance.page-background-image.select": {
+    "message": "Choose image"
+  },
+  "settings.appearance.page-background-image.replace": {
+    "message": "Replace image"
+  },
+  "settings.appearance.page-background-image.remove": {
+    "message": "Remove"
+  },
+  "settings.appearance.page-background-image.empty": {
+    "message": "No image selected"
+  },
+  "settings.appearance.page-background-opacity.title": {
+    "message": "Page background opacity"
+  },
+  "settings.appearance.page-background-opacity.description": {
+    "message": "Control how visible the page background image is behind content."
+  },
+  "app.nav.discord": {
+    "message": "Discord server"
+  },
+  "app.update-toast.body.auto-download": {
+    "message": "Revoria v{version} is being prepared in the background. We will let you know when it is ready to install."
+  },
+  "app.update-toast.title.downloading": {
+    "message": "Downloading update"
+  },
+  "app.update-toast.body.downloading": {
+    "message": "Downloading Revoria v{version}. You can keep using the launcher while this finishes."
+  },
+  "app.update-toast.progress": {
+    "message": "{percent}% downloaded"
+  },
+  "app.update-toast.restart": {
+    "message": "Restart now"
+  },
+  "app.update-toast.background-download": {
+    "message": "Downloading in background"
+  },
+  "settings.resource.auto-updates.title": {
+    "message": "Automatic updates"
+  },
+  "settings.resource.auto-updates.description": {
+    "message": "Automatically downloads launcher updates in the background when available. When disabled, the launcher only shows that an update is available on startup."
   }
 }

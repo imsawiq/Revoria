@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CompassIcon, LibraryIcon, PlusIcon } from '@modrinth/assets'
+import { CompassIcon, LibraryIcon } from '@modrinth/assets'
 import { ButtonStyled, injectNotificationManager } from '@modrinth/ui'
 import type { SearchResult } from '@modrinth/utils'
 import { defineMessages, useVIntl } from '@vintl/vintl'
@@ -163,17 +163,26 @@ onBeforeUnmount(() => {
 
 <template>
 	<div class="home-page p-6 flex flex-col gap-5">
-		<div class="hero-section relative overflow-hidden rounded-2xl bg-gradient-to-br from-[rgba(27,217,106,0.12)] via-[rgba(27,217,106,0.04)] to-transparent border border-[--glass-border] p-6">
+		<div
+			class="hero-section relative overflow-hidden rounded-2xl border border-[--glass-border] p-6"
+		>
 			<div class="relative z-10 flex flex-col gap-3">
 				<div class="flex items-end justify-between gap-4">
 					<div>
-						<p class="m-0 text-sm font-medium text-secondary uppercase tracking-wider">{{ greeting }}</p>
+						<p class="m-0 text-sm font-medium text-secondary uppercase tracking-wider">
+							{{ greeting }}
+						</p>
 						<h1 class="m-0 mt-1 text-3xl font-extrabold text-contrast leading-tight">
-							<template v-if="recentInstances?.length > 0">{{ formatMessage(messages.welcomeBack) }}</template>
+							<template v-if="recentInstances?.length > 0">{{
+								formatMessage(messages.welcomeBack)
+							}}</template>
 							<template v-else>{{ formatMessage(messages.welcomeNew) }}</template>
 						</h1>
 					</div>
-					<div v-if="instanceCount > 0" class="flex items-center gap-4 text-sm text-secondary shrink-0 pb-1">
+					<div
+						v-if="instanceCount > 0"
+						class="flex items-center gap-4 text-sm text-secondary shrink-0 pb-1"
+					>
 						<div class="flex items-center gap-1.5">
 							<LibraryIcon class="w-4 h-4" />
 							<span>{{ formatMessage(messages.instancesCount, { count: instanceCount }) }}</span>
@@ -222,13 +231,17 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
+.hero-section {
+	background: linear-gradient(135deg, var(--color-brand-highlight) 0%, rgba(0, 0, 0, 0) 72%);
+}
+
 .hero-glow {
 	position: absolute;
 	top: -40%;
 	right: -10%;
 	width: 300px;
 	height: 300px;
-	background: radial-gradient(circle, rgba(27, 217, 106, 0.15) 0%, transparent 70%);
+	background: radial-gradient(circle, var(--color-brand-shadow) 0%, transparent 70%);
 	pointer-events: none;
 	z-index: 0;
 }

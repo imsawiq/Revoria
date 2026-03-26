@@ -141,7 +141,7 @@
     "message": "Заменить текстуру"
   },
   "label.singleplayer": {
-    "defaultMessage": "Одиночная игра"
+    "defaultMessage": "Одиночная"
   },
   "project.settings.license.title": {
     "defaultMessage": "Лицензия"
@@ -977,6 +977,18 @@
   "browse.max-results.label": {
     "message": "Макс. результатов"
   },
+  "browse.pagination.go": {
+    "message": "Перейти"
+  },
+  "browse.pagination.page-count": {
+    "message": "из {count}"
+  },
+  "browse.pagination.page-label": {
+    "message": "Страница"
+  },
+  "browse.pagination.page-placeholder": {
+    "message": "Номер"
+  },
   "servers.region.western-europe": {
     "defaultMessage": "Западная Европа"
   },
@@ -1515,7 +1527,7 @@
     "message": "Копировать имена"
   },
   "singleplayer": {
-    "message": "Одиночная игра"
+    "message": "Одиночная"
   },
   "form.label.first-name": {
     "defaultMessage": "Имя"
@@ -1584,7 +1596,7 @@
     "message": "Ошибка загрузки проекта"
   },
   "app.update-toast.title.download-complete": {
-    "message": "Скачивание завершено"
+    "message": "Обновление готово"
   },
   "instance.settings.tabs.installation.no-connection": {
     "message": "Не удалось получить данные о сборке. Проверьте соединение с интернетом."
@@ -3180,7 +3192,7 @@
     "message": "Поделиться сборкой"
   },
   "app.update-toast.body.download-complete": {
-    "message": "Скачивание Revoria v{version} завершено. Перезапустите приложение, чтобы обновить его, или оно обновится автоматически при закрытии."
+    "message": "Revoria v{version} полностью загружена. Перезапустите лаунчер сейчас, чтобы применить обновление, или оно установится автоматически при закрытии."
   },
   "settings.appearance.default-landing.home": {
     "message": "Главная"
@@ -3741,7 +3753,7 @@
     "message": "Название"
   },
   "instance.worlds.type.singleplayer": {
-    "message": "Одиночная игра"
+    "message": "Одиночная"
   },
   "payment-method.virtual-visa-plural": {
     "defaultMessage": "Виртуальные Visa"
@@ -5773,5 +5785,233 @@
   },
   "app.instance.mods.unknown-version": {
     "message": "Неизвестно"
+  },
+  "settings.appearance.glass-blur.title": {
+    "message": "Размытие стекла"
+  },
+  "settings.appearance.glass-blur.description": {
+    "message": "Настройте силу размытия для стеклянных поверхностей."
+  },
+  "settings.appearance.glass-border-opacity.title": {
+    "message": "Непрозрачность стеклянной границы"
+  },
+  "settings.appearance.glass-border-opacity.description": {
+    "message": "Определяет, насколько заметны границы стекла."
+  },
+  "settings.appearance.background-effects.title": {
+    "message": "Фоновые эффекты"
+  },
+  "settings.appearance.background-effects.description": {
+    "message": "Декоративные эффекты, отрисовываемые за интерфейсом."
+  },
+  "settings.appearance.background-effects.off": {
+    "message": "Выключено"
+  },
+  "settings.appearance.background-effects.snow": {
+    "message": "Снег"
+  },
+  "settings.appearance.background-effects.stars": {
+    "message": "Звёздная пыль"
+  },
+  "settings.appearance.background-effects.rain": {
+    "message": "Дождь"
+  },
+  "settings.appearance.background-effects-intensity.title": {
+    "message": "Плотность эффекта"
+  },
+  "settings.appearance.background-effects-intensity.description": {
+    "message": "Управляет тем, как часто появляются частицы и насколько плотным выглядит эффект."
+  },
+  "app.settings.tabs.themes": {
+    "message": "Темы"
+  },
+  "settings.themes.color-theme.title": {
+    "message": "Темы"
+  },
+  "settings.themes.color-theme.description": {
+    "message": "Выберите предпочтительную цветовую тему для Revoria."
+  },
+  "settings.display.theme.sapphire": {
+    "message": "Сапфир"
+  },
+  "settings.display.theme.amethyst": {
+    "message": "Аметист"
+  },
+  "settings.display.theme.sunset": {
+    "message": "Закат"
+  },
+  "settings.display.theme.aurora": {
+    "message": "Аврора"
+  },
+  "app.settings.tabs.proxy": {
+    "message": "Прокси"
+  },
+  "settings.proxy.title": {
+    "message": "Прокси лаунчера"
+  },
+  "settings.proxy.description": {
+    "message": "Направляйте сетевые запросы лаунчера через прокси. Изменения применяются сразу после сохранения."
+  },
+  "settings.proxy.enable.title": {
+    "message": "Включить глобальный прокси"
+  },
+  "settings.proxy.enable.description": {
+    "message": "Применяется к API лаунчера, загрузкам, скинам, авторизации и запросам контента."
+  },
+  "settings.proxy.type.title": {
+    "message": "Тип прокси"
+  },
+  "settings.proxy.type.description": {
+    "message": "Выберите протокол, который использует ваш прокси-сервер."
+  },
+  "settings.proxy.host.title": {
+    "message": "Хост"
+  },
+  "settings.proxy.host.placeholder": {
+    "message": "127.0.0.1 или proxy.example.com"
+  },
+  "settings.proxy.port.title": {
+    "message": "Порт"
+  },
+  "settings.proxy.port.placeholder": {
+    "message": "8080"
+  },
+  "settings.proxy.auth.title": {
+    "message": "Аутентификация"
+  },
+  "settings.proxy.auth.description": {
+    "message": "Включите, если прокси требует логин и пароль."
+  },
+  "settings.proxy.username.title": {
+    "message": "Имя пользователя"
+  },
+  "settings.proxy.username.placeholder": {
+    "message": "proxy-user"
+  },
+  "settings.proxy.password.title": {
+    "message": "Пароль"
+  },
+  "settings.proxy.password.placeholder": {
+    "message": "Введите пароль"
+  },
+  "settings.proxy.preview.title": {
+    "message": "Применяемый маршрут"
+  },
+  "settings.proxy.preview.disabled": {
+    "message": "Прокси сейчас отключён."
+  },
+  "settings.proxy.type.http": {
+    "message": "HTTP"
+  },
+  "settings.proxy.type.http.description": {
+    "message": "Лучше всего подходит для большинства обычных прокси-серверов."
+  },
+  "settings.proxy.type.https": {
+    "message": "HTTPS"
+  },
+  "settings.proxy.type.https.description": {
+    "message": "Используйте, если сам прокси-узел работает через TLS."
+  },
+  "settings.proxy.type.socks5": {
+    "message": "SOCKS5"
+  },
+  "settings.proxy.type.socks5.description": {
+    "message": "Подходит для туннелирования всего трафика через один сокет."
+  },
+  "settings.proxy.actions.save": {
+    "message": "Применить прокси"
+  },
+  "settings.proxy.actions.reset": {
+    "message": "Сбросить"
+  },
+  "settings.proxy.validation.host": {
+    "message": "Укажите хост прокси перед включением прокси."
+  },
+  "settings.proxy.validation.port": {
+    "message": "Порт прокси должен быть в диапазоне от 1 до 65535."
+  },
+  "settings.proxy.actions.test": {
+    "message": "Проверить прокси"
+  },
+  "settings.proxy.status.idle": {
+    "message": "Запустите тест, чтобы проверить, что лаунчер может достучаться до сервисов Minecraft и Xbox через этот прокси."
+  },
+  "settings.proxy.status.testing": {
+    "message": "Проверка маршрута прокси..."
+  },
+  "settings.proxy.status.success": {
+    "message": "Проверка прокси пройдена."
+  },
+  "settings.proxy.status.failed": {
+    "message": "Проверка прокси не пройдена."
+  },
+  "settings.proxy.status.ip": {
+    "message": "Определённый внешний IP"
+  },
+  "settings.proxy.status.minecraft": {
+    "message": "Статус Minecraft"
+  },
+  "settings.proxy.status.xbox": {
+    "message": "Статус Xbox"
+  },
+  "settings.display.theme.rose-gold": {
+    "message": "Розовое золото"
+  },
+  "settings.display.theme.obsidian-gold": {
+    "message": "Обсидиановое золото"
+  },
+  "settings.display.theme.cherry-blossom": {
+    "message": "Цветение сакуры"
+  },
+  "settings.appearance.page-background-image.title": {
+    "message": "Фоновое изображение страницы"
+  },
+  "settings.appearance.page-background-image.description": {
+    "message": "Используйте PNG, JPG или WebP изображение за содержимым страниц. Изображение загружается из локального файла на вашем устройстве."
+  },
+  "settings.appearance.page-background-image.select": {
+    "message": "Выбрать изображение"
+  },
+  "settings.appearance.page-background-image.replace": {
+    "message": "Заменить изображение"
+  },
+  "settings.appearance.page-background-image.remove": {
+    "message": "Удалить"
+  },
+  "settings.appearance.page-background-image.empty": {
+    "message": "Изображение не выбрано"
+  },
+  "settings.appearance.page-background-opacity.title": {
+    "message": "Прозрачность фона страницы"
+  },
+  "settings.appearance.page-background-opacity.description": {
+    "message": "Управляет тем, насколько заметно фоновое изображение страницы за содержимым."
+  },
+  "app.nav.discord": {
+    "message": "Сервер Discord"
+  },
+  "app.update-toast.body.auto-download": {
+    "message": "Revoria v{version} загружается в фоне. Мы сообщим, когда обновление будет готово к установке."
+  },
+  "app.update-toast.title.downloading": {
+    "message": "Загрузка обновления"
+  },
+  "app.update-toast.body.downloading": {
+    "message": "Загружается Revoria v{version}. Лаунчером можно продолжать пользоваться."
+  },
+  "app.update-toast.progress": {
+    "message": "Загружено {percent}%"
+  },
+  "app.update-toast.restart": {
+    "message": "Перезапустить"
+  },
+  "app.update-toast.background-download": {
+    "message": "Загрузка в фоне"
+  },
+  "settings.resource.auto-updates.title": {
+    "message": "Автоматические обновления"
+  },
+  "settings.resource.auto-updates.description": {
+    "message": "Автоматически скачивает обновления лаунчера в фоне, когда они доступны. Если отключено, лаунчер при запуске только покажет, что доступно обновление."
   }
 }

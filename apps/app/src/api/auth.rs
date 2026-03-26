@@ -2,7 +2,6 @@ use crate::api::Result;
 use chrono::{Duration, Utc};
 use tauri::plugin::TauriPlugin;
 use tauri::{Manager, Runtime, UserAttentionType};
-use tauri_plugin_http::reqwest::Client;
 use theseus::prelude::*;
 
 pub fn init<R: Runtime>() -> TauriPlugin<R> {
@@ -49,7 +48,7 @@ pub async fn elyby_auth_authenticate(
     password: &str,
     client_token: &str,
 ) -> Result<String> {
-    let client = Client::new();
+    let client = crate::api::utils::build_proxy_aware_client().await?;
     let auth_body = serde_json::json!({
         "username": login,
         "password": password,

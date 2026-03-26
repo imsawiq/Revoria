@@ -668,8 +668,8 @@ $skin-card-gap: 4px;
 	background: var(--color-glass-bg-strong);
 	border: 1px solid var(--glass-border);
 	box-shadow: var(--glass-shadow);
-	backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-	-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+	backdrop-filter: blur(calc(var(--glass-blur) * 0.7)) saturate(var(--glass-saturate));
+	-webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.7)) saturate(var(--glass-saturate));
 	transform: translateZ(0);
 	transition:
 		transform 220ms cubic-bezier(0.2, 0.9, 0.2, 1),
@@ -700,12 +700,12 @@ $skin-card-gap: 4px;
 }
 
 :deep(.skin-overlay-button.btn) {
-	background: rgba(6, 10, 8, 0.7) !important;
+	background: rgba(6, 10, 8, 0.82) !important;
 	border: 1px solid rgba(27, 217, 106, 0.45) !important;
 	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45) !important;
 	color: var(--color-contrast) !important;
-	backdrop-filter: blur(8px);
-	-webkit-backdrop-filter: blur(8px);
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
 }
 
 :deep(.skin-overlay-button.btn:hover) {
@@ -714,12 +714,12 @@ $skin-card-gap: 4px;
 }
 
 :deep(.skin-overlay-icon-button.btn) {
-	background: rgba(8, 10, 12, 0.75) !important;
+	background: rgba(8, 10, 12, 0.86) !important;
 	border: 1px solid rgba(255, 107, 107, 0.55) !important;
 	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45) !important;
 	color: var(--color-contrast) !important;
-	backdrop-filter: blur(8px);
-	-webkit-backdrop-filter: blur(8px);
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
 }
 
 :deep(.skin-overlay-icon-button.btn:hover) {

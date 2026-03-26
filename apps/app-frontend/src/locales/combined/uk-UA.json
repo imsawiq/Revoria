@@ -1208,6 +1208,18 @@
   "browse.max-results.label": {
     "message": "Максимальний результат"
   },
+  "browse.pagination.go": {
+    "message": "Перейти"
+  },
+  "browse.pagination.page-count": {
+    "message": "з {count}"
+  },
+  "browse.pagination.page-label": {
+    "message": "Сторінка"
+  },
+  "browse.pagination.page-placeholder": {
+    "message": "Номер"
+  },
   "servers.region.western-europe": {
     "defaultMessage": "Західна Європа"
   },
@@ -2028,7 +2040,7 @@
     "message": "Помилка завантаження проекту"
   },
   "app.update-toast.title.download-complete": {
-    "message": "Завантаження завершено"
+    "message": "Оновлення готове"
   },
   "instance.settings.tabs.installation.no-connection": {
     "message": "Неможливо отримати пов’язані деталі пакета модів. Перевірте підключення до Інтернету."
@@ -4032,7 +4044,7 @@
     "message": "зберегти"
   },
   "app.update-toast.body.download-complete": {
-    "message": "Revoria v{version} завантажено. Перезавантажте, щоб оновити зараз, або автоматично, коли ви закриєте Revoria."
+    "message": "Revoria v{version} повністю завантажено. Перезапустіть лаунчер зараз, щоб застосувати оновлення, або воно встановиться автоматично після закриття."
   },
   "instance.index.installing": {
     "message": "Встановлення..."
@@ -5662,5 +5674,233 @@
   },
   "installation.installed-modpack.title": {
     "message": "Встановлений модпак"
+  },
+  "app.settings.tabs.themes": {
+    "message": "Теми"
+  },
+  "settings.themes.color-theme.title": {
+    "message": "Теми"
+  },
+  "settings.themes.color-theme.description": {
+    "message": "Виберіть бажану кольорову тему для Revoria."
+  },
+  "settings.display.theme.sapphire": {
+    "message": "Сапфір"
+  },
+  "settings.display.theme.amethyst": {
+    "message": "Аметист"
+  },
+  "settings.display.theme.sunset": {
+    "message": "Захід сонця"
+  },
+  "settings.display.theme.aurora": {
+    "message": "Аврора"
+  },
+  "settings.appearance.background-effects.stars": {
+    "message": "Зоряний пил"
+  },
+  "settings.appearance.background-effects-intensity.title": {
+    "message": "Щільність ефекту"
+  },
+  "settings.appearance.background-effects-intensity.description": {
+    "message": "Керує тим, як часто з’являються частинки та наскільки щільним виглядає ефект."
+  },
+  "app.settings.tabs.proxy": {
+    "message": "Проксі"
+  },
+  "settings.proxy.title": {
+    "message": "Проксі лаунчера"
+  },
+  "settings.proxy.description": {
+    "message": "Спрямовуйте мережеві запити лаунчера через проксі. Зміни застосовуються одразу після збереження."
+  },
+  "settings.proxy.enable.title": {
+    "message": "Увімкнути глобальний проксі"
+  },
+  "settings.proxy.enable.description": {
+    "message": "Застосовується до API лаунчера, завантажень, скінів, авторизації та запитів контенту."
+  },
+  "settings.proxy.type.title": {
+    "message": "Тип проксі"
+  },
+  "settings.proxy.type.description": {
+    "message": "Виберіть протокол, який очікує ваш проксі-сервер."
+  },
+  "settings.proxy.host.title": {
+    "message": "Хост"
+  },
+  "settings.proxy.host.placeholder": {
+    "message": "127.0.0.1 або proxy.example.com"
+  },
+  "settings.proxy.port.title": {
+    "message": "Порт"
+  },
+  "settings.proxy.port.placeholder": {
+    "message": "8080"
+  },
+  "settings.proxy.auth.title": {
+    "message": "Автентифікація"
+  },
+  "settings.proxy.auth.description": {
+    "message": "Увімкніть це, якщо проксі вимагає ім’я користувача та пароль."
+  },
+  "settings.proxy.username.title": {
+    "message": "Ім’я користувача"
+  },
+  "settings.proxy.username.placeholder": {
+    "message": "proxy-user"
+  },
+  "settings.proxy.password.title": {
+    "message": "Пароль"
+  },
+  "settings.proxy.password.placeholder": {
+    "message": "Введіть пароль"
+  },
+  "settings.proxy.preview.title": {
+    "message": "Застосований маршрут"
+  },
+  "settings.proxy.preview.disabled": {
+    "message": "Проксі зараз вимкнений."
+  },
+  "settings.proxy.type.http": {
+    "message": "HTTP"
+  },
+  "settings.proxy.type.http.description": {
+    "message": "Найкраще підходить для більшості стандартних проксі-серверів."
+  },
+  "settings.proxy.type.https": {
+    "message": "HTTPS"
+  },
+  "settings.proxy.type.https.description": {
+    "message": "Використовуйте, якщо сам проксі-вузол працює через TLS."
+  },
+  "settings.proxy.type.socks5": {
+    "message": "SOCKS5"
+  },
+  "settings.proxy.type.socks5.description": {
+    "message": "Добре підходить для тунелювання всього трафіку через один сокет."
+  },
+  "settings.proxy.actions.save": {
+    "message": "Застосувати проксі"
+  },
+  "settings.proxy.actions.reset": {
+    "message": "Скинути"
+  },
+  "settings.proxy.validation.host": {
+    "message": "Вкажіть хост проксі перед увімкненням проксі."
+  },
+  "settings.proxy.validation.port": {
+    "message": "Порт проксі має бути в діапазоні від 1 до 65535."
+  },
+  "settings.appearance.glass-blur.title": {
+    "message": "Розмиття скла"
+  },
+  "settings.appearance.glass-blur.description": {
+    "message": "Налаштуйте силу розмиття для скляних поверхонь."
+  },
+  "settings.appearance.glass-border-opacity.title": {
+    "message": "Непрозорість скляної межі"
+  },
+  "settings.appearance.glass-border-opacity.description": {
+    "message": "Визначає, наскільки помітні межі скла."
+  },
+  "settings.appearance.background-effects.title": {
+    "message": "Фонові ефекти"
+  },
+  "settings.appearance.background-effects.description": {
+    "message": "Декоративні ефекти, що рендеряться за інтерфейсом."
+  },
+  "settings.appearance.background-effects.off": {
+    "message": "Вимкнено"
+  },
+  "settings.appearance.background-effects.snow": {
+    "message": "Сніг"
+  },
+  "settings.appearance.background-effects.rain": {
+    "message": "Дощ"
+  },
+  "settings.proxy.actions.test": {
+    "message": "Перевірити проксі"
+  },
+  "settings.proxy.status.idle": {
+    "message": "Запустіть тест, щоб перевірити, чи може лаунчер дістатися до сервісів Minecraft та Xbox через цей проксі."
+  },
+  "settings.proxy.status.testing": {
+    "message": "Перевірка маршруту проксі..."
+  },
+  "settings.proxy.status.success": {
+    "message": "Перевірка проксі пройдена."
+  },
+  "settings.proxy.status.failed": {
+    "message": "Перевірка проксі не пройдена."
+  },
+  "settings.proxy.status.ip": {
+    "message": "Визначена зовнішня IP-адреса"
+  },
+  "settings.proxy.status.minecraft": {
+    "message": "Статус Minecraft"
+  },
+  "settings.proxy.status.xbox": {
+    "message": "Статус Xbox"
+  },
+  "settings.display.theme.rose-gold": {
+    "message": "Рожеве золото"
+  },
+  "settings.display.theme.obsidian-gold": {
+    "message": "Обсидіанове золото"
+  },
+  "settings.display.theme.cherry-blossom": {
+    "message": "Цвіт сакури"
+  },
+  "settings.appearance.page-background-image.title": {
+    "message": "Фонове зображення сторінки"
+  },
+  "settings.appearance.page-background-image.description": {
+    "message": "Використовуйте PNG, JPG або WebP зображення позаду вмісту сторінок. Зображення завантажується з локального файла на вашому пристрої."
+  },
+  "settings.appearance.page-background-image.select": {
+    "message": "Вибрати зображення"
+  },
+  "settings.appearance.page-background-image.replace": {
+    "message": "Замінити зображення"
+  },
+  "settings.appearance.page-background-image.remove": {
+    "message": "Видалити"
+  },
+  "settings.appearance.page-background-image.empty": {
+    "message": "Зображення не вибрано"
+  },
+  "settings.appearance.page-background-opacity.title": {
+    "message": "Прозорість фону сторінки"
+  },
+  "settings.appearance.page-background-opacity.description": {
+    "message": "Керує тим, наскільки помітне фонове зображення сторінки за вмістом."
+  },
+  "app.nav.discord": {
+    "message": "Сервер Discord"
+  },
+  "app.update-toast.body.auto-download": {
+    "message": "Revoria v{version} завантажується у фоновому режимі. Ми повідомимо, коли оновлення буде готове до встановлення."
+  },
+  "app.update-toast.title.downloading": {
+    "message": "Завантаження оновлення"
+  },
+  "app.update-toast.body.downloading": {
+    "message": "Завантажується Revoria v{version}. Ви можете й далі користуватися лаунчером."
+  },
+  "app.update-toast.progress": {
+    "message": "Завантажено {percent}%"
+  },
+  "app.update-toast.restart": {
+    "message": "Перезапустити зараз"
+  },
+  "app.update-toast.background-download": {
+    "message": "Фонове завантаження"
+  },
+  "settings.resource.auto-updates.title": {
+    "message": "Автоматичні оновлення"
+  },
+  "settings.resource.auto-updates.description": {
+    "message": "Автоматично завантажує оновлення лаунчера у фоні, коли вони доступні. Якщо вимкнено, лаунчер під час запуску лише покаже, що доступне оновлення."
   }
 }

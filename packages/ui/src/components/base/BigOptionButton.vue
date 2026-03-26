@@ -1,17 +1,13 @@
 <template>
 	<button
-		class="group flex w-full hover:cursor-pointer items-center gap-3 rounded-[20px] p-3 text-left transition-all hover:brightness-110 active:scale-[0.98] border-none"
-		:class="selected ? 'bg-brand-highlight' : 'bg-surface-4'"
+		class="big-option-button group flex w-full hover:cursor-pointer items-center gap-3 rounded-[20px] p-3 text-left transition-all active:scale-[0.98] border-none"
+		:data-selected="selected ? 'true' : 'false'"
 		@click="$emit('click')"
 	>
-		<div
-			class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-solid"
-			:class="selected ? 'border-brand' : 'border-surface-5'"
-		>
+		<div class="big-option-button__icon-shell flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-solid">
 			<component
 				:is="icon"
-				class="size-8 text-secondary"
-				:class="selected ? '!stroke-brand' : ''"
+				class="big-option-button__icon size-8 text-secondary"
 				stroke-width="1.5"
 			/>
 		</div>
@@ -40,3 +36,73 @@ defineEmits<{
 	(e: 'click'): void
 }>()
 </script>
+
+<style scoped lang="scss">
+.big-option-button {
+	background: color-mix(in srgb, var(--color-glass-bg) 92%, transparent);
+	border: 1px solid var(--glass-border);
+	box-shadow: var(--glass-shadow);
+	backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+	-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+
+	&:hover {
+		background: color-mix(in srgb, var(--color-glass-bg-strong) 88%, transparent);
+		border-color: color-mix(in srgb, var(--color-brand) 28%, var(--glass-border));
+		transform: translateY(-1px);
+	}
+
+	&[data-selected='true'] {
+		background:
+			linear-gradient(
+				135deg,
+				color-mix(in srgb, var(--color-brand-highlight) 84%, transparent),
+				color-mix(in srgb, var(--color-glass-bg-strong) 92%, transparent)
+			);
+		border-color: color-mix(in srgb, var(--color-brand) 44%, var(--glass-border));
+	}
+}
+
+.big-option-button__icon-shell {
+	border-color: var(--glass-border);
+	background: color-mix(in srgb, var(--color-glass-bg-strong) 84%, transparent);
+	transition:
+		border-color 120ms ease,
+		background-color 120ms ease,
+		transform 120ms ease;
+}
+
+.big-option-button__icon {
+	transition: color 120ms ease, stroke 120ms ease, transform 120ms ease;
+}
+
+.big-option-button:hover .big-option-button__icon-shell,
+.big-option-button[data-selected='true'] .big-option-button__icon-shell {
+	border-color: color-mix(in srgb, var(--color-brand) 36%, var(--glass-border));
+	background: color-mix(in srgb, var(--color-brand-highlight) 22%, var(--color-glass-bg-strong));
+}
+
+.big-option-button[data-selected='true'] .big-option-button__icon {
+	color: var(--color-brand);
+	stroke: var(--color-brand);
+}
+
+:global(.light-mode),
+:global(.rose-gold-mode),
+:global(.cherry-blossom-mode) {
+	.big-option-button {
+		color: var(--color-base);
+	}
+
+	.big-option-button .text-contrast {
+		color: var(--color-contrast) !important;
+	}
+
+	.big-option-button .text-primary,
+	.big-option-button .text-secondary,
+	.big-option-button__icon,
+	.big-option-button .size-5 {
+		color: var(--color-secondary) !important;
+		stroke: currentColor;
+	}
+}
+</style>

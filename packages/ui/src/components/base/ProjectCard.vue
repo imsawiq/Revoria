@@ -397,7 +397,7 @@ const sinceUpdated = computed(() => formatRelativeTime(displayUpdatedAt.value))
 }
 
 .project-card:hover {
-	background-color: color-mix(in srgb, var(--color-raised-bg) 70%, var(--color-button-bg-hover) 30%);
+	background-color: color-mix(in srgb, var(--color-raised-bg) 88%, var(--color-button-bg-hover) 12%);
 	border-color: color-mix(in srgb, var(--color-button-border) 55%, var(--color-brand) 45%);
 	box-shadow: var(--shadow-raised);
 	transform: translateY(-1px);
@@ -721,11 +721,7 @@ const sinceUpdated = computed(() => formatRelativeTime(displayUpdatedAt.value))
 	position: relative;
 	min-height: 2rem;
 
-	background: linear-gradient(
-		90deg,
-		color-mix(in srgb, var(--color-raised-bg) 86%, black 14%) 0%,
-		color-mix(in srgb, var(--color-raised-bg) 94%, black 6%) 100%
-	);
+	background: color-mix(in srgb, var(--color-raised-bg) 94%, var(--color-bg) 6%);
 	border-radius: var(--radius-lg);
 	border: 1px solid var(--color-button-border);
 
@@ -768,5 +764,80 @@ const sinceUpdated = computed(() => formatRelativeTime(displayUpdatedAt.value))
 	background: transparent;
 	border: none;
 	box-shadow: none;
+}
+
+:global(.light-mode) {
+	.base-card {
+		background: color-mix(in srgb, var(--color-raised-bg) 97%, white 3%);
+		border-color: color-mix(in srgb, var(--color-button-border) 88%, rgba(22, 34, 30, 0.12));
+		box-shadow:
+			0 18px 42px -30px rgba(39, 49, 45, 0.1),
+			0 1px 0 rgba(255, 255, 255, 0.72) inset;
+	}
+
+	.project-card:hover {
+		background: color-mix(in srgb, var(--color-raised-bg) 92%, var(--color-button-bg-hover) 8%);
+		border-color: color-mix(in srgb, var(--color-button-border) 78%, var(--color-brand) 22%);
+		box-shadow:
+			0 20px 46px -30px rgba(39, 49, 45, 0.14),
+			0 1px 0 rgba(255, 255, 255, 0.78) inset;
+	}
+}
+
+:global(.sapphire-mode) {
+	.base-card {
+		background: color-mix(in srgb, var(--color-raised-bg) 96%, rgba(47, 125, 255, 0.04) 4%);
+		border-color: color-mix(in srgb, var(--color-button-border) 76%, var(--color-brand) 24%);
+	}
+}
+
+:global(.amethyst-mode) {
+	.base-card {
+		background: color-mix(in srgb, var(--color-raised-bg) 96%, rgba(180, 83, 255, 0.04) 4%);
+		border-color: color-mix(in srgb, var(--color-button-border) 76%, var(--color-brand) 24%);
+	}
+}
+
+:global(.sunset-mode) {
+	.base-card {
+		background: color-mix(in srgb, var(--color-raised-bg) 96%, rgba(255, 118, 92, 0.04) 4%);
+		border-color: color-mix(in srgb, var(--color-button-border) 76%, var(--color-brand) 24%);
+	}
+}
+
+:global(.aurora-mode) {
+	.base-card {
+		background: color-mix(in srgb, var(--color-raised-bg) 96%, rgba(0, 212, 166, 0.04) 4%);
+		border-color: color-mix(in srgb, var(--color-button-border) 76%, var(--color-brand) 24%);
+	}
+}
+
+:global(.retro-mode) {
+	.base-card {
+		background: color-mix(in srgb, var(--color-raised-bg) 94%, rgba(136, 157, 88, 0.06) 6%);
+		border-color: color-mix(in srgb, var(--color-button-border) 62%, var(--color-brand) 38%);
+	}
+}
+
+:global(.oled-mode),
+:global(.obsidian-gold-mode) {
+	.base-card {
+		background: color-mix(in srgb, var(--color-raised-bg) 95%, rgba(216, 180, 108, 0.04) 5%);
+		border-color: color-mix(in srgb, var(--color-button-border) 62%, var(--color-brand) 38%);
+	}
+}
+
+:global(.rose-gold-mode) {
+	.base-card {
+		background: color-mix(in srgb, var(--color-raised-bg) 96%, rgba(188, 110, 120, 0.03) 4%);
+		border-color: color-mix(in srgb, var(--color-button-border) 78%, var(--color-brand) 22%);
+	}
+}
+
+:global(.cherry-blossom-mode) {
+	.base-card {
+		background: color-mix(in srgb, var(--color-raised-bg) 96%, rgba(200, 92, 146, 0.03) 4%);
+		border-color: color-mix(in srgb, var(--color-button-border) 78%, var(--color-brand) 22%);
+	}
 }
 </style>

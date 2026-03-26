@@ -32,6 +32,42 @@ const colorTheme = defineMessages({
 		id: 'settings.display.theme.dark',
 		defaultMessage: 'Dark',
 	},
+	oled: {
+		id: 'settings.display.theme.oled',
+		defaultMessage: 'OLED',
+	},
+	retro: {
+		id: 'settings.display.theme.retro',
+		defaultMessage: 'Retro',
+	},
+	sapphire: {
+		id: 'settings.display.theme.sapphire',
+		defaultMessage: 'Sapphire',
+	},
+	amethyst: {
+		id: 'settings.display.theme.amethyst',
+		defaultMessage: 'Amethyst',
+	},
+	sunset: {
+		id: 'settings.display.theme.sunset',
+		defaultMessage: 'Sunset',
+	},
+	aurora: {
+		id: 'settings.display.theme.aurora',
+		defaultMessage: 'Aurora',
+	},
+	'rose-gold': {
+		id: 'settings.display.theme.rose-gold',
+		defaultMessage: 'Rose Gold',
+	},
+	'obsidian-gold': {
+		id: 'settings.display.theme.obsidian-gold',
+		defaultMessage: 'Obsidian Gold',
+	},
+	'cherry-blossom': {
+		id: 'settings.display.theme.cherry-blossom',
+		defaultMessage: 'Cherry Blossom',
+	},
 	preferredLight: {
 		id: 'settings.display.theme.preferred-light-theme',
 		defaultMessage: 'Preferred light theme',
@@ -46,9 +82,7 @@ function asString(theme: T): string {
 	return theme
 }
 
-const supportedThemeOptions = (themeOptions as readonly T[]).filter((t) =>
-	(['system', 'light', 'dark'] as readonly string[]).includes(String(t)),
-)
+const supportedThemeOptions = themeOptions as readonly T[]
 
 function getPreviewClass(option: T): string {
 	const base = option === 'system' ? systemThemeColor : option

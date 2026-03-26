@@ -72,7 +72,7 @@ defineExpose({ selectedTab, setTab })
 			>
 				<div
 					v-if="showTopFade"
-					class="pointer-events-none absolute left-0 right-0 top-0 z-10 h-24 bg-gradient-to-b from-bg-raised to-transparent"
+					class="pointer-events-none absolute left-0 right-0 top-0 z-10 h-24 bg-gradient-to-b from-[--color-glass-bg-strong] to-transparent"
 				/>
 			</Transition>
 
@@ -99,9 +99,29 @@ defineExpose({ selectedTab, setTab })
 			>
 				<div
 					v-if="showBottomFade"
-					class="pointer-events-none absolute bottom-0 left-0 right-0 z-10 h-24 bg-gradient-to-t from-bg-raised to-transparent"
+					class="pointer-events-none absolute bottom-0 left-0 right-0 z-10 h-24 bg-gradient-to-t from-[--color-glass-bg-strong] to-transparent"
 				/>
 			</Transition>
 		</div>
 	</div>
 </template>
+
+<style scoped lang="scss">
+:global(.light-mode),
+:global(.rose-gold-mode),
+:global(.cherry-blossom-mode) {
+	.tabbed-modal__sidebar {
+		border-color: color-mix(in srgb, var(--glass-border) 88%, rgba(22, 33, 30, 0.18));
+	}
+
+	.tabbed-modal__sidebar button {
+		color: var(--color-base);
+
+		&:hover,
+		&:focus-visible {
+			color: var(--color-contrast);
+			background: color-mix(in srgb, var(--color-button-bg) 90%, white 10%);
+		}
+	}
+}
+</style>

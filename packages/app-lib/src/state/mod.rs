@@ -143,6 +143,7 @@ impl State {
 
         tracing::info!("Fetching app settings");
         let mut settings = Settings::get(&pool).await?;
+        crate::util::fetch::configure_reqwest_client_from_settings(&settings)?;
 
         let fetch_semaphore =
             FetchSemaphore(Semaphore::new(settings.max_concurrent_downloads));

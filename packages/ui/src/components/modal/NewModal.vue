@@ -34,14 +34,14 @@
 				role="dialog"
 				aria-modal="true"
 				:aria-labelledby="headerId"
-				class="modal-body flex flex-col bg-bg-raised rounded-2xl border border-solid border-surface-5"
+				class="modal-body flex flex-col rounded-2xl border border-solid border-[--glass-border]"
 				v-bind="attrs"
 				@keydown="handleKeyDown"
 			>
 				<div
 					v-if="!hideHeader"
 					data-tauri-drag-region
-					class="grid grid-cols-[auto_min-content] items-center gap-4 p-6 border-solid border-0 border-b-[1px] border-surface-5 max-w-full"
+					class="grid grid-cols-[auto_min-content] items-center gap-4 p-6 border-solid border-0 border-b-[1px] border-[--glass-border] max-w-full"
 				>
 					<div class="flex text-wrap break-words items-center gap-3 min-w-0">
 						<slot name="title">
@@ -88,7 +88,7 @@
 					>
 						<div
 							v-if="showTopFade"
-							class="pointer-events-none absolute left-0 right-0 top-0 z-10 h-6 bg-gradient-to-b from-bg-raised to-transparent"
+							class="pointer-events-none absolute left-0 right-0 top-0 z-10 h-6 bg-gradient-to-b from-[--color-glass-bg-strong] to-transparent"
 						/>
 					</Transition>
 
@@ -115,7 +115,7 @@
 					>
 						<div
 							v-if="showBottomFade"
-							class="pointer-events-none absolute bottom-0 left-0 right-0 z-10 h-6 bg-gradient-to-t from-bg-raised to-transparent"
+							class="pointer-events-none absolute bottom-0 left-0 right-0 z-10 h-6 bg-gradient-to-t from-[--color-glass-bg-strong] to-transparent"
 						/>
 					</Transition>
 				</div>
@@ -399,7 +399,8 @@ function handleKeyDown(event: KeyboardEvent) {
 	&.shown {
 		opacity: 1;
 		visibility: visible;
-		backdrop-filter: blur(5px);
+		background-color: rgba(7, 12, 10, 0.14);
+		backdrop-filter: blur(2px);
 	}
 
 	&.noblur {
@@ -445,7 +446,11 @@ function handleKeyDown(event: KeyboardEvent) {
 
 	> .modal-body {
 		position: fixed;
-		box-shadow: 4px 4px 26px 10px rgba(0, 0, 0, 0.08);
+		background: var(--color-glass-bg-strong);
+		border-color: var(--glass-border);
+		box-shadow: var(--glass-shadow);
+		backdrop-filter: blur(calc(var(--glass-blur) * 0.8)) saturate(var(--glass-saturate));
+		-webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.8)) saturate(var(--glass-saturate));
 		max-height: calc(100% - 2 * var(--gap-lg));
 		max-width: min(var(--_max-width, 60rem), calc(100% - 2 * var(--gap-lg)));
 		overflow-y: hidden;
@@ -464,6 +469,20 @@ function handleKeyDown(event: KeyboardEvent) {
 
 		@media screen and (max-width: 640px) {
 			width: calc(100% - 2 * var(--gap-lg));
+		}
+	}
+}
+
+:global(.light-mode),
+:global(.rose-gold-mode),
+:global(.cherry-blossom-mode) {
+	.modal-container {
+		> .modal-body {
+			background: color-mix(in srgb, var(--color-glass-bg-strong) 98%, white 2%);
+			border-color: color-mix(in srgb, var(--glass-border) 88%, rgba(31, 43, 38, 0.18));
+			box-shadow:
+				0 24px 64px -38px rgba(41, 52, 47, 0.24),
+				0 1px 0 rgba(255, 255, 255, 0.65) inset;
 		}
 	}
 }

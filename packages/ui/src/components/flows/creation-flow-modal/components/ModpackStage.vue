@@ -19,13 +19,13 @@
 			</template>
 		</Combobox>
 		<div class="flex items-center gap-3">
-			<div class="h-[1px] w-full flex-1 bg-surface-5" />
+			<div class="h-[1px] w-full flex-1 bg-[--glass-border]" />
 			<span class="text-sm text-secondary">{{ formatMessage(messages.or) }}</span>
-			<div class="h-[1px] w-full flex-1 bg-surface-5" />
+			<div class="h-[1px] w-full flex-1 bg-[--glass-border]" />
 		</div>
 		<div class="flex gap-3">
 			<ButtonStyled type="outlined">
-				<button class="flex-1 !border-surface-4" @click="triggerFileInput">
+				<button class="flex-1 !border-[--glass-border]" @click="triggerFileInput">
 					<ImportIcon />
 					{{ formatMessage(messages.importModpack) }}
 				</button>

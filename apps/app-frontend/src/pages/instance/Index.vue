@@ -644,27 +644,24 @@ Button {
 }
 
 .instance-tab-swap-shell {
-	will-change: transform, opacity, filter;
+	will-change: transform, opacity;
 }
 
 .instance-tab-swap-enter-active,
 .instance-tab-swap-leave-active {
 	transition:
 		opacity 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
-		transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
-		filter 240ms ease;
+		transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .instance-tab-swap-enter-from {
 	opacity: 0;
 	transform: translateY(10px) scale(0.988);
-	filter: blur(3px);
 }
 
 .instance-tab-swap-leave-to {
 	opacity: 0;
 	transform: translateY(-6px) scale(0.994);
-	filter: blur(2px);
 }
 
 .badge {

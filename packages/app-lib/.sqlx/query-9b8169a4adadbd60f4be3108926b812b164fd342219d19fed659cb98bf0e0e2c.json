@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "\n            UPDATE settings\n            SET\n                max_concurrent_writes = $1,\n                max_concurrent_downloads = $2,\n\n                theme = $3,\n                default_page = $4,\n                collapsed_navigation = $5,\n                advanced_rendering = $6,\n                native_decorations = $7,\n\n                glass_blur = $8,\n                glass_border_opacity = $9,\n                background_effect = $10,\n                background_effect_intensity = $11,\n                page_background_path = $12,\n                page_background_opacity = $13,\n                proxy_enabled = $14,\n                proxy_type = $15,\n                proxy_host = $16,\n                proxy_port = $17,\n                proxy_auth_enabled = $18,\n                proxy_username = $19,\n                proxy_password = $20,\n\n                discord_rpc = $21,\n                developer_mode = $22,\n                telemetry = $23,\n                personalized_ads = $24,\n\n                onboarded = $25,\n\n                extra_launch_args = json($26),\n                custom_env_vars = json($27),\n                mc_memory_max = $28,\n                mc_force_fullscreen = $29,\n                mc_game_resolution_x = $30,\n                mc_game_resolution_y = $31,\n                hide_on_process_start = $32,\n\n                hook_pre_launch = $33,\n                hook_wrapper = $34,\n                hook_post_exit = $35,\n\n                custom_dir = $36,\n                prev_custom_dir = $37,\n                migrated = $38,\n\n                toggle_sidebar = $39,\n                feature_flags = $40,\n                hide_nametag_skins_page = $41,\n\n                skipped_update = $42,\n                pending_update_toast_for_version = $43,\n                auto_download_updates = $44,\n\n                version = $45\n            ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 45
+    },
+    "nullable": []
+  },
+  "hash": "9b8169a4adadbd60f4be3108926b812b164fd342219d19fed659cb98bf0e0e2c"
+}

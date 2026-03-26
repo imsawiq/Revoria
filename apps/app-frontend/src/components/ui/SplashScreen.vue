@@ -1,5 +1,5 @@
 <template>
-	<div v-if="!hidden" class="splash-screen dark" :class="{ 'fade-out': doneLoading }">
+	<div v-if="!hidden" class="splash-screen" :class="{ 'fade-out': doneLoading }">
 		<div v-if="os !== 'MacOS'" class="app-buttons">
 			<button
 				class="btn icon-only transparent"
@@ -192,8 +192,13 @@ const handleClose = async () => {
 }
 
 @keyframes logo-breathe {
-	0%, 100% { opacity: 0.85; }
-	50% { opacity: 1; }
+	0%,
+	100% {
+		opacity: 0.85;
+	}
+	50% {
+		opacity: 1;
+	}
 }
 
 .loading-bar {
@@ -205,9 +210,9 @@ const handleClose = async () => {
 	height: 100vh;
 	width: 100vw;
 	background:
-		radial-gradient(ellipse 80% 60% at 50% 40%, rgba(27, 217, 106, 0.18) 0%, transparent 70%),
-		linear-gradient(180deg, rgba(66, 131, 92, 0.2) 0%, rgba(17, 35, 43, 0.5) 97.29%),
-		linear-gradient(0deg, rgba(22, 24, 28, 0.7), rgba(22, 24, 28, 0.7));
+		radial-gradient(ellipse 80% 60% at 50% 40%, var(--color-brand-shadow) 0%, transparent 70%),
+		var(--brand-gradient-bg),
+		linear-gradient(0deg, color-mix(in oklch, var(--color-bg) 70%, transparent), var(--color-bg));
 	z-index: 9997;
 }
 

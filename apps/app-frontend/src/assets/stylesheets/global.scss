@@ -4,6 +4,8 @@
 
 @import '@modrinth/ui/src/styles/tailwind-utilities.css';
 
+@import '@modrinth/assets/omorphia.scss';
+
 @font-face {
 	font-family: 'bundled-minecraft-font-mrapp';
 	font-style: normal;
@@ -189,4 +191,249 @@ img {
 	box-shadow: var(--shadow-card);
 }
 
-@import '@modrinth/assets/omorphia.scss';
+html.oled-mode,
+.oled-mode {
+	--color-bg: #000000;
+	--color-raised-bg: #08090b;
+	--color-button-bg: #121316;
+	--color-base: #e6edf3;
+	--color-secondary: #aab6c2;
+	--color-contrast: #ffffff;
+
+	--color-brand: #24c8ff;
+	--color-brand-highlight: rgba(36, 200, 255, 0.14);
+	--color-brand-shadow: rgba(36, 200, 255, 0.24);
+	--color-button-bg-selected: rgba(36, 200, 255, 0.14);
+	--color-button-text-selected: #d6f5ff;
+	--brand-gradient-bg: linear-gradient(
+		0deg,
+		rgba(36, 200, 255, 0.16) 0%,
+		rgba(36, 200, 255, 0.06) 100%
+	);
+	--brand-gradient-strong-bg: linear-gradient(
+		270deg,
+		rgba(0, 0, 0, 0.62) 10%,
+		rgba(36, 200, 255, 0.08) 100%
+	);
+	--brand-gradient-border: rgba(36, 200, 255, 0.12);
+	--loading-bar-gradient: linear-gradient(to right, var(--color-brand) 0%, #7be4ff 100%);
+}
+
+html.retro-mode,
+.retro-mode {
+	--color-bg: #191917;
+	--color-raised-bg: #1d1e1b;
+	--color-button-bg: #3a3b38;
+	--color-base: #c3c4b3;
+	--color-secondary: #777a74;
+	--color-contrast: #e6e2d1;
+
+	--color-brand: #4d9227;
+	--color-brand-highlight: rgba(77, 146, 39, 0.18);
+	--color-brand-shadow: rgba(77, 146, 39, 0.26);
+	--color-button-bg-selected: rgba(77, 146, 39, 0.18);
+	--color-button-text-selected: #e6e2d1;
+	--brand-gradient-bg: linear-gradient(
+		0deg,
+		rgba(77, 146, 39, 0.18) 0%,
+		rgba(77, 146, 39, 0.08) 100%
+	);
+	--brand-gradient-border: rgba(77, 146, 39, 0.14);
+	--loading-bar-gradient: linear-gradient(to right, var(--color-brand) 0%, #9bdc63 100%);
+}
+
+html.light-mode,
+.light-mode {
+	--color-bg: #e2ebe7;
+	--color-raised-bg: #f8fbf9;
+	--color-button-bg: rgba(255, 255, 255, 0.82);
+	--color-base: #11201c;
+	--color-secondary: #2e3e38;
+	--color-contrast: #07100d;
+
+	--color-brand: #0faa4f;
+	--color-brand-highlight: rgba(15, 170, 79, 0.16);
+	--color-brand-shadow: rgba(15, 170, 79, 0.24);
+	--color-button-bg-selected: rgba(15, 170, 79, 0.16);
+	--color-button-text-selected: #0b4e2d;
+	--brand-gradient-bg: linear-gradient(
+		0deg,
+		rgba(15, 170, 79, 0.16) 0%,
+		rgba(95, 203, 149, 0.1) 100%
+	);
+	--brand-gradient-strong-bg: linear-gradient(
+		270deg,
+		rgba(231, 244, 237, 0.9) 12%,
+		rgba(165, 224, 192, 0.18) 100%
+	);
+	--brand-gradient-border: rgba(15, 170, 79, 0.16);
+	--loading-bar-gradient: linear-gradient(to right, var(--color-brand) 0%, #4bdb8b 100%);
+}
+
+html.rose-gold-mode,
+.rose-gold-mode {
+	--color-bg: #eadcdf;
+	--color-raised-bg: #fdf4f2;
+	--color-button-bg: rgba(255, 252, 251, 0.86);
+	--color-base: #351c20;
+	--color-secondary: #5f454c;
+	--color-contrast: #201013;
+
+	--color-brand: #bc6e78;
+	--color-brand-highlight: rgba(188, 110, 120, 0.16);
+	--color-brand-shadow: rgba(188, 110, 120, 0.24);
+	--color-button-bg-selected: rgba(188, 110, 120, 0.18);
+	--color-button-text-selected: #6b3740;
+	--brand-gradient-bg: linear-gradient(
+		0deg,
+		rgba(188, 110, 120, 0.18) 0%,
+		rgba(237, 194, 183, 0.12) 100%
+	);
+	--brand-gradient-strong-bg: linear-gradient(
+		270deg,
+		rgba(252, 241, 241, 0.9) 12%,
+		rgba(235, 184, 176, 0.16) 100%
+	);
+	--brand-gradient-border: rgba(188, 110, 120, 0.16);
+	--loading-bar-gradient: linear-gradient(to right, var(--color-brand) 0%, #df9ca4 100%);
+}
+
+html.cherry-blossom-mode,
+.cherry-blossom-mode {
+	--color-bg: #f1e5eb;
+	--color-raised-bg: #fff8fb;
+	--color-button-bg: rgba(255, 252, 253, 0.86);
+	--color-base: #3f1c2f;
+	--color-secondary: #654a5d;
+	--color-contrast: #260d18;
+
+	--color-brand: #c85c92;
+	--color-brand-highlight: rgba(200, 92, 146, 0.16);
+	--color-brand-shadow: rgba(200, 92, 146, 0.24);
+	--color-button-bg-selected: rgba(200, 92, 146, 0.18);
+	--color-button-text-selected: #712f4c;
+	--brand-gradient-bg: linear-gradient(
+		0deg,
+		rgba(200, 92, 146, 0.18) 0%,
+		rgba(241, 197, 224, 0.12) 100%
+	);
+	--brand-gradient-strong-bg: linear-gradient(
+		270deg,
+		rgba(252, 245, 249, 0.9) 12%,
+		rgba(235, 183, 214, 0.16) 100%
+	);
+	--brand-gradient-border: rgba(200, 92, 146, 0.16);
+	--loading-bar-gradient: linear-gradient(to right, var(--color-brand) 0%, #eb9fc6 100%);
+}
+
+html.sapphire-mode,
+.sapphire-mode {
+	--color-bg: #080c14;
+	--color-raised-bg: #0c1220;
+	--color-button-bg: #141f35;
+	--color-base: #cfe6ff;
+	--color-secondary: #8db8e6;
+	--color-contrast: #eff6ff;
+
+	--color-brand: #2f7dff;
+	--color-brand-highlight: rgba(47, 125, 255, 0.16);
+	--color-brand-shadow: rgba(47, 125, 255, 0.28);
+	--color-button-bg-selected: rgba(47, 125, 255, 0.18);
+	--color-button-text-selected: #eff6ff;
+	--brand-gradient-bg: linear-gradient(
+		0deg,
+		rgba(47, 125, 255, 0.18) 0%,
+		rgba(47, 125, 255, 0.08) 100%
+	);
+	--brand-gradient-strong-bg: linear-gradient(
+		270deg,
+		rgba(8, 12, 20, 0.72) 10%,
+		rgba(47, 125, 255, 0.1) 100%
+	);
+	--brand-gradient-border: rgba(47, 125, 255, 0.14);
+	--loading-bar-gradient: linear-gradient(to right, var(--color-brand) 0%, #7bb3ff 100%);
+}
+
+html.amethyst-mode,
+.amethyst-mode {
+	--color-bg: #0d0714;
+	--color-raised-bg: #140a22;
+	--color-button-bg: #241038;
+	--color-base: #f0e7ff;
+	--color-secondary: #cdb7ff;
+	--color-contrast: #ffffff;
+
+	--color-brand: #b453ff;
+	--color-brand-highlight: rgba(180, 83, 255, 0.16);
+	--color-brand-shadow: rgba(180, 83, 255, 0.28);
+	--color-button-bg-selected: rgba(180, 83, 255, 0.18);
+	--color-button-text-selected: #ffffff;
+	--brand-gradient-bg: linear-gradient(
+		0deg,
+		rgba(180, 83, 255, 0.18) 0%,
+		rgba(180, 83, 255, 0.08) 100%
+	);
+	--brand-gradient-strong-bg: linear-gradient(
+		270deg,
+		rgba(13, 7, 20, 0.72) 10%,
+		rgba(180, 83, 255, 0.1) 100%
+	);
+	--brand-gradient-border: rgba(180, 83, 255, 0.14);
+	--loading-bar-gradient: linear-gradient(to right, var(--color-brand) 0%, #d7a6ff 100%);
+}
+
+html.sunset-mode,
+.sunset-mode {
+	--color-bg: #12070a;
+	--color-raised-bg: #1b0b0f;
+	--color-button-bg: #2a1117;
+	--color-base: #ffe8ee;
+	--color-secondary: #ffc0cf;
+	--color-contrast: #ffffff;
+
+	--color-brand: #ff4d6d;
+	--color-brand-highlight: rgba(255, 77, 109, 0.16);
+	--color-brand-shadow: rgba(255, 77, 109, 0.28);
+	--color-button-bg-selected: rgba(255, 77, 109, 0.18);
+	--color-button-text-selected: #ffffff;
+	--brand-gradient-bg: linear-gradient(
+		0deg,
+		rgba(255, 77, 109, 0.18) 0%,
+		rgba(255, 77, 109, 0.08) 100%
+	);
+	--brand-gradient-strong-bg: linear-gradient(
+		270deg,
+		rgba(18, 7, 10, 0.72) 10%,
+		rgba(255, 77, 109, 0.1) 100%
+	);
+	--brand-gradient-border: rgba(255, 77, 109, 0.14);
+	--loading-bar-gradient: linear-gradient(to right, var(--color-brand) 0%, #ff98ad 100%);
+}
+
+html.aurora-mode,
+.aurora-mode {
+	--color-bg: #06110f;
+	--color-raised-bg: #071a16;
+	--color-button-bg: #0b2a23;
+	--color-base: #d8fff2;
+	--color-secondary: #9ae7d1;
+	--color-contrast: #f4fffb;
+
+	--color-brand: #00d4a6;
+	--color-brand-highlight: rgba(0, 212, 166, 0.14);
+	--color-brand-shadow: rgba(0, 212, 166, 0.26);
+	--color-button-bg-selected: rgba(0, 212, 166, 0.16);
+	--color-button-text-selected: #f4fffb;
+	--brand-gradient-bg: linear-gradient(
+		0deg,
+		rgba(0, 212, 166, 0.16) 0%,
+		rgba(0, 212, 166, 0.06) 100%
+	);
+	--brand-gradient-strong-bg: linear-gradient(
+		270deg,
+		rgba(6, 17, 15, 0.72) 10%,
+		rgba(0, 212, 166, 0.1) 100%
+	);
+	--brand-gradient-border: rgba(0, 212, 166, 0.12);
+	--loading-bar-gradient: linear-gradient(to right, var(--color-brand) 0%, #70ffe0 100%);
+}

@@ -1208,6 +1208,18 @@
   "browse.max-results.label": {
     "message": "Rezultate maxime"
   },
+  "browse.pagination.go": {
+    "message": "Mergi"
+  },
+  "browse.pagination.page-count": {
+    "message": "din {count}"
+  },
+  "browse.pagination.page-label": {
+    "message": "Pagină"
+  },
+  "browse.pagination.page-placeholder": {
+    "message": "Număr"
+  },
   "servers.region.western-europe": {
     "defaultMessage": "Europa de Vest"
   },
@@ -2028,7 +2040,7 @@
     "message": "Eroare la încărcarea proiectului"
   },
   "app.update-toast.title.download-complete": {
-    "message": "Descărcare finalizată"
+    "message": "Actualizare gata"
   },
   "instance.settings.tabs.installation.no-connection": {
     "message": "Nu se pot prelua detaliile modpack-ului conectat. Vă rugăm să vă verificați conexiunea la internet."
@@ -4032,7 +4044,7 @@
     "message": "Salva"
   },
   "app.update-toast.body.download-complete": {
-    "message": "Revoria v{version} has finished downloading. Reload to update now, or automatically when you close Revoria."
+    "message": "Revoria v{version} a fost descarcata complet. Reporneste launcherul acum pentru a aplica actualizarea sau va fi instalata automat cand il inchizi."
   },
   "instance.index.installing": {
     "message": "Se instalează..."
@@ -5662,5 +5674,233 @@
   },
   "installation.installed-modpack.title": {
     "message": "Modpack instalat"
+  },
+  "app.settings.tabs.themes": {
+    "message": "Teme"
+  },
+  "settings.themes.color-theme.title": {
+    "message": "Teme"
+  },
+  "settings.themes.color-theme.description": {
+    "message": "Alege tema de culoare preferata pentru Revoria."
+  },
+  "settings.display.theme.sapphire": {
+    "message": "Safir"
+  },
+  "settings.display.theme.amethyst": {
+    "message": "Ametist"
+  },
+  "settings.display.theme.sunset": {
+    "message": "Apus"
+  },
+  "settings.display.theme.aurora": {
+    "message": "Aurora"
+  },
+  "settings.appearance.background-effects.stars": {
+    "message": "Praf stelar"
+  },
+  "settings.appearance.background-effects-intensity.title": {
+    "message": "Densitatea efectului"
+  },
+  "settings.appearance.background-effects-intensity.description": {
+    "message": "Controleaza cat de des apar particulele si cat de dens pare efectul."
+  },
+  "app.settings.tabs.proxy": {
+    "message": "Proxy"
+  },
+  "settings.proxy.title": {
+    "message": "Proxy pentru launcher"
+  },
+  "settings.proxy.description": {
+    "message": "Trimite cererile de rețea ale launcherului printr-un proxy. Modificările se aplică imediat după salvare."
+  },
+  "settings.proxy.enable.title": {
+    "message": "Activează proxy global"
+  },
+  "settings.proxy.enable.description": {
+    "message": "Se aplică pentru API-ul launcherului, descărcări, skinuri, autentificare și cereri de conținut."
+  },
+  "settings.proxy.type.title": {
+    "message": "Tip proxy"
+  },
+  "settings.proxy.type.description": {
+    "message": "Alege protocolul pe care îl așteaptă serverul tău proxy."
+  },
+  "settings.proxy.host.title": {
+    "message": "Host"
+  },
+  "settings.proxy.host.placeholder": {
+    "message": "127.0.0.1 sau proxy.example.com"
+  },
+  "settings.proxy.port.title": {
+    "message": "Port"
+  },
+  "settings.proxy.port.placeholder": {
+    "message": "8080"
+  },
+  "settings.proxy.auth.title": {
+    "message": "Autentificare"
+  },
+  "settings.proxy.auth.description": {
+    "message": "Activează această opțiune dacă proxy-ul cere nume de utilizator și parolă."
+  },
+  "settings.proxy.username.title": {
+    "message": "Nume de utilizator"
+  },
+  "settings.proxy.username.placeholder": {
+    "message": "proxy-user"
+  },
+  "settings.proxy.password.title": {
+    "message": "Parolă"
+  },
+  "settings.proxy.password.placeholder": {
+    "message": "Introdu parola"
+  },
+  "settings.proxy.preview.title": {
+    "message": "Rută aplicată"
+  },
+  "settings.proxy.preview.disabled": {
+    "message": "Proxy-ul este dezactivat momentan."
+  },
+  "settings.proxy.type.http": {
+    "message": "HTTP"
+  },
+  "settings.proxy.type.http.description": {
+    "message": "Potrivit pentru majoritatea serverelor proxy standard."
+  },
+  "settings.proxy.type.https": {
+    "message": "HTTPS"
+  },
+  "settings.proxy.type.https.description": {
+    "message": "Folosește-l dacă endpoint-ul proxy este expus prin TLS."
+  },
+  "settings.proxy.type.socks5": {
+    "message": "SOCKS5"
+  },
+  "settings.proxy.type.socks5.description": {
+    "message": "Bun pentru tunelarea întregului trafic printr-un singur socket."
+  },
+  "settings.proxy.actions.save": {
+    "message": "Aplică proxy-ul"
+  },
+  "settings.proxy.actions.reset": {
+    "message": "Resetează"
+  },
+  "settings.proxy.validation.host": {
+    "message": "Introdu un host proxy înainte de a activa proxy-ul."
+  },
+  "settings.proxy.validation.port": {
+    "message": "Portul proxy trebuie să fie între 1 și 65535."
+  },
+  "settings.appearance.glass-blur.title": {
+    "message": "Blur pentru sticlă"
+  },
+  "settings.appearance.glass-blur.description": {
+    "message": "Ajustează intensitatea blurului pentru suprafețele din sticlă."
+  },
+  "settings.appearance.glass-border-opacity.title": {
+    "message": "Opacitatea marginii de sticlă"
+  },
+  "settings.appearance.glass-border-opacity.description": {
+    "message": "Controlează cât de vizibile sunt marginile de sticlă."
+  },
+  "settings.appearance.background-effects.title": {
+    "message": "Efecte de fundal"
+  },
+  "settings.appearance.background-effects.description": {
+    "message": "Efecte decorative randate în spatele interfeței."
+  },
+  "settings.appearance.background-effects.off": {
+    "message": "Oprit"
+  },
+  "settings.appearance.background-effects.snow": {
+    "message": "Zăpadă"
+  },
+  "settings.appearance.background-effects.rain": {
+    "message": "Ploaie"
+  },
+  "settings.proxy.actions.test": {
+    "message": "Testează proxy-ul"
+  },
+  "settings.proxy.status.idle": {
+    "message": "Rulează un test pentru a verifica dacă launcherul poate ajunge la serviciile Minecraft și Xbox prin acest proxy."
+  },
+  "settings.proxy.status.testing": {
+    "message": "Se testează ruta proxy..."
+  },
+  "settings.proxy.status.success": {
+    "message": "Testul proxy a reușit."
+  },
+  "settings.proxy.status.failed": {
+    "message": "Testul proxy a eșuat."
+  },
+  "settings.proxy.status.ip": {
+    "message": "IP extern detectat"
+  },
+  "settings.proxy.status.minecraft": {
+    "message": "Status Minecraft"
+  },
+  "settings.proxy.status.xbox": {
+    "message": "Status Xbox"
+  },
+  "settings.display.theme.rose-gold": {
+    "message": "Aur roz"
+  },
+  "settings.display.theme.obsidian-gold": {
+    "message": "Obsidian Gold"
+  },
+  "settings.display.theme.cherry-blossom": {
+    "message": "Floare de cires"
+  },
+  "settings.appearance.page-background-image.title": {
+    "message": "Imagine de fundal pentru pagina"
+  },
+  "settings.appearance.page-background-image.description": {
+    "message": "Folositi o imagine PNG, JPG sau WebP in spatele continutului paginilor. Imaginea este incarcata dintr-un fisier local de pe dispozitivul dvs."
+  },
+  "settings.appearance.page-background-image.select": {
+    "message": "Alege imaginea"
+  },
+  "settings.appearance.page-background-image.replace": {
+    "message": "Inlocuieste imaginea"
+  },
+  "settings.appearance.page-background-image.remove": {
+    "message": "Elimina"
+  },
+  "settings.appearance.page-background-image.empty": {
+    "message": "Nicio imagine selectata"
+  },
+  "settings.appearance.page-background-opacity.title": {
+    "message": "Opacitatea fundalului paginii"
+  },
+  "settings.appearance.page-background-opacity.description": {
+    "message": "Controleaza cat de vizibila este imaginea de fundal a paginii in spatele continutului."
+  },
+  "app.nav.discord": {
+    "message": "Server Discord"
+  },
+  "app.update-toast.body.auto-download": {
+    "message": "Revoria v{version} se descarca in fundal. Te vom anunta cand actualizarea este gata de instalare."
+  },
+  "app.update-toast.title.downloading": {
+    "message": "Se descarca actualizarea"
+  },
+  "app.update-toast.body.downloading": {
+    "message": "Se descarca Revoria v{version}. Poti continua sa folosesti launcherul intre timp."
+  },
+  "app.update-toast.progress": {
+    "message": "{percent}% descarcat"
+  },
+  "app.update-toast.restart": {
+    "message": "Reporneste acum"
+  },
+  "app.update-toast.background-download": {
+    "message": "Descarcare in fundal"
+  },
+  "settings.resource.auto-updates.title": {
+    "message": "Actualizari automate"
+  },
+  "settings.resource.auto-updates.description": {
+    "message": "Descarca automat actualizarile launcherului in fundal atunci cand sunt disponibile. Daca este dezactivat, launcherul va afisa la pornire doar ca exista o actualizare disponibila."
   }
 }

@@ -4,32 +4,159 @@ use crate::ErrorKind;
 use crate::LAUNCHER_USER_AGENT;
 use crate::event::LoadingBarId;
 use crate::event::emit::emit_loading;
+use crate::state::{ProxyType, Settings};
 use bytes::Bytes;
-use reqwest::Method;
+use reqwest::{IntoUrl, Method};
 use serde::de::DeserializeOwned;
 use std::ffi::OsStr;
 use std::path::{Path, PathBuf};
-use std::sync::LazyLock;
+use std::sync::{LazyLock, RwLock};
 use std::time::{self};
 use tokio::sync::Semaphore;
 use tokio::{fs::File, io::AsyncWriteExt};
+use url::Url;
 
 #[derive(Debug)]
 pub struct IoSemaphore(pub Semaphore);
 #[derive(Debug)]
 pub struct FetchSemaphore(pub Semaphore);
 
-pub static REQWEST_CLIENT: LazyLock<reqwest::Client> = LazyLock::new(|| {
+#[derive(Debug)]
+pub struct ReqwestClientHandle(RwLock<reqwest::Client>);
+
+impl ReqwestClientHandle {
+    fn new() -> Self {
+        Self(RwLock::new(
+            build_reqwest_client(None)
+                .expect("Reqwest Client Building Failed"),
+        ))
+    }
+
+    pub fn client(&self) -> reqwest::Client {
+        self.0.read().expect("Reqwest client poisoned").clone()
+    }
+
+    pub fn replace(&self, client: reqwest::Client) {
+        *self.0.write().expect("Reqwest client poisoned") = client;
+    }
+
+    pub fn request<U: IntoUrl>(
+        &self,
+        method: Method,
+        url: U,
+    ) -> reqwest::RequestBuilder {
+        self.client().request(method, url)
+    }
+
+    pub fn get<U: IntoUrl>(&self, url: U) -> reqwest::RequestBuilder {
+        self.client().get(url)
+    }
+
+    pub fn post<U: IntoUrl>(&self, url: U) -> reqwest::RequestBuilder {
+        self.client().post(url)
+    }
+
+    pub fn put<U: IntoUrl>(&self, url: U) -> reqwest::RequestBuilder {
+        self.client().put(url)
+    }
+
+    pub fn delete<U: IntoUrl>(&self, url: U) -> reqwest::RequestBuilder {
+        self.client().delete(url)
+    }
+}
+
+pub static REQWEST_CLIENT: LazyLock<ReqwestClientHandle> =
+    LazyLock::new(ReqwestClientHandle::new);
+
+fn build_reqwest_client(
+    proxy_url: Option<&str>,
+) -> crate::Result<reqwest::Client> {
     let mut headers = reqwest::header::HeaderMap::new();
     let header =
         reqwest::header::HeaderValue::from_str(LAUNCHER_USER_AGENT).unwrap();
     headers.insert(reqwest::header::USER_AGENT, header);
-    reqwest::Client::builder()
+
+    let mut builder = reqwest::Client::builder()
         .tcp_keepalive(Some(time::Duration::from_secs(10)))
-        .default_headers(headers)
-        .build()
-        .expect("Reqwest Client Building Failed")
-});
+        .default_headers(headers);
+
+    if let Some(proxy_url) = proxy_url {
+        let proxy = reqwest::Proxy::all(proxy_url).map_err(|err| {
+            ErrorKind::OtherError(format!(
+                "Failed to configure proxy: {err}"
+            ))
+        })?;
+        builder = builder.proxy(proxy);
+    }
+
+    builder.build().map_err(|err| {
+        ErrorKind::OtherError(format!("Reqwest client build failed: {err}"))
+            .into()
+    })
+}
+
+pub fn proxy_url_from_settings(
+    settings: &Settings,
+) -> crate::Result<Option<String>> {
+    if !settings.proxy_enabled {
+        return Ok(None);
+    }
+
+    let host = settings.proxy_host.trim();
+    if host.is_empty() {
+        return Err(ErrorKind::OtherError(
+            "Proxy host cannot be empty while proxy is enabled".to_string(),
+        )
+        .into());
+    }
+
+    let scheme = match settings.proxy_type {
+        ProxyType::Http => "http",
+        ProxyType::Https => "https",
+        ProxyType::Socks5 => "socks5h",
+    };
+
+    let mut url = Url::parse(&format!(
+        "{scheme}://{host}:{}",
+        settings.proxy_port
+    ))
+    .map_err(|err| {
+        ErrorKind::OtherError(format!("Invalid proxy configuration: {err}"))
+    })?;
+
+    if settings.proxy_auth_enabled && !settings.proxy_username.is_empty() {
+        url.set_username(&settings.proxy_username).map_err(|_| {
+            ErrorKind::OtherError(
+                "Invalid proxy username for URL encoding".to_string(),
+            )
+        })?;
+        if !settings.proxy_password.is_empty() {
+            url.set_password(Some(&settings.proxy_password))
+                .map_err(|_| {
+                    ErrorKind::OtherError(
+                        "Invalid proxy password for URL encoding".to_string(),
+                    )
+                })?;
+        }
+    }
+
+    Ok(Some(url.to_string()))
+}
+
+pub fn build_reqwest_client_from_settings(
+    settings: &Settings,
+) -> crate::Result<reqwest::Client> {
+    let proxy_url = proxy_url_from_settings(settings)?;
+    build_reqwest_client(proxy_url.as_deref())
+}
+
+pub fn configure_reqwest_client_from_settings(
+    settings: &Settings,
+) -> crate::Result<()> {
+    REQWEST_CLIENT.replace(build_reqwest_client_from_settings(settings)?);
+    Ok(())
+}
+
 const FETCH_ATTEMPTS: usize = 3;
 
 #[tracing::instrument(skip(semaphore))]

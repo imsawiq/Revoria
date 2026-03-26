@@ -157,7 +157,11 @@ html {
 .dark,
 .dark-mode,
 .oled-mode,
-.retro-mode {
+.retro-mode,
+.sapphire-mode,
+.amethyst-mode,
+.sunset-mode,
+.aurora-mode {
 	--color-icon: var(--color-secondary);
 	--color-text: var(--dark-color-text);
 	--color-text-inactive: #929aa3;
@@ -309,6 +313,62 @@ html {
 	--color-blue-highlight: rgba(9, 159, 239, 0.25);
 	--color-purple-highlight: rgba(139, 129, 230, 0.25);
 	--color-gray-highlight: rgba(113, 128, 150, 0.25);
+}
+
+.sapphire-mode {
+	--color-bg: #080c14;
+	--color-raised-bg: #0c1220;
+	--color-button-bg: #141f35;
+	--color-base: #cfe6ff;
+	--color-secondary: #8db8e6;
+	--color-contrast: #eff6ff;
+
+	--color-brand: #2f7dff;
+	--color-brand-highlight: rgba(47, 125, 255, 0.16);
+	--color-brand-shadow: rgba(47, 125, 255, 0.28);
+	--loading-bar-gradient: linear-gradient(to right, var(--color-brand) 0%, #00d4ff 100%);
+}
+
+.amethyst-mode {
+	--color-bg: #0d0714;
+	--color-raised-bg: #140a22;
+	--color-button-bg: #241038;
+	--color-base: #f0e7ff;
+	--color-secondary: #cdb7ff;
+	--color-contrast: #ffffff;
+
+	--color-brand: #b453ff;
+	--color-brand-highlight: rgba(180, 83, 255, 0.16);
+	--color-brand-shadow: rgba(180, 83, 255, 0.28);
+	--loading-bar-gradient: linear-gradient(to right, var(--color-brand) 0%, #ff4dd8 100%);
+}
+
+.sunset-mode {
+	--color-bg: #12070a;
+	--color-raised-bg: #1b0b0f;
+	--color-button-bg: #2a1117;
+	--color-base: #ffe8ee;
+	--color-secondary: #ffc0cf;
+	--color-contrast: #ffffff;
+
+	--color-brand: #ff4d6d;
+	--color-brand-highlight: rgba(255, 77, 109, 0.16);
+	--color-brand-shadow: rgba(255, 77, 109, 0.28);
+	--loading-bar-gradient: linear-gradient(to right, var(--color-brand) 0%, #ffb703 100%);
+}
+
+.aurora-mode {
+	--color-bg: #06110f;
+	--color-raised-bg: #071a16;
+	--color-button-bg: #0b2a23;
+	--color-base: #d8fff2;
+	--color-secondary: #9ae7d1;
+	--color-contrast: #f4fffb;
+
+	--color-brand: #00d4a6;
+	--color-brand-highlight: rgba(0, 212, 166, 0.14);
+	--color-brand-shadow: rgba(0, 212, 166, 0.26);
+	--loading-bar-gradient: linear-gradient(to right, var(--color-brand) 0%, #3b82f6 100%);
 }
 
 body {
