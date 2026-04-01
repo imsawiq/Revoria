@@ -144,6 +144,13 @@ export function useSearch(
 		}),
 	}
 
+	const filterTypeMessages = {
+		categories: defineMessage({
+			id: 'search.filter_type.categories',
+			defaultMessage: 'Categories',
+		}),
+	}
+
 	const sortTypes: readonly SortType[] = readonly([
 		{ display: formatMessage(sortMessages.relevance), name: 'relevance' },
 		{ display: formatMessage(sortMessages.downloads), name: 'downloads' },
@@ -171,7 +178,10 @@ export function useSearch(
 			if (!categoryFilters[filterTypeId]) {
 				categoryFilters[filterTypeId] = {
 					id: filterTypeId,
-					formatted_name: formatCategoryHeader(category.header),
+					formatted_name:
+						category.header === 'categories'
+							? formatMessage(filterTypeMessages.categories)
+							: formatCategoryHeader(category.header),
 					supported_project_types:
 						category.project_type === 'mod'
 							? ['mod', 'plugin', 'datapack']

@@ -29,13 +29,13 @@ onUnmounted(() => {
 			<div
 				v-if="shown"
 				v-bind="attrs"
-				class="floating-action-bar drop-shadow-2xl fixed z-40 p-4 bottom-0"
+				class="floating-action-bar drop-shadow-2xl fixed z-40 p-4 bottom-0 pointer-events-none"
 				aria-live="polite"
 			>
 				<div
 					role="toolbar"
 					:aria-label="ariaLabel"
-					class="relative overflow-clip flex items-center gap-2 rounded-[20px] bg-surface-3 border border-surface-5 border-solid mx-auto max-w-[60vw] px-4 py-3 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.3),0px_6px_10px_0px_rgba(0,0,0,0.15)]"
+					class="relative overflow-clip flex items-center gap-2 rounded-[20px] bg-surface-3 border border-surface-5 border-solid mx-auto w-full max-w-[min(100%,_72rem)] px-4 py-3 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.3),0px_6px_10px_0px_rgba(0,0,0,0.15)] pointer-events-auto"
 				>
 					<slot />
 				</div>

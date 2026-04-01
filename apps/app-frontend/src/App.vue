@@ -59,6 +59,8 @@ import { RouterView, useRoute, useRouter } from 'vue-router'
 
 import ModrinthLoadingIndicator from '@/components/LoadingIndicatorBar.vue'
 import AccountsCard from '@/components/ui/AccountsCard.vue'
+import AprilFoolsPopupImage from '@/components/ui/AprilFoolsPopupImage.vue'
+import AprilFoolsCleanupGame from '@/components/ui/AprilFoolsCleanupGame.vue'
 import BackgroundEffects from '@/components/ui/BackgroundEffects.vue'
 import Breadcrumbs from '@/components/ui/Breadcrumbs.vue'
 import ErrorModal from '@/components/ui/ErrorModal.vue'
@@ -77,6 +79,7 @@ import URLConfirmModal from '@/components/ui/URLConfirmModal.vue'
 import { useCheckDisableMouseover } from '@/composables/macCssFix.js'
 import { debugAnalytics, optOutAnalytics, trackEvent } from '@/helpers/analytics'
 import { check_reachable } from '@/helpers/auth.js'
+import { isAprilFoolsActive, startAprilFoolsMode } from '@/helpers/april-fools.js'
 import { get_user } from '@/helpers/cache.js'
 import { command_listener, warning_listener } from '@/helpers/events.js'
 import { useFetch } from '@/helpers/fetch.js'
@@ -217,12 +220,19 @@ onMounted(async () => {
 	document.querySelector('body').addEventListener('click', handleClick)
 	document.querySelector('body').addEventListener('auxclick', handleAuxClick)
 
+	stopAprilFoolsMode = startAprilFoolsMode({
+		active: isAprilFoolsActive(),
+		addNotification,
+		formatMessage,
+	})
+
 	checkUpdates()
 })
 
 onUnmounted(async () => {
 	document.querySelector('body').removeEventListener('click', handleClick)
 	document.querySelector('body').removeEventListener('auxclick', handleAuxClick)
+	stopAprilFoolsMode?.()
 
 	await unlistenUpdateDownload?.()
 })
@@ -259,6 +269,7 @@ const normalizeMessages = (messages) =>
 		]),
 	)
 let langSwitchTimeout
+let stopAprilFoolsMode
 function triggerLanguageTransition() {
 	const root = document.documentElement
 	root.classList.add('lang-switching')
@@ -368,6 +379,47 @@ const messages = defineMessages({
 	navDiscord: {
 		id: 'app.nav.discord',
 		defaultMessage: 'Discord server',
+	},
+	aprilFoolsThemeTitle: {
+		id: 'app.april-fools.theme.title',
+		defaultMessage: 'Important launcher branding update',
+	},
+	aprilFoolsThemeBody: {
+		id: 'app.april-fools.theme.body',
+		defaultMessage:
+			'Chaotic Rainbow is now the main launcher theme for today. Your actual theme preference is safe.',
+	},
+	aprilFoolsLauncherTitle: {
+		id: 'app.april-fools.launcher.title',
+		defaultMessage: 'Launcher found another launcher',
+	},
+	aprilFoolsLauncherBody: {
+		id: 'app.april-fools.launcher.body',
+		defaultMessage: 'Nested launcher detected inside launcher. Please remain calm.',
+	},
+	aprilFoolsRandomLauncherTitle: {
+		id: 'app.april-fools.random.launcher.title',
+		defaultMessage: 'Launcher recursion status',
+	},
+	aprilFoolsRandomLauncherBody: {
+		id: 'app.april-fools.random.launcher.body',
+		defaultMessage: 'The launcher is currently launching the launcher launcher.',
+	},
+	aprilFoolsRandomThemeTitle: {
+		id: 'app.april-fools.random.theme.title',
+		defaultMessage: 'Theme compliance notice',
+	},
+	aprilFoolsRandomThemeBody: {
+		id: 'app.april-fools.random.theme.body',
+		defaultMessage: 'Your previous theme has been temporarily sent to a safe location.',
+	},
+	aprilFoolsRandomButtonsTitle: {
+		id: 'app.april-fools.random.buttons.title',
+		defaultMessage: 'Button stability warning',
+	},
+	aprilFoolsRandomButtonsBody: {
+		id: 'app.april-fools.random.buttons.body',
+		defaultMessage: 'Some buttons may briefly dodge responsibility today.',
 	},
 	accountMenu: {
 		id: 'app.account.menu',
@@ -983,6 +1035,8 @@ async function processPendingSurveys() {
 		class="app-grid-layout experimental-styles-within relative"
 		:class="{ 'disable-advanced-rendering': !themeStore.advancedRendering }"
 	>
+		<AprilFoolsPopupImage />
+		<AprilFoolsCleanupGame />
 		<div class="app-effects-layer">
 			<BackgroundEffects />
 		</div>
@@ -1051,12 +1105,6 @@ async function processPendingSurveys() {
 			<NavButton
 				v-tooltip.right="formatMessage(messages.navLibrary)"
 				to="/library"
-				:is-subpage="
-					() =>
-						route.path.startsWith('/instance') ||
-						((route.path.startsWith('/browse') || route.path.startsWith('/project')) &&
-							route.query.i)
-				"
 			>
 				<LibraryIcon />
 			</NavButton>
@@ -1184,15 +1232,27 @@ async function processPendingSurveys() {
 				'disable-advanced-rendering': !themeStore.advancedRendering,
 			}"
 		>
-			<div class="app-viewport flex-grow router-view">
-				<div
-					v-if="themeStore.pageBackgroundUrl"
-					class="app-page-background-layer"
-					:style="{
-						backgroundImage: `url(${themeStore.pageBackgroundUrl})`,
-						opacity: themeStore.pageBackgroundOpacity,
-					}"
-				></div>
+			<div
+				class="app-viewport flex-grow router-view"
+				:style="
+					themeStore.pageBackgroundUrl
+						? {
+								backgroundImage: `linear-gradient(
+									color-mix(in srgb, var(--color-glass-bg-strong) ${
+										Math.round((1 - themeStore.pageBackgroundOpacity) * 100)
+									}%, transparent),
+									color-mix(in srgb, var(--color-glass-bg-strong) ${
+										Math.round((1 - themeStore.pageBackgroundOpacity) * 100)
+									}%, transparent)
+								), url(${themeStore.pageBackgroundUrl})`,
+								backgroundPosition: 'center',
+								backgroundRepeat: 'no-repeat',
+								backgroundSize: 'cover',
+								backgroundAttachment: 'scroll',
+						  }
+						: undefined
+				"
+			>
 				<transition name="popup-survey">
 					<div
 						v-if="availableSurvey"
@@ -1509,17 +1569,6 @@ async function processPendingSurveys() {
 	overflow: auto;
 	overflow-x: hidden;
 	position: relative;
-}
-
-.app-page-background-layer {
-	position: absolute;
-	inset: 0;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	pointer-events: none;
-	z-index: 0;
-	filter: saturate(1.04);
 }
 
 .app-page-swap-shell,

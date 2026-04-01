@@ -67,10 +67,15 @@ a {
 	}
 }
 
-.router-link-active,
+.router-link-active {
+	svg {
+		filter: drop-shadow(0 0 0.45rem color-mix(in srgb, var(--color-brand) 28%, transparent));
+	}
+}
+
 .subpage-active {
 	svg {
-		filter: drop-shadow(0 0 0.5rem black);
+		filter: none;
 	}
 }
 
@@ -81,7 +86,8 @@ a {
 
 .subpage-active {
 	color: var(--color-contrast);
-	background: var(--color-button-bg);
+	background: color-mix(in srgb, var(--color-brand) 5%, var(--color-glass-bg-strong));
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-brand) 12%, transparent);
 }
 
 .nav-button-attention {

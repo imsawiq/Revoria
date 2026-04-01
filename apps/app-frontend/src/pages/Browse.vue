@@ -95,12 +95,20 @@ const projectTypes = computed(() => {
 })
 
 const selectableSources = computed(() => {
-	const sources = [{ label: formatMessage(messages.sourceModrinth), href: 'modrinth' }]
-	// Hide CurseForge for modpacks — CF uses .zip, launcher uses .mrpack
-	if (projectType.value !== 'modpack' && projectType.value !== 'server') {
-		sources.push({ label: formatMessage(messages.sourceCurseForge), href: 'curseforge' })
-	}
-	return sources
+	const baseQuery = { ...route.query }
+	const curseForgeTargetPath =
+		projectType.value === 'modpack' || projectType.value === 'server' ? '/browse/mod' : route.path
+
+	return [
+		{ label: formatMessage(messages.sourceModrinth), href: 'modrinth' },
+		{
+			label: formatMessage(messages.sourceCurseForge),
+			href: {
+				path: curseForgeTargetPath,
+				query: { ...baseQuery, source: 'curseforge' },
+			},
+		},
+	]
 })
 
 const maxResultsOptions = computed(() =>
@@ -1202,7 +1210,7 @@ const selectableProjectTypes = computed(() => {
 		{ label: formatMessage(messages.typeResourcePack), href: `/browse/resourcepack` },
 		{ label: formatMessage(messages.typeDatapack), href: `/browse/datapack`, shown: dataPacks },
 		{ label: formatMessage(messages.typeShader), href: `/browse/shader` },
-		{ label: formatMessage(messages.typeServer), href: `/browse/server`, shown: !instance.value },
+		{ label: formatMessage(messages.typeServer), href: `/browse/server`, shown: !instance.value && !isCurseForge.value },
 	]
 
 	if (params) {

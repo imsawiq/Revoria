@@ -168,18 +168,18 @@ function handleSort(column: ContentCardTableSortColumn) {
 <template>
 	<div
 		role="table"
-		class="@container border border-solid border-surface-4 shadow-sm overflow-clip"
+		class="content-card-table @container overflow-clip"
 		:class="[flat ? '' : 'rounded-[20px]', isStuck || hideHeader ? 'border-t-0' : '']"
 	>
 		<div
 			v-if="!hideHeader"
 			ref="stickyHeaderRef"
 			role="rowgroup"
-			class="sticky top-0 z-10 flex h-12 items-center justify-between gap-4 bg-surface-3 px-3"
+			class="content-card-table__header sticky top-0 z-10 flex h-12 items-center justify-between gap-4 px-3"
 			:class="[
 				flat || isStuck ? 'rounded-none' : 'rounded-t-[20px]',
 				isStuck
-					? 'transition-[border-radius] duration-100 border-0 border-y border-solid border-surface-4 shadow-md before:pointer-events-none before:absolute before:inset-x-0 before:-top-4 before:h-5 before:bg-surface-3'
+					? 'transition-[border-radius] duration-100 border-0 border-y border-solid shadow-md content-card-table__header--stuck before:pointer-events-none before:absolute before:inset-x-0 before:-top-4 before:h-5 before:bg-transparent'
 					: '',
 			]"
 		>
@@ -281,11 +281,10 @@ function handleSort(column: ContentCardTableSortColumn) {
 					:selected="isItemSelected(item.id)"
 					:class="[
 						isItemSelected(item.id)
-							? 'bg-surface-2.5'
+							? 'content-card-row content-card-row--selected'
 							: (visibleRange.start + idx) % 2 === 1
-								? 'bg-surface-1.5'
-								: 'bg-surface-2',
-						'border-0 border-t border-solid border-surface-4',
+								? 'content-card-row content-card-row--alt'
+								: 'content-card-row',
 						visibleRange.start + idx === items.length - 1 && !flat ? 'rounded-b-[20px]' : '',
 					]"
 					@update:selected="
@@ -331,11 +330,10 @@ function handleSort(column: ContentCardTableSortColumn) {
 				:selected="isItemSelected(item.id)"
 				:class="[
 					isItemSelected(item.id)
-						? 'bg-surface-2.5'
+						? 'content-card-row content-card-row--selected'
 						: index % 2 === 1
-							? 'bg-surface-1.5'
-							: 'bg-surface-2',
-					'border-0 border-t border-solid border-surface-4',
+							? 'content-card-row content-card-row--alt'
+							: 'content-card-row',
 					index === items.length - 1 && !flat ? 'rounded-b-[20px]' : '',
 				]"
 				@update:selected="(val) => toggleItemSelection(item.id, val ?? false, index)"
@@ -363,3 +361,45 @@ function handleSort(column: ContentCardTableSortColumn) {
 		</div>
 	</div>
 </template>
+
+<style scoped>
+.content-card-table {
+	border: 1px solid color-mix(in srgb, var(--glass-border) 85%, transparent);
+	background: color-mix(in srgb, var(--color-glass-bg-strong) 90%, transparent);
+	box-shadow: var(--shadow-card);
+}
+
+.content-card-table__header {
+	background: color-mix(in srgb, var(--color-glass-bg-strong) 98%, white 2%);
+	border-bottom: 1px solid color-mix(in srgb, var(--glass-border) 82%, transparent);
+}
+
+.content-card-table__header--stuck {
+	border-color: color-mix(in srgb, var(--glass-border) 82%, transparent);
+}
+
+.content-card-table__header--stuck::before {
+	background: color-mix(in srgb, var(--color-glass-bg-strong) 98%, white 2%);
+}
+
+.content-card-row {
+	background: color-mix(in srgb, var(--color-glass-bg-strong) 94%, transparent);
+	border-top: 1px solid color-mix(in srgb, var(--glass-border) 70%, transparent);
+}
+
+.content-card-row--alt {
+	background: color-mix(in srgb, var(--color-glass-bg-strong) 90%, var(--color-brand) 1.5%);
+}
+
+.content-card-row--selected {
+	background:
+		linear-gradient(
+			90deg,
+			color-mix(in srgb, var(--color-brand) 10%, transparent) 0,
+			color-mix(in srgb, var(--color-glass-bg-strong) 94%, transparent) 1rem
+		);
+	box-shadow:
+		inset 3px 0 0 color-mix(in srgb, var(--color-brand) 42%, transparent),
+		inset 0 0 0 1px color-mix(in srgb, var(--color-brand) 8%, transparent);
+}
+</style>

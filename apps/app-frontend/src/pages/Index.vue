@@ -191,13 +191,13 @@ onBeforeUnmount(() => {
 				</div>
 				<div class="flex gap-2 mt-1">
 					<ButtonStyled color="brand">
-						<button @click="router.push('/browse/modpack')">
+						<button data-april-fools-dodge @click="router.push('/browse/modpack')">
 							<CompassIcon class="w-4 h-4" />
 							{{ formatMessage(messages.browseContent) }}
 						</button>
 					</ButtonStyled>
 					<ButtonStyled type="outlined">
-						<button @click="router.push('/library')">
+						<button data-april-fools-dodge @click="router.push('/library')">
 							<LibraryIcon class="w-4 h-4" />
 							{{ formatMessage(messages.myLibrary) }}
 						</button>
@@ -231,6 +231,14 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
+.discover-shell {
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	box-shadow: none;
+}
+
 .hero-section {
 	background: linear-gradient(135deg, var(--color-brand-highlight) 0%, rgba(0, 0, 0, 0) 72%);
 }

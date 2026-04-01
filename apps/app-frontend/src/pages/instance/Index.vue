@@ -45,7 +45,7 @@
 								color="brand"
 								size="large"
 							>
-								<button @click="repairInstance()">
+								<button data-april-fools-dodge @click="repairInstance()">
 									<DownloadIcon />
 									{{ formatMessage(messages.repair) }}
 								</button>
@@ -61,7 +61,7 @@
 								color="brand"
 								size="large"
 							>
-								<button @click="startInstance('InstancePage')">
+								<button data-april-fools-dodge @click="startInstance('InstancePage')">
 									<PlayIcon />
 									{{ formatMessage(messages.play) }}
 								</button>

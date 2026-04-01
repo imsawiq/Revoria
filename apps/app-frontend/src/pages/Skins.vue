@@ -553,18 +553,7 @@ onMounted(async () => {
 				alt="Excited Modrinth Bot"
 				class="absolute -top-28 right-8 md:right-20 h-28 w-auto"
 			/>
-			<div
-				class="absolute top-0 left-0 w-full h-[1px] opacity-40 bg-gradient-to-r from-transparent via-green-500 to-transparent"
-				style="
-					background: linear-gradient(
-						to right,
-						transparent 2rem,
-						var(--color-green) calc(100% - 13rem),
-						var(--color-green) calc(100% - 5rem),
-						transparent calc(100% - 2rem)
-					);
-				"
-			></div>
+			<div class="skins-beta-glow absolute top-0 left-0 w-full h-[1px] opacity-40"></div>
 
 			<div class="flex flex-col gap-5">
 				<h1 class="text-3xl font-extrabold m-0">{{ formatMessage(messages.pleaseSignIn) }}</h1>
@@ -629,8 +618,8 @@ $skin-card-gap: 4px;
 	position: absolute;
 	inset: 0;
 	background:
-		radial-gradient(700px 220px at 10% 0%, rgba(255, 255, 255, 0.12), transparent 60%),
-		radial-gradient(520px 240px at 90% 0%, rgba(27, 217, 106, 0.12), transparent 62%);
+		radial-gradient(700px 220px at 10% 0%, color-mix(in srgb, var(--color-brand) 9%, white 4%), transparent 60%),
+		radial-gradient(520px 240px at 90% 0%, color-mix(in srgb, var(--color-brand) 12%, transparent), transparent 62%);
 	opacity: 0.9;
 	pointer-events: none;
 }
@@ -742,4 +731,15 @@ $skin-card-gap: 4px;
 		transition: none;
 	}
 }
+.skins-beta-glow {
+	background: linear-gradient(
+		to right,
+		transparent 2rem,
+		color-mix(in srgb, var(--color-brand) 82%, white 18%) calc(100% - 13rem),
+		color-mix(in srgb, var(--color-brand) 82%, white 18%) calc(100% - 5rem),
+		transparent calc(100% - 2rem)
+	);
+	box-shadow: 0 0 18px color-mix(in srgb, var(--color-brand) 28%, transparent);
+}
+
 </style>

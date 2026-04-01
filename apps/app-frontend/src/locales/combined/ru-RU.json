@@ -2705,6 +2705,39 @@
   "instance.settings.tabs.java.environment-variables": {
     "message": "Переменные среды"
   },
+  "app.april-fools.theme.title": {
+    "message": "Важное обновление бренда лаунчера"
+  },
+  "app.april-fools.theme.body": {
+    "message": "Хаотичная радужная тема теперь главная тема лаунчера на сегодня. Твоя настоящая тема никуда не делась."
+  },
+  "app.april-fools.cleanup.message": {
+    "message": "Вы не смыли за собой. Убери своё говно."
+  },
+  "app.april-fools.launcher.title": {
+    "message": "Лаунчер нашёл ещё один лаунчер"
+  },
+  "app.april-fools.launcher.body": {
+    "message": "Внутри лаунчера обнаружен ещё один лаунчер. Просим сохранять спокойствие."
+  },
+  "app.april-fools.random.launcher.title": {
+    "message": "Статус рекурсии лаунчера"
+  },
+  "app.april-fools.random.launcher.body": {
+    "message": "Лаунчер сейчас запускает лаунчер, который запускает лаунчер."
+  },
+  "app.april-fools.random.theme.title": {
+    "message": "Уведомление о теме"
+  },
+  "app.april-fools.random.theme.body": {
+    "message": "Твоя предыдущая тема временно отправлена в безопасное место."
+  },
+  "app.april-fools.random.buttons.title": {
+    "message": "Предупреждение о стабильности кнопок"
+  },
+  "app.april-fools.random.buttons.body": {
+    "message": "Некоторые кнопки сегодня могут ненадолго уклоняться от обязанностей."
+  },
   "app.account.menu": {
     "message": "Аккаунт Modrinth"
   },
@@ -2908,6 +2941,9 @@
   },
   "instance.worlds.play_instance": {
     "message": "Запустить сборку"
+  },
+  "search.filter_type.categories": {
+    "defaultMessage": "Категории"
   },
   "search.filter_type.environment": {
     "defaultMessage": "Среда"
@@ -5685,7 +5721,7 @@
     "message": "{count} friend {count, plural, one {request} other {requests}}"
   },
   "project-card.stats.followers": {
-    "defaultMessage": "{count, plural, one {follower} other {followers}}"
+    "defaultMessage": "подписчиков"
   },
   "project-type.server.capital": {
     "defaultMessage": "{count, plural, one {Server} other {Servers}}"
@@ -5742,7 +5778,7 @@
     "defaultMessage": "{action, select, downgrade {Downgrade} other {Update}} modpack"
   },
   "project-card.stats.downloads": {
-    "defaultMessage": "{count, plural, one {download} other {downloads}}"
+    "defaultMessage": "{count, plural, one {загрузка} few {загрузки} many {загрузок} other {загрузки}}"
   },
   "project-type.resourcepack.capital": {
     "message": "{count, plural, one {Ресурс-пак} few {Ресурс-пака} many {Ресурс-паков} other {Ресурс-пака}}"
@@ -6013,5 +6049,14 @@
   },
   "settings.resource.auto-updates.description": {
     "message": "Автоматически скачивает обновления лаунчера в фоне, когда они доступны. Если отключено, лаунчер при запуске только покажет, что доступно обновление."
+  },
+  "project-type.shaderpack.category": {
+    "defaultMessage": "Шейдерпаки"
+  },
+  "project-type.shaderpack.capital": {
+    "defaultMessage": "{count, plural, one {Шейдерпак} few {Шейдерпака} many {Шейдерпаков} other {Шейдерпака}}"
+  },
+  "project-type.shaderpack.lowercase": {
+    "defaultMessage": "{count, plural, one {шейдерпак} few {шейдерпака} many {шейдерпаков} other {шейдерпака}}"
   }
 }

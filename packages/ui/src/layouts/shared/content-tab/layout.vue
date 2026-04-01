@@ -654,8 +654,8 @@ const confirmUnlinkModal = ref<InstanceType<typeof ConfirmUnlinkModal>>()
 								class="cursor-pointer rounded-full border border-solid px-3 py-1.5 text-base font-semibold leading-5 transition-all duration-100 active:scale-[0.97]"
 								:class="
 									selectedFilters.length === 0
-										? 'border-green bg-brand-highlight text-brand'
-										: 'border-surface-5 bg-surface-4 text-primary hover:bg-surface-5'
+										? 'content-filter-button is-active'
+										: 'content-filter-button'
 								"
 								:aria-pressed="selectedFilters.length === 0"
 								@click="selectedFilters = []"
@@ -668,8 +668,8 @@ const confirmUnlinkModal = ref<InstanceType<typeof ConfirmUnlinkModal>>()
 								class="cursor-pointer rounded-full border border-solid px-3 py-1.5 text-base font-semibold leading-5 transition-all duration-100 active:scale-[0.97]"
 								:class="
 									selectedFilters.includes(option.id)
-										? 'border-green bg-brand-highlight text-brand'
-										: 'border-surface-5 bg-surface-4 text-primary hover:bg-surface-5'
+										? 'content-filter-button is-active'
+										: 'content-filter-button'
 								"
 								:aria-pressed="selectedFilters.includes(option.id)"
 								@click="toggleFilter(option.id)"
@@ -928,3 +928,22 @@ const confirmUnlinkModal = ref<InstanceType<typeof ConfirmUnlinkModal>>()
 		<slot name="modals" />
 	</div>
 </template>
+
+<style scoped>
+.content-filter-button {
+	border-color: color-mix(in srgb, var(--glass-border) 85%, transparent);
+	background: color-mix(in srgb, var(--color-glass-bg-strong) 88%, transparent);
+	color: var(--color-primary);
+}
+
+.content-filter-button:hover {
+	background: color-mix(in srgb, var(--color-glass-bg-strong) 96%, var(--color-brand) 4%);
+}
+
+.content-filter-button.is-active {
+	border-color: color-mix(in srgb, var(--color-brand) 52%, var(--glass-border));
+	background: color-mix(in srgb, var(--color-brand) 16%, var(--color-glass-bg-strong));
+	color: var(--color-brand);
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-brand) 18%, transparent);
+}
+</style>

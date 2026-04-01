@@ -1106,6 +1106,39 @@
   "instance.edit-world.title": {
     "message": "Редагувати світ"
   },
+  "app.april-fools.theme.title": {
+    "message": "Важливе оновлення бренду лаунчера"
+  },
+  "app.april-fools.theme.body": {
+    "message": "Хаотична райдужна тема сьогодні стала головною темою лаунчера. Твоя справжня тема збережена."
+  },
+  "app.april-fools.cleanup.message": {
+    "message": "Ти не прибрав за собою. Прибери своє лайно."
+  },
+  "app.april-fools.launcher.title": {
+    "message": "Лаунчер знайшов ще один лаунчер"
+  },
+  "app.april-fools.launcher.body": {
+    "message": "Усередині лаунчера виявлено ще один лаунчер. Будь ласка, зберігайте спокій."
+  },
+  "app.april-fools.random.launcher.title": {
+    "message": "Статус рекурсії лаунчера"
+  },
+  "app.april-fools.random.launcher.body": {
+    "message": "Лаунчер зараз запускає лаунчер, який запускає лаунчер."
+  },
+  "app.april-fools.random.theme.title": {
+    "message": "Сповіщення про тему"
+  },
+  "app.april-fools.random.theme.body": {
+    "message": "Твою попередню тему тимчасово відправлено в безпечне місце."
+  },
+  "app.april-fools.random.buttons.title": {
+    "message": "Попередження про стабільність кнопок"
+  },
+  "app.april-fools.random.buttons.body": {
+    "message": "Деякі кнопки сьогодні можуть ненадовго ухилятися від обовʼязків."
+  },
   "app.account.menu": {
     "message": "Акаунт Modrinth"
   },
@@ -1143,7 +1176,7 @@
     "defaultMessage": "Пошук modpack"
   },
   "project-card.stats.followers": {
-    "defaultMessage": "{count, plural, one {follower} other {followers}}"
+    "defaultMessage": "{count, plural, one {підписник} few {підписники} many {підписників} other {підписника}}"
   },
   "maintenance.cleanup.selected-count": {
     "message": "Вибрано {count}"
@@ -3665,6 +3698,9 @@
   "instance.worlds.play_instance": {
     "message": "Відтворити екземпляр"
   },
+  "search.filter_type.categories": {
+    "defaultMessage": "Категорії"
+  },
   "search.filter_type.environment": {
     "defaultMessage": "Навколишнє середовище"
   },
@@ -3831,7 +3867,7 @@
     "defaultMessage": "Перевстановлення modpack"
   },
   "project-card.stats.downloads": {
-    "defaultMessage": "{count, plural, one {download} other {downloads}}"
+    "defaultMessage": "{count, plural, one {завантаження} few {завантаження} many {завантажень} other {завантаження}}"
   },
   "instances.updater-modal.select-version": {
     "defaultMessage": "Виберіть версію, щоб переглянути її журнал змін"
@@ -4254,7 +4290,7 @@
     "message": "Бібліотека"
   },
   "search-card.downloads": {
-    "message": "завантаження"
+    "message": "завантажень"
   },
   "project.about.server.title": {
     "defaultMessage": "Деталі сервера"
@@ -4485,7 +4521,7 @@
     "message": "Налаштування"
   },
   "search-card.followers": {
-    "message": "послідовників"
+    "message": "підписників"
   },
   "friends.friend.request-sent": {
     "message": "Запит на дружбу надіслано"
@@ -5902,5 +5938,14 @@
   },
   "settings.resource.auto-updates.description": {
     "message": "Автоматично завантажує оновлення лаунчера у фоні, коли вони доступні. Якщо вимкнено, лаунчер під час запуску лише покаже, що доступне оновлення."
+  },
+  "project-type.shaderpack.category": {
+    "defaultMessage": "Шейдерпаки"
+  },
+  "project-type.shaderpack.capital": {
+    "defaultMessage": "{count, plural, one {Шейдерпак} few {Шейдерпаки} many {Шейдерпаків} other {Шейдерпака}}"
+  },
+  "project-type.shaderpack.lowercase": {
+    "defaultMessage": "{count, plural, one {шейдерпак} few {шейдерпаки} many {шейдерпаків} other {шейдерпака}}"
   }
 }

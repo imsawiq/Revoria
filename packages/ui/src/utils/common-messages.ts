@@ -533,6 +533,10 @@ export const commonProjectTypeCategoryMessages = defineMessages({
 		id: 'project-type.shader.category',
 		defaultMessage: 'Shaders',
 	},
+	shaderpack: {
+		id: 'project-type.shaderpack.category',
+		defaultMessage: 'Shader Packs',
+	},
 	server: {
 		id: 'project-type.server.category',
 		defaultMessage: 'Servers',
@@ -568,6 +572,10 @@ export const commonProjectTypeTitleMessages = defineMessages({
 		id: 'project-type.shader.capital',
 		defaultMessage: '{count, plural, one {Shader} other {Shaders}}',
 	},
+	shaderpack: {
+		id: 'project-type.shaderpack.capital',
+		defaultMessage: '{count, plural, one {Shader Pack} other {Shader Packs}}',
+	},
 	server: {
 		id: 'project-type.server.capital',
 		defaultMessage: '{count, plural, one {Server} other {Servers}}',
@@ -602,6 +610,10 @@ export const commonProjectTypeSentenceMessages = defineMessages({
 	shader: {
 		id: 'project-type.shader.lowercase',
 		defaultMessage: '{count, plural, one {shader} other {shaders}}',
+	},
+	shaderpack: {
+		id: 'project-type.shaderpack.lowercase',
+		defaultMessage: '{count, plural, one {shader pack} other {shader packs}}',
 	},
 	server: {
 		id: 'project-type.server.lowercase',

@@ -352,7 +352,7 @@ onUnmounted(() => {
 	min-width: 100%;
 
 	&:nth-child(even) {
-		background: var(--color-bg);
+		background: transparent;
 	}
 
 	.header {

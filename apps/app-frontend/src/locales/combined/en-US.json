@@ -1106,6 +1106,39 @@
   "instance.edit-world.title": {
     "message": "Edit world"
   },
+  "app.april-fools.theme.title": {
+    "message": "Important launcher branding update"
+  },
+  "app.april-fools.theme.body": {
+    "message": "Chaotic Rainbow is now the main launcher theme for today. Your actual theme preference is safe."
+  },
+  "app.april-fools.cleanup.message": {
+    "message": "You did not clean up after yourself. Clean up your mess."
+  },
+  "app.april-fools.launcher.title": {
+    "message": "Launcher found another launcher"
+  },
+  "app.april-fools.launcher.body": {
+    "message": "Nested launcher detected inside launcher. Please remain calm."
+  },
+  "app.april-fools.random.launcher.title": {
+    "message": "Launcher recursion status"
+  },
+  "app.april-fools.random.launcher.body": {
+    "message": "The launcher is currently launching the launcher launcher."
+  },
+  "app.april-fools.random.theme.title": {
+    "message": "Theme compliance notice"
+  },
+  "app.april-fools.random.theme.body": {
+    "message": "Your previous theme has been temporarily sent to a safe location."
+  },
+  "app.april-fools.random.buttons.title": {
+    "message": "Button stability warning"
+  },
+  "app.april-fools.random.buttons.body": {
+    "message": "Some buttons may briefly dodge responsibility today."
+  },
   "app.account.menu": {
     "message": "Modrinth account"
   },
@@ -3665,6 +3698,9 @@
   "instance.worlds.play_instance": {
     "message": "Play instance"
   },
+  "search.filter_type.categories": {
+    "defaultMessage": "Categories"
+  },
   "search.filter_type.environment": {
     "defaultMessage": "Environment"
   },
@@ -5902,5 +5938,14 @@
   },
   "settings.resource.auto-updates.description": {
     "message": "Automatically downloads launcher updates in the background when available. When disabled, the launcher only shows that an update is available on startup."
+  },
+  "project-type.shaderpack.category": {
+    "defaultMessage": "Shader Packs"
+  },
+  "project-type.shaderpack.capital": {
+    "defaultMessage": "{count, plural, one {Shader Pack} other {Shader Packs}}"
+  },
+  "project-type.shaderpack.lowercase": {
+    "defaultMessage": "{count, plural, one {shader pack} other {shader packs}}"
   }
 }

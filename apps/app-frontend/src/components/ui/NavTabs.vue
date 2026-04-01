@@ -64,8 +64,12 @@ const sliderHeightPx = computed(() => `${sliderHeight.value}px`)
 function buildTo(link: Tab): RouteLocationRaw {
 	if (!props.query) return link.href
 
+	if (typeof link.href !== 'string') {
+		return link.href
+	}
+
 	const nextQuery: Record<string, any> = { ...route.query }
-	if (typeof link.href === 'string' && link.href.length > 0) {
+	if (link.href.length > 0) {
 		nextQuery[props.query] = link.href
 	} else {
 		delete nextQuery[props.query]
@@ -91,7 +95,11 @@ function pickLink() {
 		const current = route.query[props.query]
 		for (let i = filteredLinks.value.length - 1; i >= 0; i--) {
 			const link = filteredLinks.value[i]
-			if (String(current ?? '') === String(link.href ?? '')) {
+			const expected =
+				typeof link.href === 'string'
+					? link.href
+					: (link.href.query?.[props.query] as string | undefined)
+			if (String(current ?? '') === String(expected ?? '')) {
 				index = i
 				break
 			}

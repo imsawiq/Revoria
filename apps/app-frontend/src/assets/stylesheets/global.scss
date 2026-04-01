@@ -437,3 +437,50 @@ html.aurora-mode,
 	--brand-gradient-border: rgba(0, 212, 166, 0.12);
 	--loading-bar-gradient: linear-gradient(to right, var(--color-brand) 0%, #70ffe0 100%);
 }
+
+html.april-fools-mode,
+.april-fools-mode {
+	--color-bg: #20072c;
+	--color-raised-bg: #311042;
+	--color-button-bg: rgba(86, 18, 111, 0.9);
+	--color-base: #fff0ff;
+	--color-secondary: #ffe3ff;
+	--color-contrast: #fffdfc;
+	--color-brand: #ff66c4;
+	--color-brand-highlight: rgba(255, 102, 196, 0.24);
+	--color-brand-shadow: rgba(255, 102, 196, 0.38);
+	--color-button-bg-selected: rgba(255, 232, 121, 0.24);
+	--color-button-text-selected: #fff3b6;
+	--brand-gradient-border: rgba(255, 232, 121, 0.26);
+	--loading-bar-gradient: linear-gradient(
+		to right,
+		#ff005a 0%,
+		#ff8c00 18%,
+		#fff055 36%,
+		#50ff95 56%,
+		#49d0ff 76%,
+		#a65cff 100%
+	);
+}
+
+body.april-fools-active {
+	background:
+		radial-gradient(circle at 15% 18%, rgba(255, 0, 90, 0.2) 0, transparent 30%),
+		radial-gradient(circle at 34% 12%, rgba(255, 140, 0, 0.18) 0, transparent 24%),
+		radial-gradient(circle at 56% 16%, rgba(255, 240, 85, 0.18) 0, transparent 22%),
+		radial-gradient(circle at 74% 12%, rgba(80, 255, 149, 0.16) 0, transparent 24%),
+		radial-gradient(circle at 88% 16%, rgba(73, 208, 255, 0.18) 0, transparent 26%),
+		radial-gradient(circle at 50% 100%, rgba(166, 92, 255, 0.18) 0, transparent 38%);
+}
+
+[data-april-fools-dodge] {
+	transition:
+		transform 180ms ease,
+		filter 180ms ease;
+	will-change: transform;
+}
+
+[data-april-fools-dodge].april-fools-dodging {
+	transform: translate(var(--april-dodge-x, 0), var(--april-dodge-y, 0)) rotate(-8deg) scale(1.02);
+	filter: saturate(1.28) brightness(1.08);
+}
