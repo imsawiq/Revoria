@@ -83,17 +83,37 @@ const messages = defineMessages({
 		id: 'instance.settings.tabs.java.java-installation',
 		defaultMessage: 'Java installation',
 	},
+	customJavaInstallation: {
+		id: 'instance.settings.tabs.java.custom-java-installation',
+		defaultMessage: 'Custom Java installation',
+	},
 	javaArguments: {
 		id: 'instance.settings.tabs.java.java-arguments',
 		defaultMessage: 'Java arguments',
+	},
+	customJavaArguments: {
+		id: 'instance.settings.tabs.java.custom-java-arguments',
+		defaultMessage: 'Custom java arguments',
 	},
 	javaEnvironmentVariables: {
 		id: 'instance.settings.tabs.java.environment-variables',
 		defaultMessage: 'Environment variables',
 	},
+	customEnvironmentVariables: {
+		id: 'instance.settings.tabs.java.custom-environment-variables',
+		defaultMessage: 'Custom environment variables',
+	},
+	enterEnvironmentalVariables: {
+		id: 'instance.settings.tabs.java.enter-environmental-variables',
+		defaultMessage: 'Enter environmental variables...',
+	},
 	javaMemory: {
 		id: 'instance.settings.tabs.java.java-memory',
 		defaultMessage: 'Memory allocated',
+	},
+	customMemoryAllocation: {
+		id: 'instance.settings.tabs.java.custom-memory-allocation',
+		defaultMessage: 'Custom memory allocation',
 	},
 	hooks: {
 		id: 'instance.settings.tabs.java.hooks',
@@ -107,7 +127,11 @@ const messages = defineMessages({
 		<h2 id="project-name" class="m-0 mb-1 text-lg font-extrabold text-contrast block">
 			{{ formatMessage(messages.javaInstallation) }}
 		</h2>
-		<Checkbox v-model="overrideJavaInstall" label="Custom Java installation" class="mb-2" />
+		<Checkbox
+			v-model="overrideJavaInstall"
+			:label="formatMessage(messages.customJavaInstallation)"
+			class="mb-2"
+		/>
 		<template v-if="!overrideJavaInstall">
 			<div class="flex my-2 items-center gap-2 font-semibold">
 				<template v-if="javaInstall">
@@ -140,7 +164,11 @@ const messages = defineMessages({
 		<h2 id="project-name" class="mt-4 mb-1 text-lg font-extrabold text-contrast block">
 			{{ formatMessage(messages.javaMemory) }}
 		</h2>
-		<Checkbox v-model="overrideMemorySettings" label="Custom memory allocation" class="mb-2" />
+		<Checkbox
+			v-model="overrideMemorySettings"
+			:label="formatMessage(messages.customMemoryAllocation)"
+			class="mb-2"
+		/>
 		<Slider
 			id="max-memory"
 			v-model="memory.maximum"
@@ -155,7 +183,11 @@ const messages = defineMessages({
 		<h2 id="project-name" class="mt-4 mb-1 text-lg font-extrabold text-contrast block">
 			{{ formatMessage(messages.javaArguments) }}
 		</h2>
-		<Checkbox v-model="overrideJavaArgs" label="Custom java arguments" class="my-2" />
+		<Checkbox
+			v-model="overrideJavaArgs"
+			:label="formatMessage(messages.customJavaArguments)"
+			class="my-2"
+		/>
 		<input
 			id="java-args"
 			v-model="javaArgs"
@@ -163,12 +195,16 @@ const messages = defineMessages({
 			:disabled="!overrideJavaArgs"
 			type="text"
 			class="w-full"
-			placeholder="Enter java arguments..."
+			:placeholder="formatMessage(messages.javaArguments)"
 		/>
 		<h2 id="project-name" class="mt-4 mb-1 text-lg font-extrabold text-contrast block">
 			{{ formatMessage(messages.javaEnvironmentVariables) }}
 		</h2>
-		<Checkbox v-model="overrideEnvVars" label="Custom environment variables" class="mb-2" />
+		<Checkbox
+			v-model="overrideEnvVars"
+			:label="formatMessage(messages.customEnvironmentVariables)"
+			class="mb-2"
+		/>
 		<input
 			id="env-vars"
 			v-model="envVars"
@@ -176,7 +212,7 @@ const messages = defineMessages({
 			:disabled="!overrideEnvVars"
 			type="text"
 			class="w-full"
-			placeholder="Enter environmental variables..."
+			:placeholder="formatMessage(messages.enterEnvironmentalVariables)"
 		/>
 	</div>
 </template>

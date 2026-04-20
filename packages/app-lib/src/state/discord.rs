@@ -1,6 +1,6 @@
 // [AR] Feature
 use std::{
-    sync::{Arc, atomic::AtomicBool},
+    sync::{Arc, OnceLock, RwLock as StdRwLock, atomic::AtomicBool},
     time::{SystemTime, UNIX_EPOCH},
 };
 
@@ -20,22 +20,132 @@ pub struct DiscordGuard {
     connected: Arc<AtomicBool>,
 }
 
-pub(crate) const ACTIVE_STATE: [&str; 6] = [
-    "Explores",
-    "Travels with",
-    "Pirating",
-    "Investigating the",
-    "Engaged in",
-    "Conducting",
-];
-pub(crate) const INACTIVE_STATE: [&str; 6] = [
-    "Idling...",
-    "Waiting for the pirate team...",
-    "Taking a break...",
-    "Resting...",
-    "On standby...",
-    "In a holding pattern...",
-];
+static RPC_LANGUAGE: OnceLock<StdRwLock<String>> = OnceLock::new();
+
+fn rpc_language_store() -> &'static StdRwLock<String> {
+    RPC_LANGUAGE.get_or_init(|| StdRwLock::new(String::from("en")))
+}
+
+pub fn set_rpc_language(language: &str) {
+    if let Ok(mut current) = rpc_language_store().write() {
+        *current = language.to_string();
+    }
+}
+
+fn get_rpc_language() -> String {
+    rpc_language_store()
+        .read()
+        .map(|value| value.clone())
+        .unwrap_or_else(|_| "en".to_string())
+}
+
+fn active_state(language: &str) -> [&'static str; 6] {
+    match language {
+        "ru" => [
+            "Исследует",
+            "Путешествует с",
+            "Пиратит с",
+            "Изучает",
+            "Занят вместе с",
+            "Запускает с",
+        ],
+        "uk" => [
+            "Досліджує",
+            "Подорожує з",
+            "Піратствує з",
+            "Вивчає",
+            "Зайнятий разом із",
+            "Запускає з",
+        ],
+        "de" => [
+            "Erkundet",
+            "Reist mit",
+            "Piratet mit",
+            "Untersucht",
+            "Beschäftigt sich mit",
+            "Startet mit",
+        ],
+        "ro" => [
+            "Exploreaza",
+            "Calatoreste cu",
+            "Pirateaza cu",
+            "Investigheaza",
+            "Este ocupat cu",
+            "Porneste cu",
+        ],
+        _ => [
+            "Explores",
+            "Travels with",
+            "Pirating",
+            "Investigating",
+            "Engaged with",
+            "Launching with",
+        ],
+    }
+}
+
+fn inactive_state(language: &str) -> [&'static str; 6] {
+    match language {
+        "ru" => [
+            "Бездельничает...",
+            "Ждёт пиратскую команду...",
+            "Делает перерыв...",
+            "Отдыхает...",
+            "Наготове...",
+            "Завис в ожидании...",
+        ],
+        "uk" => [
+            "Нудьгує...",
+            "Чекає піратську команду...",
+            "Робить перерву...",
+            "Відпочиває...",
+            "Напоготові...",
+            "Завмер у режимі очікування...",
+        ],
+        "de" => [
+            "Leerlauf...",
+            "Wartet auf das Piratenteam...",
+            "Macht eine Pause...",
+            "Ruht sich aus...",
+            "In Bereitschaft...",
+            "Im Wartemodus...",
+        ],
+        "ro" => [
+            "Sta degeaba...",
+            "Asteapta echipa de pirati...",
+            "Ia o pauza...",
+            "Se odihneste...",
+            "In asteptare...",
+            "Ramane in standby...",
+        ],
+        _ => [
+            "Idling...",
+            "Waiting for the pirate team...",
+            "Taking a break...",
+            "Resting...",
+            "On standby...",
+            "In a holding pattern...",
+        ],
+    }
+}
+
+pub fn select_active_phrase() -> &'static str {
+    let language = get_rpc_language();
+    let phrases = active_state(&language);
+    phrases
+        .choose(&mut rand::thread_rng())
+        .copied()
+        .unwrap_or("Playing")
+}
+
+pub fn select_inactive_phrase() -> &'static str {
+    let language = get_rpc_language();
+    let phrases = inactive_state(&language);
+    phrases
+        .choose(&mut rand::thread_rng())
+        .copied()
+        .unwrap_or("Idling...")
+}
 
 impl DiscordGuard {
     /// Initialize discord IPC client, and attempt to connect to it
@@ -178,8 +288,7 @@ impl DiscordGuard {
             return self.clear_activity(true).await;
         }
 
-        let selected_phrase =
-            INACTIVE_STATE.choose(&mut rand::thread_rng()).unwrap();
+        let selected_phrase = select_inactive_phrase();
         self.set_activity(&format!("{}", selected_phrase), reconnect_if_fail)
             .await?;
         Ok(())

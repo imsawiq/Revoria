@@ -128,6 +128,54 @@
   "instance.logs.share.text": {
     "message": "Sehen Sie sich dieses Protokoll einer Instanz in der Modrinth-App an"
   },
+  "project.about.details.title": {
+    "defaultMessage": "Details"
+  },
+  "project.versions.showing": {
+    "defaultMessage": "Angezeigt"
+  },
+  "project.versions.to": {
+    "defaultMessage": "bis"
+  },
+  "project.versions.of": {
+    "defaultMessage": "von"
+  },
+  "project.versions.name": {
+    "defaultMessage": "Name"
+  },
+  "project.versions.game-version": {
+    "defaultMessage": "Spielversion"
+  },
+  "project.versions.platforms": {
+    "defaultMessage": "Plattformen"
+  },
+  "project.versions.published": {
+    "defaultMessage": "Veröffentlicht"
+  },
+  "project.versions.downloads": {
+    "defaultMessage": "Downloads"
+  },
+  "project.versions.compatibility": {
+    "defaultMessage": "Kompatibilität"
+  },
+  "project.versions.stats": {
+    "defaultMessage": "Statistik"
+  },
+  "browse.server.status.online": {
+    "defaultMessage": "Server online"
+  },
+  "browse.server.ping.unavailable": {
+    "defaultMessage": "Ping nicht verfügbar"
+  },
+  "browse.server.ping.value": {
+    "defaultMessage": "{ping} ms"
+  },
+  "browse.server.action.play": {
+    "defaultMessage": "Spielen"
+  },
+  "instance.logs.share.open-link": {
+    "defaultMessage": "Link öffnen"
+  },
   "settings.default-instance.height.title": {
     "message": "Höhe"
   },
@@ -579,7 +627,7 @@
     "defaultMessage": "Nordamerika"
   },
   "header.category.performance-impact": {
-    "defaultMessage": "Auswirkungen auf die Leistung"
+    "message": "Leistungsauswirkung"
   },
   "settings.appearance.launcher-language.option.russian": {
     "message": "Russisch"
@@ -852,7 +900,7 @@
     "message": "Suchen"
   },
   "header.category.minecraft-server-features": {
-    "defaultMessage": "Merkmale"
+    "message": "Funktionen"
   },
   "project.tab.files": {
     "message": "Dateien"
@@ -1101,43 +1149,10 @@
     "message": "Neue Version installieren"
   },
   "header.category.feature": {
-    "defaultMessage": "Besonderheit"
+    "message": "Funktionen"
   },
   "instance.edit-world.title": {
     "message": "Welt bearbeiten"
-  },
-  "app.april-fools.theme.title": {
-    "message": "Wichtiges Launcher-Branding-Update"
-  },
-  "app.april-fools.theme.body": {
-    "message": "Chaotic Rainbow ist heute das neue Haupttheme des Launchers. Deine echte Theme-Auswahl bleibt erhalten."
-  },
-  "app.april-fools.cleanup.message": {
-    "message": "Du hast nicht hinter dir aufgeräumt. Mach deinen Dreck weg."
-  },
-  "app.april-fools.launcher.title": {
-    "message": "Launcher hat einen weiteren Launcher gefunden"
-  },
-  "app.april-fools.launcher.body": {
-    "message": "Im Launcher wurde ein weiterer Launcher entdeckt. Bitte ruhig bleiben."
-  },
-  "app.april-fools.random.launcher.title": {
-    "message": "Launcher-Rekursionsstatus"
-  },
-  "app.april-fools.random.launcher.body": {
-    "message": "Der Launcher startet gerade den Launcher-Launcher."
-  },
-  "app.april-fools.random.theme.title": {
-    "message": "Theme-Hinweis"
-  },
-  "app.april-fools.random.theme.body": {
-    "message": "Dein vorheriges Theme wurde vorübergehend an einen sicheren Ort verschoben."
-  },
-  "app.april-fools.random.buttons.title": {
-    "message": "Warnung zur Button-Stabilität"
-  },
-  "app.april-fools.random.buttons.body": {
-    "message": "Einige Buttons könnten heute kurzzeitig ihren Pflichten ausweichen."
   },
   "app.account.menu": {
     "message": "Modrinth-Konto"
@@ -1176,7 +1191,7 @@
     "defaultMessage": "Suchen Sie nach Modpack"
   },
   "project-card.stats.followers": {
-    "defaultMessage": "{count, plural, one {Follower} other {Follower}}"
+    "message": "{count, plural, one {Follower} other {Follower}}"
   },
   "maintenance.cleanup.selected-count": {
     "message": "{count} ausgewählt"
@@ -1317,7 +1332,7 @@
     "message": "Gute Nacht"
   },
   "header.category.minecraft-server-meta": {
-    "defaultMessage": "Meta"
+    "message": "Meta"
   },
   "content.diff-modal.diff-type.updated": {
     "defaultMessage": "Aktualisiert"
@@ -1368,7 +1383,7 @@
     "message": "Der jeder Instanz zugewiesene Speicher, wenn sie ausgeführt wird."
   },
   "project.about.details.updated": {
-    "defaultMessage": "Updated {date}"
+    "message": "Aktualisiert {date}"
   },
   "creation-flow.final.generator-settings.flat": {
     "defaultMessage": "Wohnung"
@@ -1875,7 +1890,7 @@
     "message": "API-Schlüssel"
   },
   "installation-settings.linked-instance.title": {
-    "defaultMessage": "Verknüpft mit {projectType, select, server {server project} other {modpack}}"
+    "message": "Verknüpft mit {projectType, select, server {dem Serverprojekt} other {dem Modpack}}"
   },
   "project-type.modpack.lowercase": {
     "defaultMessage": "{count, plural, one {modpack} other {modpacks}}"
@@ -2088,7 +2103,7 @@
     "defaultMessage": "Weltdaten und Serverkonfiguration für {backupName} werden gespeichert. Dies kann einige Minuten dauern."
   },
   "header.category.resolutions": {
-    "defaultMessage": "Auflösung"
+    "message": "Auflösungen"
   },
   "app.library.tab.custom": {
     "message": "Brauch"
@@ -2215,6 +2230,9 @@
   },
   "notification.error.title": {
     "defaultMessage": "Es ist ein Fehler aufgetreten"
+  },
+  "notification.error.invalid-project-type": {
+    "message": "Ungültige Eingabe: Der Projekttyp für die hochgeladene Datei konnte nicht erkannt werden."
   },
   "label.actions": {
     "defaultMessage": "Aktionen"
@@ -2790,7 +2808,7 @@
     "defaultMessage": "Öffentlich"
   },
   "project.about.details.published": {
-    "defaultMessage": "Published {date}"
+    "message": "Veröffentlicht {date}"
   },
   "app.survey.take": {
     "message": "Nehmen Sie an der Umfrage teil"
@@ -3438,7 +3456,7 @@
     "defaultMessage": "Inkompatibel anzeigen"
   },
   "project.about.details.submitted": {
-    "defaultMessage": "Submitted {date}"
+    "message": "Eingereicht {date}"
   },
   "instance.settings.tabs.installation.show-all-versions": {
     "message": "Alle Versionen anzeigen"
@@ -3699,7 +3717,7 @@
     "message": "Instanz spielen"
   },
   "search.filter_type.categories": {
-    "defaultMessage": "Kategorien"
+    "message": "Kategorien"
   },
   "search.filter_type.environment": {
     "defaultMessage": "Umfeld"
@@ -3867,7 +3885,7 @@
     "defaultMessage": "Modpack neu installieren"
   },
   "project-card.stats.downloads": {
-    "defaultMessage": "{count, plural, one {Download} other {Downloads}}"
+    "message": "{count, plural, one {Download} other {Downloads}}"
   },
   "instances.updater-modal.select-version": {
     "defaultMessage": "Wählen Sie eine Version aus, um deren Änderungsprotokoll anzuzeigen"
@@ -4520,6 +4538,15 @@
   "app.settings.title": {
     "message": "Einstellungen"
   },
+  "app.settings.page.eyebrow": {
+    "message": "Launcher-Steuerzentrale"
+  },
+  "app.settings.page.description": {
+    "message": "Passe Optik, Themes, Sprache, Java, Netzwerk und Launcher-Standards in einem einzigen Arbeitsbereich an."
+  },
+  "app.settings.page.sections": {
+    "message": "Bereiche"
+  },
   "search-card.followers": {
     "message": "Follower"
   },
@@ -5055,7 +5082,7 @@
     "message": "Deaktiviert"
   },
   "header.category.minecraft-server-gameplay": {
-    "defaultMessage": "Gameplay"
+    "message": "Gameplay"
   },
   "project.settings.environment.notice.multiple-environments.title": {
     "defaultMessage": "Ihr Projekt verfügt über mehrere Umgebungen"
@@ -5124,7 +5151,7 @@
     "defaultMessage": "Inhalt wird geladen..."
   },
   "project.about.details.created": {
-    "defaultMessage": "Created {date}"
+    "message": "Erstellt {date}"
   },
   "app.update.complete-toast.title": {
     "message": "Version {version} wurde erfolgreich installiert!"
@@ -5271,7 +5298,7 @@
     "defaultMessage": "Dateien werden hochgeladen ({completed}/{total})"
   },
   "project.about.details.licensed": {
-    "defaultMessage": "Lizenzierte {license}"
+    "message": "Lizenziert"
   },
   "maintenance.action.scanning": {
     "message": "Scannen..."
@@ -5439,7 +5466,7 @@
     "defaultMessage": "Kreativmodus"
   },
   "header.category.minecraft-server-community": {
-    "defaultMessage": "Gemeinschaft"
+    "message": "Community"
   },
   "friends.add-friend.username.description": {
     "message": "Es kann sich von ihrem Minecraft-Benutzernamen unterscheiden!"
@@ -5596,6 +5623,63 @@
   },
   "instance.breadcrumb.content": {
     "message": "Inhalt"
+  },
+  "instance.breadcrumb.files": {
+    "message": "Dateien"
+  },
+  "instance.logs.delete-latest-running": {
+    "message": "latest.log kann nicht gelöscht werden, solange die Instanz läuft"
+  },
+  "console.filters.all": {
+    "message": "Alle"
+  },
+  "console.actions.expand": {
+    "message": "Erweitern"
+  },
+  "console.actions.collapse": {
+    "message": "Einklappen"
+  },
+  "console.delete.header": {
+    "message": "Logdatei löschen"
+  },
+  "console.delete.irreversible": {
+    "message": "Dies ist unumkehrbar"
+  },
+  "console.delete.confirmation": {
+    "message": "Das Löschen dieser Logdatei kann nicht rückgängig gemacht werden. Möchten Sie fortfahren?"
+  },
+  "console.delete.failed-title": {
+    "message": "Logdatei konnte nicht gelöscht werden"
+  },
+  "console.share.failed-title": {
+    "message": "Logs konnten nicht geteilt werden"
+  },
+  "console.base.scroll-to-bottom": {
+    "message": "Nach unten scrollen"
+  },
+  "console.base.server-not-running": {
+    "message": "Server läuft nicht"
+  },
+  "console.base.send-command": {
+    "message": "Befehl senden"
+  },
+  "console.base.server-empty.top": {
+    "message": "Willkommen auf Ihrem Modrinth-Server!"
+  },
+  "console.base.server-empty.bottom": {
+    "message": "Drücken Sie die grüne Starttaste, um Ihren Server zu starten!"
+  },
+  "console.base.instance-empty.top": {
+    "message": "Starten Sie Ihre Instanz oben rechts,"
+  },
+  "console.base.instance-empty.bottom": {
+    "message": "um Live-Logs zu empfangen!"
+  },
+  "console.admonition.toggle": {
+    "message": "Umschalten"
+  },
+  "console.admonition.dismiss": {
+    "message": "Schließen"
   },
   "instance.settings.tabs.installation.unknown-version": {
     "message": "(unbekannte Version)"
@@ -5947,5 +6031,556 @@
   },
   "project-type.shaderpack.lowercase": {
     "defaultMessage": "{count, plural, one {Shader-Pack} other {Shader-Packs}}"
+  },
+  "instance.settings.tabs.java.custom-java-installation": {
+    "message": "Benutzerdefinierte Java-Installation"
+  },
+  "instance.settings.tabs.java.custom-memory-allocation": {
+    "message": "Benutzerdefinierte Speicherzuweisung"
+  },
+  "instance.settings.tabs.java.custom-java-arguments": {
+    "message": "Benutzerdefinierte Java-Argumente"
+  },
+  "instance.settings.tabs.java.custom-environment-variables": {
+    "message": "Benutzerdefinierte Umgebungsvariablen"
+  },
+  "instance.settings.tabs.java.enter-environmental-variables": {
+    "message": "Umgebungsvariablen eingeben..."
+  },
+  "search.filter_type.features": {
+    "message": "Funktionen"
+  },
+  "search.filter_type.resolutions": {
+    "message": "Auflösungen"
+  },
+  "search.filter_type.performance-impact": {
+    "message": "Leistungsauswirkung"
+  },
+  "server.search.sort.relevance": {
+    "message": "Relevanz"
+  },
+  "server.search.sort.verified-plays": {
+    "message": "Bestätigte Spielzeiten"
+  },
+  "server.search.sort.players": {
+    "message": "Spieler"
+  },
+  "server.search.sort.followers": {
+    "message": "Follower"
+  },
+  "server.search.sort.date-published": {
+    "message": "Veröffentlichungsdatum"
+  },
+  "server.search.sort.date-updated": {
+    "message": "Aktualisierungsdatum"
+  },
+  "server.search.header.community": {
+    "message": "Community"
+  },
+  "server.search.header.features": {
+    "message": "Funktionen"
+  },
+  "server.search.header.gameplay": {
+    "message": "Gameplay"
+  },
+  "server.search.header.meta": {
+    "message": "Meta"
+  },
+  "server.search.filter.content-type": {
+    "message": "Typ"
+  },
+  "server.search.filter.content-vanilla": {
+    "message": "Vanilla"
+  },
+  "server.search.filter.content-modded": {
+    "message": "Modded"
+  },
+  "server.search.filter.game-version": {
+    "message": "Spielversion"
+  },
+  "server.search.filter.region": {
+    "message": "Region"
+  },
+  "server.search.filter.language": {
+    "message": "Sprache"
+  },
+  "server.search.filter.status": {
+    "message": "Status"
+  },
+  "server.search.filter.status-online": {
+    "message": "Online"
+  },
+  "server.search.filter.status-offline": {
+    "message": "Offline"
+  },
+  "server.search.category.skyblock": {
+    "message": "Skyblock"
+  },
+  "server.search.category.prison": {
+    "message": "Prison"
+  },
+  "server.search.category.smp": {
+    "message": "SMP"
+  },
+  "server.search.category.pokemon": {
+    "message": "Pokemon"
+  },
+  "server.search.category.adventure": {
+    "message": "Abenteuer"
+  },
+  "server.search.category.anarchy": {
+    "message": "Anarchie"
+  },
+  "server.search.category.pvp": {
+    "message": "PvP"
+  },
+  "server.search.category.pve": {
+    "message": "PvE"
+  },
+  "server.search.category.bosses": {
+    "message": "Bosse"
+  },
+  "server.search.category.network": {
+    "message": "Netzwerk"
+  },
+  "server.search.category.custom-content": {
+    "message": "Benutzerdefinierter Inhalt"
+  },
+  "server.search.category.minigames": {
+    "message": "Minispiele"
+  },
+  "server.search.category.parkour": {
+    "message": "Parkour"
+  },
+  "server.search.category.questing": {
+    "message": "Questing"
+  },
+  "server.search.category.lifesteal": {
+    "message": "Lifesteal"
+  },
+  "server.search.category.whitelisted": {
+    "message": "Whitelisted"
+  },
+  "server.search.category.gens": {
+    "message": "Gens"
+  },
+  "server.search.category.technical": {
+    "message": "Technisch"
+  },
+  "server.search.category.world-resets": {
+    "message": "Welt-Resets"
+  },
+  "settings.display.theme.nord": "Nord",
+  "settings.display.theme.cherry-cola": "Cherry Cola",
+  "settings.display.theme.slate": "Schiefer",
+  "settings.theme-studio.title": "Theme-Studio",
+  "settings.theme-studio.description": "Wähle ein Preset oder baue deine eigene Theme mit Live-Vorschau, Import und Export.",
+  "settings.theme-studio.official": "Offizielle Themes",
+  "settings.theme-studio.custom": "Benutzerdefinierte Themes",
+  "settings.theme-studio.new-theme": "Neue Theme",
+  "settings.theme-studio.import-theme": "Theme importieren",
+  "settings.theme-studio.empty": "Noch keine benutzerdefinierten Themes. Erstelle eine Theme aus dem aktuellen Preset.",
+  "settings.theme-studio.editor": "Editor",
+  "settings.theme-studio.preview": "Vorschau",
+  "settings.theme-studio.name": "Theme-Name",
+  "settings.theme-studio.author": "Autor",
+  "settings.theme-studio.base-theme": "Basis-Preset",
+  "settings.theme-studio.description-label": "Beschreibung",
+  "settings.theme-studio.reset-base": "Farben auf Basis-Preset zurücksetzen",
+  "settings.theme-studio.save-theme": "Änderungen speichern",
+  "settings.theme-studio.apply-theme": "Theme anwenden",
+  "settings.theme-studio.duplicate": "Duplizieren",
+  "settings.theme-studio.export-theme": "Exportieren",
+  "settings.theme-studio.copy-json": "JSON kopieren",
+  "settings.theme-studio.delete-theme": "Löschen",
+  "settings.theme-studio.active": "Aktiv",
+  "settings.theme-studio.import-failed": "Diese Datei ist keine gültige Revoria-Theme.",
+  "settings.theme-studio.saved": "Theme gespeichert.",
+  "settings.theme-studio.copied": "Theme-JSON kopiert.",
+  "settings.theme-studio.canvas": "Fläche",
+  "settings.theme-studio.layer-2": "Ebene 2",
+  "settings.theme-studio.layer-3": "Ebene 3",
+  "settings.theme-studio.cards": "Karten",
+  "settings.theme-studio.hover-layer": "Hover-Ebene",
+  "settings.theme-studio.text-primary": "Titeltext",
+  "settings.theme-studio.text-default": "Haupttext",
+  "settings.theme-studio.text-secondary": "Sekundärtext",
+  "settings.theme-studio.brand": "Akzent",
+  "settings.theme-studio.glass-tint": "Glas-Tönung",
+  "settings.theme-studio.glow": "Glow-Stärke",
+  "settings.theme-studio.glass-opacity": "Glas-Deckkraft",
+  "settings.theme-studio.glass-strong": "Starkes Glas",
+  "settings.theme-studio.glass-border": "Glasrahmen",
+  "settings.theme-studio.preview-title": "Vorschau der benutzerdefinierten Theme",
+  "settings.theme-studio.preview-body": "Panels, Buttons und Text werden hier aktualisiert, bevor du die Theme anwendest.",
+  "settings.theme-studio.primary-action": "Primäre Aktion",
+  "settings.theme-studio.secondary-action": "Sekundäre Aktion",
+  "settings.theme-studio.selected-preset": "Ausgewähltes Preset",
+  "settings.theme-studio.apply-preset": "Preset anwenden",
+  "settings.theme-studio.create-from-preset": "Bearbeitbare Kopie erstellen",
+  "settings.theme-studio.preset-hint": "Presets erstellen nicht mehr sofort ein Theme. Wähle zuerst eine Basis und entscheide dann, was du damit machen willst.",
+  "settings.theme-studio.section.colors": "Grundfarben",
+  "settings.theme-studio.section.ui": "UI-Oberflächen",
+  "settings.theme-studio.section.glass": "Glas und Leuchten",
+  "settings.theme-studio.section.meta": "Theme-Info",
+  "settings.theme-studio.raised-bg": "Panel-Hintergrund",
+  "settings.theme-studio.raised-bg-hover": "Panel-Hover",
+  "settings.theme-studio.button-bg": "Button-Hintergrund",
+  "settings.theme-studio.button-bg-hover": "Button-Hover",
+  "settings.theme-studio.button-bg-active": "Aktiver Button",
+  "settings.theme-studio.divider": "Trenner",
+  "button.copy-filename": {
+    "message": "Dateinamen kopieren"
+  },
+  "button.copy-full-path": {
+    "message": "Vollständigen Pfad kopieren"
+  },
+  "button.open-in-folder": {
+    "message": "Im Ordner öffnen"
+  },
+  "label.copied-filename": {
+    "message": "Dateiname kopiert"
+  },
+  "label.copied-path": {
+    "message": "Pfad kopiert"
+  },
+  "button.extract": {
+    "message": "Entpacken"
+  },
+  "button.rename": {
+    "message": "Umbenennen"
+  },
+  "button.move": {
+    "message": "Verschieben"
+  },
+  "files.upload.drag-and-drop.drop-to-upload": {
+    "message": "Ziehe {type, select, undefined {Dateien} other {{type}}} hierher, um sie hochzuladen"
+  },
+  "files.error.try-again": {
+    "message": "Erneut versuchen"
+  },
+  "files.error.go-to-home": {
+    "message": "Zum Stammordner"
+  },
+  "files.upload-dropdown.file": {
+    "message": "Datei"
+  },
+  "files.upload-dropdown.file-uploads": {
+    "message": "{count, plural, one {# Datei-Upload} other {# Datei-Uploads}}"
+  },
+  "files.upload-dropdown.uploads-left": {
+    "message": "{count, plural, one {# Upload verbleibend} other {# Uploads verbleibend}}"
+  },
+  "files.upload-dropdown.failed-file-exists": {
+    "message": "Upload fehlgeschlagen: Datei existiert bereits."
+  },
+  "files.upload-dropdown.failed-generic": {
+    "message": "Upload fehlgeschlagen."
+  },
+  "files.upload-dropdown.unexpected-error": {
+    "message": "Unerwarteter Fehler"
+  },
+  "files.upload-dropdown.failed-incorrect-type": {
+    "message": "Upload fehlgeschlagen: falscher Dateityp."
+  },
+  "files.upload-dropdown.cancelled": {
+    "message": "Abgebrochen"
+  },
+  "files.upload-dropdown.incorrect-file-type": {
+    "message": "Falscher Dateityp"
+  },
+  "files.upload-dropdown.failed-to-upload": {
+    "message": "Hochladen fehlgeschlagen"
+  },
+  "files.upload-dropdown.failed-infer-project-type": {
+    "message": "Hochladen fehlgeschlagen: Der Projekttyp für die hochgeladene Datei konnte nicht erkannt werden."
+  },
+  "files.create-modal.header": {
+    "message": "{type, select, file {Datei} other {Ordner}} erstellen"
+  },
+  "files.create-modal.placeholder-file": {
+    "message": "Dateinamen eingeben"
+  },
+  "files.create-modal.placeholder-directory": {
+    "message": "Ordnernamen eingeben"
+  },
+  "files.create-modal.create-button": {
+    "message": "Erstellen"
+  },
+  "files.editor.failed-to-open-title": {
+    "message": "Datei konnte nicht geöffnet werden"
+  },
+  "files.editor.failed-to-open-text": {
+    "message": "Der Dateiinhalt konnte nicht geladen werden."
+  },
+  "files.editor.file-saved-title": {
+    "message": "Datei gespeichert"
+  },
+  "files.editor.file-saved-text": {
+    "message": "Ihre Datei wurde gespeichert."
+  },
+  "files.editor.save-failed-title": {
+    "message": "Speichern fehlgeschlagen"
+  },
+  "files.editor.save-failed-text": {
+    "message": "Die Datei konnte nicht gespeichert werden."
+  },
+  "files.editor.log-url-copied-title": {
+    "message": "Log-URL kopiert"
+  },
+  "files.editor.log-url-copied-text": {
+    "message": "Die URL der Logdatei wurde in die Zwischenablage kopiert."
+  },
+  "files.editor.failed-to-share-title": {
+    "message": "Datei konnte nicht geteilt werden"
+  },
+  "files.editor.failed-to-share-text": {
+    "message": "Upload zu mclo.gs fehlgeschlagen."
+  },
+  "files.delete-modal.header": {
+    "message": "Element löschen"
+  },
+  "files.delete-modal.deleting-name": {
+    "message": "Wird gelöscht: {name}"
+  },
+  "files.delete-modal.warning": {
+    "message": "Diese Aktion kann nicht rückgängig gemacht werden."
+  },
+  "files.rename-modal.header": {
+    "message": "Element umbenennen"
+  },
+  "files.rename-modal.new-name-label": {
+    "message": "Neuer Name"
+  },
+  "files.unsaved-changes-modal.header": {
+    "message": "Ungespeicherte Änderungen"
+  },
+  "files.unsaved-changes-modal.body": {
+    "message": "Sie haben ungespeicherte Änderungen. Was möchten Sie tun?"
+  },
+  "files.unsaved-changes-modal.discard": {
+    "message": "Änderungen verwerfen"
+  },
+  "files.operations.extracting": {
+    "message": "Archiv wird entpackt..."
+  },
+  "files.operations.modpack-from-url": {
+    "message": "Modpack wird von URL installiert..."
+  },
+  "files.operations.failed": {
+    "message": "Vorgang fehlgeschlagen"
+  },
+  "files.operations.extracted": {
+    "message": "Archiv entpackt"
+  },
+  "files.conflict-modal.header": {
+    "message": "Konfliktdateien gefunden"
+  },
+  "files.conflict-modal.warning-header": {
+    "message": "Überschreibwarnung"
+  },
+  "files.conflict-modal.overwrite-many-warning": {
+    "message": "Eine große Anzahl von Dateien wird überschrieben."
+  },
+  "files.conflict-modal.overwrite-warning": {
+    "message": "{count, plural, one {# Datei wird überschrieben.} other {# Dateien werden überschrieben.}}"
+  },
+  "files.conflict-modal.overwritten-count": {
+    "message": "{count, plural, one {# Datei} other {# Dateien}}"
+  },
+  "files.conflict-modal.overwritten-label": {
+    "message": "Wird überschrieben"
+  },
+  "files.conflict-modal.overwrite-button": {
+    "message": "Überschreiben"
+  },
+  "files.table-header.name": {
+    "message": "Name"
+  },
+  "files.table-header.size": {
+    "message": "Größe"
+  },
+  "files.table-header.created": {
+    "message": "Erstellt"
+  },
+  "files.table-header.modified": {
+    "message": "Geändert"
+  },
+  "files.row.item-count": {
+    "message": "{count, plural, one {# Eintrag} other {# Einträge}}"
+  },
+  "files.navbar.file-navigation": {
+    "message": "Dateinavigation"
+  },
+  "files.navbar.breadcrumb-navigation": {
+    "message": "Pfadnavigation"
+  },
+  "files.navbar.back-to-home": {
+    "message": "Zurück zum Stammordner"
+  },
+  "files.navbar.home": {
+    "message": "Stammordner"
+  },
+  "files.navbar.search-files": {
+    "message": "Dateien suchen"
+  },
+  "files.navbar.create-new": {
+    "message": "Neu erstellen"
+  },
+  "files.navbar.new-file": {
+    "message": "Neue Datei"
+  },
+  "files.navbar.new-folder": {
+    "message": "Neuer Ordner"
+  },
+  "files.navbar.upload-file": {
+    "message": "Datei hochladen"
+  },
+  "files.navbar.upload-from-zip": {
+    "message": "Aus ZIP hochladen"
+  },
+  "files.navbar.upload-from-zip-url": {
+    "message": "ZIP per URL hochladen"
+  },
+  "files.navbar.install-curseforge-pack": {
+    "message": "CurseForge-Paket installieren"
+  },
+  "files.navbar.share-to-mclogs": {
+    "message": "Zu mclo.gs teilen"
+  },
+  "files.layout.loading": {
+    "message": "Dateien werden geladen..."
+  },
+  "files.layout.busy-warning": {
+    "message": "Dateioperationen sind deaktiviert, während ein anderer Vorgang läuft."
+  },
+  "files.layout.empty-folder-title": {
+    "message": "Dieser Ordner ist leer"
+  },
+  "files.layout.empty-folder-description": {
+    "message": "Hier gibt es noch keine Dateien oder Ordner."
+  },
+  "files.layout.error-title": {
+    "message": "Dateien konnten nicht geladen werden"
+  },
+  "files.layout.error-message": {
+    "message": "Der Ordner existiert möglicherweise nicht."
+  },
+  "files.layout.selected-count": {
+    "message": "{count} ausgewählt"
+  },
+  "files.layout.dry-run-failed-title": {
+    "message": "Testlauf fehlgeschlagen"
+  },
+  "files.layout.dry-run-failed-text": {
+    "message": "Fehler beim Testlauf"
+  },
+  "files.layout.extraction-started-title": {
+    "message": "Entpacken gestartet"
+  },
+  "files.layout.unsaved-changes": {
+    "message": "Sie haben ungespeicherte Änderungen."
+  },
+  "files.validation.name-label": {
+    "message": "Name"
+  },
+  "files.validation.name-required": {
+    "message": "Name ist erforderlich."
+  },
+  "files.validation.name-invalid-file": {
+    "message": "Der Name darf nur Buchstaben, Zahlen, Bindestriche, Unterstriche, Punkte oder Leerzeichen enthalten."
+  },
+  "files.validation.name-invalid-directory": {
+    "message": "Der Name darf nur Buchstaben, Zahlen, Bindestriche, Unterstriche oder Leerzeichen enthalten."
+  },
+  "files.image_viewer.invalid_image": {
+    "message": "Ungültiges Bild"
+  },
+  "files.image_viewer.viewed_image_alt": {
+    "message": "Angezeigtes Bild"
+  },
+  "files.image_viewer.zoom_in": {
+    "message": "Vergrößern"
+  },
+  "files.image_viewer.zoom_out": {
+    "message": "Verkleinern"
+  },
+  "files.image_viewer.reset_zoom": {
+    "message": "Zoom zurücksetzen"
+  },
+  "files.image_viewer.image_too_large": {
+    "message": "Das Bild ist für die Vorschau zu groß."
+  },
+  "files.image_viewer.load_failed": {
+    "message": "Bild konnte nicht geladen werden."
+  },
+  "files.zip-url-modal.cf-header": {
+    "message": "CurseForge-Modpack installieren"
+  },
+  "files.zip-url-modal.zip-header": {
+    "message": "ZIP-Inhalt per URL hochladen"
+  },
+  "files.zip-url-modal.enter-link": {
+    "message": "Link eingeben"
+  },
+  "files.zip-url-modal.zip-description": {
+    "message": "Kopieren Sie die direkte Download-URL einer .zip-Datei und fügen Sie sie ein."
+  },
+  "files.zip-url-modal.install-button": {
+    "message": "Installieren"
+  },
+  "files.zip-url-modal.step-find-title": {
+    "message": "Modpack finden"
+  },
+  "files.zip-url-modal.step-find-description": {
+    "message": "Öffnen Sie CurseForge und suchen Sie das gewünschte Modpack."
+  },
+  "files.zip-url-modal.step-select-title": {
+    "message": "Version auswählen"
+  },
+  "files.zip-url-modal.step-select-description": {
+    "message": "Öffnen Sie die Registerkarte Files und wählen Sie die gewünschte Version."
+  },
+  "files.zip-url-modal.step-copy-title": {
+    "message": "URL kopieren"
+  },
+  "files.zip-url-modal.step-copy-description": {
+    "message": "Kopieren Sie die URL der Versionsseite und fügen Sie sie unten ein."
+  },
+  "files.zip-url-modal.error-url-required": {
+    "message": "Eine URL ist erforderlich."
+  },
+  "files.zip-url-modal.error-cf-url": {
+    "message": "Die URL muss auf eine CurseForge-Modpack-Versionsseite verweisen."
+  },
+  "files.zip-url-modal.error-url-invalid": {
+    "message": "Die URL muss gültig sein."
+  },
+  "files.zip-url-modal.cf-not-found-title": {
+    "message": "CurseForge-Modpack nicht gefunden"
+  },
+  "files.zip-url-modal.cf-not-found-text": {
+    "message": "Unter dieser URL konnte kein CurseForge-Modpack gefunden werden."
+  },
+  "files.zip-url-modal.install-failed-title": {
+    "message": "Installation fehlgeschlagen"
+  },
+  "files.zip-url-modal.unknown-error": {
+    "message": "Ein unbekannter Fehler ist aufgetreten"
+  },
+  "files.zip-url-modal.backup-name": {
+    "message": "CurseForge-Modpack-Installation"
+  },
+  "files.move-modal.header": {
+    "message": "Element verschieben"
+  },
+  "files.move-modal.current-location": {
+    "message": "Aktueller Speicherort"
+  },
+  "files.move-modal.destination-path": {
+    "message": "Zielpfad"
+  },
+  "files.move-modal.destination-placeholder": {
+    "message": "Zielpfad eingeben"
   }
 }

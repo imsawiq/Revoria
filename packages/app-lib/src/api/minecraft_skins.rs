@@ -5,8 +5,8 @@ use std::sync::{
     atomic::{AtomicBool, Ordering},
 };
 
-pub use bytes::Bytes;
 use base64::Engine;
+pub use bytes::Bytes;
 use futures::{StreamExt, TryStreamExt, stream};
 use reqwest::StatusCode;
 use serde::{Deserialize, Serialize};
@@ -526,9 +526,7 @@ struct MojangSkinTexture {
 
 /// Fetches a Minecraft skin texture by username using Mojang APIs.
 #[tracing::instrument]
-pub async fn get_skin_by_username(
-    username: String,
-) -> crate::Result<Bytes> {
+pub async fn get_skin_by_username(username: String) -> crate::Result<Bytes> {
     let profile_response = REQWEST_CLIENT
         .get(format!(
             "https://api.mojang.com/users/profiles/minecraft/{username}"
@@ -560,24 +558,42 @@ pub async fn get_skin_by_username(
         .properties
         .iter()
         .find(|property| property.name == "textures")
-        .and_then(|property| if property.value.is_empty() { None } else { Some(&property.value) })
-        .ok_or_else(|| ErrorKind::OtherError("Missing textures property".into()))?;
+        .and_then(|property| {
+            if property.value.is_empty() {
+                None
+            } else {
+                Some(&property.value)
+            }
+        })
+        .ok_or_else(|| {
+            ErrorKind::OtherError("Missing textures property".into())
+        })?;
 
     let decoded = base64::engine::general_purpose::STANDARD
         .decode(textures_value)
-        .map_err(|_| ErrorKind::OtherError("Failed to decode textures payload".into()))?;
+        .map_err(|_| {
+            ErrorKind::OtherError("Failed to decode textures payload".into())
+        })?;
 
-    let decoded_str = String::from_utf8(decoded)
-        .map_err(|_| ErrorKind::OtherError("Invalid textures payload".into()))?;
+    let decoded_str = String::from_utf8(decoded).map_err(|_| {
+        ErrorKind::OtherError("Invalid textures payload".into())
+    })?;
 
     let textures_payload: MojangTexturesPayload =
-        serde_json::from_str(&decoded_str)
-            .map_err(|_| ErrorKind::OtherError("Invalid textures payload".into()))?;
+        serde_json::from_str(&decoded_str).map_err(|_| {
+            ErrorKind::OtherError("Invalid textures payload".into())
+        })?;
 
     let skin_url = textures_payload
         .textures
         .skin
-        .and_then(|skin| if skin.url.is_empty() { None } else { Some(skin.url) })
+        .and_then(|skin| {
+            if skin.url.is_empty() {
+                None
+            } else {
+                Some(skin.url)
+            }
+        })
         .ok_or_else(|| ErrorKind::OtherError("Missing skin URL".into()))?;
 
     let skin_response = REQWEST_CLIENT

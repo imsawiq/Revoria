@@ -34,9 +34,10 @@ pub async fn offline_login(name: &str) -> Result<Credentials> {
 pub async fn elyby_login(
     uuid: uuid::Uuid,
     login: &str,
-    access_token: &str
+    access_token: &str,
 ) -> Result<Credentials> {
-    let credentials = minecraft_auth::elyby_auth(uuid, login, access_token).await?;
+    let credentials =
+        minecraft_auth::elyby_auth(uuid, login, access_token).await?;
     Ok(credentials)
 }
 

@@ -164,40 +164,22 @@ pub enum ErrorKind {
     )]
     InvalidSkinTexture,
 
-    #[error(
-        "[AR] Target minecraft {minecraft_version} version doesn't exist."
-    )]
-    InvalidMinecraftVersion {
-        minecraft_version: String,
-    },
+    #[error("[AR] Target minecraft {minecraft_version} version doesn't exist.")]
+    InvalidMinecraftVersion { minecraft_version: String },
 
     #[error(
         "[AR] Target metadata not found for minecraft version {minecraft_version}."
     )]
-    MinecraftMetadataNotFound {
-        minecraft_version: String,
-    },
+    MinecraftMetadataNotFound { minecraft_version: String },
 
-    #[error(
-        "[AR] Network error: {error}"
-    )]
-    NetworkErrorOccurred {
-        error: String,
-    },
+    #[error("[AR] Network error: {error}")]
+    NetworkErrorOccurred { error: String },
 
-    #[error(
-        "[AR] IO error: {error}"
-    )]
-    IOErrorOccurred {
-        error: String,
-    },
+    #[error("[AR] IO error: {error}")]
+    IOErrorOccurred { error: String },
 
-    #[error(
-        "[AR] Parse error: {reason}"
-    )]
-    ParseError {
-        reason: String,
-    },
+    #[error("[AR] Parse error: {reason}")]
+    ParseError { reason: String },
     #[error("RPC error: {0}")]
     RpcError(String),
 

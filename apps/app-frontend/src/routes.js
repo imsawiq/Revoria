@@ -53,6 +53,14 @@ export default new createRouter({
 			},
 		},
 		{
+			path: '/settings/:tab?',
+			name: 'Настройки',
+			component: Pages.Settings,
+			meta: {
+				breadcrumb: [{ name: 'Настройки' }],
+			},
+		},
+		{
 			path: '/maintenance',
 			name: 'Maintenance',
 			component: Pages.Maintenance,
@@ -164,6 +172,15 @@ export default new createRouter({
 					meta: {
 						useRootContext: true,
 						breadcrumb: [{ name: '?Instance', link: '/instance/{id}' }, { name: 'Worlds' }],
+					},
+				},
+				{
+					path: 'files',
+					name: 'InstanceFiles',
+					component: Instance.Files,
+					meta: {
+						useRootContext: true,
+						breadcrumb: [{ name: '?Instance', link: '/instance/{id}' }, { name: 'Files' }],
 					},
 				},
 				{

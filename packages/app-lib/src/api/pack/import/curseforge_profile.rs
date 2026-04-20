@@ -513,12 +513,11 @@ async fn download_curseforge_mod(
 
     tracing::info!("Fetching metadata from: {}", metadata_url);
 
-    let metadata_response =
-        crate::util::fetch::REQWEST_CLIENT
-            .get(&metadata_url)
-            .send()
-            .await
-            .map_err(|e| {
+    let metadata_response = crate::util::fetch::REQWEST_CLIENT
+        .get(&metadata_url)
+        .send()
+        .await
+        .map_err(|e| {
             crate::ErrorKind::InputError(format!(
                 "Failed to fetch metadata for mod {}/{}: {}",
                 file.project_id, file.file_id, e
@@ -569,11 +568,11 @@ async fn download_curseforge_mod(
         .send()
         .await
         .map_err(|e| {
-        crate::ErrorKind::InputError(format!(
-            "Failed to download mod {}/{}: {}",
-            file.project_id, file.file_id, e
-        ))
-    })?;
+            crate::ErrorKind::InputError(format!(
+                "Failed to download mod {}/{}: {}",
+                file.project_id, file.file_id, e
+            ))
+        })?;
 
     if !response.status().is_success() {
         return Err(crate::ErrorKind::InputError(format!(

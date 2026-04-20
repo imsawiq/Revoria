@@ -396,7 +396,8 @@ impl Settings {
                 self.version = 5;
             }
             5 => {
-                self.page_background_path = self.page_background_path.trim().to_string();
+                self.page_background_path =
+                    self.page_background_path.trim().to_string();
 
                 if !(0.0..=1.0).contains(&self.page_background_opacity) {
                     self.page_background_opacity = 0.22;
@@ -462,6 +463,10 @@ pub enum Theme {
     Amethyst,
     Sunset,
     Aurora,
+    Nord,
+    #[serde(rename = "cherry-cola")]
+    CherryCola,
+    Slate,
     #[serde(rename = "rose-gold")]
     RoseGold,
     #[serde(rename = "obsidian-gold")]
@@ -482,6 +487,9 @@ impl Theme {
             Theme::Amethyst => "amethyst",
             Theme::Sunset => "sunset",
             Theme::Aurora => "aurora",
+            Theme::Nord => "nord",
+            Theme::CherryCola => "cherry-cola",
+            Theme::Slate => "slate",
             Theme::RoseGold => "rose-gold",
             Theme::ObsidianGold => "obsidian-gold",
             Theme::CherryBlossom => "cherry-blossom",
@@ -499,6 +507,9 @@ impl Theme {
             "amethyst" => Theme::Amethyst,
             "sunset" => Theme::Sunset,
             "aurora" => Theme::Aurora,
+            "nord" => Theme::Nord,
+            "cherry-cola" => Theme::CherryCola,
+            "slate" => Theme::Slate,
             "rose-gold" => Theme::RoseGold,
             "obsidian-gold" => Theme::ObsidianGold,
             "cherry-blossom" => Theme::CherryBlossom,

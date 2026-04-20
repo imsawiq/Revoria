@@ -193,7 +193,7 @@ const messages = defineMessages({
 })
 </script>
 <template>
-	<SmartClickable>
+	<SmartClickable class="rounded-xl overflow-hidden">
 		<template v-if="instancePath" #clickable>
 			<router-link
 				class="no-click-animation"

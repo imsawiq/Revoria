@@ -127,6 +127,8 @@ const unlisten = await process_listener((e) => {
 		currentEvent.value = e.event
 		if (e.event === 'finished') {
 			playing.value = false
+		} else if (e.event === 'launched') {
+			playing.value = true
 		}
 	}
 })
@@ -138,7 +140,7 @@ onUnmounted(() => unlisten())
 <template>
 	<template v-if="compact">
 		<div
-			class="instance-card group grid grid-cols-[auto_1fr_auto] bg-[--color-glass-bg-strong] border border-[--glass-border] shadow-[--glass-shadow] rounded-xl p-3 pl-4 gap-2 cursor-pointer transition-colors"
+			class="instance-card instance-card-surface group grid grid-cols-[auto_1fr_auto] rounded-xl p-3 pl-4 gap-2 cursor-pointer transition-colors"
 			@click="seeInstance"
 		>
 			<Avatar
@@ -185,7 +187,7 @@ onUnmounted(() => unlisten())
 	</template>
 	<div v-else>
 		<div
-			class="instance-card bg-[--color-glass-bg-strong] border border-[--glass-border] shadow-[--glass-shadow] p-4 rounded-xl grid grid-cols-[auto_1fr_auto] gap-x-3 gap-y-1 items-center group cursor-pointer"
+			class="instance-card instance-card-surface p-4 rounded-xl grid grid-cols-[auto_1fr_auto] gap-x-3 gap-y-1 items-center group cursor-pointer"
 			:class="{ 'is-busy': modLoading || installing }"
 			@click="seeInstance"
 		>
@@ -240,6 +242,19 @@ onUnmounted(() => unlisten())
 </template>
 
 <style scoped>
+.instance-card-surface {
+	background:
+		linear-gradient(
+			180deg,
+			color-mix(in srgb, var(--color-raised-bg) 68%, var(--color-glass-bg-strong) 32%),
+			color-mix(in srgb, var(--color-button-bg) 54%, var(--color-glass-bg) 46%)
+		);
+	border: 1px solid color-mix(in srgb, var(--glass-border) 78%, var(--color-contrast) 8%);
+	box-shadow:
+		0 1px 0 color-mix(in srgb, white 10%, transparent),
+		0 18px 38px color-mix(in srgb, black 16%, transparent);
+}
+
 .instance-card {
 	position: relative;
 	border-radius: 0.9rem;
@@ -259,7 +274,11 @@ onUnmounted(() => unlisten())
 	inset: 0;
 	background:
 		radial-gradient(700px 180px at 15% -10%, rgba(255, 255, 255, 0.08), transparent 60%),
-		radial-gradient(520px 200px at 90% -20%, rgba(27, 217, 106, 0.1), transparent 62%);
+		radial-gradient(
+			520px 200px at 90% -20%,
+			color-mix(in srgb, var(--color-brand) 18%, transparent),
+			transparent 62%
+		);
 	opacity: 0;
 	transition: opacity 520ms cubic-bezier(0.16, 1, 0.3, 1);
 	pointer-events: none;
@@ -271,8 +290,16 @@ onUnmounted(() => unlisten())
 
 .instance-card:hover {
 	transform: translateY(-2px) scale(1.008) translateZ(0);
-	box-shadow: var(--shadow-floating);
-	border-color: rgba(27, 217, 106, 0.22);
+	background:
+		linear-gradient(
+			180deg,
+			color-mix(in srgb, var(--color-raised-bg-hover) 72%, var(--color-glass-bg-strong) 28%),
+			color-mix(in srgb, var(--color-button-bg-hover) 56%, var(--color-glass-bg) 44%)
+		);
+	box-shadow:
+		0 1px 0 color-mix(in srgb, white 10%, transparent),
+		var(--shadow-floating);
+	border-color: color-mix(in srgb, var(--color-brand) 22%, var(--glass-border) 78%);
 }
 
 .instance-card:hover::before {
@@ -283,9 +310,9 @@ onUnmounted(() => unlisten())
 }
 
 .instance-card:focus-within {
-	border-color: rgba(27, 217, 106, 0.35);
+	border-color: color-mix(in srgb, var(--color-brand) 34%, var(--glass-border) 66%);
 	box-shadow:
-		0 0 0 2px rgba(27, 217, 106, 0.25),
+		0 0 0 2px color-mix(in srgb, var(--color-brand-shadow) 62%, transparent),
 		var(--shadow-floating);
 }
 

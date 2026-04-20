@@ -167,7 +167,8 @@ impl State {
         let file_watcher = fs_watcher::init_watcher().await?;
         fs_watcher::watch_profiles_init(&file_watcher, &directories).await;
 
-        let process_manager = ProcessManager::new();
+        let process_manager = ProcessManager::new(&directories.settings_dir);
+        process_manager.recover_persisted_processes()?;
 
         let friends_socket = FriendsSocket::new();
 

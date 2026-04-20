@@ -106,13 +106,13 @@
 	--color-glass-bg-strong: var(--glass-bg-strong);
 
 	--color-button-bg: rgba(255, 255, 255, 0.76);
-	--color-button-bg-hover: var(--surface-4);
-	--color-button-bg-active: var(--surface-5);
+	--color-button-bg-hover: color-mix(in srgb, var(--surface-4) 72%, var(--color-brand-highlight) 28%);
+	--color-button-bg-active: color-mix(in srgb, var(--surface-5) 78%, var(--color-brand) 22%);
 	--color-button-text-hover: var(--color-text-primary);
 	--color-button-text-active: var(--color-text-primary);
 	--color-button-border: rgba(64, 82, 74, 0.2);
 	--color-scrollbar: #7f938a;
-	--color-raised-bg-hover: var(--surface-4);
+	--color-raised-bg-hover: color-mix(in srgb, var(--surface-4) 80%, var(--color-brand-highlight) 20%);
 
 	--color-divider: #becdc6;
 	--color-divider-dark: #b0c1ba;
@@ -347,13 +347,13 @@ html {
 	--color-super-raised-bg: var(--surface-4);
 
 	--color-button-bg: var(--surface-4);
-	--color-button-bg-hover: var(--surface-5);
-	--color-button-bg-active: var(--surface-5);
+	--color-button-bg-hover: color-mix(in srgb, var(--surface-5) 74%, var(--color-brand-highlight) 26%);
+	--color-button-bg-active: color-mix(in srgb, var(--surface-5) 76%, var(--color-brand) 24%);
 	--color-button-text-hover: var(--color-text-primary);
 	--color-button-text-active: var(--color-text-primary);
 	--color-button-border: rgba(255, 255, 255, 0.09);
 	--color-scrollbar: var(--color-button-bg);
-	--color-raised-bg-hover: var(--surface-4);
+	--color-raised-bg-hover: color-mix(in srgb, var(--surface-4) 80%, var(--color-brand-highlight) 20%);
 
 	--color-divider: #222a32;
 	--color-divider-dark: #2b3440;
@@ -444,6 +444,9 @@ html {
 	--surface-3: #101013;
 	--surface-4: #1b1b20;
 	--surface-5: #25262b;
+	--color-button-bg-hover: color-mix(in srgb, #121821 56%, var(--color-brand-highlight) 44%);
+	--color-button-bg-active: color-mix(in srgb, #11171f 62%, var(--color-brand) 38%);
+	--color-raised-bg-hover: color-mix(in srgb, #0f141b 64%, var(--color-brand-highlight) 36%);
 
 	--color-ad: #0d1828;
 
@@ -463,6 +466,9 @@ html {
 
 .retro-mode {
 	--brand-gradient-strong-bg: #3a3b38;
+	--color-button-bg-hover: color-mix(in srgb, var(--surface-5) 58%, var(--color-brand-highlight) 42%);
+	--color-button-bg-active: color-mix(in srgb, var(--surface-5) 66%, var(--color-brand) 34%);
+	--color-raised-bg-hover: color-mix(in srgb, var(--surface-4) 72%, var(--color-brand-highlight) 28%);
 }
 
 .sapphire-mode {
@@ -470,6 +476,9 @@ html {
 	--color-brand: #57a6ff;
 	--color-brand-highlight: rgba(87, 166, 255, 0.16);
 	--color-brand-shadow: rgba(87, 166, 255, 0.24);
+	--color-button-bg-hover: color-mix(in srgb, var(--surface-5) 60%, var(--color-brand-highlight) 40%);
+	--color-button-bg-active: color-mix(in srgb, var(--surface-5) 68%, var(--color-brand) 32%);
+	--color-raised-bg-hover: color-mix(in srgb, var(--surface-4) 72%, var(--color-brand-highlight) 28%);
 	--glass-border-base: rgba(148, 201, 255, 0.12);
 	--glass-border: rgba(148, 201, 255, 0.12);
 	--glass-bg-base: rgba(8, 18, 31, 0.62);
@@ -483,6 +492,9 @@ html {
 	--color-brand: #c78aff;
 	--color-brand-highlight: rgba(199, 138, 255, 0.18);
 	--color-brand-shadow: rgba(199, 138, 255, 0.24);
+	--color-button-bg-hover: color-mix(in srgb, #411a61 50%, var(--color-brand-highlight) 50%);
+	--color-button-bg-active: color-mix(in srgb, #4b1d70 56%, var(--color-brand) 44%);
+	--color-raised-bg-hover: color-mix(in srgb, #32164a 58%, var(--color-brand-highlight) 42%);
 	--glass-border-base: rgba(220, 176, 255, 0.12);
 	--glass-border: rgba(220, 176, 255, 0.12);
 	--glass-bg-base: rgba(24, 13, 34, 0.62);
@@ -496,6 +508,9 @@ html {
 	--color-brand: #ff9b54;
 	--color-brand-highlight: rgba(255, 155, 84, 0.18);
 	--color-brand-shadow: rgba(255, 155, 84, 0.24);
+	--color-button-bg-hover: color-mix(in srgb, #2f1714 54%, var(--color-brand-highlight) 46%);
+	--color-button-bg-active: color-mix(in srgb, #341813 60%, var(--color-brand) 40%);
+	--color-raised-bg-hover: color-mix(in srgb, #28120f 62%, var(--color-brand-highlight) 38%);
 	--glass-border-base: rgba(255, 197, 136, 0.12);
 	--glass-border: rgba(255, 197, 136, 0.12);
 	--glass-bg-base: rgba(36, 17, 15, 0.6);
@@ -509,12 +524,63 @@ html {
 	--color-brand: #59d3b1;
 	--color-brand-highlight: rgba(89, 211, 177, 0.16);
 	--color-brand-shadow: rgba(89, 211, 177, 0.24);
+	--color-button-bg-hover: color-mix(in srgb, #12342d 54%, var(--color-brand-highlight) 46%);
+	--color-button-bg-active: color-mix(in srgb, #13372f 60%, var(--color-brand) 40%);
+	--color-raised-bg-hover: color-mix(in srgb, #0f2823 62%, var(--color-brand-highlight) 38%);
 	--glass-border-base: rgba(153, 242, 218, 0.12);
 	--glass-border: rgba(153, 242, 218, 0.12);
 	--glass-bg-base: rgba(11, 27, 24, 0.6);
 	--glass-bg-strong-base: rgba(14, 34, 30, 0.78);
 	--glass-bg: rgba(11, 27, 24, 0.6);
 	--glass-bg-strong: rgba(14, 34, 30, 0.78);
+}
+
+.nord-mode {
+	@extend .dark-mode;
+	--color-brand: #88a7d8;
+	--color-brand-highlight: rgba(136, 167, 216, 0.18);
+	--color-brand-shadow: rgba(136, 167, 216, 0.24);
+	--color-button-bg-hover: color-mix(in srgb, #1d2635 56%, var(--color-brand-highlight) 44%);
+	--color-button-bg-active: color-mix(in srgb, #20293a 62%, var(--color-brand) 38%);
+	--color-raised-bg-hover: color-mix(in srgb, #18212f 64%, var(--color-brand-highlight) 36%);
+	--glass-border-base: rgba(186, 206, 237, 0.14);
+	--glass-border: rgba(186, 206, 237, 0.14);
+	--glass-bg-base: rgba(15, 22, 34, 0.62);
+	--glass-bg-strong-base: rgba(18, 27, 41, 0.8);
+	--glass-bg: rgba(15, 22, 34, 0.62);
+	--glass-bg-strong: rgba(18, 27, 41, 0.8);
+}
+
+.cherry-cola-mode {
+	@extend .dark-mode;
+	--color-brand: #d85c72;
+	--color-brand-highlight: rgba(216, 92, 114, 0.18);
+	--color-brand-shadow: rgba(216, 92, 114, 0.24);
+	--color-button-bg-hover: color-mix(in srgb, #35131a 56%, var(--color-brand-highlight) 44%);
+	--color-button-bg-active: color-mix(in srgb, #3c141d 62%, var(--color-brand) 38%);
+	--color-raised-bg-hover: color-mix(in srgb, #2a1017 64%, var(--color-brand-highlight) 36%);
+	--glass-border-base: rgba(242, 158, 172, 0.14);
+	--glass-border: rgba(242, 158, 172, 0.14);
+	--glass-bg-base: rgba(23, 8, 12, 0.64);
+	--glass-bg-strong-base: rgba(31, 11, 16, 0.82);
+	--glass-bg: rgba(23, 8, 12, 0.64);
+	--glass-bg-strong: rgba(31, 11, 16, 0.82);
+}
+
+.slate-mode {
+	@extend .dark-mode;
+	--color-brand: #a8b2c0;
+	--color-brand-highlight: rgba(168, 178, 192, 0.18);
+	--color-brand-shadow: rgba(168, 178, 192, 0.22);
+	--color-button-bg-hover: color-mix(in srgb, #242a34 58%, var(--color-brand-highlight) 42%);
+	--color-button-bg-active: color-mix(in srgb, #29303b 64%, var(--color-brand) 36%);
+	--color-raised-bg-hover: color-mix(in srgb, #202732 66%, var(--color-brand-highlight) 34%);
+	--glass-border-base: rgba(193, 202, 214, 0.14);
+	--glass-border: rgba(193, 202, 214, 0.14);
+	--glass-bg-base: rgba(19, 23, 29, 0.64);
+	--glass-bg-strong-base: rgba(24, 29, 36, 0.82);
+	--glass-bg: rgba(19, 23, 29, 0.64);
+	--glass-bg-strong: rgba(24, 29, 36, 0.82);
 }
 
 .rose-gold-mode {
@@ -527,6 +593,8 @@ html {
 	--color-brand: #bc6e78;
 	--color-brand-highlight: rgba(188, 110, 120, 0.16);
 	--color-brand-shadow: rgba(188, 110, 120, 0.24);
+	--color-button-bg-hover: color-mix(in srgb, var(--surface-4) 68%, var(--color-brand-highlight) 32%);
+	--color-button-bg-active: color-mix(in srgb, var(--surface-5) 72%, var(--color-brand) 28%);
 	--glass-border-base: rgba(145, 87, 92, 0.18);
 	--glass-border: rgba(145, 87, 92, 0.18);
 	--glass-bg-base: rgba(255, 247, 245, 0.84);
@@ -555,6 +623,9 @@ html {
 	--color-brand: #d8b46c;
 	--color-brand-highlight: rgba(216, 180, 108, 0.16);
 	--color-brand-shadow: rgba(216, 180, 108, 0.22);
+	--color-button-bg-hover: color-mix(in srgb, var(--surface-5) 60%, var(--color-brand-highlight) 40%);
+	--color-button-bg-active: color-mix(in srgb, var(--surface-5) 68%, var(--color-brand) 32%);
+	--color-raised-bg-hover: color-mix(in srgb, var(--surface-4) 72%, var(--color-brand-highlight) 28%);
 	--glass-border-base: rgba(237, 202, 132, 0.14);
 	--glass-border: rgba(237, 202, 132, 0.14);
 	--glass-bg-base: rgba(17, 13, 9, 0.68);
@@ -576,6 +647,8 @@ html {
 	--color-brand: #c85c92;
 	--color-brand-highlight: rgba(200, 92, 146, 0.16);
 	--color-brand-shadow: rgba(200, 92, 146, 0.24);
+	--color-button-bg-hover: color-mix(in srgb, var(--surface-4) 68%, var(--color-brand-highlight) 32%);
+	--color-button-bg-active: color-mix(in srgb, var(--surface-5) 72%, var(--color-brand) 28%);
 	--glass-border-base: rgba(150, 76, 111, 0.18);
 	--glass-border: rgba(150, 76, 111, 0.18);
 	--glass-bg-base: rgba(255, 248, 251, 0.84);
@@ -592,43 +665,4 @@ html {
 	--brand-gradient-border: rgba(200, 92, 146, 0.16);
 	--brand-gradient-fade-out-color: linear-gradient(to bottom, rgba(247, 236, 242, 0), #f6ebf0 80%);
 	--color-gradient-button-bg: linear-gradient(180deg, #fffafc 0%, #ecd7e1 100%);
-}
-
-.april-fools-mode {
-	@extend .dark-mode;
-	--surface-1: #17071f;
-	--surface-2: #240b30;
-	--surface-3: #361046;
-	--surface-4: #4b165f;
-	--surface-5: #611a7b;
-	--color-brand: #ff66c4;
-	--color-brand-highlight: rgba(255, 102, 196, 0.24);
-	--color-brand-shadow: rgba(255, 102, 196, 0.38);
-	--glass-border-base: rgba(255, 232, 121, 0.28);
-	--glass-border: rgba(255, 232, 121, 0.28);
-	--glass-bg-base: rgba(56, 8, 71, 0.74);
-	--glass-bg-strong-base: rgba(75, 10, 94, 0.86);
-	--glass-bg: rgba(56, 8, 71, 0.74);
-	--glass-bg-strong: rgba(75, 10, 94, 0.86);
-	--glass-shadow: 0 28px 76px -40px rgba(255, 102, 196, 0.44);
-	--color-button-bg-selected: rgba(255, 204, 73, 0.22);
-	--color-button-text-selected: #fff3b6;
-	--brand-gradient-bg: linear-gradient(
-		90deg,
-		rgba(255, 0, 90, 0.24) 0%,
-		rgba(255, 140, 0, 0.22) 18%,
-		rgba(255, 240, 85, 0.22) 36%,
-		rgba(80, 255, 149, 0.22) 54%,
-		rgba(73, 208, 255, 0.22) 74%,
-		rgba(166, 92, 255, 0.24) 100%
-	);
-	--brand-gradient-strong-bg: linear-gradient(
-		120deg,
-		rgba(255, 0, 90, 0.3) 0%,
-		rgba(255, 140, 0, 0.28) 18%,
-		rgba(255, 240, 85, 0.26) 34%,
-		rgba(80, 255, 149, 0.26) 52%,
-		rgba(73, 208, 255, 0.26) 72%,
-		rgba(166, 92, 255, 0.3) 100%
-	);
 }

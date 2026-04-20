@@ -27,8 +27,7 @@ pub struct ReqwestClientHandle(RwLock<reqwest::Client>);
 impl ReqwestClientHandle {
     fn new() -> Self {
         Self(RwLock::new(
-            build_reqwest_client(None)
-                .expect("Reqwest Client Building Failed"),
+            build_reqwest_client(None).expect("Reqwest Client Building Failed"),
         ))
     }
 
@@ -82,9 +81,7 @@ fn build_reqwest_client(
 
     if let Some(proxy_url) = proxy_url {
         let proxy = reqwest::Proxy::all(proxy_url).map_err(|err| {
-            ErrorKind::OtherError(format!(
-                "Failed to configure proxy: {err}"
-            ))
+            ErrorKind::OtherError(format!("Failed to configure proxy: {err}"))
         })?;
         builder = builder.proxy(proxy);
     }
@@ -116,13 +113,13 @@ pub fn proxy_url_from_settings(
         ProxyType::Socks5 => "socks5h",
     };
 
-    let mut url = Url::parse(&format!(
-        "{scheme}://{host}:{}",
-        settings.proxy_port
-    ))
-    .map_err(|err| {
-        ErrorKind::OtherError(format!("Invalid proxy configuration: {err}"))
-    })?;
+    let mut url =
+        Url::parse(&format!("{scheme}://{host}:{}", settings.proxy_port))
+            .map_err(|err| {
+                ErrorKind::OtherError(format!(
+                    "Invalid proxy configuration: {err}"
+                ))
+            })?;
 
     if settings.proxy_auth_enabled && !settings.proxy_username.is_empty() {
         url.set_username(&settings.proxy_username).map_err(|_| {

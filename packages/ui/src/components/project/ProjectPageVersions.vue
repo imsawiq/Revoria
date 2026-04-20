@@ -27,8 +27,10 @@
 			class="flex flex-wrap justify-between items-center gap-2"
 		>
 			<span>
-				Showing {{ (currentPage - 1) * pageSize + 1 }} to
+				{{ formatMessage(messages.showing) }} {{ (currentPage - 1) * pageSize + 1 }}
+				{{ formatMessage(messages.to) }}
 				{{ Math.min(currentPage * pageSize, filteredVersions.length) }} of
+				{{ formatMessage(messages.of) }}
 				{{ filteredVersions.length }}
 			</span>
 
@@ -46,31 +48,35 @@
 	>
 		<div class="versions-grid-row">
 			<div class="w-9 max-sm:hidden"></div>
-			<div class="text-sm font-bold text-contrast max-sm:hidden">Name</div>
-			<div
-				class="text-sm font-bold text-contrast max-sm:hidden sm:max-xl:collapse sm:max-xl:hidden"
-			>
-				Game version
+			<div class="text-sm font-bold text-contrast max-sm:hidden">
+				{{ formatMessage(messages.name) }}
 			</div>
 			<div
 				class="text-sm font-bold text-contrast max-sm:hidden sm:max-xl:collapse sm:max-xl:hidden"
 			>
-				Platforms
+				{{ formatMessage(messages.gameVersion) }}
 			</div>
 			<div
 				class="text-sm font-bold text-contrast max-sm:hidden sm:max-xl:collapse sm:max-xl:hidden"
 			>
-				Published
+				{{ formatMessage(messages.platforms) }}
 			</div>
 			<div
 				class="text-sm font-bold text-contrast max-sm:hidden sm:max-xl:collapse sm:max-xl:hidden"
 			>
-				Downloads
+				{{ formatMessage(messages.published) }}
+			</div>
+			<div
+				class="text-sm font-bold text-contrast max-sm:hidden sm:max-xl:collapse sm:max-xl:hidden"
+			>
+				{{ formatMessage(messages.downloads) }}
 			</div>
 			<div class="text-sm font-bold text-contrast max-sm:hidden xl:collapse xl:hidden">
-				Compatibility
+				{{ formatMessage(messages.compatibility) }}
 			</div>
-			<div class="text-sm font-bold text-contrast max-sm:hidden xl:collapse xl:hidden">Stats</div>
+			<div class="text-sm font-bold text-contrast max-sm:hidden xl:collapse xl:hidden">
+				{{ formatMessage(messages.stats) }}
+			</div>
 			<div class="w-9 max-sm:hidden"></div>
 		</div>
 		<template v-for="(version, index) in currentVersions" :key="index">
@@ -206,7 +212,7 @@ import {
 	type GameVersionTag,
 	type Version,
 } from '@modrinth/utils'
-import { useVIntl } from '@vintl/vintl'
+import { defineMessages, useVIntl } from '@vintl/vintl'
 import { computed, type Ref, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -218,6 +224,48 @@ import { Pagination, VersionChannelIndicator, VersionFilterControl } from '../in
 
 const { formatMessage } = useVIntl()
 const formatRelativeTime = useRelativeTime()
+const messages = defineMessages({
+	showing: {
+		id: 'project.versions.showing',
+		defaultMessage: 'Showing',
+	},
+	to: {
+		id: 'project.versions.to',
+		defaultMessage: 'to',
+	},
+	of: {
+		id: 'project.versions.of',
+		defaultMessage: 'of',
+	},
+	name: {
+		id: 'project.versions.name',
+		defaultMessage: 'Name',
+	},
+	gameVersion: {
+		id: 'project.versions.game-version',
+		defaultMessage: 'Game version',
+	},
+	platforms: {
+		id: 'project.versions.platforms',
+		defaultMessage: 'Platforms',
+	},
+	published: {
+		id: 'project.versions.published',
+		defaultMessage: 'Published',
+	},
+	downloads: {
+		id: 'project.versions.downloads',
+		defaultMessage: 'Downloads',
+	},
+	compatibility: {
+		id: 'project.versions.compatibility',
+		defaultMessage: 'Compatibility',
+	},
+	stats: {
+		id: 'project.versions.stats',
+		defaultMessage: 'Stats',
+	},
+})
 
 type VersionWithDisplayUrlEnding = Version & {
 	displayUrlEnding: string

@@ -53,9 +53,25 @@ export const commonMessages = defineMessages({
 		id: 'button.copy-id',
 		defaultMessage: 'Copy ID',
 	},
+	copyFilenameButton: {
+		id: 'button.copy-filename',
+		defaultMessage: 'Copy filename',
+	},
+	copyFullPathButton: {
+		id: 'button.copy-full-path',
+		defaultMessage: 'Copy full path',
+	},
 	copyPermalinkButton: {
 		id: 'button.copy-permalink',
 		defaultMessage: 'Copy permanent link',
+	},
+	copiedFilenameLabel: {
+		id: 'label.copied-filename',
+		defaultMessage: 'Filename copied',
+	},
+	copiedPathLabel: {
+		id: 'label.copied-path',
+		defaultMessage: 'Path copied',
 	},
 	createAProjectButton: {
 		id: 'button.create-a-project',
@@ -77,6 +93,10 @@ export const commonMessages = defineMessages({
 		id: 'label.delete',
 		defaultMessage: 'Delete',
 	},
+	deleteImmediatelyLabel: {
+		id: 'label.delete-immediately',
+		defaultMessage: 'Delete immediately',
+	},
 	descriptionLabel: {
 		id: 'label.description',
 		defaultMessage: 'Description',
@@ -92,6 +112,10 @@ export const commonMessages = defineMessages({
 	editButton: {
 		id: 'button.edit',
 		defaultMessage: 'Edit',
+	},
+	extractButton: {
+		id: 'button.extract',
+		defaultMessage: 'Extract',
 	},
 	errorLabel: {
 		id: 'label.error',
@@ -148,6 +172,10 @@ export const commonMessages = defineMessages({
 	openFolderButton: {
 		id: 'button.open-folder',
 		defaultMessage: 'Open folder',
+	},
+	openInFolderButton: {
+		id: 'button.open-in-folder',
+		defaultMessage: 'Open in folder',
 	},
 	orLabel: {
 		id: 'label.or',
@@ -212,6 +240,10 @@ export const commonMessages = defineMessages({
 	removeImageButton: {
 		id: 'button.remove-image',
 		defaultMessage: 'Remove image',
+	},
+	renameButton: {
+		id: 'button.rename',
+		defaultMessage: 'Rename',
 	},
 	reportButton: {
 		id: 'button.report',
@@ -380,6 +412,10 @@ export const commonMessages = defineMessages({
 	showAllVersionsButton: {
 		id: 'button.show-all-versions',
 		defaultMessage: 'Show all versions',
+	},
+	moveButton: {
+		id: 'button.move',
+		defaultMessage: 'Move',
 	},
 	hideSnapshotsButton: {
 		id: 'button.hide-snapshots',

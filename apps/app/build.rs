@@ -89,6 +89,7 @@ fn main() {
                         "logs_delete_logs",
                         "logs_delete_logs_by_filename",
                         "logs_get_latest_log_cursor",
+                        "logs_get_game_log_cursor",
                     ])
                     .default_permission(
                         DefaultPermissionRule::AllowAllCommands,
@@ -109,15 +110,15 @@ fn main() {
                 "minecraft-skins",
                 InlinedPlugin::new()
                     .commands(&[
-                "get_available_capes",
-                "get_available_skins",
-                "get_skin_history",
-                "get_skin_by_username",
-                "add_and_equip_custom_skin",
-                "set_default_cape",
-                "equip_skin",
-                "remove_custom_skin",
-                "unequip_skin",
+                        "get_available_capes",
+                        "get_available_skins",
+                        "get_skin_history",
+                        "get_skin_by_username",
+                        "add_and_equip_custom_skin",
+                        "set_default_cape",
+                        "equip_skin",
+                        "remove_custom_skin",
+                        "unequip_skin",
                         "normalize_skin_texture",
                         "get_dragged_skin_data",
                     ])
@@ -265,12 +266,19 @@ fn main() {
                         "progress_bars_list",
                         "get_opening_command",
                         "list_dir_files",
+                        "list_dir_entries",
                         "get_dir_size",
                         "delete_paths",
+                        "create_path",
+                        "rename_path",
+                        "move_path",
                         "read_text_file",
                         "read_binary_file",
+                        "write_text_file",
+                        "write_binary_file",
                         "copy_image_to_clipboard",
                         "set_theme_window_icon",
+                        "set_discord_rpc_language",
                     ])
                     .default_permission(
                         DefaultPermissionRule::AllowAllCommands,

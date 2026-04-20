@@ -116,6 +116,39 @@
   "instance.logs.share.text": {
     "message": "Посмотрите лог сборки из Revoria"
   },
+  "instance.logs.share.open-link": {
+    "message": "Открыть ссылку"
+  },
+  "project.versions.showing": {
+    "message": "Показано"
+  },
+  "project.versions.to": {
+    "message": "по"
+  },
+  "project.versions.of": {
+    "message": "из"
+  },
+  "project.versions.name": {
+    "message": "Название"
+  },
+  "project.versions.game-version": {
+    "message": "Версия игры"
+  },
+  "project.versions.platforms": {
+    "message": "Платформы"
+  },
+  "project.versions.published": {
+    "message": "Опубликовано"
+  },
+  "project.versions.downloads": {
+    "message": "Загрузки"
+  },
+  "project.versions.compatibility": {
+    "message": "Совместимость"
+  },
+  "project.versions.stats": {
+    "message": "Статистика"
+  },
   "settings.default-instance.height.title": {
     "message": "Высота"
   },
@@ -1721,6 +1754,9 @@
   "notification.error.title": {
     "defaultMessage": "Произошла ошибка"
   },
+  "notification.error.invalid-project-type": {
+    "message": "Некорректный ввод: не удалось определить тип проекта для загруженного файла."
+  },
   "label.actions": {
     "defaultMessage": "Действия"
   },
@@ -2517,7 +2553,7 @@
     "message": "Группировка"
   },
   "instance.logs.live": {
-    "message": "Лог в реальном времени"
+    "message": "Онлайн"
   },
   "instance.index.export-modpack": {
     "message": "Экспорт модпака"
@@ -2704,39 +2740,6 @@
   },
   "instance.settings.tabs.java.environment-variables": {
     "message": "Переменные среды"
-  },
-  "app.april-fools.theme.title": {
-    "message": "Важное обновление бренда лаунчера"
-  },
-  "app.april-fools.theme.body": {
-    "message": "Хаотичная радужная тема теперь главная тема лаунчера на сегодня. Твоя настоящая тема никуда не делась."
-  },
-  "app.april-fools.cleanup.message": {
-    "message": "Вы не смыли за собой. Убери своё говно."
-  },
-  "app.april-fools.launcher.title": {
-    "message": "Лаунчер нашёл ещё один лаунчер"
-  },
-  "app.april-fools.launcher.body": {
-    "message": "Внутри лаунчера обнаружен ещё один лаунчер. Просим сохранять спокойствие."
-  },
-  "app.april-fools.random.launcher.title": {
-    "message": "Статус рекурсии лаунчера"
-  },
-  "app.april-fools.random.launcher.body": {
-    "message": "Лаунчер сейчас запускает лаунчер, который запускает лаунчер."
-  },
-  "app.april-fools.random.theme.title": {
-    "message": "Уведомление о теме"
-  },
-  "app.april-fools.random.theme.body": {
-    "message": "Твоя предыдущая тема временно отправлена в безопасное место."
-  },
-  "app.april-fools.random.buttons.title": {
-    "message": "Предупреждение о стабильности кнопок"
-  },
-  "app.april-fools.random.buttons.body": {
-    "message": "Некоторые кнопки сегодня могут ненадолго уклоняться от обязанностей."
   },
   "app.account.menu": {
     "message": "Аккаунт Modrinth"
@@ -2943,7 +2946,7 @@
     "message": "Запустить сборку"
   },
   "search.filter_type.categories": {
-    "defaultMessage": "Категории"
+    "message": "Категории"
   },
   "search.filter_type.environment": {
     "defaultMessage": "Среда"
@@ -3551,6 +3554,15 @@
   "app.settings.title": {
     "message": "Настройки"
   },
+  "app.settings.page.eyebrow": {
+    "message": "Пульт лаунчера"
+  },
+  "app.settings.page.description": {
+    "message": "Меняйте визуал, темы, язык, Java, сеть и поведение лаунчера в одном рабочем пространстве."
+  },
+  "app.settings.page.sections": {
+    "message": "Разделы"
+  },
   "open-in-browser": {
     "message": "Открыть в браузере"
   },
@@ -4113,7 +4125,7 @@
     "defaultMessage": "Пользователь, для которого нужно создать партнёрский код"
   },
   "project.about.details.licensed": {
-    "defaultMessage": "Лицензия: {license}"
+    "message": "Лицензия"
   },
   "maintenance.action.scanning": {
     "message": "Сканирование..."
@@ -4363,6 +4375,63 @@
   },
   "instance.breadcrumb.content": {
     "message": "Контент"
+  },
+  "instance.breadcrumb.files": {
+    "message": "Файлы"
+  },
+  "instance.logs.delete-latest-running": {
+    "message": "Нельзя удалить latest.log, пока сборка запущена"
+  },
+  "console.filters.all": {
+    "message": "Все"
+  },
+  "console.actions.expand": {
+    "message": "Во весь экран"
+  },
+  "console.actions.collapse": {
+    "message": "Свернуть"
+  },
+  "console.delete.header": {
+    "message": "Удалить лог-файл"
+  },
+  "console.delete.irreversible": {
+    "message": "Это действие необратимо"
+  },
+  "console.delete.confirmation": {
+    "message": "Удаление этого лог-файла нельзя отменить. Продолжить?"
+  },
+  "console.delete.failed-title": {
+    "message": "Не удалось удалить лог-файл"
+  },
+  "console.share.failed-title": {
+    "message": "Не удалось поделиться логами"
+  },
+  "console.base.scroll-to-bottom": {
+    "message": "Прокрутить вниз"
+  },
+  "console.base.server-not-running": {
+    "message": "Сервер не запущен"
+  },
+  "console.base.send-command": {
+    "message": "Отправить команду"
+  },
+  "console.base.server-empty.top": {
+    "message": "Добро пожаловать на ваш сервер Modrinth!"
+  },
+  "console.base.server-empty.bottom": {
+    "message": "Нажмите зелёную кнопку запуска, чтобы включить сервер!"
+  },
+  "console.base.instance-empty.top": {
+    "message": "Запустите сборку в правом верхнем углу,"
+  },
+  "console.base.instance-empty.bottom": {
+    "message": "чтобы начали поступать live-логи!"
+  },
+  "console.admonition.toggle": {
+    "message": "Переключить"
+  },
+  "console.admonition.dismiss": {
+    "message": "Скрыть"
   },
   "instance.settings.tabs.installation.unknown-version": {
     "message": "(неизвестная версия)"
@@ -4674,7 +4743,7 @@
     "message": "Только проекты модов или модпаков могут иметь метаданные окружения."
   },
   "header.category.feature": {
-    "message": "Функция"
+    "message": "Особенности"
   },
   "tag.category.skyblock": {
     "message": "Скайблок"
@@ -4902,7 +4971,7 @@
     "message": "Сохранение данных мира и конфигурации сервера для {backupName}. Это может занять несколько минут."
   },
   "header.category.resolutions": {
-    "message": "Разрешение"
+    "message": "Разрешения"
   },
   "hosting.content.failed-to-bulk-enable": {
     "message": "Не удалось включить контент"
@@ -5085,7 +5154,7 @@
     "defaultMessage": "Творческий режим"
   },
   "content.inline-backup.warning-body": {
-    "defaultMessage": "Прежде чем продолжить, мы рекомендуем создать резервную копию, чтобы вы могли восстановить свой {type, select, server {world} Other {instance}}, если что-то сломается."
+    "defaultMessage": "Прежде чем продолжить, мы рекомендуем создать резервную копию, чтобы вы могли восстановить свой {type, select, server {world} other {instance}}, если что-то сломается."
   },
   "payment-method.visa": {
     "defaultMessage": "Виза"
@@ -5565,7 +5634,7 @@
     "defaultMessage": "Опубликовано"
   },
   "header.category.minecraft-server-gameplay": {
-    "defaultMessage": "Геймплей"
+    "message": "Геймплей"
   },
   "project.settings.environment.notice.multiple-environments.title": {
     "defaultMessage": "Ваш проект имеет несколько сред"
@@ -5646,7 +5715,7 @@
     "message": "Обновить {count, plural, one {# project} other {# projects}}"
   },
   "header.category.minecraft-server-community": {
-    "defaultMessage": "Сообщество"
+    "message": "Сообщество"
   },
   "modal.open-in-app.opening-automatically": {
     "defaultMessage": "Приложение Modrinth откроется автоматически..."
@@ -5721,7 +5790,7 @@
     "message": "{count} friend {count, plural, one {request} other {requests}}"
   },
   "project-card.stats.followers": {
-    "defaultMessage": "подписчиков"
+    "message": "подписчиков"
   },
   "project-type.server.capital": {
     "defaultMessage": "{count, plural, one {Server} other {Servers}}"
@@ -5742,7 +5811,7 @@
     "defaultMessage": "Repair {type, select, server {server} other {instance}}"
   },
   "installation-settings.linked-instance.title": {
-    "defaultMessage": "Linked {projectType, select, server {server project} other {modpack}}"
+    "message": "Связано с {projectType, select, server {серверным проектом} other {модпаком}}"
   },
   "project-type.modpack.lowercase": {
     "defaultMessage": "{count, plural, one {modpack} other {modpacks}}"
@@ -5778,7 +5847,7 @@
     "defaultMessage": "{action, select, downgrade {Downgrade} other {Update}} modpack"
   },
   "project-card.stats.downloads": {
-    "defaultMessage": "{count, plural, one {загрузка} few {загрузки} many {загрузок} other {загрузки}}"
+    "message": "{count, plural, one {загрузка} few {загрузки} many {загрузок} other {загрузки}}"
   },
   "project-type.resourcepack.capital": {
     "message": "{count, plural, one {Ресурс-пак} few {Ресурс-пака} many {Ресурс-паков} other {Ресурс-пака}}"
@@ -6058,5 +6127,556 @@
   },
   "project-type.shaderpack.lowercase": {
     "defaultMessage": "{count, plural, one {шейдерпак} few {шейдерпака} many {шейдерпаков} other {шейдерпака}}"
+  },
+  "instance.settings.tabs.java.custom-java-installation": {
+    "message": "Своя установка Java"
+  },
+  "instance.settings.tabs.java.custom-memory-allocation": {
+    "message": "Свое выделение памяти"
+  },
+  "instance.settings.tabs.java.custom-java-arguments": {
+    "message": "Свои аргументы Java"
+  },
+  "instance.settings.tabs.java.custom-environment-variables": {
+    "message": "Свои переменные окружения"
+  },
+  "instance.settings.tabs.java.enter-environmental-variables": {
+    "message": "Введите переменные окружения..."
+  },
+  "search.filter_type.features": {
+    "message": "Особенности"
+  },
+  "search.filter_type.resolutions": {
+    "message": "Разрешения"
+  },
+  "search.filter_type.performance-impact": {
+    "message": "Влияние на производительность"
+  },
+  "server.search.sort.relevance": {
+    "message": "Релевантность"
+  },
+  "server.search.sort.verified-plays": {
+    "message": "Подтвержденные заходы"
+  },
+  "server.search.sort.players": {
+    "message": "Игроки"
+  },
+  "server.search.sort.followers": {
+    "message": "Подписчики"
+  },
+  "server.search.sort.date-published": {
+    "message": "Дата публикации"
+  },
+  "server.search.sort.date-updated": {
+    "message": "Дата обновления"
+  },
+  "server.search.header.community": {
+    "message": "Сообщество"
+  },
+  "server.search.header.features": {
+    "message": "Особенности"
+  },
+  "server.search.header.gameplay": {
+    "message": "Геймплей"
+  },
+  "server.search.header.meta": {
+    "message": "Мета"
+  },
+  "server.search.filter.content-type": {
+    "message": "Тип"
+  },
+  "server.search.filter.content-vanilla": {
+    "message": "Ванильный"
+  },
+  "server.search.filter.content-modded": {
+    "message": "Модовый"
+  },
+  "server.search.filter.game-version": {
+    "message": "Версия игры"
+  },
+  "server.search.filter.region": {
+    "message": "Регион"
+  },
+  "server.search.filter.language": {
+    "message": "Язык"
+  },
+  "server.search.filter.status": {
+    "message": "Статус"
+  },
+  "server.search.filter.status-online": {
+    "message": "Онлайн"
+  },
+  "server.search.filter.status-offline": {
+    "message": "Оффлайн"
+  },
+  "server.search.category.skyblock": {
+    "message": "Скайблок"
+  },
+  "server.search.category.prison": {
+    "message": "Тюрьма"
+  },
+  "server.search.category.smp": {
+    "message": "SMP"
+  },
+  "server.search.category.pokemon": {
+    "message": "Покемоны"
+  },
+  "server.search.category.adventure": {
+    "message": "Приключения"
+  },
+  "server.search.category.anarchy": {
+    "message": "Анархия"
+  },
+  "server.search.category.pvp": {
+    "message": "PvP"
+  },
+  "server.search.category.pve": {
+    "message": "PvE"
+  },
+  "server.search.category.bosses": {
+    "message": "Боссы"
+  },
+  "server.search.category.network": {
+    "message": "Сеть"
+  },
+  "server.search.category.custom-content": {
+    "message": "Кастомный контент"
+  },
+  "server.search.category.minigames": {
+    "message": "Мини-игры"
+  },
+  "server.search.category.parkour": {
+    "message": "Паркур"
+  },
+  "server.search.category.questing": {
+    "message": "Квесты"
+  },
+  "server.search.category.lifesteal": {
+    "message": "Лайфстил"
+  },
+  "server.search.category.whitelisted": {
+    "message": "По вайтлисту"
+  },
+  "server.search.category.gens": {
+    "message": "Гены"
+  },
+  "server.search.category.technical": {
+    "message": "Технический"
+  },
+  "server.search.category.world-resets": {
+    "message": "Сбросы мира"
+  },
+  "settings.display.theme.nord": "Норд",
+  "settings.display.theme.cherry-cola": "Черри-кола",
+  "settings.display.theme.slate": "Слейт",
+  "settings.theme-studio.title": "Студия тем",
+  "settings.theme-studio.description": "Выбирай готовую тему или собирай свою с живым превью, импортом и экспортом.",
+  "settings.theme-studio.official": "Официальные темы",
+  "settings.theme-studio.custom": "Кастомные темы",
+  "settings.theme-studio.new-theme": "Новая тема",
+  "settings.theme-studio.import-theme": "Импорт темы",
+  "settings.theme-studio.empty": "Пока нет кастомных тем. Создай новую на основе текущего пресета.",
+  "settings.theme-studio.editor": "Редактор",
+  "settings.theme-studio.preview": "Превью",
+  "settings.theme-studio.name": "Название темы",
+  "settings.theme-studio.author": "Автор",
+  "settings.theme-studio.base-theme": "Базовый пресет",
+  "settings.theme-studio.description-label": "Описание",
+  "settings.theme-studio.reset-base": "Сбросить цвета к базовому пресету",
+  "settings.theme-studio.save-theme": "Сохранить изменения",
+  "settings.theme-studio.apply-theme": "Применить тему",
+  "settings.theme-studio.duplicate": "Дублировать",
+  "settings.theme-studio.export-theme": "Экспорт",
+  "settings.theme-studio.copy-json": "Копировать JSON",
+  "settings.theme-studio.delete-theme": "Удалить",
+  "settings.theme-studio.active": "Активна",
+  "settings.theme-studio.import-failed": "Этот файл не является корректной темой Revoria.",
+  "settings.theme-studio.saved": "Тема сохранена.",
+  "settings.theme-studio.copied": "JSON темы скопирован.",
+  "settings.theme-studio.canvas": "Фон",
+  "settings.theme-studio.layer-2": "Слой 2",
+  "settings.theme-studio.layer-3": "Слой 3",
+  "settings.theme-studio.cards": "Карточки",
+  "settings.theme-studio.hover-layer": "Слой наведения",
+  "settings.theme-studio.text-primary": "Заголовок",
+  "settings.theme-studio.text-default": "Основной текст",
+  "settings.theme-studio.text-secondary": "Вторичный текст",
+  "settings.theme-studio.brand": "Акцент",
+  "settings.theme-studio.glass-tint": "Оттенок стекла",
+  "settings.theme-studio.glow": "Сила свечения",
+  "settings.theme-studio.glass-opacity": "Прозрачность стекла",
+  "settings.theme-studio.glass-strong": "Плотное стекло",
+  "settings.theme-studio.glass-border": "Граница стекла",
+  "settings.theme-studio.preview-title": "Превью кастомной темы",
+  "settings.theme-studio.preview-body": "Панели, кнопки и текст обновляются здесь до применения темы.",
+  "settings.theme-studio.primary-action": "Основное действие",
+  "settings.theme-studio.secondary-action": "Вторичное действие",
+  "settings.theme-studio.selected-preset": "Выбранный пресет",
+  "settings.theme-studio.apply-preset": "Применить пресет",
+  "settings.theme-studio.create-from-preset": "Создать редактируемую копию",
+  "settings.theme-studio.preset-hint": "Пресеты больше не создают темы сразу. Сначала выбери базу, потом уже применяй или редактируй её.",
+  "settings.theme-studio.section.colors": "Основные цвета",
+  "settings.theme-studio.section.ui": "Поверхности интерфейса",
+  "settings.theme-studio.section.glass": "Стекло и свечение",
+  "settings.theme-studio.section.meta": "Информация о теме",
+  "settings.theme-studio.raised-bg": "Фон панелей",
+  "settings.theme-studio.raised-bg-hover": "Наведение на панели",
+  "settings.theme-studio.button-bg": "Фон кнопок",
+  "settings.theme-studio.button-bg-hover": "Наведение на кнопки",
+  "settings.theme-studio.button-bg-active": "Активная кнопка",
+  "settings.theme-studio.divider": "Разделители",
+  "button.copy-filename": {
+    "message": "Копировать имя файла"
+  },
+  "button.copy-full-path": {
+    "message": "Копировать полный путь"
+  },
+  "button.open-in-folder": {
+    "message": "Открыть в папке"
+  },
+  "label.copied-filename": {
+    "message": "Имя файла скопировано"
+  },
+  "label.copied-path": {
+    "message": "Путь скопирован"
+  },
+  "button.extract": {
+    "message": "Распаковать"
+  },
+  "button.rename": {
+    "message": "Переименовать"
+  },
+  "button.move": {
+    "message": "Переместить"
+  },
+  "files.upload.drag-and-drop.drop-to-upload": {
+    "message": "Перетащите сюда {type, select, undefined {файлы} other {{type}}}, чтобы загрузить"
+  },
+  "files.error.try-again": {
+    "message": "Попробовать снова"
+  },
+  "files.error.go-to-home": {
+    "message": "Перейти в корень"
+  },
+  "files.upload-dropdown.file": {
+    "message": "файл"
+  },
+  "files.upload-dropdown.file-uploads": {
+    "message": "{count, plural, one {# загрузка файла} few {# загрузки файлов} many {# загрузок файлов} other {# загрузки файла}}"
+  },
+  "files.upload-dropdown.uploads-left": {
+    "message": "{count, plural, one {# осталось} few {# осталось} many {# осталось} other {# осталось}}"
+  },
+  "files.upload-dropdown.failed-file-exists": {
+    "message": "Загрузка не удалась: файл уже существует."
+  },
+  "files.upload-dropdown.failed-generic": {
+    "message": "Не удалось загрузить файл."
+  },
+  "files.upload-dropdown.unexpected-error": {
+    "message": "Непредвиденная ошибка"
+  },
+  "files.upload-dropdown.failed-incorrect-type": {
+    "message": "Загрузка не удалась: неверный тип файла."
+  },
+  "files.upload-dropdown.cancelled": {
+    "message": "Отменено"
+  },
+  "files.upload-dropdown.incorrect-file-type": {
+    "message": "Неверный тип файла"
+  },
+  "files.upload-dropdown.failed-to-upload": {
+    "message": "Не удалось загрузить"
+  },
+  "files.upload-dropdown.failed-infer-project-type": {
+    "message": "Загрузка не удалась: не удалось определить тип проекта для загруженного файла."
+  },
+  "files.create-modal.header": {
+    "message": "Создать {type, select, file {файл} other {папку}}"
+  },
+  "files.create-modal.placeholder-file": {
+    "message": "Введите имя файла"
+  },
+  "files.create-modal.placeholder-directory": {
+    "message": "Введите имя папки"
+  },
+  "files.create-modal.create-button": {
+    "message": "Создать"
+  },
+  "files.editor.failed-to-open-title": {
+    "message": "Не удалось открыть файл"
+  },
+  "files.editor.failed-to-open-text": {
+    "message": "Не удалось загрузить содержимое файла."
+  },
+  "files.editor.file-saved-title": {
+    "message": "Файл сохранён"
+  },
+  "files.editor.file-saved-text": {
+    "message": "Файл успешно сохранён."
+  },
+  "files.editor.save-failed-title": {
+    "message": "Не удалось сохранить"
+  },
+  "files.editor.save-failed-text": {
+    "message": "Не удалось сохранить файл."
+  },
+  "files.editor.log-url-copied-title": {
+    "message": "Ссылка на лог скопирована"
+  },
+  "files.editor.log-url-copied-text": {
+    "message": "Ссылка на файл лога скопирована в буфер обмена."
+  },
+  "files.editor.failed-to-share-title": {
+    "message": "Не удалось поделиться файлом"
+  },
+  "files.editor.failed-to-share-text": {
+    "message": "Не удалось загрузить файл на mclo.gs."
+  },
+  "files.delete-modal.header": {
+    "message": "Удалить элемент"
+  },
+  "files.delete-modal.deleting-name": {
+    "message": "Удаляется: {name}"
+  },
+  "files.delete-modal.warning": {
+    "message": "Это действие нельзя отменить."
+  },
+  "files.rename-modal.header": {
+    "message": "Переименовать элемент"
+  },
+  "files.rename-modal.new-name-label": {
+    "message": "Новое имя"
+  },
+  "files.unsaved-changes-modal.header": {
+    "message": "Несохранённые изменения"
+  },
+  "files.unsaved-changes-modal.body": {
+    "message": "У вас есть несохранённые изменения. Что сделать?"
+  },
+  "files.unsaved-changes-modal.discard": {
+    "message": "Отбросить изменения"
+  },
+  "files.operations.extracting": {
+    "message": "Идёт распаковка архива..."
+  },
+  "files.operations.modpack-from-url": {
+    "message": "Устанавливается модпак по ссылке..."
+  },
+  "files.operations.failed": {
+    "message": "Операция не удалась"
+  },
+  "files.operations.extracted": {
+    "message": "Архив распакован"
+  },
+  "files.conflict-modal.header": {
+    "message": "Найдены конфликтующие файлы"
+  },
+  "files.conflict-modal.warning-header": {
+    "message": "Предупреждение о перезаписи"
+  },
+  "files.conflict-modal.overwrite-many-warning": {
+    "message": "Будет перезаписано большое количество файлов."
+  },
+  "files.conflict-modal.overwrite-warning": {
+    "message": "{count, plural, one {# файл будет перезаписан.} few {# файла будут перезаписаны.} many {# файлов будет перезаписано.} other {# файла будут перезаписаны.}}"
+  },
+  "files.conflict-modal.overwritten-count": {
+    "message": "{count, plural, one {# файл} few {# файла} many {# файлов} other {# файла}}"
+  },
+  "files.conflict-modal.overwritten-label": {
+    "message": "Будут перезаписаны"
+  },
+  "files.conflict-modal.overwrite-button": {
+    "message": "Перезаписать"
+  },
+  "files.table-header.name": {
+    "message": "Имя"
+  },
+  "files.table-header.size": {
+    "message": "Размер"
+  },
+  "files.table-header.created": {
+    "message": "Создан"
+  },
+  "files.table-header.modified": {
+    "message": "Изменён"
+  },
+  "files.row.item-count": {
+    "message": "{count, plural, one {# элемент} few {# элемента} many {# элементов} other {# элемента}}"
+  },
+  "files.navbar.file-navigation": {
+    "message": "Навигация по файлам"
+  },
+  "files.navbar.breadcrumb-navigation": {
+    "message": "Навигация по пути"
+  },
+  "files.navbar.back-to-home": {
+    "message": "Назад в корень"
+  },
+  "files.navbar.home": {
+    "message": "Корень"
+  },
+  "files.navbar.search-files": {
+    "message": "Поиск файлов"
+  },
+  "files.navbar.create-new": {
+    "message": "Создать"
+  },
+  "files.navbar.new-file": {
+    "message": "Новый файл"
+  },
+  "files.navbar.new-folder": {
+    "message": "Новая папка"
+  },
+  "files.navbar.upload-file": {
+    "message": "Загрузить файл"
+  },
+  "files.navbar.upload-from-zip": {
+    "message": "Загрузить из ZIP"
+  },
+  "files.navbar.upload-from-zip-url": {
+    "message": "Загрузить ZIP по ссылке"
+  },
+  "files.navbar.install-curseforge-pack": {
+    "message": "Установить CurseForge-пак"
+  },
+  "files.navbar.share-to-mclogs": {
+    "message": "Поделиться через mclo.gs"
+  },
+  "files.layout.loading": {
+    "message": "Загрузка файлов..."
+  },
+  "files.layout.busy-warning": {
+    "message": "Файловые операции временно отключены, пока выполняется другая операция."
+  },
+  "files.layout.empty-folder-title": {
+    "message": "Эта папка пуста"
+  },
+  "files.layout.empty-folder-description": {
+    "message": "Здесь пока нет файлов или папок."
+  },
+  "files.layout.error-title": {
+    "message": "Не удалось загрузить файлы"
+  },
+  "files.layout.error-message": {
+    "message": "Возможно, папка не существует."
+  },
+  "files.layout.selected-count": {
+    "message": "Выбрано: {count}"
+  },
+  "files.layout.dry-run-failed-title": {
+    "message": "Проверка перед выполнением не удалась"
+  },
+  "files.layout.dry-run-failed-text": {
+    "message": "Ошибка при выполнении предварительной проверки"
+  },
+  "files.layout.extraction-started-title": {
+    "message": "Распаковка началась"
+  },
+  "files.layout.unsaved-changes": {
+    "message": "У вас есть несохранённые изменения."
+  },
+  "files.validation.name-label": {
+    "message": "Имя"
+  },
+  "files.validation.name-required": {
+    "message": "Нужно указать имя."
+  },
+  "files.validation.name-invalid-file": {
+    "message": "Имя может содержать только буквы, цифры, дефисы, подчёркивания, точки и пробелы."
+  },
+  "files.validation.name-invalid-directory": {
+    "message": "Имя может содержать только буквы, цифры, дефисы, подчёркивания и пробелы."
+  },
+  "files.image_viewer.invalid_image": {
+    "message": "Некорректное изображение"
+  },
+  "files.image_viewer.viewed_image_alt": {
+    "message": "Просматриваемое изображение"
+  },
+  "files.image_viewer.zoom_in": {
+    "message": "Увеличить"
+  },
+  "files.image_viewer.zoom_out": {
+    "message": "Уменьшить"
+  },
+  "files.image_viewer.reset_zoom": {
+    "message": "Сбросить масштаб"
+  },
+  "files.image_viewer.image_too_large": {
+    "message": "Изображение слишком большое для предпросмотра."
+  },
+  "files.image_viewer.load_failed": {
+    "message": "Не удалось загрузить изображение."
+  },
+  "files.zip-url-modal.cf-header": {
+    "message": "Установить модпак CurseForge"
+  },
+  "files.zip-url-modal.zip-header": {
+    "message": "Загрузка содержимого ZIP по ссылке"
+  },
+  "files.zip-url-modal.enter-link": {
+    "message": "Введите ссылку"
+  },
+  "files.zip-url-modal.zip-description": {
+    "message": "Скопируйте и вставьте прямую ссылку на скачивание .zip-файла."
+  },
+  "files.zip-url-modal.install-button": {
+    "message": "Установить"
+  },
+  "files.zip-url-modal.step-find-title": {
+    "message": "Найдите модпак"
+  },
+  "files.zip-url-modal.step-find-description": {
+    "message": "Откройте CurseForge и найдите нужный модпак."
+  },
+  "files.zip-url-modal.step-select-title": {
+    "message": "Выберите версию"
+  },
+  "files.zip-url-modal.step-select-description": {
+    "message": "Перейдите на вкладку Files и выберите версию для установки."
+  },
+  "files.zip-url-modal.step-copy-title": {
+    "message": "Скопируйте URL"
+  },
+  "files.zip-url-modal.step-copy-description": {
+    "message": "Скопируйте ссылку на страницу версии и вставьте её ниже."
+  },
+  "files.zip-url-modal.error-url-required": {
+    "message": "Нужно указать URL."
+  },
+  "files.zip-url-modal.error-cf-url": {
+    "message": "URL должен вести на страницу версии модпака CurseForge."
+  },
+  "files.zip-url-modal.error-url-invalid": {
+    "message": "URL должен быть корректным."
+  },
+  "files.zip-url-modal.cf-not-found-title": {
+    "message": "Модпак CurseForge не найден"
+  },
+  "files.zip-url-modal.cf-not-found-text": {
+    "message": "Не удалось найти модпак CurseForge по этой ссылке."
+  },
+  "files.zip-url-modal.install-failed-title": {
+    "message": "Установка не удалась"
+  },
+  "files.zip-url-modal.unknown-error": {
+    "message": "Произошла неизвестная ошибка"
+  },
+  "files.zip-url-modal.backup-name": {
+    "message": "Установка модпака CurseForge"
+  },
+  "files.move-modal.header": {
+    "message": "Переместить элемент"
+  },
+  "files.move-modal.current-location": {
+    "message": "Текущее расположение"
+  },
+  "files.move-modal.destination-path": {
+    "message": "Путь назначения"
+  },
+  "files.move-modal.destination-placeholder": {
+    "message": "Введите путь назначения"
   }
 }

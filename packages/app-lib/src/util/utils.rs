@@ -2,7 +2,7 @@ use crate::api::update;
 use crate::state::db;
 ///
 /// [AR] Feature Utils
-/// 
+///
 /// Version: 0.1.1
 ///
 use crate::{Result, State};
@@ -64,7 +64,8 @@ pub async fn get_or_download_elyby_injector() -> Result<PathBuf> {
     validate_revoria_library_dir(&libraries_dir, "authlib_injector/").await?;
     let revoria_dir = libraries_dir.join("revoria/");
     let authlib_injector_dir = revoria_dir.join("authlib_injector/");
-    let mut authlib_injector_dir_data = fs::read_dir(&authlib_injector_dir).await?;
+    let mut authlib_injector_dir_data =
+        fs::read_dir(&authlib_injector_dir).await?;
 
     // Get all local authlib injectors
     while let Some(entry) = authlib_injector_dir_data.next_entry().await? {
@@ -72,28 +73,41 @@ pub async fn get_or_download_elyby_injector() -> Result<PathBuf> {
         if let Some(file_name) = path.file_name().and_then(|s| s.to_str()) {
             if file_name.starts_with("authlib-injector") {
                 let metadata = entry.metadata().await?;
-                let modified = metadata.modified().unwrap_or(SystemTime::UNIX_EPOCH);
+                let modified =
+                    metadata.modified().unwrap_or(SystemTime::UNIX_EPOCH);
                 local_authlib_injectors.push((path.clone(), modified));
             }
         }
     }
 
     // Get information about latest authlib injector from remote repository
-    let (asset_name, download_url) = match extract_elyby_authlib_metadata("authlib-injector").await {
+    let (asset_name, download_url) = match extract_elyby_authlib_metadata(
+        "authlib-injector",
+    )
+    .await
+    {
         Ok(data) => data,
         Err(err) => {
-            if let Some((local_path, _)) = local_authlib_injectors
-                .iter()
-                .max_by(|a, b| a.1.cmp(&b.1)) 
+            if let Some((local_path, _)) =
+                local_authlib_injectors.iter().max_by(|a, b| a.1.cmp(&b.1))
             {
                 tracing::info!("[AR] • Found local AuthLib Injector(s):");
                 for (path, time) in &local_authlib_injectors {
-                    tracing::info!("• {:?} (modified: {:?})", path.file_name().unwrap(), time);
+                    tracing::info!(
+                        "• {:?} (modified: {:?})",
+                        path.file_name().unwrap(),
+                        time
+                    );
                 }
-                tracing::warn!("[AR] • Failed to get latest AuthLib Injector from remote, using latest local version: {}", local_path.display());
+                tracing::warn!(
+                    "[AR] • Failed to get latest AuthLib Injector from remote, using latest local version: {}",
+                    local_path.display()
+                );
                 return Ok(local_path.clone());
             } else {
-                tracing::error!("[AR] • Failed to get AuthLib Injector from remote and no local copy found.");
+                tracing::error!(
+                    "[AR] • Failed to get AuthLib Injector from remote and no local copy found."
+                );
                 return Err(crate::ErrorKind::NetworkErrorOccurred { error: format!("Failed to fetch authlib-injector metadata and no local version available: {}", err) }.as_error());
             }
         }
@@ -103,38 +117,67 @@ pub async fn get_or_download_elyby_injector() -> Result<PathBuf> {
         local_authlib_injectors.sort_by(|a, b| a.1.cmp(&b.1));
         tracing::info!("[AR] • Found local AuthLib Injector(s):");
         for (path, time) in &local_authlib_injectors {
-            tracing::info!("• {:?} (modified: {:?})", path.file_name().unwrap(), time);
+            tracing::info!(
+                "• {:?} (modified: {:?})",
+                path.file_name().unwrap(),
+                time
+            );
         }
     }
 
     let remote_authlib_injector = if !asset_name.is_empty() {
         authlib_injector_dir.join(&asset_name)
     } else {
-        return Err(crate::ErrorKind::ParseError { reason: "Asset name is empty from metadata".to_string() }.as_error());
-    };
-
-    let latest_local_authlib_injector = local_authlib_injectors
-        .first()
-        .map(|(p, _)| p.clone());
-
-    let latest_local_authlib_injector_full_path_buf = match latest_local_authlib_injector {
-        Some(path) => path,
-        None => {
-            tracing::info!("[AR] • No local version found, will download from remote: {}", remote_authlib_injector.display());
-            let bytes = fetch_bytes_from_url(download_url.as_str()).await?;
-            write_file_to_libraries(&remote_authlib_injector.to_string_lossy(), &bytes).await?;
-            tracing::info!("[AR] • Successfully saved AuthLib Injector to {}", remote_authlib_injector.display());
-            return Ok(remote_authlib_injector);
+        return Err(crate::ErrorKind::ParseError {
+            reason: "Asset name is empty from metadata".to_string(),
         }
+        .as_error());
     };
+
+    let latest_local_authlib_injector =
+        local_authlib_injectors.first().map(|(p, _)| p.clone());
+
+    let latest_local_authlib_injector_full_path_buf =
+        match latest_local_authlib_injector {
+            Some(path) => path,
+            None => {
+                tracing::info!(
+                    "[AR] • No local version found, will download from remote: {}",
+                    remote_authlib_injector.display()
+                );
+                let bytes = fetch_bytes_from_url(download_url.as_str()).await?;
+                write_file_to_libraries(
+                    &remote_authlib_injector.to_string_lossy(),
+                    &bytes,
+                )
+                .await?;
+                tracing::info!(
+                    "[AR] • Successfully saved AuthLib Injector to {}",
+                    remote_authlib_injector.display()
+                );
+                return Ok(remote_authlib_injector);
+            }
+        };
 
     tracing::info!("[AR] • Remote Asset name: {}", asset_name);
     tracing::info!("[AR] • Remote Download URL: {}", download_url);
-    tracing::info!("[AR] • Latest local AuthLib Injector: {}", latest_local_authlib_injector_full_path_buf.file_name().unwrap().to_string_lossy());
-    tracing::info!("[AR] • Comparing local version {} with parsed remote version {}", latest_local_authlib_injector_full_path_buf.display(), remote_authlib_injector.display());
+    tracing::info!(
+        "[AR] • Latest local AuthLib Injector: {}",
+        latest_local_authlib_injector_full_path_buf
+            .file_name()
+            .unwrap()
+            .to_string_lossy()
+    );
+    tracing::info!(
+        "[AR] • Comparing local version {} with parsed remote version {}",
+        latest_local_authlib_injector_full_path_buf.display(),
+        remote_authlib_injector.display()
+    );
 
     if remote_authlib_injector == latest_local_authlib_injector_full_path_buf {
-        tracing::info!("[AR] • Remote version is the same as local version, using local copy.");
+        tracing::info!(
+            "[AR] • Remote version is the same as local version, using local copy."
+        );
         return Ok(latest_local_authlib_injector_full_path_buf);
     } else {
         tracing::info!(
@@ -142,8 +185,15 @@ pub async fn get_or_download_elyby_injector() -> Result<PathBuf> {
             download_url
         );
         let bytes = fetch_bytes_from_url(download_url.as_str()).await?;
-        write_file_to_libraries(&remote_authlib_injector.to_string_lossy(), &bytes).await?;
-        tracing::info!("[AR] • Successfully saved AuthLib Injector to {}", remote_authlib_injector.display());
+        write_file_to_libraries(
+            &remote_authlib_injector.to_string_lossy(),
+            &bytes,
+        )
+        .await?;
+        tracing::info!(
+            "[AR] • Successfully saved AuthLib Injector to {}",
+            remote_authlib_injector.display()
+        );
         return Ok(remote_authlib_injector);
     }
 }
@@ -231,9 +281,10 @@ pub async fn init_authlib_patching(
 /// Validating the `revoria/{target_directory}/` directory exists inside the libraries/revoria directory.
 async fn validate_revoria_library_dir(
     libraries_dir: &PathBuf,
-    validation_directory: &str
+    validation_directory: &str,
 ) -> Result<()> {
-    let revoria_path = libraries_dir.join(format!("revoria/{}", validation_directory));
+    let revoria_path =
+        libraries_dir.join(format!("revoria/{}", validation_directory));
     if !revoria_path.exists() {
         tokio::fs::create_dir_all(&revoria_path)
             .await
@@ -310,21 +361,26 @@ async fn download_authlib(
 async fn extract_elyby_authlib_metadata(
     authlib_fullname: &str,
 ) -> Result<(String, String)> {
-    const URL: &str = "https://api.github.com/repos/sawiq/ElyIntegration/releases/latest";
+    const URL: &str =
+        "https://api.github.com/repos/sawiq/ElyIntegration/releases/latest";
 
-    let response = crate::util::fetch::REQWEST_CLIENT.get(URL).send().await.map_err(|e| {
-        tracing::error!(
-            "[AR] • Failed to fetch ElyIntegration release JSON: {:?}",
-            e
-        );
-        crate::ErrorKind::NetworkErrorOccurred {
-            error: format!(
-                "Failed to fetch ElyIntegration release JSON: {}",
+    let response = crate::util::fetch::REQWEST_CLIENT
+        .get(URL)
+        .send()
+        .await
+        .map_err(|e| {
+            tracing::error!(
+                "[AR] • Failed to fetch ElyIntegration release JSON: {:?}",
                 e
-            ),
-        }
-        .as_error()
-    })?;
+            );
+            crate::ErrorKind::NetworkErrorOccurred {
+                error: format!(
+                    "Failed to fetch ElyIntegration release JSON: {}",
+                    e
+                ),
+            }
+            .as_error()
+        })?;
 
     let json: serde_json::Value = response.json().await.map_err(|e| {
         tracing::error!("[AR] • Failed to parse ElyIntegration JSON: {:?}", e);

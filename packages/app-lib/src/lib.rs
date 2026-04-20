@@ -25,6 +25,7 @@ pub use event::{
 };
 pub use logger::start_logger;
 pub use state::State;
+pub use state::set_rpc_language;
 
 pub const LAUNCHER_USER_AGENT: &str = concat!(
     "modrinth/theseus/",

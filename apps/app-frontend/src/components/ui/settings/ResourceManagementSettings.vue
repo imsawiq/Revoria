@@ -201,6 +201,39 @@ async function findLauncherDir() {
 </template>
 
 <style lang="scss" scoped>
+.m-1 {
+	margin: 0;
+}
+
+.iconified-input {
+	border: 1px solid var(--glass-border);
+	border-radius: var(--radius-xl);
+	background: linear-gradient(
+		180deg,
+		color-mix(in oklch, var(--color-glass-bg-strong) 88%, transparent),
+		color-mix(in oklch, var(--color-glass-bg) 94%, transparent)
+	);
+	box-shadow: var(--shadow-card);
+}
+
+.iconified-input :deep(svg) {
+	color: var(--color-secondary);
+}
+
+.text-input {
+	color: var(--color-contrast);
+}
+
+.btn {
+	border: 1px solid color-mix(in srgb, var(--glass-border) 82%, transparent);
+	background: color-mix(in srgb, var(--color-button-bg) 88%, transparent);
+	color: var(--color-contrast);
+}
+
+.btn:hover {
+	background: color-mix(in srgb, var(--color-button-bg-hover) 86%, transparent);
+}
+
 .settings-row {
 	padding: 1rem 1.125rem;
 	border: 1px solid var(--glass-border);
@@ -211,5 +244,21 @@ async function findLauncherDir() {
 		color-mix(in oklch, var(--color-glass-bg) 94%, transparent)
 	);
 	box-shadow: var(--shadow-card);
+}
+
+:deep(.root-container) {
+	--color-base: color-mix(in srgb, var(--color-button-bg) 90%, var(--color-glass-bg) 10%);
+}
+
+:deep(.slider-input) {
+	background: color-mix(in srgb, var(--color-button-bg) 88%, transparent);
+	border: 1px solid var(--glass-border);
+	border-radius: 0.85rem;
+	color: var(--color-contrast);
+	padding: 0.45rem 0.7rem;
+}
+
+:deep(.slider-range) {
+	color: var(--color-secondary);
 }
 </style>

@@ -94,7 +94,7 @@ impl CacheValueType {
             CacheValueType::FileHash => 30 * 24 * 60 * 60, // 30 days
             // ModpackFiles never expire - version_id is immutable so hashes never change
             CacheValueType::ModpackFiles => 100 * 365 * 24 * 60 * 60, // 100 years
-            _ => 30 * 60,                              // 30 minutes
+            _ => 30 * 60, // 30 minutes
         }
     }
 
@@ -526,7 +526,9 @@ impl CacheValue {
             }
             CacheValue::SearchResults(search) => search.search.clone(),
             CacheValue::ModpackFiles(files) => files.version_id.clone(),
-            CacheValue::ProjectVersions(versions) => versions.project_id.clone(),
+            CacheValue::ProjectVersions(versions) => {
+                versions.project_id.clone()
+            }
         }
     }
 

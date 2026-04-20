@@ -104,7 +104,10 @@ pub async fn syncing_set_target(
 }
 
 #[tauri::command]
-pub async fn syncing_remove_target(path: &str, is_file: bool) -> Result<SyncState> {
+pub async fn syncing_remove_target(
+    path: &str,
+    is_file: bool,
+) -> Result<SyncState> {
     let normalized = normalize_target(path).ok_or_else(|| {
         theseus::Error::from(theseus::ErrorKind::InputError(format!(
             "Invalid sync target path: {path}"
@@ -168,7 +171,9 @@ pub async fn apply_configured_syncs() -> Result<()> {
 
     for file in &config.files {
         for instance in &instances {
-            apply_file_target_to_instance(file, &instances, &sync_root, instance)?;
+            apply_file_target_to_instance(
+                file, &instances, &sync_root, instance,
+            )?;
         }
     }
 
@@ -274,7 +279,9 @@ fn build_file_states(
 
             for instance in instances {
                 let path = sync_target_path(instance, target);
-                if shared.exists() && path.exists() && is_same_file(&shared, &path).unwrap_or(false)
+                if shared.exists()
+                    && path.exists()
+                    && is_same_file(&shared, &path).unwrap_or(false)
                 {
                     sync_count += 1;
                 } else if path.exists() {
@@ -327,8 +334,7 @@ fn write_config(path: &Path, config: &SyncConfig) -> io::Result<()> {
         fs::create_dir_all(parent)?;
     }
 
-    let json = serde_json::to_vec_pretty(config)
-        .map_err(io::Error::other)?;
+    let json = serde_json::to_vec_pretty(config).map_err(io::Error::other)?;
     fs::write(path, json)
 }
 
@@ -347,7 +353,9 @@ fn normalize_target(input: &str) -> Option<String> {
     let mut parts = Vec::new();
     for component in Path::new(&trimmed).components() {
         match component {
-            Component::Normal(part) => parts.push(part.to_string_lossy().to_string()),
+            Component::Normal(part) => {
+                parts.push(part.to_string_lossy().to_string())
+            }
             Component::CurDir => {}
             _ => return None,
         }
@@ -406,7 +414,8 @@ fn apply_folder_target_to_instance(
     fs::create_dir_all(&shared)?;
 
     let instance_target = sync_target_path(instance, target);
-    if is_dir_link_targeting(&shared, &instance_target) || instance_target.exists()
+    if is_dir_link_targeting(&shared, &instance_target)
+        || instance_target.exists()
     {
         return Ok(());
     }
@@ -487,7 +496,9 @@ fn disable_file_target(
 
     for instance in instances {
         let instance_target = sync_target_path(instance, target);
-        if instance_target.exists() && is_same_file(&shared, &instance_target).unwrap_or(false) {
+        if instance_target.exists()
+            && is_same_file(&shared, &instance_target).unwrap_or(false)
+        {
             remove_existing_path(&instance_target)?;
             copy_file(&shared, &instance_target)?;
         }
@@ -496,7 +507,10 @@ fn disable_file_target(
     Ok(())
 }
 
-fn pick_latest_file_candidate(target: &str, instances: &[PathBuf]) -> Option<PathBuf> {
+fn pick_latest_file_candidate(
+    target: &str,
+    instances: &[PathBuf],
+) -> Option<PathBuf> {
     instances
         .iter()
         .map(|instance| sync_target_path(instance, target))
@@ -529,7 +543,9 @@ fn merge_dir_into(source: &Path, target: &Path) -> io::Result<()> {
 
         if target_path.exists() {
             let source_modified = metadata.modified().ok();
-            let target_modified = fs::metadata(&target_path).and_then(|meta| meta.modified()).ok();
+            let target_modified = fs::metadata(&target_path)
+                .and_then(|meta| meta.modified())
+                .ok();
             if source_modified > target_modified {
                 remove_existing_path(&target_path)?;
                 copy_file(&source_path, &target_path)?;

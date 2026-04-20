@@ -1,9 +1,9 @@
 use arboard::{Clipboard, ImageData};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
+use tauri::Runtime;
 use tauri::image::Image;
 use tauri::{AppHandle, Manager};
-use tauri::Runtime;
 use tauri_plugin_opener::OpenerExt;
 use theseus::{
     LoadingBarType, emit_loading, handler, init_loading,
@@ -17,8 +17,8 @@ use std::borrow::Cow;
 use std::path::{Path, PathBuf};
 use theseus::prelude::canonicalize;
 use theseus::util::utils;
-use tokio::io::AsyncWriteExt;
 use tokio::fs;
+use tokio::io::AsyncWriteExt;
 use url::Url;
 
 pub fn init<R: Runtime>() -> tauri::plugin::TauriPlugin<R> {
@@ -37,12 +37,19 @@ pub fn init<R: Runtime>() -> tauri::plugin::TauriPlugin<R> {
             progress_bars_list,
             get_opening_command,
             list_dir_files,
+            list_dir_entries,
             get_dir_size,
             delete_paths,
+            create_path,
+            rename_path,
+            move_path,
             read_text_file,
             read_binary_file,
+            write_text_file,
+            write_binary_file,
             copy_image_to_clipboard,
             set_theme_window_icon,
+            set_discord_rpc_language,
             proxy_get_json,
             ollama_chat
         ])
@@ -71,6 +78,15 @@ fn theme_icon_bytes(theme: &str, prefers_dark: bool) -> &'static [u8] {
         ),
         "aurora" => include_bytes!(
             "../../../app-frontend/src/assets/theme-icons/aurora.png"
+        ),
+        "nord" => include_bytes!(
+            "../../../app-frontend/src/assets/theme-icons/default.png"
+        ),
+        "cherry-cola" => include_bytes!(
+            "../../../app-frontend/src/assets/theme-icons/default.png"
+        ),
+        "slate" => include_bytes!(
+            "../../../app-frontend/src/assets/theme-icons/default.png"
         ),
         "rose-gold" => include_bytes!(
             "../../../app-frontend/src/assets/theme-icons/rose-gold.png"
@@ -118,12 +134,25 @@ pub async fn set_theme_window_icon<R: Runtime>(
     Ok(())
 }
 
+#[tauri::command]
+pub async fn set_discord_rpc_language(language: String) -> Result<()> {
+    theseus::set_rpc_language(&language);
+
+    if let Ok(state) = theseus::State::get().await {
+        let _ = state.discord_rpc.clear_to_default(true).await;
+    }
+
+    Ok(())
+}
+
 pub(crate) async fn build_proxy_aware_client() -> Result<Client> {
     let settings = theseus::settings::get().await?;
     let mut builder =
         Client::builder().user_agent(theseus::LAUNCHER_USER_AGENT);
 
-    if let Some(proxy_url) = theseus::util::fetch::proxy_url_from_settings(&settings)? {
+    if let Some(proxy_url) =
+        theseus::util::fetch::proxy_url_from_settings(&settings)?
+    {
         let proxy = Proxy::all(&proxy_url)
             .map_err(|err| std::io::Error::other(err.to_string()))?;
         builder = builder.proxy(proxy);
@@ -158,8 +187,8 @@ pub async fn download_url_to_temp(
         .send()
         .await
         .map_err(|e| {
-        std::io::Error::new(std::io::ErrorKind::Other, e.to_string())
-    })?;
+            std::io::Error::new(std::io::ErrorKind::Other, e.to_string())
+        })?;
 
     if !response.status().is_success() {
         return Err(theseus::Error::from(std::io::Error::new(
@@ -370,8 +399,20 @@ pub struct DirFileEntry {
     pub size: u64,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DirEntry {
+    pub name: String,
+    pub path: String,
+    pub is_dir: bool,
+    pub size: Option<u64>,
+    pub modified: Option<i64>,
+}
+
 #[tauri::command]
-pub async fn list_dir_files(path: String, extensions: Option<Vec<String>>) -> Result<Vec<DirFileEntry>> {
+pub async fn list_dir_files(
+    path: String,
+    extensions: Option<Vec<String>>,
+) -> Result<Vec<DirFileEntry>> {
     let dir = PathBuf::from(&path);
     if !dir.exists() || !dir.is_dir() {
         return Ok(Vec::new());
@@ -397,6 +438,46 @@ pub async fn list_dir_files(path: String, extensions: Option<Vec<String>>) -> Re
         });
     }
     entries.sort_by(|a, b| b.name.cmp(&a.name));
+    Ok(entries)
+}
+
+#[tauri::command]
+pub async fn list_dir_entries(path: String) -> Result<Vec<DirEntry>> {
+    let dir = PathBuf::from(&path);
+    if !dir.exists() || !dir.is_dir() {
+        return Ok(Vec::new());
+    }
+
+    let mut entries = Vec::new();
+    let mut read_dir = tokio::fs::read_dir(&dir).await?;
+
+    while let Some(entry) = read_dir.next_entry().await? {
+        let metadata = entry.metadata().await?;
+        let modified = metadata
+            .modified()
+            .ok()
+            .and_then(|value| value.duration_since(std::time::UNIX_EPOCH).ok())
+            .map(|value| value.as_secs() as i64);
+
+        entries.push(DirEntry {
+            name: entry.file_name().to_string_lossy().to_string(),
+            path: entry.path().to_string_lossy().to_string(),
+            is_dir: metadata.is_dir(),
+            size: if metadata.is_file() {
+                Some(metadata.len())
+            } else {
+                None
+            },
+            modified,
+        });
+    }
+
+    entries.sort_by(|a, b| match (a.is_dir, b.is_dir) {
+        (true, false) => std::cmp::Ordering::Less,
+        (false, true) => std::cmp::Ordering::Greater,
+        _ => a.name.to_lowercase().cmp(&b.name.to_lowercase()),
+    });
+
     Ok(entries)
 }
 
@@ -452,6 +533,43 @@ pub async fn delete_paths(paths: Vec<String>) -> Result<u64> {
 }
 
 #[tauri::command]
+pub async fn create_path(path: String, kind: String) -> Result<()> {
+    match kind.as_str() {
+        "directory" => {
+            fs::create_dir_all(path).await?;
+        }
+        _ => {
+            if let Some(parent) = Path::new(&path).parent() {
+                fs::create_dir_all(parent).await?;
+            }
+            fs::write(path, []).await?;
+        }
+    }
+    Ok(())
+}
+
+#[tauri::command]
+pub async fn rename_path(path: String, new_name: String) -> Result<()> {
+    let source = PathBuf::from(&path);
+    let parent = source
+        .parent()
+        .ok_or_else(|| std::io::Error::other("Path has no parent"))?;
+    let destination = parent.join(new_name);
+    fs::rename(source, destination).await?;
+    Ok(())
+}
+
+#[tauri::command]
+pub async fn move_path(source: String, destination: String) -> Result<()> {
+    let destination_path = PathBuf::from(&destination);
+    if let Some(parent) = destination_path.parent() {
+        fs::create_dir_all(parent).await?;
+    }
+    fs::rename(source, destination_path).await?;
+    Ok(())
+}
+
+#[tauri::command]
 pub async fn read_text_file(path: String) -> Result<String> {
     let content = fs::read_to_string(path).await?;
     Ok(content)
@@ -461,6 +579,24 @@ pub async fn read_text_file(path: String) -> Result<String> {
 pub async fn read_binary_file(path: String) -> Result<Vec<u8>> {
     let content = fs::read(path).await?;
     Ok(content)
+}
+
+#[tauri::command]
+pub async fn write_text_file(path: String, content: String) -> Result<()> {
+    if let Some(parent) = Path::new(&path).parent() {
+        fs::create_dir_all(parent).await?;
+    }
+    fs::write(path, content).await?;
+    Ok(())
+}
+
+#[tauri::command]
+pub async fn write_binary_file(path: String, content: Vec<u8>) -> Result<()> {
+    if let Some(parent) = Path::new(&path).parent() {
+        fs::create_dir_all(parent).await?;
+    }
+    fs::write(path, content).await?;
+    Ok(())
 }
 
 #[tauri::command]
@@ -477,17 +613,19 @@ pub async fn proxy_get_json(
         }
     }
 
-    let response = request.send().await.map_err(|e| {
-        std::io::Error::other(e.to_string())
-    })?;
+    let response = request
+        .send()
+        .await
+        .map_err(|e| std::io::Error::other(e.to_string()))?;
 
-    let response = response.error_for_status().map_err(|e| {
-        std::io::Error::other(e.to_string())
-    })?;
+    let response = response
+        .error_for_status()
+        .map_err(|e| std::io::Error::other(e.to_string()))?;
 
-    let value = response.json::<Value>().await.map_err(|e| {
-        std::io::Error::other(e.to_string())
-    })?;
+    let value = response
+        .json::<Value>()
+        .await
+        .map_err(|e| std::io::Error::other(e.to_string()))?;
 
     Ok(value)
 }
@@ -516,7 +654,9 @@ pub async fn copy_image_to_clipboard(path: String) -> Result<()> {
         Ok(())
     })
     .await
-    .map_err(|e| theseus::Error::from(std::io::Error::other(e.to_string())))??;
+    .map_err(|e| {
+        theseus::Error::from(std::io::Error::other(e.to_string()))
+    })??;
     Ok(())
 }
 

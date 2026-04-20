@@ -45,7 +45,7 @@
 								color="brand"
 								size="large"
 							>
-								<button data-april-fools-dodge @click="repairInstance()">
+								<button @click="repairInstance()">
 									<DownloadIcon />
 									{{ formatMessage(messages.repair) }}
 								</button>
@@ -61,7 +61,7 @@
 								color="brand"
 								size="large"
 							>
-								<button data-april-fools-dodge @click="startInstance('InstancePage')">
+								<button @click="startInstance('InstancePage')">
 									<PlayIcon />
 									{{ formatMessage(messages.play) }}
 								</button>
@@ -186,6 +186,7 @@
 </template>
 <script setup>
 import {
+	BoxesIcon,
 	CheckCircleIcon,
 	ClipboardCopyIcon,
 	DownloadIcon,
@@ -196,6 +197,7 @@ import {
 	GameIcon,
 	GlobeIcon,
 	HashIcon,
+	ImageIcon,
 	MoreVerticalIcon,
 	PackageIcon,
 	PlayIcon,
@@ -203,6 +205,7 @@ import {
 	ServerIcon,
 	SettingsIcon,
 	StopCircleIcon,
+	TerminalSquareIcon,
 	TimerIcon,
 	UpdatedIcon,
 	UserPlusIcon,
@@ -275,6 +278,7 @@ const messages = defineMessages({
 	updateAll: { id: 'instance.index.update-all', defaultMessage: 'Update all' },
 	selectUpdatable: { id: 'instance.index.select-updatable', defaultMessage: 'Select Updatable' },
 	tabContent: { id: 'instance.breadcrumb.content', defaultMessage: 'Content' },
+	tabFiles: { id: 'instance.breadcrumb.files', defaultMessage: 'Files' },
 	tabWorlds: { id: 'instance.index.tab.worlds', defaultMessage: 'Worlds' },
 	tabScreenshots: { id: 'instance.breadcrumb.screenshots', defaultMessage: 'Screenshots' },
 	tabLogs: { id: 'instance.breadcrumb.logs', defaultMessage: 'Logs' },
@@ -348,12 +352,14 @@ onMounted(async () => {
 		return
 	}
 	await fetchInstance()
+	await updatePlayState()
 })
 watch(
 	() => route.params.id,
 	async () => {
 		if (route.params.id && isOnInstanceRoute.value) {
 			await fetchInstance()
+			await updatePlayState()
 		}
 	},
 )
@@ -365,10 +371,15 @@ const basePath = computed(() =>
 const tabs = computed(() => {
 	if (!isOnInstanceRoute.value || !hasValidProfilePathId.value) return []
 	return [
-		{ label: formatMessage(messages.tabContent), href: `${basePath.value}` },
-		{ label: formatMessage(messages.tabWorlds), href: `${basePath.value}/worlds` },
-		{ label: formatMessage(messages.tabScreenshots), href: `${basePath.value}/screenshots` },
-		{ label: formatMessage(messages.tabLogs), href: `${basePath.value}/logs` },
+		{ label: formatMessage(messages.tabContent), href: `${basePath.value}`, icon: BoxesIcon },
+		{ label: formatMessage(messages.tabFiles), href: `${basePath.value}/files`, icon: FolderOpenIcon },
+		{ label: formatMessage(messages.tabWorlds), href: `${basePath.value}/worlds`, icon: GlobeIcon },
+		{
+			label: formatMessage(messages.tabScreenshots),
+			href: `${basePath.value}/screenshots`,
+			icon: ImageIcon,
+		},
+		{ label: formatMessage(messages.tabLogs), href: `${basePath.value}/logs`, icon: TerminalSquareIcon },
 	]
 })
 
@@ -392,6 +403,7 @@ if (instance.value?.name) {
 const loadingBar = useLoading()
 
 const options = ref(null)
+const selected = ref([])
 
 const startInstance = async (context) => {
 	loading.value = true
@@ -502,8 +514,12 @@ onMounted(async () => {
 	}).catch(() => null)
 
 	unlistenProcesses = await process_listener((e) => {
-		if (e.event === 'finished' && e.profile_path_id === profilePathId.value) {
-			playing.value = false
+		if (e.profile_path_id === profilePathId.value) {
+			if (e.event === 'finished') {
+				playing.value = false
+			} else if (e.event === 'launched') {
+				playing.value = true
+			}
 		}
 	}).catch(() => null)
 })

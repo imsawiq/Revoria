@@ -14,27 +14,34 @@ use std::fs::OpenOptions;
 use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::process::ExitStatus;
+use sysinfo::{Pid, ProcessesToUpdate, System};
 use tempfile::TempDir;
 use tokio::io::{AsyncBufReadExt, BufReader};
 use tokio::process::{Child, Command};
 use uuid::Uuid;
 
 const LAUNCHER_LOG_PATH: &str = "launcher_log.txt";
+const RUNNING_PROCESSES_STATE: &str = "running_processes.json";
 
 pub struct ProcessManager {
     processes: DashMap<Uuid, Process>,
+    state_file: PathBuf,
 }
 
 impl Default for ProcessManager {
     fn default() -> Self {
-        Self::new()
+        Self {
+            processes: DashMap::new(),
+            state_file: PathBuf::from(RUNNING_PROCESSES_STATE),
+        }
     }
 }
 
 impl ProcessManager {
-    pub fn new() -> Self {
+    pub fn new(settings_dir: &Path) -> Self {
         Self {
             processes: DashMap::new(),
+            state_file: settings_dir.join(RUNNING_PROCESSES_STATE),
         }
     }
 
@@ -58,6 +65,11 @@ impl ProcessManager {
         mc_command.stdin(std::process::Stdio::piped());
 
         let mut mc_proc = mc_command.spawn().map_err(IOError::from)?;
+        let pid = mc_proc.id().ok_or_else(|| {
+            crate::ErrorKind::LauncherError(
+                "Launched process did not return a PID".to_string(),
+            )
+        })?;
 
         let stdout = mc_proc.stdout.take();
         let stderr = mc_proc.stderr.take();
@@ -67,17 +79,27 @@ impl ProcessManager {
                 uuid: Uuid::new_v4(),
                 start_time: Utc::now(),
                 profile_path: profile_path.to_string(),
+                pid,
+                recovered: false,
             },
-            child: mc_proc,
-            rpc_server,
-            _main_class_keep_alive: main_class_keep_alive,
+            child: Some(mc_proc),
+            rpc_server: Some(rpc_server),
+            _main_class_keep_alive: Some(main_class_keep_alive),
         };
 
-        if let Err(e) =
-            post_process_init(&process.metadata, &process.rpc_server).await
+        if let Err(e) = post_process_init(
+            &process.metadata,
+            process
+                .rpc_server
+                .as_ref()
+                .expect("RPC server should exist for launched processes"),
+        )
+        .await
         {
             tracing::error!("Failed to run post-process init: {e}");
-            let _ = process.child.kill().await;
+            if let Some(child) = process.child.as_mut() {
+                let _ = child.kill().await;
+            }
             return Err(e);
         }
 
@@ -149,6 +171,7 @@ impl ProcessManager {
         ));
 
         self.processes.insert(process.metadata.uuid, process);
+        self.persist_running_processes()?;
 
         emit_process(
             profile_path,
@@ -166,10 +189,11 @@ impl ProcessManager {
     }
 
     pub fn get_rpc(&self, id: Uuid) -> Option<RpcServer> {
-        self.processes.get(&id).map(|x| x.rpc_server.clone())
+        self.processes.get(&id).and_then(|x| x.rpc_server.clone())
     }
 
     pub fn get_all(&self) -> Vec<ProcessMetadata> {
+        self.prune_dead_recovered();
         self.processes
             .iter()
             .map(|x| x.value().metadata.clone())
@@ -181,7 +205,13 @@ impl ProcessManager {
         id: Uuid,
     ) -> crate::Result<Option<Option<ExitStatus>>> {
         if let Some(mut process) = self.processes.get_mut(&id) {
-            Ok(Some(process.child.try_wait()?))
+            if let Some(child) = process.child.as_mut() {
+                Ok(Some(child.try_wait()?))
+            } else if process.is_running() {
+                Ok(Some(None))
+            } else {
+                Ok(Some(Some(ExitStatus::default())))
+            }
         } else {
             Ok(None)
         }
@@ -189,14 +219,40 @@ impl ProcessManager {
 
     pub async fn wait_for(&self, id: Uuid) -> crate::Result<()> {
         if let Some(mut process) = self.processes.get_mut(&id) {
-            process.child.wait().await?;
+            if let Some(child) = process.child.as_mut() {
+                child.wait().await?;
+                return Ok(());
+            }
+        }
+
+        if let Some(process) = self.processes.get(&id) {
+            if process.metadata.recovered {
+                let pid = process.metadata.pid;
+                drop(process);
+                while Self::is_pid_running(pid) {
+                    tokio::time::sleep(tokio::time::Duration::from_millis(200))
+                        .await;
+                }
+                self.remove(id);
+            }
         }
         Ok(())
     }
 
     pub async fn kill(&self, id: Uuid) -> crate::Result<()> {
         if let Some(mut process) = self.processes.get_mut(&id) {
-            process.child.kill().await?;
+            if let Some(child) = process.child.as_mut() {
+                child.kill().await?;
+                return Ok(());
+            }
+        }
+
+        if let Some(mut process) = self.processes.get_mut(&id) {
+            if process.metadata.recovered {
+                process.kill_recovered()?;
+                drop(process);
+                self.remove(id);
+            }
         }
 
         Ok(())
@@ -204,6 +260,85 @@ impl ProcessManager {
 
     fn remove(&self, id: Uuid) {
         self.processes.remove(&id);
+        let _ = self.persist_running_processes();
+    }
+
+    pub fn recover_persisted_processes(&self) -> crate::Result<()> {
+        let Ok(contents) = std::fs::read_to_string(&self.state_file) else {
+            return Ok(());
+        };
+
+        let persisted: Vec<ProcessMetadata> =
+            serde_json::from_str(&contents).unwrap_or_default();
+
+        for metadata in persisted {
+            if metadata.recovered || Self::is_pid_running(metadata.pid) {
+                self.processes.insert(
+                    metadata.uuid,
+                    Process {
+                        metadata: ProcessMetadata {
+                            recovered: true,
+                            ..metadata
+                        },
+                        child: None,
+                        _main_class_keep_alive: None,
+                        rpc_server: None,
+                    },
+                );
+            }
+        }
+
+        self.persist_running_processes()?;
+        Ok(())
+    }
+
+    fn prune_dead_recovered(&self) {
+        let dead = self
+            .processes
+            .iter()
+            .filter(|entry| {
+                entry.value().metadata.recovered && !entry.value().is_running()
+            })
+            .map(|entry| *entry.key())
+            .collect::<Vec<_>>();
+
+        if !dead.is_empty() {
+            for uuid in dead {
+                self.processes.remove(&uuid);
+            }
+            let _ = self.persist_running_processes();
+        }
+    }
+
+    fn persist_running_processes(&self) -> crate::Result<()> {
+        let persisted = self
+            .processes
+            .iter()
+            .filter_map(|entry| {
+                let metadata = &entry.value().metadata;
+                if Self::is_pid_running(metadata.pid) {
+                    Some(metadata.clone())
+                } else {
+                    None
+                }
+            })
+            .collect::<Vec<_>>();
+
+        if let Some(parent) = self.state_file.parent() {
+            std::fs::create_dir_all(parent)?;
+        }
+
+        std::fs::write(
+            &self.state_file,
+            serde_json::to_vec_pretty(&persisted)?,
+        )?;
+        Ok(())
+    }
+
+    fn is_pid_running(pid: u32) -> bool {
+        let mut system = System::new();
+        system.refresh_processes(ProcessesToUpdate::All, true);
+        system.process(Pid::from_u32(pid)).is_some()
     }
 }
 
@@ -212,14 +347,37 @@ pub struct ProcessMetadata {
     pub uuid: Uuid,
     pub profile_path: String,
     pub start_time: DateTime<Utc>,
+    pub pid: u32,
+    #[serde(default)]
+    pub recovered: bool,
 }
 
 #[derive(Debug)]
 struct Process {
     metadata: ProcessMetadata,
-    child: Child,
-    _main_class_keep_alive: TempDir,
-    rpc_server: RpcServer,
+    child: Option<Child>,
+    _main_class_keep_alive: Option<TempDir>,
+    rpc_server: Option<RpcServer>,
+}
+
+impl Process {
+    fn is_running(&self) -> bool {
+        if let Some(child) = self.child.as_ref() {
+            child.id().is_some()
+        } else {
+            ProcessManager::is_pid_running(self.metadata.pid)
+        }
+    }
+
+    fn kill_recovered(&mut self) -> crate::Result<()> {
+        let mut system = System::new();
+        system.refresh_processes(ProcessesToUpdate::All, true);
+        if let Some(process) = system.process(Pid::from_u32(self.metadata.pid))
+        {
+            process.kill();
+        }
+        Ok(())
+    }
 }
 
 #[derive(Debug, Default)]

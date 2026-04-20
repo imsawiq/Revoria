@@ -59,8 +59,6 @@ import { RouterView, useRoute, useRouter } from 'vue-router'
 
 import ModrinthLoadingIndicator from '@/components/LoadingIndicatorBar.vue'
 import AccountsCard from '@/components/ui/AccountsCard.vue'
-import AprilFoolsPopupImage from '@/components/ui/AprilFoolsPopupImage.vue'
-import AprilFoolsCleanupGame from '@/components/ui/AprilFoolsCleanupGame.vue'
 import BackgroundEffects from '@/components/ui/BackgroundEffects.vue'
 import Breadcrumbs from '@/components/ui/Breadcrumbs.vue'
 import ErrorModal from '@/components/ui/ErrorModal.vue'
@@ -68,7 +66,6 @@ import FriendsList from '@/components/ui/friends/FriendsList.vue'
 import IncompatibilityWarningModal from '@/components/ui/install_flow/IncompatibilityWarningModal.vue'
 import InstallConfirmModal from '@/components/ui/install_flow/InstallConfirmModal.vue'
 import ModInstallModal from '@/components/ui/install_flow/ModInstallModal.vue'
-import AppSettingsModal from '@/components/ui/modal/AppSettingsModal.vue'
 import AuthGrantFlowWaitModal from '@/components/ui/modal/AuthGrantFlowWaitModal.vue'
 import NavButton from '@/components/ui/NavButton.vue'
 import QuickInstanceSwitcher from '@/components/ui/QuickInstanceSwitcher.vue'
@@ -79,7 +76,6 @@ import URLConfirmModal from '@/components/ui/URLConfirmModal.vue'
 import { useCheckDisableMouseover } from '@/composables/macCssFix.js'
 import { debugAnalytics, optOutAnalytics, trackEvent } from '@/helpers/analytics'
 import { check_reachable } from '@/helpers/auth.js'
-import { isAprilFoolsActive, startAprilFoolsMode } from '@/helpers/april-fools.js'
 import { get_user } from '@/helpers/cache.js'
 import { command_listener, warning_listener } from '@/helpers/events.js'
 import { useFetch } from '@/helpers/fetch.js'
@@ -171,6 +167,14 @@ const languageToLocale = {
 const i18nLocale = ref(languageToLocale[launcherLanguage.value] ?? 'en-US')
 const availableSurvey = ref(false)
 
+async function syncDiscordRpcLanguage(language) {
+	try {
+		await invoke('plugin:utils|set_discord_rpc_language', { language })
+	} catch (error) {
+		console.warn('Failed to sync Discord RPC language', error)
+	}
+}
+
 const urlModal = ref(null)
 
 const offline = ref(!navigator.onLine)
@@ -216,15 +220,10 @@ const authUnreachable = computed(() => {
 onMounted(async () => {
 	await useCheckDisableMouseover()
 	await syncLauncherThemeIcon()
+	await syncDiscordRpcLanguage(launcherLanguage.value)
 
 	document.querySelector('body').addEventListener('click', handleClick)
 	document.querySelector('body').addEventListener('auxclick', handleAuxClick)
-
-	stopAprilFoolsMode = startAprilFoolsMode({
-		active: isAprilFoolsActive(),
-		addNotification,
-		formatMessage,
-	})
 
 	checkUpdates()
 })
@@ -232,8 +231,6 @@ onMounted(async () => {
 onUnmounted(async () => {
 	document.querySelector('body').removeEventListener('click', handleClick)
 	document.querySelector('body').removeEventListener('auxclick', handleAuxClick)
-	stopAprilFoolsMode?.()
-
 	await unlistenUpdateDownload?.()
 })
 
@@ -268,8 +265,18 @@ const normalizeMessages = (messages) =>
 			value?.message ?? value?.defaultMessage ?? value,
 		]),
 	)
+const allMessagesByLocale = {
+	'en-US': allEnMessages,
+	'ru-RU': allRuMessages,
+	'uk-UA': allUkMessages,
+	'de-DE': allDeDeMessages,
+	'ro-RO': allRoMessages,
+}
+
+Object.entries(allMessagesByLocale).forEach(([locale, messages]) => {
+	vintl.addMessages(locale, normalizeMessages(messages))
+})
 let langSwitchTimeout
-let stopAprilFoolsMode
 function triggerLanguageTransition() {
 	const root = document.documentElement
 	root.classList.add('lang-switching')
@@ -287,18 +294,10 @@ function triggerLanguageTransition() {
 watch(
 	launcherLanguage,
 	async (lang) => {
+		await syncDiscordRpcLanguage(lang)
 		triggerLanguageTransition()
 		const nextLocale = languageToLocale[lang] ?? 'en-US'
 		i18nLocale.value = nextLocale
-		const allMessagesByLocale = {
-			'en-US': allEnMessages,
-			'ru-RU': allRuMessages,
-			'uk-UA': allUkMessages,
-			'de-DE': allDeDeMessages,
-			'ro-RO': allRoMessages,
-		}
-		const allMessages = allMessagesByLocale[nextLocale] ?? allEnMessages
-		vintl.addMessages(nextLocale, normalizeMessages(allMessages))
 	},
 	{ immediate: true },
 )
@@ -379,47 +378,6 @@ const messages = defineMessages({
 	navDiscord: {
 		id: 'app.nav.discord',
 		defaultMessage: 'Discord server',
-	},
-	aprilFoolsThemeTitle: {
-		id: 'app.april-fools.theme.title',
-		defaultMessage: 'Important launcher branding update',
-	},
-	aprilFoolsThemeBody: {
-		id: 'app.april-fools.theme.body',
-		defaultMessage:
-			'Chaotic Rainbow is now the main launcher theme for today. Your actual theme preference is safe.',
-	},
-	aprilFoolsLauncherTitle: {
-		id: 'app.april-fools.launcher.title',
-		defaultMessage: 'Launcher found another launcher',
-	},
-	aprilFoolsLauncherBody: {
-		id: 'app.april-fools.launcher.body',
-		defaultMessage: 'Nested launcher detected inside launcher. Please remain calm.',
-	},
-	aprilFoolsRandomLauncherTitle: {
-		id: 'app.april-fools.random.launcher.title',
-		defaultMessage: 'Launcher recursion status',
-	},
-	aprilFoolsRandomLauncherBody: {
-		id: 'app.april-fools.random.launcher.body',
-		defaultMessage: 'The launcher is currently launching the launcher launcher.',
-	},
-	aprilFoolsRandomThemeTitle: {
-		id: 'app.april-fools.random.theme.title',
-		defaultMessage: 'Theme compliance notice',
-	},
-	aprilFoolsRandomThemeBody: {
-		id: 'app.april-fools.random.theme.body',
-		defaultMessage: 'Your previous theme has been temporarily sent to a safe location.',
-	},
-	aprilFoolsRandomButtonsTitle: {
-		id: 'app.april-fools.random.buttons.title',
-		defaultMessage: 'Button stability warning',
-	},
-	aprilFoolsRandomButtonsBody: {
-		id: 'app.april-fools.random.buttons.body',
-		defaultMessage: 'Some buttons may briefly dodge responsibility today.',
 	},
 	accountMenu: {
 		id: 'app.account.menu',
@@ -517,7 +475,11 @@ async function setupApp() {
 	nativeDecorations.value = native_decorations
 	if (os.value !== 'MacOS') await getCurrentWindow().setDecorations(native_decorations)
 
-	themeStore.setThemeState(theme)
+	if (themeStore.getActiveCustomTheme()) {
+		themeStore.restoreActiveCustomTheme()
+	} else {
+		themeStore.setThemeState(theme)
+	}
 	if (settingsObj.theme !== themeStore.selectedTheme) {
 		settingsObj.theme = themeStore.selectedTheme
 		await setSettings(settingsObj)
@@ -1035,8 +997,7 @@ async function processPendingSurveys() {
 		class="app-grid-layout experimental-styles-within relative"
 		:class="{ 'disable-advanced-rendering': !themeStore.advancedRendering }"
 	>
-		<AprilFoolsPopupImage />
-		<AprilFoolsCleanupGame />
+		<div data-tauri-drag-region class="app-top-drag-strip"></div>
 		<div class="app-effects-layer">
 			<BackgroundEffects />
 		</div>
@@ -1051,9 +1012,6 @@ async function processPendingSurveys() {
 			@restart="installUpdate"
 			@close="closeUpdateToast"
 		/>
-		<Suspense>
-			<AppSettingsModal ref="settingsModal" />
-		</Suspense>
 		<Suspense>
 			<AuthGrantFlowWaitModal ref="modrinthLoginFlowWaitModal" @flow-cancel="cancelLogin" />
 		</Suspense>
@@ -1128,14 +1086,15 @@ async function processPendingSurveys() {
 			</NavButton>
 			<NavButton
 				v-tooltip.right="formatMessage(commonMessages.settingsLabel)"
-				:to="() => $refs.settingsModal.show()"
+				to="/settings"
+				:is-primary="(route) => route.path.startsWith('/settings')"
 			>
 				<SettingsIcon />
 			</NavButton>
 			<OverflowMenu
 				v-if="credentials"
 				v-tooltip.right="formatMessage(messages.accountMenu)"
-				class="w-10 h-10 text-primary rounded-full flex items-center justify-center text-2xl transition-all bg-transparent hover:bg-button-bg hover:text-contrast border-0 cursor-pointer"
+				class="w-10 h-10 text-primary rounded-full flex items-center justify-center text-2xl transition-all bg-transparent hover:bg-[--color-button-bg-hover] hover:text-contrast border-0 cursor-pointer"
 				:options="[
 					{
 						id: 'view-profile',
@@ -1189,19 +1148,19 @@ async function processPendingSurveys() {
 				<Breadcrumbs class="pt-[2px]" />
 			</div>
 			<section data-tauri-drag-region class="flex ml-auto items-center">
-				<ButtonStyled
-					v-if="!forceSidebar && themeStore.toggleSidebar"
-					:type="sidebarToggled ? 'standard' : 'transparent'"
-					circular
-				>
-					<button
-						class="mr-3 transition-transform"
-						:class="{ 'rotate-180': !sidebarToggled }"
-						@click="sidebarToggled = !sidebarToggled"
+					<ButtonStyled
+						v-if="!forceSidebar && themeStore.toggleSidebar"
+						:type="sidebarToggled ? 'standard' : 'transparent'"
+						circular
 					>
-						<RightArrowIcon />
-					</button>
-				</ButtonStyled>
+						<button
+							class="mr-3 transition-transform"
+							:class="{ 'rotate-180': !sidebarToggled }"
+							@click="sidebarToggled = !sidebarToggled"
+						>
+							<RightArrowIcon />
+						</button>
+					</ButtonStyled>
 				<div class="flex mr-3">
 					<Suspense>
 						<RunningAppBar />
@@ -1473,6 +1432,16 @@ async function processPendingSurveys() {
 	height: 100vh;
 }
 
+.app-top-drag-strip {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: var(--shell-gap);
+	z-index: 2;
+	-webkit-app-region: drag;
+}
+
 .app-effects-layer {
 	position: absolute;
 	inset: 0;
@@ -1569,11 +1538,19 @@ async function processPendingSurveys() {
 	overflow: auto;
 	overflow-x: hidden;
 	position: relative;
+	box-sizing: border-box;
+	padding-bottom: 1.5rem;
 }
 
 .app-page-swap-shell,
 #background-teleport-target {
 	z-index: 1;
+}
+
+.app-page-swap-shell {
+	position: relative;
+	will-change: transform, opacity;
+	min-height: 100%;
 }
 
 .sidebar-teleport-content {
@@ -1615,11 +1592,6 @@ async function processPendingSurveys() {
 .toast-enter-from,
 .toast-leave-to {
 	opacity: 0;
-}
-
-.app-page-swap-shell {
-	position: relative;
-	will-change: transform, opacity;
 }
 
 .app-page-swap-enter-active,

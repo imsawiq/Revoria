@@ -17,7 +17,7 @@
 			:class="
 				(modelValue
 					? 'bg-brand border-button-border text-brand-inverted'
-					: 'bg-surface-2 border-surface-5') +
+					: 'bg-[color:color-mix(in_srgb,var(--color-button-bg)_84%,var(--color-brand-highlight)_16%)] border-button-border text-secondary') +
 				(disabled ? '' : ' checkbox-shadow group-active:scale-95')
 			"
 		>

@@ -1,37 +1,40 @@
 <template>
-	<div
-		v-if="mode !== 'isolated'"
-		ref="button"
-		class="button-base mt-2 px-3 py-2 bg-button-bg rounded-xl flex items-center gap-2"
-		:class="{ expanded: mode === 'expanded' }"
-		@click="toggleMenu"
-	>
-		<Avatar
-			size="36px"
-			:src="
-				selectedAccount ? avatarUrl : 'https://launcher-files.modrinth.com/assets/steve_head.png'
-			"
-		/>
-		<div class="flex flex-col w-full">
-			<span class="account-title">
-				<component
-					:is="getAccountType(selectedAccount)"
-					v-if="selectedAccount"
-					class="vector-icon"
-				/>
-				{{ selectedAccount ? selectedAccount.profile.name : formatMessage(messages.selectAccount) }}
-			</span>
-			<span class="text-secondary text-xs">{{ formatMessage(messages.minecraftAccount) }}</span>
-		</div>
-		<DropdownIcon class="dropdown-icon shrink-0" />
-	</div>
-	<transition name="fade">
-		<Card
-			v-if="showCard || mode === 'isolated'"
-			ref="card"
-			class="account-card"
-			:class="{ expanded: mode === 'expanded', isolated: mode === 'isolated' }"
+	<div class="accounts-shell" :class="{ expanded: mode === 'expanded', isolated: mode === 'isolated' }">
+		<div
+			v-if="mode !== 'isolated'"
+			ref="button"
+			class="button-base mt-2 px-3 py-2 bg-button-bg rounded-xl flex items-center gap-2 min-w-0"
+			:class="{ expanded: mode === 'expanded' }"
+			@click="toggleMenu"
 		>
+			<Avatar
+				size="36px"
+				:src="
+					selectedAccount ? avatarUrl : 'https://launcher-files.modrinth.com/assets/steve_head.png'
+				"
+			/>
+			<div class="account-summary">
+				<span class="account-title">
+					<component
+						:is="getAccountType(selectedAccount)"
+						v-if="selectedAccount"
+						class="vector-icon"
+					/>
+					{{ selectedAccount ? selectedAccount.profile.name : formatMessage(messages.selectAccount) }}
+				</span>
+				<span class="text-secondary text-xs account-subtitle">{{
+					formatMessage(messages.minecraftAccount)
+				}}</span>
+			</div>
+			<DropdownIcon class="dropdown-icon shrink-0" />
+		</div>
+		<transition name="fade">
+			<Card
+				v-if="mode === 'isolated'"
+				ref="card"
+				class="account-card"
+				:class="{ expanded: mode === 'expanded', isolated: mode === 'isolated' }"
+			>
 			<div v-if="selectedAccount" class="selected account">
 				<Avatar size="xs" :src="avatarUrl" />
 				<div>
@@ -116,8 +119,105 @@
 					<SpinnerIcon v-else class="animate-spin" />
 				</Button>
 			</div>
-		</Card>
-	</transition>
+			</Card>
+		</transition>
+		<Teleport to="body">
+			<transition name="fade">
+				<Card
+					v-if="mode !== 'isolated' && showCard"
+					ref="card"
+					class="account-card teleported"
+					:class="{ expanded: mode === 'expanded' }"
+					:style="teleportedCardStyle"
+				>
+					<div v-if="selectedAccount" class="selected account">
+						<Avatar size="xs" :src="avatarUrl" />
+						<div>
+							<h4>
+								<component :is="getAccountType(selectedAccount)" class="vector-icon" />
+								{{ selectedAccount.profile.name }}
+							</h4>
+							<p>{{ formatMessage(messages.selected) }}</p>
+						</div>
+						<Button
+							v-tooltip="formatMessage(messages.logOut)"
+							icon-only
+							color="raised"
+							@click="logout(selectedAccount.profile.id)"
+						>
+							<TrashIcon />
+						</Button>
+					</div>
+					<div v-else class="login-section account">
+						<h4>{{ formatMessage(messages.notSignedIn) }}</h4>
+						<Button
+							v-tooltip="formatMessage(messages.logViaMicrosoft)"
+							:disabled="microsoftLoginDisabled"
+							icon-only
+							@click="login()"
+						>
+							<MicrosoftIcon v-if="!microsoftLoginDisabled" />
+							<SpinnerIcon v-else class="animate-spin" />
+						</Button>
+						<Button
+							v-tooltip="formatMessage(messages.addOfflineAccount)"
+							icon-only
+							@click="showOfflineLoginModal()"
+						>
+							<PirateIcon />
+						</Button>
+						<Button
+							v-tooltip="formatMessage(messages.logViaElyBy)"
+							icon-only
+							@click="showElybyLoginModal()"
+						>
+							<ElyByIcon v-if="!elybyLoginDisabled" />
+							<SpinnerIcon v-else class="animate-spin" />
+						</Button>
+					</div>
+					<div v-if="displayAccounts.length > 0" class="account-group">
+						<div v-for="account in displayAccounts" :key="account.profile.id" class="account-row">
+							<Button class="option account" @click="setAccount(account)">
+								<Avatar :src="getAccountAvatarUrl(account)" class="icon" />
+								<p class="account-type">
+									<component :is="getAccountType(account)" class="vector-icon" />
+									{{ account.profile.name }}
+								</p>
+							</Button>
+							<Button
+								v-tooltip="formatMessage(messages.logOut)"
+								icon-only
+								@click="logout(account.profile.id)"
+							>
+								<TrashIcon />
+							</Button>
+						</div>
+					</div>
+					<div v-if="accounts.length > 0" class="login-section account centered">
+						<Button v-tooltip="formatMessage(messages.logViaMicrosoft)" icon-only @click="login()">
+							<MicrosoftIcon v-if="!microsoftLoginDisabled" />
+							<SpinnerIcon v-else class="animate-spin" />
+						</Button>
+						<Button
+							v-tooltip="formatMessage(messages.addOfflineAccount)"
+							icon-only
+							@click="showOfflineLoginModal()"
+						>
+							<PirateIcon />
+						</Button>
+						<Button
+							v-tooltip="formatMessage(messages.logViaElyBy)"
+							icon-only
+							@click="showElybyLoginModal()"
+						>
+							<ElyByIcon v-if="!elybyLoginDisabled" />
+							<SpinnerIcon v-else class="animate-spin" />
+						</Button>
+					</div>
+				</Card>
+			</transition>
+		</Teleport>
+	</div>
 	<ModalWrapper
 		ref="addElybyModal"
 		class="modal"
@@ -294,7 +394,7 @@ import {
 } from '@modrinth/assets'
 import { Avatar, Button, Card, injectNotificationManager } from '@modrinth/ui'
 import { defineMessages, useVIntl } from '@vintl/vintl'
-import { computed, onBeforeUnmount, onMounted, onUnmounted, ref } from 'vue'
+import { Teleport, computed, onBeforeUnmount, onMounted, onUnmounted, ref } from 'vue'
 
 const { handleError } = injectNotificationManager()
 const { formatMessage } = useVIntl()
@@ -405,13 +505,14 @@ const messages = defineMessages({
 	},
 })
 
-defineProps({
+const props = defineProps({
 	mode: {
 		type: String,
 		required: true,
 		default: 'normal',
 	},
 })
+const mode = computed(() => props.mode)
 
 const emit = defineEmits(['change'])
 
@@ -691,6 +792,24 @@ const logout = async (id) => {
 const showCard = ref(false)
 const card = ref(null)
 const button = ref(null)
+const teleportedCardStyle = ref({})
+
+const updateCardPosition = () => {
+	if (!button.value || mode.value === 'isolated') return
+	const rect = button.value.getBoundingClientRect()
+	const maxWidth = Math.min(352, window.innerWidth - 16)
+	const rightPadding = 16
+	const left = Math.min(
+		Math.max(8, rect.right - maxWidth),
+		window.innerWidth - maxWidth - rightPadding,
+	)
+
+	teleportedCardStyle.value = {
+		top: `${rect.bottom + 8}px`,
+		left: `${left}px`,
+		width: `${maxWidth}px`,
+	}
+}
 const handleClickOutside = (event) => {
 	const elements = document.elementsFromPoint(event.clientX, event.clientY)
 	if (
@@ -708,6 +827,7 @@ function toggleMenu(override = true) {
 		showCard.value = false
 	} else {
 		showCard.value = true
+		updateCardPosition()
 	}
 }
 
@@ -719,10 +839,15 @@ const unlisten = await process_listener(async (e) => {
 
 onMounted(() => {
 	window.addEventListener('click', handleClickOutside)
+	window.addEventListener('resize', updateCardPosition)
+	window.addEventListener('scroll', updateCardPosition, true)
+	updateCardPosition()
 })
 
 onBeforeUnmount(() => {
 	window.removeEventListener('click', handleClickOutside)
+	window.removeEventListener('resize', updateCardPosition)
+	window.removeEventListener('scroll', updateCardPosition, true)
 })
 
 onUnmounted(() => {
@@ -731,15 +856,39 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
+.accounts-shell {
+	position: relative;
+	width: 100%;
+	min-width: 0;
+
+	&.isolated {
+		display: contents;
+	}
+}
+
 .selected {
-	background: var(--color-brand-highlight);
+	background:
+		linear-gradient(
+			180deg,
+			color-mix(in srgb, var(--color-brand-highlight) 82%, transparent) 0%,
+			color-mix(in srgb, var(--color-brand-highlight) 56%, var(--color-button-bg) 44%) 100%
+		);
+	border: 1px solid color-mix(in srgb, var(--color-brand) 28%, var(--glass-border) 72%);
+	box-shadow: var(--shadow-card);
 	border-radius: var(--radius-lg);
 	color: var(--color-contrast);
 	gap: 1rem;
 }
 
 .login-section {
-	background: var(--color-bg);
+	background:
+		linear-gradient(
+			180deg,
+			color-mix(in srgb, var(--color-glass-bg-strong) 84%, var(--color-brand-highlight) 16%) 0%,
+			color-mix(in srgb, var(--color-glass-bg) 90%, transparent) 100%
+		);
+	border: 1px solid color-mix(in srgb, var(--color-brand-highlight) 34%, var(--glass-border) 66%);
+	box-shadow: var(--shadow-card);
 	border-radius: var(--radius-lg);
 	gap: 1rem;
 }
@@ -761,6 +910,7 @@ onUnmounted(() => {
 	width: 1.25rem;
 	height: 1.25rem;
 	display: block;
+	flex-shrink: 0;
 }
 
 .account-title {
@@ -768,6 +918,24 @@ onUnmounted(() => {
 	align-items: center;
 	gap: 0.5rem;
 	line-height: 1.1;
+	min-width: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 100%;
+}
+
+.account-summary {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	flex: 1;
+}
+
+.account-subtitle {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .account {
@@ -785,20 +953,27 @@ onUnmounted(() => {
 }
 
 .account-card {
-	position: fixed;
+	position: absolute;
 	display: flex;
 	flex-direction: column;
-	margin-top: 0.5rem;
-	right: 2rem;
-	z-index: 11;
+	top: calc(100% + 0.5rem);
+	right: 0;
+	z-index: 40;
 	gap: 0.5rem;
 	padding: 1rem;
-	border: 1px solid var(--color-divider);
-	width: max-content;
+	border: 1px solid var(--glass-border);
+	background:
+		linear-gradient(
+			180deg,
+			color-mix(in srgb, var(--color-glass-bg-strong) 94%, var(--color-brand-highlight) 6%) 0%,
+			var(--color-glass-bg-strong) 100%
+		);
+	box-shadow: var(--glass-shadow);
+	width: min(22rem, calc(100vw - 2rem));
 	user-select: none;
 	-ms-user-select: none;
 	-webkit-user-select: none;
-	max-height: calc(100vh - 300px);
+	max-height: min(32rem, calc(100vh - 8rem));
 	overflow-y: auto;
 
 	&::-webkit-scrollbar-track {
@@ -816,13 +991,17 @@ onUnmounted(() => {
 	}
 
 	&.expanded {
-		left: 13.5rem;
+		left: 0;
+		right: auto;
 	}
 
 	&.isolated {
 		position: relative;
 		left: 0;
 		top: 0;
+		right: auto;
+		width: 100%;
+		max-width: 100%;
 	}
 }
 
@@ -846,7 +1025,8 @@ onUnmounted(() => {
 
 .option {
 	width: calc(100% - 2.25rem);
-	background: var(--color-raised-bg);
+	background: color-mix(in srgb, var(--color-raised-bg) 88%, var(--color-brand-highlight) 12%);
+	border: 1px solid color-mix(in srgb, var(--glass-border) 76%, var(--color-brand-highlight) 24%);
 	color: var(--color-base);
 	box-shadow: none;
 
@@ -865,7 +1045,8 @@ onUnmounted(() => {
 	gap: 0.5rem;
 	vertical-align: center;
 	justify-content: space-between;
-	padding-right: 1rem;
+	padding: 0.25rem 0.25rem 0.25rem 0;
+	border-radius: var(--radius-lg);
 }
 
 .fade-enter-active,
@@ -918,6 +1099,32 @@ onUnmounted(() => {
 	align-items: center;
 	gap: 0.25rem;
 	margin: 0;
+}
+
+.login-section.account {
+	width: 100%;
+	padding: 1rem 1rem 0.9rem;
+	align-items: center;
+	justify-content: space-between;
+
+	h4 {
+		margin: 0;
+		font-size: 0.95rem;
+		font-weight: 700;
+		color: var(--color-contrast);
+		letter-spacing: 0.01em;
+	}
+}
+
+.button-base.mt-2 {
+	background:
+		linear-gradient(
+			180deg,
+			color-mix(in srgb, var(--color-glass-bg-strong) 90%, var(--color-brand-highlight) 10%) 0%,
+			color-mix(in srgb, var(--color-glass-bg) 92%, transparent) 100%
+		);
+	border: 1px solid var(--glass-border);
+	box-shadow: var(--shadow-card);
 }
 
 .qr-code {

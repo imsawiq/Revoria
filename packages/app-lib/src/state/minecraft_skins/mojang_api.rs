@@ -1,4 +1,4 @@
-use std::{error::Error, sync::Arc, time::Instant, str::FromStr};
+use std::{error::Error, str::FromStr, sync::Arc, time::Instant};
 
 use bytes::Bytes;
 use futures::TryStream;

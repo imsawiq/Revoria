@@ -308,6 +308,14 @@ pub async fn get_latest_log_cursor(
 }
 
 #[tracing::instrument]
+pub async fn get_game_log_cursor(
+    profile_path: &str,
+    cursor: u64,
+) -> crate::Result<LatestLogCursor> {
+    get_generic_live_log_cursor(profile_path, "latest.log", cursor).await
+}
+
+#[tracing::instrument]
 pub async fn get_generic_live_log_cursor(
     profile_path_id: &str,
     log_file_name: &str,

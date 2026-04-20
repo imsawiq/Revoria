@@ -62,6 +62,7 @@ const messages = defineMessages({
 	versions: { id: 'project.tab.versions', defaultMessage: 'Versions' },
 	gallery: { id: 'project.tab.gallery', defaultMessage: 'Gallery' },
 	content: { id: 'instance.breadcrumb.content', defaultMessage: 'Content' },
+	files: { id: 'instance.breadcrumb.files', defaultMessage: 'Files' },
 	logs: { id: 'instance.breadcrumb.logs', defaultMessage: 'Logs' },
 	screenshots: { id: 'instance.breadcrumb.screenshots', defaultMessage: 'Screenshots' },
 })
@@ -80,6 +81,7 @@ const localizeBreadcrumbName = (name) => {
 		Versions: messages.versions,
 		Gallery: messages.gallery,
 		Content: messages.content,
+		Files: messages.files,
 		Logs: messages.logs,
 		Screenshots: messages.screenshots,
 	}

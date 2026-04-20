@@ -21,6 +21,7 @@ pub fn init<R: tauri::Runtime>() -> tauri::plugin::TauriPlugin<R> {
             logs_delete_logs,
             logs_delete_logs_by_filename,
             logs_get_latest_log_cursor,
+            logs_get_game_log_cursor,
         ])
         .build()
 }
@@ -82,4 +83,12 @@ pub async fn logs_get_latest_log_cursor(
     cursor: u64, // 0 to start at beginning of file
 ) -> Result<LatestLogCursor> {
     Ok(logs::get_latest_log_cursor(profile_path, cursor).await?)
+}
+
+#[tauri::command]
+pub async fn logs_get_game_log_cursor(
+    profile_path: &str,
+    cursor: u64,
+) -> Result<LatestLogCursor> {
+    Ok(logs::get_game_log_cursor(profile_path, cursor).await?)
 }

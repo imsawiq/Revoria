@@ -15,6 +15,7 @@ use daedalus::{
 };
 use dunce::canonicalize;
 use itertools::Itertools;
+use std::fs;
 use std::io::{BufRead, BufReader, ErrorKind};
 use std::net::SocketAddr;
 use std::{collections::HashMap, path::Path};
@@ -340,6 +341,16 @@ fn parse_minecraft_argument(
     resolution: WindowSize,
     quick_play_type: &QuickPlayType,
 ) -> crate::Result<String> {
+    if !game_directory.exists() {
+        fs::create_dir_all(game_directory).map_err(|err| {
+            crate::ErrorKind::LauncherError(format!(
+                "Failed to create game directory {}: {err}",
+                game_directory.to_string_lossy()
+            ))
+            .as_error()
+        })?;
+    }
+
     Ok(argument
         .replace("${accessToken}", access_token)
         .replace("${auth_access_token}", access_token)

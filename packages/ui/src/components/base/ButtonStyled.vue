@@ -197,16 +197,27 @@ const colorVariables = computed(() => {
 		text: 'var(--color-base)',
 	}
 	let hoverColors = {
-		bg: 'var(--color-button-bg-hover)',
+		bg: 'color-mix(in srgb, var(--color-button-bg-hover) 78%, var(--color-brand-highlight) 22%)',
 		text: 'var(--color-button-text-hover)',
 	}
 
 	if (props.type === 'outlined' || props.type === 'transparent') {
 		colors.bg = 'transparent'
 		colors = setColorFill(colors, props.colorFill === 'auto' ? 'text' : props.colorFill)
+		hoverColors = {
+			bg:
+				props.type === 'transparent'
+					? 'color-mix(in srgb, var(--color-button-bg) 74%, var(--color-brand-highlight) 26%)'
+					: 'transparent',
+			text: colors.text,
+		}
 		hoverColors = setColorFill(
 			hoverColors,
-			props.hoverColorFill === 'auto' ? 'text' : props.hoverColorFill,
+			props.hoverColorFill === 'auto'
+				? props.type === 'transparent'
+					? 'none'
+					: 'text'
+				: props.hoverColorFill,
 		)
 	} else if (props.type === 'chip') {
 		// Chip type uses highlight-colored-text styling when colored

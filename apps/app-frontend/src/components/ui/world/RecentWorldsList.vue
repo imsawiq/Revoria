@@ -198,13 +198,17 @@ async function playInstance(instance: GameInstance) {
 
 async function stopInstance(path: string) {
 	await kill(path).catch(handleError)
+	runningInstances.value = runningInstances.value.filter((instancePath) => instancePath !== path)
+	activeWorldSessions.value = activeWorldSessions.value.filter((session) => {
+		const [profilePath] = session.split('::')
+		return profilePath !== path
+	})
 	trackEvent('InstanceStop', {
 		source: 'RecentWorldsList',
 	})
 }
 
-const currentProfile = ref<string>()
-const currentWorld = ref<string>()
+const activeWorldSessions = ref<string[]>([])
 
 let unlistenProcesses: (() => void) | null = null
 let unlistenProfiles: (() => void) | null = null
@@ -223,12 +227,24 @@ const checkProcesses = async () => {
 	const runningPaths = runningProcesses.map((x) => x.profile_path)
 
 	const stoppedInstances = runningInstances.value.filter((x) => !runningPaths.includes(x))
-	if (currentProfile.value && stoppedInstances.includes(currentProfile.value)) {
-		currentProfile.value = undefined
-		currentWorld.value = undefined
+	if (stoppedInstances.length > 0) {
+		activeWorldSessions.value = activeWorldSessions.value.filter((session) => {
+			const [profilePath] = session.split('::')
+			return !stoppedInstances.includes(profilePath)
+		})
 	}
 
 	runningInstances.value = runningPaths
+}
+
+const worldSessionKey = (profilePath: string, world: WorldWithProfile) =>
+	`${profilePath}::${getWorldIdentifier(world)}`
+
+const startWorldSession = (profilePath: string, world: WorldWithProfile) => {
+	const sessionKey = worldSessionKey(profilePath, world)
+	if (!activeWorldSessions.value.includes(sessionKey)) {
+		activeWorldSessions.value = [...activeWorldSessions.value, sessionKey]
+	}
 }
 
 onMounted(async () => {
@@ -294,7 +310,7 @@ onBeforeUnmount(() => {
 					:world="item.world"
 					:playing-instance="runningInstances.includes(item.instance.path)"
 					:playing-world="
-						currentProfile === item.instance.path && currentWorld === getWorldIdentifier(item.world)
+						activeWorldSessions.includes(worldSessionKey(item.instance.path, item.world))
 					"
 					:refreshing="
 						item.world.type === 'server'
@@ -331,14 +347,12 @@ onBeforeUnmount(() => {
 					@update="() => populateJumpBackIn()"
 					@play="
 						() => {
-							currentProfile = item.instance.path
-							currentWorld = getWorldIdentifier(item.world)
+							startWorldSession(item.instance.path, item.world)
 							joinWorld(item.world)
 						}
 					"
 					@play-instance="
 						() => {
-							currentProfile = item.instance.path
 							playInstance(item.instance)
 						}
 					"

@@ -5,7 +5,7 @@
 			<div v-if="project.license">
 				<BookTextIcon aria-hidden="true" />
 				<div>
-					Licensed
+					{{ formatMessage(messages.licensed) }}
 					<a
 						v-if="project.license.url"
 						class="text-link hover:underline"
@@ -29,14 +29,14 @@
 			</div>
 			<div
 				v-if="project.approved"
-				v-tooltip="dayjs(project.approved).format('MMMM D, YYYY [at] h:mm A')"
+				v-tooltip="formatLongDate(project.approved)"
 			>
 				<CalendarIcon aria-hidden="true" />
 				<div>
 					{{ formatMessage(messages.published, { date: publishedDate }) }}
 				</div>
 			</div>
-			<div v-else v-tooltip="dayjs(project.published).format('MMMM D, YYYY [at] h:mm A')">
+			<div v-else v-tooltip="formatLongDate(project.published)">
 				<CalendarIcon aria-hidden="true" />
 				<div>
 					{{ formatMessage(messages.created, { date: createdDate }) }}
@@ -44,7 +44,7 @@
 			</div>
 			<div
 				v-if="project.status === 'processing' && project.queued"
-				v-tooltip="dayjs(project.queued).format('MMMM D, YYYY [at] h:mm A')"
+				v-tooltip="formatLongDate(project.queued)"
 			>
 				<ScaleIcon aria-hidden="true" />
 				<div>
@@ -53,7 +53,7 @@
 			</div>
 			<div
 				v-if="hasVersions && project.updated"
-				v-tooltip="dayjs(project.updated).format('MMMM D, YYYY [at] h:mm A')"
+				v-tooltip="formatLongDate(project.updated)"
 			>
 				<VersionIcon aria-hidden="true" />
 				<div>
@@ -66,13 +66,20 @@
 <script setup lang="ts">
 import { BookTextIcon, CalendarIcon, ExternalIcon, ScaleIcon, VersionIcon } from '@modrinth/assets'
 import { defineMessages, useVIntl } from '@vintl/vintl'
-import dayjs from 'dayjs'
 import { computed } from 'vue'
 
 import { useRelativeTime } from '../../composables'
 
-const { formatMessage } = useVIntl()
+const { formatMessage, locale } = useVIntl()
 const formatRelativeTime = useRelativeTime()
+const formatLongDate = (value: Date | number | string) =>
+	new Intl.DateTimeFormat(locale.value, {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+		hour: 'numeric',
+		minute: '2-digit',
+	}).format(value instanceof Date ? value : new Date(value))
 
 const props = defineProps<{
 	project: {
@@ -124,7 +131,7 @@ const messages = defineMessages({
 	},
 	licensed: {
 		id: 'project.about.details.licensed',
-		defaultMessage: 'Licensed {license}',
+		defaultMessage: 'Licensed',
 	},
 	created: {
 		id: 'project.about.details.created',

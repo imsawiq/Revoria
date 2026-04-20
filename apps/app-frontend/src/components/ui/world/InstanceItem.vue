@@ -122,7 +122,7 @@ onUnmounted(() => {
 })
 </script>
 <template>
-	<SmartClickable>
+	<SmartClickable class="rounded-xl overflow-hidden">
 		<template #clickable>
 			<router-link
 				class="no-click-animation"

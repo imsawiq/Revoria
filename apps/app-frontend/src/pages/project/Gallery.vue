@@ -1,83 +1,95 @@
 <template>
-	<div class="gallery">
-		<Card v-for="(image, index) in project.gallery" :key="image.url" class="gallery-item">
-			<a @click="expandImage(image, index)">
-				<img :src="image.url" :alt="image.title" class="gallery-image" />
-			</a>
-			<div class="gallery-body">
-				<h3>{{ image.title }}</h3>
-				{{ image.description }}
-			</div>
-			<span class="gallery-time">
-				<CalendarIcon />
-				{{
-					new Date(image.created).toLocaleDateString('en-US', {
-						year: 'numeric',
-						month: 'long',
-						day: 'numeric',
-					})
-				}}
-			</span>
-		</Card>
-	</div>
-	<div v-if="expandedGalleryItem" class="expanded-image-modal" @click="hideImage">
-		<div class="content">
-			<img
-				class="image"
-				:class="{ 'zoomed-in': zoomedIn }"
-				:src="
-					expandedGalleryItem.raw_url
-						? expandedGalleryItem.raw_url
-						: 'https://cdn.modrinth.com/placeholder-banner.svg'
-				"
-				:alt="expandedGalleryItem.title ? expandedGalleryItem.title : 'gallery-image'"
-				@click.stop="() => {}"
-			/>
-
-			<div class="floating" @click.stop="() => {}">
-				<div class="text">
-					<h2 v-if="expandedGalleryItem.title">
-						{{ expandedGalleryItem.title }}
-					</h2>
-					<p v-if="expandedGalleryItem.description">
-						{{ expandedGalleryItem.description }}
-					</p>
+	<div class="gallery-view">
+		<div class="gallery">
+			<Card v-for="(image, index) in project.gallery" :key="image.url" class="gallery-item">
+				<a @click="expandImage(image, index)">
+					<img :src="image.url" :alt="image.title" class="gallery-image" />
+				</a>
+				<div class="gallery-body">
+					<h3>{{ image.title }}</h3>
+					{{ image.description }}
 				</div>
-				<div class="controls">
-					<div class="buttons">
-						<Button class="close" icon-only @click="hideImage">
-							<XIcon aria-hidden="true" />
-						</Button>
-						<a
-							class="open btn icon-only"
-							target="_blank"
-							:href="
+				<span class="gallery-time">
+					<CalendarIcon />
+					{{
+						new Date(image.created).toLocaleDateString('en-US', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+						})
+					}}
+				</span>
+			</Card>
+		</div>
+		<Teleport to="body">
+			<Transition name="gallery-modal">
+				<div v-if="expandedGalleryItem" class="expanded-image-modal" @click="hideImage">
+					<div class="content" @click.stop>
+						<div class="image-stage">
+						<img
+							class="image"
+							:class="{ 'zoomed-in': zoomedIn }"
+							:src="
 								expandedGalleryItem.raw_url
 									? expandedGalleryItem.raw_url
 									: 'https://cdn.modrinth.com/placeholder-banner.svg'
 							"
-						>
-							<ExternalIcon aria-hidden="true" />
-						</a>
-						<Button icon-only @click="zoomedIn = !zoomedIn">
-							<ExpandIcon v-if="!zoomedIn" aria-hidden="true" />
-							<ContractIcon v-else aria-hidden="true" />
-						</Button>
-						<Button
-							v-if="project.gallery.length > 1"
-							class="previous"
-							icon-only
-							@click="previousImage()"
-						>
-							<LeftArrowIcon aria-hidden="true" />
-						</Button>
-						<Button v-if="project.gallery.length > 1" class="next" icon-only @click="nextImage()">
-							<RightArrowIcon aria-hidden="true" />
-						</Button>
+							:alt="expandedGalleryItem.title ? expandedGalleryItem.title : 'gallery-image'"
+						/>
+					</div>
+
+						<div class="floating">
+						<div class="text">
+							<h2 v-if="expandedGalleryItem.title">
+								{{ expandedGalleryItem.title }}
+							</h2>
+							<p v-if="expandedGalleryItem.description">
+								{{ expandedGalleryItem.description }}
+							</p>
+						</div>
+						<div class="controls">
+							<div class="buttons">
+								<Button class="close" icon-only @click="hideImage">
+									<XIcon aria-hidden="true" />
+								</Button>
+								<a
+									class="open btn icon-only"
+									target="_blank"
+									:href="
+										expandedGalleryItem.raw_url
+											? expandedGalleryItem.raw_url
+											: 'https://cdn.modrinth.com/placeholder-banner.svg'
+									"
+								>
+									<ExternalIcon aria-hidden="true" />
+								</a>
+								<Button icon-only @click="zoomedIn = !zoomedIn">
+									<ExpandIcon v-if="!zoomedIn" aria-hidden="true" />
+									<ContractIcon v-else aria-hidden="true" />
+								</Button>
+								<Button
+									v-if="project.gallery.length > 1"
+									class="previous"
+									icon-only
+									@click="previousImage()"
+								>
+									<LeftArrowIcon aria-hidden="true" />
+								</Button>
+								<Button
+									v-if="project.gallery.length > 1"
+									class="next"
+									icon-only
+									@click="nextImage()"
+								>
+									<RightArrowIcon aria-hidden="true" />
+								</Button>
+							</div>
+						</div>
+					</div>
 					</div>
 				</div>
-			</div>
-		</div>
+			</Transition>
+		</Teleport>
 	</div>
 </template>
 
@@ -92,7 +104,7 @@ import {
 	XIcon,
 } from '@modrinth/assets'
 import { Button, Card } from '@modrinth/ui'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { Teleport, onMounted, onUnmounted, ref } from 'vue'
 
 // import { hide_ads_window, show_ads_window } from '@/helpers/ads.js'
 import { trackEvent } from '@/helpers/analytics'
@@ -208,14 +220,20 @@ onUnmounted(() => {
 
 .expanded-image-modal {
 	position: fixed;
-	z-index: 11;
-	overflow: auto;
+	z-index: 40;
+	overflow: hidden;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(8, 18, 14, 0.68);
-	backdrop-filter: blur(2px) saturate(110%);
+	background:
+		radial-gradient(
+			1200px 700px at 50% 10%,
+			color-mix(in srgb, var(--color-brand-highlight) 10%, transparent),
+			transparent 74%
+		),
+		rgba(8, 10, 14, 0.92);
+	backdrop-filter: blur(8px) saturate(112%);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -224,6 +242,16 @@ onUnmounted(() => {
 		position: relative;
 		width: calc(100vw - 2 * var(--gap-lg));
 		height: calc(100vh - 2 * var(--gap-lg));
+
+		.image-stage {
+			position: absolute;
+			inset: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 2.5rem;
+			border-radius: 1.5rem;
+		}
 
 		.circle-button {
 			padding: 0.5rem;
@@ -263,55 +291,63 @@ onUnmounted(() => {
 		}
 
 		.image {
-			position: absolute;
-			left: 50%;
-			top: 50%;
-			transform: translate(-50%, -50%);
-			max-width: calc(100vw - 2 * var(--gap-lg));
-			max-height: calc(100vh - 2 * var(--gap-lg));
-			border-radius: var(--radius-lg);
+			display: block;
+			max-width: min(calc(100vw - 10rem), 1400px);
+			max-height: calc(100vh - 12rem);
+			border-radius: 1.25rem;
+			border: 1px solid color-mix(in srgb, var(--glass-border) 86%, transparent);
+			box-shadow:
+				0 40px 120px -48px rgba(0, 0, 0, 0.72),
+				0 0 0 1px color-mix(in srgb, var(--glass-border) 46%, transparent);
+			background: color-mix(in srgb, var(--color-raised-bg) 90%, black 10%);
+			object-fit: contain;
 
 			&.zoomed-in {
-				object-fit: cover;
+				object-fit: contain;
 				width: auto;
-				height: calc(100vh - 2 * var(--gap-lg));
-				max-width: calc(100vw - 2 * var(--gap-lg));
+				height: calc(100vh - 12rem);
+				max-width: min(calc(100vw - 10rem), 1400px);
 			}
 		}
 		.floating {
 			position: absolute;
 			left: 50%;
 			transform: translateX(-50%);
-			bottom: var(--gap-md);
+			bottom: 1.5rem;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			gap: var(--gap-md);
 			transition: opacity 0.25s ease-in-out;
 			opacity: 1;
-			padding: 2rem 2rem 0 2rem;
+			padding: 0;
 
 			&:not(&:hover) {
-				opacity: 0.4;
+				opacity: 0.94;
 				.text {
-					transform: translateY(2.5rem) scale(0.8);
-					opacity: 0;
+					transform: translateY(0);
+					opacity: 1;
 				}
 				.controls {
-					transform: translateY(0.25rem) scale(0.9);
+					transform: translateY(0);
 				}
 			}
 
 			.text {
 				display: flex;
 				flex-direction: column;
-				max-width: 40rem;
+				max-width: min(42rem, calc(100vw - 8rem));
 				transition:
 					opacity 0.25s ease-in-out,
 					transform 0.25s ease-in-out;
 				text-shadow: 0 1px 10px rgba(9, 18, 14, 0.42);
 				margin-bottom: 0.25rem;
 				gap: 0.5rem;
+				padding: 1rem 1.25rem;
+				border-radius: 1rem;
+				background: color-mix(in srgb, var(--color-glass-bg-strong) 92%, transparent);
+				border: 1px solid color-mix(in srgb, var(--glass-border) 80%, transparent);
+				box-shadow: var(--glass-shadow);
 
 				h2 {
 					color: var(--color-contrast);
@@ -326,17 +362,39 @@ onUnmounted(() => {
 				}
 			}
 			.controls {
-				background-color: var(--color-glass-bg-strong);
-				border: 1px solid var(--glass-border);
+				background-color: color-mix(in srgb, var(--color-glass-bg-strong) 96%, transparent);
+				border: 1px solid color-mix(in srgb, var(--glass-border) 86%, transparent);
 				box-shadow: var(--glass-shadow);
-				padding: var(--gap-md);
-				border-radius: var(--radius-md);
+				padding: 0.75rem;
+				border-radius: 999px;
 				transition:
 					opacity 0.25s ease-in-out,
 					transform 0.25s ease-in-out;
 			}
 		}
 	}
+}
+
+.gallery-modal-enter-active,
+.gallery-modal-leave-active {
+	transition:
+		opacity 0.2s ease,
+		transform 0.24s ease;
+}
+
+.gallery-modal-enter-from,
+.gallery-modal-leave-to {
+	opacity: 0;
+}
+
+.gallery-modal-enter-from .content,
+.gallery-modal-leave-to .content {
+	transform: scale(0.97) translateY(8px);
+}
+
+.gallery-modal-enter-active .content,
+.gallery-modal-leave-active .content {
+	transition: transform 0.24s ease;
 }
 
 .buttons {

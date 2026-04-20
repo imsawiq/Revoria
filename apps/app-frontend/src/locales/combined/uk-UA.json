@@ -128,6 +128,54 @@
   "instance.logs.share.text": {
     "message": "Перегляньте цей журнал із примірника в додатку Modrinth"
   },
+  "project.about.details.title": {
+    "defaultMessage": "Деталі"
+  },
+  "project.versions.showing": {
+    "defaultMessage": "Показано"
+  },
+  "project.versions.to": {
+    "defaultMessage": "до"
+  },
+  "project.versions.of": {
+    "defaultMessage": "з"
+  },
+  "project.versions.name": {
+    "defaultMessage": "Назва"
+  },
+  "project.versions.game-version": {
+    "defaultMessage": "Версія гри"
+  },
+  "project.versions.platforms": {
+    "defaultMessage": "Платформи"
+  },
+  "project.versions.published": {
+    "defaultMessage": "Опубліковано"
+  },
+  "project.versions.downloads": {
+    "defaultMessage": "Завантаження"
+  },
+  "project.versions.compatibility": {
+    "defaultMessage": "Сумісність"
+  },
+  "project.versions.stats": {
+    "defaultMessage": "Статистика"
+  },
+  "browse.server.status.online": {
+    "defaultMessage": "Сервер онлайн"
+  },
+  "browse.server.ping.unavailable": {
+    "defaultMessage": "Пінг недоступний"
+  },
+  "browse.server.ping.value": {
+    "defaultMessage": "{ping} мс"
+  },
+  "browse.server.action.play": {
+    "defaultMessage": "Грати"
+  },
+  "instance.logs.share.open-link": {
+    "defaultMessage": "Відкрити посилання"
+  },
   "settings.default-instance.height.title": {
     "message": "Висота"
   },
@@ -579,7 +627,7 @@
     "defaultMessage": "Північна Америка"
   },
   "header.category.performance-impact": {
-    "defaultMessage": "Вплив продуктивності"
+    "message": "Вплив на продуктивність"
   },
   "settings.appearance.launcher-language.option.russian": {
     "message": "російська"
@@ -852,7 +900,7 @@
     "message": "Пошук"
   },
   "header.category.minecraft-server-features": {
-    "defaultMessage": "особливості"
+    "message": "Особливості"
   },
   "project.tab.files": {
     "message": "Файли"
@@ -1101,43 +1149,10 @@
     "message": "Встановлення нової версії"
   },
   "header.category.feature": {
-    "defaultMessage": "Особливість"
+    "message": "Особливості"
   },
   "instance.edit-world.title": {
     "message": "Редагувати світ"
-  },
-  "app.april-fools.theme.title": {
-    "message": "Важливе оновлення бренду лаунчера"
-  },
-  "app.april-fools.theme.body": {
-    "message": "Хаотична райдужна тема сьогодні стала головною темою лаунчера. Твоя справжня тема збережена."
-  },
-  "app.april-fools.cleanup.message": {
-    "message": "Ти не прибрав за собою. Прибери своє лайно."
-  },
-  "app.april-fools.launcher.title": {
-    "message": "Лаунчер знайшов ще один лаунчер"
-  },
-  "app.april-fools.launcher.body": {
-    "message": "Усередині лаунчера виявлено ще один лаунчер. Будь ласка, зберігайте спокій."
-  },
-  "app.april-fools.random.launcher.title": {
-    "message": "Статус рекурсії лаунчера"
-  },
-  "app.april-fools.random.launcher.body": {
-    "message": "Лаунчер зараз запускає лаунчер, який запускає лаунчер."
-  },
-  "app.april-fools.random.theme.title": {
-    "message": "Сповіщення про тему"
-  },
-  "app.april-fools.random.theme.body": {
-    "message": "Твою попередню тему тимчасово відправлено в безпечне місце."
-  },
-  "app.april-fools.random.buttons.title": {
-    "message": "Попередження про стабільність кнопок"
-  },
-  "app.april-fools.random.buttons.body": {
-    "message": "Деякі кнопки сьогодні можуть ненадовго ухилятися від обовʼязків."
   },
   "app.account.menu": {
     "message": "Акаунт Modrinth"
@@ -1176,7 +1191,7 @@
     "defaultMessage": "Пошук modpack"
   },
   "project-card.stats.followers": {
-    "defaultMessage": "{count, plural, one {підписник} few {підписники} many {підписників} other {підписника}}"
+    "message": "підписників"
   },
   "maintenance.cleanup.selected-count": {
     "message": "Вибрано {count}"
@@ -1317,7 +1332,7 @@
     "message": "на добраніч"
   },
   "header.category.minecraft-server-meta": {
-    "defaultMessage": "Мета"
+    "message": "Мета"
   },
   "content.diff-modal.diff-type.updated": {
     "defaultMessage": "Оновлено"
@@ -1368,7 +1383,7 @@
     "message": "Пам'ять, виділена кожному екземпляру під час його запуску."
   },
   "project.about.details.updated": {
-    "defaultMessage": "Оновлено {date}"
+    "message": "Оновлено {date}"
   },
   "creation-flow.final.generator-settings.flat": {
     "defaultMessage": "Плоский"
@@ -1875,7 +1890,7 @@
     "message": "Ключ API"
   },
   "installation-settings.linked-instance.title": {
-    "defaultMessage": "Пов’язаний {projectType, select, server {server project} other {modpack}}"
+    "message": "Пов’язано з {projectType, select, server {серверним проєктом} other {модпаком}}"
   },
   "project-type.modpack.lowercase": {
     "defaultMessage": "{count, plural, one {modpack} other {modpacks}}"
@@ -2088,7 +2103,7 @@
     "defaultMessage": "Збереження глобальних даних і конфігурації сервера для {backupName}. Це може тривати кілька хвилин."
   },
   "header.category.resolutions": {
-    "defaultMessage": "роздільна здатність"
+    "message": "Роздільності"
   },
   "app.library.tab.custom": {
     "message": "Custom"
@@ -2215,6 +2230,9 @@
   },
   "notification.error.title": {
     "defaultMessage": "Сталася помилка"
+  },
+  "notification.error.invalid-project-type": {
+    "message": "Некоректне введення: не вдалося визначити тип проєкту для завантаженого файлу."
   },
   "label.actions": {
     "defaultMessage": "Дії"
@@ -2790,7 +2808,7 @@
     "defaultMessage": "Громадський"
   },
   "project.about.details.published": {
-    "defaultMessage": "Published {date}"
+    "message": "Опубліковано {date}"
   },
   "app.survey.take": {
     "message": "Пройти опитування"
@@ -3438,7 +3456,7 @@
     "defaultMessage": "Показати несумісне"
   },
   "project.about.details.submitted": {
-    "defaultMessage": "Submitted {date}"
+    "message": "Подано {date}"
   },
   "instance.settings.tabs.installation.show-all-versions": {
     "message": "Показати всі версії"
@@ -3699,7 +3717,7 @@
     "message": "Відтворити екземпляр"
   },
   "search.filter_type.categories": {
-    "defaultMessage": "Категорії"
+    "message": "Категорії"
   },
   "search.filter_type.environment": {
     "defaultMessage": "Навколишнє середовище"
@@ -3867,7 +3885,7 @@
     "defaultMessage": "Перевстановлення modpack"
   },
   "project-card.stats.downloads": {
-    "defaultMessage": "{count, plural, one {завантаження} few {завантаження} many {завантажень} other {завантаження}}"
+    "message": "{count, plural, one {завантаження} few {завантаження} many {завантажень} other {завантаження}}"
   },
   "instances.updater-modal.select-version": {
     "defaultMessage": "Виберіть версію, щоб переглянути її журнал змін"
@@ -4520,6 +4538,15 @@
   "app.settings.title": {
     "message": "Налаштування"
   },
+  "app.settings.page.eyebrow": {
+    "message": "Пульт лаунчера"
+  },
+  "app.settings.page.description": {
+    "message": "Налаштовуйте візуал, теми, мову, Java, мережу та поведінку лаунчера в одному робочому просторі."
+  },
+  "app.settings.page.sections": {
+    "message": "Розділи"
+  },
   "search-card.followers": {
     "message": "підписників"
   },
@@ -5055,7 +5082,7 @@
     "message": "Вимкнено"
   },
   "header.category.minecraft-server-gameplay": {
-    "defaultMessage": "Геймплей"
+    "message": "Геймплей"
   },
   "project.settings.environment.notice.multiple-environments.title": {
     "defaultMessage": "Ваш проект має кілька середовищ"
@@ -5124,7 +5151,7 @@
     "defaultMessage": "Завантаження вмісту..."
   },
   "project.about.details.created": {
-    "defaultMessage": "Created {date}"
+    "message": "Створено {date}"
   },
   "app.update.complete-toast.title": {
     "message": "Версію {version} успішно встановлено!"
@@ -5271,7 +5298,7 @@
     "defaultMessage": "Завантаження файлів ({completed}/{total})"
   },
   "project.about.details.licensed": {
-    "defaultMessage": "Licensed {license}"
+    "message": "Ліцензія"
   },
   "maintenance.action.scanning": {
     "message": "Сканування..."
@@ -5439,7 +5466,7 @@
     "defaultMessage": "Творчий режим"
   },
   "header.category.minecraft-server-community": {
-    "defaultMessage": "Спільнота"
+    "message": "Спільнота"
   },
   "friends.add-friend.username.description": {
     "message": "Воно може відрізнятися від імені користувача Minecraft!"
@@ -5596,6 +5623,63 @@
   },
   "instance.breadcrumb.content": {
     "message": "Зміст"
+  },
+  "instance.breadcrumb.files": {
+    "message": "Файли"
+  },
+  "instance.logs.delete-latest-running": {
+    "message": "Не можна видалити latest.log, поки збірка запущена"
+  },
+  "console.filters.all": {
+    "message": "Усі"
+  },
+  "console.actions.expand": {
+    "message": "Розгорнути"
+  },
+  "console.actions.collapse": {
+    "message": "Згорнути"
+  },
+  "console.delete.header": {
+    "message": "Видалити лог-файл"
+  },
+  "console.delete.irreversible": {
+    "message": "Цю дію не можна скасувати"
+  },
+  "console.delete.confirmation": {
+    "message": "Видалення цього лог-файлу неможливо скасувати. Продовжити?"
+  },
+  "console.delete.failed-title": {
+    "message": "Не вдалося видалити лог-файл"
+  },
+  "console.share.failed-title": {
+    "message": "Не вдалося поділитися логами"
+  },
+  "console.base.scroll-to-bottom": {
+    "message": "Прокрутити вниз"
+  },
+  "console.base.server-not-running": {
+    "message": "Сервер не запущено"
+  },
+  "console.base.send-command": {
+    "message": "Надіслати команду"
+  },
+  "console.base.server-empty.top": {
+    "message": "Ласкаво просимо на ваш сервер Modrinth!"
+  },
+  "console.base.server-empty.bottom": {
+    "message": "Натисніть зелену кнопку запуску, щоб увімкнути сервер!"
+  },
+  "console.base.instance-empty.top": {
+    "message": "Запустіть збірку у правому верхньому куті,"
+  },
+  "console.base.instance-empty.bottom": {
+    "message": "щоб почали надходити live-логи!"
+  },
+  "console.admonition.toggle": {
+    "message": "Перемкнути"
+  },
+  "console.admonition.dismiss": {
+    "message": "Сховати"
   },
   "instance.settings.tabs.installation.unknown-version": {
     "message": "(невідома версія)"
@@ -5947,5 +6031,556 @@
   },
   "project-type.shaderpack.lowercase": {
     "defaultMessage": "{count, plural, one {шейдерпак} few {шейдерпаки} many {шейдерпаків} other {шейдерпака}}"
+  },
+  "instance.settings.tabs.java.custom-java-installation": {
+    "message": "Власна установка Java"
+  },
+  "instance.settings.tabs.java.custom-memory-allocation": {
+    "message": "Власне виділення пам’яті"
+  },
+  "instance.settings.tabs.java.custom-java-arguments": {
+    "message": "Власні аргументи Java"
+  },
+  "instance.settings.tabs.java.custom-environment-variables": {
+    "message": "Власні змінні середовища"
+  },
+  "instance.settings.tabs.java.enter-environmental-variables": {
+    "message": "Введіть змінні середовища..."
+  },
+  "search.filter_type.features": {
+    "message": "Особливості"
+  },
+  "search.filter_type.resolutions": {
+    "message": "Роздільності"
+  },
+  "search.filter_type.performance-impact": {
+    "message": "Вплив на продуктивність"
+  },
+  "server.search.sort.relevance": {
+    "message": "Релевантність"
+  },
+  "server.search.sort.verified-plays": {
+    "message": "Підтверджені заходи"
+  },
+  "server.search.sort.players": {
+    "message": "Гравці"
+  },
+  "server.search.sort.followers": {
+    "message": "Підписники"
+  },
+  "server.search.sort.date-published": {
+    "message": "Дата публікації"
+  },
+  "server.search.sort.date-updated": {
+    "message": "Дата оновлення"
+  },
+  "server.search.header.community": {
+    "message": "Спільнота"
+  },
+  "server.search.header.features": {
+    "message": "Особливості"
+  },
+  "server.search.header.gameplay": {
+    "message": "Геймплей"
+  },
+  "server.search.header.meta": {
+    "message": "Мета"
+  },
+  "server.search.filter.content-type": {
+    "message": "Тип"
+  },
+  "server.search.filter.content-vanilla": {
+    "message": "Ванільний"
+  },
+  "server.search.filter.content-modded": {
+    "message": "Модовий"
+  },
+  "server.search.filter.game-version": {
+    "message": "Версія гри"
+  },
+  "server.search.filter.region": {
+    "message": "Регіон"
+  },
+  "server.search.filter.language": {
+    "message": "Мова"
+  },
+  "server.search.filter.status": {
+    "message": "Статус"
+  },
+  "server.search.filter.status-online": {
+    "message": "Онлайн"
+  },
+  "server.search.filter.status-offline": {
+    "message": "Офлайн"
+  },
+  "server.search.category.skyblock": {
+    "message": "Скайблок"
+  },
+  "server.search.category.prison": {
+    "message": "В’язниця"
+  },
+  "server.search.category.smp": {
+    "message": "SMP"
+  },
+  "server.search.category.pokemon": {
+    "message": "Покемони"
+  },
+  "server.search.category.adventure": {
+    "message": "Пригоди"
+  },
+  "server.search.category.anarchy": {
+    "message": "Анархія"
+  },
+  "server.search.category.pvp": {
+    "message": "PvP"
+  },
+  "server.search.category.pve": {
+    "message": "PvE"
+  },
+  "server.search.category.bosses": {
+    "message": "Боси"
+  },
+  "server.search.category.network": {
+    "message": "Мережа"
+  },
+  "server.search.category.custom-content": {
+    "message": "Кастомний контент"
+  },
+  "server.search.category.minigames": {
+    "message": "Мініігри"
+  },
+  "server.search.category.parkour": {
+    "message": "Паркур"
+  },
+  "server.search.category.questing": {
+    "message": "Квести"
+  },
+  "server.search.category.lifesteal": {
+    "message": "Лайфстіл"
+  },
+  "server.search.category.whitelisted": {
+    "message": "За вайтлістом"
+  },
+  "server.search.category.gens": {
+    "message": "Гени"
+  },
+  "server.search.category.technical": {
+    "message": "Технічний"
+  },
+  "server.search.category.world-resets": {
+    "message": "Скидання світу"
+  },
+  "settings.display.theme.nord": "Норд",
+  "settings.display.theme.cherry-cola": "Черрі-кола",
+  "settings.display.theme.slate": "Слейт",
+  "settings.theme-studio.title": "Студія тем",
+  "settings.theme-studio.description": "Обирай готову тему або збирай свою з живим превʼю, імпортом і експортом.",
+  "settings.theme-studio.official": "Офіційні теми",
+  "settings.theme-studio.custom": "Кастомні теми",
+  "settings.theme-studio.new-theme": "Нова тема",
+  "settings.theme-studio.import-theme": "Імпорт теми",
+  "settings.theme-studio.empty": "Поки немає кастомних тем. Створи нову на основі поточного пресету.",
+  "settings.theme-studio.editor": "Редактор",
+  "settings.theme-studio.preview": "Превʼю",
+  "settings.theme-studio.name": "Назва теми",
+  "settings.theme-studio.author": "Автор",
+  "settings.theme-studio.base-theme": "Базовий пресет",
+  "settings.theme-studio.description-label": "Опис",
+  "settings.theme-studio.reset-base": "Скинути кольори до базового пресету",
+  "settings.theme-studio.save-theme": "Зберегти зміни",
+  "settings.theme-studio.apply-theme": "Застосувати тему",
+  "settings.theme-studio.duplicate": "Дублювати",
+  "settings.theme-studio.export-theme": "Експорт",
+  "settings.theme-studio.copy-json": "Копіювати JSON",
+  "settings.theme-studio.delete-theme": "Видалити",
+  "settings.theme-studio.active": "Активна",
+  "settings.theme-studio.import-failed": "Цей файл не є коректною темою Revoria.",
+  "settings.theme-studio.saved": "Тему збережено.",
+  "settings.theme-studio.copied": "JSON теми скопійовано.",
+  "settings.theme-studio.canvas": "Фон",
+  "settings.theme-studio.layer-2": "Шар 2",
+  "settings.theme-studio.layer-3": "Шар 3",
+  "settings.theme-studio.cards": "Картки",
+  "settings.theme-studio.hover-layer": "Шар наведення",
+  "settings.theme-studio.text-primary": "Заголовок",
+  "settings.theme-studio.text-default": "Основний текст",
+  "settings.theme-studio.text-secondary": "Другорядний текст",
+  "settings.theme-studio.brand": "Акцент",
+  "settings.theme-studio.glass-tint": "Відтінок скла",
+  "settings.theme-studio.glow": "Сила сяйва",
+  "settings.theme-studio.glass-opacity": "Прозорість скла",
+  "settings.theme-studio.glass-strong": "Щільне скло",
+  "settings.theme-studio.glass-border": "Межа скла",
+  "settings.theme-studio.preview-title": "Превʼю кастомної теми",
+  "settings.theme-studio.preview-body": "Панелі, кнопки й текст оновлюються тут до застосування теми.",
+  "settings.theme-studio.primary-action": "Основна дія",
+  "settings.theme-studio.secondary-action": "Другорядна дія",
+  "settings.theme-studio.selected-preset": "Вибраний пресет",
+  "settings.theme-studio.apply-preset": "Застосувати пресет",
+  "settings.theme-studio.create-from-preset": "Створити редаговану копію",
+  "settings.theme-studio.preset-hint": "Пресети більше не створюють тему миттєво. Спочатку вибери базу, а вже потім застосовуй або редагуй її.",
+  "settings.theme-studio.section.colors": "Основні кольори",
+  "settings.theme-studio.section.ui": "Поверхні інтерфейсу",
+  "settings.theme-studio.section.glass": "Скло та сяйво",
+  "settings.theme-studio.section.meta": "Інформація про тему",
+  "settings.theme-studio.raised-bg": "Фон панелей",
+  "settings.theme-studio.raised-bg-hover": "Наведення на панелі",
+  "settings.theme-studio.button-bg": "Фон кнопок",
+  "settings.theme-studio.button-bg-hover": "Наведення на кнопки",
+  "settings.theme-studio.button-bg-active": "Активна кнопка",
+  "settings.theme-studio.divider": "Роздільники",
+  "button.copy-filename": {
+    "message": "Копіювати назву файлу"
+  },
+  "button.copy-full-path": {
+    "message": "Копіювати повний шлях"
+  },
+  "button.open-in-folder": {
+    "message": "Відкрити в папці"
+  },
+  "label.copied-filename": {
+    "message": "Назву файлу скопійовано"
+  },
+  "label.copied-path": {
+    "message": "Шлях скопійовано"
+  },
+  "button.extract": {
+    "message": "Розпакувати"
+  },
+  "button.rename": {
+    "message": "Перейменувати"
+  },
+  "button.move": {
+    "message": "Перемістити"
+  },
+  "files.upload.drag-and-drop.drop-to-upload": {
+    "message": "Перетягніть сюди {type, select, undefined {файли} other {{type}}}, щоб завантажити"
+  },
+  "files.error.try-again": {
+    "message": "Спробувати знову"
+  },
+  "files.error.go-to-home": {
+    "message": "Перейти в корінь"
+  },
+  "files.upload-dropdown.file": {
+    "message": "файл"
+  },
+  "files.upload-dropdown.file-uploads": {
+    "message": "{count, plural, one {# завантаження файлу} few {# завантаження файлів} many {# завантажень файлів} other {# завантаження файлу}}"
+  },
+  "files.upload-dropdown.uploads-left": {
+    "message": "{count, plural, one {# залишилось} few {# залишилось} many {# залишилось} other {# залишилось}}"
+  },
+  "files.upload-dropdown.failed-file-exists": {
+    "message": "Не вдалося завантажити: файл уже існує."
+  },
+  "files.upload-dropdown.failed-generic": {
+    "message": "Не вдалося завантажити файл."
+  },
+  "files.upload-dropdown.unexpected-error": {
+    "message": "Неочікувана помилка"
+  },
+  "files.upload-dropdown.failed-incorrect-type": {
+    "message": "Не вдалося завантажити: неправильний тип файлу."
+  },
+  "files.upload-dropdown.cancelled": {
+    "message": "Скасовано"
+  },
+  "files.upload-dropdown.incorrect-file-type": {
+    "message": "Неправильний тип файлу"
+  },
+  "files.upload-dropdown.failed-to-upload": {
+    "message": "Не вдалося завантажити"
+  },
+  "files.upload-dropdown.failed-infer-project-type": {
+    "message": "Не вдалося завантажити: не вдалося визначити тип проєкту для завантаженого файлу."
+  },
+  "files.create-modal.header": {
+    "message": "Створити {type, select, file {файл} other {папку}}"
+  },
+  "files.create-modal.placeholder-file": {
+    "message": "Введіть назву файлу"
+  },
+  "files.create-modal.placeholder-directory": {
+    "message": "Введіть назву папки"
+  },
+  "files.create-modal.create-button": {
+    "message": "Створити"
+  },
+  "files.editor.failed-to-open-title": {
+    "message": "Не вдалося відкрити файл"
+  },
+  "files.editor.failed-to-open-text": {
+    "message": "Не вдалося завантажити вміст файлу."
+  },
+  "files.editor.file-saved-title": {
+    "message": "Файл збережено"
+  },
+  "files.editor.file-saved-text": {
+    "message": "Ваш файл успішно збережено."
+  },
+  "files.editor.save-failed-title": {
+    "message": "Не вдалося зберегти"
+  },
+  "files.editor.save-failed-text": {
+    "message": "Не вдалося зберегти файл."
+  },
+  "files.editor.log-url-copied-title": {
+    "message": "Посилання на лог скопійовано"
+  },
+  "files.editor.log-url-copied-text": {
+    "message": "Посилання на файл журналу скопійовано в буфер обміну."
+  },
+  "files.editor.failed-to-share-title": {
+    "message": "Не вдалося поділитися файлом"
+  },
+  "files.editor.failed-to-share-text": {
+    "message": "Не вдалося завантажити файл на mclo.gs."
+  },
+  "files.delete-modal.header": {
+    "message": "Видалити елемент"
+  },
+  "files.delete-modal.deleting-name": {
+    "message": "Видаляється: {name}"
+  },
+  "files.delete-modal.warning": {
+    "message": "Цю дію неможливо скасувати."
+  },
+  "files.rename-modal.header": {
+    "message": "Перейменувати елемент"
+  },
+  "files.rename-modal.new-name-label": {
+    "message": "Нова назва"
+  },
+  "files.unsaved-changes-modal.header": {
+    "message": "Незбережені зміни"
+  },
+  "files.unsaved-changes-modal.body": {
+    "message": "У вас є незбережені зміни. Що ви хочете зробити?"
+  },
+  "files.unsaved-changes-modal.discard": {
+    "message": "Відкинути зміни"
+  },
+  "files.operations.extracting": {
+    "message": "Архів розпаковується..."
+  },
+  "files.operations.modpack-from-url": {
+    "message": "Модпак встановлюється за URL..."
+  },
+  "files.operations.failed": {
+    "message": "Операція не вдалася"
+  },
+  "files.operations.extracted": {
+    "message": "Архів розпаковано"
+  },
+  "files.conflict-modal.header": {
+    "message": "Знайдено конфліктні файли"
+  },
+  "files.conflict-modal.warning-header": {
+    "message": "Попередження про перезапис"
+  },
+  "files.conflict-modal.overwrite-many-warning": {
+    "message": "Буде перезаписано велику кількість файлів."
+  },
+  "files.conflict-modal.overwrite-warning": {
+    "message": "{count, plural, one {# файл буде перезаписано.} few {# файли буде перезаписано.} many {# файлів буде перезаписано.} other {# файлу буде перезаписано.}}"
+  },
+  "files.conflict-modal.overwritten-count": {
+    "message": "{count, plural, one {# файл} few {# файли} many {# файлів} other {# файлу}}"
+  },
+  "files.conflict-modal.overwritten-label": {
+    "message": "Буде перезаписано"
+  },
+  "files.conflict-modal.overwrite-button": {
+    "message": "Перезаписати"
+  },
+  "files.table-header.name": {
+    "message": "Назва"
+  },
+  "files.table-header.size": {
+    "message": "Розмір"
+  },
+  "files.table-header.created": {
+    "message": "Створено"
+  },
+  "files.table-header.modified": {
+    "message": "Змінено"
+  },
+  "files.row.item-count": {
+    "message": "{count, plural, one {# елемент} few {# елементи} many {# елементів} other {# елемента}}"
+  },
+  "files.navbar.file-navigation": {
+    "message": "Навігація файлами"
+  },
+  "files.navbar.breadcrumb-navigation": {
+    "message": "Навігація шляхом"
+  },
+  "files.navbar.back-to-home": {
+    "message": "Назад у корінь"
+  },
+  "files.navbar.home": {
+    "message": "Корінь"
+  },
+  "files.navbar.search-files": {
+    "message": "Пошук файлів"
+  },
+  "files.navbar.create-new": {
+    "message": "Створити"
+  },
+  "files.navbar.new-file": {
+    "message": "Новий файл"
+  },
+  "files.navbar.new-folder": {
+    "message": "Нова папка"
+  },
+  "files.navbar.upload-file": {
+    "message": "Завантажити файл"
+  },
+  "files.navbar.upload-from-zip": {
+    "message": "Завантажити із ZIP"
+  },
+  "files.navbar.upload-from-zip-url": {
+    "message": "Завантажити ZIP за URL"
+  },
+  "files.navbar.install-curseforge-pack": {
+    "message": "Встановити CurseForge-пак"
+  },
+  "files.navbar.share-to-mclogs": {
+    "message": "Поділитися через mclo.gs"
+  },
+  "files.layout.loading": {
+    "message": "Завантаження файлів..."
+  },
+  "files.layout.busy-warning": {
+    "message": "Файлові операції тимчасово вимкнені, поки виконується інша операція."
+  },
+  "files.layout.empty-folder-title": {
+    "message": "Ця папка порожня"
+  },
+  "files.layout.empty-folder-description": {
+    "message": "Тут поки немає файлів або папок."
+  },
+  "files.layout.error-title": {
+    "message": "Не вдалося завантажити файли"
+  },
+  "files.layout.error-message": {
+    "message": "Можливо, папка не існує."
+  },
+  "files.layout.selected-count": {
+    "message": "Вибрано: {count}"
+  },
+  "files.layout.dry-run-failed-title": {
+    "message": "Попередня перевірка не вдалася"
+  },
+  "files.layout.dry-run-failed-text": {
+    "message": "Помилка під час попередньої перевірки"
+  },
+  "files.layout.extraction-started-title": {
+    "message": "Розпакування розпочато"
+  },
+  "files.layout.unsaved-changes": {
+    "message": "У вас є незбережені зміни."
+  },
+  "files.validation.name-label": {
+    "message": "Назва"
+  },
+  "files.validation.name-required": {
+    "message": "Потрібно вказати назву."
+  },
+  "files.validation.name-invalid-file": {
+    "message": "Назва може містити лише літери, цифри, дефіси, підкреслення, крапки або пробіли."
+  },
+  "files.validation.name-invalid-directory": {
+    "message": "Назва може містити лише літери, цифри, дефіси, підкреслення або пробіли."
+  },
+  "files.image_viewer.invalid_image": {
+    "message": "Некоректне зображення"
+  },
+  "files.image_viewer.viewed_image_alt": {
+    "message": "Зображення, що переглядається"
+  },
+  "files.image_viewer.zoom_in": {
+    "message": "Збільшити"
+  },
+  "files.image_viewer.zoom_out": {
+    "message": "Зменшити"
+  },
+  "files.image_viewer.reset_zoom": {
+    "message": "Скинути масштаб"
+  },
+  "files.image_viewer.image_too_large": {
+    "message": "Зображення занадто велике для попереднього перегляду."
+  },
+  "files.image_viewer.load_failed": {
+    "message": "Не вдалося завантажити зображення."
+  },
+  "files.zip-url-modal.cf-header": {
+    "message": "Встановити модпак CurseForge"
+  },
+  "files.zip-url-modal.zip-header": {
+    "message": "Завантаження вмісту ZIP за URL"
+  },
+  "files.zip-url-modal.enter-link": {
+    "message": "Введіть посилання"
+  },
+  "files.zip-url-modal.zip-description": {
+    "message": "Скопіюйте й вставте пряме посилання на завантаження .zip-файлу."
+  },
+  "files.zip-url-modal.install-button": {
+    "message": "Встановити"
+  },
+  "files.zip-url-modal.step-find-title": {
+    "message": "Знайдіть модпак"
+  },
+  "files.zip-url-modal.step-find-description": {
+    "message": "Відкрийте CurseForge і знайдіть потрібний модпак."
+  },
+  "files.zip-url-modal.step-select-title": {
+    "message": "Виберіть версію"
+  },
+  "files.zip-url-modal.step-select-description": {
+    "message": "Перейдіть на вкладку Files і виберіть версію для встановлення."
+  },
+  "files.zip-url-modal.step-copy-title": {
+    "message": "Скопіюйте URL"
+  },
+  "files.zip-url-modal.step-copy-description": {
+    "message": "Скопіюйте посилання на сторінку версії та вставте його нижче."
+  },
+  "files.zip-url-modal.error-url-required": {
+    "message": "Потрібно вказати URL."
+  },
+  "files.zip-url-modal.error-cf-url": {
+    "message": "URL має вести на сторінку версії модпака CurseForge."
+  },
+  "files.zip-url-modal.error-url-invalid": {
+    "message": "URL має бути коректним."
+  },
+  "files.zip-url-modal.cf-not-found-title": {
+    "message": "Модпак CurseForge не знайдено"
+  },
+  "files.zip-url-modal.cf-not-found-text": {
+    "message": "Не вдалося знайти модпак CurseForge за цим URL."
+  },
+  "files.zip-url-modal.install-failed-title": {
+    "message": "Установлення не вдалося"
+  },
+  "files.zip-url-modal.unknown-error": {
+    "message": "Сталася невідома помилка"
+  },
+  "files.zip-url-modal.backup-name": {
+    "message": "Встановлення модпака CurseForge"
+  },
+  "files.move-modal.header": {
+    "message": "Перемістити елемент"
+  },
+  "files.move-modal.current-location": {
+    "message": "Поточне розташування"
+  },
+  "files.move-modal.destination-path": {
+    "message": "Шлях призначення"
+  },
+  "files.move-modal.destination-placeholder": {
+    "message": "Введіть шлях призначення"
   }
 }

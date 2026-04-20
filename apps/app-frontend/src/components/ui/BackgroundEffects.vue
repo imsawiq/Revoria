@@ -39,18 +39,9 @@ function isLightTheme() {
 	return document.documentElement.classList.contains('light-mode')
 }
 
-function getThemeFlavor() {
-	const root = document.documentElement
-	if (root.classList.contains('rose-gold-mode')) return 'rose-gold'
-	if (root.classList.contains('cherry-blossom-mode')) return 'cherry-blossom'
-	if (root.classList.contains('obsidian-gold-mode')) return 'obsidian-gold'
-	if (root.classList.contains('sapphire-mode')) return 'sapphire'
-	if (root.classList.contains('amethyst-mode')) return 'amethyst'
-	if (root.classList.contains('sunset-mode')) return 'sunset'
-	if (root.classList.contains('aurora-mode')) return 'aurora'
-	if (root.classList.contains('retro-mode')) return 'retro'
-	if (root.classList.contains('oled-mode')) return 'oled'
-	return isLightTheme() ? 'light' : 'dark'
+function getThemeColor(variable: string, fallback: string) {
+	const value = getComputedStyle(document.documentElement).getPropertyValue(variable).trim()
+	return value || fallback
 }
 
 function applyCanvasBlendMode() {
@@ -69,79 +60,11 @@ function applyCanvasBlendMode() {
 }
 
 function getPalette() {
-	switch (getThemeFlavor()) {
-		case 'light':
-			return {
-				snow: 'rgba(32, 69, 89, 1)',
-				rain: 'rgba(36, 92, 118, 1)',
-				stars: 'rgba(42, 80, 101, 1)',
-				starsGlow: 'rgba(117, 171, 196, 1)',
-			}
-		case 'rose-gold':
-			return {
-				snow: 'rgba(151, 88, 95, 1)',
-				rain: 'rgba(172, 98, 111, 1)',
-				stars: 'rgba(166, 94, 109, 1)',
-				starsGlow: 'rgba(232, 174, 176, 1)',
-			}
-		case 'cherry-blossom':
-			return {
-				snow: 'rgba(152, 76, 111, 1)',
-				rain: 'rgba(180, 86, 132, 1)',
-				stars: 'rgba(173, 85, 124, 1)',
-				starsGlow: 'rgba(235, 178, 210, 1)',
-			}
-		case 'obsidian-gold':
-			return {
-				snow: 'rgba(230, 201, 139, 1)',
-				rain: 'rgba(214, 180, 108, 1)',
-				stars: 'rgba(241, 214, 160, 1)',
-				starsGlow: 'rgba(255, 232, 188, 1)',
-			}
-		case 'sapphire':
-			return {
-				snow: 'rgba(190, 220, 255, 1)',
-				rain: 'rgba(111, 171, 255, 1)',
-				stars: 'rgba(214, 230, 255, 1)',
-				starsGlow: 'rgba(114, 172, 255, 1)',
-			}
-		case 'amethyst':
-			return {
-				snow: 'rgba(233, 214, 255, 1)',
-				rain: 'rgba(198, 147, 255, 1)',
-				stars: 'rgba(239, 225, 255, 1)',
-				starsGlow: 'rgba(184, 120, 255, 1)',
-			}
-		case 'sunset':
-			return {
-				snow: 'rgba(255, 215, 188, 1)',
-				rain: 'rgba(255, 161, 117, 1)',
-				stars: 'rgba(255, 224, 204, 1)',
-				starsGlow: 'rgba(255, 145, 102, 1)',
-			}
-		case 'aurora':
-			return {
-				snow: 'rgba(202, 255, 240, 1)',
-				rain: 'rgba(106, 227, 195, 1)',
-				stars: 'rgba(224, 255, 246, 1)',
-				starsGlow: 'rgba(97, 223, 189, 1)',
-			}
-		case 'retro':
-			return {
-				snow: 'rgba(225, 224, 188, 1)',
-				rain: 'rgba(161, 174, 118, 1)',
-				stars: 'rgba(232, 229, 182, 1)',
-				starsGlow: 'rgba(178, 196, 103, 1)',
-			}
-		case 'oled':
-		case 'dark':
-		default:
-			return {
-				snow: 'rgba(255,255,255,1)',
-				rain: 'rgba(153, 202, 255, 1)',
-				stars: 'rgba(224, 236, 255, 1)',
-				starsGlow: 'rgba(150, 198, 255, 1)',
-			}
+	return {
+		snow: getThemeColor('--color-contrast', isLightTheme() ? '#204559' : '#FFFFFF'),
+		rain: getThemeColor('--color-brand', isLightTheme() ? '#245C76' : '#99CAFF'),
+		stars: getThemeColor('--color-text-primary', isLightTheme() ? '#2A5065' : '#E0ECFF'),
+		starsGlow: getThemeColor('--color-brand', isLightTheme() ? '#75ABC4' : '#96C6FF'),
 	}
 }
 

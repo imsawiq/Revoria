@@ -8,7 +8,9 @@
 				<span class="text-lg font-extrabold text-contrast m-0 leading-none">{{
 					project.title
 				}}</span>
-				<span v-if="project.author" class="text-secondary"> by {{ project.author }}</span>
+				<span v-if="project.author" class="text-secondary">
+					{{ formatMessage(messages.by) }} {{ project.author }}
+				</span>
 			</div>
 			<div class="m-0 line-clamp-2">
 				{{ project.description }}
@@ -29,14 +31,14 @@
 				<DownloadIcon class="shrink-0" />
 				<span>
 					{{ formatNumber(project.downloads) }}
-					<span class="text-secondary">downloads</span>
+					<span class="text-secondary">{{ formatMessage(messages.downloads) }}</span>
 				</span>
 			</div>
 			<div class="flex items-center gap-2">
 				<HeartIcon class="shrink-0" />
 				<span>
 					{{ formatNumber(project.follows ?? project.followers) }}
-					<span class="text-secondary">followers</span>
+					<span class="text-secondary">{{ formatMessage(messages.followers) }}</span>
 				</span>
 			</div>
 			<div class="mt-auto relative">
@@ -49,7 +51,7 @@
 				>
 					<HistoryIcon class="shrink-0" />
 					<span>
-						<span class="text-secondary">Updated</span>
+						<span class="text-secondary">{{ formatMessage(messages.updated) }}</span>
 						{{ formatRelativeTime(project.date_modified ?? project.updated) }}
 					</span>
 				</div>
@@ -66,11 +68,32 @@
 <script setup>
 import { DownloadIcon, HeartIcon, HistoryIcon, TagsIcon } from '@modrinth/assets'
 import { formatCategory, formatNumber } from '@modrinth/utils'
+import { defineMessages, useVIntl } from '@vintl/vintl'
 
 import { useRelativeTime } from '../../composables'
 import Avatar from '../base/Avatar.vue'
 
 const formatRelativeTime = useRelativeTime()
+const { formatMessage } = useVIntl()
+
+const messages = defineMessages({
+	by: {
+		id: 'project-card.by',
+		defaultMessage: 'by',
+	},
+	downloads: {
+		id: 'search-card.downloads',
+		defaultMessage: 'downloads',
+	},
+	followers: {
+		id: 'search-card.followers',
+		defaultMessage: 'followers',
+	},
+	updated: {
+		id: 'project-card.date.updated',
+		defaultMessage: 'Updated',
+	},
+})
 
 defineProps({
 	project: {

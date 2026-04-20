@@ -3,7 +3,7 @@ import { ClipboardCopyIcon, FolderOpenIcon, ImageIcon } from '@modrinth/assets'
 import { ButtonStyled, injectNotificationManager } from '@modrinth/ui'
 import { convertFileSrc, invoke } from '@tauri-apps/api/core'
 import { defineMessages, useVIntl } from '@vintl/vintl'
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import { get_full_path } from '@/helpers/profile'
 import { openPath } from '@/helpers/utils.js'
@@ -69,18 +69,10 @@ const screenshots = ref<DirFileEntry[]>([])
 const loading = ref(true)
 const screenshotsPath = ref('')
 const selectedImage = ref<DirFileEntry | null>(null)
-const imageSrcByPath = ref<Record<string, string>>({})
+const visibleScreenshotsCount = ref(36)
+const loadMoreTrigger = ref<HTMLDivElement | null>(null)
 
-function cleanupImageUrls() {
-	for (const url of Object.values(imageSrcByPath.value)) {
-		try {
-			URL.revokeObjectURL(url)
-		} catch {
-			// Ignore invalid/already-revoked URLs.
-		}
-	}
-	imageSrcByPath.value = {}
-}
+let loadMoreObserver: IntersectionObserver | null = null
 
 function getMimeFromName(name: string): string {
 	const lower = name.toLowerCase()
@@ -90,23 +82,6 @@ function getMimeFromName(name: string): string {
 	if (lower.endsWith('.bmp')) return 'image/bmp'
 	if (lower.endsWith('.webp')) return 'image/webp'
 	return 'application/octet-stream'
-}
-
-async function preloadImageSrc(entries: DirFileEntry[]) {
-	cleanupImageUrls()
-	const pairs = await Promise.all(
-		entries.map(async (entry) => {
-			try {
-				const bytes = await invoke<number[]>('plugin:utils|read_binary_file', { path: entry.path })
-				const blob = new Blob([new Uint8Array(bytes)], { type: getMimeFromName(entry.name) })
-				return [entry.path, URL.createObjectURL(blob)] as const
-			} catch {
-				const normalizedPath = entry.path.replace(/\\/g, '/')
-				return [entry.path, convertFileSrc(normalizedPath)] as const
-			}
-		}),
-	)
-	imageSrcByPath.value = Object.fromEntries(pairs.filter(([, src]) => !!src))
 }
 
 function joinPath(base: string, child: string): string {
@@ -140,9 +115,70 @@ function getDisplayName(entry: DirFileEntry): string {
 	return parseScreenshotDate(entry.name) ?? entry.name
 }
 
+function getNormalizedFileSrc(path: string): string {
+	return convertFileSrc(path.replace(/\\/g, '/'))
+}
+
+const sortedScreenshots = computed(() =>
+	[...screenshots.value].sort((a, b) => b.name.localeCompare(a.name)),
+)
+const visibleScreenshots = computed(() =>
+	sortedScreenshots.value.slice(0, visibleScreenshotsCount.value),
+)
+
+function resetVisibleScreenshots() {
+	visibleScreenshotsCount.value = 36
+}
+
+function loadMoreScreenshots() {
+	if (visibleScreenshotsCount.value >= sortedScreenshots.value.length) return
+	visibleScreenshotsCount.value = Math.min(
+		visibleScreenshotsCount.value + 24,
+		sortedScreenshots.value.length,
+	)
+}
+
+function getScrollParent(element: HTMLElement | null): HTMLElement | null {
+	let current = element?.parentElement ?? null
+
+	while (current) {
+		const { overflowY } = window.getComputedStyle(current)
+		if ((overflowY === 'auto' || overflowY === 'scroll') && current.scrollHeight > current.clientHeight) {
+			return current
+		}
+		current = current.parentElement
+	}
+
+	return null
+}
+
+function bindLoadMoreObserver() {
+	if (!loadMoreTrigger.value) return
+	if (loadMoreObserver) {
+		loadMoreObserver.disconnect()
+	}
+
+	const scrollParent = getScrollParent(loadMoreTrigger.value)
+
+	loadMoreObserver = new IntersectionObserver(
+		(entries) => {
+			if (entries.some((entry) => entry.isIntersecting)) {
+				loadMoreScreenshots()
+			}
+		},
+		{
+			root: scrollParent,
+			rootMargin: '300px 0px',
+		},
+	)
+
+	loadMoreObserver.observe(loadMoreTrigger.value)
+}
+
 async function loadScreenshots() {
 	if (!props.instance?.path) return
 	loading.value = true
+	resetVisibleScreenshots()
 	try {
 		const fullPath = await get_full_path(props.instance.path)
 		screenshotsPath.value = joinPath(fullPath, 'screenshots')
@@ -151,10 +187,8 @@ async function loadScreenshots() {
 			extensions: ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp'],
 		})
 		screenshots.value = files
-		await preloadImageSrc(files)
 	} catch (e) {
 		screenshots.value = []
-		cleanupImageUrls()
 	} finally {
 		loading.value = false
 	}
@@ -214,7 +248,7 @@ function formatSize(bytes: number): string {
 }
 
 function getImageSrc(entry: DirFileEntry): string {
-	return imageSrcByPath.value[entry.path] || ''
+	return getNormalizedFileSrc(entry.path)
 }
 
 onMounted(() => {
@@ -222,10 +256,31 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+	loadMoreObserver?.disconnect()
+	loadMoreObserver = null
 	selectedImage.value = null
 	screenshots.value = []
-	cleanupImageUrls()
 })
+
+watch(
+	loadMoreTrigger,
+	async () => {
+		await nextTick()
+		bindLoadMoreObserver()
+	},
+)
+
+watch(
+	sortedScreenshots,
+	async () => {
+		if (visibleScreenshotsCount.value === 0 && sortedScreenshots.value.length > 0) {
+			resetVisibleScreenshots()
+		}
+		await nextTick()
+		bindLoadMoreObserver()
+	},
+	{ flush: 'post' },
+)
 
 watch(
 	() => props.instance?.path,
@@ -236,14 +291,14 @@ watch(
 </script>
 
 <template>
-	<div class="flex flex-col gap-4">
+	<div class="screenshots-page flex flex-col gap-4">
 		<div class="flex items-center justify-between">
 			<div class="flex items-center gap-2">
 				<ImageIcon class="w-5 h-5 text-secondary" />
 				<h2 class="m-0 text-lg font-extrabold text-contrast">
 					{{ formatMessage(messages.heading) }}
 					<span v-if="!loading" class="text-sm font-normal text-secondary"
-						>({{ screenshots.length }})</span
+						>({{ sortedScreenshots.length }})</span
 					>
 				</h2>
 			</div>
@@ -265,7 +320,7 @@ watch(
 		</div>
 
 		<div
-			v-else-if="screenshots.length === 0"
+			v-else-if="sortedScreenshots.length === 0"
 			class="flex flex-col items-center justify-center py-12 gap-3"
 		>
 			<ImageIcon class="w-12 h-12 text-secondary opacity-50" />
@@ -313,19 +368,20 @@ watch(
 			</Teleport>
 
 			<!-- Grid -->
-			<div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-3">
+			<div class="screenshots-grid">
 				<div
-					v-for="screenshot in screenshots"
+					v-for="screenshot in visibleScreenshots"
 					:key="screenshot.path"
-					class="group relative rounded-xl overflow-hidden border border-[--glass-border] bg-[--color-glass-bg-strong] shadow-card cursor-pointer transition-all hover:border-[--color-brand] hover:shadow-floating"
+					class="screenshot-card group relative rounded-xl overflow-hidden border border-[--glass-border] bg-[--color-glass-bg-strong] shadow-card cursor-pointer transition-all hover:border-[--color-brand] hover:shadow-floating"
 					@click="selectedImage = screenshot"
 				>
 					<div class="aspect-video overflow-hidden">
 						<img
 							:src="getImageSrc(screenshot)"
 							:alt="screenshot.name"
-							class="w-full h-full object-cover transition-transform group-hover:scale-105"
+							class="screenshot-image w-full h-full object-cover transition-transform group-hover:scale-105"
 							loading="lazy"
+							decoding="async"
 						/>
 					</div>
 					<div class="p-2 flex items-center justify-between gap-1">
@@ -347,11 +403,47 @@ watch(
 					</div>
 				</div>
 			</div>
+			<div
+				v-if="visibleScreenshots.length < sortedScreenshots.length"
+				ref="loadMoreTrigger"
+				class="screenshots-load-trigger"
+			/>
 		</template>
 	</div>
 </template>
 
 <style scoped>
+.screenshots-page {
+	width: 100%;
+	min-width: 0;
+	overflow-x: hidden;
+}
+
+.screenshots-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+	gap: 0.75rem;
+	width: 100%;
+	min-width: 0;
+	align-items: start;
+}
+
+.screenshot-card {
+	min-width: 0;
+	max-width: 100%;
+}
+
+.screenshot-image {
+	display: block;
+	content-visibility: auto;
+	contain-intrinsic-size: 220px 124px;
+}
+
+.screenshots-load-trigger {
+	height: 1px;
+	width: 100%;
+}
+
 .fade-enter-active,
 .fade-leave-active {
 	transition: opacity 0.2s ease;

@@ -1,89 +1,8 @@
 <template>
-	<div class="logs-page">
-		<Card class="log-card">
-			<div class="button-row">
-				<DropdownSelect
-					v-model="selectedLogIndex"
-					:default-value="0"
-					:name="formatMessage(messages.logDateLabel)"
-					class="log-select"
-					:options="logs.map((_, index) => index)"
-					:display-name="(option) => logs[option]?.name"
-					:disabled="logs.length === 0"
-				/>
-				<div class="button-group">
-					<Button :disabled="!logs[selectedLogIndex]" @click="copyLog()">
-						<ClipboardCopyIcon v-if="!copied" />
-						<CheckIcon v-else />
-						{{ copied ? formatMessage(messages.copied) : formatMessage(messages.copy) }}
-					</Button>
-					<Button :disabled="!props.instance?.path" @click="openLogsFolder()">
-						<FolderOpenIcon aria-hidden="true" />
-						{{ formatMessage(messages.openFolder) }}
-					</Button>
-					<Button color="primary" :disabled="offline || !logs[selectedLogIndex]" @click="share">
-						<ShareIcon aria-hidden="true" />
-						{{ formatMessage(messages.share) }}
-					</Button>
-					<Button
-						v-if="logs[selectedLogIndex] && logs[selectedLogIndex].live === true"
-						@click="clearLiveLog()"
-					>
-						<TrashIcon aria-hidden="true" />
-						{{ formatMessage(messages.clear) }}
-					</Button>
-
-					<Button
-						v-else
-						:disabled="!logs[selectedLogIndex] || logs[selectedLogIndex].live === true"
-						color="danger"
-						@click="deleteLog()"
-					>
-						<TrashIcon aria-hidden="true" />
-						{{ formatMessage(messages.delete) }}
-					</Button>
-				</div>
-			</div>
-			<div class="button-row">
-				<input
-					id="text-filter"
-					v-model="searchFilter"
-					autocomplete="off"
-					type="text"
-					class="text-filter"
-					:placeholder="formatMessage(messages.filterPlaceholder)"
-				/>
-				<div class="filter-group">
-					<Checkbox
-						v-for="level in levels"
-						:key="level.toLowerCase()"
-						v-model="levelFilters[level.toLowerCase()]"
-						class="filter-checkbox"
-					>
-						{{ levelLabels[level.toLowerCase()] ?? level }}
-					</Checkbox>
-				</div>
-			</div>
-			<div class="log-text">
-				<div ref="logContainer" class="scroller">
-					<div v-for="item in displayProcessedLogs" :key="item.id" class="user no-wrap">
-						<span :style="{ color: item.prefixColor, 'font-weight': item.weight }">{{
-							item.prefix
-						}}</span>
-						<span :style="{ color: item.textColor }">{{ item.text }}</span>
-					</div>
-				</div>
-			</div>
-			<ShareModalWrapper
-				ref="shareModal"
-				:header="formatMessage(messages.shareLogHeader)"
-				:share-title="formatMessage(messages.shareTitle)"
-				:share-text="formatMessage(messages.shareText)"
-				:open-in-new-tab="false"
-				:on-hide="onModalHide"
-				link
-			/>
-		</Card>
+	<div class="flex h-full flex-col gap-4">
+		<div class="revoria-console-theme">
+			<ConsolePageLayout />
+		</div>
 
 		<Card class="crash-card">
 			<div class="crash-header">
@@ -152,45 +71,38 @@
 </template>
 
 <script setup>
-import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
-
+import { FolderOpenIcon } from '@modrinth/assets'
 import {
-	CheckIcon,
-	ClipboardCopyIcon,
-	FolderOpenIcon,
-	ShareIcon,
-	TrashIcon,
-} from '@modrinth/assets'
-import { Button, Card, Checkbox, DropdownSelect, injectNotificationManager } from '@modrinth/ui'
+	Button,
+	Card,
+	ConsolePageLayout,
+	DropdownSelect,
+	injectNotificationManager,
+	provideConsoleManager,
+} from '@modrinth/ui'
 import { formatBytes, renderString } from '@modrinth/utils'
 import { invoke } from '@tauri-apps/api/core'
 import { defineMessages, useVIntl } from '@vintl/vintl'
 import { useStorage } from '@vueuse/core'
-import dayjs from 'dayjs'
-import isToday from 'dayjs/plugin/isToday'
-import isYesterday from 'dayjs/plugin/isYesterday'
-import { ofetch } from 'ofetch'
-import { computed, nextTick, onBeforeUnmount, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, shallowRef, triggerRef, watch, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 
 import ModalWrapper from '@/components/ui/modal/ModalWrapper.vue'
-import ShareModalWrapper from '@/components/ui/modal/ShareModalWrapper.vue'
+import { useInstanceConsole } from '@/composables/useInstanceConsole'
 import { process_listener } from '@/helpers/events.js'
 import {
 	delete_logs_by_filename,
+	get_game_log_cursor,
 	get_latest_log_cursor,
-	get_logs,
 	get_output_by_filename,
 } from '@/helpers/logs.js'
 import { get_by_profile_path } from '@/helpers/process.js'
 import { get_full_path } from '@/helpers/profile'
 import { openPath } from '@/helpers/utils.js'
 
-dayjs.extend(isToday)
-dayjs.extend(isYesterday)
-
 const { handleError } = injectNotificationManager()
 const route = useRoute()
+const { formatMessage } = useVIntl()
 
 const props = defineProps({
 	instance: {
@@ -199,15 +111,15 @@ const props = defineProps({
 			return {}
 		},
 	},
-	openSettings: {
-		type: Function,
-		default: null,
-	},
 	options: {
 		type: Object,
 		default() {
 			return {}
 		},
+	},
+	openSettings: {
+		type: Function,
+		default: null,
 	},
 	offline: {
 		type: Boolean,
@@ -223,7 +135,9 @@ const props = defineProps({
 	},
 	versions: {
 		type: Array,
-		required: true,
+		default() {
+			return []
+		},
 	},
 	installed: {
 		type: Boolean,
@@ -235,54 +149,7 @@ const props = defineProps({
 
 defineEmits(['play', 'stop'])
 
-const currentLiveLog = ref(null)
-const currentLiveLogCursor = ref(0)
-const { formatMessage } = useVIntl()
 const messages = defineMessages({
-	logDateLabel: {
-		id: 'instance.logs.log-date',
-		defaultMessage: 'Log date',
-	},
-	copy: {
-		id: 'instance.logs.copy',
-		defaultMessage: 'Copy',
-	},
-	copied: {
-		id: 'instance.logs.copied',
-		defaultMessage: 'Copied',
-	},
-	openFolder: {
-		id: 'instance.logs.open-folder',
-		defaultMessage: 'Open folder',
-	},
-	share: {
-		id: 'instance.logs.share',
-		defaultMessage: 'Share',
-	},
-	clear: {
-		id: 'instance.logs.clear',
-		defaultMessage: 'Clear',
-	},
-	delete: {
-		id: 'instance.logs.delete',
-		defaultMessage: 'Delete',
-	},
-	filterPlaceholder: {
-		id: 'instance.logs.filter.placeholder',
-		defaultMessage: 'Type to filter logs...',
-	},
-	shareLogHeader: {
-		id: 'instance.logs.share.header',
-		defaultMessage: 'Share Log',
-	},
-	shareTitle: {
-		id: 'instance.logs.share.title',
-		defaultMessage: 'Instance Log',
-	},
-	shareText: {
-		id: 'instance.logs.share.text',
-		defaultMessage: 'Check out this log from an instance on the Modrinth App',
-	},
 	endpointLabel: {
 		id: 'instance.logs.crash.endpoint',
 		defaultMessage: 'Endpoint',
@@ -290,50 +157,6 @@ const messages = defineMessages({
 	crashLogLabel: {
 		id: 'instance.logs.crash.dropdown',
 		defaultMessage: 'Crash log',
-	},
-	noLiveGame: {
-		id: 'instance.logs.empty.title',
-		defaultMessage: 'No live game detected.',
-	},
-	startGame: {
-		id: 'instance.logs.empty.subtitle',
-		defaultMessage: 'Start your game to proceed.',
-	},
-	liveLog: {
-		id: 'instance.logs.live',
-		defaultMessage: 'Live Log',
-	},
-	unknownLog: {
-		id: 'instance.logs.unknown',
-		defaultMessage: 'Unknown',
-	},
-	loading: {
-		id: 'instance.logs.loading',
-		defaultMessage: 'Loading...',
-	},
-	levelComment: {
-		id: 'instance.logs.level.comment',
-		defaultMessage: 'Comment',
-	},
-	levelError: {
-		id: 'instance.logs.level.error',
-		defaultMessage: 'Error',
-	},
-	levelWarn: {
-		id: 'instance.logs.level.warn',
-		defaultMessage: 'Warn',
-	},
-	levelInfo: {
-		id: 'instance.logs.level.info',
-		defaultMessage: 'Info',
-	},
-	levelDebug: {
-		id: 'instance.logs.level.debug',
-		defaultMessage: 'Debug',
-	},
-	levelTrace: {
-		id: 'instance.logs.level.trace',
-		defaultMessage: 'Trace',
 	},
 	crashHeader: {
 		id: 'instance.logs.crash.header',
@@ -399,30 +222,171 @@ const messages = defineMessages({
 		id: 'instance.logs.crash.fail',
 		defaultMessage: 'Failed to get a response from the model.',
 	},
+	deleteLatestTooltip: {
+		id: 'instance.logs.delete-latest-running',
+		defaultMessage: 'Cannot delete latest.log while the instance is running',
+	},
+	liveLog: {
+		id: 'instance.logs.live',
+		defaultMessage: 'Live',
+	},
+	unknownLog: {
+		id: 'instance.logs.unknown',
+		defaultMessage: 'Unknown',
+	},
 })
-const emptyText = computed(() => [
-	formatMessage(messages.noLiveGame),
-	formatMessage(messages.startGame),
-])
 
-const logs = ref([])
+const profilePathId = computed(() =>
+	typeof route.params.id === 'string' ? route.params.id : String(route.params.id ?? ''),
+)
+const {
+	liveConsole,
+	historicalConsole,
+	hydrate,
+	getHistoricalLogs,
+	getHistoricalContent,
+	setHistoricalContent,
+	invalidate,
+	clearLive,
+} = useInstanceConsole(profilePathId.value)
 
-const logsColored = true
+await hydrate()
+
+function buildLogList(rawLogs) {
+	return [
+		{ name: formatMessage(messages.liveLog), live: true },
+		...rawLogs
+			.filter(
+				(log) =>
+					log.filename !== 'latest_stdout.log' &&
+					log.filename !== 'latest_stdout' &&
+					log.filename !== 'launcher_log.txt' &&
+					log.stdout !== '' &&
+					(log.filename.includes('.log') || log.filename.endsWith('.txt')),
+			)
+			.map((log) => ({
+				...log,
+				name: log.filename || formatMessage(messages.unknownLog),
+			})),
+	]
+}
+
+const logs = ref(buildLogList([]))
+
+if (props.instance?.path) {
+	void getHistoricalLogs(props.instance.path)
+		.then((allLogs) => {
+			logs.value = buildLogList(allLogs)
+		})
+		.catch(handleError)
+}
 
 const selectedLogIndex = ref(0)
-const copied = ref(false)
-const logContainer = ref(null)
-const interval = ref(null)
-const userScrolled = ref(false)
-const isAutoScrolling = ref(false)
-const shareModal = ref(null)
+const isLive = computed(() => selectedLogIndex.value === 0)
+const filteredLogs = computed(() =>
+	props.playing ? logs.value.filter((log) => log.live || log.name !== 'latest.log') : logs.value,
+)
+const logSources = computed(() =>
+	filteredLogs.value.map((log, index) => ({
+		id: String(index),
+		name: log?.name ?? `Log ${index}`,
+		live: log?.live ?? false,
+	})),
+)
+const activeConsole = computed(() => (isLive.value ? liveConsole : historicalConsole))
+const logLines = shallowRef(activeConsole.value.output.value)
+
+watchEffect(() => {
+	logLines.value = activeConsole.value.output.value
+	triggerRef(logLines)
+})
+
+const selectedLog = computed(() => filteredLogs.value[selectedLogIndex.value])
+const deleteDisabled = computed(() => {
+	const log = selectedLog.value
+	if (!log || log.live) return true
+	return log.filename === 'latest.log' && props.playing
+})
+
+const currentLiveLogCursor = ref(0)
+
+async function pollLiveLog() {
+	if (!props.instance?.path || !profilePathId.value) return
+	const processes = await get_by_profile_path(profilePathId.value).catch(() => [])
+	if (!processes?.length) return
+
+	const hasRecoveredProcess = processes.some((process) => process.recovered)
+	const cursorData = await (
+		hasRecoveredProcess ? get_game_log_cursor : get_latest_log_cursor
+	)(props.instance.path, currentLiveLogCursor.value).catch(handleError)
+
+	if (!cursorData) return
+	if (cursorData.new_file) {
+		liveConsole.clear()
+		currentLiveLogCursor.value = 0
+	}
+	if (cursorData.output) {
+		liveConsole.addLegacyLog(cursorData.output)
+	}
+	currentLiveLogCursor.value = cursorData.cursor
+}
+
+async function deleteSelectedLog() {
+	const log = selectedLog.value
+	if (!log || log.live) return
+	await delete_logs_by_filename(props.instance.path, log.log_type, log.filename).catch(handleError)
+	invalidate()
+	const freshLogs = await getHistoricalLogs(props.instance.path)
+	logs.value = buildLogList(freshLogs)
+	selectedLogIndex.value = 0
+}
+
+provideConsoleManager({
+	logLines,
+	logSources,
+	activeLogSourceIndex: selectedLogIndex,
+	showCommandInput: false,
+	loading: ref(false),
+	onClear: () => {
+		if (!isLive.value) return
+		currentLiveLogCursor.value = 0
+		void clearLive()
+	},
+	onDelete: deleteSelectedLog,
+	deleteDisabled,
+	deleteDisabledTooltip: formatMessage(messages.deleteLatestTooltip),
+	shareDisabled: computed(() => props.offline),
+	emptyStateType: 'instance',
+})
+
+watch(selectedLogIndex, async (newIndex) => {
+	if (newIndex === 0) return
+	const log = filteredLogs.value[newIndex]
+	if (!log) return
+
+	const cached = getHistoricalContent(log.filename)
+	if (cached) {
+		historicalConsole.clear()
+		historicalConsole.addLegacyLog(cached)
+		return
+	}
+
+	const output = await get_output_by_filename(props.instance.path, log.log_type, log.filename).catch(
+		handleError,
+	)
+	if (output) {
+		setHistoricalContent(log.filename, output)
+		historicalConsole.clear()
+		historicalConsole.addLegacyLog(output)
+	}
+})
+
 const crashModal = ref(null)
 const crashResult = ref('')
 const crashLoading = ref(false)
 const crashLogs = ref([])
 const selectedCrashIndex = ref(0)
 const crashResultHtml = computed(() => renderString(crashResult.value || ''))
-
 const crashSettings = useStorage('crash-log-settings', {
 	endpoint: 'https://ollama.com/api/chat',
 	model: 'glm-5:cloud',
@@ -448,138 +412,12 @@ const crashText = computed(() => ({
 	result: formatMessage(messages.crashResult),
 	fail: formatMessage(messages.crashFail),
 }))
-const levelLabels = computed(() => ({
-	comment: formatMessage(messages.levelComment),
-	error: formatMessage(messages.levelError),
-	warn: formatMessage(messages.levelWarn),
-	info: formatMessage(messages.levelInfo),
-	debug: formatMessage(messages.levelDebug),
-	trace: formatMessage(messages.levelTrace),
-}))
-const onModalHide = () => {
-	copied.value = false
-}
 
-const openLogsFolder = async () => {
-	if (!props.instance?.path) return
-	const fullPath = await get_full_path(props.instance.path).catch(handleError)
-	if (!fullPath) return
-	await openPath(`${fullPath}/logs`).catch(handleError)
-}
-
-const openCrashFolder = async () => {
+async function openCrashFolder() {
 	if (!props.instance?.path) return
 	const fullPath = await get_full_path(props.instance.path).catch(handleError)
 	if (!fullPath) return
 	await openPath(`${fullPath}/crash-reports`).catch(handleError)
-}
-
-const levels = ['Comment', 'Error', 'Warn', 'Info', 'Debug', 'Trace']
-const levelFilters = ref({})
-levels.forEach((level) => {
-	levelFilters.value[level.toLowerCase()] = true
-})
-const searchFilter = ref('')
-
-function shouldDisplay(processedLine) {
-	if (!processedLine.level) {
-		return true
-	}
-
-	if (!levelFilters.value[processedLine.level.toLowerCase()]) {
-		return false
-	}
-	if (searchFilter.value !== '') {
-		if (!processedLine.text.toLowerCase().includes(searchFilter.value.toLowerCase())) {
-			return false
-		}
-	}
-	return true
-}
-
-// Selects from the processed logs which ones should be displayed (shouldDisplay)
-// In addition, splits each line by \n. Each split line is given the same properties as the original line
-const displayProcessedLogs = computed(() => {
-	return processedLogs.value.filter((l) => shouldDisplay(l))
-})
-
-const processedLogs = computed(() => {
-	// split based on newline and timestamp lookahead
-	// (not just newline because of multiline messages)
-	const splitPattern = /\n(?=(?:#|\[\d\d:\d\d:\d\d\]))/
-
-	const lines = logs.value[selectedLogIndex.value]?.stdout.split(splitPattern) || []
-	const processed = []
-	let id = 0
-	for (let i = 0; i < lines.length; i++) {
-		// Then split off of \n.
-		// Lines that are not the first have prefix = null
-		const text = getLineText(lines[i])
-		const prefix = getLinePrefix(lines[i])
-		const prefixColor = getLineColor(lines[i], true)
-		const textColor = getLineColor(lines[i], false)
-		const weight = getLineWeight(lines[i])
-		const level = getLineLevel(lines[i])
-		text.split('\n').forEach((line, index) => {
-			processed.push({
-				id: id,
-				text: line,
-				prefix: index === 0 ? prefix : null,
-				prefixColor: prefixColor,
-				textColor: textColor,
-				weight: weight,
-				level: level,
-			})
-			id += 1
-		})
-	}
-	return processed
-})
-
-async function getLiveStdLog() {
-	if (route.params.id && props.instance?.path) {
-		const processes = await get_by_profile_path(route.params.id).catch(handleError)
-		let returnValue
-		if (processes.length === 0) {
-			returnValue = emptyText.value.join('\n')
-		} else {
-			const logCursor = await get_latest_log_cursor(
-				props.instance.path,
-				currentLiveLogCursor.value,
-			).catch(handleError)
-			if (logCursor.new_file) {
-				currentLiveLog.value = ''
-			}
-			currentLiveLog.value = currentLiveLog.value + logCursor.output
-			currentLiveLogCursor.value = logCursor.cursor
-			returnValue = currentLiveLog.value
-		}
-		return { name: formatMessage(messages.liveLog), stdout: returnValue, live: true }
-	}
-	return null
-}
-
-async function getLogs() {
-	if (!props.instance?.path) return []
-	return (await get_logs(props.instance.path, true).catch(handleError))
-		.filter(
-			// filter out latest_stdout.log or anything without .log in it
-			(log) =>
-				log.filename !== 'latest_stdout.log' &&
-				log.filename !== 'latest_stdout' &&
-				log.stdout !== '' &&
-				(log.filename.includes('.log') || log.filename.endsWith('.txt')),
-		)
-		.map((log) => {
-			log.name = log.filename || formatMessage(messages.unknownLog)
-			log.stdout = formatMessage(messages.loading)
-			return log
-		})
-}
-
-async function setLogs() {
-	const [liveStd, allLogs] = await Promise.all([getLiveStdLog(), getLogs()])
-	logs.value = [liveStd, ...allLogs]
 }
 
 async function loadCrashLogs() {
@@ -621,11 +459,7 @@ async function analyzeCrashLog() {
 			data = null
 		}
 		crashResult.value =
-			data?.message?.content ??
-			data?.response ??
-			data?.output ??
-			raw ??
-			crashText.value.fail
+			data?.message?.content ?? data?.response ?? data?.output ?? raw ?? crashText.value.fail
 		crashModal.value?.show()
 	} catch (error) {
 		handleError(error)
@@ -634,426 +468,241 @@ async function analyzeCrashLog() {
 	}
 }
 
-const copyLog = () => {
-	if (logs.value.length > 0 && logs.value[selectedLogIndex.value]) {
-		navigator.clipboard.writeText(logs.value[selectedLogIndex.value].stdout)
-		copied.value = true
-	}
-}
-
-const share = async () => {
-	if (logs.value.length > 0 && logs.value[selectedLogIndex.value]) {
-		const url = await ofetch('https://api.mclo.gs/1/log', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-			},
-			body: `content=${encodeURIComponent(logs.value[selectedLogIndex.value].stdout)}`,
-		}).catch(handleError)
-
-		shareModal.value.show(url.url)
-	}
-}
-
-watch(selectedLogIndex, async (newIndex) => {
-	copied.value = false
-	userScrolled.value = false
-
-	if (logs.value.length > 1 && newIndex !== 0) {
-		logs.value[newIndex].stdout = 'Loading...'
-		logs.value[newIndex].stdout = await get_output_by_filename(
-			props.instance.path,
-			logs.value[newIndex].log_type,
-			logs.value[newIndex].filename,
-		).catch(handleError)
-	}
-})
-
-if (logs.value.length > 1 && !props.playing) {
-	selectedLogIndex.value = 1
-} else {
-	selectedLogIndex.value = 0
-}
-
-const deleteLog = async () => {
-	if (logs.value[selectedLogIndex.value] && selectedLogIndex.value !== 0) {
-		const deleteIndex = selectedLogIndex.value
-		selectedLogIndex.value = deleteIndex - 1
-		await delete_logs_by_filename(
-			props.instance.path,
-			logs.value[deleteIndex].log_type,
-			logs.value[deleteIndex].filename,
-		).catch(handleError)
-		await setLogs()
-	}
-}
-
-const clearLiveLog = async () => {
-	currentLiveLog.value = ''
-	// does not reset cursor
-}
-
-const isLineLevel = (text, level) => {
-	if ((text.includes('/INFO') || text.includes('[System] [CHAT]')) && level === 'info') {
-		return true
-	}
-
-	if (text.includes('/WARN') && level === 'warn') {
-		return true
-	}
-
-	if (text.includes('/DEBUG') && level === 'debug') {
-		return true
-	}
-
-	if (text.includes('/TRACE') && level === 'trace') {
-		return true
-	}
-
-	const errorTriggers = ['/ERROR', 'Exception:', ':?]', 'Error', '[thread', '	at']
-	if (level === 'error') {
-		for (const trigger of errorTriggers) {
-			if (text.includes(trigger)) return true
-		}
-	}
-
-	if (text.trim()[0] === '#' && level === 'comment') {
-		return true
-	}
-	return false
-}
-
-const getLineWeight = (text) => {
-	if (
-		!logsColored ||
-		isLineLevel(text, 'info') ||
-		isLineLevel(text, 'debug') ||
-		isLineLevel(text, 'trace')
-	) {
-		return 'normal'
-	}
-
-	if (isLineLevel(text, 'error') || isLineLevel(text, 'warn')) {
-		return 'bold'
-	}
-}
-
-const getLineLevel = (text) => {
-	for (const level of levels) {
-		if (isLineLevel(text, level.toLowerCase())) {
-			return level
-		}
-	}
-}
-
-const getLineColor = (text, prefix) => {
-	if (isLineLevel(text, 'comment')) {
-		return 'var(--color-green)'
-	}
-
-	if (!logsColored || text.includes('[System] [CHAT]')) {
-		return 'var(--color-white)'
-	}
-	if (
-		(isLineLevel(text, 'info') || isLineLevel(text, 'debug') || isLineLevel(text, 'trace')) &&
-		prefix
-	) {
-		return 'var(--color-blue)'
-	}
-	if (isLineLevel(text, 'warn')) {
-		return 'var(--color-orange)'
-	}
-	if (isLineLevel(text, 'error')) {
-		return 'var(--color-red)'
-	}
-}
-
-const getLinePrefix = (text) => {
-	if (text.includes(']:')) {
-		return text.split(']:')[0] + ']:'
-	}
-}
-
-const getLineText = (text) => {
-	if (text.includes(']:')) {
-		if (text.split(']:').length > 2) {
-			return text.split(']:').slice(1).join(']:')
-		}
-		return text.split(']:')[1]
-	} else {
-		return text
-	}
-}
-
-function handleUserScroll() {
-	if (!isAutoScrolling.value) {
-		userScrolled.value = true
-	}
-}
-
-interval.value = setInterval(async () => {
-	if (logs.value.length > 0) {
-		logs.value[0] = await getLiveStdLog()
-		const container = logContainer.value
-		if (!container) return
-		const scrollEnd = container.scrollTop + container.clientHeight
-
-		// Allow resetting of userScrolled if the user scrolls to the bottom
-		if (selectedLogIndex.value === 0) {
-			if (scrollEnd >= container.scrollHeight - 10) userScrolled.value = false
-			if (!userScrolled.value) {
-				await nextTick()
-				isAutoScrolling.value = true
-				container.scrollTop = container.scrollHeight
-				setTimeout(() => (isAutoScrolling.value = false), 50)
-			}
-		}
-	}
-}, 250)
-
+const pollInterval = ref(null)
 let unlistenProcesses = null
 
 onMounted(async () => {
-	await setLogs()
 	await loadCrashLogs()
-	logContainer.value?.addEventListener('scroll', handleUserScroll)
+	await pollLiveLog()
 
-	unlistenProcesses = await process_listener(async (e) => {
-		if (e.event === 'launched') {
-			currentLiveLog.value = ''
+	pollInterval.value = setInterval(() => {
+		void pollLiveLog()
+	}, 250)
+
+	unlistenProcesses = await process_listener(async (event) => {
+		if (event.profile_path_id && event.profile_path_id !== profilePathId.value) return
+
+		if (event.event === 'launched') {
+			liveConsole.clear()
 			currentLiveLogCursor.value = 0
+			invalidate()
 			selectedLogIndex.value = 0
 		}
-		if (e.event === 'finished') {
-			currentLiveLog.value = ''
+		if (event.event === 'finished') {
+			invalidate()
 			currentLiveLogCursor.value = 0
-			userScrolled.value = false
-			await setLogs()
-			selectedLogIndex.value = 1
+			const freshLogs = await getHistoricalLogs(props.instance.path)
+			logs.value = buildLogList(freshLogs)
+			await loadCrashLogs()
 		}
 	}).catch(() => null)
 })
 
-onBeforeUnmount(() => {
-	logContainer.value?.removeEventListener('scroll', handleUserScroll)
-})
 onUnmounted(() => {
-	clearInterval(interval.value)
+	if (pollInterval.value) clearInterval(pollInterval.value)
 	unlistenProcesses?.()
 })
 </script>
 
 <style scoped lang="scss">
-.logs-page {
-	display: flex;
-	flex-direction: column;
-	gap: 1.5rem;
-}
-
-.log-card {
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-	min-height: 60vh;
-	min-width: 0;
-}
-
-.log-select {
-	max-width: 18rem;
-	border-radius: 999px;
-	background: color-mix(in oklch, var(--color-glass-bg-strong) 82%, transparent);
-	border: 1px solid var(--glass-border);
-	box-shadow: var(--shadow-card);
-}
-
 .crash-card {
-	padding: 1.5rem;
-	display: flex;
-	flex-direction: column;
-	gap: 1.25rem;
+	padding: 1rem;
+	border: 1px solid var(--glass-border);
+	background: color-mix(in srgb, var(--color-glass-bg-strong) 96%, transparent);
+	box-shadow: var(--glass-shadow);
+	backdrop-filter: blur(var(--glass-blur));
 }
 
 .crash-header {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: space-between;
 	gap: 1rem;
+	margin-bottom: 1rem;
 }
 
 .crash-grid {
 	display: grid;
-	grid-template-columns: minmax(220px, 1fr) minmax(320px, 2fr);
-	gap: 1.5rem;
+	grid-template-columns: minmax(18rem, 22rem) minmax(0, 1fr);
+	gap: 1rem;
 }
 
-.crash-settings {
-	display: flex;
-	flex-direction: column;
-	gap: 0.75rem;
-}
-
-.crash-input {
-	width: 100%;
-	background: color-mix(in oklch, var(--color-glass-bg-strong) 82%, transparent);
-	border: 1px solid var(--glass-border);
-	border-radius: 0.75rem;
-	padding: 0.5rem 0.75rem;
-	color: var(--color-contrast);
-	box-shadow: inset 0 1px 0 color-mix(in oklch, white 4%, transparent);
-}
-
+.crash-settings,
 .crash-logs {
 	display: flex;
 	flex-direction: column;
 	gap: 0.75rem;
+	padding: 1rem;
+	border: 1px solid color-mix(in srgb, var(--glass-border) 84%, transparent);
+	border-radius: 1rem;
+	background: color-mix(in srgb, var(--color-raised-bg) 92%, var(--color-glass-bg) 8%);
 }
 
-.crash-meta {
-	padding: 0.5rem 0.75rem;
-	border-radius: 0.75rem;
-	background: color-mix(in oklch, var(--color-button-bg) 88%, transparent);
-	border: 1px solid var(--glass-border);
+.label {
+	font-size: 0.8rem;
+	font-weight: 700;
+	color: var(--color-secondary);
+}
+
+.crash-input {
+	width: 100%;
+	border: 1px solid color-mix(in srgb, var(--glass-border) 86%, transparent);
+	border-radius: 0.9rem;
+	background: color-mix(in srgb, var(--color-button-bg) 88%, var(--color-raised-bg) 12%);
+	color: var(--color-contrast);
+	padding: 0.8rem 0.9rem;
+}
+
+.crash-input:focus {
+	outline: none;
+	border-color: color-mix(in srgb, var(--color-brand) 42%, var(--glass-border));
+	box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-brand-highlight) 68%, transparent);
+}
+
+.hint {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	padding: 0.9rem 1rem;
+	border-radius: 1rem;
+	border: 1px solid color-mix(in srgb, var(--glass-border) 80%, transparent);
+	background: color-mix(in srgb, var(--color-button-bg) 84%, var(--color-raised-bg) 16%);
+	color: var(--color-secondary);
+}
+
+.empty-state {
+	display: grid;
+	place-items: center;
+	min-height: 8rem;
+	border: 1px dashed color-mix(in srgb, var(--glass-border) 82%, transparent);
+	border-radius: 1rem;
+	color: var(--color-secondary);
+	background: color-mix(in srgb, var(--color-raised-bg) 94%, var(--color-button-bg) 6%);
 }
 
 .crash-actions {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.5rem;
+	gap: 0.75rem;
+	margin-top: auto;
+}
+
+.crash-card :deep(.btn-wrapper) {
+	--_bg: color-mix(in srgb, var(--color-button-bg) 88%, var(--color-raised-bg) 12%);
+	--_text: var(--color-base);
+	--_hover-bg: color-mix(in srgb, var(--color-button-bg-hover) 84%, transparent);
+	--_hover-text: var(--color-contrast);
+}
+
+.crash-card :deep(.btn-wrapper[color='primary']),
+.crash-card :deep(.btn-wrapper[color='brand']) {
+	--_bg: color-mix(in srgb, var(--color-button-bg-selected) 78%, transparent);
+	--_text: var(--color-button-text-selected);
+	--_hover-bg: color-mix(in srgb, var(--color-button-bg-selected) 92%, transparent);
+	--_hover-text: var(--color-button-text-selected);
 }
 
 .modal-content {
-	max-height: 70vh;
+	max-height: min(70vh, 44rem);
 	overflow: auto;
+	padding-right: 0.25rem;
 }
 
 .analysis-text {
-	margin: 0;
-	max-height: 60vh;
-	overflow: auto;
+	line-height: 1.6;
 }
 
-:deep(.analysis-text.markdown-body) {
-	font-family: var(--font-standard);
-	line-height: 1.5;
-	white-space: normal;
-	word-break: break-word;
+.revoria-console-theme {
+	--surface-1: color-mix(in srgb, var(--color-glass-bg-strong) 96%, transparent);
+	--surface-1_5: color-mix(in srgb, var(--color-glass-bg-strong) 88%, var(--color-raised-bg) 12%);
+	--surface-2: color-mix(in srgb, var(--color-raised-bg) 96%, transparent);
+	--surface-2_5: color-mix(in srgb, var(--color-raised-bg) 82%, var(--color-button-bg) 18%);
+	--surface-3: color-mix(in srgb, var(--color-button-bg) 90%, var(--color-raised-bg) 10%);
+	--surface-4: color-mix(in srgb, var(--glass-border) 84%, transparent);
+	--surface-5: color-mix(in srgb, var(--glass-border) 94%, var(--color-raised-bg) 6%);
+	--color-button-bg: color-mix(in srgb, var(--color-button-bg) 92%, var(--color-raised-bg) 8%);
+	--color-button-bg-hover: color-mix(in srgb, var(--color-button-bg-hover) 92%, var(--color-raised-bg) 8%);
+	--color-button-bg-active: color-mix(
+		in srgb,
+		var(--color-button-bg-selected) 62%,
+		var(--color-button-bg-hover) 38%
+	);
 }
 
-:deep(.analysis-text.markdown-body pre),
-:deep(.analysis-text.markdown-body code) {
-	font-family: var(--mono-font);
+.revoria-console-theme :deep(.console-layout) {
+	min-height: 100%;
 }
 
-:deep(.analysis-text.markdown-body table) {
-	display: block;
-	max-width: 100%;
-	overflow-x: auto;
-	border-collapse: collapse;
+.revoria-console-theme :deep(.console-layout .iconified-input),
+.revoria-console-theme :deep(.console-layout .relative.inline-block > span),
+.revoria-console-theme :deep(.console-layout .v-popper__inner) {
+	border-color: color-mix(in srgb, var(--glass-border) 82%, transparent) !important;
+	background: color-mix(in srgb, var(--color-button-bg) 92%, var(--color-raised-bg) 8%) !important;
+	color: var(--color-contrast) !important;
 }
 
-:deep(.analysis-text.markdown-body th),
-:deep(.analysis-text.markdown-body td) {
+.revoria-console-theme :deep(.console-layout input) {
+	color: var(--color-contrast) !important;
+}
+
+.revoria-console-theme :deep(.console-filter-pill) {
+	border-color: color-mix(in srgb, var(--glass-border) 82%, transparent) !important;
+	background: color-mix(in srgb, var(--color-button-bg) 88%, var(--color-raised-bg) 12%) !important;
+	color: var(--color-secondary) !important;
+}
+
+.revoria-console-theme :deep(.console-filter-pill:hover) {
+	background: color-mix(in srgb, var(--color-button-bg-hover) 86%, transparent) !important;
+	color: var(--color-contrast) !important;
+}
+
+.revoria-console-theme :deep(.console-filter-pill--active) {
+	border-color: color-mix(in srgb, var(--color-button-text-selected) 24%, var(--glass-border)) !important;
+	background: color-mix(in srgb, var(--color-button-bg-selected) 88%, var(--color-raised-bg) 12%) !important;
+	color: var(--color-button-text-selected) !important;
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-button-text-selected) 18%, transparent);
+}
+
+.revoria-console-theme :deep(.console-action-buttons .btn-wrapper) {
+	--_bg: color-mix(in srgb, var(--color-button-bg) 88%, var(--color-raised-bg) 12%);
+	--_text: var(--color-base);
+	--_hover-bg: color-mix(in srgb, var(--color-button-bg-hover) 84%, transparent);
+	--_hover-text: var(--color-contrast);
+}
+
+.revoria-console-theme :deep(.console-layout .btn-wrapper[color='red']),
+.revoria-console-theme :deep(.console-layout .btn-wrapper .text-red) {
+	--_text: var(--color-red);
+	--_hover-text: var(--color-red);
+}
+
+.revoria-console-theme :deep(.console-action-buttons button) {
 	white-space: nowrap;
 }
 
-.crash-select {
-	max-width: 20rem;
-	border-radius: 999px;
-	background: color-mix(in oklch, var(--color-glass-bg-strong) 82%, transparent);
-	border: 1px solid var(--glass-border);
-	box-shadow: var(--shadow-card);
+.revoria-console-theme :deep(.xterm),
+.revoria-console-theme :deep(.xterm-viewport),
+.revoria-console-theme :deep(.xterm-screen),
+.revoria-console-theme :deep(.xterm .xterm-screen) {
+	background: color-mix(in srgb, var(--color-raised-bg) 96%, transparent) !important;
 }
 
-:global(.v-popper__inner) {
-	background: var(--color-glass-bg-strong) !important;
-	border: 1px solid var(--glass-border);
-	box-shadow: var(--shadow-floating);
-	backdrop-filter: none !important;
-	-webkit-backdrop-filter: none !important;
-	color: var(--color-contrast);
+.revoria-console-theme :deep(.xterm-scrollable-element > .scrollbar.vertical > div) {
+	background: color-mix(in srgb, var(--color-button-bg-selected) 56%, var(--surface-5)) !important;
 }
 
-:global(.v-popper__arrow-inner) {
-	border-color: var(--glass-border);
+.revoria-console-theme :deep(.btn-wrapper[type='highlight']),
+.revoria-console-theme :deep(.btn-wrapper) {
+	color-scheme: inherit;
 }
 
-.button-row {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	gap: 0.5rem;
+.crash-select :deep(.dropdown) {
+	background: color-mix(in srgb, var(--color-button-bg) 92%, var(--color-raised-bg) 8%) !important;
 }
 
-.button-group {
-	display: flex;
-	flex-direction: row;
-	gap: 0.5rem;
-}
-
-.log-text {
-	width: 100%;
-	flex: 1 1 auto;
-	min-height: 18rem;
-	height: clamp(23rem, 50vh, 38rem);
-	font-family: var(--mono-font);
-	background-color: var(--color-accent-contrast);
-	color: var(--color-contrast);
-	border-radius: var(--radius-lg);
-	padding-top: 0.75rem;
-	overflow: hidden;
-	white-space: normal;
-	color-scheme: dark;
-}
-
-.filter-checkbox {
-	margin-bottom: 0.3rem;
-	font-size: 1rem;
-
-	svg {
-		display: flex;
-		align-self: center;
-		justify-self: center;
+@media (max-width: 960px) {
+	.crash-grid {
+		grid-template-columns: 1fr;
 	}
-}
-
-.filter-group {
-	display: flex;
-	padding: 0.6rem;
-	flex-direction: row;
-	overflow: auto;
-	gap: 0.5rem;
-
-	&::-webkit-scrollbar-track,
-	&::-webkit-scrollbar-thumb {
-		border-radius: 10px;
-	}
-}
-
-:deep(.vue-recycle-scroller__item-wrapper) {
-	overflow: visible; /* Enables horizontal scrolling */
-}
-
-:deep(.vue-recycle-scroller) {
-	&::-webkit-scrollbar-corner {
-		background-color: var(--color-bg);
-		border-radius: 0 0 10px 0;
-	}
-}
-
-.scroller {
-	height: 100%;
-	overflow: auto;
-	padding-bottom: 0.75rem;
-}
-
-.user {
-	min-height: 20px;
-	padding: 0 1.5rem;
-	display: flex;
-	align-items: flex-start;
-	user-select: text;
-	-webkit-user-select: text;
-	white-space: pre-wrap;
-	word-break: break-word;
 }
 </style>

@@ -574,7 +574,11 @@ interface CleanupTarget {
 	display: flex;
 	flex-direction: column;
 	gap: 1.5rem;
-	background: var(--color-glass-bg-strong);
+	background: linear-gradient(
+		180deg,
+		color-mix(in srgb, var(--color-glass-bg-strong) 94%, transparent),
+		color-mix(in srgb, var(--color-glass-bg) 98%, transparent)
+	);
 	border: 1px solid var(--glass-border);
 	box-shadow: var(--glass-shadow);
 }
@@ -586,7 +590,7 @@ interface CleanupTarget {
 }
 
 .summary-card {
-	background: var(--color-glass-bg);
+	background: color-mix(in srgb, var(--color-glass-bg) 94%, transparent);
 	border: 1px solid var(--glass-border);
 	border-radius: var(--radius-lg);
 	padding: 1rem;
@@ -618,7 +622,7 @@ interface CleanupTarget {
 .instance-card {
 	padding: 1rem;
 	border-radius: var(--radius-lg);
-	background: var(--color-glass-bg);
+	background: color-mix(in srgb, var(--color-glass-bg) 94%, transparent);
 	border: 1px solid var(--glass-border);
 	display: flex;
 	flex-direction: column;
@@ -651,9 +655,10 @@ interface CleanupTarget {
 .chip {
 	padding: 0.25rem 0.5rem;
 	border-radius: 999px;
-	background: var(--color-button-bg);
+	background: color-mix(in srgb, var(--color-button-bg) 90%, transparent);
 	font-size: 0.75rem;
 	color: var(--color-secondary);
+	border: 1px solid color-mix(in srgb, var(--glass-border) 80%, transparent);
 }
 
 .instance-actions {
@@ -669,7 +674,7 @@ interface CleanupTarget {
 }
 
 .rule-card {
-	background: var(--color-glass-bg);
+	background: color-mix(in srgb, var(--color-glass-bg) 94%, transparent);
 	border: 1px solid var(--glass-border);
 	border-radius: var(--radius-lg);
 	padding: 1rem;
@@ -687,7 +692,7 @@ interface CleanupTarget {
 
 .rule-input {
 	width: 100%;
-	background: var(--color-super-raised-bg);
+	background: color-mix(in srgb, var(--color-button-bg) 88%, transparent);
 	border: 1px solid var(--glass-border);
 	border-radius: 0.75rem;
 	padding: 0.5rem 0.75rem;
@@ -710,9 +715,10 @@ interface CleanupTarget {
 .empty-state {
 	padding: 1rem;
 	border-radius: var(--radius-lg);
-	background: var(--color-button-bg);
+	background: color-mix(in srgb, var(--color-button-bg) 88%, transparent);
 	color: var(--color-secondary);
 	text-align: center;
+	border: 1px solid color-mix(in srgb, var(--glass-border) 82%, transparent);
 }
 
 .modal-content {
@@ -753,8 +759,8 @@ interface CleanupTarget {
 	align-items: center;
 	padding: 0.6rem 0.75rem;
 	border-radius: var(--radius-md);
-	background: var(--color-button-bg);
-	border: 1px solid var(--color-button-border);
+	background: color-mix(in srgb, var(--color-button-bg) 88%, transparent);
+	border: 1px solid color-mix(in srgb, var(--glass-border) 82%, transparent);
 }
 
 .modal-actions {

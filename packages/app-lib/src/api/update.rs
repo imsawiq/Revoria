@@ -13,8 +13,10 @@ pub(crate) async fn get_resource(
         .ok_or("[AR] • Failed to determine download directory")?;
     let full_path = download_dir.join(local_filename);
 
-    let response =
-        crate::util::fetch::REQWEST_CLIENT.get(download_url).send().await?;
+    let response = crate::util::fetch::REQWEST_CLIENT
+        .get(download_url)
+        .send()
+        .await?;
     let bytes = response.bytes().await?;
     let mut dest_file = AsyncFile::create(&full_path).await?;
     dest_file.write_all(&bytes).await?;
@@ -36,7 +38,9 @@ pub(crate) async fn get_resource(
     Ok(())
 }
 
-async fn handle_windows_file(path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
+async fn handle_windows_file(
+    path: &PathBuf,
+) -> Result<(), Box<dyn std::error::Error>> {
     let filename = path
         .file_name()
         .and_then(|f| f.to_str())
@@ -51,7 +55,9 @@ async fn handle_windows_file(path: &PathBuf) -> Result<(), Box<dyn std::error::E
     }
 }
 
-async fn run_windows_installer(path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
+async fn run_windows_installer(
+    path: &PathBuf,
+) -> Result<(), Box<dyn std::error::Error>> {
     let installer_path = path.to_str().unwrap_or_default();
 
     let status = if installer_path.ends_with(".msi") {
@@ -76,7 +82,9 @@ async fn run_windows_installer(path: &PathBuf) -> Result<(), Box<dyn std::error:
     }
 }
 
-async fn open_windows_folder(path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
+async fn open_windows_folder(
+    path: &PathBuf,
+) -> Result<(), Box<dyn std::error::Error>> {
     let folder = path.parent().unwrap_or(path);
     let status = Command::new("explorer")
         .arg(folder.display().to_string())
@@ -90,7 +98,9 @@ async fn open_windows_folder(path: &PathBuf) -> Result<(), Box<dyn std::error::E
     }
 }
 
-async fn open_macos_file(path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
+async fn open_macos_file(
+    path: &PathBuf,
+) -> Result<(), Box<dyn std::error::Error>> {
     let status = Command::new("open")
         .arg(path.to_str().unwrap_or_default())
         .status()
@@ -103,7 +113,9 @@ async fn open_macos_file(path: &PathBuf) -> Result<(), Box<dyn std::error::Error
     }
 }
 
-async fn open_default(path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
+async fn open_default(
+    path: &PathBuf,
+) -> Result<(), Box<dyn std::error::Error>> {
     let status = Command::new(".")
         .arg(path.to_str().unwrap_or_default())
         .status()

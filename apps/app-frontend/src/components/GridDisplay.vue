@@ -508,36 +508,76 @@ const filteredResults = computed(() => {
 	gap: 0.5rem;
 	align-items: center;
 	flex-wrap: wrap;
+	min-width: 0;
 }
 
 .toolbar-select {
+	flex: 1 1 13.5rem;
 	max-width: 16rem;
+	min-width: 0;
 	border-radius: 999px;
+	background: transparent;
+	border: none;
+	box-shadow: none;
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
+}
+
+.toolbar-select :deep(.animated-dropdown) {
+	width: 100%;
+	min-width: 0;
+}
+
+.toolbar-select :deep(.selected) {
 	background: color-mix(in srgb, var(--color-glass-bg-strong) 96%, transparent);
 	border: 1px solid var(--glass-border);
 	box-shadow: var(--shadow-card);
-	backdrop-filter: none;
-	-webkit-backdrop-filter: none;
+	border-radius: 999px;
+	min-width: 0;
 }
 
-/* DropdownSelect uses v-popper; teleported nodes still carry the scope attribute so this applies */
-:deep(.v-popper__inner) {
+.toolbar-select :deep(.selected > div) {
+	min-width: 0;
+	flex: 1;
+	overflow: hidden;
+}
+
+.toolbar-select :deep(.selected > div > span) {
+	display: block;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.toolbar-select :deep(.options-wrapper) {
+	overflow: visible;
+}
+
+.toolbar-select :deep(.options) {
 	background: color-mix(in srgb, var(--color-glass-bg-strong) 98%, transparent);
 	border: 1px solid var(--glass-border);
 	box-shadow: var(--shadow-floating);
-	backdrop-filter: none;
-	-webkit-backdrop-filter: none;
 	color: var(--color-contrast);
 }
 
-:deep(.v-popper__arrow-inner) {
-	border-color: var(--glass-border);
+.toolbar-select :deep(.option) {
+	min-width: 0;
+}
+
+.toolbar-select :deep(.option label) {
+	display: block;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .toolbar-label {
 	margin-right: 0.35rem;
 	font-weight: 700;
 	color: var(--color-secondary);
+	flex-shrink: 0;
 }
 
 .toolbar-label::after {
@@ -547,12 +587,25 @@ const filteredResults = computed(() => {
 .toolbar-value {
 	font-weight: 800;
 	color: var(--color-contrast);
+	flex: 1;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .toolbar-select-content {
-	display: inline-flex;
+	display: flex;
 	align-items: baseline;
+	flex-wrap: nowrap;
 	gap: 0.35rem;
+	white-space: nowrap;
+	max-width: 100%;
+	min-width: 0;
+}
+
+.toolbar-label,
+.toolbar-value {
+	white-space: nowrap;
 }
 
 .group-section {

@@ -32,6 +32,10 @@ const props = defineProps({
 		type: Function,
 		default: null,
 	},
+	fullScreen: {
+		type: Boolean,
+		default: false,
+	},
 })
 
 const modal = ref<any>(null)
@@ -63,5 +67,6 @@ const onModalHide = () => {
 		:open-in-new-tab="openInNewTab"
 		:on-hide="onModalHide"
 		:noblur="!themeStore.advancedRendering"
+		:full-screen="fullScreen"
 	/>
 </template>

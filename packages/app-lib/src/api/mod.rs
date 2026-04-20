@@ -13,8 +13,8 @@ pub mod process;
 pub mod profile;
 pub mod server_address;
 pub mod settings;
-pub mod update; // [AR] Feature
 pub mod tags;
+pub mod update; // [AR] Feature
 pub mod worlds;
 
 pub mod data {

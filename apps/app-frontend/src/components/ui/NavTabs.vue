@@ -8,9 +8,9 @@
 			:key="getTabKey(link)"
 			:to="buildTo(link)"
 			:data-tab-index="index"
-			:class="`navtab-link button-animation shrink-0 z-[1] flex flex-row items-center gap-2 px-4 py-2 focus:rounded-full ${activeIndex === index && !subpageSelected ? 'text-button-textSelected is-active' : activeIndex === index && subpageSelected ? 'text-contrast is-subpage' : 'text-primary'}`"
+			:class="`navtab-link button-animation shrink-0 z-[1] flex min-h-10 flex-row items-center gap-2 px-4 py-2 leading-none focus:rounded-full ${activeIndex === index && !subpageSelected ? 'text-button-textSelected is-active' : activeIndex === index && subpageSelected ? 'text-contrast is-subpage' : 'text-primary'}`"
 		>
-			<component :is="link.icon" v-if="link.icon" class="size-5" />
+			<component :is="link.icon" v-if="link.icon" class="size-5 shrink-0" />
 			<span class="text-nowrap">{{ link.label }}</span>
 		</RouterLink>
 		<div
@@ -149,11 +149,16 @@ async function startAnimation() {
 
 	if (!el) return
 
-	// Use local offset metrics to avoid desync when the tab container is horizontally scrolled.
-	sliderX.value = Math.max(0, Math.round(el.offsetLeft))
-	sliderY.value = Math.max(0, Math.round(el.offsetTop))
-	sliderWidth.value = Math.round(el.offsetWidth)
-	sliderHeight.value = Math.round(el.offsetHeight)
+	const navRect = navElement.value.getBoundingClientRect()
+	const tabRect = el.getBoundingClientRect()
+
+	sliderX.value = Math.max(
+		0,
+		Math.round(tabRect.left - navRect.left + navElement.value.scrollLeft),
+	)
+	sliderY.value = Math.max(0, Math.round(tabRect.top - navRect.top + navElement.value.scrollTop))
+	sliderWidth.value = Math.round(tabRect.width)
+	sliderHeight.value = Math.round(tabRect.height)
 }
 
 onMounted(() => {
@@ -177,7 +182,6 @@ watch(
 </script>
 <style scoped>
 .navtabs-transition {
-	/* Delay on opacity is to hide any jankiness as the page loads */
 	transition:
 		transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
 		width 340ms cubic-bezier(0.22, 1, 0.36, 1),

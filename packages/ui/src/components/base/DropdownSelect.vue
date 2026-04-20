@@ -17,8 +17,6 @@
 			class="selected"
 			:class="{
 				disabled: disabled,
-				'render-down': dropdownVisible && !renderUp && !disabled,
-				'render-up': dropdownVisible && renderUp && !disabled,
 			}"
 			@click="toggleDropdown"
 		>
@@ -230,25 +228,16 @@ const isChildOfDropdown = (element) => {
 		box-shadow:
 			var(--shadow-inset-sm),
 			0 0 0 0 transparent;
-
-		transition: 0.05s;
-
-		&:not(.render-down):not(.render-up) {
-			transition-delay: 0.2s;
-		}
+		transform: none;
+		transition:
+			background-color 0.15s ease,
+			color 0.15s ease,
+			border-color 0.15s ease;
 
 		&.disabled {
 			cursor: not-allowed;
 			filter: grayscale(50%);
 			opacity: 0.5;
-		}
-
-		&.render-up {
-			border-radius: 0 0 var(--radius-md) var(--radius-md);
-		}
-
-		&.render-down {
-			border-radius: var(--radius-md) var(--radius-md) 0 0;
 		}
 
 		&:focus {
@@ -258,7 +247,7 @@ const isChildOfDropdown = (element) => {
 		&:focus-visible {
 			box-shadow:
 				var(--shadow-inset-sm),
-				0 0 0 0.2rem var(--color-brand-shadow);
+				0 0 0 1px var(--color-brand-shadow);
 		}
 
 		&:hover:not(.disabled) {
@@ -282,6 +271,7 @@ const isChildOfDropdown = (element) => {
 		border: 1px solid var(--color-button-border);
 		background-color: var(--color-raised-bg);
 		box-shadow: var(--shadow-inset-sm), var(--shadow-floating);
+		border-radius: var(--radius-md);
 
 		.option {
 			background-color: var(--color-raised-bg);
@@ -321,42 +311,51 @@ const isChildOfDropdown = (element) => {
 
 .options-enter-active,
 .options-leave-active {
-	transition: transform 0.2s ease;
+	transition:
+		transform 0.18s ease,
+		opacity 0.18s ease;
 }
 
 .options-enter-from,
 .options-leave-to {
-	// this is not 100% due to a safari bug
 	&.up {
-		transform: translateY(99.999%);
+		opacity: 0;
+		transform: translateY(0.4rem) scaleY(0.96);
 	}
 
 	&.down {
-		transform: translateY(-99.999%);
+		opacity: 0;
+		transform: translateY(-0.4rem) scaleY(0.96);
 	}
 }
 
 .options-enter-to,
 .options-leave-from {
 	&.up {
-		transform: translateY(0%);
+		opacity: 1;
+		transform: translateY(0) scaleY(1);
+	}
+
+	&.down {
+		opacity: 1;
+		transform: translateY(0) scaleY(1);
 	}
 }
 
 .options-wrapper {
 	position: absolute;
 	width: 100%;
-	overflow: auto;
+	overflow: visible;
 	z-index: 50;
 
 	&.up {
-		top: 0;
-		transform: translateY(-99.999%);
-		border-radius: var(--radius-md) var(--radius-md) 0 0;
+		bottom: calc(100% + 0.35rem);
+		border-radius: var(--radius-lg);
 	}
 
 	&.down {
-		border-radius: 0 0 var(--radius-md) var(--radius-md);
+		top: calc(100% + 0.35rem);
+		border-radius: var(--radius-lg);
 	}
 }
 </style>

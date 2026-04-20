@@ -7,7 +7,11 @@
 		<button
 			v-for="filter in options"
 			:key="`filter-${filter.id}`"
-			:class="`px-2 py-1 rounded-full font-semibold leading-none border-none cursor-pointer active:scale-[0.97] duration-100 transition-all ${selectedFilters.includes(filter.id) ? 'bg-brand-highlight text-brand' : 'bg-bg-raised text-secondary'}`"
+			:class="`px-2 py-1 rounded-full font-semibold leading-none border border-solid cursor-pointer active:scale-[0.97] duration-100 transition-all ${
+				selectedFilters.includes(filter.id)
+					? 'border-[--color-brand] bg-[color:var(--color-brand-highlight)] text-[--color-brand]'
+					: 'border-[--glass-border] bg-[--color-glass-bg-strong] text-secondary hover:bg-[--color-button-bg-hover] hover:text-contrast'
+			}`"
 			@click="toggleFilter(filter.id)"
 		>
 			{{ formatMessage(filter.message) }}

@@ -11,14 +11,13 @@ use crate::profile::QuickPlayType;
 use crate::state::{
     AccountType, Credentials, JavaVersion, ProcessMetadata, ProfileInstallStage,
 };
-use crate::util::{io, utils};
 use crate::util::rpc::RpcServerBuilder;
+use crate::util::{io, utils};
 use crate::{State, get_resource_file, process, state as st};
 use chrono::Utc;
 use daedalus as d;
 use daedalus::minecraft::{LoggingSide, RuleAction, VersionInfo};
 use daedalus::modded::LoaderVersion;
-use rand::seq::SliceRandom; // [AR] Feature
 use regex::Regex;
 use serde::Deserialize;
 use st::Profile;
@@ -31,7 +30,7 @@ mod args;
 pub mod download;
 pub mod quick_play_version;
 
-use crate::state::ACTIVE_STATE;
+use crate::state::select_active_phrase;
 
 // All nones -> disallowed
 // 1+ true -> allowed
@@ -793,7 +792,7 @@ pub async fn launch_minecraft(
     }
 
     // [AR] Feature
-    let selected_phrase = ACTIVE_STATE.choose(&mut rand::thread_rng()).unwrap();
+    let selected_phrase = select_active_phrase();
     let _ = state
         .discord_rpc
         .set_activity(&format!("{} {}", selected_phrase, profile.name), true)

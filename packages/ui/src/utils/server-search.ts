@@ -20,6 +20,8 @@ import { formatCategory } from '@modrinth/utils'
 import { computed, type Ref, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
+import { defineMessages, useVIntl } from '#ui/composables/i18n'
+
 import type { FilterType, FilterValue, SortType, Tags } from './search'
 
 const SERVER_REGIONS = [
@@ -51,15 +53,6 @@ const SERVER_LANGUAGES = [
 	{ code: 'fi', name: 'Finnish' },
 ]
 
-const SERVER_SORT_TYPES: SortType[] = [
-	{ display: 'Relevance', name: 'relevance' },
-	{ display: 'Verified Plays', name: 'minecraft_java_server.verified_plays_2w' },
-	{ display: 'Players', name: 'minecraft_java_server.ping.data.players_online' },
-	{ display: 'Followers', name: 'follows' },
-	{ display: 'Date Published', name: 'date_created' },
-	{ display: 'Date Updated', name: 'date_modified' },
-]
-
 const FILTER_FIELD_MAP: Record<string, string> = {
 	server_content_type: 'minecraft_java_server.content.kind',
 	server_game_version: 'minecraft_java_server.content.supported_game_versions',
@@ -68,12 +61,67 @@ const FILTER_FIELD_MAP: Record<string, string> = {
 	server_language: 'minecraft_server.languages',
 }
 
-const SERVER_HEADER_LABELS: Record<string, string> = {
-	minecraft_server_community: 'Community',
-	minecraft_server_features: 'Features',
-	minecraft_server_gameplay: 'Gameplay',
-	minecraft_server_meta: 'Meta',
-}
+const messages = defineMessages({
+	sortRelevance: { id: 'server.search.sort.relevance', defaultMessage: 'Relevance' },
+	sortVerifiedPlays: {
+		id: 'server.search.sort.verified-plays',
+		defaultMessage: 'Verified Plays',
+	},
+	sortPlayers: { id: 'server.search.sort.players', defaultMessage: 'Players' },
+	sortFollowers: { id: 'server.search.sort.followers', defaultMessage: 'Followers' },
+	sortDatePublished: {
+		id: 'server.search.sort.date-published',
+		defaultMessage: 'Date Published',
+	},
+	sortDateUpdated: {
+		id: 'server.search.sort.date-updated',
+		defaultMessage: 'Date Updated',
+	},
+	headerCommunity: {
+		id: 'server.search.header.community',
+		defaultMessage: 'Community',
+	},
+	headerFeatures: { id: 'server.search.header.features', defaultMessage: 'Features' },
+	headerGameplay: { id: 'server.search.header.gameplay', defaultMessage: 'Gameplay' },
+	headerMeta: { id: 'server.search.header.meta', defaultMessage: 'Meta' },
+	status: { id: 'server.search.filter.status', defaultMessage: 'Status' },
+	statusOnline: { id: 'server.search.filter.status-online', defaultMessage: 'Online' },
+	statusOffline: { id: 'server.search.filter.status-offline', defaultMessage: 'Offline' },
+	contentType: { id: 'server.search.filter.content-type', defaultMessage: 'Type' },
+	contentVanilla: { id: 'server.search.filter.content-vanilla', defaultMessage: 'Vanilla' },
+	contentModded: { id: 'server.search.filter.content-modded', defaultMessage: 'Modded' },
+	gameVersion: { id: 'server.search.filter.game-version', defaultMessage: 'Game Version' },
+	region: { id: 'server.search.filter.region', defaultMessage: 'Region' },
+	language: { id: 'server.search.filter.language', defaultMessage: 'Language' },
+	categorySkyblock: { id: 'server.search.category.skyblock', defaultMessage: 'Skyblock' },
+	categoryPrison: { id: 'server.search.category.prison', defaultMessage: 'Prison' },
+	categorySmp: { id: 'server.search.category.smp', defaultMessage: 'SMP' },
+	categoryPokemon: { id: 'server.search.category.pokemon', defaultMessage: 'Pokemon' },
+	categoryAdventure: { id: 'server.search.category.adventure', defaultMessage: 'Adventure' },
+	categoryAnarchy: { id: 'server.search.category.anarchy', defaultMessage: 'Anarchy' },
+	categoryPvp: { id: 'server.search.category.pvp', defaultMessage: 'PvP' },
+	categoryPve: { id: 'server.search.category.pve', defaultMessage: 'PvE' },
+	categoryBosses: { id: 'server.search.category.bosses', defaultMessage: 'Bosses' },
+	categoryNetwork: { id: 'server.search.category.network', defaultMessage: 'Network' },
+	categoryCustomContent: {
+		id: 'server.search.category.custom-content',
+		defaultMessage: 'Custom content',
+	},
+	categoryMinigames: { id: 'server.search.category.minigames', defaultMessage: 'Minigames' },
+	categoryParkour: { id: 'server.search.category.parkour', defaultMessage: 'Parkour' },
+	categoryQuesting: { id: 'server.search.category.questing', defaultMessage: 'Questing' },
+	categoryLifesteal: { id: 'server.search.category.lifesteal', defaultMessage: 'Lifesteal' },
+	categoryWhitelisted: {
+		id: 'server.search.category.whitelisted',
+		defaultMessage: 'Whitelisted',
+	},
+	categoryGens: { id: 'server.search.category.gens', defaultMessage: 'Gens' },
+	categoryTechnical: { id: 'server.search.category.technical', defaultMessage: 'Technical' },
+	categoryWorldResets: {
+		id: 'server.search.category.world-resets',
+		defaultMessage: 'World resets',
+	},
+})
 
 const SERVER_CATEGORY_ICON_COMPONENTS: Record<string, unknown> = {
 	skyblock: CloudIcon,
@@ -98,8 +146,17 @@ const SERVER_CATEGORY_ICON_COMPONENTS: Record<string, unknown> = {
 	world_resets: RefreshCwIcon,
 }
 
-function formatServerHeader(header: string): string {
-	if (SERVER_HEADER_LABELS[header]) return SERVER_HEADER_LABELS[header]
+function formatServerHeader(formatMessage: ReturnType<typeof useVIntl>['formatMessage'], header: string): string {
+	switch (header) {
+		case 'minecraft_server_community':
+			return formatMessage(messages.headerCommunity)
+		case 'minecraft_server_features':
+			return formatMessage(messages.headerFeatures)
+		case 'minecraft_server_gameplay':
+			return formatMessage(messages.headerGameplay)
+		case 'minecraft_server_meta':
+			return formatMessage(messages.headerMeta)
+	}
 	return header
 		.replaceAll('_', ' ')
 		.replace(/\b\w/g, (char) => char.toUpperCase())
@@ -129,6 +186,53 @@ function resolveServerCategoryIconByName(name: string, apiIcon: unknown) {
 	)
 }
 
+function formatServerCategoryName(formatMessage: ReturnType<typeof useVIntl>['formatMessage'], name: string) {
+	const normalized = name.toLowerCase().replace(/[-\s]/g, '_')
+	switch (normalized) {
+		case 'skyblock':
+			return formatMessage(messages.categorySkyblock)
+		case 'prison':
+			return formatMessage(messages.categoryPrison)
+		case 'smp':
+			return formatMessage(messages.categorySmp)
+		case 'pokemon':
+			return formatMessage(messages.categoryPokemon)
+		case 'adventure':
+			return formatMessage(messages.categoryAdventure)
+		case 'anarchy':
+			return formatMessage(messages.categoryAnarchy)
+		case 'pvp':
+			return formatMessage(messages.categoryPvp)
+		case 'pve':
+			return formatMessage(messages.categoryPve)
+		case 'bosses':
+			return formatMessage(messages.categoryBosses)
+		case 'network':
+			return formatMessage(messages.categoryNetwork)
+		case 'custom_content':
+		case 'custom_content_':
+			return formatMessage(messages.categoryCustomContent)
+		case 'minigames':
+			return formatMessage(messages.categoryMinigames)
+		case 'parkour':
+			return formatMessage(messages.categoryParkour)
+		case 'questing':
+			return formatMessage(messages.categoryQuesting)
+		case 'lifesteal':
+			return formatMessage(messages.categoryLifesteal)
+		case 'whitelisted':
+			return formatMessage(messages.categoryWhitelisted)
+		case 'gens':
+			return formatMessage(messages.categoryGens)
+		case 'technical':
+			return formatMessage(messages.categoryTechnical)
+		case 'world_resets':
+			return formatMessage(messages.categoryWorldResets)
+		default:
+			return formatCategory(name)
+	}
+}
+
 function getFilterField(filterId: string): string | undefined {
 	if (filterId.startsWith('server_category_')) return 'categories'
 	return FILTER_FIELD_MAP[filterId]
@@ -140,6 +244,7 @@ export function useServerSearch(opts: {
 	maxResults: Ref<number>
 	currentPage: Ref<number>
 }) {
+	const { formatMessage } = useVIntl()
 	const toPositiveInt = (value: unknown, fallback: number) => {
 		const parsed = Number(value)
 		if (!Number.isFinite(parsed)) return fallback
@@ -150,7 +255,21 @@ export function useServerSearch(opts: {
 	const { tags, query, maxResults, currentPage } = opts
 	const route = useRoute()
 
-	const serverCurrentSortType = ref<SortType>(SERVER_SORT_TYPES[0])
+	const serverSortTypes = computed<SortType[]>(() => [
+		{ display: formatMessage(messages.sortRelevance), name: 'relevance' },
+		{
+			display: formatMessage(messages.sortVerifiedPlays),
+			name: 'minecraft_java_server.verified_plays_2w',
+		},
+		{
+			display: formatMessage(messages.sortPlayers),
+			name: 'minecraft_java_server.ping.data.players_online',
+		},
+		{ display: formatMessage(messages.sortFollowers), name: 'follows' },
+		{ display: formatMessage(messages.sortDatePublished), name: 'date_created' },
+		{ display: formatMessage(messages.sortDateUpdated), name: 'date_modified' },
+	])
+	const serverCurrentSortType = ref<SortType>(serverSortTypes.value[0])
 	const serverCurrentFilters = ref<FilterValue[]>([{ type: 'server_status', option: 'online' }])
 	const serverToggledGroups = ref<string[]>([])
 
@@ -163,7 +282,7 @@ export function useServerSearch(opts: {
 			if (!categoryFilters[filterTypeId]) {
 				categoryFilters[filterTypeId] = {
 					id: filterTypeId,
-					formatted_name: formatServerHeader(c.header),
+					formatted_name: formatServerHeader(formatMessage, c.header),
 					supported_project_types: ['server'],
 					display: 'all',
 					query_param: 'sc',
@@ -172,9 +291,9 @@ export function useServerSearch(opts: {
 					options: [],
 				}
 			}
-			categoryFilters[filterTypeId].options.push({
+				categoryFilters[filterTypeId].options.push({
 				id: c.name,
-				formatted_name: formatCategory(c.name),
+				formatted_name: formatServerCategoryName(formatMessage, c.name),
 				icon: resolveServerCategoryIconByName(c.name, c.icon),
 				method: 'or',
 				value: c.name,
@@ -195,21 +314,31 @@ export function useServerSearch(opts: {
 		return [
 			{
 				id: 'server_content_type',
-				formatted_name: 'Type',
+				formatted_name: formatMessage(messages.contentType),
 				supported_project_types: ['server'],
 				display: 'all',
 				query_param: 'sct',
 				supports_negative_filter: false,
 				searchable: false,
 				options: [
-					{ id: 'vanilla', formatted_name: 'Vanilla', method: 'or', value: 'vanilla' },
-					{ id: 'modpack', formatted_name: 'Modded', method: 'or', value: 'modpack' },
+					{
+						id: 'vanilla',
+						formatted_name: formatMessage(messages.contentVanilla),
+						method: 'or',
+						value: 'vanilla',
+					},
+					{
+						id: 'modpack',
+						formatted_name: formatMessage(messages.contentModded),
+						method: 'or',
+						value: 'modpack',
+					},
 				],
 			},
 			...sectionFilters,
 			{
 				id: 'server_game_version',
-				formatted_name: 'Game Version',
+				formatted_name: formatMessage(messages.gameVersion),
 				supported_project_types: ['server'],
 				display: 'scrollable',
 				query_param: 'sgv',
@@ -225,7 +354,7 @@ export function useServerSearch(opts: {
 			},
 			{
 				id: 'server_region',
-				formatted_name: 'Region',
+				formatted_name: formatMessage(messages.region),
 				supported_project_types: ['server'],
 				display: 'all',
 				query_param: 'sr',
@@ -240,7 +369,7 @@ export function useServerSearch(opts: {
 			},
 			{
 				id: 'server_language',
-				formatted_name: 'Language',
+				formatted_name: formatMessage(messages.language),
 				supported_project_types: ['server'],
 				display: 'scrollable',
 				query_param: 'sl',
@@ -255,15 +384,25 @@ export function useServerSearch(opts: {
 			},
 			{
 				id: 'server_status',
-				formatted_name: 'Status',
+				formatted_name: formatMessage(messages.status),
 				supported_project_types: ['server'],
 				display: 'all',
 				query_param: 'sst',
 				supports_negative_filter: false,
 				searchable: false,
 				options: [
-					{ id: 'online', formatted_name: 'Online', method: 'or', value: 'online' },
-					{ id: 'offline', formatted_name: 'Offline', method: 'or', value: 'offline' },
+					{
+						id: 'online',
+						formatted_name: formatMessage(messages.statusOnline),
+						method: 'or',
+						value: 'online',
+					},
+					{
+						id: 'offline',
+						formatted_name: formatMessage(messages.statusOffline),
+						method: 'or',
+						value: 'offline',
+					},
 				],
 			},
 		]
@@ -325,7 +464,7 @@ export function useServerSearch(opts: {
 		}
 		if (q.ss) {
 			serverCurrentSortType.value =
-				SERVER_SORT_TYPES.find((s) => s.name === String(q.ss)) ?? SERVER_SORT_TYPES[0]
+				serverSortTypes.value.find((s) => s.name === String(q.ss)) ?? serverSortTypes.value[0]
 		}
 		for (const filterType of serverFilterTypes.value) {
 			const paramValue = q[filterType.query_param]
@@ -378,7 +517,7 @@ export function useServerSearch(opts: {
 		serverCurrentSortType,
 		serverCurrentFilters,
 		serverToggledGroups,
-		serverSortTypes: SERVER_SORT_TYPES,
+		serverSortTypes,
 		serverFilterTypes,
 		serverRequestParams,
 		createServerPageParams,

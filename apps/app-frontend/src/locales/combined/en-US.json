@@ -128,6 +128,54 @@
   "instance.logs.share.text": {
     "message": "Check out this log from an instance on the Modrinth App"
   },
+  "project.about.details.title": {
+    "defaultMessage": "Details"
+  },
+  "project.versions.showing": {
+    "defaultMessage": "Showing"
+  },
+  "project.versions.to": {
+    "defaultMessage": "to"
+  },
+  "project.versions.of": {
+    "defaultMessage": "of"
+  },
+  "project.versions.name": {
+    "defaultMessage": "Name"
+  },
+  "project.versions.game-version": {
+    "defaultMessage": "Game version"
+  },
+  "project.versions.platforms": {
+    "defaultMessage": "Platforms"
+  },
+  "project.versions.published": {
+    "defaultMessage": "Published"
+  },
+  "project.versions.downloads": {
+    "defaultMessage": "Downloads"
+  },
+  "project.versions.compatibility": {
+    "defaultMessage": "Compatibility"
+  },
+  "project.versions.stats": {
+    "defaultMessage": "Stats"
+  },
+  "browse.server.status.online": {
+    "defaultMessage": "Server online"
+  },
+  "browse.server.ping.unavailable": {
+    "defaultMessage": "Ping unavailable"
+  },
+  "browse.server.ping.value": {
+    "defaultMessage": "{ping} ms"
+  },
+  "browse.server.action.play": {
+    "defaultMessage": "Play"
+  },
+  "instance.logs.share.open-link": {
+    "defaultMessage": "Open link"
+  },
   "settings.default-instance.height.title": {
     "message": "Height"
   },
@@ -579,7 +627,7 @@
     "defaultMessage": "North America"
   },
   "header.category.performance-impact": {
-    "defaultMessage": "Performance impact"
+    "message": "Performance impact"
   },
   "settings.appearance.launcher-language.option.russian": {
     "message": "Russian"
@@ -852,7 +900,7 @@
     "message": "Search"
   },
   "header.category.minecraft-server-features": {
-    "defaultMessage": "Features"
+    "message": "Features"
   },
   "project.tab.files": {
     "message": "Files"
@@ -1101,43 +1149,10 @@
     "message": "Installing new version"
   },
   "header.category.feature": {
-    "defaultMessage": "Feature"
+    "message": "Features"
   },
   "instance.edit-world.title": {
     "message": "Edit world"
-  },
-  "app.april-fools.theme.title": {
-    "message": "Important launcher branding update"
-  },
-  "app.april-fools.theme.body": {
-    "message": "Chaotic Rainbow is now the main launcher theme for today. Your actual theme preference is safe."
-  },
-  "app.april-fools.cleanup.message": {
-    "message": "You did not clean up after yourself. Clean up your mess."
-  },
-  "app.april-fools.launcher.title": {
-    "message": "Launcher found another launcher"
-  },
-  "app.april-fools.launcher.body": {
-    "message": "Nested launcher detected inside launcher. Please remain calm."
-  },
-  "app.april-fools.random.launcher.title": {
-    "message": "Launcher recursion status"
-  },
-  "app.april-fools.random.launcher.body": {
-    "message": "The launcher is currently launching the launcher launcher."
-  },
-  "app.april-fools.random.theme.title": {
-    "message": "Theme compliance notice"
-  },
-  "app.april-fools.random.theme.body": {
-    "message": "Your previous theme has been temporarily sent to a safe location."
-  },
-  "app.april-fools.random.buttons.title": {
-    "message": "Button stability warning"
-  },
-  "app.april-fools.random.buttons.body": {
-    "message": "Some buttons may briefly dodge responsibility today."
   },
   "app.account.menu": {
     "message": "Modrinth account"
@@ -1176,7 +1191,7 @@
     "defaultMessage": "Search for modpack"
   },
   "project-card.stats.followers": {
-    "defaultMessage": "{count, plural, one {follower} other {followers}}"
+    "message": "{count, plural, one {follower} other {followers}}"
   },
   "maintenance.cleanup.selected-count": {
     "message": "{count} selected"
@@ -1317,7 +1332,7 @@
     "message": "Good night"
   },
   "header.category.minecraft-server-meta": {
-    "defaultMessage": "Meta"
+    "message": "Meta"
   },
   "content.diff-modal.diff-type.updated": {
     "defaultMessage": "Updated"
@@ -1875,7 +1890,7 @@
     "message": "API key"
   },
   "installation-settings.linked-instance.title": {
-    "defaultMessage": "Linked {projectType, select, server {server project} other {modpack}}"
+    "message": "Linked {projectType, select, server {server project} other {modpack}}"
   },
   "project-type.modpack.lowercase": {
     "defaultMessage": "{count, plural, one {modpack} other {modpacks}}"
@@ -2088,7 +2103,7 @@
     "defaultMessage": "Saving world data and server configuration for {backupName}. This can take a few minutes."
   },
   "header.category.resolutions": {
-    "defaultMessage": "Resolution"
+    "message": "Resolutions"
   },
   "app.library.tab.custom": {
     "message": "Custom"
@@ -3699,7 +3714,7 @@
     "message": "Play instance"
   },
   "search.filter_type.categories": {
-    "defaultMessage": "Categories"
+    "message": "Categories"
   },
   "search.filter_type.environment": {
     "defaultMessage": "Environment"
@@ -3867,7 +3882,7 @@
     "defaultMessage": "Reinstalling modpack"
   },
   "project-card.stats.downloads": {
-    "defaultMessage": "{count, plural, one {download} other {downloads}}"
+    "message": "{count, plural, one {download} other {downloads}}"
   },
   "instances.updater-modal.select-version": {
     "defaultMessage": "Select a version to view its changelog"
@@ -4520,6 +4535,15 @@
   "app.settings.title": {
     "message": "Settings"
   },
+  "app.settings.page.eyebrow": {
+    "message": "Launcher control room"
+  },
+  "app.settings.page.description": {
+    "message": "Adjust visuals, themes, language, Java, network, and launcher defaults in one full workspace."
+  },
+  "app.settings.page.sections": {
+    "message": "Sections"
+  },
   "search-card.followers": {
     "message": "followers"
   },
@@ -5055,7 +5079,7 @@
     "message": "Disabled"
   },
   "header.category.minecraft-server-gameplay": {
-    "defaultMessage": "Gameplay"
+    "message": "Gameplay"
   },
   "project.settings.environment.notice.multiple-environments.title": {
     "defaultMessage": "Your project has multiple environments"
@@ -5271,7 +5295,7 @@
     "defaultMessage": "Uploading files ({completed}/{total})"
   },
   "project.about.details.licensed": {
-    "defaultMessage": "Licensed {license}"
+    "message": "Licensed"
   },
   "maintenance.action.scanning": {
     "message": "Scanning..."
@@ -5439,7 +5463,7 @@
     "defaultMessage": "Creative mode"
   },
   "header.category.minecraft-server-community": {
-    "defaultMessage": "Community"
+    "message": "Community"
   },
   "friends.add-friend.username.description": {
     "message": "It may be different from their Minecraft username!"
@@ -5596,6 +5620,63 @@
   },
   "instance.breadcrumb.content": {
     "message": "Content"
+  },
+  "instance.breadcrumb.files": {
+    "message": "Files"
+  },
+  "instance.logs.delete-latest-running": {
+    "message": "Cannot delete latest.log while the instance is running"
+  },
+  "console.filters.all": {
+    "message": "All"
+  },
+  "console.actions.expand": {
+    "message": "Expand"
+  },
+  "console.actions.collapse": {
+    "message": "Collapse"
+  },
+  "console.delete.header": {
+    "message": "Delete log file"
+  },
+  "console.delete.irreversible": {
+    "message": "This is irreversible"
+  },
+  "console.delete.confirmation": {
+    "message": "Deleting this log file cannot be undone. Are you sure you want to continue?"
+  },
+  "console.delete.failed-title": {
+    "message": "Failed to delete log file"
+  },
+  "console.share.failed-title": {
+    "message": "Failed to share logs"
+  },
+  "console.base.scroll-to-bottom": {
+    "message": "Scroll to bottom"
+  },
+  "console.base.server-not-running": {
+    "message": "Server is not running"
+  },
+  "console.base.send-command": {
+    "message": "Send a command"
+  },
+  "console.base.server-empty.top": {
+    "message": "Welcome to your Modrinth Server!"
+  },
+  "console.base.server-empty.bottom": {
+    "message": "Press the green start button to start your server!"
+  },
+  "console.base.instance-empty.top": {
+    "message": "Start your instance in the top right to start"
+  },
+  "console.base.instance-empty.bottom": {
+    "message": "receiving live logs!"
+  },
+  "console.admonition.toggle": {
+    "message": "Toggle"
+  },
+  "console.admonition.dismiss": {
+    "message": "Dismiss"
   },
   "instance.settings.tabs.installation.unknown-version": {
     "message": "(unknown version)"
@@ -5947,5 +6028,202 @@
   },
   "project-type.shaderpack.lowercase": {
     "defaultMessage": "{count, plural, one {shader pack} other {shader packs}}"
-  }
+  },
+  "instance.settings.tabs.java.custom-java-installation": {
+    "message": "Custom Java installation"
+  },
+  "instance.settings.tabs.java.custom-memory-allocation": {
+    "message": "Custom memory allocation"
+  },
+  "instance.settings.tabs.java.custom-java-arguments": {
+    "message": "Custom Java arguments"
+  },
+  "instance.settings.tabs.java.custom-environment-variables": {
+    "message": "Custom environment variables"
+  },
+  "instance.settings.tabs.java.enter-environmental-variables": {
+    "message": "Enter environmental variables..."
+  },
+  "search.filter_type.features": {
+    "message": "Features"
+  },
+  "search.filter_type.resolutions": {
+    "message": "Resolutions"
+  },
+  "search.filter_type.performance-impact": {
+    "message": "Performance impact"
+  },
+  "server.search.sort.relevance": {
+    "message": "Relevance"
+  },
+  "server.search.sort.verified-plays": {
+    "message": "Verified plays"
+  },
+  "server.search.sort.players": {
+    "message": "Players"
+  },
+  "server.search.sort.followers": {
+    "message": "Followers"
+  },
+  "server.search.sort.date-published": {
+    "message": "Date published"
+  },
+  "server.search.sort.date-updated": {
+    "message": "Date updated"
+  },
+  "server.search.header.community": {
+    "message": "Community"
+  },
+  "server.search.header.features": {
+    "message": "Features"
+  },
+  "server.search.header.gameplay": {
+    "message": "Gameplay"
+  },
+  "server.search.header.meta": {
+    "message": "Meta"
+  },
+  "server.search.filter.content-type": {
+    "message": "Type"
+  },
+  "server.search.filter.content-vanilla": {
+    "message": "Vanilla"
+  },
+  "server.search.filter.content-modded": {
+    "message": "Modded"
+  },
+  "server.search.filter.game-version": {
+    "message": "Game version"
+  },
+  "server.search.filter.region": {
+    "message": "Region"
+  },
+  "server.search.filter.language": {
+    "message": "Language"
+  },
+  "server.search.filter.status": {
+    "message": "Status"
+  },
+  "server.search.filter.status-online": {
+    "message": "Online"
+  },
+  "server.search.filter.status-offline": {
+    "message": "Offline"
+  },
+  "server.search.category.skyblock": {
+    "message": "Skyblock"
+  },
+  "server.search.category.prison": {
+    "message": "Prison"
+  },
+  "server.search.category.smp": {
+    "message": "SMP"
+  },
+  "server.search.category.pokemon": {
+    "message": "Pokemon"
+  },
+  "server.search.category.adventure": {
+    "message": "Adventure"
+  },
+  "server.search.category.anarchy": {
+    "message": "Anarchy"
+  },
+  "server.search.category.pvp": {
+    "message": "PvP"
+  },
+  "server.search.category.pve": {
+    "message": "PvE"
+  },
+  "server.search.category.bosses": {
+    "message": "Bosses"
+  },
+  "server.search.category.network": {
+    "message": "Network"
+  },
+  "server.search.category.custom-content": {
+    "message": "Custom content"
+  },
+  "server.search.category.minigames": {
+    "message": "Minigames"
+  },
+  "server.search.category.parkour": {
+    "message": "Parkour"
+  },
+  "server.search.category.questing": {
+    "message": "Questing"
+  },
+  "server.search.category.lifesteal": {
+    "message": "Lifesteal"
+  },
+  "server.search.category.whitelisted": {
+    "message": "Whitelisted"
+  },
+  "server.search.category.gens": {
+    "message": "Gens"
+  },
+  "server.search.category.technical": {
+    "message": "Technical"
+  },
+  "server.search.category.world-resets": {
+    "message": "World resets"
+  },
+  "settings.display.theme.nord": "Nord",
+  "settings.display.theme.cherry-cola": "Cherry Cola",
+  "settings.display.theme.slate": "Slate",
+  "settings.theme-studio.title": "Theme studio",
+  "settings.theme-studio.description": "Choose a preset or build your own theme with live preview, import and export.",
+  "settings.theme-studio.official": "Official themes",
+  "settings.theme-studio.custom": "Custom themes",
+  "settings.theme-studio.new-theme": "New theme",
+  "settings.theme-studio.import-theme": "Import theme",
+  "settings.theme-studio.empty": "No custom themes yet. Create one from the current preset.",
+  "settings.theme-studio.editor": "Editor",
+  "settings.theme-studio.preview": "Preview",
+  "settings.theme-studio.name": "Theme name",
+  "settings.theme-studio.author": "Author",
+  "settings.theme-studio.base-theme": "Base preset",
+  "settings.theme-studio.description-label": "Description",
+  "settings.theme-studio.reset-base": "Reset from base preset",
+  "settings.theme-studio.save-theme": "Save changes",
+  "settings.theme-studio.apply-theme": "Apply theme",
+  "settings.theme-studio.duplicate": "Duplicate",
+  "settings.theme-studio.export-theme": "Export",
+  "settings.theme-studio.copy-json": "Copy JSON",
+  "settings.theme-studio.delete-theme": "Delete",
+  "settings.theme-studio.active": "Active",
+  "settings.theme-studio.import-failed": "This file is not a valid Revoria theme.",
+  "settings.theme-studio.saved": "Theme saved.",
+  "settings.theme-studio.copied": "Theme JSON copied.",
+  "settings.theme-studio.canvas": "Canvas",
+  "settings.theme-studio.layer-2": "Layer 2",
+  "settings.theme-studio.layer-3": "Layer 3",
+  "settings.theme-studio.cards": "Cards",
+  "settings.theme-studio.hover-layer": "Hover layer",
+  "settings.theme-studio.text-primary": "Title text",
+  "settings.theme-studio.text-default": "Main text",
+  "settings.theme-studio.text-secondary": "Secondary text",
+  "settings.theme-studio.brand": "Accent",
+  "settings.theme-studio.glass-tint": "Glass tint",
+  "settings.theme-studio.glow": "Glow",
+  "settings.theme-studio.glass-opacity": "Glass opacity",
+  "settings.theme-studio.glass-strong": "Strong glass",
+  "settings.theme-studio.glass-border": "Glass border",
+  "settings.theme-studio.preview-title": "Custom theme preview",
+  "settings.theme-studio.preview-body": "Panels, buttons and copy update here before you apply the theme.",
+  "settings.theme-studio.primary-action": "Primary action",
+  "settings.theme-studio.secondary-action": "Secondary action",
+  "settings.theme-studio.selected-preset": "Selected preset",
+  "settings.theme-studio.apply-preset": "Apply preset",
+  "settings.theme-studio.create-from-preset": "Create editable copy",
+  "settings.theme-studio.preset-hint": "Presets no longer create themes instantly. Pick one first, then choose what to do.",
+  "settings.theme-studio.section.colors": "Core colors",
+  "settings.theme-studio.section.ui": "UI surfaces",
+  "settings.theme-studio.section.glass": "Glass and glow",
+  "settings.theme-studio.section.meta": "Theme info",
+  "settings.theme-studio.raised-bg": "Panel background",
+  "settings.theme-studio.raised-bg-hover": "Panel hover",
+  "settings.theme-studio.button-bg": "Button background",
+  "settings.theme-studio.button-bg-hover": "Button hover",
+  "settings.theme-studio.button-bg-active": "Button active",
+  "settings.theme-studio.divider": "Dividers"
 }

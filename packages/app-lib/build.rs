@@ -149,8 +149,7 @@ fn build_java_jars() {
 }
 
 fn set_java_jars_dir_placeholder() {
-    let out_dir =
-        PathBuf::from(env::var_os("OUT_DIR").unwrap());
+    let out_dir = PathBuf::from(env::var_os("OUT_DIR").unwrap());
     println!(
         "cargo::rustc-env=JAVA_JARS_DIR={}",
         out_dir.join("java/libs").display()

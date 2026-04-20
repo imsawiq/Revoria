@@ -149,6 +149,18 @@ export function useSearch(
 			id: 'search.filter_type.categories',
 			defaultMessage: 'Categories',
 		}),
+		features: defineMessage({
+			id: 'search.filter_type.features',
+			defaultMessage: 'Features',
+		}),
+		resolutions: defineMessage({
+			id: 'search.filter_type.resolutions',
+			defaultMessage: 'Resolutions',
+		}),
+		performanceImpact: defineMessage({
+			id: 'search.filter_type.performance-impact',
+			defaultMessage: 'Performance impact',
+		}),
 	}
 
 	const sortTypes: readonly SortType[] = readonly([
@@ -181,6 +193,12 @@ export function useSearch(
 					formatted_name:
 						category.header === 'categories'
 							? formatMessage(filterTypeMessages.categories)
+							: category.header === 'features'
+								? formatMessage(filterTypeMessages.features)
+								: category.header === 'resolutions'
+									? formatMessage(filterTypeMessages.resolutions)
+									: category.header === 'performance impact'
+										? formatMessage(filterTypeMessages.performanceImpact)
 							: formatCategoryHeader(category.header),
 					supported_project_types:
 						category.project_type === 'mod'
@@ -493,7 +511,6 @@ export function useSearch(
 					value: filterValue.option,
 				}
 			} else if (!option) {
-				console.error(`Filter option ${filterValue.option} not found`)
 				continue
 			}
 

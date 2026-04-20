@@ -113,7 +113,7 @@ const deleteHovered = ref(false)
 						:alt="project.title"
 						size="3rem"
 						no-shadow
-						class="rounded-2xl border border-surface-5"
+						class="rounded-2xl border border-[--glass-border]"
 					/>
 					<div
 						v-if="installing"

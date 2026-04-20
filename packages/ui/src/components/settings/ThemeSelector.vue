@@ -56,6 +56,18 @@ const colorTheme = defineMessages({
 		id: 'settings.display.theme.aurora',
 		defaultMessage: 'Aurora',
 	},
+	nord: {
+		id: 'settings.display.theme.nord',
+		defaultMessage: 'Nord',
+	},
+	'cherry-cola': {
+		id: 'settings.display.theme.cherry-cola',
+		defaultMessage: 'Cherry Cola',
+	},
+	slate: {
+		id: 'settings.display.theme.slate',
+		defaultMessage: 'Slate',
+	},
 	'rose-gold': {
 		id: 'settings.display.theme.rose-gold',
 		defaultMessage: 'Rose Gold',

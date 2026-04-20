@@ -1,5 +1,14 @@
 import { defineStore } from 'pinia'
 import { convertFileSrc } from '@tauri-apps/api/core'
+import {
+	applyCustomThemeToDocument,
+	clearAppliedCustomTheme,
+	loadStoredActiveCustomThemeId,
+	loadStoredCustomThemes,
+	persistActiveCustomThemeId,
+	persistCustomThemes,
+	type CustomTheme,
+} from '@/helpers/custom-themes'
 
 export const DEFAULT_FEATURE_FLAGS = {
 	project_background: false,
@@ -19,6 +28,9 @@ export const THEME_OPTIONS = [
 	'amethyst',
 	'sunset',
 	'aurora',
+	'nord',
+	'cherry-cola',
+	'slate',
 	'rose-gold',
 	'obsidian-gold',
 	'cherry-blossom',
@@ -30,6 +42,8 @@ export type ColorTheme = (typeof THEME_OPTIONS)[number]
 
 export type ThemeStore = {
 	selectedTheme: ColorTheme
+	customThemes: CustomTheme[]
+	activeCustomThemeId: string | null
 	advancedRendering: boolean
 	toggleSidebar: boolean
 	glassBlur: number
@@ -61,6 +75,8 @@ function getStoredTheme(): ColorTheme | null {
 
 export const DEFAULT_THEME_STORE: ThemeStore = {
 	selectedTheme: getStoredTheme() ?? 'dark',
+	customThemes: loadStoredCustomThemes(),
+	activeCustomThemeId: loadStoredActiveCustomThemeId(),
 	advancedRendering: true,
 	toggleSidebar: false,
 	glassBlur: 20,
@@ -90,11 +106,17 @@ function parseCssColor(value: string): { r: number; g: number; b: number; a: num
 export const useTheming = defineStore('themeStore', {
 	state: () => DEFAULT_THEME_STORE,
 	actions: {
-		setThemeState(newTheme: ColorTheme) {
+		setThemeState(newTheme: ColorTheme, options?: { preserveCustom?: boolean }) {
 			if (THEME_OPTIONS.includes(newTheme)) {
 				this.selectedTheme = newTheme
 			} else {
 				this.selectedTheme = 'dark'
+			}
+
+			if (!options?.preserveCustom) {
+				this.activeCustomThemeId = null
+				persistActiveCustomThemeId(null)
+				clearAppliedCustomTheme()
 			}
 
 			try {
@@ -132,6 +154,15 @@ export const useTheming = defineStore('themeStore', {
 			}
 
 			this.applyGlassSettings()
+			this.syncCustomThemeOverlay()
+		},
+		syncCustomThemeOverlay() {
+			const activeCustomTheme = this.customThemes.find((theme) => theme.id === this.activeCustomThemeId)
+			if (activeCustomTheme) {
+				applyCustomThemeToDocument(activeCustomTheme)
+			} else {
+				clearAppliedCustomTheme()
+			}
 		},
 		applyGlassSettings() {
 			const root = document.getElementsByTagName('html')[0]
@@ -171,6 +202,8 @@ export const useTheming = defineStore('themeStore', {
 				root.style.setProperty('--glass-bg-strong', value)
 				root.style.setProperty('--color-glass-bg-strong', value)
 			}
+
+			this.syncCustomThemeOverlay()
 		},
 		setGlassBlur(value: number) {
 			this.glassBlur = value
@@ -200,6 +233,45 @@ export const useTheming = defineStore('themeStore', {
 		},
 		getFeatureFlag(key: FeatureFlag) {
 			return this.featureFlags[key] ?? DEFAULT_FEATURE_FLAGS[key]
+		},
+		restoreActiveCustomTheme() {
+			const activeCustomTheme = this.customThemes.find((theme) => theme.id === this.activeCustomThemeId)
+			if (!activeCustomTheme) {
+				this.activeCustomThemeId = null
+				persistActiveCustomThemeId(null)
+				clearAppliedCustomTheme()
+				return
+			}
+
+			this.setThemeState(activeCustomTheme.baseTheme, { preserveCustom: true })
+		},
+		saveCustomThemes(themes: CustomTheme[]) {
+			this.customThemes = themes
+			persistCustomThemes(themes)
+
+			if (!themes.some((theme) => theme.id === this.activeCustomThemeId)) {
+				this.activeCustomThemeId = null
+				persistActiveCustomThemeId(null)
+				clearAppliedCustomTheme()
+			} else {
+				this.syncCustomThemeOverlay()
+			}
+		},
+		activateCustomTheme(id: string) {
+			const theme = this.customThemes.find((entry) => entry.id === id)
+			if (!theme) return
+			this.activeCustomThemeId = id
+			persistActiveCustomThemeId(id)
+			this.setThemeState(theme.baseTheme, { preserveCustom: true })
+		},
+		clearCustomThemeSelection() {
+			this.activeCustomThemeId = null
+			persistActiveCustomThemeId(null)
+			clearAppliedCustomTheme()
+			this.setThemeClass()
+		},
+		getActiveCustomTheme() {
+			return this.customThemes.find((theme) => theme.id === this.activeCustomThemeId) ?? null
 		},
 		getThemeOptions() {
 			return THEME_OPTIONS

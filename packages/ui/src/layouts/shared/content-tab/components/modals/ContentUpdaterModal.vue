@@ -19,9 +19,9 @@
 			}}</span>
 		</template>
 		<div
-			class="flex h-[min(550px,calc(95vh-10rem))] border-solid border-transparent border-[1px] border-b-surface-4"
+			class="flex h-[min(550px,calc(95vh-10rem))] border-solid border-transparent border-[1px] border-b-[--glass-border]"
 		>
-			<div class="w-[300px] flex flex-col relative bg-surface-3">
+			<div class="w-[300px] flex flex-col relative bg-[--color-glass-bg-strong]">
 				<div class="p-4 pb-2">
 					<StyledInput
 						v-model="searchQuery"
@@ -50,8 +50,8 @@
 								class="flex items-center h-10 px-4 py-2.5 rounded-xl border-none cursor-pointer transition-colors"
 								:class="[
 									selectedVersion?.id === version.id
-										? 'bg-brand-highlight'
-										: 'bg-transparent hover:bg-button-bg',
+										? 'bg-[--color-brand-highlight]'
+										: 'bg-transparent hover:bg-[--color-button-bg]',
 								]"
 								@mouseenter="handleVersionMouseEnter(version)"
 								@mouseleave="handleVersionMouseLeave"
@@ -100,7 +100,7 @@
 				</div>
 
 				<div
-					class="absolute bottom-0 left-0 right-0 pointer-events-none flex flex-col items-center justify-end bg-gradient-to-b from-transparent to-bg-raised to-70% pb-3 h-24"
+					class="absolute bottom-0 left-0 right-0 pointer-events-none flex flex-col items-center justify-end bg-gradient-to-b from-transparent to-[--color-glass-bg-strong] to-70% pb-3 h-24"
 				>
 					<div class="pointer-events-auto">
 						<ButtonStyled type="transparent" :circular="true">
@@ -128,9 +128,9 @@
 
 			<div class="w-px bg-divider" />
 
-			<div class="flex-1 flex flex-col min-w-0 relative bg-surface-1" aria-live="polite">
+			<div class="flex-1 flex flex-col min-w-0 relative bg-[--color-bg]" aria-live="polite">
 				<template v-if="selectedVersion">
-					<div class="bg-bg p-4">
+					<div class="bg-[--color-glass-bg-strong] p-4">
 						<div class="flex flex-col gap-1.5">
 							<div class="flex items-center justify-between">
 								<div class="flex items-center gap-2">
@@ -165,7 +165,7 @@
 
 					<div class="h-px bg-divider" />
 
-					<div class="flex-1 bg-bg p-4 overflow-y-auto">
+					<div class="flex-1 bg-[--color-bg] p-4 overflow-y-auto">
 						<div
 							v-if="loadingChangelog"
 							class="flex flex-col items-center justify-center h-full gap-2"
@@ -186,17 +186,17 @@
 					</div>
 
 					<div
-						class="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-bg to-transparent pointer-events-none"
+						class="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-[--color-bg] to-transparent pointer-events-none"
 					/>
 				</template>
-				<div v-else class="flex-1 flex items-center justify-center text-secondary bg-bg">
+				<div v-else class="flex-1 flex items-center justify-center text-secondary bg-[--color-bg]">
 					{{ formatMessage(messages.selectVersionPrompt) }}
 				</div>
 			</div>
 		</div>
 
 		<div
-			class="w-full flex flex-row items-center gap-4 p-4 border-solid border-x-0 border-b-0 border-t border-surface-4"
+			class="w-full flex flex-row items-center gap-4 p-4 border-solid border-x-0 border-b-0 border-t border-[--glass-border]"
 		>
 			<div class="flex flex-row items-center gap-2 max-w-[55%] flex-1 text-orange mr-auto">
 				<TriangleAlertIcon class="size-6 shrink-0" />
@@ -206,7 +206,7 @@
 			</div>
 			<div class="flex flex-row gap-2 shrink-0">
 				<ButtonStyled type="outlined">
-					<button class="!border-[1px] !border-surface-4" @click="handleCancel">
+					<button class="!border-[1px] !border-[--glass-border]" @click="handleCancel">
 						<XIcon />
 						{{ formatMessage(commonMessages.cancelButton) }}
 					</button>
@@ -497,7 +497,7 @@ function getBadgeLabel(version: Labrinth.Versions.v2.Version): string {
 function getBadgeClasses(version: Labrinth.Versions.v2.Version): string {
 	// Current badge
 	if (version.id === props.currentVersionId) {
-		return 'bg-surface-4 border-surface-5 text-primary'
+		return 'bg-[--color-button-bg] border-[--glass-border] text-primary'
 	}
 
 	// Incompatible badge (takes precedence over version type)
@@ -508,26 +508,26 @@ function getBadgeClasses(version: Labrinth.Versions.v2.Version): string {
 	// Version type badges
 	switch (version.version_type) {
 		case 'release':
-			return 'bg-highlight-green border-brand text-brand'
+			return 'bg-[--color-brand-highlight] border-[--color-brand] text-[--color-brand]'
 		case 'beta':
-			return 'bg-highlight-blue border-brand-blue text-brand-blue'
+			return 'bg-[color-mix(in_srgb,var(--color-brand-highlight)_85%,rgba(83,124,255,0.18))] border-[color-mix(in_srgb,var(--color-brand)_60%,#537cff_40%)] text-[color-mix(in_srgb,var(--color-brand)_72%,#89a8ff_28%)]'
 		case 'alpha':
-			return 'bg-highlight-purple border-brand-purple text-brand-purple'
+			return 'bg-[color-mix(in_srgb,var(--color-brand-highlight)_82%,rgba(170,92,255,0.18))] border-[color-mix(in_srgb,var(--color-brand)_54%,#aa5cff_46%)] text-[color-mix(in_srgb,var(--color-brand)_68%,#d09cff_32%)]'
 		default:
-			return 'bg-surface-4 border-surface-5 text-primary'
+			return 'bg-[--color-button-bg] border-[--glass-border] text-primary'
 	}
 }
 
 function getVersionTypeBadgeClasses(version: Labrinth.Versions.v2.Version): string {
 	switch (version.version_type) {
 		case 'release':
-			return 'bg-highlight-green border-brand text-brand'
+			return 'bg-[--color-brand-highlight] border-[--color-brand] text-[--color-brand]'
 		case 'beta':
-			return 'bg-highlight-blue border-brand-blue text-brand-blue'
+			return 'bg-[color-mix(in_srgb,var(--color-brand-highlight)_85%,rgba(83,124,255,0.18))] border-[color-mix(in_srgb,var(--color-brand)_60%,#537cff_40%)] text-[color-mix(in_srgb,var(--color-brand)_72%,#89a8ff_28%)]'
 		case 'alpha':
-			return 'bg-highlight-purple border-brand-purple text-brand-purple'
+			return 'bg-[color-mix(in_srgb,var(--color-brand-highlight)_82%,rgba(170,92,255,0.18))] border-[color-mix(in_srgb,var(--color-brand)_54%,#aa5cff_46%)] text-[color-mix(in_srgb,var(--color-brand)_68%,#d09cff_32%)]'
 		default:
-			return 'bg-surface-4 border-surface-5 text-primary'
+			return 'bg-[--color-button-bg] border-[--glass-border] text-primary'
 	}
 }
 

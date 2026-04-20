@@ -256,7 +256,9 @@ const messages = defineMessages({
 				<span class="text-lg font-semibold text-contrast">
 					{{ formatMessage(commonMessages.installationInfoTitle) }}
 				</span>
-				<div class="flex flex-col gap-2.5 rounded-[20px] bg-surface-2 p-4">
+				<div
+					class="flex flex-col gap-2.5 rounded-[20px] border border-[--glass-border] bg-[--color-glass-bg-strong] p-4 shadow-[--glass-shadow]"
+				>
 					<div
 						v-for="row in ctx.installationInfo.value"
 						:key="row.label"
@@ -281,11 +283,11 @@ const messages = defineMessages({
 					</span>
 					<div
 						v-if="ctx.modpack.value"
-						class="flex items-center gap-2.5 rounded-[20px] bg-surface-2 p-3"
+						class="flex items-center gap-2.5 rounded-[20px] border border-[--glass-border] bg-[--color-glass-bg-strong] p-3 shadow-[--glass-shadow]"
 					>
 						<AutoLink :to="ctx.modpack.value.link" class="shrink-0">
 							<div
-								class="size-14 shrink-0 overflow-hidden rounded-2xl border border-solid border-surface-5"
+								class="size-14 shrink-0 overflow-hidden rounded-2xl border border-solid border-[--glass-border]"
 							>
 								<Avatar
 									v-if="ctx.modpack.value.iconUrl"
@@ -460,7 +462,9 @@ const messages = defineMessages({
 					<span class="text-lg font-semibold text-contrast">
 						{{ formatMessage(messages.editInstallationTitle) }}
 					</span>
-					<div class="flex flex-col gap-3 rounded-[20px] border border-solid border-surface-5 p-4">
+					<div
+						class="flex flex-col gap-3 rounded-[20px] border border-solid border-[--glass-border] bg-[--color-glass-bg-strong] p-4 shadow-[--glass-shadow]"
+					>
 						<div class="flex flex-col gap-2.5">
 							<span class="font-semibold text-contrast">
 								{{ formatMessage(commonMessages.platformLabel) }}
@@ -493,7 +497,7 @@ const messages = defineMessages({
 							>
 								<template v-if="form.hasSnapshots.value" #dropdown-footer>
 									<button
-										class="flex w-full cursor-pointer items-center justify-center gap-1.5 border-0 border-t border-solid border-surface-5 bg-transparent py-3 text-center text-sm font-semibold text-secondary transition-colors hover:text-contrast"
+										class="flex w-full cursor-pointer items-center justify-center gap-1.5 border-0 border-t border-solid border-[--glass-border] bg-transparent py-3 text-center text-sm font-semibold text-secondary transition-colors hover:text-contrast"
 										@mousedown.prevent
 										@click="form.showSnapshots.value = !form.showSnapshots.value"
 									>
@@ -562,7 +566,7 @@ const messages = defineMessages({
 							</ButtonStyled>
 							<ButtonStyled type="outlined">
 								<button
-									class="!border !border-surface-5 !shadow-none"
+									class="!border !border-[--glass-border] !bg-[--color-glass-bg-strong] !shadow-none"
 									@click="form.cancelEditing()"
 								>
 									<XIcon />
@@ -578,7 +582,9 @@ const messages = defineMessages({
 					<span class="text-lg font-semibold text-contrast">
 						{{ formatMessage(commonMessages.installationInfoTitle) }}
 					</span>
-					<div class="flex flex-col gap-2.5 rounded-[20px] bg-surface-2 p-4">
+					<div
+						class="flex flex-col gap-2.5 rounded-[20px] border border-[--glass-border] bg-[--color-glass-bg-strong] p-4 shadow-[--glass-shadow]"
+					>
 						<div
 							v-for="row in ctx.installationInfo.value"
 							:key="row.label"

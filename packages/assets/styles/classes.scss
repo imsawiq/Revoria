@@ -329,7 +329,11 @@ a,
 
 		&:focus-visible:not(&:disabled),
 		&:hover:not(&:disabled) {
-			background-color: var(--color-button-bg);
+			background-color: color-mix(
+				in srgb,
+				var(--color-button-bg) 74%,
+				var(--color-brand-highlight) 26%
+			);
 
 			&.btn-hover-filled,
 			&.btn-hover-filled-only {

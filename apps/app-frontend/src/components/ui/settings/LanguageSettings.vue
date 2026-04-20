@@ -55,12 +55,7 @@ function selectLanguage(value: string) {
 </script>
 
 <template>
-	<h2 class="m-0 text-lg font-extrabold text-contrast">
-		{{ formatMessage(messages.launcherLanguageTitle) }}
-	</h2>
-	<p class="m-0 mt-1">{{ formatMessage(messages.launcherLanguageDescription) }}</p>
-
-	<div class="languages-list mt-4">
+	<div class="languages-list">
 		<button
 			v-for="option in languageOptions"
 			:key="option.value"

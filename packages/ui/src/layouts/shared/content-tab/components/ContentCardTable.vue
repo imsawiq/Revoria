@@ -388,18 +388,18 @@ function handleSort(column: ContentCardTableSortColumn) {
 }
 
 .content-card-row--alt {
-	background: color-mix(in srgb, var(--color-glass-bg-strong) 90%, var(--color-brand) 1.5%);
+	background: color-mix(in srgb, var(--color-glass-bg-strong) 98%, var(--color-brand) 2%);
 }
 
 .content-card-row--selected {
 	background:
 		linear-gradient(
 			90deg,
-			color-mix(in srgb, var(--color-brand) 10%, transparent) 0,
-			color-mix(in srgb, var(--color-glass-bg-strong) 94%, transparent) 1rem
+			color-mix(in srgb, var(--color-brand-highlight) 55%, transparent) 0,
+			color-mix(in srgb, var(--color-glass-bg-strong) 98%, transparent) 1rem
 		);
 	box-shadow:
-		inset 3px 0 0 color-mix(in srgb, var(--color-brand) 42%, transparent),
-		inset 0 0 0 1px color-mix(in srgb, var(--color-brand) 8%, transparent);
+		inset 2px 0 0 color-mix(in srgb, var(--color-brand) 22%, transparent),
+		inset 0 0 0 1px color-mix(in srgb, var(--color-brand) 4%, transparent);
 }
 </style>

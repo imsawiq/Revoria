@@ -4,7 +4,7 @@
 			ref="triggerRef"
 			role="button"
 			tabindex="0"
-			class="relative cursor-pointer flex min-h-5 w-full items-center justify-between overflow-hidden rounded-xl bg-button-bg px-4 py-2.5 text-left transition-all duration-200 text-button-text hover:bg-button-bgHover active:bg-button-bgActive"
+			class="relative cursor-pointer flex min-h-5 w-full items-center justify-between overflow-hidden rounded-xl bg-button-bg px-4 py-2.5 text-left transition-all duration-200 text-button-text hover:bg-[--color-button-bg-hover] active:bg-[--color-button-bg-active]"
 			:class="[
 				triggerClasses,
 				{
@@ -40,7 +40,7 @@
 			<div
 				v-if="isOpen"
 				ref="dropdownRef"
-				class="fixed z-[10040] flex flex-col overflow-hidden rounded-[14px] bg-bg-raised border border-divider shadow-2xl"
+				class="fixed z-[10040] flex flex-col overflow-hidden rounded-[14px] border border-[--glass-border] bg-[--color-raised-bg] shadow-[--glass-shadow]"
 				:class="[
 					shouldRoundBottomCorners
 						? 'rounded-t-none'
@@ -52,7 +52,7 @@
 				@keydown="handleDropdownKeydown"
 			>
 				<div v-if="searchable" class="p-4">
-					<div class="iconified-input w-full border-surface-5 border-[1px] border-solid rounded-xl">
+					<div class="iconified-input w-full rounded-xl border-[1px] border-solid border-[--glass-border] bg-[--color-button-bg]">
 						<SearchIcon aria-hidden="true" />
 						<input
 							ref="searchInputRef"
@@ -66,7 +66,7 @@
 					</div>
 				</div>
 
-				<div v-if="searchable && filteredOptions.length > 0" class="h-px bg-surface-5"></div>
+				<div v-if="searchable && filteredOptions.length > 0" class="h-px bg-[--glass-border]"></div>
 
 				<div
 					v-if="filteredOptions.length > 0"
@@ -75,7 +75,7 @@
 					:style="{ maxHeight: `${maxHeight}px` }"
 				>
 					<template v-for="(item, index) in filteredOptions" :key="item.key">
-						<div v-if="item.type === 'divider'" class="h-px bg-surface-5"></div>
+						<div v-if="item.type === 'divider'" class="h-px bg-[--glass-border]"></div>
 						<component
 							:is="item.type === 'link' ? 'a' : 'span'"
 							v-else
@@ -86,7 +86,7 @@
 							:aria-selected="listbox && item.value === modelValue"
 							:aria-disabled="item.disabled || undefined"
 							:data-focused="focusedIndex === index"
-							class="flex items-center gap-2.5 cursor-pointer rounded-xl p-3 text-left transition-colors duration-150 text-contrast hover:bg-surface-5 focus:bg-surface-5"
+							class="flex items-center gap-2.5 cursor-pointer rounded-xl p-3 text-left transition-colors duration-150 text-contrast hover:bg-[--color-button-bg-hover] focus:bg-[--color-button-bg-hover]"
 							:class="getOptionClasses(item, index)"
 							tabindex="-1"
 							@click="handleOptionClick(item, index)"
@@ -110,6 +110,11 @@
 				<div v-else-if="searchQuery" class="p-4 mb-2 text-center text-sm text-secondary">
 					{{ noOptionsMessage }}
 				</div>
+
+				<template v-if="slots['dropdown-footer']">
+					<div class="h-px bg-[--glass-border]"></div>
+					<slot name="dropdown-footer"></slot>
+				</template>
 			</div>
 		</Teleport>
 	</div>
@@ -264,7 +269,7 @@ function getOptionClasses(item: ComboboxOption<T> & { key: string }, index: numb
 	return [
 		item.class,
 		{
-			'bg-surface-5':
+			'bg-[--color-button-bg-hover]':
 				(props.listbox && item.value === props.modelValue) ||
 				(focusedIndex.value === index && !(props.listbox && item.value === props.modelValue)),
 			'cursor-not-allowed opacity-50 pointer-events-none': item.disabled,

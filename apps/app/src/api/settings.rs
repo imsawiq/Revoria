@@ -39,13 +39,16 @@ pub async fn settings_set(settings: Settings) -> Result<()> {
 }
 
 #[tauri::command]
-pub async fn settings_test_proxy(settings: Settings) -> Result<ProxyTestResult> {
+pub async fn settings_test_proxy(
+    settings: Settings,
+) -> Result<ProxyTestResult> {
     #[derive(serde::Deserialize)]
     struct IpResponse {
         ip: String,
     }
 
-    let client = theseus::util::fetch::build_reqwest_client_from_settings(&settings)?;
+    let client =
+        theseus::util::fetch::build_reqwest_client_from_settings(&settings)?;
 
     let ip = client
         .get("https://api.ipify.org?format=json")

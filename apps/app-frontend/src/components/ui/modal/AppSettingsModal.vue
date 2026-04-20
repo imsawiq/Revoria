@@ -1,15 +1,7 @@
 <script setup lang="ts">
 import {
-	CoffeeIcon,
-	GameIcon,
-	GaugeIcon,
-	GlobeIcon,
-	LanguagesIcon,
-	PaintbrushIcon,
 	PaletteIcon,
-	ReportIcon,
 	SettingsIcon,
-	ShieldIcon,
 } from '@modrinth/assets'
 import { TabbedModal } from '@modrinth/ui'
 import { getVersion } from '@tauri-apps/api/app'
@@ -18,15 +10,7 @@ import { defineMessage, defineMessages, useVIntl } from '@vintl/vintl'
 import { computed, ref, watch } from 'vue'
 
 import ModalWrapper from '@/components/ui/modal/ModalWrapper.vue'
-import AppearanceSettings from '@/components/ui/settings/AppearanceSettings.vue'
-import ThemesSettings from '@/components/ui/settings/ThemesSettings.vue'
-import DefaultInstanceSettings from '@/components/ui/settings/DefaultInstanceSettings.vue'
-import FeatureFlagSettings from '@/components/ui/settings/FeatureFlagSettings.vue'
-import JavaSettings from '@/components/ui/settings/JavaSettings.vue'
-import LanguageSettings from '@/components/ui/settings/LanguageSettings.vue'
-import PrivacySettings from '@/components/ui/settings/PrivacySettings.vue'
-import ProxySettings from '@/components/ui/settings/ProxySettings.vue'
-import ResourceManagementSettings from '@/components/ui/settings/ResourceManagementSettings.vue'
+import { appSettingsTabs } from '@/components/ui/settings/app-settings-tabs'
 import { get, set } from '@/helpers/settings.ts'
 import { getThemeIconUrl } from '@/helpers/theme-icons'
 import { useTheming } from '@/store/state'
@@ -42,81 +26,7 @@ const developerModeEnabled = defineMessage({
 	defaultMessage: 'Developer mode enabled.',
 })
 
-const tabs = [
-	{
-		name: defineMessage({
-			id: 'app.settings.tabs.appearance',
-			defaultMessage: 'Appearance',
-		}),
-		icon: PaintbrushIcon,
-		content: AppearanceSettings,
-	},
-	{
-		name: defineMessage({
-			id: 'app.settings.tabs.themes',
-			defaultMessage: 'Themes',
-		}),
-		icon: PaletteIcon,
-		content: ThemesSettings,
-	},
-	{
-		name: defineMessage({
-			id: 'app.settings.tabs.language',
-			defaultMessage: 'Language',
-		}),
-		icon: LanguagesIcon,
-		content: LanguageSettings,
-	},
-	{
-		name: defineMessage({
-			id: 'app.settings.tabs.privacy',
-			defaultMessage: 'Privacy',
-		}),
-		icon: ShieldIcon,
-		content: PrivacySettings,
-	},
-	{
-		name: defineMessage({
-			id: 'app.settings.tabs.java-installations',
-			defaultMessage: 'Java installations',
-		}),
-		icon: CoffeeIcon,
-		content: JavaSettings,
-	},
-	{
-		name: defineMessage({
-			id: 'app.settings.tabs.default-instance-options',
-			defaultMessage: 'Default instance options',
-		}),
-		icon: GameIcon,
-		content: DefaultInstanceSettings,
-	},
-	{
-		name: defineMessage({
-			id: 'app.settings.tabs.resource-management',
-			defaultMessage: 'Resource management',
-		}),
-		icon: GaugeIcon,
-		content: ResourceManagementSettings,
-	},
-	{
-		name: defineMessage({
-			id: 'app.settings.tabs.proxy',
-			defaultMessage: 'Proxy',
-		}),
-		icon: GlobeIcon,
-		content: ProxySettings,
-	},
-	{
-		name: defineMessage({
-			id: 'app.settings.tabs.feature-flags',
-			defaultMessage: 'Feature flags',
-		}),
-		icon: ReportIcon,
-		content: FeatureFlagSettings,
-		developerOnly: true,
-	},
-]
+const tabs = appSettingsTabs
 
 const modal = ref()
 
@@ -167,7 +77,7 @@ const messages = defineMessages({
 	},
 	settingsTitle: {
 		id: 'app.settings.title',
-		defaultMessage: 'Settings',
+		defaultMessage: 'Настройки',
 	},
 	appVersion: {
 		id: 'app.settings.footer.version',

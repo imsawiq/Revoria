@@ -1041,7 +1041,7 @@ pub async fn create_mrpack_json(
         .collect::<crate::Result<Vec<PackFile>>>()?;
 
     files.sort_by(|a, b| a.path.cmp(&b.path));
-    
+
     Ok(PackFormat {
         game: "minecraft".to_string(),
         format_version: 1,

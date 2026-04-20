@@ -17,7 +17,11 @@ import type { Option as OverflowMenuOption } from '#ui/components/base/OverflowM
 import StyledInput from '#ui/components/base/StyledInput.vue'
 import NewModal from '#ui/components/modal/NewModal.vue'
 import { defineMessages, useVIntl } from '#ui/composables/i18n'
-import { commonMessages, commonProjectTypeTitleMessages } from '#ui/utils/common-messages'
+import {
+	commonMessages,
+	commonProjectTypeSentenceMessages,
+	commonProjectTypeTitleMessages,
+} from '#ui/utils/common-messages'
 
 import { isClientOnlyEnvironment } from '../../composables/content-filtering'
 import type { ContentCardTableItem, ContentItem } from '../../types'
@@ -176,6 +180,11 @@ const typeFilteredCount = computed(() => {
 function getProjectTypeLabel(type: string, count: number) {
 	const key = type as keyof typeof commonProjectTypeTitleMessages
 	return commonProjectTypeTitleMessages[key] ?? commonProjectTypeTitleMessages.project
+}
+
+function getProjectTypeSentenceLabel(type: string, count: number) {
+	const key = type as keyof typeof commonProjectTypeSentenceMessages
+	return commonProjectTypeSentenceMessages[key] ?? commonProjectTypeSentenceMessages.project
 }
 
 const filteredItems = computed(() => {
@@ -343,7 +352,9 @@ defineExpose({ show, showLoading, hide, getState, restore, updateItem })
 			</span>
 		</template>
 		<div class="flex flex-col h-[min(600px,calc(95vh-10rem))]">
-			<div class="flex flex-col gap-4 px-6 py-4 border-b border-solid border-0 border-surface-4">
+			<div
+				class="flex flex-col gap-4 px-6 py-4 border-b border-solid border-0 border-[--glass-border]"
+			>
 				<StyledInput
 					v-model="searchQuery"
 					:icon="SearchIcon"
@@ -361,8 +372,8 @@ defineExpose({ show, showLoading, hide, getState, restore, updateItem })
 							class="rounded-full border border-solid px-3 py-1.5 text-base font-semibold leading-5 transition-colors"
 							:class="
 								selectedFilters.length === 0
-									? 'border-green bg-brand-highlight text-brand'
-									: 'border-surface-5 bg-surface-4 text-primary hover:bg-surface-5'
+									? 'border-[--color-brand] bg-[--color-brand-highlight] text-[--color-brand]'
+									: 'border-[--glass-border] bg-[--color-button-bg] text-primary hover:bg-[--color-button-bg-hover]'
 							"
 							@click="selectedFilters = []"
 						>
@@ -375,8 +386,8 @@ defineExpose({ show, showLoading, hide, getState, restore, updateItem })
 							class="rounded-full border border-solid px-3 py-1.5 text-base font-semibold leading-5 transition-colors"
 							:class="
 								selectedFilters.includes(option.id)
-									? 'border-green bg-brand-highlight text-brand'
-									: 'border-surface-5 bg-surface-4 text-primary hover:bg-surface-5'
+									? 'border-[--color-brand] bg-[--color-brand-highlight] text-[--color-brand]'
+									: 'border-[--glass-border] bg-[--color-button-bg] text-primary hover:bg-[--color-button-bg-hover]'
 							"
 							@click="toggleFilter(option.id)"
 						>
@@ -419,7 +430,7 @@ defineExpose({ show, showLoading, hide, getState, restore, updateItem })
 				<!-- Content table -->
 				<div v-else class="@container flex-1 min-h-0 flex flex-col">
 					<div
-						class="flex h-12 shrink-0 items-center justify-between gap-4 border-0 border-b border-solid border-surface-4 bg-surface-3 px-3"
+						class="flex h-12 shrink-0 items-center justify-between gap-4 border-0 border-b border-solid border-[--glass-border] bg-[--color-glass-bg-strong] px-3"
 					>
 						<div
 							class="flex min-w-0 items-center gap-4"
@@ -475,7 +486,7 @@ defineExpose({ show, showLoading, hide, getState, restore, updateItem })
 
 			<!-- Footer -->
 			<div
-				class="flex items-center justify-between px-6 py-4 border-t border-solid border-0 border-surface-4 shrink-0"
+				class="flex items-center justify-between px-6 py-4 border-t border-solid border-0 border-[--glass-border] shrink-0 bg-[--color-glass-bg-strong]"
 			>
 				<!-- Stats -->
 				<div class="flex items-center gap-2">
@@ -484,7 +495,11 @@ defineExpose({ show, showLoading, hide, getState, restore, updateItem })
 						<div class="flex items-center gap-1.5">
 							<component :is="getTypeIcon(type as string)" class="size-5 text-secondary" />
 							<span class="font-medium text-primary">
-								{{ formatMessage(getProjectTypeLabel(type as string, count), { count }) }}
+								{{
+									count +
+									' ' +
+									formatMessage(getProjectTypeSentenceLabel(type as string, count), { count })
+								}}
 							</span>
 						</div>
 					</template>

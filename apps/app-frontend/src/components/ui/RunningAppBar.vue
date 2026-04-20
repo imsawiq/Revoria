@@ -67,38 +67,40 @@
 			</Card>
 		</transition>
 	</Teleport>
-	<transition name="download">
-		<Card
-			v-if="showProfiles === true && currentProcesses.length > 0"
-			ref="profiles"
-			class="profile-card"
-		>
-			<Button
-				v-for="process in currentProcesses"
-				:key="process.uuid"
-				class="profile-button"
-				@click="selectProcess(process)"
+	<Teleport to="body">
+		<transition name="download">
+			<Card
+				v-if="showProfiles === true && currentProcesses.length > 0"
+				ref="profiles"
+				class="profile-card"
 			>
-				<div class="text"><span class="circle running" /> {{ process.profile.name }}</div>
 				<Button
-					:v-tooltip="formatMessage(messages.stopInstance)"
-					icon-only
-					class="icon-button stop"
-					@click.stop="stop(process)"
+					v-for="process in currentProcesses"
+					:key="process.uuid"
+					class="profile-button"
+					@click="selectProcess(process)"
 				>
-					<StopCircleIcon />
+					<div class="text"><span class="circle running" /> {{ process.profile.name }}</div>
+					<Button
+						:v-tooltip="formatMessage(messages.stopInstance)"
+						icon-only
+						class="icon-button stop"
+						@click.stop="stop(process)"
+					>
+						<StopCircleIcon />
+					</Button>
+					<Button
+						:v-tooltip="formatMessage(messages.viewLogs)"
+						icon-only
+						class="icon-button"
+						@click.stop="goToTerminal(process.profile.path)"
+					>
+						<TerminalSquareIcon />
+					</Button>
 				</Button>
-				<Button
-					:v-tooltip="formatMessage(messages.viewLogs)"
-					icon-only
-					class="icon-button"
-					@click.stop="goToTerminal(process.profile.path)"
-				>
-					<TerminalSquareIcon />
-				</Button>
-			</Button>
-		</Card>
-	</transition>
+			</Card>
+		</transition>
+	</Teleport>
 </template>
 
 <script setup>
@@ -148,6 +150,7 @@ const currentProcesses = ref([])
 const selectedProcess = ref()
 
 const refresh = async () => {
+	const selectedUuid = selectedProcess.value?.uuid
 	const processes = await getRunningProcesses().catch(handleError)
 	const profiles = await get_many(processes.map((x) => x.profile_path)).catch(handleError)
 
@@ -155,9 +158,9 @@ const refresh = async () => {
 		profile: profiles.find((prof) => x.profile_path === prof.path),
 		...x,
 	}))
-	if (!selectedProcess.value || !currentProcesses.value.includes(selectedProcess.value)) {
-		selectedProcess.value = currentProcesses.value[0]
-	}
+	selectedProcess.value =
+		currentProcesses.value.find((process) => process.uuid === selectedUuid) ??
+		currentProcesses.value[0]
 }
 
 await refresh()
@@ -173,6 +176,8 @@ window.addEventListener('online', () => {
 const unlistenProcess = await process_listener(async () => {
 	await refresh()
 })
+
+let refreshInterval = null
 
 const stop = async (process) => {
 	try {
@@ -298,6 +303,9 @@ const toggleProfiles = async () => {
 onMounted(() => {
 	window.addEventListener('click', handleClickOutsideCard)
 	window.addEventListener('click', handleClickOutsideProfile)
+	refreshInterval = window.setInterval(() => {
+		refresh().catch(handleError)
+	}, 2000)
 })
 
 onBeforeUnmount(() => {
@@ -305,6 +313,10 @@ onBeforeUnmount(() => {
 	window.removeEventListener('click', handleClickOutsideProfile)
 	unlistenProcess()
 	unlistenLoading()
+	if (refreshInterval) {
+		window.clearInterval(refreshInterval)
+		refreshInterval = null
+	}
 })
 </script>
 
@@ -338,9 +350,17 @@ onBeforeUnmount(() => {
 	align-items: center;
 	gap: 0.5rem;
 	border-radius: var(--radius-lg);
-	border: 1px solid var(--color-button-border);
-	background-color: var(--color-button-bg);
-	padding: var(--gap-sm) var(--gap-md);
+	border: 1px solid var(--glass-border);
+	background:
+		linear-gradient(
+			180deg,
+			color-mix(in srgb, var(--color-glass-bg-strong) 92%, var(--color-brand-highlight) 8%) 0%,
+			color-mix(in srgb, var(--color-glass-bg) 94%, transparent) 100%
+		);
+	box-shadow: var(--shadow-card);
+	padding: 0.5rem 0.75rem;
+	min-height: 2.625rem;
+	flex-wrap: nowrap;
 }
 
 .running-text {
@@ -377,20 +397,25 @@ onBeforeUnmount(() => {
 .icon-button {
 	background-color: rgba(0, 0, 0, 0);
 	box-shadow: none;
-	width: 1.25rem !important;
-	height: 1.25rem !important;
+	width: 1.75rem !important;
+	height: 1.75rem !important;
+	min-width: 1.75rem;
+	min-height: 1.75rem;
 	border-radius: var(--radius-sm);
 	transition: background-color 0.15s ease-in-out;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 
 	&:hover {
 		background-color: var(--color-button-bg-hover);
 	}
 
 	svg {
-		min-width: 1.25rem;
+		min-width: 1.1rem;
 		display: block;
-		width: 1.25rem;
-		height: 1.25rem;
+		width: 1.1rem;
+		height: 1.1rem;
 	}
 
 	&.stop {
@@ -417,6 +442,10 @@ onBeforeUnmount(() => {
 	&.hidden {
 		transform: translateY(-100%);
 	}
+}
+
+.running-text a {
+	font-weight: 600;
 }
 
 .loading-option {
@@ -500,10 +529,10 @@ onBeforeUnmount(() => {
 }
 
 .profile-card {
-	position: absolute;
+	position: fixed;
 	top: 3.5rem;
 	right: 0.5rem;
-	z-index: 9;
+	z-index: 9999;
 	background-color: var(--color-glass-bg-strong);
 	box-shadow: var(--glass-shadow);
 	display: flex;
@@ -513,6 +542,8 @@ onBeforeUnmount(() => {
 	border: 1px solid var(--glass-border);
 	border-radius: var(--radius-xl);
 	padding: var(--gap-md);
+	min-width: 18rem;
+	max-width: 28rem;
 
 	&.hidden {
 		transform: translateY(-100%);

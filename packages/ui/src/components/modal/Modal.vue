@@ -15,7 +15,7 @@
 			@click="() => (closable ? hide() : {})"
 		/>
 		<div class="modal-container" :class="{ shown: actuallyShown }">
-			<div class="modal-body">
+			<div class="modal-body" :class="{ 'modal-body--fullscreen': props.fullScreen }">
 				<div v-if="props.header" class="header">
 					<h1>{{ props.header }}</h1>
 					<button v-if="closable" class="btn icon-only transparent" @click="hide">
@@ -47,6 +47,10 @@ const props = defineProps({
 	closable: {
 		type: Boolean,
 		default: true,
+	},
+	fullScreen: {
+		type: Boolean,
+		default: false,
 	},
 	onHide: {
 		type: Function,
@@ -178,6 +182,36 @@ defineExpose({
 
 		@media screen and (max-width: 650px) {
 			width: calc(100% - 2 * var(--gap-lg));
+		}
+	}
+
+	.modal-body--fullscreen {
+		width: calc(100vw - 2rem);
+		height: calc(100vh - 2rem);
+		max-width: calc(100vw - 2rem);
+		max-height: calc(100vh - 2rem);
+		border-radius: 1.5rem;
+		background-color: var(--color-glass-bg-strong);
+		border: 1px solid var(--glass-border);
+		box-shadow: var(--glass-shadow);
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+
+		.header {
+			background:
+				linear-gradient(
+					180deg,
+					color-mix(in srgb, var(--color-glass-bg-strong) 90%, var(--color-brand-highlight) 10%) 0%,
+					color-mix(in srgb, var(--color-glass-bg) 92%, transparent) 100%
+				);
+			border-bottom: 1px solid var(--glass-border);
+		}
+
+		.content {
+			flex: 1;
+			min-height: 0;
+			overflow: auto;
 		}
 	}
 }

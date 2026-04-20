@@ -39,6 +39,10 @@ const props = defineProps({
 		type: Boolean,
 		default: false,
 	},
+	fullScreen: {
+		type: Boolean,
+		default: false,
+	},
 	onHide: {
 		type: Function,
 		default() {
@@ -126,7 +130,13 @@ defineExpose({
 </script>
 
 <template>
-	<Modal ref="shareModal" :header="header" :noblur="noblur" :on-hide="onHide">
+	<Modal
+		ref="shareModal"
+		:header="header"
+		:noblur="noblur"
+		:on-hide="onHide"
+		:full-screen="fullScreen"
+	>
 		<div class="share-body">
 			<div v-if="link" class="qr-wrapper">
 				<div ref="qrCode">
@@ -226,6 +236,9 @@ defineExpose({
 	flex-wrap: wrap;
 	gap: var(--gap-sm);
 	padding: var(--gap-lg);
+	width: 100%;
+	height: 100%;
+	align-content: flex-start;
 }
 
 .all-buttons {
@@ -234,6 +247,7 @@ defineExpose({
 	gap: var(--gap-sm);
 	flex-grow: 1;
 	justify-content: center;
+	min-width: 18rem;
 }
 
 .iconified-input {
@@ -299,9 +313,12 @@ defineExpose({
 .resizable-textarea-wrapper {
 	position: relative;
 	height: 100%;
+	flex: 1;
+	min-width: min(40rem, 100%);
 
 	textarea {
 		width: 100%;
+		height: min(32rem, calc(100vh - 14rem));
 		margin: 0;
 	}
 
