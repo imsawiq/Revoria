@@ -66,16 +66,16 @@
     "message": "Ricarica per installare aggiornamento"
   },
   "friends.action.add-friend": {
-    "message": "Stringi un'amicizia"
+    "message": "Aggiungi amico"
   },
   "friends.action.view-friend-requests": {
     "message": "{count} {count, plural, one {richiesta} other {richieste}} d'amicizia"
   },
   "friends.add-friend.submit": {
-    "message": "Invia richiesta d'amicizia"
+    "message": "Invia la richiesta d'amicizia"
   },
   "friends.add-friend.title": {
-    "message": "Stringendo l'amicizia"
+    "message": "Aggiungendo l'amico"
   },
   "friends.add-friend.username.description": {
     "message": "Potrebbe essere diverso dal nome utente di Minecraft!"
@@ -87,7 +87,7 @@
     "message": "Con quale utente Modrinth vuoi stringere l'amicizia?"
   },
   "friends.add-friends-to-share": {
-    "message": "<link>Stringi un'amicizia</link> per sapere a cosa stanno giocando!"
+    "message": "<link>Aggiungi un'amicizia</link> per sapere a cosa stanno giocando!"
   },
   "friends.friend.cancel-request": {
     "message": "Annulla richiesta"
