@@ -11,19 +11,19 @@ import {
 } from '@modrinth/assets'
 import type { ProjectType, SortType, Tags } from '@modrinth/ui'
 import {
-    Avatar,
-    Button,
-    ButtonStyled,
-    Checkbox,
-    DropdownSelect,
-    injectNotificationManager,
-    LoadingIndicator,
-    Pagination,
-    SearchFilterControl,
-    SearchSidebarFilter,
-    StyledInput,
-    useSearch,
-    useServerSearch,
+	Avatar,
+	Button,
+	ButtonStyled,
+	Checkbox,
+	DropdownSelect,
+	injectNotificationManager,
+	LoadingIndicator,
+	Pagination,
+	SearchFilterControl,
+	SearchSidebarFilter,
+	StyledInput,
+	useSearch,
+	useServerSearch,
 } from '@modrinth/ui'
 import { convertFileSrc } from '@tauri-apps/api/core'
 import { openUrl } from '@tauri-apps/plugin-opener'
@@ -41,14 +41,18 @@ import SearchCard from '@/components/ui/SearchCard.vue'
 import ServerSearchCard from '@/components/ui/ServerSearchCard.vue'
 import { get_search_results, get_version } from '@/helpers/cache.js'
 import {
-    constructCurseForgeCdnUrl,
-    getCurseForgeCategories,
-    getCurseForgeClassId,
-    getCurseForgeFileDownloadUrl,
-    getCurseForgeModFiles,
-    getCurseForgeProjectUrl,
-    searchCurseForgeMods,
+	constructCurseForgeCdnUrl,
+	getCurseForgeCategories,
+	getCurseForgeClassId,
+	getCurseForgeFileDownloadUrl,
+	getCurseForgeModFiles,
+	getCurseForgeProjectUrl,
+	searchCurseForgeMods,
 } from '@/helpers/curseforge'
+import { process_listener } from '@/helpers/events'
+import { useFetch } from '@/helpers/fetch.js'
+import { install_to_existing_profile } from '@/helpers/pack.js'
+import { get_by_profile_path } from '@/helpers/process.js'
 import {
 	add_project_from_path,
 	create as createInstanceProfile,
@@ -60,11 +64,12 @@ import {
 } from '@/helpers/profile.js'
 import { get_categories, get_game_versions, get_loaders } from '@/helpers/tags'
 import { downloadUrlToTemp } from '@/helpers/utils'
-import { useFetch } from '@/helpers/fetch.js'
-import { process_listener } from '@/helpers/events'
-import { get_by_profile_path } from '@/helpers/process.js'
-import { install_to_existing_profile } from '@/helpers/pack.js'
-import { add_server_to_profile, get_profile_worlds, getServerLatency, start_join_server } from '@/helpers/worlds.ts'
+import {
+	add_server_to_profile,
+	get_profile_worlds,
+	getServerLatency,
+	start_join_server,
+} from '@/helpers/worlds.ts'
 import { useBreadcrumbs } from '@/store/breadcrumbs'
 
 const { handleError, addNotification } = injectNotificationManager()
@@ -145,6 +150,19 @@ type InstanceProject = {
 	}
 }
 
+type BrowseSearchState = {
+	query: string
+	currentFilters: any[]
+	toggledGroups: string[]
+	overriddenProvidedFilterTypes: string[]
+	currentSortType: SortType
+	serverCurrentFilters: any[]
+	serverToggledGroups: string[]
+	serverCurrentSortType: SortType
+	maxResults: number
+	currentPage: number
+}
+
 const instance: Ref<GameInstance | null> = ref(null)
 const instanceProjects: Ref<Record<string, InstanceProject> | null> = ref(null)
 const instanceHideInstalled = ref(false)
@@ -165,11 +183,16 @@ let unlistenProcessEvents: (() => void) | null = null
 
 function cfLoaderIdToString(id: number): string | null {
 	switch (id) {
-		case 1: return 'forge'
-		case 4: return 'fabric'
-		case 5: return 'quilt'
-		case 6: return 'neoforge'
-		default: return null
+		case 1:
+			return 'forge'
+		case 4:
+			return 'fabric'
+		case 5:
+			return 'quilt'
+		case 6:
+			return 'neoforge'
+		default:
+			return null
 	}
 }
 
@@ -197,6 +220,8 @@ const cfShownProfiles = computed(() => {
 })
 
 const PERSISTENT_QUERY_PARAMS = ['i', 'ai', 'source']
+const BROWSE_STATE_STORAGE_PREFIX = 'revoria:browse-search-state'
+let remoteServerCategoriesCache: any[] | null = null
 
 onMounted(async () => {
 	const [categories, loaders, availableGameVersions] = await Promise.all([
@@ -214,23 +239,27 @@ onMounted(async () => {
 
 	// Some launcher builds may cache old tag sets without server categories.
 	// Backfill server categories from public API so server filters stay complete.
-	const remoteServerCategories = await useFetch('https://api.modrinth.com/v2/tag/category', null, true)
-		.then(async (response) => {
-			if (!response?.ok) return []
-			const data = await response.json()
-			return Array.isArray(data)
-				? data.filter((x: any) => x.project_type === 'minecraft_java_server')
-				: []
-		})
-		.catch(() => [])
-
-	if (remoteServerCategories.length > 0) {
-		const existing = new Set(
-			modrinthCategoryList.value.map(
-				(x: any) => `${x.project_type}::${x.header ?? ''}::${x.name}`,
-			),
+	if (remoteServerCategoriesCache === null) {
+		remoteServerCategoriesCache = await useFetch(
+			'https://api.modrinth.com/v2/tag/category',
+			null,
+			true,
 		)
-		for (const cat of remoteServerCategories) {
+			.then(async (response) => {
+				if (!response?.ok) return []
+				const data = await response.json()
+				return Array.isArray(data)
+					? data.filter((x: any) => x.project_type === 'minecraft_java_server')
+					: []
+			})
+			.catch(() => [])
+	}
+
+	if (remoteServerCategoriesCache.length > 0) {
+		const existing = new Set(
+			modrinthCategoryList.value.map((x: any) => `${x.project_type}::${x.header ?? ''}::${x.name}`),
+		)
+		for (const cat of remoteServerCategoriesCache) {
 			const key = `${cat.project_type}::${cat.header ?? ''}::${cat.name}`
 			if (!existing.has(key)) {
 				modrinthCategoryList.value.push(cat)
@@ -242,45 +271,49 @@ onMounted(async () => {
 	gameVersionList.value = availableGameVersions
 
 	await updateInstanceContext()
+	restoreBrowseSearchState()
 	await refreshSearch()
 
-	unlistenProcessEvents = await process_listener((e: { event: string; profile_path_id: string }) => {
-		if (e.event !== 'finished') return
-		const projectId = Object.entries(runningServerProjects.value).find(
-			([, path]) => path === e.profile_path_id,
-		)?.[0]
-		if (projectId) {
-			const { [projectId]: _, ...remaining } = runningServerProjects.value
-			runningServerProjects.value = remaining
-		}
-	})
-
-	previousFilterState.value = JSON.stringify({
-		query: query.value,
-		filters: currentFilters.value,
-		sort: currentSortType.value,
-		maxResults: maxResults.value,
-		projectTypes: projectTypes.value,
-	})
+	unlistenProcessEvents = await process_listener(
+		(e: { event: string; profile_path_id: string }) => {
+			if (e.event !== 'finished') return
+			const projectId = Object.entries(runningServerProjects.value).find(
+				([, path]) => path === e.profile_path_id,
+			)?.[0]
+			if (projectId) {
+				const { [projectId]: _, ...remaining } = runningServerProjects.value
+				runningServerProjects.value = remaining
+			}
+		},
+	)
 })
 
 onUnmounted(() => {
+	saveBrowseSearchState()
 	unlistenProcessEvents?.()
 	unlistenProcessEvents = null
+	window.removeEventListener('offline', onGoOffline)
+	window.removeEventListener('online', onGoOnline)
 })
 
-watch(route, () => {
-	updateInstanceContext()
-})
+watch(
+	() => [route.query.i, route.query.ai] as const,
+	() => {
+		void updateInstanceContext()
+	},
+)
 
 async function updateInstanceContext() {
-	if (route.query.i) {
-		;[instance.value, instanceProjects.value] = await Promise.all([
-			getInstance(route.query.i as string).catch(handleError),
-			getInstanceProjects(route.query.i as string)
+	const nextInstancePath = (route.query.i as string | undefined) ?? null
+	if (nextInstancePath && instance.value?.path !== nextInstancePath) {
+		const [nextInstance, nextProjects] = await Promise.all([
+			getInstance(nextInstancePath).catch(handleError),
+			getInstanceProjects(nextInstancePath)
 				.catch(handleError)
 				.then((v) => (v ?? null) as any),
 		])
+		instance.value = nextInstance ?? null
+		instanceProjects.value = nextProjects
 		newlyInstalled.value = []
 	}
 
@@ -288,8 +321,9 @@ async function updateInstanceContext() {
 		instanceHideInstalled.value = route.query.ai === 'true'
 	}
 
-	if (instance.value && instance.value.path !== route.query.i && route.path.startsWith('/browse')) {
+	if (!nextInstancePath && instance.value && route.path.startsWith('/browse')) {
 		instance.value = null
+		instanceProjects.value = null
 		instanceHideInstalled.value = false
 	}
 }
@@ -388,7 +422,9 @@ const curseForgeSortTypes = computed(() => [
 	{ display: formatMessage(messages.sortTotalDownloads), name: 'downloads' },
 ])
 
-const sortTypesForSource = computed(() => (isCurseForge.value ? curseForgeSortTypes.value : sortTypes))
+const sortTypesForSource = computed(() =>
+	isCurseForge.value ? curseForgeSortTypes.value : sortTypes,
+)
 const {
 	serverCurrentSortType,
 	serverCurrentFilters,
@@ -398,6 +434,69 @@ const {
 	serverRequestParams,
 	createServerPageParams,
 } = useServerSearch({ tags, query, maxResults, currentPage })
+
+function browseStateStorageKey() {
+	return [
+		BROWSE_STATE_STORAGE_PREFIX,
+		projectType.value,
+		contentSource.value,
+		String(route.query.i ?? ''),
+	].join(':')
+}
+
+function hasExplicitSearchQuery() {
+	return Object.keys(route.query).some((key) => !PERSISTENT_QUERY_PARAMS.includes(key))
+}
+
+function saveBrowseSearchState() {
+	if (typeof sessionStorage === 'undefined') return
+	sessionStorage.setItem(
+		browseStateStorageKey(),
+		JSON.stringify({
+			query: query.value,
+			currentFilters: currentFilters.value,
+			toggledGroups: toggledGroups.value,
+			overriddenProvidedFilterTypes: overriddenProvidedFilterTypes.value,
+			currentSortType: currentSortType.value,
+			serverCurrentFilters: serverCurrentFilters.value,
+			serverToggledGroups: serverToggledGroups.value,
+			serverCurrentSortType: serverCurrentSortType.value,
+			maxResults: maxResults.value,
+			currentPage: currentPage.value,
+		} satisfies BrowseSearchState),
+	)
+}
+
+function restoreBrowseSearchState() {
+	if (typeof sessionStorage === 'undefined' || hasExplicitSearchQuery()) return
+	const rawState = sessionStorage.getItem(browseStateStorageKey())
+	if (!rawState) return
+	try {
+		const state = JSON.parse(rawState) as Partial<BrowseSearchState>
+		query.value = state.query ?? query.value
+		currentFilters.value = Array.isArray(state.currentFilters)
+			? state.currentFilters
+			: currentFilters.value
+		toggledGroups.value = Array.isArray(state.toggledGroups)
+			? state.toggledGroups
+			: toggledGroups.value
+		overriddenProvidedFilterTypes.value = Array.isArray(state.overriddenProvidedFilterTypes)
+			? state.overriddenProvidedFilterTypes
+			: overriddenProvidedFilterTypes.value
+		currentSortType.value = state.currentSortType ?? currentSortType.value
+		serverCurrentFilters.value = Array.isArray(state.serverCurrentFilters)
+			? state.serverCurrentFilters
+			: serverCurrentFilters.value
+		serverToggledGroups.value = Array.isArray(state.serverToggledGroups)
+			? state.serverToggledGroups
+			: serverToggledGroups.value
+		serverCurrentSortType.value = state.serverCurrentSortType ?? serverCurrentSortType.value
+		maxResults.value = state.maxResults ?? maxResults.value
+		currentPage.value = state.currentPage ?? currentPage.value
+	} catch {
+		sessionStorage.removeItem(browseStateStorageKey())
+	}
+}
 
 watch(
 	() => isCurseForge.value,
@@ -459,16 +558,21 @@ watch(
 const previousFilterState = ref('')
 
 const offline = ref(!navigator.onLine)
-window.addEventListener('offline', () => {
+const onGoOffline = () => {
 	offline.value = true
-})
-window.addEventListener('online', () => {
+}
+const onGoOnline = () => {
 	offline.value = false
-})
+}
+window.addEventListener('offline', onGoOffline)
+window.addEventListener('online', onGoOnline)
 
 const breadcrumbs = useBreadcrumbs()
 breadcrumbs.setContext({
-	name: formatMessage({ id: 'browse.breadcrumb.discover-content', defaultMessage: 'Discover content' }),
+	name: formatMessage({
+		id: 'browse.breadcrumb.discover-content',
+		defaultMessage: 'Discover content',
+	}),
 	link: route.path,
 	query: route.query,
 })
@@ -543,6 +647,7 @@ const serverPingUpdatedAt = ref<Record<string, number>>({})
 const runningServerProjects = ref<Record<string, string>>({})
 const installingServerProjects = ref<string[]>([])
 const addingServerProjects = ref<string[]>([])
+let searchRequestId = 0
 
 watch(
 	() => isCurseForge.value,
@@ -651,7 +756,8 @@ async function ensureServerInInstance(path: string, name: string, address: strin
 	const exists = worlds.some(
 		(world: any) =>
 			world.type === 'server' &&
-			(world.address === address || (address.endsWith(':25565') && world.address === address.split(':')[0])),
+			(world.address === address ||
+				(address.endsWith(':25565') && world.address === address.split(':')[0])),
 	)
 	if (!exists) {
 		await add_server_to_profile(path, name, address, 'prompt')
@@ -661,7 +767,9 @@ async function ensureServerInInstance(path: string, name: string, address: strin
 const serverShownProfiles = computed(() => {
 	const q = serverInstallSearching.value.toLowerCase()
 	return (serverInstallProfiles.value ?? []).filter((p: any) =>
-		String(p?.name ?? '').toLowerCase().includes(q),
+		String(p?.name ?? '')
+			.toLowerCase()
+			.includes(q),
 	)
 })
 
@@ -705,7 +813,9 @@ async function handleAddServerToCurrentInstance(project: ServerProject, instance
 		handleError(err instanceof Error ? err : new Error(String(err)))
 		return false
 	} finally {
-		addingServerProjects.value = addingServerProjects.value.filter((id) => id !== project.project_id)
+		addingServerProjects.value = addingServerProjects.value.filter(
+			(id) => id !== project.project_id,
+		)
 	}
 }
 
@@ -814,6 +924,7 @@ async function handleStopServerProject(projectId: string) {
 }
 
 async function refreshSearch() {
+	const requestId = ++searchRequestId
 	if (projectType.value === 'server' && isCurseForge.value) {
 		await router.replace({
 			path: route.path,
@@ -822,91 +933,99 @@ async function refreshSearch() {
 		return
 	}
 
-	if (isCurseForge.value) {
-		loading.value = true
-		try {
-			const validProvidedFilters = instanceFilters.value.filter(
-				(providedFilter: any) => !overriddenProvidedFilterTypes.value.includes(providedFilter.type),
-			)
-			const effectiveFilters = [...currentFilters.value, ...validProvidedFilters]
-			const gameVersionFilter = effectiveFilters.find(
-				(filter: any) => filter.type === 'game_version',
-			)
-			const modLoaderTypes = Array.from(
-				new Set(
-					effectiveFilters
-						.filter((filter: any) => filter.type.endsWith('_loader'))
-						.map((filter: any) => curseForgeLoaderMap[String(filter.option).toLowerCase()])
-						.filter((value: number | undefined) => Number.isFinite(value))
-						.map((value: number) => value),
-				),
-			)
-			const categoryIds = Array.from(
-				new Set(
-					effectiveFilters
-						.filter((filter: any) => filter.type.startsWith('category_'))
-						.map((filter: any) => curseForgeCategoryIdMap.value[filter.option])
-						.filter((value: number | undefined) => Number.isFinite(value))
-						.map((value: number) => value),
-				),
-			)
-			const pageSize = Math.min(Number(maxResults.value) || 10, 50)
-			const index = (currentPage.value - 1) * pageSize
-			const cf = await searchCurseForgeMods({
-				projectType: projectType.value as string,
-				query: query.value,
-				sortType: currentSortType.value?.name,
-				gameVersion: gameVersionFilter?.option,
-				modLoaderTypes,
-				categoryIds,
-				index,
-				pageSize,
-			})
+	loading.value = true
+	try {
+		if (isCurseForge.value) {
+			try {
+				const validProvidedFilters = instanceFilters.value.filter(
+					(providedFilter: any) =>
+						!overriddenProvidedFilterTypes.value.includes(providedFilter.type),
+				)
+				const effectiveFilters = [...currentFilters.value, ...validProvidedFilters]
+				const gameVersionFilter = effectiveFilters.find(
+					(filter: any) => filter.type === 'game_version',
+				)
+				const modLoaderTypes = Array.from(
+					new Set(
+						effectiveFilters
+							.filter((filter: any) => filter.type.endsWith('_loader'))
+							.map((filter: any) => curseForgeLoaderMap[String(filter.option).toLowerCase()])
+							.filter((value: number | undefined) => Number.isFinite(value))
+							.map((value: number) => value),
+					),
+				)
+				const categoryIds = Array.from(
+					new Set(
+						effectiveFilters
+							.filter((filter: any) => filter.type.startsWith('category_'))
+							.map((filter: any) => curseForgeCategoryIdMap.value[filter.option])
+							.filter((value: number | undefined) => Number.isFinite(value))
+							.map((value: number) => value),
+					),
+				)
+				const pageSize = Math.min(Number(maxResults.value) || 10, 50)
+				const index = (currentPage.value - 1) * pageSize
+				const cf = await searchCurseForgeMods({
+					projectType: projectType.value as string,
+					query: query.value,
+					sortType: currentSortType.value?.name,
+					gameVersion: gameVersionFilter?.option,
+					modLoaderTypes,
+					categoryIds,
+					index,
+					pageSize,
+				})
 
-			if (!cf || !cf.pagination) {
-				results.value = { total_hits: 0, limit: 1, hits: [] }
-				return
-			}
+				if (requestId !== searchRequestId) return
 
-			results.value = {
-				total_hits: cf.pagination?.totalCount ?? 0,
-				limit: cf.pagination?.pageSize ?? 1,
-				hits: (cf.data ?? []).map((m: any) => {
-					const indexes = m.latestFilesIndexes ?? []
-					const gameVersions = [...new Set(indexes.map((f: any) => f.gameVersion).filter(Boolean))]
-					const cfLoaderIds = [...new Set(indexes.map((f: any) => f.modLoader).filter((v: any) => v != null && v !== 0))]
-					return {
-						project_id: String(m.id),
-						slug: m.slug,
-						project_type: projectType.value as any,
-						title: m.name,
-						description: m.summary,
-						icon_url: m.logo?.thumbnailUrl ?? m.logo?.url ?? null,
-						author: m.authors?.[0]?.name,
-						downloads: m.downloadCount,
-						follows: m.likeCount,
-						date_modified: m.dateModified,
-						display_categories: (m.categories ?? [])
-							.map((c: any) => c.name)
-							.filter(Boolean),
-						source: 'curseforge',
-						game_versions: gameVersions,
-						cf_loader_ids: cfLoaderIds,
-					}
-				}),
+				if (!cf || !cf.pagination) {
+					results.value = { total_hits: 0, limit: 1, hits: [] }
+					return
+				}
+
+				results.value = {
+					total_hits: cf.pagination?.totalCount ?? 0,
+					limit: cf.pagination?.pageSize ?? 1,
+					hits: (cf.data ?? []).map((m: any) => {
+						const indexes = m.latestFilesIndexes ?? []
+						const gameVersions = [
+							...new Set(indexes.map((f: any) => f.gameVersion).filter(Boolean)),
+						]
+						const cfLoaderIds = [
+							...new Set(
+								indexes.map((f: any) => f.modLoader).filter((v: any) => v != null && v !== 0),
+							),
+						]
+						return {
+							project_id: String(m.id),
+							slug: m.slug,
+							project_type: projectType.value as any,
+							title: m.name,
+							description: m.summary,
+							icon_url: m.logo?.thumbnailUrl ?? m.logo?.url ?? null,
+							author: m.authors?.[0]?.name,
+							downloads: m.downloadCount,
+							follows: m.likeCount,
+							date_modified: m.dateModified,
+							display_categories: (m.categories ?? []).map((c: any) => c.name).filter(Boolean),
+							source: 'curseforge',
+							game_versions: gameVersions,
+							cf_loader_ids: cfLoaderIds,
+						}
+					}),
+				}
+			} catch (e) {
+				const err = e instanceof Error ? e : new Error(String(e))
+				handleError(err)
+				if (requestId === searchRequestId) {
+					results.value = { total_hits: 0, limit: 1, hits: [] }
+				}
 			}
-		} catch (e) {
-			const err = e instanceof Error ? e : new Error(String(e))
-			handleError(err)
-			results.value = { total_hits: 0, limit: 1, hits: [] }
-		} finally {
-			loading.value = false
-		}
-	} else {
-		if (projectType.value === 'server') {
+		} else if (projectType.value === 'server') {
 			const serverResults = await fetchServerSearchResults(serverRequestParams.value).catch(
 				handleError,
 			)
+			if (requestId !== searchRequestId) return
 			serverHits.value = serverResults?.hits ?? []
 			results.value = {
 				total_hits: serverResults?.total_hits ?? 0,
@@ -914,18 +1033,14 @@ async function refreshSearch() {
 				hits: [],
 			}
 			serverPings.value = {}
-			loading.value = false
 			void pingServerHits(serverHits.value)
 			void checkServerRunningStates(serverHits.value)
 		} else {
 			let rawResults = await get_search_results(requestParams.value)
+			if (requestId !== searchRequestId) return
 			if (!rawResults) {
 				rawResults = {
-					result: {
-						hits: [],
-						total_hits: 0,
-						limit: 1,
-					},
+					result: { hits: [], total_hits: 0, limit: 1 },
 				}
 			}
 			if (instance.value) {
@@ -943,57 +1058,39 @@ async function refreshSearch() {
 				source: 'modrinth',
 			}))
 		}
-		if (projectType.value !== 'server') loading.value = false
-	}
 
-	const currentFilterState =
-		projectType.value === 'server'
-			? JSON.stringify({
-					query: query.value,
-					filters: serverCurrentFilters.value,
-					sort: serverCurrentSortType.value,
-					maxResults: maxResults.value,
-					projectTypes: projectTypes.value,
-				})
-			: JSON.stringify({
-					query: query.value,
-					filters: currentFilters.value,
-					sort: currentSortType.value,
-					maxResults: maxResults.value,
-					projectTypes: projectTypes.value,
-				})
+		if (requestId !== searchRequestId) return
 
-	if (previousFilterState.value && previousFilterState.value !== currentFilterState) {
-		currentPage.value = 1
-	}
+		const persistentParams: LocationQuery = {}
+		for (const [key, value] of Object.entries(route.query)) {
+			if (PERSISTENT_QUERY_PARAMS.includes(key)) {
+				persistentParams[key] = value
+			}
+		}
+		if (instanceHideInstalled.value) {
+			persistentParams.ai = 'true'
+		} else {
+			delete persistentParams.ai
+		}
+		const params = {
+			...persistentParams,
+			...(projectType.value === 'server' ? createServerPageParams() : createPageParams()),
+		}
 
-	previousFilterState.value = currentFilterState
-
-	const persistentParams: LocationQuery = {}
-
-	for (const [key, value] of Object.entries(route.query)) {
-		if (PERSISTENT_QUERY_PARAMS.includes(key)) {
-			persistentParams[key] = value
+		breadcrumbs.setContext({
+			name: formatMessage(messages.breadcrumbDiscoverContent),
+			link: `/browse/${projectType.value}`,
+			query: params,
+		})
+		saveBrowseSearchState()
+		if (JSON.stringify(route.query) !== JSON.stringify(params)) {
+			await router.replace({ path: route.path, query: params })
+		}
+	} finally {
+		if (requestId === searchRequestId) {
+			loading.value = false
 		}
 	}
-
-	if (instanceHideInstalled.value) {
-		persistentParams.ai = 'true'
-	} else {
-		delete persistentParams.ai
-	}
-
-	const params = {
-		...persistentParams,
-		...(projectType.value === 'server' ? createServerPageParams() : createPageParams()),
-	}
-
-	breadcrumbs.setContext({
-		name: formatMessage(messages.breadcrumbDiscoverContent),
-		link: `/browse/${projectType.value}`,
-		query: params,
-	})
-	await router.replace({ path: route.path, query: params })
 }
 
 async function setPage(newPageNumber: number) {
@@ -1143,12 +1240,11 @@ async function installCurseForgeProjectToInstance(project: any, instanceVal: Gam
 			'_',
 		)
 		const downloadedPath = await downloadUrlToTemp(downloadUrl, suggestedName, instanceVal.path)
-		const backendType = (project.project_type ?? 'mod') === 'shader' ? 'shaderpack' : String(project.project_type ?? 'mod')
-		await add_project_from_path(
-			instanceVal.path,
-			downloadedPath,
-			backendType,
-		)
+		const backendType =
+			(project.project_type ?? 'mod') === 'shader'
+				? 'shaderpack'
+				: String(project.project_type ?? 'mod')
+		await add_project_from_path(instanceVal.path, downloadedPath, backendType)
 		newlyInstalled.value.push(String(modId))
 	} catch (e) {
 		const err = e instanceof Error ? e : new Error(String(e))
@@ -1210,7 +1306,11 @@ const selectableProjectTypes = computed(() => {
 		{ label: formatMessage(messages.typeResourcePack), href: `/browse/resourcepack` },
 		{ label: formatMessage(messages.typeDatapack), href: `/browse/datapack`, shown: dataPacks },
 		{ label: formatMessage(messages.typeShader), href: `/browse/shader` },
-		{ label: formatMessage(messages.typeServer), href: `/browse/server`, shown: !instance.value && !isCurseForge.value },
+		{
+			label: formatMessage(messages.typeServer),
+			href: `/browse/server`,
+			shown: !instance.value && !isCurseForge.value,
+		},
 	]
 
 	if (params) {
@@ -1457,7 +1557,6 @@ const handleOptionsClick = (args: any) => {
 			break
 	}
 }
-
 </script>
 
 <template>
@@ -1471,7 +1570,9 @@ const handleOptionsClick = (args: any) => {
 				Select an instance to add
 				<strong class="text-contrast">{{ serverInstallTargetProject.name }}</strong>
 			</p>
-			<div class="flex items-center gap-2 rounded-xl bg-[--color-button-bg] px-3 py-2 border border-[--glass-border]">
+			<div
+				class="flex items-center gap-2 rounded-xl bg-[--color-button-bg] px-3 py-2 border border-[--glass-border]"
+			>
 				<SearchIcon class="w-4 h-4 text-secondary shrink-0" />
 				<input
 					v-model="serverInstallSearching"
@@ -1531,17 +1632,14 @@ const handleOptionsClick = (args: any) => {
 						>
 							<PlusIcon v-if="!profile.added && !profile.installing" class="w-4 h-4" />
 							<CheckIcon v-else-if="profile.added" class="w-4 h-4" />
-							{{
-								profile.installing
-									? 'Adding...'
-									: profile.added
-										? 'Added'
-										: 'Add'
-							}}
+							{{ profile.installing ? 'Adding...' : profile.added ? 'Added' : 'Add' }}
 						</button>
 					</ButtonStyled>
 				</div>
-				<div v-if="serverShownProfiles.length === 0" class="py-6 text-center text-secondary text-sm">
+				<div
+					v-if="serverShownProfiles.length === 0"
+					class="py-6 text-center text-secondary text-sm"
+				>
 					No instances found.
 				</div>
 			</div>
@@ -1566,7 +1664,9 @@ const handleOptionsClick = (args: any) => {
 				{{ formatMessage(messages.installToInstanceDescription) }}
 				<strong class="text-contrast">{{ cfInstallTargetProject.title }}</strong>
 			</p>
-			<div class="flex items-center gap-2 rounded-xl bg-[--color-button-bg] px-3 py-2 border border-[--glass-border]">
+			<div
+				class="flex items-center gap-2 rounded-xl bg-[--color-button-bg] px-3 py-2 border border-[--glass-border]"
+			>
 				<SearchIcon class="w-4 h-4 text-secondary shrink-0" />
 				<input
 					v-model="cfInstallSearching"
@@ -1602,7 +1702,10 @@ const handleOptionsClick = (args: any) => {
 							</span>
 						</div>
 					</router-link>
-					<ButtonStyled :color="profile.installed ? 'green' : 'brand'" :type="profile.installed ? 'standard' : 'outlined'">
+					<ButtonStyled
+						:color="profile.installed ? 'green' : 'brand'"
+						:type="profile.installed ? 'standard' : 'outlined'"
+					>
 						<button
 							class="shrink-0 text-xs"
 							:disabled="profile.installing || profile.installed"

@@ -224,11 +224,11 @@ impl DiscordGuard {
             .state(msg)
             .assets(
                 Assets::new()
-                    .large_image("revoria_logo")
-                    .large_text(&build_info)
-                    .small_image("revoria_logo")
-                    .small_text(&build_download),
-            )
+					.large_image("revoria_logo")
+					.large_text(&build_info)
+					.small_image("revoria_logo")
+					.small_text(build_download),
+			)
             .timestamps(Timestamps::new().start(time));
 
         // Attempt to set the activity

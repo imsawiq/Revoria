@@ -5,7 +5,13 @@
 		:class="{ 'h-full': fullscreen }"
 	>
 		<div ref="wrapperRef" class="relative min-h-0 flex-1 overflow-hidden pb-2 pt-1">
-			<div ref="containerRef" class="size-full" />
+			<div
+				ref="containerRef"
+				class="size-full"
+				@mouseenter="isPointerOverTerminal = true"
+				@mouseleave="isPointerOverTerminal = false"
+				@copy.prevent="copyTerminalContent"
+			/>
 			<div v-if="!isAtBottom" class="absolute bottom-4 right-4 z-10">
 				<ButtonStyled circular type="highlight" size="large">
 					<button :aria-label="formatMessage(messages.scrollToBottom)" @click="scrollToBottom">
@@ -38,8 +44,8 @@
 
 <script setup lang="ts">
 import { ChevronDownIcon, TerminalSquareIcon } from '@modrinth/assets'
-import type { Terminal } from '@xterm/xterm'
 import { defineMessages, useVIntl } from '@vintl/vintl'
+import type { Terminal } from '@xterm/xterm'
 import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import ButtonStyled from '#ui/components/base/ButtonStyled.vue'
@@ -133,6 +139,11 @@ const commandInput = ref('')
 const componentHeight = ref(0)
 const snappedHeight = ref<number | null>(null)
 const showingEmptyState = ref(false)
+const isPointerOverTerminal = ref(false)
+const isTerminalFocused = ref(false)
+let copyHandler: ((event: KeyboardEvent) => void) | null = null
+let focusHandler: (() => void) | null = null
+let blurHandler: (() => void) | null = null
 
 const {
 	terminal,
@@ -210,12 +221,77 @@ function handleWindowResize() {
 	}, 50)
 }
 
+function getBufferContent() {
+	const terminalValue = terminal.value
+	if (!terminalValue) return ''
+	const buffer = terminalValue.buffer.active
+	const lines: string[] = []
+	for (let index = 0; index < buffer.length; index++) {
+		lines.push(buffer.getLine(index)?.translateToString(true) ?? '')
+	}
+	return lines.join('\n').trimEnd()
+}
+
+async function copyTerminalContent() {
+	const terminalValue = terminal.value
+	if (!terminalValue) return
+	const selectedText = terminalValue.getSelection()
+	const content = selectedText || getBufferContent()
+	if (!content) return
+	if (navigator.clipboard?.writeText) {
+		await navigator.clipboard.writeText(content)
+		return
+	}
+	const textarea = document.createElement('textarea')
+	textarea.value = content
+	textarea.style.position = 'fixed'
+	textarea.style.left = '-9999px'
+	textarea.style.top = '-9999px'
+	document.body.appendChild(textarea)
+	textarea.focus()
+	textarea.select()
+	document.execCommand('copy')
+	textarea.remove()
+}
+
 onMounted(() => {
 	window.addEventListener('resize', handleWindowResize)
+	copyHandler = (event) => {
+		if (!(event.ctrlKey || event.metaKey) || event.code !== 'KeyC') return
+		if (!isPointerOverTerminal.value && !isTerminalFocused.value && !terminal.value?.hasSelection())
+			return
+		event.preventDefault()
+		event.stopPropagation()
+		void copyTerminalContent()
+	}
+	document.addEventListener('keydown', copyHandler, true)
+	nextTick(() => {
+		const textarea = containerRef.value?.querySelector(
+			'.xterm-helper-textarea',
+		) as HTMLElement | null
+		if (!textarea) return
+		focusHandler = () => {
+			isTerminalFocused.value = true
+		}
+		blurHandler = () => {
+			isTerminalFocused.value = false
+		}
+		textarea.addEventListener('focus', focusHandler)
+		textarea.addEventListener('blur', blurHandler)
+	})
 })
 
 onBeforeUnmount(() => {
 	window.removeEventListener('resize', handleWindowResize)
+	if (copyHandler) {
+		document.removeEventListener('keydown', copyHandler, true)
+		copyHandler = null
+	}
+	const textarea = containerRef.value?.querySelector('.xterm-helper-textarea') as HTMLElement | null
+	if (textarea && focusHandler) textarea.removeEventListener('focus', focusHandler)
+	if (textarea && blurHandler) textarea.removeEventListener('blur', blurHandler)
+	focusHandler = null
+	blurHandler = null
 	if (resizeDebounce) clearTimeout(resizeDebounce)
 })
 
@@ -282,8 +358,21 @@ defineExpose({
 	color-scheme: inherit;
 }
 
+.xterm-viewport,
+.xterm-scrollable-element,
+.xterm-screen,
+.xterm-helpers,
+.xterm-helper-textarea {
+	background-color: var(--surface-2) !important;
+}
+
+.xterm-screen {
+	right: 0 !important;
+}
+
 .xterm-viewport {
-	background-color: color-mix(in srgb, var(--surface-2) 94%, transparent) !important;
+	right: 0 !important;
+	width: 100% !important;
 }
 
 .xterm .xterm-screen {
@@ -310,12 +399,13 @@ defineExpose({
 
 .xterm-scrollable-element > .scrollbar.vertical {
 	width: 8px !important;
+	background: transparent !important;
 }
 
 .xterm-scrollable-element > .scrollbar.vertical > div {
 	width: 6px !important;
 	border-radius: 8px !important;
 	contain: layout style !important;
-	background: color-mix(in srgb, var(--color-button-bg-selected) 56%, var(--surface-5)) !important;
+	background: color-mix(in srgb, var(--color-button-bg-selected) 42%, transparent) !important;
 }
 </style>

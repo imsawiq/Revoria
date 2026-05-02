@@ -45,16 +45,21 @@
 					:show-clear="isLiveSource"
 					:has-logs="hasLogs"
 					:share-disabled="resolvedShareDisabled"
-					:share-disabled-tooltip="resolvedShareDisabled ? formatMessage(messages.shareDisabled) : undefined"
+					:share-disabled-tooltip="
+						resolvedShareDisabled ? formatMessage(messages.shareDisabled) : undefined
+					"
 					:sharing="isSharing"
 					:fullscreen="isFullscreen"
 					:show-delete="showDelete"
+					:show-open-folder="ctx.onOpenFolder != null"
 					:delete-disabled="resolvedDeleteDisabled"
 					:delete-disabled-tooltip="ctx.deleteDisabledTooltip"
 					@clear="handleClear"
+					@copy="handleCopy"
 					@share="handleShare"
 					@toggle-fullscreen="toggleFullscreen"
 					@delete="handleDelete"
+					@open-folder="handleOpenFolder"
 				/>
 			</div>
 
@@ -70,12 +75,14 @@
 			/>
 		</div>
 	</Teleport>
-	<ShareModal
-		ref="shareModal"
-		:header="formatMessage(messages.shareHeader)"
-		link
-		:social-buttons="false"
-	/>
+	<Teleport to="body">
+		<ShareModal
+			ref="shareModal"
+			:header="formatMessage(messages.shareHeader)"
+			link
+			:social-buttons="false"
+		/>
+	</Teleport>
 	<NewModal
 		ref="deleteModal"
 		:header="formatMessage(messages.deleteLogFile)"
@@ -108,8 +115,8 @@
 
 <script setup lang="ts">
 import { SearchIcon, TrashIcon, XIcon } from '@modrinth/assets'
-import type { Terminal } from '@xterm/xterm'
 import { defineMessages, useVIntl } from '@vintl/vintl'
+import type { Terminal } from '@xterm/xterm'
 import { Teleport, computed, isRef, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 
 import Admonition from '#ui/components/base/Admonition.vue'
@@ -121,7 +128,6 @@ import Combobox from '#ui/components/base/Combobox.vue'
 import StyledInput from '#ui/components/base/StyledInput.vue'
 import NewModal from '#ui/components/modal/NewModal.vue'
 import ShareModal from '#ui/components/modal/ShareModal.vue'
-import { injectModrinthClient } from '#ui/providers'
 import { injectModalBehavior } from '#ui/providers/modal-behavior'
 import { injectNotificationManager } from '#ui/providers/web-notifications.ts'
 
@@ -133,7 +139,6 @@ import { injectConsoleManager } from './providers'
 import type { LogLevel, LogLine } from './types'
 
 const ctx = injectConsoleManager()
-const client = injectModrinthClient()
 const modalBehavior = injectModalBehavior(null)
 const { addNotification } = injectNotificationManager()
 const { formatMessage } = useVIntl()
@@ -178,6 +183,14 @@ const messages = defineMessages({
 	failedShareTitle: {
 		id: 'console.share.failed-title',
 		defaultMessage: 'Failed to share logs',
+	},
+	failedCopyTitle: {
+		id: 'instance.logs.copy.failed-title',
+		defaultMessage: 'Failed to copy logs',
+	},
+	copiedTitle: {
+		id: 'instance.logs.copy.success-title',
+		defaultMessage: 'Copied logs',
 	},
 	unknownError: {
 		id: 'error.unknown',
@@ -380,6 +393,10 @@ function handleDelete() {
 	deleteModal.value?.show()
 }
 
+async function handleOpenFolder() {
+	await ctx.onOpenFolder?.()
+}
+
 async function confirmDelete() {
 	if (!ctx.onDelete) return
 	isDeleting.value = true
@@ -398,14 +415,47 @@ async function confirmDelete() {
 	}
 }
 
-async function handleShare() {
+function getVisibleLogContent() {
 	const predicate = buildCombinedPredicate()
 	const lines = predicate ? ctx.logLines.value.filter(predicate) : ctx.logLines.value
-	const content = lines.map((line) => line.text).join('\n')
+	return lines.map((line) => line.text).join('\n')
+}
+
+async function handleCopy() {
+	try {
+		await navigator.clipboard.writeText(getVisibleLogContent())
+		addNotification({
+			type: 'success',
+			title: formatMessage(messages.copiedTitle),
+		})
+	} catch (error) {
+		console.error('Failed to copy logs:', error)
+		addNotification({
+			type: 'error',
+			title: formatMessage(messages.failedCopyTitle),
+			text: typeof error === 'string' ? error : formatMessage(messages.unknownError),
+		})
+	}
+}
+
+async function handleShare() {
+	const content = getVisibleLogContent()
 
 	isSharing.value = true
 	try {
-		const data = await client.mclogs.logs_v1.create(content)
+		const body = new URLSearchParams()
+		body.set('content', content)
+		const response = await fetch('https://api.mclo.gs/1/log', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+			},
+			body,
+		})
+		const data = (await response.json()) as { success?: boolean; url?: string; error?: string }
+		if (!response.ok || !data.success) {
+			throw new Error(data.error || response.statusText)
+		}
 		if (data.url) {
 			shareModal.value?.show(data.url)
 		}

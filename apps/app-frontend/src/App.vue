@@ -91,6 +91,7 @@ import {
 	getUpdateSize,
 	isDev,
 	isNetworkMetered,
+	showLauncherLogsFolder,
 } from '@/helpers/utils.js'
 import { createContentInstall, provideContentInstall } from '@/providers/content-install'
 import {
@@ -119,10 +120,7 @@ const systemThemeMediaQuery =
 
 async function syncLauncherThemeIcon() {
 	try {
-		await applyLauncherWindowIcon(
-			themeStore.selectedTheme,
-			systemThemeMediaQuery?.matches ?? false,
-		)
+		await applyLauncherWindowIcon(themeStore.selectedTheme, systemThemeMediaQuery?.matches ?? false)
 	} catch (error) {
 		console.warn('Failed to apply themed launcher icon', error)
 	}
@@ -224,6 +222,7 @@ onMounted(async () => {
 
 	document.querySelector('body').addEventListener('click', handleClick)
 	document.querySelector('body').addEventListener('auxclick', handleAuxClick)
+	window.addEventListener('keydown', handleDebugShortcut)
 
 	checkUpdates()
 })
@@ -231,8 +230,15 @@ onMounted(async () => {
 onUnmounted(async () => {
 	document.querySelector('body').removeEventListener('click', handleClick)
 	document.querySelector('body').removeEventListener('auxclick', handleAuxClick)
+	window.removeEventListener('keydown', handleDebugShortcut)
 	await unlistenUpdateDownload?.()
 })
+
+async function handleDebugShortcut(event) {
+	if (!event.ctrlKey || event.key !== 'F12') return
+	event.preventDefault()
+	await showLauncherLogsFolder().catch(handleError)
+}
 
 watch(
 	() => themeStore.selectedTheme,
@@ -756,10 +762,8 @@ if (typeof window !== 'undefined') {
 		}
 		updateSize.value = typeof next.size === 'number' ? next.size : 128 * 1024 * 1024
 		metered.value = typeof next.metered === 'boolean' ? next.metered : false
-		appUpdateDownloadProgress.value =
-			typeof next.progress === 'number' ? next.progress : 0.42
-		updateToastStatus.value =
-			typeof next.status === 'string' ? next.status : 'downloading'
+		appUpdateDownloadProgress.value = typeof next.progress === 'number' ? next.progress : 0.42
+		updateToastStatus.value = typeof next.status === 'string' ? next.status : 'downloading'
 	}
 }
 
@@ -1060,10 +1064,7 @@ async function processPendingSurveys() {
 			<NavButton v-tooltip.right="formatMessage(messages.navSyncing)" to="/syncing">
 				<LinkIcon />
 			</NavButton>
-			<NavButton
-				v-tooltip.right="formatMessage(messages.navLibrary)"
-				to="/library"
-			>
+			<NavButton v-tooltip.right="formatMessage(messages.navLibrary)" to="/library">
 				<LibraryIcon />
 			</NavButton>
 			<div class="h-px w-8 mx-auto my-2 bg-divider"></div>
@@ -1148,19 +1149,19 @@ async function processPendingSurveys() {
 				<Breadcrumbs class="pt-[2px]" />
 			</div>
 			<section data-tauri-drag-region class="flex ml-auto items-center">
-					<ButtonStyled
-						v-if="!forceSidebar && themeStore.toggleSidebar"
-						:type="sidebarToggled ? 'standard' : 'transparent'"
-						circular
+				<ButtonStyled
+					v-if="!forceSidebar && themeStore.toggleSidebar"
+					:type="sidebarToggled ? 'standard' : 'transparent'"
+					circular
+				>
+					<button
+						class="mr-3 transition-transform"
+						:class="{ 'rotate-180': !sidebarToggled }"
+						@click="sidebarToggled = !sidebarToggled"
 					>
-						<button
-							class="mr-3 transition-transform"
-							:class="{ 'rotate-180': !sidebarToggled }"
-							@click="sidebarToggled = !sidebarToggled"
-						>
-							<RightArrowIcon />
-						</button>
-					</ButtonStyled>
+						<RightArrowIcon />
+					</button>
+				</ButtonStyled>
 				<div class="flex mr-3">
 					<Suspense>
 						<RunningAppBar />
@@ -1197,18 +1198,18 @@ async function processPendingSurveys() {
 					themeStore.pageBackgroundUrl
 						? {
 								backgroundImage: `linear-gradient(
-									color-mix(in srgb, var(--color-glass-bg-strong) ${
-										Math.round((1 - themeStore.pageBackgroundOpacity) * 100)
-									}%, transparent),
-									color-mix(in srgb, var(--color-glass-bg-strong) ${
-										Math.round((1 - themeStore.pageBackgroundOpacity) * 100)
-									}%, transparent)
+									color-mix(in srgb, var(--color-glass-bg-strong) ${Math.round(
+										(1 - themeStore.pageBackgroundOpacity) * 100,
+									)}%, transparent),
+									color-mix(in srgb, var(--color-glass-bg-strong) ${Math.round(
+										(1 - themeStore.pageBackgroundOpacity) * 100,
+									)}%, transparent)
 								), url(${themeStore.pageBackgroundUrl})`,
 								backgroundPosition: 'center',
 								backgroundRepeat: 'no-repeat',
 								backgroundSize: 'cover',
 								backgroundAttachment: 'scroll',
-						  }
+							}
 						: undefined
 				"
 			>

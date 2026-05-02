@@ -1,3 +1,0 @@
-ALTER TABLE settings ADD COLUMN glass_blur INTEGER NOT NULL DEFAULT 20;
-ALTER TABLE settings ADD COLUMN glass_border_opacity REAL NOT NULL DEFAULT 0.075;
-ALTER TABLE settings ADD COLUMN background_effect TEXT NOT NULL DEFAULT 'off';

@@ -21,7 +21,9 @@
 					<label class="label">{{ crashText.apiKey }}</label>
 					<input v-model="crashSettings.apiKey" class="crash-input" type="password" />
 					<div class="hint">
-						<p class="m-0"><strong>{{ crashText.apiTutorialTitle }}</strong></p>
+						<p class="m-0">
+							<strong>{{ crashText.apiTutorialTitle }}</strong>
+						</p>
 						<ol class="m-0 pl-5">
 							<li>{{ crashText.apiTutorialStep1 }}</li>
 							<li>{{ crashText.apiTutorialStep2 }}</li>
@@ -84,7 +86,16 @@ import { formatBytes, renderString } from '@modrinth/utils'
 import { invoke } from '@tauri-apps/api/core'
 import { defineMessages, useVIntl } from '@vintl/vintl'
 import { useStorage } from '@vueuse/core'
-import { computed, onMounted, onUnmounted, ref, shallowRef, triggerRef, watch, watchEffect } from 'vue'
+import {
+	computed,
+	onMounted,
+	onUnmounted,
+	ref,
+	shallowRef,
+	triggerRef,
+	watch,
+	watchEffect,
+} from 'vue'
 import { useRoute } from 'vue-router'
 
 import ModalWrapper from '@/components/ui/modal/ModalWrapper.vue'
@@ -98,7 +109,7 @@ import {
 } from '@/helpers/logs.js'
 import { get_by_profile_path } from '@/helpers/process.js'
 import { get_full_path } from '@/helpers/profile'
-import { openPath } from '@/helpers/utils.js'
+import { openPath, showProfileInFolder } from '@/helpers/utils.js'
 
 const { handleError } = injectNotificationManager()
 const route = useRoute()
@@ -309,26 +320,34 @@ const deleteDisabled = computed(() => {
 })
 
 const currentLiveLogCursor = ref(0)
+let isPollingLiveLog = false
 
 async function pollLiveLog() {
+	if (isPollingLiveLog) return
 	if (!props.instance?.path || !profilePathId.value) return
-	const processes = await get_by_profile_path(profilePathId.value).catch(() => [])
-	if (!processes?.length) return
+	isPollingLiveLog = true
+	try {
+		const processes = await get_by_profile_path(profilePathId.value).catch(() => [])
+		if (!processes?.length) return
 
-	const hasRecoveredProcess = processes.some((process) => process.recovered)
-	const cursorData = await (
-		hasRecoveredProcess ? get_game_log_cursor : get_latest_log_cursor
-	)(props.instance.path, currentLiveLogCursor.value).catch(handleError)
+		const hasRecoveredProcess = processes.some((process) => process.recovered)
+		const cursorData = await (hasRecoveredProcess ? get_game_log_cursor : get_latest_log_cursor)(
+			props.instance.path,
+			currentLiveLogCursor.value,
+		).catch(handleError)
 
-	if (!cursorData) return
-	if (cursorData.new_file) {
-		liveConsole.clear()
-		currentLiveLogCursor.value = 0
+		if (!cursorData) return
+		if (cursorData.new_file) {
+			liveConsole.clear()
+			currentLiveLogCursor.value = 0
+		}
+		if (cursorData.output) {
+			liveConsole.addLegacyLog(cursorData.output)
+		}
+		currentLiveLogCursor.value = cursorData.cursor
+	} finally {
+		isPollingLiveLog = false
 	}
-	if (cursorData.output) {
-		liveConsole.addLegacyLog(cursorData.output)
-	}
-	currentLiveLogCursor.value = cursorData.cursor
 }
 
 async function deleteSelectedLog() {
@@ -353,6 +372,10 @@ provideConsoleManager({
 		void clearLive()
 	},
 	onDelete: deleteSelectedLog,
+	onOpenFolder: async () => {
+		if (!props.instance?.path) return
+		await showProfileInFolder(props.instance.path).catch(handleError)
+	},
 	deleteDisabled,
 	deleteDisabledTooltip: formatMessage(messages.deleteLatestTooltip),
 	shareDisabled: computed(() => props.offline),
@@ -371,9 +394,11 @@ watch(selectedLogIndex, async (newIndex) => {
 		return
 	}
 
-	const output = await get_output_by_filename(props.instance.path, log.log_type, log.filename).catch(
-		handleError,
-	)
+	const output = await get_output_by_filename(
+		props.instance.path,
+		log.log_type,
+		log.filename,
+	).catch(handleError)
 	if (output) {
 		setHistoricalContent(log.filename, output)
 		historicalConsole.clear()
@@ -389,9 +414,12 @@ const selectedCrashIndex = ref(0)
 const crashResultHtml = computed(() => renderString(crashResult.value || ''))
 const crashSettings = useStorage('crash-log-settings', {
 	endpoint: 'https://ollama.com/api/chat',
-	model: 'glm-5:cloud',
+	model: 'gemma4:31b-cloud',
 	apiKey: '',
 })
+if (crashSettings.value.model === 'glm-5:cloud') {
+	crashSettings.value.model = 'gemma4:31b-cloud'
+}
 const launcherLanguage = useStorage('launcher-language', 'ru')
 const isRussian = computed(() => launcherLanguage.value === 'ru')
 const crashText = computed(() => ({
@@ -477,7 +505,7 @@ onMounted(async () => {
 
 	pollInterval.value = setInterval(() => {
 		void pollLiveLog()
-	}, 250)
+	}, 1000)
 
 	unlistenProcesses = await process_listener(async (event) => {
 		if (event.profile_path_id && event.profile_path_id !== profilePathId.value) return
@@ -621,7 +649,11 @@ onUnmounted(() => {
 	--surface-4: color-mix(in srgb, var(--glass-border) 84%, transparent);
 	--surface-5: color-mix(in srgb, var(--glass-border) 94%, var(--color-raised-bg) 6%);
 	--color-button-bg: color-mix(in srgb, var(--color-button-bg) 92%, var(--color-raised-bg) 8%);
-	--color-button-bg-hover: color-mix(in srgb, var(--color-button-bg-hover) 92%, var(--color-raised-bg) 8%);
+	--color-button-bg-hover: color-mix(
+		in srgb,
+		var(--color-button-bg-hover) 92%,
+		var(--color-raised-bg) 8%
+	);
 	--color-button-bg-active: color-mix(
 		in srgb,
 		var(--color-button-bg-selected) 62%,
@@ -657,8 +689,16 @@ onUnmounted(() => {
 }
 
 .revoria-console-theme :deep(.console-filter-pill--active) {
-	border-color: color-mix(in srgb, var(--color-button-text-selected) 24%, var(--glass-border)) !important;
-	background: color-mix(in srgb, var(--color-button-bg-selected) 88%, var(--color-raised-bg) 12%) !important;
+	border-color: color-mix(
+		in srgb,
+		var(--color-button-text-selected) 24%,
+		var(--glass-border)
+	) !important;
+	background: color-mix(
+		in srgb,
+		var(--color-button-bg-selected) 88%,
+		var(--color-raised-bg) 12%
+	) !important;
 	color: var(--color-button-text-selected) !important;
 	box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-button-text-selected) 18%, transparent);
 }

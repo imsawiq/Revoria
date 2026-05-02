@@ -3,19 +3,20 @@ import 'floating-vue/dist/style.css'
 import * as Sentry from '@sentry/vue'
 import { VueScanPlugin } from '@taijased/vue-render-tracker'
 import { VueQueryPlugin } from '@tanstack/vue-query'
+import { invoke } from '@tauri-apps/api/core'
 import { createPlugin } from '@vintl/vintl/plugin'
+import { useStorage } from '@vueuse/core'
 import FloatingVue from 'floating-vue'
 import { createPinia } from 'pinia'
 import { createApp, watch } from 'vue'
-import { useStorage } from '@vueuse/core'
 
 import App from '@/App.vue'
-import router from '@/routes'
+import allDeDeMessages from '@/locales/combined/de-DE.json'
 import allEnMessages from '@/locales/combined/en-US.json'
+import allRoMessages from '@/locales/combined/ro-RO.json'
 import allRuMessages from '@/locales/combined/ru-RU.json'
 import allUkMessages from '@/locales/combined/uk-UA.json'
-import allDeDeMessages from '@/locales/combined/de-DE.json'
-import allRoMessages from '@/locales/combined/ro-RO.json'
+import router from '@/routes'
 
 const launcherLanguage = useStorage('launcher-language', 'en')
 const localeMap = {
@@ -99,6 +100,28 @@ const vueScan = new VueScanPlugin({
 const pinia = createPinia()
 
 let app = createApp(App)
+
+function logFrontendError(message, source, stack) {
+	void invoke('log_frontend_error', {
+		message: String(message ?? 'Unknown frontend error'),
+		source: source ? String(source) : null,
+		stack: stack ? String(stack) : null,
+	}).catch(() => {})
+}
+
+window.addEventListener('error', (event) => {
+	logFrontendError(event.message, event.filename, event.error?.stack)
+})
+
+window.addEventListener('unhandledrejection', (event) => {
+	const reason = event.reason
+	logFrontendError(reason?.message ?? reason, 'unhandledrejection', reason?.stack)
+})
+
+app.config.errorHandler = (error, instance, info) => {
+	logFrontendError(error?.message ?? error, info, error?.stack)
+	console.error(error, instance, info)
+}
 
 Sentry.init({
 	app,

@@ -16,6 +16,18 @@
 				{{ formatMessage(messages.delete) }}
 			</button>
 		</ButtonStyled>
+		<ButtonStyled v-if="showOpenFolder" type="transparent">
+			<button @click="emit('open-folder')">
+				<FolderOpenIcon />
+				{{ formatMessage(messages.openFolder) }}
+			</button>
+		</ButtonStyled>
+		<ButtonStyled v-if="hasLogs" type="transparent">
+			<button @click="emit('copy')">
+				<ClipboardCopyIcon />
+				{{ formatMessage(messages.copy) }}
+			</button>
+		</ButtonStyled>
 		<ButtonStyled v-if="hasLogs" type="transparent">
 			<button
 				v-tooltip="shareDisabled ? shareDisabledTooltip : undefined"
@@ -39,8 +51,10 @@
 
 <script setup lang="ts">
 import {
+	ClipboardCopyIcon,
 	ContractIcon,
 	ExpandIcon,
+	FolderOpenIcon,
 	ShareIcon,
 	SpinnerIcon,
 	TrashIcon,
@@ -58,21 +72,26 @@ defineProps<{
 	sharing?: boolean
 	fullscreen?: boolean
 	showDelete?: boolean
+	showOpenFolder?: boolean
 	deleteDisabled?: boolean
 	deleteDisabledTooltip?: string
 }>()
 
 const emit = defineEmits<{
 	clear: []
+	copy: []
 	share: []
 	'toggle-fullscreen': []
 	delete: []
+	'open-folder': []
 }>()
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
 	clear: { id: 'instance.logs.clear', defaultMessage: 'Clear' },
 	delete: { id: 'instance.logs.delete', defaultMessage: 'Delete' },
+	openFolder: { id: 'instance.logs.open-folder', defaultMessage: 'Open logs folder' },
+	copy: { id: 'instance.logs.copy', defaultMessage: 'Copy' },
 	share: { id: 'instance.logs.share', defaultMessage: 'Share' },
 	expand: { id: 'console.actions.expand', defaultMessage: 'Expand' },
 	collapse: { id: 'console.actions.collapse', defaultMessage: 'Collapse' },

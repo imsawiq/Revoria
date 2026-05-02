@@ -1,19 +1,7 @@
-import { ref } from 'vue'
+import { shallowRef, triggerRef } from 'vue'
 
 import type { Log4jEvent, LogLine } from '../layouts/shared/console/types'
-
-const ERROR_TRIGGERS = ['/ERROR', 'Exception:', ':?]', 'Error', '[thread', '\tat']
-
-function detectLogLevel(lineText: string): LogLine['level'] {
-	if (lineText.includes('/INFO') || lineText.includes('[System] [CHAT]')) return 'info'
-	if (lineText.includes('/WARN')) return 'warn'
-	if (lineText.includes('/DEBUG')) return 'debug'
-	if (lineText.includes('/TRACE')) return 'trace'
-	for (const trigger of ERROR_TRIGGERS) {
-		if (lineText.includes(trigger)) return 'error'
-	}
-	return null
-}
+import { detectLogLevel } from '../layouts/shared/console/composables/log-level'
 
 function toLogLines(text: string): LogLine[] {
 	return text
@@ -38,7 +26,7 @@ function formatLog4jEvent(event: Log4jEvent): string {
 }
 
 export function createConsoleState() {
-	const output = ref<LogLine[]>([])
+	const output = shallowRef<LogLine[]>([])
 
 	function clear() {
 		output.value = []
@@ -46,7 +34,8 @@ export function createConsoleState() {
 
 	function append(lines: LogLine[]) {
 		if (lines.length === 0) return
-		output.value = [...output.value, ...lines]
+		output.value.push(...lines)
+		triggerRef(output)
 	}
 
 	function addLegacyLog(text: string) {
