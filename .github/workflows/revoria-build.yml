@@ -192,7 +192,7 @@ jobs:
 
       - name: Build Linux app
         if: matrix.platform == 'ubuntu-latest'
-        run: pnpm --filter=@modrinth/app run tauri build --config tauri-release.conf.json
+        run: pnpm --filter=@modrinth/app run tauri build --config tauri-release.conf.json --verbose --bundles 'appimage,deb'
         env:
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
@@ -209,6 +209,8 @@ jobs:
 
           if [ -z "$LINUX_ARCHIVE" ] || [ -z "$LINUX_SIG_FILE" ]; then
             echo "Missing Linux updater archive or signature"
+            echo "Generated Linux bundle files:"
+            find target -path '*release/bundle/*' -type f | sort || true
             exit 1
           fi
 
