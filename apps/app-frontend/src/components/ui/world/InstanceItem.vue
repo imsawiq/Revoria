@@ -4,6 +4,7 @@ import {
 	FolderOpenIcon,
 	MoreVerticalIcon,
 	PlayIcon,
+	PlusIcon,
 	SpinnerIcon,
 	StopCircleIcon,
 } from '@modrinth/assets'
@@ -103,6 +104,21 @@ const stop = async (event: MouseEvent) => {
 	loading.value = false
 }
 
+const playSecond = async (event: MouseEvent) => {
+	event?.stopPropagation()
+	loading.value = true
+	await run(props.instance.path)
+		.catch((err) => handleSevereError(err, { profilePath: props.instance.path }))
+		.finally(() => {
+			trackEvent('InstancePlaySecond', {
+				loader: props.instance.loader,
+				game_version: props.instance.game_version,
+				source: 'InstanceItem',
+			})
+		})
+	loading.value = false
+}
+
 const unlistenProcesses = await process_listener(async () => {
 	await checkProcess()
 })
@@ -184,16 +200,23 @@ onUnmounted(() => {
 				</div>
 			</div>
 			<div class="flex gap-1 justify-end smart-clickable:allow-pointer-events">
-				<ButtonStyled v-if="playing && !loading" color="red">
-					<button @click="stop">
-						<StopCircleIcon aria-hidden="true" />
-						{{ formatMessage(commonMessages.stopButton) }}
-					</button>
-				</ButtonStyled>
+				<template v-if="playing && !loading">
+					<ButtonStyled color="red">
+						<button @click="stop">
+							<StopCircleIcon aria-hidden="true" />
+							{{ formatMessage(commonMessages.stopButton) }}
+						</button>
+					</ButtonStyled>
+					<ButtonStyled type="outlined">
+						<button v-tooltip="'Launch another client'" @click="playSecond">
+							<PlusIcon aria-hidden="true" />
+							{{ formatMessage(commonMessages.playButton) }}
+						</button>
+					</ButtonStyled>
+				</template>
 				<ButtonStyled v-else>
 					<button
-						v-tooltip="playing ? 'Instance is already open' : null"
-						:disabled="playing || loading"
+						:disabled="loading"
 						@click="play"
 					>
 						<SpinnerIcon v-if="loading" class="animate-spin" />

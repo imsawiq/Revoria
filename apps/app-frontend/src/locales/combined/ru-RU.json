@@ -1,4 +1,49 @@
 {
+	"instance.action.stop": {
+		"defaultMessage": "Остановить"
+	},
+	"instance.action.play": {
+		"defaultMessage": "Играть"
+	},
+	"instance.action.repair": {
+		"defaultMessage": "Починить"
+	},
+	"instance.action.installing": {
+		"defaultMessage": "Установка..."
+	},
+	"instance.action.loading": {
+		"defaultMessage": "Сборка запускается..."
+	},
+	"instance.action.launch-another-client": {
+		"defaultMessage": "Запустить ещё один клиент"
+	},
+	"instance.action.launch-another-client-short": {
+		"defaultMessage": "Ещё клиент"
+	},
+	"instance.launch-second.notification.title": {
+		"defaultMessage": "Запускается второй клиент"
+	},
+	"instance.launch-second.notification.text": {
+		"defaultMessage": "{name} запускается как ещё один клиент."
+	},
+	"instance.settings.tabs.general.sandbox": {
+		"defaultMessage": "Sandbox"
+	},
+	"instance.settings.tabs.general.sandbox.beta": {
+		"defaultMessage": "Бета"
+	},
+	"instance.settings.tabs.general.sandbox.description": {
+		"defaultMessage": "Запускает эту сборку с отдельными системными папками для игровых данных вне папки сборки."
+	},
+	"instance.index.create-shortcut": {
+		"defaultMessage": "Создать ярлык"
+	},
+	"instance.shortcut.created.title": {
+		"defaultMessage": "Ярлык создан"
+	},
+	"instance.shortcut.created.text": {
+		"defaultMessage": "Ярлык для {name} готов."
+	},
 	"instances.updater-modal.loading-changelog": {
 		"defaultMessage": "Загрузка списка изменений..."
 	},

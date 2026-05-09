@@ -6,15 +6,28 @@ import java.io.IOException;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.CompletableFuture;
 
 public final class MinecraftLaunch {
     public static void main(String[] args) throws IOException, ReflectiveOperationException {
+        if (Boolean.getBoolean("modrinth.internal.stdinLaunch")) {
+            stdinLaunch();
+            return;
+        }
+
         final String mainClass = args[0];
         final String[] gameArgs = Arrays.copyOfRange(args, 1, args.length);
 
         System.setProperty("modrinth.process.args", String.join("\u001f", gameArgs));
+
+        if (Boolean.getBoolean("modrinth.internal.skipRpcLaunch")) {
+            relaunch(mainClass, gameArgs);
+            return;
+        }
 
         final CompletableFuture<Void> waitForLaunch = new CompletableFuture<>();
         TheseusRpc.connectAndStart(
@@ -26,6 +39,38 @@ public final class MinecraftLaunch {
 
         waitForLaunch.join();
         relaunch(mainClass, gameArgs);
+    }
+
+    private static void stdinLaunch() throws ReflectiveOperationException {
+        final Scanner scanner = new Scanner(System.in);
+        final List<String> gameArgs = new ArrayList<>();
+
+        while (scanner.hasNextLine()) {
+            final String command = scanner.nextLine();
+            if ("exit".equals(command)) {
+                return;
+            }
+            if (!scanner.hasNextLine()) {
+                return;
+            }
+
+            final String value = scanner.nextLine();
+            if ("arg".equals(command)) {
+                gameArgs.add(value);
+            } else if ("property".equals(command)) {
+                if (!scanner.hasNextLine()) {
+                    return;
+                }
+                System.setProperty(value, scanner.nextLine());
+            } else if ("printproperty".equals(command)) {
+                System.out.println(System.getProperty(value));
+            } else if ("launch".equals(command)) {
+                final String[] args = gameArgs.toArray(new String[0]);
+                System.setProperty("modrinth.process.args", String.join("\u001f", args));
+                relaunch(value, args);
+                return;
+            }
+        }
     }
 
     private static void relaunch(String mainClassName, String[] args) throws ReflectiveOperationException {

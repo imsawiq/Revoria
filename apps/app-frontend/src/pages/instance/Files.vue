@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { FilePageLayout, provideFileManager } from '@modrinth/ui'
 import type { EditingFile, FileItem, UploadState } from '@modrinth/ui'
+import { FilePageLayout, provideFileManager } from '@modrinth/ui'
 import { invoke } from '@tauri-apps/api/core'
 import { computed, onMounted, ref, watch } from 'vue'
 

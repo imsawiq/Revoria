@@ -59,7 +59,7 @@ pub enum MinecraftAuthenticationError {
         source: serde_json::Error,
     },
     #[error(
-        "Failed to deserialize response to JSON during step {step:?}: {source}. Status Code: {status_code} Body: {raw}"
+        "Unexpected Minecraft auth response during step {step:?}: HTTP {status_code}. Could not parse the response as expected JSON ({source}). Response body: {raw}"
     )]
     DeserializeResponse {
         step: MinecraftAuthStep,
@@ -414,8 +414,9 @@ impl Credentials {
                             },
                         ) => {
                             tracing::warn!(
-                                "Failed to fetch online profile for UUID {} likely due to stale credentials, backing off: {err}",
-                                self.offline_profile.id
+                                uuid = %self.offline_profile.id,
+                                error = %err,
+                                "Minecraft profile request was rejected with 401 Unauthorized. The saved Microsoft/Minecraft token is stale; the launcher will use the cached offline profile and retry later. Sign in again if skins, capes, or online profile data do not update."
                             );
 
                             // We have to assume the player UUID key we have is correct here, which

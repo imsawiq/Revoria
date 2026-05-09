@@ -190,6 +190,7 @@ fn main() {
                         "profile_repair_managed_modrinth",
                         "profile_run",
                         "profile_kill",
+                        "profile_create_shortcut",
                         "profile_edit",
                         "profile_edit_icon",
                         "profile_export_mrpack",

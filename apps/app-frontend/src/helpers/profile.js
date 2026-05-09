@@ -220,6 +220,10 @@ export async function kill(path) {
 	return await invoke('plugin:profile|profile_kill', { path })
 }
 
+export async function createShortcut(path, destination) {
+	return await invoke('plugin:profile|profile_create_shortcut', { path, destination })
+}
+
 // Edits a profile
 export async function edit(path, editProfile) {
 	return await invoke('plugin:profile|profile_edit', { path, editProfile })

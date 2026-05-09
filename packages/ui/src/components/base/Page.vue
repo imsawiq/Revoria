@@ -40,7 +40,7 @@ defineProps({
 .omorphia__page {
 	display: flex;
 	flex-direction: column;
-	padding: 0 0.75rem;
+	padding: 0 0.5rem;
 
 	.header {
 		grid-area: header;
@@ -62,8 +62,8 @@ defineProps({
 @media (min-width: 1024px) {
 	.omorphia__page {
 		margin: 0 auto;
-		max-width: 80rem;
-		column-gap: 0.75rem;
+		max-width: 76rem;
+		column-gap: 0.625rem;
 
 		&.has-sidebar {
 			display: grid;
@@ -71,7 +71,7 @@ defineProps({
 				'sidebar content' auto
 				'footer content' auto
 				'dummy content' 1fr
-				/ 20rem 1fr;
+				/ 18rem 1fr;
 
 			&.has-header {
 				grid-template:
@@ -79,7 +79,7 @@ defineProps({
 					'sidebar content' auto
 					'footer content' auto
 					'dummy content' 1fr
-					/ 20rem 1fr;
+					/ 18rem 1fr;
 			}
 
 			&.right-sidebar {
@@ -87,7 +87,7 @@ defineProps({
 					'content sidebar' auto
 					'content footer' auto
 					'content dummy' 1fr
-					/ 1fr 20rem;
+					/ 1fr 18rem;
 
 				&.has-header {
 					grid-template:
@@ -95,26 +95,26 @@ defineProps({
 						'content sidebar' auto
 						'content footer' auto
 						'content dummy' 1fr
-						/ 1fr 20rem;
+						/ 1fr 18rem;
 				}
 			}
 
 			.content {
-				max-width: calc(60rem - 0.75rem);
+				max-width: calc(58rem - 0.625rem);
 			}
 		}
 	}
 
 	.sidebar {
-		min-width: 20rem;
-		width: 20rem;
+		min-width: 18rem;
+		width: 18rem;
 	}
 }
 
 @media (min-width: 80rem) {
 	.omorphia__page.has-sidebar {
 		.content {
-			width: calc(60rem - 0.75rem);
+			width: calc(58rem - 0.625rem);
 		}
 	}
 }

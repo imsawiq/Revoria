@@ -8,8 +8,8 @@ import {
 	provideInstallationSettings,
 	useVIntl,
 } from '@modrinth/ui'
-import { formatCategory } from '@modrinth/utils'
 import type { GameVersionTag, PlatformTag } from '@modrinth/utils'
+import { formatCategory } from '@modrinth/utils'
 import { useQuery, useQueryClient } from '@tanstack/vue-query'
 import { computed, ref, shallowRef } from 'vue'
 

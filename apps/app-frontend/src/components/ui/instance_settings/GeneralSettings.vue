@@ -30,6 +30,7 @@ const props = defineProps<InstanceSettingsTabProps>()
 const title = ref(props.instance.name)
 const icon: Ref<string | undefined> = ref(props.instance.icon_path)
 const groups = ref(props.instance.groups)
+const sandbox = ref(!!props.instance.sandbox)
 
 const newCategoryInput = ref('')
 
@@ -76,6 +77,7 @@ async function setIcon() {
 const editProfileObject = computed(() => ({
 	name: title.value.trim().substring(0, 32) ?? 'Instance',
 	groups: groups.value.map((x) => x.trim().substring(0, 32)).filter((x) => x.length > 0),
+	sandbox: sandbox.value,
 }))
 
 const toggleGroup = (group: string) => {
@@ -96,7 +98,7 @@ const addCategory = () => {
 }
 
 watch(
-	[title, groups, groups],
+	[title, groups, sandbox],
 	async () => {
 		await edit(props.instance.path, editProfileObject.value)
 	},
@@ -188,6 +190,19 @@ const messages = defineMessages({
 		id: 'instance.settings.tabs.general.deleting.button',
 		defaultMessage: 'Deleting...',
 	},
+	sandbox: {
+		id: 'instance.settings.tabs.general.sandbox',
+		defaultMessage: 'Sandbox',
+	},
+	sandboxBeta: {
+		id: 'instance.settings.tabs.general.sandbox.beta',
+		defaultMessage: 'Beta',
+	},
+	sandboxDescription: {
+		id: 'instance.settings.tabs.general.sandbox.description',
+		defaultMessage:
+			'Runs this instance with isolated system folders for game data outside the instance folder.',
+	},
 })
 </script>
 
@@ -276,6 +291,16 @@ const messages = defineMessages({
 				</button>
 			</ButtonStyled>
 		</template>
+		<h2 class="m-0 mt-4 mb-1 text-lg font-extrabold text-contrast flex items-center gap-2">
+			{{ formatMessage(messages.sandbox) }}
+			<span class="text-xs font-bold px-2 py-0.5 bg-brand-highlight text-brand rounded-full leading-none">
+				{{ formatMessage(messages.sandboxBeta) }}
+			</span>
+		</h2>
+		<p class="m-0 mb-2">
+			{{ formatMessage(messages.sandboxDescription) }}
+		</p>
+		<Checkbox v-model="sandbox" :label="formatMessage(messages.sandbox)" />
 		<h2 class="m-0 mt-4 mb-1 text-lg font-extrabold text-contrast block">
 			{{ formatMessage(messages.libraryGroups) }}
 		</h2>

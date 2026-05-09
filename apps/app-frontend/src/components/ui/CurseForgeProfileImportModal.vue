@@ -50,20 +50,20 @@
 			</div>
 
 			<div class="flex justify-end gap-2">
-				<Button @click="hide" :disabled="importing">
+				<Button :disabled="importing" @click="hide">
 					<XIcon />
 					{{ formatMessage(messages.cancel) }}
 				</Button>
 				<Button
 					v-if="!metadata"
-					@click="fetchMetadata"
 					:disabled="!profileCode.trim() || fetching"
 					color="primary"
+					@click="fetchMetadata"
 				>
 					<SearchIcon v-if="!fetching" />
 					{{ fetching ? formatMessage(messages.checking) : formatMessage(messages.checkProfile) }}
 				</Button>
-				<Button v-if="metadata" @click="importProfile" :disabled="importing" color="primary">
+				<Button v-if="metadata" :disabled="importing" color="primary" @click="importProfile">
 					<DownloadIcon v-if="!importing" />
 					{{
 						importing ? formatMessage(messages.importing) : formatMessage(messages.importProfile)
@@ -75,15 +75,16 @@
 </template>
 
 <script setup>
-import ModalWrapper from '@/components/ui/modal/ModalWrapper.vue'
-import { trackEvent } from '@/helpers/analytics'
-import { loading_listener } from '@/helpers/events.js'
-import { fetch_curseforge_profile_metadata, import_curseforge_profile } from '@/helpers/import.js'
 import { DownloadIcon, SearchIcon, XIcon } from '@modrinth/assets'
 import { Button, injectNotificationManager } from '@modrinth/ui'
 import { defineMessages, useVIntl } from '@vintl/vintl'
 import { nextTick, onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+
+import ModalWrapper from '@/components/ui/modal/ModalWrapper.vue'
+import { trackEvent } from '@/helpers/analytics'
+import { loading_listener } from '@/helpers/events.js'
+import { fetch_curseforge_profile_metadata, import_curseforge_profile } from '@/helpers/import.js'
 
 const { handleError } = injectNotificationManager()
 const { formatMessage } = useVIntl()

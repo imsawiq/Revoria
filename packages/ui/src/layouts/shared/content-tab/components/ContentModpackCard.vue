@@ -139,7 +139,7 @@ onUnmounted(() => {
 <template>
 	<div
 		ref="containerRef"
-		class="flex flex-col gap-4 rounded-[20px] bg-bg-raised p-6 shadow-md"
+		class="flex flex-col gap-3 rounded-2xl border border-solid border-divider bg-bg-raised p-4"
 		:class="{ 'opacity-50': disabled }"
 	>
 		<div class="flex flex-wrap items-start justify-between gap-4">

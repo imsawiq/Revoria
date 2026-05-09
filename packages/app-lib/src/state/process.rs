@@ -9,6 +9,8 @@ use quick_xml::Reader;
 use quick_xml::events::Event;
 use serde::Deserialize;
 use serde::Serialize;
+#[cfg(any(target_os = "linux", target_os = "macos"))]
+use std::ffi::OsStr;
 use std::fmt::Debug;
 use std::fs::OpenOptions;
 use std::io::Write;
@@ -16,12 +18,14 @@ use std::path::{Path, PathBuf};
 use std::process::ExitStatus;
 use sysinfo::{Pid, ProcessesToUpdate, System};
 use tempfile::TempDir;
-use tokio::io::{AsyncBufReadExt, BufReader};
+use tokio::io::{AsyncBufReadExt, AsyncRead, BufReader};
 use tokio::process::{Child, Command};
 use uuid::Uuid;
 
 const LAUNCHER_LOG_PATH: &str = "launcher_log.txt";
 const RUNNING_PROCESSES_STATE: &str = "running_processes.json";
+const STDIN_PAYLOAD_CONFIGURED_ENV: &str =
+    "MODRINTH_SANDBOX_STDIN_PAYLOAD_CONFIGURED";
 
 pub struct ProcessManager {
     processes: DashMap<Uuid, Process>,
@@ -62,17 +66,18 @@ impl ProcessManager {
     ) -> crate::Result<ProcessMetadata> {
         mc_command.stdout(std::process::Stdio::piped());
         mc_command.stderr(std::process::Stdio::piped());
-        mc_command.stdin(std::process::Stdio::piped());
+        if stdin_payload_is_configured(&mc_command) {
+            mc_command.env_remove(STDIN_PAYLOAD_CONFIGURED_ENV);
+        } else {
+            mc_command.stdin(std::process::Stdio::piped());
+        }
 
-        let mut mc_proc = mc_command.spawn().map_err(IOError::from)?;
-        let pid = mc_proc.id().ok_or_else(|| {
-            crate::ErrorKind::LauncherError(
-                "Launched process did not return a PID".to_string(),
-            )
-        })?;
-
-        let stdout = mc_proc.stdout.take();
-        let stderr = mc_proc.stderr.take();
+        let SpawnedMinecraftProcess {
+            child,
+            pid,
+            stdout,
+            stderr,
+        } = spawn_minecraft_process(&mut mc_command)?;
 
         let mut process = Process {
             metadata: ProcessMetadata {
@@ -82,26 +87,10 @@ impl ProcessManager {
                 pid,
                 recovered: false,
             },
-            child: Some(mc_proc),
+            child: Some(child),
             rpc_server: Some(rpc_server),
             _main_class_keep_alive: Some(main_class_keep_alive),
         };
-
-        if let Err(e) = post_process_init(
-            &process.metadata,
-            process
-                .rpc_server
-                .as_ref()
-                .expect("RPC server should exist for launched processes"),
-        )
-        .await
-        {
-            tracing::error!("Failed to run post-process init: {e}");
-            if let Some(child) = process.child.as_mut() {
-                let _ = child.kill().await;
-            }
-            return Err(e);
-        }
 
         let metadata = process.metadata.clone();
 
@@ -162,6 +151,22 @@ impl ProcessManager {
                 )
                 .await;
             });
+        }
+
+        if let Err(e) = post_process_init(
+            &process.metadata,
+            process
+                .rpc_server
+                .as_ref()
+                .expect("RPC server should exist for launched processes"),
+        )
+        .await
+        {
+            tracing::error!("Failed to run post-process init: {e}");
+            if let Some(child) = process.child.as_mut() {
+                let _ = child.kill().await;
+            }
+            return Err(e);
         }
 
         tokio::spawn(Process::sequential_process_manager(
@@ -355,7 +360,7 @@ pub struct ProcessMetadata {
 #[derive(Debug)]
 struct Process {
     metadata: ProcessMetadata,
-    child: Option<Child>,
+    child: Option<MinecraftChild>,
     _main_class_keep_alive: Option<TempDir>,
     rpc_server: Option<RpcServer>,
 }
@@ -377,6 +382,111 @@ impl Process {
             process.kill();
         }
         Ok(())
+    }
+}
+
+struct SpawnedMinecraftProcess {
+    child: MinecraftChild,
+    pid: u32,
+    stdout: Option<Box<dyn AsyncRead + Send + Unpin>>,
+    stderr: Option<Box<dyn AsyncRead + Send + Unpin>>,
+}
+
+fn spawn_minecraft_process(
+    command: &mut Command,
+) -> crate::Result<SpawnedMinecraftProcess> {
+    #[cfg(target_os = "windows")]
+    if let Some(child) =
+        crate::util::sandbox::try_spawn_windows_sandboxed_direct(command)?
+    {
+        let pid = child.process.id();
+        let stdout = child.stdout.map(|stdout| {
+            Box::new(stdout) as Box<dyn AsyncRead + Send + Unpin>
+        });
+        let stderr = child.stderr.map(|stderr| {
+            Box::new(stderr) as Box<dyn AsyncRead + Send + Unpin>
+        });
+        return Ok(SpawnedMinecraftProcess {
+            child: MinecraftChild::WindowsSandbox(child.process),
+            pid,
+            stdout,
+            stderr,
+        });
+    }
+
+    let mut child = command.spawn().map_err(IOError::from)?;
+    let pid = child.id().ok_or_else(|| {
+        crate::ErrorKind::LauncherError(
+            "Launched process did not return a PID".to_string(),
+        )
+    })?;
+    let stdout = child
+        .stdout
+        .take()
+        .map(|stdout| Box::new(stdout) as Box<dyn AsyncRead + Send + Unpin>);
+    let stderr = child
+        .stderr
+        .take()
+        .map(|stderr| Box::new(stderr) as Box<dyn AsyncRead + Send + Unpin>);
+
+    Ok(SpawnedMinecraftProcess {
+        child: MinecraftChild::Tokio(child),
+        pid,
+        stdout,
+        stderr,
+    })
+}
+
+#[cfg(any(target_os = "linux", target_os = "macos"))]
+fn stdin_payload_is_configured(command: &Command) -> bool {
+    command.as_std().get_envs().any(|(key, value)| {
+        key == OsStr::new(STDIN_PAYLOAD_CONFIGURED_ENV) && value.is_some()
+    })
+}
+
+#[cfg(not(any(target_os = "linux", target_os = "macos")))]
+fn stdin_payload_is_configured(_command: &Command) -> bool {
+    false
+}
+
+#[derive(Debug)]
+enum MinecraftChild {
+    Tokio(Child),
+    #[cfg(target_os = "windows")]
+    WindowsSandbox(crate::util::sandbox::WindowsSandboxProcess),
+}
+
+impl MinecraftChild {
+    fn id(&self) -> Option<u32> {
+        match self {
+            MinecraftChild::Tokio(child) => child.id(),
+            #[cfg(target_os = "windows")]
+            MinecraftChild::WindowsSandbox(child) => Some(child.id()),
+        }
+    }
+
+    fn try_wait(&mut self) -> std::io::Result<Option<ExitStatus>> {
+        match self {
+            MinecraftChild::Tokio(child) => child.try_wait(),
+            #[cfg(target_os = "windows")]
+            MinecraftChild::WindowsSandbox(child) => child.try_wait(),
+        }
+    }
+
+    async fn wait(&mut self) -> std::io::Result<ExitStatus> {
+        match self {
+            MinecraftChild::Tokio(child) => child.wait().await,
+            #[cfg(target_os = "windows")]
+            MinecraftChild::WindowsSandbox(child) => child.wait().await,
+        }
+    }
+
+    async fn kill(&mut self) -> std::io::Result<()> {
+        match self {
+            MinecraftChild::Tokio(child) => child.kill().await,
+            #[cfg(target_os = "windows")]
+            MinecraftChild::WindowsSandbox(child) => child.kill().await,
+        }
     }
 }
 
@@ -699,6 +809,102 @@ impl Process {
         Ok(())
     }
 
+    fn append_exit_summary(
+        log_path: impl AsRef<Path>,
+        logs_folder: impl AsRef<Path>,
+        exit_status: ExitStatus,
+    ) -> std::io::Result<()> {
+        let log_path = log_path.as_ref();
+        let logs_folder = logs_folder.as_ref();
+        let mut summary =
+            format!("\n# Process exited with status: {exit_status}\n");
+
+        if exit_status.success() {
+            summary.push_str("# Result: Minecraft closed normally.\n");
+        } else {
+            summary.push_str(
+                "# Result: Minecraft crashed or was stopped by an external error.\n",
+            );
+            summary.push_str(
+                "# Check the lines above for the first ERROR/FATAL entry; that is usually the real cause.\n",
+            );
+
+            if let Some(crash_report) = Self::latest_crash_report(logs_folder) {
+                summary.push_str(&format!(
+                    "# Latest crash report: {}\n",
+                    crash_report.display()
+                ));
+
+                if let Some(reason) = Self::extract_crash_reason(&crash_report)
+                {
+                    summary.push_str(&format!(
+                        "# Likely crash reason: {reason}\n"
+                    ));
+                }
+            } else {
+                summary.push_str(
+                    "# No crash-report file was generated. This often means Java failed before Minecraft could write a report, or the process was killed.\n",
+                );
+            }
+        }
+
+        Self::append_to_log_file(log_path, &summary)
+    }
+
+    fn latest_crash_report(logs_folder: &Path) -> Option<PathBuf> {
+        let crash_reports = logs_folder.parent()?.join("crash-reports");
+        let entries = std::fs::read_dir(crash_reports).ok()?;
+
+        entries
+            .filter_map(|entry| {
+                let entry = entry.ok()?;
+                let path = entry.path();
+                if !path.is_file() {
+                    return None;
+                }
+
+                let filename = path.file_name()?.to_string_lossy();
+                if !filename.starts_with("crash-") {
+                    return None;
+                }
+
+                let modified = entry.metadata().ok()?.modified().ok()?;
+                Some((modified, path))
+            })
+            .max_by_key(|(modified, _)| *modified)
+            .map(|(_, path)| path)
+    }
+
+    fn extract_crash_reason(path: &Path) -> Option<String> {
+        let contents = std::fs::read_to_string(path).ok()?;
+        let mut description = None;
+        let mut caused_by = None;
+
+        for line in contents.lines() {
+            let line = line.trim();
+            if description.is_none() {
+                description = line
+                    .strip_prefix("Description:")
+                    .map(str::trim)
+                    .filter(|value| !value.is_empty())
+                    .map(ToOwned::to_owned);
+            }
+            if caused_by.is_none() {
+                caused_by = line
+                    .strip_prefix("Caused by:")
+                    .map(str::trim)
+                    .filter(|value| !value.is_empty())
+                    .map(ToOwned::to_owned);
+            }
+
+            if description.is_some() && caused_by.is_some() {
+                break;
+            }
+        }
+
+        caused_by.or(description)
+    }
+
     async fn maybe_handle_server_join_logging(
         profile_path: &str,
         timestamp: &str,
@@ -875,9 +1081,10 @@ impl Process {
         let log_path = logs_folder.join(LAUNCHER_LOG_PATH);
 
         if log_path.exists()
-            && let Err(e) = Process::append_to_log_file(
+            && let Err(e) = Process::append_exit_summary(
                 &log_path,
-                &format!("\n# Process exited with status: {mc_exit_status}\n"),
+                &logs_folder,
+                mc_exit_status,
             )
         {
             tracing::warn!("Failed to write exit status to log file: {}", e);

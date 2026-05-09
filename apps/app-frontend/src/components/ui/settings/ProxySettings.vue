@@ -7,17 +7,17 @@ import {
 	SparklesIcon,
 	UserIcon,
 } from '@modrinth/assets'
-import { Button, Toggle, injectNotificationManager } from '@modrinth/ui'
+import { Button, injectNotificationManager,Toggle } from '@modrinth/ui'
 import { defineMessages, useVIntl } from '@vintl/vintl'
 import { computed, ref } from 'vue'
 
 import {
-	get,
-	set,
-	testProxy,
 	type AppSettings,
+	get,
 	type ProxyTestResult,
 	type ProxyType,
+	set,
+	testProxy,
 } from '@/helpers/settings.ts'
 
 const { formatMessage } = useVIntl()

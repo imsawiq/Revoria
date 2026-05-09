@@ -1,11 +1,13 @@
 {
 	"name": "@modrinth/app-frontend",
 	"private": true,
-	"version": "1.7.0",
+	"version": "1.8.0",
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
-		"build": "vue-tsc --noEmit && vite build",
+		"dev": "vite --host 127.0.0.1",
+		"build": "vite build",
+		"build:check": "vue-tsc --noEmit && vite build",
+		"build:tauri": "vite build",
 		"tsc:check": "vue-tsc --noEmit",
 		"lint": "eslint . && prettier --check .",
 		"fix": "eslint . --fix && prettier --write .",
@@ -68,6 +70,6 @@
 		"vue-component-type-helpers": "^3.1.8",
 		"vue-tsc": "^2.1.6"
 	},
-	"packageManager": "pnpm@9.4.0",
+	"packageManager": "pnpm@9.15.0",
 	"web-types": "../../web-types.json"
 }

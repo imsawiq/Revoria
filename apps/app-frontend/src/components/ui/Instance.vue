@@ -3,12 +3,14 @@ import {
 	DownloadIcon,
 	GameIcon,
 	PlayIcon,
+	PlusIcon,
 	SpinnerIcon,
 	StopCircleIcon,
 	TimerIcon,
 } from '@modrinth/assets'
 import { Avatar, ButtonStyled, injectNotificationManager, useRelativeTime } from '@modrinth/ui'
 import { convertFileSrc } from '@tauri-apps/api/core'
+import { defineMessages, useVIntl } from '@vintl/vintl'
 import dayjs from 'dayjs'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -20,8 +22,29 @@ import { finish_install, kill, run } from '@/helpers/profile'
 import { showProfileInFolder } from '@/helpers/utils.js'
 import { handleSevereError } from '@/store/error.js'
 
-const { handleError } = injectNotificationManager()
+const { handleError, addNotification } = injectNotificationManager()
+const { formatMessage } = useVIntl()
 const formatRelativeTime = useRelativeTime()
+
+const messages = defineMessages({
+	stop: { id: 'instance.action.stop', defaultMessage: 'Stop' },
+	play: { id: 'instance.action.play', defaultMessage: 'Play' },
+	repair: { id: 'instance.action.repair', defaultMessage: 'Repair' },
+	installing: { id: 'instance.action.installing', defaultMessage: 'Installing...' },
+	loading: { id: 'instance.action.loading', defaultMessage: 'Instance is loading...' },
+	launchAnother: {
+		id: 'instance.action.launch-another-client',
+		defaultMessage: 'Launch another client',
+	},
+	secondClientLaunchingTitle: {
+		id: 'instance.launch-second.notification.title',
+		defaultMessage: 'Launching second client',
+	},
+	secondClientLaunchingText: {
+		id: 'instance.launch-second.notification.text',
+		defaultMessage: '{name} is starting as another client.',
+	},
+})
 
 const props = defineProps({
 	instance: {
@@ -42,9 +65,11 @@ const props = defineProps({
 
 const playing = ref(false)
 const loading = ref(false)
+const secondLoading = ref(false)
 const modLoading = computed(
 	() =>
 		loading.value ||
+		secondLoading.value ||
 		currentEvent.value === 'installing' ||
 		(currentEvent.value === 'launched' && !playing.value),
 )
@@ -79,6 +104,26 @@ const play = async (e, context) => {
 			})
 		})
 	loading.value = false
+}
+
+const playSecond = async (e, context) => {
+	e?.stopPropagation()
+	secondLoading.value = true
+	addNotification({
+		title: formatMessage(messages.secondClientLaunchingTitle),
+		text: formatMessage(messages.secondClientLaunchingText, { name: props.instance.name }),
+		type: 'success',
+	})
+	await run(props.instance.path)
+		.catch((err) => handleSevereError(err, { profilePath: props.instance.path }))
+		.finally(() => {
+			trackEvent('InstancePlaySecond', {
+				loader: props.instance.loader,
+				game_version: props.instance.game_version,
+				source: context,
+			})
+		})
+	secondLoading.value = false
 }
 
 const stop = async (e, context) => {
@@ -152,20 +197,32 @@ onUnmounted(() => unlisten())
 			<div class="h-full flex items-center font-bold text-contrast leading-normal">
 				<span class="line-clamp-2">{{ instance.name }}</span>
 			</div>
-			<div class="flex items-center">
-				<ButtonStyled v-if="playing" color="red" circular @mousehover="checkProcess">
-					<button v-tooltip="'Stop'" @click="(e) => stop(e, 'InstanceCard')">
-						<StopCircleIcon />
-					</button>
-				</ButtonStyled>
+			<div class="flex items-center gap-1">
+				<template v-if="playing">
+					<ButtonStyled color="red" circular @mousehover="checkProcess">
+						<button v-tooltip="formatMessage(messages.stop)" @click="(e) => stop(e, 'InstanceCard')">
+							<StopCircleIcon />
+						</button>
+					</ButtonStyled>
+					<ButtonStyled type="outlined" circular>
+						<button
+							v-tooltip="formatMessage(messages.launchAnother)"
+							:disabled="secondLoading"
+							@click="(e) => playSecond(e, 'InstanceCard')"
+						>
+							<SpinnerIcon v-if="secondLoading" class="animate-spin" />
+							<PlusIcon v-else />
+						</button>
+					</ButtonStyled>
+				</template>
 				<ButtonStyled v-else-if="modLoading" color="standard" circular>
-					<button v-tooltip="'Instance is loading...'" disabled>
+					<button v-tooltip="formatMessage(messages.loading)" disabled>
 						<SpinnerIcon class="animate-spin" />
 					</button>
 				</ButtonStyled>
 				<ButtonStyled v-else :color="first ? 'brand' : 'standard'" circular>
 					<button
-						v-tooltip="'Play'"
+						v-tooltip="formatMessage(messages.play)"
 						@click="(e) => play(e, 'InstanceCard')"
 						@mousehover="checkProcess"
 					>
@@ -211,25 +268,42 @@ onUnmounted(() => unlisten())
 					</span>
 				</div>
 			</div>
-			<div class="row-span-2 flex items-center justify-end">
-				<ButtonStyled v-if="playing" color="red" circular @mousehover="checkProcess">
-					<button v-tooltip="'Stop'" @click="(e) => stop(e, 'InstanceCard')">
-						<StopCircleIcon />
-					</button>
-				</ButtonStyled>
+			<div class="row-span-2 flex items-center justify-end gap-1">
+				<template v-if="playing">
+					<ButtonStyled color="red" circular @mousehover="checkProcess">
+						<button v-tooltip="formatMessage(messages.stop)" @click="(e) => stop(e, 'InstanceCard')">
+							<StopCircleIcon />
+						</button>
+					</ButtonStyled>
+					<ButtonStyled type="outlined" circular>
+						<button
+							v-tooltip="formatMessage(messages.launchAnother)"
+							:disabled="secondLoading"
+							@click="(e) => playSecond(e, 'InstanceCard')"
+						>
+							<SpinnerIcon v-if="secondLoading" class="animate-spin" />
+							<PlusIcon v-else />
+						</button>
+					</ButtonStyled>
+				</template>
 				<ButtonStyled v-else-if="modLoading || installing" color="standard" circular>
-					<button v-tooltip="modLoading ? 'Instance is loading...' : 'Installing...'" disabled>
+					<button
+						v-tooltip="
+							modLoading ? formatMessage(messages.loading) : formatMessage(messages.installing)
+						"
+						disabled
+					>
 						<SpinnerIcon class="animate-spin" />
 					</button>
 				</ButtonStyled>
 				<ButtonStyled v-else-if="!installed" color="brand" circular>
-					<button v-tooltip="'Repair'" @click="(e) => repair(e)">
+					<button v-tooltip="formatMessage(messages.repair)" @click="(e) => repair(e)">
 						<DownloadIcon />
 					</button>
 				</ButtonStyled>
 				<ButtonStyled v-else :color="first ? 'brand' : 'standard'" circular>
 					<button
-						v-tooltip="'Play'"
+						v-tooltip="formatMessage(messages.play)"
 						@click="(e) => play(e, 'InstanceCard')"
 						@mousehover="checkProcess"
 					>

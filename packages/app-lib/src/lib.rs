@@ -24,6 +24,7 @@ pub use event::{
     emit::init_loading,
 };
 pub use logger::start_logger;
+pub use state::DirectoryInfo;
 pub use state::State;
 pub use state::set_rpc_language;
 

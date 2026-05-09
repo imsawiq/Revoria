@@ -24,6 +24,15 @@ pub async fn handle_url(sublink: &str) -> crate::Result<CommandPayload> {
         Some(("modpack", id)) => {
             CommandPayload::InstallModpack { id: id.to_string() }
         }
+        Some(("profile", path)) => CommandPayload::RunProfile {
+            path: urlencoding::decode(path)
+                .map_err(|err| {
+                    crate::ErrorKind::InputError(format!(
+                        "Invalid profile path in command: {err}"
+                    ))
+                })?
+                .into_owned(),
+        },
         _ => {
             emit_warning(&format!(
                 "Invalid command, unrecognized path: {sublink}"

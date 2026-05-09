@@ -11,9 +11,9 @@ import { computed, onMounted, ref } from 'vue'
 
 import ConfirmModalWrapper from '@/components/ui/modal/ConfirmModalWrapper.vue'
 import ModalWrapper from '@/components/ui/modal/ModalWrapper.vue'
-import { list, remove, get_full_path } from '@/helpers/profile.js'
-import { openPath } from '@/helpers/utils.js'
+import { get_full_path,list, remove } from '@/helpers/profile.js'
 import type { GameInstance } from '@/helpers/types'
+import { openPath } from '@/helpers/utils.js'
 import { useBreadcrumbs } from '@/store/breadcrumbs'
 
 dayjs.extend(relativeTime)

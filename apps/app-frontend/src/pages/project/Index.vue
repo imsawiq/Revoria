@@ -282,6 +282,7 @@ import NavTabs from '@/components/ui/NavTabs.vue'
 import { get_project, get_team, get_version_many } from '@/helpers/cache.js'
 import {
     constructCurseForgeCdnUrl,
+    type CurseForgeModFile,
     formatCurseForgeFileSize,
     getCurseForgeFileDownloadUrl,
     getCurseForgeMod,
@@ -289,7 +290,6 @@ import {
     getCurseForgeModFiles,
     getCurseForgeProjectUrl,
     getCurseForgeReleaseType,
-    type CurseForgeModFile,
 } from '@/helpers/curseforge'
 import {
     add_project_from_path,

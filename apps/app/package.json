@@ -3,7 +3,7 @@
 	"scripts": {
 		"tauri": "tauri",
 		"build": "tauri build",
-		"dev": "tauri dev",
+		"dev": "node scripts/dev-no-proxy.mjs",
 		"test": "cargo nextest run --all-targets --no-fail-fast",
 		"lint": "cargo fmt --check && cargo clippy --all-targets",
 		"lint:ancillary": "prettier --check .",

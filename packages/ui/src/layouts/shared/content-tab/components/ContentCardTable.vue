@@ -364,40 +364,39 @@ function handleSort(column: ContentCardTableSortColumn) {
 
 <style scoped>
 .content-card-table {
-	border: 1px solid color-mix(in srgb, var(--glass-border) 85%, transparent);
-	background: color-mix(in srgb, var(--color-glass-bg-strong) 90%, transparent);
-	box-shadow: var(--shadow-card);
+	border: 1px solid var(--color-button-border);
+	background: var(--color-raised-bg);
+	box-shadow: none;
 }
 
 .content-card-table__header {
-	background: color-mix(in srgb, var(--color-glass-bg-strong) 98%, white 2%);
-	border-bottom: 1px solid color-mix(in srgb, var(--glass-border) 82%, transparent);
+	background: var(--color-raised-bg);
+	border-bottom: 1px solid var(--color-button-border);
 }
 
 .content-card-table__header--stuck {
-	border-color: color-mix(in srgb, var(--glass-border) 82%, transparent);
+	border-color: var(--color-button-border);
 }
 
 .content-card-table__header--stuck::before {
-	background: color-mix(in srgb, var(--color-glass-bg-strong) 98%, white 2%);
+	background: var(--color-raised-bg);
 }
 
 .content-card-row {
-	background: color-mix(in srgb, var(--color-glass-bg-strong) 94%, transparent);
-	border-top: 1px solid color-mix(in srgb, var(--glass-border) 70%, transparent);
+	background: transparent;
+	border-top: 1px solid var(--color-button-border);
 }
 
 .content-card-row--alt {
-	background: color-mix(in srgb, var(--color-glass-bg-strong) 98%, var(--color-brand) 2%);
+	background: color-mix(in srgb, var(--color-raised-bg) 96%, var(--color-brand) 4%);
 }
 
 .content-card-row--selected {
-	background:
-		linear-gradient(
-			90deg,
-			color-mix(in srgb, var(--color-brand-highlight) 55%, transparent) 0,
-			color-mix(in srgb, var(--color-glass-bg-strong) 98%, transparent) 1rem
-		);
+	background: linear-gradient(
+		90deg,
+		color-mix(in srgb, var(--color-brand-highlight) 55%, transparent) 0,
+		color-mix(in srgb, var(--color-glass-bg-strong) 98%, transparent) 1rem
+	);
 	box-shadow:
 		inset 2px 0 0 color-mix(in srgb, var(--color-brand) 22%, transparent),
 		inset 0 0 0 1px color-mix(in srgb, var(--color-brand) 4%, transparent);

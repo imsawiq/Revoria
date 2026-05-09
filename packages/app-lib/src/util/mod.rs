@@ -6,5 +6,7 @@ pub mod network;
 pub mod platform;
 pub mod protocol_version;
 pub mod rpc;
+pub mod sandbox;
+pub mod shortcut;
 pub mod server_ping;
 pub mod utils; // [AR] Feature

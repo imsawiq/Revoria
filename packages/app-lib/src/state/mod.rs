@@ -137,6 +137,7 @@ impl State {
     #[tracing::instrument]
     async fn initialize_state() -> crate::Result<Arc<Self>> {
         tracing::info!("Connecting to app database");
+
         let pool = db::connect().await?;
 
         legacy_converter::migrate_legacy_data(&pool).await?;

@@ -365,6 +365,21 @@
 </template>
 
 <script setup>
+import {
+	DropdownIcon,
+	ElyByIcon as Elyby,
+	ElyByIcon,
+	MicrosoftIcon as License,
+	MicrosoftIcon,
+	PirateIcon as Offline,
+	PirateIcon,
+	SpinnerIcon,
+	TrashIcon,
+} from '@modrinth/assets'
+import { Avatar, Button, Card, injectNotificationManager } from '@modrinth/ui'
+import { defineMessages, useVIntl } from '@vintl/vintl'
+import { computed, onBeforeUnmount, onMounted, onUnmounted, ref,Teleport } from 'vue'
+
 import ModalWrapper from '@/components/ui/modal/ModalWrapper.vue'
 import { trackEvent } from '@/helpers/analytics'
 import {
@@ -381,20 +396,6 @@ import { process_listener } from '@/helpers/events'
 import { getPlayerHeadUrl } from '@/helpers/rendering/batch-skin-renderer.ts'
 import { get_available_skins } from '@/helpers/skins'
 import { handleSevereError } from '@/store/error.js'
-import {
-	DropdownIcon,
-	ElyByIcon as Elyby,
-	ElyByIcon,
-	MicrosoftIcon as License,
-	MicrosoftIcon,
-	PirateIcon as Offline,
-	PirateIcon,
-	SpinnerIcon,
-	TrashIcon,
-} from '@modrinth/assets'
-import { Avatar, Button, Card, injectNotificationManager } from '@modrinth/ui'
-import { defineMessages, useVIntl } from '@vintl/vintl'
-import { Teleport, computed, onBeforeUnmount, onMounted, onUnmounted, ref } from 'vue'
 
 const { handleError } = injectNotificationManager()
 const { formatMessage } = useVIntl()

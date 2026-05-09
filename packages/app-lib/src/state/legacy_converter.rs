@@ -369,6 +369,7 @@ where
                             .and_then(|x| x.wrapper.clone()),
                         post_exit: profile.hooks.and_then(|x| x.post_exit),
                     },
+                    sandbox: false,
                 }
                 .upsert(exec)
                 .await?;

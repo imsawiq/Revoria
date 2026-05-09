@@ -1,4 +1,49 @@
 {
+	"instance.action.stop": {
+		"defaultMessage": "Зупинити"
+	},
+	"instance.action.play": {
+		"defaultMessage": "Грати"
+	},
+	"instance.action.repair": {
+		"defaultMessage": "Відновити"
+	},
+	"instance.action.installing": {
+		"defaultMessage": "Встановлення..."
+	},
+	"instance.action.loading": {
+		"defaultMessage": "Збірка запускається..."
+	},
+	"instance.action.launch-another-client": {
+		"defaultMessage": "Запустити ще один клієнт"
+	},
+	"instance.action.launch-another-client-short": {
+		"defaultMessage": "Ще клієнт"
+	},
+	"instance.launch-second.notification.title": {
+		"defaultMessage": "Запускається другий клієнт"
+	},
+	"instance.launch-second.notification.text": {
+		"defaultMessage": "{name} запускається як ще один клієнт."
+	},
+	"instance.settings.tabs.general.sandbox": {
+		"defaultMessage": "Sandbox"
+	},
+	"instance.settings.tabs.general.sandbox.beta": {
+		"defaultMessage": "Бета"
+	},
+	"instance.settings.tabs.general.sandbox.description": {
+		"defaultMessage": "Запускає цю збірку з окремими системними папками для ігрових даних поза папкою збірки."
+	},
+	"instance.index.create-shortcut": {
+		"defaultMessage": "Створити ярлик"
+	},
+	"instance.shortcut.created.title": {
+		"defaultMessage": "Ярлик створено"
+	},
+	"instance.shortcut.created.text": {
+		"defaultMessage": "Ярлик для {name} готовий."
+	},
 	"instance.create.type.from-file": {
 		"message": "з файлу"
 	},

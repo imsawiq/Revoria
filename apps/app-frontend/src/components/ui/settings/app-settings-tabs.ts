@@ -12,7 +12,6 @@ import {
 import { defineMessage } from '@vintl/vintl'
 
 import AppearanceSettings from '@/components/ui/settings/AppearanceSettings.vue'
-import ThemesSettings from '@/components/ui/settings/ThemesSettings.vue'
 import DefaultInstanceSettings from '@/components/ui/settings/DefaultInstanceSettings.vue'
 import FeatureFlagSettings from '@/components/ui/settings/FeatureFlagSettings.vue'
 import JavaSettings from '@/components/ui/settings/JavaSettings.vue'
@@ -20,6 +19,7 @@ import LanguageSettings from '@/components/ui/settings/LanguageSettings.vue'
 import PrivacySettings from '@/components/ui/settings/PrivacySettings.vue'
 import ProxySettings from '@/components/ui/settings/ProxySettings.vue'
 import ResourceManagementSettings from '@/components/ui/settings/ResourceManagementSettings.vue'
+import ThemesSettings from '@/components/ui/settings/ThemesSettings.vue'
 
 export const appSettingsTabs = [
 	{

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import { NewModal as Modal } from '@modrinth/ui'
 import { useAttrs, useTemplateRef } from 'vue'
 
 // import { hide_ads_window, show_ads_window } from '@/helpers/ads.js'
 import { useTheming } from '@/store/theme.ts'
+
+defineOptions({ inheritAttrs: false })
 
 const themeStore = useTheming()
 

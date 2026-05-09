@@ -1,7 +1,5 @@
 import { invoke } from '@tauri-apps/api/core'
 
-import type { ColorTheme } from '@/store/theme'
-
 import amethystIcon from '@/assets/theme-icons/amethyst.png?url'
 import auroraIcon from '@/assets/theme-icons/aurora.png?url'
 import cherryBlossomIcon from '@/assets/theme-icons/cherry-blossom.png?url'
@@ -13,6 +11,7 @@ import roseGoldIcon from '@/assets/theme-icons/rose-gold.png?url'
 import sapphireIcon from '@/assets/theme-icons/sapphire.png?url'
 import sunsetIcon from '@/assets/theme-icons/sunset.png?url'
 import whiteIcon from '@/assets/theme-icons/white.png?url'
+import type { ColorTheme } from '@/store/theme'
 
 const THEME_ICON_URLS: Record<Exclude<ColorTheme, 'system'>, string> = {
 	dark: defaultIcon,

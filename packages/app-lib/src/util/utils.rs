@@ -1,5 +1,4 @@
 use crate::api::update;
-use crate::state::db;
 ///
 /// [AR] Feature Utils
 ///
@@ -196,19 +195,6 @@ pub async fn get_or_download_elyby_injector() -> Result<PathBuf> {
         );
         return Ok(remote_authlib_injector);
     }
-}
-
-/// ### AR • Migration. Patch
-/// Applying migration fix for SQLite database.
-pub async fn apply_migration_fix(eol: &str) -> Result<bool> {
-    tracing::info!("[AR] • Attempting to apply migration fix");
-    let patched = db::apply_migration_fix(eol).await?;
-    if patched {
-        tracing::info!("[AR] • Successfully applied migration fix");
-    } else {
-        tracing::error!("[AR] • Failed to apply migration fix");
-    }
-    Ok(patched)
 }
 
 /// ### AR • Feature. Updater

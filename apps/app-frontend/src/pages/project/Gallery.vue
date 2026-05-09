@@ -104,7 +104,7 @@ import {
 	XIcon,
 } from '@modrinth/assets'
 import { Button, Card } from '@modrinth/ui'
-import { Teleport, onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref,Teleport } from 'vue'
 
 // import { hide_ads_window, show_ads_window } from '@/helpers/ads.js'
 import { trackEvent } from '@/helpers/analytics'

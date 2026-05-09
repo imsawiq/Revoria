@@ -2,11 +2,10 @@
 import { PlusIcon } from '@modrinth/assets'
 import { Button, injectNotificationManager } from '@modrinth/ui'
 import { defineMessages, useVIntl } from '@vintl/vintl'
-import { onUnmounted, ref, shallowRef } from 'vue'
+import { inject,onUnmounted, ref, shallowRef  } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { NewInstanceImage } from '@/assets/icons'
-import { inject } from 'vue'
 import NavTabs from '@/components/ui/NavTabs.vue'
 import { profile_listener } from '@/helpers/events.js'
 import { list } from '@/helpers/profile.js'

@@ -57,7 +57,13 @@ impl RpcServerBuilder {
                     waiting_responses: waiting_responses.clone(),
                 };
                 if let Err(e) = server.run(socket).await {
-                    tracing::error!("Failed to run RPC server: {e}");
+                    if is_expected_rpc_disconnect(&e) {
+                        tracing::debug!(
+                            "Minecraft RPC connection closed normally: {e}"
+                        );
+                    } else {
+                        tracing::error!("Failed to run RPC server: {e}");
+                    }
                 }
                 waiting_responses.lock().unwrap().clear();
             })
@@ -69,6 +75,20 @@ impl RpcServerBuilder {
             abort_handle: join_handle.abort_handle(),
         })
     }
+}
+
+fn is_expected_rpc_disconnect(error: &crate::Error) -> bool {
+    let ErrorKind::StdIOError(source) = error.raw.as_ref() else {
+        return false;
+    };
+
+    matches!(
+        source.kind(),
+        std::io::ErrorKind::ConnectionReset
+            | std::io::ErrorKind::ConnectionAborted
+            | std::io::ErrorKind::BrokenPipe
+            | std::io::ErrorKind::UnexpectedEof
+    )
 }
 
 #[derive(Debug, Clone)]

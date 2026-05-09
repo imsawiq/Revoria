@@ -1,8 +1,8 @@
 // vite.config.ts
 import vue from "file:///C:/Users/%D0%A1%D0%B0%D1%88%D0%BA%D0%B0/Documents/%D0%BF%D0%B5%D1%80%D0%B5%D0%BD%D0%BE%D1%81/plugins/astralrinth/node_modules/.pnpm/@vitejs+plugin-vue@5.2.4_vite@5.4.19_@types+node@20.19.9_sass@1.90.0_terser@5.43.1__vue@3.5.18_typescript@5.9.2_/node_modules/@vitejs/plugin-vue/dist/index.mjs";
-import { resolve } from "path";
 import { defineConfig } from "file:///C:/Users/%D0%A1%D0%B0%D1%88%D0%BA%D0%B0/Documents/%D0%BF%D0%B5%D1%80%D0%B5%D0%BD%D0%BE%D1%81/plugins/astralrinth/node_modules/.pnpm/vite@5.4.19_@types+node@20.19.9_sass@1.90.0_terser@5.43.1/node_modules/vite/dist/node/index.js";
 import svgLoader from "file:///C:/Users/%D0%A1%D0%B0%D1%88%D0%BA%D0%B0/Documents/%D0%BF%D0%B5%D1%80%D0%B5%D0%BD%D0%BE%D1%81/plugins/astralrinth/node_modules/.pnpm/vite-svg-loader@5.1.0_vue@3.5.18_typescript@5.9.2_/node_modules/vite-svg-loader/index.js";
+import { resolve } from "path";
 
 // ../app/tauri.conf.json
 var tauri_conf_default = {
@@ -172,13 +172,13 @@ var vite_config_default = defineConfig({
   build: {
     // Tauri supports es2021
     target: process.env.TAURI_ENV_PLATFORM == "windows" ? "chrome105" : "safari13",
-    // eslint-disable-line turbo/no-undeclared-env-vars
+     
     // don't minify for debug builds
     minify: !process.env.TAURI_ENV_DEBUG ? "esbuild" : false,
-    // eslint-disable-line turbo/no-undeclared-env-vars
+     
     // produce sourcemaps for debug builds
     sourcemap: !!process.env.TAURI_ENV_DEBUG,
-    // eslint-disable-line turbo/no-undeclared-env-vars
+     
     commonjsOptions: {
       esmExternals: true
     }

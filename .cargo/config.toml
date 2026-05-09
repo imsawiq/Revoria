@@ -4,3 +4,7 @@ rustflags = ["-C", "link-args=/STACK:16777220"]
 
 [target.x86_64-pc-windows-msvc]
 linker = "rust-lld"
+
+# Use LLD on Unix for faster release links (requires lld package installed)
+[target.'cfg(unix)']
+rustflags = ["-C", "link-arg=-fuse-ld=lld"]

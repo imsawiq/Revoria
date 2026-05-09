@@ -52,11 +52,9 @@ quick-xml = { workspace = true, features = ["async-tokio"] }
 rand = { workspace = true }
 regex = { workspace = true }
 reqwest = { workspace = true, features = [
-	"brotli",
 	"charset",
 	"deflate",
 	"gzip",
-	"http2",
 	"json",
 	"macos-system-configuration",
 	"multipart",
@@ -93,14 +91,14 @@ tokio = { workspace = true, features = [
 	"sync",
 	"time",
 ] }
-tokio-util = { workspace = true, features = ["compat", "io", "io-util", "time"] }
+tokio-util = { workspace = true, features = ["codec", "compat", "io", "io-util", "time"] }
 tracing = { workspace = true }
 tracing-error = { workspace = true }
 tracing-subscriber = { workspace = true, features = ["chrono", "env-filter"] }
 url = { workspace = true, features = ["serde"] }
+urlencoding = { workspace = true }
 uuid = { workspace = true, features = ["serde", "v4"] }
 whoami = { workspace = true }
-zbus = { workspace = true }
 zip = { workspace = true }
 
 [build-dependencies]
@@ -111,9 +109,24 @@ dunce = { workspace = true }
 cidre = { workspace = true, features = ["blocks", "nw"] }
 
 [target.'cfg(windows)'.dependencies]
-windows = { workspace = true, features = ["Networking_Connectivity"] }
+windows = { workspace = true, features = [
+	"Networking_Connectivity",
+	"Win32_Foundation",
+	"Win32_Security",
+	"Win32_Security_Authorization",
+	"Win32_Security_Isolation",
+	"Win32_Storage_FileSystem",
+	"Win32_System_Console",
+	"Win32_System_StationsAndDesktops",
+	"Win32_System_SystemServices",
+	"Win32_System_Threading",
+	"Win32_UI_WindowsAndMessaging",
+] }
 windows-core = { workspace = true }
 winreg = { workspace = true }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+zbus = { workspace = true }
 
 [features]
 cli = ["dep:indicatif"]

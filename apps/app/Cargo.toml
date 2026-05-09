@@ -1,6 +1,6 @@
 [package]
 name = "theseus_gui"
-version = "1.7.0"
+version = "1.8.0"
 edition.workspace = true
 description = "The Modrinth App is a desktop application for managing your Minecraft mods"
 repository = "https://github.com/modrinth/code/apps/app/"
@@ -15,7 +15,7 @@ either = { workspace = true }
 enumset = { workspace = true, features = ["serde"] }
 hyper = { workspace = true, features = ["server"] }
 hyper-util = { workspace = true }
-image = { workspace = true }
+image = { workspace = true, features = ["ico", "jpeg", "png", "webp"] }
 junction = "1.2.0"
 native-dialog = { workspace = true }
 paste = { workspace = true }
@@ -25,19 +25,14 @@ same-file = "1.0.6"
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
 serde_with = { workspace = true }
-tauri = { workspace = true, features = [
-	"devtools",
-	"image-png",
-	"macos-private-api",
-	"protocol-asset",
-] }
+tauri = { workspace = true, features = ["image-png", "macos-private-api", "protocol-asset"] }
 tauri-plugin-deep-link = { workspace = true }
 tauri-plugin-dialog = { workspace = true }
 tauri-plugin-http = { workspace = true }
 tauri-plugin-opener = { workspace = true }
 tauri-plugin-os = { workspace = true }
 tauri-plugin-single-instance = { workspace = true }
-tauri-plugin-updater = { workspace = true }
+tauri-plugin-updater = { workspace = true, optional = true }
 tauri-plugin-window-state = { workspace = true }
 futures-util = { workspace = true }
 theseus = { workspace = true, features = ["tauri"] }
@@ -54,6 +49,7 @@ tauri-build = { workspace = true, features = ["codegen"] }
 
 [target.'cfg(windows)'.dependencies]
 webview2-com.workspace = true
+windows = { workspace = true, features = ["Win32_UI_Shell"] }
 windows-core.workspace = true
 
 [features]
@@ -63,8 +59,8 @@ default = ["custom-protocol"]
 # this feature is used for production builds where `devPath` points to the filesystem
 # DO NOT remove this
 custom-protocol = ["tauri/custom-protocol"]
-# declared to satisfy cfg(feature = "updater") checks in source
-updater = []
+updater = ["dep:tauri-plugin-updater"]
+devtools = ["tauri/devtools"]
 
 [lints]
 workspace = true

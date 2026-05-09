@@ -168,8 +168,8 @@
 			<div class="button-row">
 				<Button
 					v-if="selectedProfileType.name === 'Curseforge'"
-					@click="showCurseForgeProfileModal"
 					:disabled="loading"
+					@click="showCurseForgeProfileModal"
 				>
 					<CodeIcon />
 					{{ formatMessage(messages.importFromProfileCode) }}
@@ -197,7 +197,6 @@
 </template>
 
 <script setup>
-import ProgressBar from '@/components/ui/ProgressBar.vue'
 import {
 	CodeIcon,
 	FolderOpenIcon,
@@ -218,6 +217,7 @@ import Multiselect from 'vue-multiselect'
 
 import CurseForgeProfileImportModal from '@/components/ui/CurseForgeProfileImportModal.vue'
 import ModalWrapper from '@/components/ui/modal/ModalWrapper.vue'
+import ProgressBar from '@/components/ui/ProgressBar.vue'
 import { trackEvent } from '@/helpers/analytics'
 import {
 	get_default_launcher_path,

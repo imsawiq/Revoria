@@ -50,12 +50,25 @@
 									{{ formatMessage(messages.repair) }}
 								</button>
 							</ButtonStyled>
-							<ButtonStyled v-else-if="playing === true" color="red" size="large">
-								<button @click="stopInstance('InstancePage')">
-									<StopCircleIcon />
-									{{ formatMessage(messages.stop) }}
-								</button>
-							</ButtonStyled>
+							<template v-else-if="playing === true">
+								<ButtonStyled color="red" size="large">
+									<button @click="stopInstance('InstancePage')">
+										<StopCircleIcon />
+										{{ formatMessage(messages.stop) }}
+									</button>
+								</ButtonStyled>
+								<ButtonStyled type="outlined" size="large">
+									<button
+										v-tooltip="formatMessage(messages.launchAnotherClient)"
+										:disabled="secondLoading"
+										@click="startSecondInstance('InstancePage')"
+									>
+										<SpinnerIcon v-if="secondLoading" class="animate-spin" />
+										<PlusIcon v-else />
+										{{ formatMessage(messages.launchAnotherClientShort) }}
+									</button>
+								</ButtonStyled>
+							</template>
 							<ButtonStyled
 								v-else-if="playing === false && loading === false"
 								color="brand"
@@ -92,6 +105,10 @@
 											id: 'export-mrpack',
 											action: () => $refs.exportModal.show(),
 										},
+										{
+											id: 'create-shortcut',
+											action: () => createInstanceShortcut(),
+										},
 									]"
 								>
 									<MoreVerticalIcon />
@@ -106,6 +123,9 @@
 									</template>
 									<template #export-mrpack>
 										<PackageIcon /> {{ formatMessage(messages.exportModpack) }}
+									</template>
+									<template #create-shortcut>
+										<ExternalIcon /> {{ formatMessage(messages.createShortcut) }}
 									</template>
 								</OverflowMenu>
 							</ButtonStyled>
@@ -146,6 +166,9 @@
 				<template #stop> <StopCircleIcon /> {{ formatMessage(messages.stop) }} </template>
 				<template #add_content> <PlusIcon /> {{ formatMessage(messages.addContent) }} </template>
 				<template #edit> <EditIcon /> {{ formatMessage(messages.edit) }} </template>
+				<template #create_shortcut>
+					<ExternalIcon /> {{ formatMessage(messages.createShortcut) }}
+				</template>
 				<template #copy_path>
 					<ClipboardCopyIcon /> {{ formatMessage(messages.copyPath) }}
 				</template>
@@ -204,6 +227,7 @@ import {
 	PlusIcon,
 	ServerIcon,
 	SettingsIcon,
+	SpinnerIcon,
 	StopCircleIcon,
 	TerminalSquareIcon,
 	TimerIcon,
@@ -220,6 +244,7 @@ import {
 	OverflowMenu,
 } from '@modrinth/ui'
 import { convertFileSrc } from '@tauri-apps/api/core'
+import { save } from '@tauri-apps/plugin-dialog'
 import { defineMessages, useVIntl } from '@vintl/vintl'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
@@ -235,15 +260,22 @@ import { trackEvent } from '@/helpers/analytics'
 import { get_project, get_version_many } from '@/helpers/cache.js'
 import { process_listener, profile_listener } from '@/helpers/events'
 import { get_by_profile_path } from '@/helpers/process'
-import { finish_install, get, get_full_path, kill, run } from '@/helpers/profile'
-import { showProfileInFolder } from '@/helpers/utils.js'
+import {
+	createShortcut,
+	finish_install,
+	get,
+	get_full_path,
+	kill,
+	run,
+} from '@/helpers/profile'
+import { getOS, showProfileInFolder } from '@/helpers/utils.js'
 import { handleSevereError } from '@/store/error.js'
 import { useBreadcrumbs, useLoading } from '@/store/state'
 
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
 
-const { handleError } = injectNotificationManager()
+const { handleError, addNotification } = injectNotificationManager()
 const { formatMessage } = useVIntl()
 const route = useRoute()
 
@@ -255,6 +287,34 @@ const messages = defineMessages({
 	repair: { id: 'instance.index.repair', defaultMessage: 'Repair' },
 	stop: { id: 'instance.index.stop', defaultMessage: 'Stop' },
 	play: { id: 'instance.index.play', defaultMessage: 'Play' },
+	launchAnotherClient: {
+		id: 'instance.action.launch-another-client',
+		defaultMessage: 'Launch another client',
+	},
+	launchAnotherClientShort: {
+		id: 'instance.action.launch-another-client-short',
+		defaultMessage: 'Launch another',
+	},
+	secondClientLaunchingTitle: {
+		id: 'instance.launch-second.notification.title',
+		defaultMessage: 'Launching second client',
+	},
+	secondClientLaunchingText: {
+		id: 'instance.launch-second.notification.text',
+		defaultMessage: '{name} is starting as another client.',
+	},
+	createShortcut: {
+		id: 'instance.index.create-shortcut',
+		defaultMessage: 'Create shortcut',
+	},
+	shortcutCreatedTitle: {
+		id: 'instance.shortcut.created.title',
+		defaultMessage: 'Shortcut created',
+	},
+	shortcutCreatedText: {
+		id: 'instance.shortcut.created.text',
+		defaultMessage: 'The shortcut for {name} is ready.',
+	},
 	shareInstance: { id: 'instance.index.share-instance', defaultMessage: 'Share instance' },
 	createServer: { id: 'instance.index.create-server', defaultMessage: 'Create a server' },
 	openFolder: { id: 'action.open-folder', defaultMessage: 'Open folder' },
@@ -318,6 +378,7 @@ const instance = ref()
 const modrinthVersions = ref([])
 const playing = ref(false)
 const loading = ref(false)
+const secondLoading = ref(false)
 
 async function fetchInstance() {
 	if (!hasValidProfilePathId.value) return
@@ -433,6 +494,52 @@ const stopInstance = async (context) => {
 	})
 }
 
+const startSecondInstance = async (context) => {
+	secondLoading.value = true
+	addNotification({
+		title: formatMessage(messages.secondClientLaunchingTitle),
+		text: formatMessage(messages.secondClientLaunchingText, { name: instance.value.name }),
+		type: 'success',
+	})
+	try {
+		await run(profilePathId.value)
+	} catch (err) {
+		handleSevereError(err, { profilePath: profilePathId.value })
+	}
+	secondLoading.value = false
+
+	trackEvent('InstanceStartSecond', {
+		loader: instance.value.loader,
+		game_version: instance.value.game_version,
+		source: context,
+	})
+}
+
+const createInstanceShortcut = async () => {
+	const os = await getOS().catch(() => 'Windows')
+	const extension = os === 'Linux' ? 'desktop' : os === 'MacOS' ? 'app' : 'lnk'
+	const destination = await save({
+		defaultPath: `${instance.value?.name ?? 'Minecraft instance'}.${extension}`,
+		filters: [
+			{
+				name: formatMessage(messages.createShortcut),
+				extensions: [extension],
+			},
+		],
+	})
+	if (!destination) return
+
+	await createShortcut(profilePathId.value, destination)
+		.then(() =>
+			addNotification({
+				title: formatMessage(messages.shortcutCreatedTitle),
+				text: formatMessage(messages.shortcutCreatedText, { name: instance.value.name }),
+				type: 'success',
+			}),
+		)
+		.catch(handleError)
+}
+
 const repairInstance = async () => {
 	await finish_install(instance.value).catch(handleError)
 }
@@ -442,6 +549,7 @@ const handleRightClick = (event) => {
 		{ name: 'add_content' },
 		{ type: 'divider' },
 		{ name: 'edit' },
+		{ name: 'create_shortcut' },
 		{ name: 'open_folder' },
 		{ name: 'copy_path' },
 	]
@@ -485,6 +593,9 @@ const handleOptionsClick = async (args) => {
 			await router.push({
 				path: `/instance/${encodeURIComponent(profilePathId.value)}/options`,
 			})
+			break
+		case 'create_shortcut':
+			await createInstanceShortcut()
 			break
 		case 'open_folder':
 			await showProfileInFolder(instance.value.path)

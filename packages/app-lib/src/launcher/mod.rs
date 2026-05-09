@@ -12,8 +12,8 @@ use crate::state::{
     AccountType, Credentials, JavaVersion, ProcessMetadata, ProfileInstallStage,
 };
 use crate::util::rpc::RpcServerBuilder;
-use crate::util::{io, utils};
-use crate::{State, get_resource_file, process, state as st};
+use crate::util::{io, sandbox, utils};
+use crate::{State, get_resource_file, state as st};
 use chrono::Utc;
 use daedalus as d;
 use daedalus::minecraft::{LoggingSide, RuleAction, VersionInfo};
@@ -590,17 +590,15 @@ pub async fn launch_minecraft(
 
     let env_args = Vec::from(env_args);
 
-    // Check if profile has a running profile, and reject running the command if it does
-    // Done late so a quick double call doesn't launch two instances
-    let existing_processes =
-        process::get_by_profile_path(&profile.path).await?;
-    if let Some(process) = existing_processes.first() {
-        return Err(crate::ErrorKind::LauncherError(format!(
-            "Profile {} is already running at path: {}",
-            profile.path, process.uuid
-        ))
-        .as_error());
-    }
+    // [AR] Removed: Allow launching multiple instances of the same profile
+    // Original code blocked running a second instance:
+    // let existing_processes = process::get_by_profile_path(&profile.path).await?;
+    // if let Some(process) = existing_processes.first() {
+    //     return Err(crate::ErrorKind::LauncherError(format!(
+    //         "Profile {} is already running at path: {}",
+    //         profile.path, process.uuid
+    //     )).as_error());
+    // }
 
     let natives_dir = state.directories.version_natives_dir(&version_jar);
     if !natives_dir.exists() {
@@ -693,29 +691,66 @@ pub async fn launch_minecraft(
         command.arg(format!("-javaagent:{}=ely.by", path));
     }
 
-    command
-        .arg("com.modrinth.theseus.MinecraftLaunch")
-        .arg(version_info.main_class.clone())
-        .args(
-            args::get_minecraft_arguments(
-                args.get(&d::minecraft::ArgumentType::Game)
-                    .map(|x| x.as_slice()),
-                version_info.minecraft_arguments.as_deref(),
-                credentials,
-                &version.id,
-                &version_info.asset_index.id,
-                &instance_path,
-                &state.directories.assets_dir(),
-                &version.type_,
-                *resolution,
-                &java_version.architecture,
-                &quick_play_type,
-                quick_play_version,
-            )
-            .await?
-            .into_iter(),
-        )
-        .current_dir(instance_path.clone());
+    let minecraft_arguments = args::get_minecraft_arguments(
+        args.get(&d::minecraft::ArgumentType::Game)
+            .map(|x| x.as_slice()),
+        version_info.minecraft_arguments.as_deref(),
+        credentials,
+        &version.id,
+        &version_info.asset_index.id,
+        &instance_path,
+        &state.directories.assets_dir(),
+        &version.type_,
+        *resolution,
+        &java_version.architecture,
+        &quick_play_type,
+        quick_play_version,
+    )
+    .await?;
+
+    let sandbox_properties = if profile.sandbox {
+        let process_start_time = Utc::now().to_rfc3339();
+        let profile_created_time = profile.created.to_rfc3339();
+        let profile_modified_time = profile.modified.to_rfc3339();
+        let mut sandbox_properties = vec![
+            ("modrinth.process.startTime".to_string(), process_start_time),
+            ("modrinth.profile.created".to_string(), profile_created_time),
+            (
+                "modrinth.profile.modified".to_string(),
+                profile_modified_time,
+            ),
+            ("modrinth.profile.name".to_string(), profile.name.clone()),
+        ];
+        if let Some(icon) = &profile.icon_path {
+            sandbox_properties
+                .push(("modrinth.profile.icon".to_string(), icon.clone()));
+        }
+        if let Some(linked_data) = &profile.linked_data {
+            sandbox_properties.push((
+                "modrinth.profile.link.project".to_string(),
+                linked_data.project_id.clone(),
+            ));
+            sandbox_properties.push((
+                "modrinth.profile.link.version".to_string(),
+                linked_data.version_id.clone(),
+            ));
+        }
+        sandbox_properties
+    } else {
+        Vec::new()
+    };
+
+    if profile.sandbox {
+        command
+            .arg("-Dmodrinth.internal.stdinLaunch=true")
+            .arg("com.modrinth.theseus.MinecraftLaunch");
+    } else {
+        command
+            .arg("com.modrinth.theseus.MinecraftLaunch")
+            .arg(version_info.main_class.clone())
+            .args(minecraft_arguments.clone().into_iter());
+    }
+    command.current_dir(instance_path.clone());
 
     // CARGO-set DYLD_LIBRARY_PATH breaks Minecraft on macOS during testing on playground
     #[cfg(target_os = "macos")]
@@ -726,6 +761,51 @@ pub async fn launch_minecraft(
     command.env_remove("_JAVA_OPTIONS");
 
     command.envs(env_args);
+
+    if profile.sandbox {
+        let sandbox_dir = state
+            .directories
+            .settings_dir
+            .join("sandbox")
+            .join(sanitize_sandbox_path(&profile.path));
+
+        let mut allow_read = vec![
+            state.directories.libraries_dir(),
+            state.directories.log_configs_dir(),
+            state.directories.assets_dir(),
+            main_class_path.clone(),
+            client_path.clone(),
+            PathBuf::from(&java_version.path),
+        ];
+        if let Some(java_root) = PathBuf::from(&java_version.path)
+            .parent()
+            .and_then(|x| x.parent())
+        {
+            allow_read.push(java_root.to_path_buf());
+        }
+
+        let mut allow_write = vec![
+            instance_path.clone(),
+            natives_dir.clone(),
+            sandbox_dir.clone(),
+        ];
+        allow_write.sort();
+        allow_write.dedup();
+
+        sandbox::apply(
+            &mut command,
+            sandbox::SandboxConfig {
+                allow_read,
+                allow_write,
+                sandbox_dir,
+                stdin_payload: Some(build_sandbox_stdin_payload(
+                    &sandbox_properties,
+                    &minecraft_arguments,
+                    &version_info.main_class,
+                )),
+            },
+        )?;
+    }
 
     // Overwrites the minecraft options.txt file with the settings from the profile
     // Uses 'a:b' syntax which is not quite yaml
@@ -816,6 +896,10 @@ pub async fn launch_minecraft(
             main_class_keep_alive,
             rpc_server,
             async |process: &ProcessMetadata, rpc_server| {
+                if profile.sandbox {
+                    return Ok(());
+                }
+
                 let process_start_time = process.start_time.to_rfc3339();
                 let profile_created_time = profile.created.to_rfc3339();
                 let profile_modified_time = profile.modified.to_rfc3339();
@@ -847,4 +931,40 @@ pub async fn launch_minecraft(
             },
         )
         .await
+}
+
+fn sanitize_sandbox_path(path: &str) -> String {
+    path.chars()
+        .map(|ch| {
+            if ch.is_ascii_alphanumeric() || matches!(ch, '-' | '_' | '.') {
+                ch
+            } else {
+                '_'
+            }
+        })
+        .collect()
+}
+
+fn build_sandbox_stdin_payload(
+    properties: &[(String, String)],
+    game_args: &[String],
+    main_class: &str,
+) -> String {
+    let mut payload = String::new();
+    for (key, value) in properties {
+        payload.push_str("property\n");
+        payload.push_str(key);
+        payload.push('\n');
+        payload.push_str(value);
+        payload.push('\n');
+    }
+    for arg in game_args {
+        payload.push_str("arg\n");
+        payload.push_str(arg);
+        payload.push('\n');
+    }
+    payload.push_str("launch\n");
+    payload.push_str(main_class);
+    payload.push('\n');
+    payload
 }

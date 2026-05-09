@@ -1,4 +1,49 @@
 {
+	"instance.action.stop": {
+		"defaultMessage": "Stop"
+	},
+	"instance.action.play": {
+		"defaultMessage": "Play"
+	},
+	"instance.action.repair": {
+		"defaultMessage": "Repair"
+	},
+	"instance.action.installing": {
+		"defaultMessage": "Installing..."
+	},
+	"instance.action.loading": {
+		"defaultMessage": "Instance is loading..."
+	},
+	"instance.action.launch-another-client": {
+		"defaultMessage": "Launch another client"
+	},
+	"instance.action.launch-another-client-short": {
+		"defaultMessage": "Launch another"
+	},
+	"instance.launch-second.notification.title": {
+		"defaultMessage": "Launching second client"
+	},
+	"instance.launch-second.notification.text": {
+		"defaultMessage": "{name} is starting as another client."
+	},
+	"instance.settings.tabs.general.sandbox": {
+		"defaultMessage": "Sandbox"
+	},
+	"instance.settings.tabs.general.sandbox.beta": {
+		"defaultMessage": "Beta"
+	},
+	"instance.settings.tabs.general.sandbox.description": {
+		"defaultMessage": "Runs this instance with isolated system folders for game data outside the instance folder."
+	},
+	"instance.index.create-shortcut": {
+		"defaultMessage": "Create shortcut"
+	},
+	"instance.shortcut.created.title": {
+		"defaultMessage": "Shortcut created"
+	},
+	"instance.shortcut.created.text": {
+		"defaultMessage": "The shortcut for {name} is ready."
+	},
 	"instance.create.type.from-file": {
 		"message": "from file"
 	},

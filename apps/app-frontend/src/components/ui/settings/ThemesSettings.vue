@@ -15,14 +15,14 @@ import { computed, ref } from 'vue'
 import {
 	cloneCustomTheme,
 	createEmptyCustomTheme,
+	type CustomTheme,
+	type CustomThemeBase,
 	customThemeToCssVariables,
 	downloadCustomTheme,
 	getCustomThemeBaseOptions,
 	getCustomThemePreviewClasses,
 	normalizeImportedCustomTheme,
 	snapshotPaletteFromTheme,
-	type CustomTheme,
-	type CustomThemeBase,
 } from '@/helpers/custom-themes'
 import { get, set } from '@/helpers/settings.ts'
 import { useTheming } from '@/store/state'

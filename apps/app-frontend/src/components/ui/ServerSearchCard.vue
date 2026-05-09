@@ -91,8 +91,8 @@ import {
 	SignalIcon,
 	StopCircleIcon,
 } from '@modrinth/assets'
-import { formatCategory, formatNumber } from '@modrinth/utils'
 import { ButtonStyled, ProjectCard } from '@modrinth/ui'
+import { formatCategory, formatNumber } from '@modrinth/utils'
 import { defineMessages, useVIntl } from '@vintl/vintl'
 import { computed } from 'vue'
 

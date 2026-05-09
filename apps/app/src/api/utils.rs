@@ -25,7 +25,6 @@ pub fn init<R: Runtime>() -> tauri::plugin::TauriPlugin<R> {
     tauri::plugin::Builder::new("utils")
         .invoke_handler(tauri::generate_handler![
             init_authlib_patching,
-            apply_migration_fix,
             init_update_launcher,
             get_os,
             is_network_metered,
@@ -138,7 +137,9 @@ pub async fn set_theme_window_icon<R: Runtime>(
 pub async fn set_discord_rpc_language(language: String) -> Result<()> {
     theseus::set_rpc_language(&language);
 
-    if let Ok(state) = theseus::State::get().await {
+    if theseus::State::initialized()
+        && let Ok(state) = theseus::State::get().await
+    {
         let _ = state.discord_rpc.clear_to_default(true).await;
     }
 
@@ -247,13 +248,6 @@ pub async fn init_authlib_patching(
 ) -> Result<bool> {
     let result =
         utils::init_authlib_patching(minecraft_version, is_mojang).await?;
-    Ok(result)
-}
-
-/// [AR] Migration. Patch
-#[tauri::command]
-pub async fn apply_migration_fix(eol: &str) -> Result<bool> {
-    let result = utils::apply_migration_fix(eol).await?;
     Ok(result)
 }
 

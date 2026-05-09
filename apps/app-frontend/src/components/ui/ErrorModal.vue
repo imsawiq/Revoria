@@ -18,10 +18,9 @@ import { trackEvent } from '@/helpers/analytics'
 import { login as login_flow, set_default_user } from '@/helpers/auth.js'
 import { install } from '@/helpers/profile.js'
 import { cancel_directory_change } from '@/helpers/settings.ts'
-import { handleSevereError } from '@/store/error.js'
-
 // [AR] Imports
 import { applyMigrationFix, restartApp } from '@/helpers/utils.js'
+import { handleSevereError } from '@/store/error.js'
 
 const { handleError } = injectNotificationManager()
 const { formatMessage } = useVIntl()

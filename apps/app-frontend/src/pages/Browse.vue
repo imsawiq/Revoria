@@ -93,6 +93,31 @@ onMounted(() => {
 			query: { ...route.query, source: 'modrinth' },
 		})
 	}
+
+	const fromPath = sessionStorage.getItem('browse_last_from') ?? ''
+	const isReturningFromProject = fromPath.startsWith('/project')
+
+	if (isReturningFromProject) {
+		const savedState = sessionStorage.getItem(browseStateStorageKey())
+		if (savedState) {
+			restoreBrowseSearchState()
+			refreshSearch()
+		}
+	}
+
+	loading.value = false
+})
+
+onUnmounted(() => {
+	saveBrowseSearchState()
+	sessionStorage.setItem('browse_last_from', route.path)
+})
+
+watch(() => route.fullPath, () => {
+	if (route.path.startsWith('/browse')) {
+		restoreBrowseSearchState()
+		refreshSearch()
+	}
 })
 
 const projectTypes = computed(() => {
@@ -414,6 +439,12 @@ const {
 	createPageParams,
 } = useSearch(projectTypes, tags, instanceFilters)
 
+watch([query, currentFilters, currentSortType, maxResults], () => {
+	if (route.path.startsWith('/browse')) {
+		saveBrowseSearchState()
+	}
+}, { deep: true })
+
 const curseForgeSortTypes = computed(() => [
 	{ display: formatMessage(messages.sortRelevancy), name: 'relevance' },
 	{ display: formatMessage(messages.sortPopularity), name: 'follows' },
@@ -468,7 +499,7 @@ function saveBrowseSearchState() {
 }
 
 function restoreBrowseSearchState() {
-	if (typeof sessionStorage === 'undefined' || hasExplicitSearchQuery()) return
+	if (typeof sessionStorage === 'undefined') return
 	const rawState = sessionStorage.getItem(browseStateStorageKey())
 	if (!rawState) return
 	try {
@@ -672,7 +703,6 @@ watch(
 	],
 	() => {
 		if (!route.params.projectType) return
-		if (!isCurseForge.value) return
 		refreshSearch()
 	},
 	{ deep: true },
@@ -695,7 +725,6 @@ const effectiveRequestParams = computed(() =>
 
 watch(effectiveRequestParams, () => {
 	if (!route.params.projectType) return
-	if (isCurseForge.value) return
 	refreshSearch()
 })
 

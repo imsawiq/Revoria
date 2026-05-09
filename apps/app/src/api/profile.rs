@@ -37,6 +37,7 @@ pub fn init<R: tauri::Runtime>() -> tauri::plugin::TauriPlugin<R> {
             profile_repair_managed_modrinth,
             profile_run,
             profile_kill,
+            profile_create_shortcut,
             profile_edit,
             profile_edit_icon,
             profile_export_mrpack,
@@ -355,6 +356,99 @@ pub async fn profile_kill(path: &str) -> Result<()> {
     Ok(())
 }
 
+#[tauri::command]
+pub async fn profile_create_shortcut(path: &str, destination: PathBuf) -> Result<PathBuf> {
+    let profile = profile::get(path).await?.ok_or_else(|| {
+        theseus::ErrorKind::OtherError(format!(
+            "Tried to create a shortcut for a nonexistent profile at path {path}!"
+        ))
+        .as_error()
+    })?;
+    let current_exe = std::env::current_exe()?;
+    let icon_path = prepare_shortcut_icon(path, profile.icon_path.as_deref()).await;
+    let shortcut_path = theseus::util::shortcut::create_profile_shortcut(
+        destination,
+        &format!("Launch {}", profile.name),
+        &current_exe,
+        path,
+        icon_path.as_deref(),
+    )?;
+
+    Ok(shortcut_path)
+}
+
+#[cfg(target_os = "windows")]
+async fn prepare_shortcut_icon(profile_path: &str, icon_path: Option<&str>) -> Option<PathBuf> {
+    let icon_path = PathBuf::from(icon_path?);
+    let icon_path = match std::fs::canonicalize(&icon_path) {
+        Ok(path) => path,
+        Err(err) => {
+            tracing::warn!("Failed to resolve instance icon for shortcut: {err}");
+            return None;
+        }
+    };
+
+    if icon_path
+        .extension()
+        .and_then(|value| value.to_str())
+        .is_some_and(|value| value.eq_ignore_ascii_case("ico"))
+    {
+        return Some(icon_path);
+    }
+
+    let state = theseus::State::get().await.ok()?;
+    let safe_profile_path = profile_path
+        .chars()
+        .map(|ch| {
+            if ch.is_ascii_alphanumeric() || matches!(ch, '-' | '_' | '.') {
+                ch
+            } else {
+                '_'
+            }
+        })
+        .collect::<String>();
+    let icon_dir = state.directories.settings_dir.join("shortcut-icons");
+    let ico_path = icon_dir.join(format!("{safe_profile_path}.ico"));
+
+    if let Err(err) = tokio::fs::create_dir_all(&icon_dir).await {
+        tracing::warn!("Failed to create shortcut icon directory: {err}");
+        return None;
+    }
+
+    match image::open(&icon_path) {
+        Ok(mut image) => {
+            if image.width() > 256 || image.height() > 256 {
+                image = image.resize(256, 256, image::imageops::FilterType::Lanczos3);
+            }
+
+            let _ = tokio::fs::remove_file(&ico_path).await;
+            if let Err(err) = image.save_with_format(&ico_path, image::ImageFormat::Ico) {
+                tracing::warn!("Failed to create shortcut ico from instance icon: {err}");
+                let _ = tokio::fs::remove_file(&ico_path).await;
+                None
+            } else if std::fs::metadata(&ico_path)
+                .map(|metadata| metadata.len() == 0)
+                .unwrap_or(true)
+            {
+                tracing::warn!("Shortcut ico encoder created an empty file");
+                let _ = tokio::fs::remove_file(&ico_path).await;
+                None
+            } else {
+                Some(ico_path)
+            }
+        }
+        Err(err) => {
+            tracing::warn!("Failed to read instance icon for shortcut: {err}");
+            None
+        }
+    }
+}
+
+#[cfg(not(target_os = "windows"))]
+async fn prepare_shortcut_icon(_profile_path: &str, icon_path: Option<&str>) -> Option<PathBuf> {
+    icon_path.map(PathBuf::from)
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct EditProfile {
     pub name: Option<String>,
@@ -415,6 +509,7 @@ pub struct EditProfile {
     )]
     pub game_resolution: Option<Option<WindowSize>>,
     pub hooks: Option<Hooks>,
+    pub sandbox: Option<bool>,
 }
 
 // Edits a profile
@@ -457,6 +552,9 @@ pub async fn profile_edit(path: &str, edit_profile: EditProfile) -> Result<()> {
         }
         if let Some(hooks) = edit_profile.hooks.clone() {
             prof.hooks = hooks;
+        }
+        if let Some(sandbox) = edit_profile.sandbox {
+            prof.sandbox = sandbox;
         }
 
         prof.modified = chrono::Utc::now();

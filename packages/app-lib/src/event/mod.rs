@@ -216,6 +216,9 @@ pub enum CommandPayload {
         // run or install .mrpack
         path: PathBuf,
     },
+    RunProfile {
+        path: String,
+    },
 }
 
 #[derive(Serialize, Clone)]

@@ -99,6 +99,7 @@ pub async fn profile_create(
             wrapper: None,
             post_exit: None,
         },
+        sandbox: false,
     };
 
     let result = async {

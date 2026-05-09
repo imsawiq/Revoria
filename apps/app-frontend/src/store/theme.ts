@@ -1,13 +1,14 @@
-import { defineStore } from 'pinia'
 import { convertFileSrc } from '@tauri-apps/api/core'
+import { defineStore } from 'pinia'
+
 import {
 	applyCustomThemeToDocument,
 	clearAppliedCustomTheme,
+	type CustomTheme,
 	loadStoredActiveCustomThemeId,
 	loadStoredCustomThemes,
 	persistActiveCustomThemeId,
 	persistCustomThemes,
-	type CustomTheme,
 } from '@/helpers/custom-themes'
 
 export const DEFAULT_FEATURE_FLAGS = {

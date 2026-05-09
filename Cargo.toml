@@ -239,15 +239,29 @@ wildcard_dependencies = "warn"
 [profile.dev.package.sqlx-macros]
 opt-level = 3
 
-# Optimize for speed and reduce size on release builds
+# Fast desktop release builds. The old profile used full LTO with one codegen
+# unit, which is excellent for final binary size but makes local Tauri builds
+# painfully slow.
 [profile.release]
-opt-level = "s"   # Optimize for binary size
-strip = true      # Remove debug symbols
-lto = true        # Enables link to optimizations
-panic = "abort"   # Strip expensive panic clean-up logic
-codegen-units = 1 # Compile crates one after another so the compiler can optimize better
+opt-level = 2
+strip = true
+debug = false
+lto = "thin"
+panic = "abort"
+codegen-units = 16
+incremental = true
+
+# Use this when you explicitly want the smallest/most optimized artifact and
+# can afford a slower compile:
+#   cargo build --profile release-size
+[profile.release-size]
+inherits = "release"
+opt-level = "s"
+lto = true
+codegen-units = 1
+incremental = false
 
 # Specific profile for labrinth production builds
 [profile.release-labrinth]
-inherits = "release"
-panic = "unwind"     # Don't exit the whole app on panic in production
+inherits = "release-size"
+panic = "unwind"          # Don't exit the whole app on panic in production

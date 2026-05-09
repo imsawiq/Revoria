@@ -1,9 +1,4 @@
 <script setup>
-import allDeDeMessages from '@/locales/combined/de-DE.json'
-import allEnMessages from '@/locales/combined/en-US.json'
-import allRoMessages from '@/locales/combined/ro-RO.json'
-import allRuMessages from '@/locales/combined/ru-RU.json'
-import allUkMessages from '@/locales/combined/uk-UA.json'
 import { AuthFeature, PanelVersionFeature, TauriModrinthClient } from '@modrinth/api-client'
 import {
 	ChangeSkinIcon,
@@ -80,8 +75,8 @@ import { get_user } from '@/helpers/cache.js'
 import { command_listener, warning_listener } from '@/helpers/events.js'
 import { useFetch } from '@/helpers/fetch.js'
 import { cancelLogin, get as getCreds, login, logout } from '@/helpers/mr_auth.ts'
-import { list } from '@/helpers/profile.js'
-import { get as getSettings, set as setSettings } from '@/helpers/settings.ts'
+import { list, run as runProfile } from '@/helpers/profile.js'
+import { get, get as getSettings, set, set as setSettings } from '@/helpers/settings.ts'
 import { get_opening_command, initialize_state } from '@/helpers/state'
 import { applyLauncherWindowIcon } from '@/helpers/theme-icons'
 import {
@@ -93,6 +88,11 @@ import {
 	isNetworkMetered,
 	showLauncherLogsFolder,
 } from '@/helpers/utils.js'
+import allDeDeMessages from '@/locales/combined/de-DE.json'
+import allEnMessages from '@/locales/combined/en-US.json'
+import allRoMessages from '@/locales/combined/ro-RO.json'
+import allRuMessages from '@/locales/combined/ru-RU.json'
+import allUkMessages from '@/locales/combined/uk-UA.json'
 import { createContentInstall, provideContentInstall } from '@/providers/content-install'
 import {
 	provideAppUpdateDownloadProgress,
@@ -107,9 +107,6 @@ import { create_profile_and_install_from_file } from './helpers/pack'
 import { generateSkinPreviews } from './helpers/rendering/batch-skin-renderer'
 import { get_available_capes, get_available_skins } from './helpers/skins'
 import { AppNotificationManager } from './providers/app-notifications'
-
-// [AR] Imports
-import { get, set } from '@/helpers/settings.ts'
 
 const themeStore = useTheming()
 
@@ -145,6 +142,8 @@ providePageContext({
 	showAds: ref(false),
 })
 
+const stateInitialized = ref(false)
+
 const {
 	installationModal,
 	fetchExistingInstanceNames,
@@ -152,7 +151,7 @@ const {
 	handleBrowseModpacks,
 	searchModpacks,
 	getProjectVersions,
-} = setupProviders(notificationManager)
+} = setupProviders(notificationManager, { stateReady: stateInitialized })
 
 const launcherLanguage = useStorage('launcher-language', 'en')
 const languageToLocale = {
@@ -188,8 +187,6 @@ const nativeDecorations = ref(false)
 
 const os = ref('')
 
-const stateInitialized = ref(false)
-
 const criticalErrorMessage = ref()
 
 const isMaximized = ref(false)
@@ -216,6 +213,9 @@ const authUnreachable = computed(() => {
 })
 
 onMounted(async () => {
+	const currentWindow = getCurrentWindow()
+	await currentWindow.show()
+	await currentWindow.setFocus()
 	await useCheckDisableMouseover()
 	await syncLauncherThemeIcon()
 	await syncDiscordRpcLanguage(launcherLanguage.value)
@@ -717,6 +717,8 @@ async function handleCommand(e) {
 				source: 'CreationModalFileDrop',
 			})
 		}
+	} else if (e.event === 'RunProfile') {
+		await runProfile(e.path).catch(handleError)
 	} else {
 		// Other commands are URL-based (deep linking)
 		urlModal.value.show(e)
@@ -1029,7 +1031,7 @@ async function processPendingSurveys() {
 			@create="handleCreate"
 			@browse-modpacks="handleBrowseModpacks"
 		/>
-		<div class="app-grid-navbar flex flex-col p-3 pt-2 gap-2 w-[--left-bar-width]">
+		<div class="app-grid-navbar flex flex-col p-3 pt-2 gap-1 w-[--left-bar-width]">
 			<NavButton v-tooltip.right="formatMessage(messages.navHome)" to="/">
 				<HomeIcon />
 			</NavButton>
@@ -1458,12 +1460,9 @@ async function processPendingSurveys() {
 	left: var(--shell-gap);
 	bottom: var(--shell-gap);
 	width: var(--left-bar-width);
-	border-radius: var(--radius-xl);
+	border-radius: var(--radius-lg);
 	background: var(--color-glass-bg-strong);
 	border: 1px solid var(--glass-border);
-	box-shadow: var(--glass-shadow);
-	backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-	-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
 }
 
 .app-grid-statusbar {
@@ -1474,12 +1473,9 @@ async function processPendingSurveys() {
 	left: var(--shell-gap);
 	right: var(--shell-gap);
 	height: var(--top-bar-height);
-	border-radius: var(--radius-xl);
+	border-radius: var(--radius-lg);
 	background: var(--color-glass-bg-strong);
 	border: 1px solid var(--glass-border);
-	box-shadow: var(--glass-shadow);
-	backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-	-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
 	overflow: hidden;
 	contain: paint;
 }
@@ -1496,11 +1492,8 @@ async function processPendingSurveys() {
 	right: var(--shell-gap);
 	bottom: var(--shell-gap);
 	background: var(--color-glass-bg-strong);
-	border-radius: var(--radius-xl);
+	border-radius: var(--radius-lg);
 	border: 1px solid var(--glass-border);
-	box-shadow: var(--glass-shadow);
-	backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-	-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
 	overflow: hidden;
 
 	display: grid;
@@ -1529,8 +1522,6 @@ async function processPendingSurveys() {
 	position: relative;
 	height: calc(100vh - var(--top-bar-height));
 	background: var(--color-glass-bg);
-	backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-	-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
 }
 
 .app-viewport {

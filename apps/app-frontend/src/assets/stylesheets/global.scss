@@ -43,6 +43,7 @@
 }
 
 :root {
+	font-size: 91.25%;
 	font-family: var(--font-standard, sans-serif), sans-serif;
 	color-scheme: light dark;
 	--view-width: calc(100% - 5rem);
@@ -154,7 +155,7 @@ textarea {
 .v-popper--theme-dropdown .v-popper__inner {
 	background: var(--color-raised-bg) !important;
 	border: 1px solid var(--color-button-border) !important;
-	box-shadow: var(--shadow-floating), var(--shadow-inset-sm);
+	box-shadow: var(--shadow-floating);
 	backdrop-filter: none !important;
 	-webkit-backdrop-filter: none !important;
 	color: var(--color-contrast);
@@ -188,7 +189,7 @@ img {
 }
 
 .card-shadow {
-	box-shadow: var(--shadow-card);
+	box-shadow: none;
 }
 
 html.oled-mode,

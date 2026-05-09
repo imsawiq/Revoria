@@ -69,7 +69,7 @@ a {
 
 .router-link-active {
 	svg {
-		filter: drop-shadow(0 0 0.45rem color-mix(in srgb, var(--color-brand) 28%, transparent));
+		filter: none;
 	}
 }
 
@@ -80,20 +80,18 @@ a {
 }
 
 .router-link-active {
-	color: var(--color-button-text-selected);
-	background: var(--color-button-bg-selected);
+	color: var(--color-contrast);
+	background: var(--color-button-bg);
 }
 
 .subpage-active {
 	color: var(--color-contrast);
-	background: color-mix(in srgb, var(--color-brand) 5%, var(--color-glass-bg-strong));
-	box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-brand) 12%, transparent);
+	background: var(--color-button-bg);
 }
 
 .nav-button-attention {
-	color: var(--color-button-text-selected);
-	background: var(--color-button-bg-selected);
-	box-shadow: 0 0 0 1px var(--color-brand-highlight);
+	color: var(--color-contrast);
+	background: var(--color-button-bg);
 	animation: none;
 
 	svg {
