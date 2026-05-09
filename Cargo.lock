@@ -6872,6 +6872,7 @@ dependencies = [
  "hickory-resolver",
  "indicatif",
  "itertools",
+ "libc",
  "notify",
  "notify-debouncer-mini",
  "p256",

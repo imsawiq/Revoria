@@ -40,6 +40,7 @@ heck = { workspace = true }
 hickory-resolver = { workspace = true }
 indicatif = { workspace = true, optional = true }
 itertools = { workspace = true }
+libc = { workspace = true }
 notify = { workspace = true }
 notify-debouncer-mini = { workspace = true }
 p256 = { workspace = true, features = ["ecdsa"] }

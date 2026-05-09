@@ -35,14 +35,14 @@ fn create_shortcut(
         .map(|path| format!("Icon={}\n", path.display()))
         .unwrap_or_default();
     std::fs::write(
-        path,
+        &*path,
         format!(
             "[Desktop Entry]\nType=Application\nVersion=1.0\nName={name}\nExec={exec}\n{icon}Categories=Game;Minecraft;Launcher;\n"
         ),
     )?;
 
     use std::os::unix::fs::PermissionsExt;
-    std::fs::set_permissions(path, std::fs::Permissions::from_mode(0o755))?;
+    std::fs::set_permissions(&*path, std::fs::Permissions::from_mode(0o755))?;
     Ok(())
 }
 
