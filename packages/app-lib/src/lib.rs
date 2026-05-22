@@ -26,6 +26,7 @@ pub use event::{
 pub use logger::start_logger;
 pub use state::DirectoryInfo;
 pub use state::State;
+pub use state::db::repair_migration_state_from_disk;
 pub use state::set_rpc_language;
 
 pub const LAUNCHER_USER_AGENT: &str = concat!(

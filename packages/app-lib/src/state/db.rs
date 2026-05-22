@@ -17,26 +17,7 @@ pub(crate) async fn connect() -> crate::Result<Pool<Sqlite>> {
     // checksums won't match the database. We patch the DB to match the compiled checksums.
     let _ = apply_migration_fix(&pool).await;
 
-    let migrator = sqlx::migrate!();
-
-    if let Err(err) = migrator.run(&pool).await {
-        tracing::warn!(
-            "Migration failed (likely due to line ending mismatch): {err}. Resetting migration state and retrying..."
-        );
-
-        // Clear migration tracking to force re-run
-        sqlx::query("DELETE FROM _sqlx_migrations")
-            .execute(&pool)
-            .await?;
-
-        // Try again with fresh tracking
-        if let Err(err2) = migrator.run(&pool).await {
-            tracing::error!("Migration failed after reset: {err2}");
-            return Err(crate::ErrorKind::OtherError(format!(
-                "Failed to apply database migrations: {err2}"
-            )).into());
-        }
-    }
+    run_migrations_with_repair(&pool).await?;
 
     if let Err(err) = stale_data_cleanup(&pool).await {
         tracing::warn!(
@@ -98,7 +79,9 @@ async fn stale_data_cleanup(pool: &Pool<Sqlite>) -> crate::Result<()> {
 /// Patches _sqlx_migrations table with checksums from the compiled migrator.
 /// This fixes line-ending mismatch issues where sqlx::migrate!() checksums
 /// (embedded at compile time) differ from what's in the database.
-pub(crate) async fn apply_migration_fix(pool: &Pool<Sqlite>) -> crate::Result<bool> {
+pub(crate) async fn apply_migration_fix(
+    pool: &Pool<Sqlite>,
+) -> crate::Result<bool> {
     let started = Instant::now();
 
     tracing::info!(
@@ -110,14 +93,18 @@ pub(crate) async fn apply_migration_fix(pool: &Pool<Sqlite>) -> crate::Result<bo
 
     for migration in migrator.iter() {
         let version = migration.version;
-        let checksum = migration.checksum.iter().map(|b| format!("{:02x}", b)).collect::<String>();
+        let checksum = migration
+            .checksum
+            .iter()
+            .map(|b| format!("{:02x}", b))
+            .collect::<String>();
 
         let result = sqlx::query(
             r#"
             UPDATE _sqlx_migrations
             SET checksum = ?2
             WHERE version = ?1;
-            "#
+            "#,
         )
         .bind(version as i64)
         .bind(migration.checksum.to_vec())
@@ -125,9 +112,7 @@ pub(crate) async fn apply_migration_fix(pool: &Pool<Sqlite>) -> crate::Result<bo
         .await?;
 
         if result.rows_affected() > 0 {
-            tracing::info!(
-                "  ✓ Patched migration {version} -> {checksum}"
-            );
+            tracing::info!("  ✓ Patched migration {version} -> {checksum}");
             changed = true;
         }
     }
@@ -139,4 +124,130 @@ pub(crate) async fn apply_migration_fix(pool: &Pool<Sqlite>) -> crate::Result<bo
     );
 
     Ok(changed)
+}
+
+/// Repairs a database whose schema exists but whose SQLx migration tracking was
+/// lost or has stale checksums.
+pub async fn repair_migration_state_from_disk() -> crate::Result<bool> {
+    let pool = connect().await?;
+    Ok(!pool.is_closed())
+}
+
+async fn run_migrations_with_repair(pool: &Pool<Sqlite>) -> crate::Result<()> {
+    let migrator = sqlx::migrate!();
+    let max_attempts = migrator.iter().count() + 1;
+
+    for attempt in 1..=max_attempts {
+        match migrator.run(pool).await {
+            Ok(()) => return Ok(()),
+            Err(err) => {
+                let message = err.to_string();
+                tracing::warn!(
+                    "Migration attempt {attempt}/{max_attempts} failed: {message}. Attempting migration state repair..."
+                );
+
+                if !repair_migration_state(pool, &message).await? {
+                    tracing::error!(
+                        "Migration failed and repair was not applicable: {message}"
+                    );
+                    return Err(crate::ErrorKind::OtherError(format!(
+                        "Failed to apply database migrations: {message}"
+                    ))
+                    .into());
+                }
+            }
+        }
+    }
+
+    Err(crate::ErrorKind::OtherError(
+        "Failed to apply database migrations after repair attempts".to_string(),
+    )
+    .into())
+}
+
+async fn repair_migration_state(
+    pool: &Pool<Sqlite>,
+    migration_error: &str,
+) -> crate::Result<bool> {
+    let schema_exists = sqlx::query_scalar::<_, i64>(
+        "SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = 'settings'",
+    )
+    .fetch_one(pool)
+    .await?
+        > 0;
+
+    if !schema_exists {
+        tracing::warn!(
+            "Migration repair skipped: settings table does not exist yet"
+        );
+        return Ok(false);
+    }
+
+    let tracking_exists = sqlx::query_scalar::<_, i64>(
+        "SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = '_sqlx_migrations'",
+    )
+    .fetch_one(pool)
+    .await?
+        > 0;
+
+    if !tracking_exists {
+        tracing::warn!(
+            "Migration repair skipped: _sqlx_migrations table does not exist yet"
+        );
+        return Ok(false);
+    }
+
+    let migrator = sqlx::migrate!();
+    let mut changed = false;
+
+    for migration in migrator.iter() {
+        if !should_mark_migration_applied(migration.version, migration_error) {
+            continue;
+        }
+
+        let exists = sqlx::query_scalar::<_, i64>(
+            "SELECT COUNT(*) FROM _sqlx_migrations WHERE version = ?1",
+        )
+        .bind(migration.version)
+        .fetch_one(pool)
+        .await?
+            > 0;
+
+        if exists {
+            continue;
+        }
+
+        sqlx::query(
+            r#"
+            INSERT INTO _sqlx_migrations
+                (version, description, success, checksum, execution_time)
+            VALUES (?1, ?2, TRUE, ?3, 0)
+            "#,
+        )
+        .bind(migration.version)
+        .bind(migration.description.to_string())
+        .bind(migration.checksum.to_vec())
+        .execute(pool)
+        .await?;
+
+        tracing::warn!(
+            "Marked migration {} ({}) as applied during repair",
+            migration.version,
+            migration.description
+        );
+        changed = true;
+    }
+
+    Ok(changed)
+}
+
+fn should_mark_migration_applied(version: i64, migration_error: &str) -> bool {
+    if migration_error.is_empty() {
+        return true;
+    }
+
+    migration_error.contains(&format!("migration {version}"))
+        && (migration_error.contains("already exists")
+            || migration_error.contains("duplicate column name")
+            || migration_error.contains("UNIQUE constraint failed"))
 }

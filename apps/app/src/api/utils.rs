@@ -25,6 +25,7 @@ pub fn init<R: Runtime>() -> tauri::plugin::TauriPlugin<R> {
     tauri::plugin::Builder::new("utils")
         .invoke_handler(tauri::generate_handler![
             init_authlib_patching,
+            apply_migration_fix,
             init_update_launcher,
             get_os,
             is_network_metered,
@@ -249,6 +250,11 @@ pub async fn init_authlib_patching(
     let result =
         utils::init_authlib_patching(minecraft_version, is_mojang).await?;
     Ok(result)
+}
+
+#[tauri::command]
+pub async fn apply_migration_fix(_eol: String) -> Result<bool> {
+    Ok(theseus::repair_migration_state_from_disk().await?)
 }
 
 /// [AR] Feature. Updater
