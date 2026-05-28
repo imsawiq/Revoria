@@ -41,12 +41,10 @@ import SearchCard from '@/components/ui/SearchCard.vue'
 import ServerSearchCard from '@/components/ui/ServerSearchCard.vue'
 import { get_search_results, get_version } from '@/helpers/cache.js'
 import {
-	constructCurseForgeCdnUrl,
 	getCurseForgeCategories,
 	getCurseForgeClassId,
-	getCurseForgeFileDownloadUrl,
-	getCurseForgeModFiles,
 	getCurseForgeProjectUrl,
+	installCurseForgeProject as installCurseForgeProjectBackend,
 	searchCurseForgeMods,
 } from '@/helpers/curseforge'
 import { process_listener } from '@/helpers/events'
@@ -54,22 +52,22 @@ import { useFetch } from '@/helpers/fetch.js'
 import { install_to_existing_profile } from '@/helpers/pack.js'
 import { get_by_profile_path } from '@/helpers/process.js'
 import {
-	add_project_from_path,
 	create as createInstanceProfile,
 	edit as editInstanceProfile,
 	get as getInstance,
 	get_projects as getInstanceProjects,
 	kill,
 	list as listInstances,
+	remove as removeInstanceProfile,
 } from '@/helpers/profile.js'
 import { get_categories, get_game_versions, get_loaders } from '@/helpers/tags'
-import { downloadUrlToTemp } from '@/helpers/utils'
 import {
 	add_server_to_profile,
 	get_profile_worlds,
 	getServerLatency,
 	start_join_server,
 } from '@/helpers/worlds.ts'
+import { getErrorMessage } from '@/providers/app-notifications'
 import { useBreadcrumbs } from '@/store/breadcrumbs'
 
 const { handleError, addNotification } = injectNotificationManager()
@@ -113,12 +111,15 @@ onUnmounted(() => {
 	sessionStorage.setItem('browse_last_from', route.path)
 })
 
-watch(() => route.fullPath, () => {
-	if (route.path.startsWith('/browse')) {
-		restoreBrowseSearchState()
-		refreshSearch()
-	}
-})
+watch(
+	() => route.fullPath,
+	() => {
+		if (route.path.startsWith('/browse')) {
+			restoreBrowseSearchState()
+			refreshSearch()
+		}
+	},
+)
 
 const projectTypes = computed(() => {
 	return [route.params.projectType as ProjectType]
@@ -126,8 +127,7 @@ const projectTypes = computed(() => {
 
 const selectableSources = computed(() => {
 	const baseQuery = { ...route.query }
-	const curseForgeTargetPath =
-		projectType.value === 'modpack' || projectType.value === 'server' ? '/browse/mod' : route.path
+	const curseForgeTargetPath = projectType.value === 'server' ? '/browse/mod' : route.path
 
 	return [
 		{ label: formatMessage(messages.sourceModrinth), href: 'modrinth' },
@@ -197,6 +197,9 @@ const cfInstallModal = ref<any>(null)
 const cfInstallTargetProject = ref<any>(null)
 const cfInstallProfiles = ref<any[]>([])
 const cfInstallSearching = ref('')
+const onHideCurseForgeInstallModal = () => {
+	cfInstallTargetProject.value = null
+}
 const serverInstallModal = ref<any>(null)
 const serverInstallTargetProject = ref<ServerProject | null>(null)
 const serverInstallProfiles = ref<any[]>([])
@@ -396,13 +399,11 @@ const instanceFilters = computed(() => {
 	return filters
 })
 
-const curseForgeLoaderMap: Record<string, number> = {
-	forge: 1,
-	cauldron: 2,
-	liteloader: 3,
-	fabric: 4,
-	quilt: 5,
-	neoforge: 6,
+const curseForgeLoaderSearchMap: Record<string, string> = {
+	forge: 'forge',
+	fabric: 'fabric',
+	quilt: 'quilt',
+	neoforge: 'neoforge',
 }
 
 const isCurseForgeFilterAllowed = (filterId: string) => {
@@ -439,11 +440,15 @@ const {
 	createPageParams,
 } = useSearch(projectTypes, tags, instanceFilters)
 
-watch([query, currentFilters, currentSortType, maxResults], () => {
-	if (route.path.startsWith('/browse')) {
-		saveBrowseSearchState()
-	}
-}, { deep: true })
+watch(
+	[query, currentFilters, currentSortType, maxResults],
+	() => {
+		if (route.path.startsWith('/browse')) {
+			saveBrowseSearchState()
+		}
+	},
+	{ deep: true },
+)
 
 const curseForgeSortTypes = computed(() => [
 	{ display: formatMessage(messages.sortRelevancy), name: 'relevance' },
@@ -534,7 +539,7 @@ watch(
 	(isCf) => {
 		if (!isCf) return
 		// Redirect away from unsupported CurseForge project types
-		if (projectType.value === 'modpack' || projectType.value === 'server') {
+		if (projectType.value === 'server') {
 			router.replace({
 				path: '/browse/mod',
 				query: { ...route.query },
@@ -839,7 +844,7 @@ async function handleAddServerToCurrentInstance(project: ServerProject, instance
 		})
 		return true
 	} catch (err) {
-		handleError(err instanceof Error ? err : new Error(String(err)))
+		handleError(err)
 		return false
 	} finally {
 		addingServerProjects.value = addingServerProjects.value.filter(
@@ -936,7 +941,7 @@ async function handlePlayServerProject(project: ServerProject) {
 		await start_join_server(instance.path, address)
 		await checkServerRunningStates(serverHits.value)
 	} catch (err) {
-		handleError(err instanceof Error ? err : new Error(String(err)))
+		handleError(err)
 	} finally {
 		installingServerProjects.value = installingServerProjects.value.filter(
 			(id) => id !== project.project_id,
@@ -978,9 +983,8 @@ async function refreshSearch() {
 					new Set(
 						effectiveFilters
 							.filter((filter: any) => filter.type.endsWith('_loader'))
-							.map((filter: any) => curseForgeLoaderMap[String(filter.option).toLowerCase()])
-							.filter((value: number | undefined) => Number.isFinite(value))
-							.map((value: number) => value),
+							.map((filter: any) => curseForgeLoaderSearchMap[String(filter.option).toLowerCase()])
+							.filter(Boolean),
 					),
 				)
 				const categoryIds = Array.from(
@@ -1044,8 +1048,7 @@ async function refreshSearch() {
 					}),
 				}
 			} catch (e) {
-				const err = e instanceof Error ? e : new Error(String(e))
-				handleError(err)
+				handleError(e)
 				if (requestId === searchRequestId) {
 					results.value = { total_hits: 0, limit: 1, hits: [] }
 				}
@@ -1161,7 +1164,33 @@ function clearSearch() {
 }
 
 async function installCurseForgeProject(project: any) {
+	const projectKind = String(project?.project_type ?? projectType.value ?? 'mod')
 	if (!instance.value?.path) {
+		if (projectKind === 'modpack') {
+			const profilePath = await createInstanceProfile(
+				project.title ?? project.name ?? 'CurseForge Modpack',
+				'1.19.4',
+				'vanilla',
+				'latest',
+				null,
+				true,
+			).catch(handleError)
+			if (!profilePath) return
+
+			const installed = await installCurseForgeProjectToInstance(
+				project,
+				{
+					path: profilePath,
+				} as GameInstance,
+				false,
+			)
+			if (installed) {
+				router.push(`/instance/${encodeURIComponent(profilePath)}/`)
+			} else {
+				await removeInstanceProfile(profilePath).catch(() => {})
+			}
+			return
+		}
 		await openCurseForgeInstallModal(project)
 		return
 	}
@@ -1180,8 +1209,7 @@ async function openCurseForgeInstallModal(project: any) {
 		cfInstallProfiles.value = profiles
 		cfInstallModal.value?.show?.(undefined as any)
 	} catch (e) {
-		const err = e instanceof Error ? e : new Error(String(e))
-		handleError(err)
+		handleError(e)
 	}
 }
 
@@ -1199,93 +1227,43 @@ function notifyCurseForgeManualDownload(project: any, message: string) {
 	)
 }
 
-function getLoaderToken(loader: string | undefined | null) {
-	switch (String(loader ?? '').toLowerCase()) {
-		case 'fabric':
-			return 'fabric'
-		case 'forge':
-			return 'forge'
-		case 'quilt':
-			return 'quilt'
-		case 'neoforge':
-			return 'neoforge'
-		default:
-			return null
-	}
-}
-
-function fileLooksCompatible(file: any, instanceVal: GameInstance) {
-	const versions: string[] = Array.isArray(file?.gameVersions) ? file.gameVersions : []
-	const gvOk = instanceVal?.game_version ? versions.includes(instanceVal.game_version) : true
-	const loaderToken = getLoaderToken(instanceVal?.loader)
-	if (!loaderToken) return gvOk
-	const loaderOk = versions.some((v) => String(v).toLowerCase() === loaderToken)
-	return gvOk && loaderOk
-}
-
-async function installCurseForgeProjectToInstance(project: any, instanceVal: GameInstance) {
+async function installCurseForgeProjectToInstance(
+	project: any,
+	instanceVal: GameInstance,
+	useProfileHints = true,
+) {
 	const modId = Number(project.project_id ?? project.id)
 	if (!Number.isFinite(modId)) {
 		handleError(new Error(formatMessage(messages.invalidCurseForgeProjectId)))
-		return
+		return false
 	}
 	try {
-		const files = await getCurseForgeModFiles({
-			modId,
-			index: 0,
-			pageSize: 50,
-			gameVersion: instanceVal?.game_version,
-		}).catch(handleError)
-
-		const sorted = (files?.data ?? [])
-			.slice()
-			.sort((a: any, b: any) => Date.parse(b.fileDate) - Date.parse(a.fileDate))
-		const file =
-			sorted.find((f: any) => fileLooksCompatible(f, instanceVal)) ??
-			sorted.find((f: any) => !!f.downloadUrl) ??
-			sorted[0]
-		if (!file) {
-			handleError(new Error(formatMessage(messages.noFilesAvailableForProject)))
-			return
-		}
-
-		let downloadUrl = file.downloadUrl || null
-		if (!downloadUrl) {
-			downloadUrl = await getCurseForgeFileDownloadUrl(modId, file.id).catch(() => null)
-		}
-		if (!downloadUrl && file.id && file.fileName) {
-			downloadUrl = constructCurseForgeCdnUrl(file.id, file.fileName)
-		}
-		if (!downloadUrl) {
-			notifyCurseForgeManualDownload(
-				project,
-				formatMessage(messages.curseForgeManualDownloadFallback),
-			)
-			return
-		}
-
-		const suggestedName = (file.fileName || `curseforge-${modId}-${file.id}.jar`).replace(
-			/[^a-zA-Z0-9._-]/g,
-			'_',
-		)
-		const downloadedPath = await downloadUrlToTemp(downloadUrl, suggestedName, instanceVal.path)
-		const backendType =
-			(project.project_type ?? 'mod') === 'shader'
-				? 'shaderpack'
-				: String(project.project_type ?? 'mod')
-		await add_project_from_path(instanceVal.path, downloadedPath, backendType)
+		await installCurseForgeProjectBackend({
+			profilePath: instanceVal.path,
+			projectId: modId,
+			projectType: String(project.project_type ?? projectType.value ?? 'mod'),
+			projectName: project.title ?? project.name ?? null,
+			iconUrl: project.icon_url ?? null,
+			useProfileHints,
+		})
 		newlyInstalled.value.push(String(modId))
+		return true
 	} catch (e) {
-		const err = e instanceof Error ? e : new Error(String(e))
+		const message = getErrorMessage(e)
 		// Common CF cases: API returns 403 for restricted/manual-download files.
-		if (String(err.message ?? '').includes('(403)') || String(err.message ?? '').includes('403')) {
+		if (
+			message.includes('(403)') ||
+			message.includes('403') ||
+			message.toLowerCase().includes('third-party')
+		) {
 			notifyCurseForgeManualDownload(
 				project,
 				formatMessage(messages.curseForgeBlockedAutomatedDownload),
 			)
-			return
+			return false
 		}
-		handleError(err)
+		handleError(e)
+		return false
 	}
 }
 
@@ -1313,8 +1291,7 @@ const selectableProjectTypes = computed(() => {
 	} else {
 		dataPacks = true
 		mods = true
-		// Hide modpacks for CurseForge — CF uses .zip, launcher uses .mrpack
-		modpacks = !isCurseForge.value
+		modpacks = true
 	}
 
 	const params: LocationQuery = {}
@@ -1682,11 +1659,7 @@ const handleOptionsClick = (args: any) => {
 	<ModalWrapper
 		ref="cfInstallModal"
 		:header="formatMessage(messages.installToInstanceTitle)"
-		:on-hide="
-			() => {
-				cfInstallTargetProject.value = null
-			}
-		"
+		:on-hide="onHideCurseForgeInstallModal"
 	>
 		<div class="flex flex-col gap-3 min-w-[400px] max-w-[500px]">
 			<p v-if="cfInstallTargetProject" class="m-0 text-sm text-secondary">
@@ -1741,9 +1714,12 @@ const handleOptionsClick = (args: any) => {
 							@click.stop="
 								async () => {
 									profile.installing = true
-									await installCurseForgeProjectToInstance(cfInstallTargetProject, profile)
+									const installed = await installCurseForgeProjectToInstance(
+										cfInstallTargetProject,
+										profile,
+									)
 									profile.installing = false
-									profile.installed = true
+									profile.installed = installed
 								}
 							"
 						>

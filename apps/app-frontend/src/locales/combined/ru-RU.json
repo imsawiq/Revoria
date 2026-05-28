@@ -2483,6 +2483,30 @@
 	"browse.install.title": {
 		"message": "Установить проект в сборку"
 	},
+	"loading.message.downloading-modpack": {
+		"message": "Скачивание сборки"
+	},
+	"loading.message.canceling-download": {
+		"message": "Отмена скачивания"
+	},
+	"running-app-bar.cancel-download": {
+		"message": "Отменить скачивание"
+	},
+	"notification.error.unmanaged-profile": {
+		"message": "Сборка {profile} не управляется приложением."
+	},
+	"notification.error.download-canceled": {
+		"message": "Скачивание отменено."
+	},
+	"install-modal.hide-new-instance": {
+		"message": "Скрыть новую сборку"
+	},
+	"install-modal.no-compatible-version": {
+		"message": "Совместимая версия не найдена"
+	},
+	"install-modal.locked-instance-tooltip": {
+		"message": "Отвяжите или разблокируйте сборку, чтобы добавлять моды."
+	},
 	"creation-flow.modpack.import": {
 		"defaultMessage": "Импортировать модпак"
 	},

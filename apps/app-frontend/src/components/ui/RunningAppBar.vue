@@ -37,7 +37,12 @@
 			>
 				<StopCircleIcon />
 			</Button>
-			<Button :v-tooltip="formatMessage(messages.viewLogs)" icon-only class="icon-button" @click="goToTerminal()">
+			<Button
+				:v-tooltip="formatMessage(messages.viewLogs)"
+				icon-only
+				class="icon-button"
+				@click="goToTerminal()"
+			>
 				<TerminalSquareIcon />
 			</Button>
 		</div>
@@ -49,19 +54,33 @@
 	<Teleport to="body">
 		<transition name="download">
 			<Card
-				v-if="currentLoadingBars.length > 0"
+				v-if="showCard && currentLoadingBars.length > 0"
 				ref="card"
 				class="info-card"
 				data-tauri-drag-region-exclude
 			>
-				<div v-for="loadingBar in currentLoadingBars" :key="loadingBar.id" class="info-text">
-					<h3 class="info-title">
-						{{ loadingBar.title }}
-					</h3>
+				<div
+					v-for="loadingBar in currentLoadingBars"
+					:key="loadingBar.loading_bar_uuid"
+					class="info-text"
+				>
+					<div class="loading-header">
+						<h3 class="info-title">
+							{{ loadingBar.title }}
+						</h3>
+						<Button
+							:v-tooltip="formatMessage(messages.cancelDownload)"
+							icon-only
+							class="icon-button stop"
+							@click="cancelDownload(loadingBar)"
+						>
+							<XIcon />
+						</Button>
+					</div>
 					<ProgressBar :progress="Math.floor((100 * loadingBar.current) / loadingBar.total)" />
 					<div class="row">
 						{{ Math.floor((100 * loadingBar.current) / loadingBar.total) }}%
-						{{ loadingBar.message }}
+						{{ formatLoadingMessage(loadingBar.message) }}
 					</div>
 				</div>
 			</Card>
@@ -110,6 +129,7 @@ import {
 	StopCircleIcon,
 	TerminalSquareIcon,
 	UnplugIcon,
+	XIcon,
 } from '@modrinth/assets'
 import { Button, ButtonStyled, Card, injectNotificationManager } from '@modrinth/ui'
 import { defineMessages, useVIntl } from '@vintl/vintl'
@@ -121,7 +141,7 @@ import { trackEvent } from '@/helpers/analytics'
 import { loading_listener, process_listener } from '@/helpers/events'
 import { get_all as getRunningProcesses, kill as killProcess } from '@/helpers/process'
 import { get_many } from '@/helpers/profile.js'
-import { progress_bars_list } from '@/helpers/state.js'
+import { cancel_progress_bar, progress_bars_list } from '@/helpers/state.js'
 
 const { handleError } = injectNotificationManager()
 const { formatMessage } = useVIntl()
@@ -134,7 +154,24 @@ const messages = defineMessages({
 		id: 'running-app-bar.no-instances-running',
 		defaultMessage: 'No instances running',
 	},
+	cancelDownload: {
+		id: 'running-app-bar.cancel-download',
+		defaultMessage: 'Cancel download',
+	},
+	downloadingModpack: {
+		id: 'loading.message.downloading-modpack',
+		defaultMessage: 'Downloading modpack',
+	},
+	cancelingDownload: {
+		id: 'loading.message.canceling-download',
+		defaultMessage: 'Canceling download',
+	},
 })
+
+const loadingMessageMap = {
+	'Downloading modpack': messages.downloadingModpack,
+	'Canceling download': messages.cancelingDownload,
+}
 
 const router = useRouter()
 const card = ref(null)
@@ -196,6 +233,15 @@ const stop = async (process) => {
 
 const goToTerminal = (path) => {
 	router.push(`/instance/${encodeURIComponent(path ?? selectedProcess.value.profile.path)}/logs`)
+}
+
+const formatLoadingMessage = (message) => {
+	const descriptor = loadingMessageMap[message]
+	return descriptor ? formatMessage(descriptor) : message
+}
+
+const cancelDownload = async (loadingBar) => {
+	await cancel_progress_bar(loadingBar.loading_bar_uuid).catch(handleError)
 }
 
 const currentLoadingBars = ref([])
@@ -351,12 +397,11 @@ onBeforeUnmount(() => {
 	gap: 0.5rem;
 	border-radius: var(--radius-lg);
 	border: 1px solid var(--glass-border);
-	background:
-		linear-gradient(
-			180deg,
-			color-mix(in srgb, var(--color-glass-bg-strong) 92%, var(--color-brand-highlight) 8%) 0%,
-			color-mix(in srgb, var(--color-glass-bg) 94%, transparent) 100%
-		);
+	background: linear-gradient(
+		180deg,
+		color-mix(in srgb, var(--color-glass-bg-strong) 92%, var(--color-brand-highlight) 8%) 0%,
+		color-mix(in srgb, var(--color-glass-bg) 94%, transparent) 100%
+	);
 	box-shadow: var(--shadow-card);
 	padding: 0.5rem 0.75rem;
 	min-height: 2.625rem;
@@ -442,6 +487,17 @@ onBeforeUnmount(() => {
 	&.hidden {
 		transform: translateY(-100%);
 	}
+}
+
+.loading-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+}
+
+.info-title {
+	margin: 0;
 }
 
 .running-text a {

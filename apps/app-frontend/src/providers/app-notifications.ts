@@ -30,8 +30,55 @@ const readMessage = (
 ) => messages?.[id]?.message ?? messages?.[id]?.defaultMessage ?? fallback ?? id
 
 const getCurrentMessages = () => {
-	const language = (localStorage.getItem('launcher-language') ?? 'en') as keyof typeof localeMessages
+	const language = (localStorage.getItem('launcher-language') ??
+		'en') as keyof typeof localeMessages
 	return localeMessages[language] ?? localeMessages.en
+}
+
+const getKnownErrorMessage = (
+	errorMessage: string,
+	messages: Record<string, { message?: string; defaultMessage?: string }>,
+) => {
+	if (errorMessage.includes(knownErrorMessages.invalidProjectType)) {
+		return readMessage(
+			messages,
+			'notification.error.invalid-project-type',
+			'Invalid input: Unable to infer project type for input file',
+		)
+	}
+
+	const unmanagedProfile = errorMessage.match(/^Profile (.+) is not managed by the app!$/)
+	if (unmanagedProfile) {
+		return readMessage(
+			messages,
+			'notification.error.unmanaged-profile',
+			'Profile {profile} is not managed by the app.',
+		).replace('{profile}', unmanagedProfile[1])
+	}
+
+	if (errorMessage.includes('Download canceled')) {
+		return readMessage(messages, 'notification.error.download-canceled', 'Download canceled.')
+	}
+
+	return errorMessage
+}
+
+export const getErrorMessage = (error: unknown): string => {
+	if (error instanceof Error) return error.message
+	if (typeof error === 'string') return error
+	if (error && typeof error === 'object') {
+		const fields = error as Record<string, unknown>
+		for (const key of ['message', 'error', 'reason']) {
+			if (typeof fields[key] === 'string') return fields[key]
+		}
+		try {
+			return JSON.stringify(error)
+		} catch {
+			return String(error)
+		}
+	}
+
+	return String(error)
 }
 
 export class AppNotificationManager extends AbstractWebNotificationManager {
@@ -56,16 +103,10 @@ export class AppNotificationManager extends AbstractWebNotificationManager {
 		return this.state.value
 	}
 
-	public handleError = (error: Error): void => {
+	public handleError = (error: unknown): void => {
 		const messages = getCurrentMessages()
-		const errorText =
-			error.message?.includes(knownErrorMessages.invalidProjectType)
-				? readMessage(
-						messages,
-						'notification.error.invalid-project-type',
-						'Invalid input: Unable to infer project type for input file',
-					)
-				: error.message ?? String(error)
+		const errorMessage = getErrorMessage(error)
+		const errorText = getKnownErrorMessage(errorMessage, messages)
 
 		this.addNotification({
 			title: readMessage(messages, 'notification.error.title', 'An error occurred'),

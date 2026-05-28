@@ -843,11 +843,15 @@ provideContentManager({
 			slug: null,
 			title: item.file_name.replace('.disabled', ''),
 			icon_url: null,
+			description: null,
 		},
 		projectLink: item.project?.id ? `/project/${item.project.id}` : undefined,
 		version: item.version ?? {
 			id: item.file_name,
-			version_number: formatMessage(messages.unknownVersion),
+			version_number:
+				!item.project?.id && item.project?.description
+					? item.project.description
+					: formatMessage(messages.unknownVersion),
 			file_name: item.file_name,
 		},
 		versionLink:
@@ -857,7 +861,9 @@ provideContentManager({
 		owner: item.owner
 			? {
 					...item.owner,
-					link: () => openUrl(`https://modrinth.com/${item.owner!.type}/${item.owner!.id}`),
+					link: item.project?.id
+						? () => openUrl(`https://modrinth.com/${item.owner!.type}/${item.owner!.id}`)
+						: undefined,
 				}
 			: undefined,
 		enabled: item.enabled,

@@ -86,11 +86,14 @@ impl ProcessManager {
                 profile_path: profile_path.to_string(),
                 pid,
                 recovered: false,
+                last_playtime_update: None,
             },
             child: Some(child),
             rpc_server: Some(rpc_server),
             _main_class_keep_alive: Some(main_class_keep_alive),
         };
+        process.metadata.last_playtime_update =
+            Some(process.metadata.start_time);
 
         let metadata = process.metadata.clone();
 
@@ -173,6 +176,7 @@ impl ProcessManager {
             profile_path.to_string(),
             post_exit_command,
             metadata.uuid,
+            metadata.playtime_checkpoint(),
         ));
 
         self.processes.insert(process.metadata.uuid, process);
@@ -268,6 +272,13 @@ impl ProcessManager {
         let _ = self.persist_running_processes();
     }
 
+    fn update_playtime_checkpoint(&self, id: Uuid, checkpoint: DateTime<Utc>) {
+        if let Some(mut process) = self.processes.get_mut(&id) {
+            process.metadata.last_playtime_update = Some(checkpoint);
+        }
+        let _ = self.persist_running_processes();
+    }
+
     pub fn recover_persisted_processes(&self) -> crate::Result<()> {
         let Ok(contents) = std::fs::read_to_string(&self.state_file) else {
             return Ok(());
@@ -276,20 +287,31 @@ impl ProcessManager {
         let persisted: Vec<ProcessMetadata> =
             serde_json::from_str(&contents).unwrap_or_default();
 
-        for metadata in persisted {
+        for mut metadata in persisted {
             if metadata.recovered || Self::is_pid_running(metadata.pid) {
+                metadata.recovered = true;
+                metadata.last_playtime_update =
+                    Some(metadata.playtime_checkpoint());
+                let uuid = metadata.uuid;
+                let profile_path = metadata.profile_path.clone();
+                let last_playtime_update = metadata.playtime_checkpoint();
+
                 self.processes.insert(
-                    metadata.uuid,
+                    uuid,
                     Process {
-                        metadata: ProcessMetadata {
-                            recovered: true,
-                            ..metadata
-                        },
+                        metadata,
                         child: None,
                         _main_class_keep_alive: None,
                         rpc_server: None,
                     },
                 );
+
+                tokio::spawn(Process::sequential_process_manager(
+                    profile_path,
+                    None,
+                    uuid,
+                    last_playtime_update,
+                ));
             }
         }
 
@@ -355,6 +377,14 @@ pub struct ProcessMetadata {
     pub pid: u32,
     #[serde(default)]
     pub recovered: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub last_playtime_update: Option<DateTime<Utc>>,
+}
+
+impl ProcessMetadata {
+    fn playtime_checkpoint(&self) -> DateTime<Utc> {
+        self.last_playtime_update.unwrap_or(self.start_time)
+    }
 }
 
 #[derive(Debug)]
@@ -1001,16 +1031,29 @@ impl Process {
         profile_path: String,
         post_exit_command: Option<String>,
         uuid: Uuid,
+        initial_last_updated_playtime: DateTime<Utc>,
     ) -> crate::Result<()> {
         async fn update_playtime(
             last_updated_playtime: &mut DateTime<Utc>,
             profile_path: &str,
+            uuid: Uuid,
             force_update: bool,
         ) {
-            let diff = Utc::now()
+            let now = Utc::now();
+            let diff = now
                 .signed_duration_since(*last_updated_playtime)
                 .num_seconds();
             if diff >= 60 || force_update {
+                if diff <= 0 {
+                    *last_updated_playtime = now;
+                    if let Ok(state) = crate::State::get().await {
+                        state
+                            .process_manager
+                            .update_playtime_checkpoint(uuid, now);
+                    }
+                    return;
+                }
+
                 if let Err(e) = profile::edit(profile_path, |prof| {
                     prof.recent_time_played += diff as u64;
                     async { Ok(()) }
@@ -1022,14 +1065,18 @@ impl Process {
                         &profile_path,
                         e
                     );
+                    return;
                 }
-                *last_updated_playtime = Utc::now();
+                *last_updated_playtime = now;
+                if let Ok(state) = crate::State::get().await {
+                    state.process_manager.update_playtime_checkpoint(uuid, now);
+                }
             }
         }
 
         // Wait on current Minecraft Child
         let mc_exit_status;
-        let mut last_updated_playtime = Utc::now();
+        let mut last_updated_playtime = initial_last_updated_playtime;
 
         let state = crate::State::get().await?;
         loop {
@@ -1047,8 +1094,13 @@ impl Process {
             tokio::time::sleep(tokio::time::Duration::from_millis(50)).await;
 
             // Auto-update playtime every minute
-            update_playtime(&mut last_updated_playtime, &profile_path, false)
-                .await;
+            update_playtime(
+                &mut last_updated_playtime,
+                &profile_path,
+                uuid,
+                false,
+            )
+            .await;
         }
 
         state.process_manager.remove(uuid);
@@ -1061,7 +1113,8 @@ impl Process {
         .await?;
 
         // Now fully complete- update playtime one last time
-        update_playtime(&mut last_updated_playtime, &profile_path, true).await;
+        update_playtime(&mut last_updated_playtime, &profile_path, uuid, true)
+            .await;
 
         // Publish play time update
         // Allow failure, it will be stored locally and sent next time

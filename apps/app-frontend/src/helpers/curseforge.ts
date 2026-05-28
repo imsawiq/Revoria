@@ -109,6 +109,8 @@ async function cfFetch<T>(
 
 export function getCurseForgeClassId(projectType: string): number | null {
 	switch (projectType) {
+		case 'modpack':
+			return 4471
 		case 'mod':
 			return 6
 		case 'resourcepack':
@@ -122,9 +124,21 @@ export function getCurseForgeClassId(projectType: string): number | null {
 	}
 }
 
-function getCurseForgeSort(
-	sortType: string | undefined | null,
-): { sortField: number; sortOrder: 'asc' | 'desc' } {
+export async function installCurseForgeProject(params: {
+	profilePath: string
+	projectId: number
+	projectType?: string | null
+	projectName?: string | null
+	iconUrl?: string | null
+	useProfileHints?: boolean | null
+}) {
+	return await invoke('plugin:import|install_curseforge_project', params)
+}
+
+function getCurseForgeSort(sortType: string | undefined | null): {
+	sortField: number
+	sortOrder: 'asc' | 'desc'
+} {
 	// CurseForge API ModsSearchSortField:
 	// 1=Featured, 2=Popularity, 3=LastUpdated, 4=Name, 5=Author,
 	// 6=TotalDownloads, 7=Category, 8=GameVersion, 11=ReleasedDate
@@ -154,7 +168,7 @@ export async function searchCurseForgeMods(params: {
 	pageSize: number
 	sortType?: string
 	gameVersion?: string
-	modLoaderTypes?: number[]
+	modLoaderTypes?: string[]
 	categoryIds?: number[]
 }) {
 	const classId = getCurseForgeClassId(params.projectType)
@@ -171,7 +185,7 @@ export async function searchCurseForgeMods(params: {
 	}
 
 	const sort = getCurseForgeSort(params.sortType)
-	const loaderTypes = params.modLoaderTypes?.filter((v) => Number.isFinite(v)) ?? []
+	const loaderTypes = params.modLoaderTypes?.filter(Boolean) ?? []
 	const categoryIds = params.categoryIds?.filter((v) => Number.isFinite(v)) ?? []
 	const res = await cfFetch<CurseForgeSearchResponse>('/mods/search', {
 		gameId: 432,
@@ -180,9 +194,8 @@ export async function searchCurseForgeMods(params: {
 		sortField: sort.sortField,
 		sortOrder: sort.sortOrder,
 		gameVersion: params.gameVersion,
-		modLoaderTypes:
-			loaderTypes.length > 0 ? `[${loaderTypes.join(',')}]` : undefined,
-		categoryIds: categoryIds.length > 0 ? `[${categoryIds.join(',')}]` : undefined,
+		modLoaderTypes: loaderTypes.length > 0 ? JSON.stringify(loaderTypes) : undefined,
+		categoryIds: categoryIds.length > 0 ? JSON.stringify(categoryIds.map(String)) : undefined,
 		index: params.index,
 		pageSize: params.pageSize,
 	})
@@ -260,10 +273,7 @@ export function formatCurseForgeFileSize(bytes: number): string {
 	return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
 }
 
-export function getCurseForgeProjectUrl(
-	projectType?: string | null,
-	slug?: string | null,
-): string {
+export function getCurseForgeProjectUrl(projectType?: string | null, slug?: string | null): string {
 	switch (projectType) {
 		case 'modpack':
 			return `https://www.curseforge.com/minecraft/modpacks${slug ? `/${slug}` : ''}`

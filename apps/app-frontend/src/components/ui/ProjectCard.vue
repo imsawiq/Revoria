@@ -51,7 +51,7 @@ const accentGlow = computed(() => {
 
 <template>
 	<article
-		class="home-project-card group relative overflow-hidden rounded-[1.35rem] cursor-pointer"
+		class="home-project-card group relative overflow-hidden cursor-pointer"
 		@click="router.push(`/project/${project.slug}`)"
 	>
 		<div class="home-project-card__media">
@@ -109,9 +109,10 @@ const accentGlow = computed(() => {
 .home-project-card {
 	display: flex;
 	flex-direction: column;
+	border-radius: 0.9rem;
 	border: 1px solid color-mix(in srgb, var(--glass-border) 84%, transparent);
-	background: color-mix(in srgb, var(--color-glass-bg-strong) 92%, transparent);
-	box-shadow: var(--shadow-card);
+	background: color-mix(in srgb, var(--color-glass-bg-strong) 86%, transparent);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 	transition:
 		transform 180ms ease,
 		border-color 180ms ease,
@@ -120,15 +121,15 @@ const accentGlow = computed(() => {
 }
 
 .home-project-card:hover {
-	transform: translateY(-2px);
-	border-color: color-mix(in srgb, var(--color-brand) 24%, var(--glass-border));
-	box-shadow: var(--shadow-floating);
-	background: color-mix(in srgb, var(--color-glass-bg-strong) 96%, var(--color-brand) 3%);
+	transform: translateY(-1px);
+	border-color: color-mix(in srgb, var(--color-brand) 18%, var(--glass-border));
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
+	background: color-mix(in srgb, var(--color-glass-bg-strong) 94%, var(--color-brand) 2%);
 }
 
 .home-project-card__media {
 	position: relative;
-	aspect-ratio: 2.1 / 1;
+	aspect-ratio: 2.45 / 1;
 	overflow: hidden;
 	border-bottom: 1px solid color-mix(in srgb, var(--glass-border) 72%, transparent);
 }
@@ -159,55 +160,55 @@ const accentGlow = computed(() => {
 	display: flex;
 	flex-direction: column;
 	flex: 1 1 auto;
-	gap: 0.9rem;
-	padding: 1rem;
+	gap: 0.75rem;
+	padding: 0.85rem;
 }
 
 .home-project-card__header {
 	display: grid;
 	grid-template-columns: auto 1fr;
-	gap: 0.85rem;
+	gap: 0.75rem;
 	align-items: center;
-	min-height: 4.75rem;
+	min-height: 4.35rem;
 }
 
 .home-project-card__avatar {
-	border-radius: 1rem;
+	border-radius: 0.75rem;
 	border: 1px solid color-mix(in srgb, var(--glass-border) 78%, transparent);
-	box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+	box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
 	background: color-mix(in srgb, var(--color-raised-bg) 88%, transparent);
 }
 
 .home-project-card__meta {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.5rem;
+	gap: 0.4rem;
 	margin-top: auto;
 }
 
 .home-project-card__metric {
 	display: inline-flex;
 	align-items: center;
-	gap: 0.4rem;
-	min-height: 2rem;
-	padding: 0.35rem 0.7rem;
+	gap: 0.35rem;
+	min-height: 1.75rem;
+	padding: 0.28rem 0.6rem;
 	border-radius: 999px;
 	border: 1px solid color-mix(in srgb, var(--glass-border) 82%, transparent);
 	background: color-mix(in srgb, var(--color-glass-bg) 92%, transparent);
 	color: var(--color-secondary);
-	font-size: 0.85rem;
+	font-size: 0.8rem;
 	font-weight: 700;
 }
 
 .home-project-card__metric--tag {
-	padding: 0.35rem 0.7rem;
+	padding: 0.28rem 0.6rem;
 }
 
 .home-project-card__tag-label {
 	display: inline-flex;
 	align-items: center;
 	color: var(--color-secondary);
-	font-size: 0.85rem;
+	font-size: 0.8rem;
 	font-weight: 700;
 	line-height: 1;
 }

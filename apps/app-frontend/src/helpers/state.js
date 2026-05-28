@@ -16,6 +16,10 @@ export async function progress_bars_list() {
 	return await invoke('plugin:utils|progress_bars_list')
 }
 
+export async function cancel_progress_bar(loaderUuid) {
+	return await invoke('plugin:utils|cancel_progress_bar', { loaderUuid })
+}
+
 // Get opening command
 // For example, if a user clicks on an .mrpack to open the app.
 // This should be called once and only when the app is done booting up and ready to receive a command

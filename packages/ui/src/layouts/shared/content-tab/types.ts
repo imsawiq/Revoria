@@ -6,7 +6,9 @@ import type { Option as OverflowMenuOption } from '#ui/components/base/OverflowM
 export type ContentCardProject = Pick<
 	Labrinth.Projects.v2.Project,
 	'id' | 'slug' | 'title' | 'icon_url'
->
+> & {
+	description?: string | null
+}
 
 export type ContentCardVersion = Pick<Labrinth.Versions.v2.Version, 'id' | 'version_number'> & {
 	file_name: string
@@ -40,10 +42,8 @@ export type ContentCardTableSortColumn = 'project' | 'version'
 export type ContentCardTableSortDirection = 'asc' | 'desc'
 
 /** Content item returned from the app backend API - maps to ContentCardTableItem for display */
-export interface ContentItem extends Omit<
-	ContentCardTableItem,
-	'id' | 'projectLink' | 'disabled' | 'overflowOptions'
-> {
+export interface ContentItem
+	extends Omit<ContentCardTableItem, 'id' | 'projectLink' | 'disabled' | 'overflowOptions'> {
 	file_name: string
 	file_path?: string
 	hash?: string

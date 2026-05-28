@@ -67,6 +67,8 @@ fn apply_platform(
     push(&mut bwrap_args, "--die-with-parent");
     push(&mut bwrap_args, "--unshare-all");
     push(&mut bwrap_args, "--share-net");
+    push(&mut bwrap_args, "--new-session");
+    push_pair(&mut bwrap_args, "--cap-drop", "ALL");
     push_pair(&mut bwrap_args, "--proc", "/proc");
     push_pair(&mut bwrap_args, "--dev", "/dev");
     push_pair(&mut bwrap_args, "--tmpfs", "/tmp");
@@ -131,21 +133,9 @@ fn apply_platform(
 
     let mut wrapped = Command::new("bwrap");
     wrapped.args(bwrap_args);
-    wrapped.env_clear();
-    for (key, value) in std::env::vars_os() {
-        if should_pass_env(&key) {
-            wrapped.env(key, value);
-        }
-    }
+    apply_sandbox_environment(&mut wrapped, envs);
     if let Some(current_dir) = current_dir {
         wrapped.current_dir(current_dir);
-    }
-    for (key, value) in envs {
-        if let Some(value) = value {
-            wrapped.env(key, value);
-        } else {
-            wrapped.env_remove(key);
-        }
     }
 
     *command = wrapped;
@@ -163,7 +153,14 @@ fn apply_platform(
     config: SandboxConfig,
 ) -> crate::Result<()> {
     use std::ffi::CString;
+    use std::ffi::OsStr;
     use std::os::unix::process::CommandExt;
+
+    let envs = command
+        .as_std()
+        .get_envs()
+        .map(|(k, v)| (k.to_os_string(), v.map(OsStr::to_os_string)))
+        .collect::<Vec<_>>();
 
     let mut profile = String::from(MACOS_BASE_PROFILE);
     profile.push_str(MACOS_NETWORK);
@@ -180,15 +177,24 @@ fn apply_platform(
     }
 
     let temp = config.sandbox_dir.join("tmp");
+    let home = config.sandbox_dir.join("home");
     std::fs::create_dir_all(&temp).map_err(crate::util::io::IOError::from)?;
+    std::fs::create_dir_all(&home).map_err(crate::util::io::IOError::from)?;
     allow_macos_path(
         &mut profile,
         "file-write* file-read* file-map-executable process-exec",
         &temp,
     );
+    allow_macos_path(
+        &mut profile,
+        "file-write* file-read* file-map-executable process-exec",
+        &home,
+    );
     profile.push_str(MACOS_PROTECT);
 
+    apply_sandbox_environment(command, envs);
     command.env("TMPDIR", &temp);
+    command.env("HOME", &home);
 
     let c_profile = CString::new(profile).map_err(|_| {
         crate::ErrorKind::LauncherError(
@@ -272,15 +278,44 @@ fn apply_platform(
     std::fs::create_dir_all(&config.sandbox_dir)
         .map_err(crate::util::io::IOError::from)?;
     let temp_dir = config.sandbox_dir.join("temp");
+    let home_dir = config.sandbox_dir.join("home");
+    let appdata_dir = config.sandbox_dir.join("appdata");
+    let local_appdata_dir = config.sandbox_dir.join("local-appdata");
     std::fs::create_dir_all(&temp_dir)
         .map_err(crate::util::io::IOError::from)?;
+    std::fs::create_dir_all(&home_dir)
+        .map_err(crate::util::io::IOError::from)?;
+    std::fs::create_dir_all(&appdata_dir)
+        .map_err(crate::util::io::IOError::from)?;
+    std::fs::create_dir_all(&local_appdata_dir)
+        .map_err(crate::util::io::IOError::from)?;
     let temp_dir = temp_dir.to_string_lossy().to_string();
+    let home_dir = home_dir.to_string_lossy().to_string();
+    let appdata_dir = appdata_dir.to_string_lossy().to_string();
+    let local_appdata_dir = local_appdata_dir.to_string_lossy().to_string();
     envs.retain(|(key, _)| {
-        !matches!(key.to_ascii_uppercase().as_str(), "TEMP" | "TMP" | "TMPDIR")
+        !matches!(
+            key.to_ascii_uppercase().as_str(),
+            "APPDATA"
+                | "HOME"
+                | "HOMEDRIVE"
+                | "HOMEPATH"
+                | "LOCALAPPDATA"
+                | "TEMP"
+                | "TMP"
+                | "TMPDIR"
+                | "USERPROFILE"
+        )
     });
     envs.push(("TEMP".to_string(), Some(temp_dir.clone())));
     envs.push(("TMP".to_string(), Some(temp_dir.clone())));
     envs.push(("TMPDIR".to_string(), Some(temp_dir)));
+    envs.push(("APPDATA".to_string(), Some(appdata_dir)));
+    envs.push(("LOCALAPPDATA".to_string(), Some(local_appdata_dir)));
+    envs.push(("USERPROFILE".to_string(), Some(home_dir.clone())));
+    envs.push(("HOME".to_string(), Some(home_dir.clone())));
+    envs.push(("HOMEDRIVE".to_string(), Some(String::new())));
+    envs.push(("HOMEPATH".to_string(), Some(home_dir)));
 
     let spec_path = config.sandbox_dir.join("windows-sandbox-launch.json");
     let mut allow_write = config.allow_write;
@@ -315,15 +350,14 @@ fn apply_platform(
     let mut wrapped = Command::new(current_exe);
     wrapped.arg("--theseus-sandbox-launch");
     wrapped.arg(&spec_path);
+    apply_sandbox_environment(
+        &mut wrapped,
+        original.get_envs().map(|(key, value)| {
+            (key.to_os_string(), value.map(|value| value.to_os_string()))
+        }),
+    );
     if let Some(current_dir) = original.get_current_dir() {
         wrapped.current_dir(current_dir);
-    }
-    for (key, value) in original.get_envs() {
-        if let Some(value) = value {
-            wrapped.env(key, value);
-        } else {
-            wrapped.env_remove(key);
-        }
     }
     if original.get_args().next()
         == Some(OsStr::new("--theseus-sandbox-launch"))
@@ -475,9 +509,7 @@ mod windows_appcontainer {
         FreeSid, GetAce, InitializeSecurityDescriptor, NO_INHERITANCE,
         OBJECT_INHERIT_ACE, PSECURITY_DESCRIPTOR, PSID, SECURITY_CAPABILITIES,
         SID_AND_ATTRIBUTES, SetFileSecurityW, SetSecurityDescriptorDacl,
-        WELL_KNOWN_SID_TYPE, WinCapabilityInternetClientServerSid,
-        WinCapabilityInternetClientSid,
-        WinCapabilityPrivateNetworkClientServerSid,
+        WELL_KNOWN_SID_TYPE, WinCapabilityInternetClientSid,
     };
     use windows::Win32::Storage::FileSystem::{
         FILE_ALL_ACCESS, FILE_GENERIC_EXECUTE, FILE_GENERIC_READ, FILE_TRAVERSE,
@@ -603,11 +635,8 @@ mod windows_appcontainer {
             &mut attr_size,
         )?;
 
-        let mut capabilities = [
-            owned_capability(WinCapabilityInternetClientSid)?,
-            owned_capability(WinCapabilityInternetClientServerSid)?,
-            owned_capability(WinCapabilityPrivateNetworkClientServerSid)?,
-        ];
+        let mut capabilities =
+            [owned_capability(WinCapabilityInternetClientSid)?];
         let mut sid_attrs = capabilities
             .iter_mut()
             .map(|cap| SID_AND_ATTRIBUTES {
@@ -724,11 +753,8 @@ mod windows_appcontainer {
             &mut attr_size,
         )?;
 
-        let mut capabilities = [
-            owned_capability(WinCapabilityInternetClientSid)?,
-            owned_capability(WinCapabilityInternetClientServerSid)?,
-            owned_capability(WinCapabilityPrivateNetworkClientServerSid)?,
-        ];
+        let mut capabilities =
+            [owned_capability(WinCapabilityInternetClientSid)?];
         let mut sid_attrs = capabilities
             .iter_mut()
             .map(|cap| SID_AND_ATTRIBUTES {
@@ -1280,7 +1306,9 @@ mod windows_appcontainer {
     }
 
     fn build_env_block(envs: &[(String, Option<String>)]) -> Vec<u16> {
-        let mut map = std::env::vars_os().collect::<BTreeMap<_, _>>();
+        let mut map = std::env::vars_os()
+            .filter(|(key, _)| super::should_pass_env(key))
+            .collect::<BTreeMap<_, _>>();
         for (key, value) in envs {
             if let Some(value) = value {
                 map.insert(OsString::from(key), OsString::from(value));
@@ -1373,11 +1401,6 @@ const DEVICE_BINDS: &[&str] = &[
     "/dev/umplock",
     "/dev/kgsl-3d0",
     "/dev/ion",
-    "/dev/disk/by-uuid",
-    "/dev/dm",
-    "/dev/loop",
-    "/dev/mapper",
-    "/dev/ram",
     "/dev/ntsync",
     "/dev/snd",
 ];
@@ -1548,24 +1571,71 @@ fn is_command_available(command: &str) -> bool {
     })
 }
 
-#[cfg(target_os = "linux")]
+#[cfg(any(target_os = "linux", target_os = "macos", target_os = "windows"))]
+fn apply_sandbox_environment<I>(command: &mut Command, explicit_envs: I)
+where
+    I: IntoIterator<Item = (std::ffi::OsString, Option<std::ffi::OsString>)>,
+{
+    command.env_clear();
+    for (key, value) in std::env::vars_os() {
+        if should_pass_env(&key) {
+            command.env(key, value);
+        }
+    }
+    for (key, value) in explicit_envs {
+        if let Some(value) = value {
+            command.env(key, value);
+        } else {
+            command.env_remove(key);
+        }
+    }
+}
+
+#[cfg(any(target_os = "linux", target_os = "macos", target_os = "windows"))]
 fn should_pass_env(key: &std::ffi::OsStr) -> bool {
-    key.as_encoded_bytes().starts_with(b"XDG_")
-        || [
-            "GDMSESSION",
-            "DESKTOP_SESSION",
-            "PATH",
-            "LANG",
-            "LC_ALL",
-            "TERM",
-            "USER",
-            "USERNAME",
-            "DISPLAY",
-            "WAYLAND_DISPLAY",
-            "PULSE_SERVER",
-        ]
-        .iter()
-        .any(|allowed| key == std::ffi::OsStr::new(allowed))
+    let key = key.to_string_lossy();
+    key.starts_with("XDG_")
+        || matches!(
+            key.as_ref(),
+            "COMSPEC"
+                | "ComSpec"
+                | "CommonProgramFiles"
+                | "CommonProgramFiles(x86)"
+                | "CommonProgramW6432"
+                | "DESKTOP_SESSION"
+                | "DISPLAY"
+                | "DriverData"
+                | "GDMSESSION"
+                | "LANG"
+                | "LC_ALL"
+                | "NUMBER_OF_PROCESSORS"
+                | "PATH"
+                | "Path"
+                | "PATHEXT"
+                | "PROCESSOR_ARCHITECTURE"
+                | "PROCESSOR_IDENTIFIER"
+                | "PROCESSOR_LEVEL"
+                | "PROCESSOR_REVISION"
+                | "ProgramData"
+                | "ProgramFiles"
+                | "ProgramFiles(x86)"
+                | "ProgramW6432"
+                | "PULSE_SERVER"
+                | "PUBLIC"
+                | "SESSIONNAME"
+                | "SystemDrive"
+                | "SYSTEMROOT"
+                | "SystemRoot"
+                | "TEMP"
+                | "TERM"
+                | "TMP"
+                | "TMPDIR"
+                | "USER"
+                | "USERNAME"
+                | "WAYLAND_DISPLAY"
+                | "WINDIR"
+                | "windir"
+        )
 }
 
 #[cfg(target_os = "macos")]

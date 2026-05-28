@@ -162,17 +162,15 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-	<div class="home-page p-6 flex flex-col gap-5">
-		<div
-			class="hero-section relative overflow-hidden rounded-2xl border border-[--glass-border] p-6"
-		>
+	<div class="home-page flex flex-col gap-5">
+		<div class="hero-section relative overflow-hidden rounded-2xl border border-[--glass-border]">
 			<div class="relative z-10 flex flex-col gap-3">
 				<div class="flex items-end justify-between gap-4">
 					<div>
 						<p class="m-0 text-sm font-medium text-secondary uppercase tracking-wider">
 							{{ greeting }}
 						</p>
-						<h1 class="m-0 mt-1 text-3xl font-extrabold text-contrast leading-tight">
+						<h1 class="m-0 mt-1 text-[1.75rem] font-extrabold text-contrast leading-tight">
 							<template v-if="recentInstances?.length > 0">{{
 								formatMessage(messages.welcomeBack)
 							}}</template>
@@ -189,7 +187,7 @@ onBeforeUnmount(() => {
 						</div>
 					</div>
 				</div>
-				<div class="flex gap-2 mt-1">
+				<div class="flex flex-wrap gap-2 mt-1">
 					<ButtonStyled color="brand">
 						<button data-april-fools-dodge @click="router.push('/browse/modpack')">
 							<CompassIcon class="w-4 h-4" />
@@ -231,26 +229,45 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
-.discover-shell {
-	padding: 0;
-	border: 0;
-	border-radius: 0;
-	background: transparent;
-	box-shadow: none;
+.home-page {
+	padding: 1.35rem 1.45rem 1.75rem;
 }
 
 .hero-section {
-	background: linear-gradient(135deg, var(--color-brand-highlight) 0%, rgba(0, 0, 0, 0) 72%);
+	padding: 1.45rem 1.55rem;
+	background:
+		linear-gradient(
+			135deg,
+			color-mix(in srgb, var(--color-brand-highlight) 82%, transparent) 0%,
+			transparent 68%
+		),
+		color-mix(in srgb, var(--color-raised-bg) 26%, transparent);
+	box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-contrast) 5%, transparent);
 }
 
 .hero-glow {
 	position: absolute;
-	top: -40%;
-	right: -10%;
-	width: 300px;
-	height: 300px;
-	background: radial-gradient(circle, var(--color-brand-shadow) 0%, transparent 70%);
+	top: -58%;
+	right: -7%;
+	width: 340px;
+	height: 250px;
+	background: radial-gradient(
+		circle,
+		color-mix(in srgb, var(--color-brand-shadow) 72%, transparent) 0%,
+		transparent 70%
+	);
+	opacity: 0.72;
 	pointer-events: none;
 	z-index: 0;
+}
+
+@media (max-width: 720px) {
+	.home-page {
+		padding: 1rem;
+	}
+
+	.hero-section {
+		padding: 1.2rem;
+	}
 }
 </style>

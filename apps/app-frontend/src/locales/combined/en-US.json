@@ -3149,6 +3149,30 @@
 	"browse.install.title": {
 		"message": "Install project to instance"
 	},
+	"loading.message.downloading-modpack": {
+		"message": "Downloading modpack"
+	},
+	"loading.message.canceling-download": {
+		"message": "Canceling download"
+	},
+	"running-app-bar.cancel-download": {
+		"message": "Cancel download"
+	},
+	"notification.error.unmanaged-profile": {
+		"message": "Profile {profile} is not managed by the app."
+	},
+	"notification.error.download-canceled": {
+		"message": "Download canceled."
+	},
+	"install-modal.hide-new-instance": {
+		"message": "Hide new instance"
+	},
+	"install-modal.no-compatible-version": {
+		"message": "No compatible version found"
+	},
+	"install-modal.locked-instance-tooltip": {
+		"message": "Unpair or unlock an instance to add mods."
+	},
 	"hosting.content.failed-to-load-versions": {
 		"defaultMessage": "Failed to load versions"
 	},

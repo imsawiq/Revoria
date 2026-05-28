@@ -3152,6 +3152,30 @@
 	"browse.install.title": {
 		"message": "Встановити проект в екземпляр"
 	},
+	"loading.message.downloading-modpack": {
+		"message": "Завантаження збірки"
+	},
+	"loading.message.canceling-download": {
+		"message": "Скасування завантаження"
+	},
+	"running-app-bar.cancel-download": {
+		"message": "Скасувати завантаження"
+	},
+	"notification.error.unmanaged-profile": {
+		"message": "Збірка {profile} не керується застосунком."
+	},
+	"notification.error.download-canceled": {
+		"message": "Завантаження скасовано."
+	},
+	"install-modal.hide-new-instance": {
+		"message": "Приховати нову збірку"
+	},
+	"install-modal.no-compatible-version": {
+		"message": "Сумісну версію не знайдено"
+	},
+	"install-modal.locked-instance-tooltip": {
+		"message": "Відв'яжіть або розблокуйте збірку, щоб додавати моди."
+	},
 	"hosting.content.failed-to-load-versions": {
 		"defaultMessage": "Не вдалося завантажити версії"
 	},

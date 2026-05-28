@@ -335,6 +335,7 @@ pub struct Version {
 
     pub name: String,
     pub version_number: String,
+    #[serde(default)]
     pub changelog: String,
     pub changelog_url: Option<String>,
 

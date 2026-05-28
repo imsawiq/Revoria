@@ -250,11 +250,13 @@ const startWorldSession = (profilePath: string, world: WorldWithProfile) => {
 onMounted(async () => {
 	gameVersions.value = await get_game_versions().catch(() => [])
 
-	await populateJumpBackIn().catch(() => {
-		console.error('Failed to populate jump back in')
-	}).finally(() => {
-		loading.value = false
-	})
+	await populateJumpBackIn()
+		.catch(() => {
+			console.error('Failed to populate jump back in')
+		})
+		.finally(() => {
+			loading.value = false
+		})
 
 	checkProcesses()
 
@@ -263,9 +265,10 @@ onMounted(async () => {
 	}).catch(() => null)
 
 	unlistenProfiles = await profile_listener(async () => {
-		if (mounted) await populateJumpBackIn().catch(() => {
-			console.error('Failed to populate jump back in')
-		})
+		if (mounted)
+			await populateJumpBackIn().catch(() => {
+				console.error('Failed to populate jump back in')
+			})
 	}).catch(() => null)
 })
 
@@ -288,7 +291,7 @@ onBeforeUnmount(() => {
 			<LoaderCircleIcon class="mx-auto size-8 animate-spin text-contrast" />
 		</div>
 	</div>
-	<div v-else-if="jumpBackInItems.length > 0" class="flex flex-col gap-2">
+	<div v-else-if="jumpBackInItems.length > 0" class="recent-worlds-list flex flex-col gap-2">
 		<template v-if="!props.hideHeading">
 			<HeadingLink v-if="theme.getFeatureFlag('worlds_tab')" to="/worlds" class="mt-1">
 				{{ formatMessage(messages.jumpBackIn) }}
@@ -364,8 +367,18 @@ onBeforeUnmount(() => {
 	</div>
 </template>
 <style scoped lang="scss">
+.recent-worlds-list {
+	margin-top: 0.1rem;
+}
+
+.recent-worlds-list :deep(.heading-link),
+.recent-worlds-list :deep(a) {
+	margin-bottom: 0.35rem;
+}
+
 .grid-when-huge {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(670px, 1fr));
+	gap: 0.45rem 0.75rem;
 }
 </style>

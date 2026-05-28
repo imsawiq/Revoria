@@ -45,7 +45,11 @@ const languageOptions = computed(() => [
 	{ value: 'en', label: formatMessage(messages.languageEnglish), nativeLabel: 'English' },
 	{ value: 'ru', label: formatMessage(messages.languageRussian), nativeLabel: 'Русский' },
 	{ value: 'uk', label: formatMessage(messages.languageUkrainian), nativeLabel: 'Українська' },
-	{ value: 'de', label: formatMessage(messages.languageGermanGermany), nativeLabel: 'Deutsch (DE)' },
+	{
+		value: 'de',
+		label: formatMessage(messages.languageGermanGermany),
+		nativeLabel: 'Deutsch (DE)',
+	},
 	{ value: 'ro', label: formatMessage(messages.languageRomanian), nativeLabel: 'Română' },
 ])
 
@@ -83,75 +87,87 @@ function selectLanguage(value: string) {
 .languages-list {
 	display: flex;
 	flex-direction: column;
-	gap: 0.75rem;
+	gap: 0.45rem;
+	margin-top: 0.35rem;
 }
 
 .language-item {
+	position: relative;
 	display: flex;
 	width: 100%;
 	align-items: center;
-	gap: 0.75rem;
+	gap: 0.72rem;
 	text-align: left;
-	padding: 1rem 1.125rem;
-	border: 1px solid var(--glass-border);
-	border-radius: var(--radius-xl);
-	background: linear-gradient(
-		180deg,
-		color-mix(in oklch, var(--color-glass-bg-strong) 88%, transparent),
-		color-mix(in oklch, var(--color-glass-bg) 94%, transparent)
-	);
-	box-shadow: var(--shadow-card);
+	min-height: 3.55rem;
+	padding: 0.72rem 0.85rem;
+	border: 1px solid color-mix(in srgb, var(--glass-border) 64%, transparent);
+	border-radius: 0.78rem;
+	background: color-mix(in srgb, var(--color-button-bg) 34%, transparent);
+	box-shadow: none;
+	color: var(--color-base);
 	cursor: pointer;
 	transition:
-		border-color 200ms ease,
-		background 200ms ease,
-		box-shadow 200ms ease,
-		color 200ms ease,
-		transform 200ms ease;
+		transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		background 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		color 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .language-item:hover {
-	border-color: color-mix(in oklch, var(--color-brand) 45%, var(--glass-border));
 	transform: translateY(-1px);
+	border-color: color-mix(in srgb, var(--color-brand) 16%, var(--glass-border) 84%);
+	background: color-mix(in srgb, var(--color-button-bg-hover) 38%, transparent);
+	color: var(--color-contrast);
 }
 
 .language-item.active {
-	border-color: color-mix(in oklch, var(--color-brand) 70%, var(--glass-border));
-	background: linear-gradient(
-		180deg,
-		color-mix(in oklch, var(--color-brand-highlight) 22%, var(--color-glass-bg-strong)),
-		color-mix(in oklch, var(--color-brand-highlight) 16%, var(--color-glass-bg))
-	);
-	box-shadow:
-		var(--shadow-card),
-		0 0 0 1px color-mix(in oklch, var(--color-brand) 35%, transparent);
+	border-color: color-mix(in srgb, var(--color-brand) 30%, var(--glass-border) 70%);
+	background: color-mix(in srgb, var(--color-button-bg-selected) 24%, var(--color-button-bg) 76%);
+	color: var(--color-contrast);
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-brand) 12%, transparent);
 }
 
 .radio {
-	width: 1.1rem;
-	height: 1.1rem;
+	width: 1rem;
+	height: 1rem;
 	flex-shrink: 0;
-	transition: transform 200ms ease, opacity 200ms ease;
+	color: var(--color-secondary);
+	transition:
+		transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.language-item.active .radio {
+	color: var(--color-brand);
+	transform: scale(1.04);
 }
 
 .language-names {
 	display: flex;
 	flex-direction: column;
-	gap: 0.1rem;
+	gap: 0.08rem;
+	min-width: 0;
 }
 
 .language-name {
-	font-weight: 700;
+	overflow: hidden;
 	color: var(--color-contrast);
+	font-weight: 700;
+	line-height: 1.2;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .language-native {
-	font-size: 0.85rem;
 	color: var(--color-secondary);
+	font-size: 0.8rem;
+	line-height: 1.2;
 }
 
 .languages-note {
+	margin: 0.75rem 0 0;
 	color: var(--color-secondary);
-	font-size: 0.85rem;
+	font-size: 0.82rem;
+	line-height: 1.35;
 }
 </style>

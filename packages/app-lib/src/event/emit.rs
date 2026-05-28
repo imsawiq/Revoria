@@ -8,6 +8,7 @@ use crate::event::{
     LoadingPayload, ProcessPayload, ProfilePayload, WarningPayload,
 };
 use futures::prelude::*;
+use std::sync::Arc;
 #[cfg(feature = "tauri")]
 use tauri::{Emitter, Manager};
 use uuid::Uuid;
@@ -61,15 +62,16 @@ pub async fn init_loading_unsafe(
     title: &str,
 ) -> crate::Result<LoadingBarId> {
     let event_state = crate::EventState::get()?;
-    let key = LoadingBarId(Uuid::new_v4());
+    let key = LoadingBarId(Arc::new(Uuid::new_v4()));
 
     event_state.loading_bars.insert(
-        key.0,
+        *key.0,
         LoadingBar {
-            loading_bar_uuid: key.0,
+            loading_bar_uuid: *key.0,
             message: title.to_string(),
             total,
             current: 0.0,
+            cancelled: false,
             last_sent: 0.0,
             bar_type,
             #[cfg(feature = "cli")]
@@ -118,11 +120,12 @@ pub async fn edit_loading(
 ) -> crate::Result<()> {
     let event_state = crate::EventState::get()?;
 
-    if let Some(mut bar) = event_state.loading_bars.get_mut(&id.0) {
+    if let Some(mut bar) = event_state.loading_bars.get_mut(id.0.as_ref()) {
         bar.bar_type = bar_type;
         bar.total = total;
         bar.message = title.to_string();
         bar.current = 0.0;
+        bar.cancelled = false;
         bar.last_sent = 0.0;
         #[cfg(feature = "cli")]
         {
@@ -131,6 +134,51 @@ pub async fn edit_loading(
     };
 
     emit_loading(id, 0.0, None)?;
+    Ok(())
+}
+
+pub fn cancel_loading_bar(loader_uuid: Uuid) -> crate::Result<()> {
+    let event_state = crate::EventState::get()?;
+
+    let Some(mut loading_bar) = event_state.loading_bars.get_mut(&loader_uuid)
+    else {
+        return Ok(());
+    };
+
+    loading_bar.cancelled = true;
+    loading_bar.message = "Canceling download".to_string();
+
+    #[cfg(feature = "tauri")]
+    event_state
+        .app
+        .emit(
+            "loading",
+            LoadingPayload {
+                fraction: Some(loading_bar.current / loading_bar.total),
+                message: "Canceling download".to_string(),
+                event: loading_bar.bar_type.clone(),
+                loader_uuid,
+            },
+        )
+        .map_err(EventError::from)?;
+
+    Ok(())
+}
+
+pub fn check_loading_cancelled(key: &LoadingBarId) -> crate::Result<()> {
+    let event_state = crate::EventState::get()?;
+
+    if event_state
+        .loading_bars
+        .get(key.0.as_ref())
+        .is_some_and(|loading_bar| loading_bar.cancelled)
+    {
+        return Err(crate::ErrorKind::InputError(
+            "Download canceled".to_string(),
+        )
+        .into());
+    }
+
     Ok(())
 }
 
@@ -147,9 +195,18 @@ pub fn emit_loading(
 ) -> crate::Result<()> {
     let event_state = crate::EventState::get()?;
 
-    let Some(mut loading_bar) = event_state.loading_bars.get_mut(&key.0) else {
-        return Err(EventError::NoLoadingBar(key.0).into());
+    let Some(mut loading_bar) =
+        event_state.loading_bars.get_mut(key.0.as_ref())
+    else {
+        return Err(EventError::NoLoadingBar(*key.0).into());
     };
+
+    if loading_bar.cancelled {
+        return Err(crate::ErrorKind::InputError(
+            "Download canceled".to_string(),
+        )
+        .into());
+    }
 
     // Tick up loading bar
     loading_bar.current += increment_frac;
@@ -383,8 +440,12 @@ where
         .try_for_each_concurrent(limit, |item| {
             let f = f(item);
             async move {
+                if let Some(key) = key {
+                    check_loading_cancelled(key)?;
+                }
                 f.await?;
                 if let Some(key) = key {
+                    check_loading_cancelled(key)?;
                     emit_loading(key, total / (num_futs as f64), message)?;
                 }
                 Ok(())

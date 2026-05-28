@@ -6,10 +6,7 @@ import { useStorage } from '@vueuse/core'
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-import {
-	type AppSettingsTabId,
-	appSettingsTabs,
-} from '@/components/ui/settings/app-settings-tabs'
+import { type AppSettingsTabId, appSettingsTabs } from '@/components/ui/settings/app-settings-tabs'
 import { get as getSettings, set as setSettings } from '@/helpers/settings.ts'
 import { getThemeIconUrl } from '@/helpers/theme-icons'
 import { useBreadcrumbs } from '@/store/breadcrumbs'
@@ -108,11 +105,21 @@ function formatPlatform(platform: string) {
 <template>
 	<div class="settings-page">
 		<section class="settings-workspace settings-surface">
-			<header class="settings-tabs-wrap">
-				<button class="settings-tabs-wrap__logo button-animation" type="button" @click="devModeCount">
-					<img :src="settingsLogoUrl" alt="Revoria" class="settings-tabs-wrap__logo-image" />
-				</button>
-				<div class="settings-tabs" role="tablist">
+			<aside class="settings-sidebar">
+				<div class="settings-sidebar__brand">
+					<button
+						class="settings-sidebar__logo button-animation"
+						type="button"
+						@click="devModeCount"
+					>
+						<img :src="settingsLogoUrl" alt="Revoria" class="settings-sidebar__logo-image" />
+					</button>
+					<div class="settings-sidebar__brand-copy">
+						<h1>{{ formatMessage(messages.title) }}</h1>
+						<p>{{ formatMessage(messages.appVersion, { version }) }}</p>
+					</div>
+				</div>
+				<nav class="settings-tabs" role="tablist" :aria-label="formatMessage(messages.title)">
 					<button
 						v-for="tab in visibleTabs"
 						:key="tab.id"
@@ -124,10 +131,12 @@ function formatPlatform(platform: string) {
 						<component :is="tab.icon" class="settings-tab__icon" />
 						<span class="settings-tab__label">{{ formatMessage(tab.name) }}</span>
 					</button>
-				</div>
-			</header>
-
+				</nav>
+			</aside>
 			<div class="settings-stage">
+				<header class="settings-stage__header">
+					<h2>{{ activeTab ? formatMessage(activeTab.name) : formatMessage(messages.title) }}</h2>
+				</header>
 				<div class="settings-stage__content">
 					<Suspense>
 						<component :is="activeTab?.content" v-if="activeTab" />
@@ -152,6 +161,7 @@ function formatPlatform(platform: string) {
 .settings-page {
 	display: flex;
 	flex-direction: column;
+	min-height: 100%;
 	padding: 1rem 1.25rem 1.6rem;
 }
 
@@ -160,99 +170,160 @@ function formatPlatform(platform: string) {
 }
 
 .settings-workspace {
+	display: grid;
+	grid-template-columns: minmax(13rem, 16rem) minmax(0, 1fr);
+	min-width: 0;
+	gap: 1rem;
+	align-items: start;
+}
+
+.settings-sidebar {
+	position: sticky;
+	top: 1rem;
 	display: flex;
 	flex-direction: column;
+	gap: 0.85rem;
 	min-width: 0;
-	gap: 0.9rem;
+	max-height: calc(100vh - var(--top-bar-height) - 4rem);
+	padding: 0.85rem;
+	border: 1px solid color-mix(in srgb, var(--glass-border) 72%, transparent);
+	border-radius: 0.95rem;
+	background: color-mix(in srgb, var(--color-glass-bg-strong) 70%, transparent);
+	box-shadow:
+		inset 0 1px 0 color-mix(in srgb, white 4%, transparent),
+		0 10px 26px color-mix(in srgb, black 17%, transparent);
+	overflow: hidden;
 }
 
-.settings-tabs-wrap {
-	display: flex;
+.settings-sidebar__brand {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr);
+	gap: 0.7rem;
 	align-items: center;
-	gap: 1rem;
-	padding: 0.95rem 1rem 0.7rem;
-	border-radius: 1.35rem;
-	border: 1px solid color-mix(in srgb, var(--glass-border) 86%, transparent);
-	background: color-mix(in srgb, var(--color-glass-bg-strong) 96%, transparent);
-	box-shadow: var(--glass-shadow);
-	backdrop-filter: blur(calc(var(--glass-blur) * 0.84)) saturate(var(--glass-saturate));
-	-webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.84)) saturate(var(--glass-saturate));
+	padding: 0.25rem 0.25rem 0.75rem;
+	border-bottom: 1px solid color-mix(in srgb, var(--glass-border) 64%, transparent);
 }
 
-.settings-tabs-wrap__logo {
+.settings-sidebar__brand-copy {
+	min-width: 0;
+
+	h1,
+	p {
+		margin: 0;
+	}
+
+	h1 {
+		color: var(--color-contrast);
+		font-size: 1rem;
+		font-weight: 800;
+		line-height: 1.15;
+	}
+
+	p {
+		margin-top: 0.2rem;
+		color: var(--color-secondary);
+		font-size: 0.72rem;
+		line-height: 1.15;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}
+
+.settings-sidebar__logo {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: 3.35rem;
-	height: 3.35rem;
+	width: 2.65rem;
+	height: 2.65rem;
 	padding: 0;
-	border: 1px solid color-mix(in srgb, var(--glass-border) 85%, transparent);
-	border-radius: 1rem;
-	background: color-mix(in srgb, var(--color-button-bg) 92%, transparent);
-	box-shadow: var(--shadow-card);
+	border: 1px solid color-mix(in srgb, var(--glass-border) 78%, transparent);
+	border-radius: 0.75rem;
+	background: color-mix(in srgb, var(--color-button-bg) 58%, transparent);
+	box-shadow: none;
 	cursor: pointer;
 	transition:
-		transform 160ms ease,
-		border-color 160ms ease,
-		background 160ms ease,
-		box-shadow 160ms ease;
+		transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		background 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.settings-tabs-wrap__logo:hover {
+.settings-sidebar__logo:hover {
 	transform: translateY(-1px);
-	border-color: color-mix(in srgb, var(--color-brand) 24%, var(--glass-border));
-	background: color-mix(in srgb, var(--color-button-bg-hover) 92%, transparent);
-	box-shadow:
-		inset 0 0 0 1px color-mix(in srgb, var(--color-brand-highlight) 20%, transparent),
-		var(--shadow-card);
+	border-color: color-mix(in srgb, var(--color-brand) 22%, var(--glass-border));
+	background: color-mix(in srgb, var(--color-button-bg-hover) 62%, transparent);
 }
 
-.settings-tabs-wrap__logo-image {
-	width: 2rem;
-	height: 2rem;
-	border-radius: 0.7rem;
+.settings-sidebar__logo-image {
+	width: 1.75rem;
+	height: 1.75rem;
+	border-radius: 0.55rem;
 	object-fit: cover;
 }
 
 .settings-tabs {
 	display: flex;
-	flex: 1 1 auto;
-	gap: 0.45rem;
-	overflow-x: auto;
-	padding: 0.28rem 0.08rem 0.34rem;
-	margin: -0.28rem -0.08rem -0.12rem;
+	flex-direction: column;
+	gap: 0.18rem;
+	min-height: 0;
+	overflow-y: auto;
+	padding-right: 0.15rem;
 }
 
 .settings-tab {
-	display: inline-flex;
+	position: relative;
+	display: flex;
 	align-items: center;
-	gap: 0.65rem;
-	padding: 0.84rem 1rem;
-	border: 1px solid color-mix(in srgb, var(--glass-border) 34%, transparent);
-	border-radius: 999px;
-	background: color-mix(in srgb, var(--color-button-bg) 86%, transparent);
+	gap: 0.7rem;
+	width: 100%;
+	min-height: 2.55rem;
+	padding: 0.58rem 0.72rem;
+	border: 1px solid transparent;
+	border-radius: 0.68rem;
+	background: transparent;
 	color: var(--color-base);
-	font-weight: 700;
-	white-space: nowrap;
+	font-weight: 720;
+	text-align: left;
 	cursor: pointer;
-	transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, color 160ms ease, box-shadow 160ms ease;
+	transition:
+		transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		background 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+
+	&::before {
+		content: '';
+		position: absolute;
+		left: 0.38rem;
+		top: 50%;
+		width: 0.22rem;
+		height: 1.15rem;
+		border-radius: 999px;
+		background: var(--color-brand);
+		opacity: 0;
+		transform: translateY(-50%) scaleY(0.5);
+		transition:
+			opacity 180ms cubic-bezier(0.22, 1, 0.36, 1),
+			transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
 }
 
 .settings-tab:hover {
-	transform: translateY(-1px);
+	transform: translateX(2px);
 	color: var(--color-contrast);
-	background: color-mix(in srgb, var(--color-button-bg-hover) 92%, transparent);
-	border-color: color-mix(in srgb, var(--color-brand) 18%, var(--glass-border));
-	box-shadow: 0 12px 24px color-mix(in srgb, var(--color-brand-shadow) 8%, transparent);
+	background: color-mix(in srgb, var(--color-button-bg-hover) 48%, transparent);
+	border-color: color-mix(in srgb, var(--glass-border) 58%, transparent);
 }
 
 .settings-tab--active {
 	color: var(--color-contrast);
-	border-color: color-mix(in srgb, var(--color-brand) 30%, var(--glass-border));
-	background: color-mix(in srgb, var(--color-button-bg-selected) 34%, var(--color-button-bg) 66%);
-	box-shadow:
-		inset 0 0 0 1px color-mix(in srgb, var(--color-brand) 18%, transparent),
-		0 12px 26px color-mix(in srgb, var(--color-brand-shadow) 10%, transparent);
+	border-color: color-mix(in srgb, var(--color-brand) 24%, var(--glass-border) 76%);
+	background: color-mix(in srgb, var(--color-button-bg-selected) 30%, var(--color-button-bg) 70%);
+
+	&::before {
+		opacity: 1;
+		transform: translateY(-50%) scaleY(1);
+	}
 }
 
 .settings-tab__icon {
@@ -261,15 +332,39 @@ function formatPlatform(platform: string) {
 	flex-shrink: 0;
 }
 
+.settings-tab__label {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .settings-stage {
 	min-width: 0;
-	padding: 1rem 1.2rem 1.25rem;
-	border-radius: 1.35rem;
-	border: 1px solid color-mix(in srgb, var(--glass-border) 86%, transparent);
-	background: color-mix(in srgb, var(--color-glass-bg-strong) 96%, transparent);
-	box-shadow: var(--glass-shadow);
-	backdrop-filter: blur(calc(var(--glass-blur) * 0.84)) saturate(var(--glass-saturate));
-	-webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.84)) saturate(var(--glass-saturate));
+	padding: 0.95rem 1rem 1.15rem;
+	border-radius: 0.95rem;
+	border: 1px solid color-mix(in srgb, var(--glass-border) 72%, transparent);
+	background: color-mix(in srgb, var(--color-glass-bg-strong) 62%, transparent);
+	box-shadow:
+		inset 0 1px 0 color-mix(in srgb, white 4%, transparent),
+		0 10px 26px color-mix(in srgb, black 16%, transparent);
+}
+
+.settings-stage__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 0.15rem 0.15rem 0.9rem;
+	margin-bottom: 0.15rem;
+	border-bottom: 1px solid color-mix(in srgb, var(--glass-border) 62%, transparent);
+
+	h2 {
+		margin: 0;
+		color: var(--color-contrast);
+		font-size: 1.22rem;
+		font-weight: 850;
+		line-height: 1.2;
+	}
 }
 
 .settings-stage__content {
@@ -302,9 +397,20 @@ function formatPlatform(platform: string) {
 }
 
 @media (max-width: 1024px) {
-	.settings-tabs-wrap {
-		align-items: flex-start;
-		flex-direction: column;
+	.settings-workspace {
+		grid-template-columns: 1fr;
+	}
+
+	.settings-sidebar {
+		position: relative;
+		top: auto;
+		max-height: none;
+	}
+
+	.settings-tabs {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+		overflow: visible;
 	}
 }
 
@@ -315,6 +421,216 @@ function formatPlatform(platform: string) {
 
 	.settings-stage__footer {
 		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+
+.settings-stage__content :deep(.settings-row) {
+	min-height: 4.1rem;
+	padding: 0.78rem 0.9rem !important;
+	border: 1px solid color-mix(in srgb, var(--glass-border) 64%, transparent) !important;
+	border-radius: 0.78rem !important;
+	background: color-mix(in srgb, var(--color-button-bg) 34%, transparent) !important;
+	box-shadow: none !important;
+	transition:
+		background 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.settings-stage__content :deep(.settings-row + .settings-row) {
+	margin-top: 0.45rem !important;
+}
+
+.settings-stage__content :deep(.settings-row > div:first-child) {
+	min-width: 0;
+	flex: 1 1 auto;
+}
+
+.settings-stage__content :deep(.settings-row:hover) {
+	transform: translateY(-1px);
+	border-color: color-mix(in srgb, var(--color-brand) 16%, var(--glass-border) 84%) !important;
+	background: color-mix(in srgb, var(--color-button-bg-hover) 38%, transparent) !important;
+}
+
+.settings-stage__content :deep(.settings-row h2) {
+	font-size: 0.98rem !important;
+	line-height: 1.2;
+}
+
+.settings-stage__content :deep(.settings-row h3) {
+	margin-top: 0 !important;
+	font-size: 0.88rem !important;
+	line-height: 1.2;
+}
+
+.settings-stage__content :deep(.settings-row p) {
+	max-width: 62ch;
+	margin-top: 0.24rem !important;
+	margin-bottom: 0 !important;
+	color: var(--color-secondary);
+	font-size: 0.84rem;
+	line-height: 1.35;
+}
+
+.settings-stage__content :deep(.settings-select) {
+	flex: 0 0 clamp(11rem, 26vw, 15.5rem);
+	width: clamp(11rem, 26vw, 15.5rem) !important;
+	min-width: 0;
+}
+
+.settings-stage__content :deep(.settings-select [role='button']) {
+	min-height: 2.35rem;
+	padding: 0.45rem 0.7rem 0.45rem 0.85rem;
+	border: 1px solid color-mix(in srgb, var(--glass-border) 58%, transparent);
+	border-radius: 0.68rem;
+	background: color-mix(in srgb, var(--color-bg) 42%, transparent);
+	box-shadow: none;
+}
+
+.settings-stage__content :deep(.settings-select [role='button']:hover) {
+	border-color: color-mix(in srgb, var(--color-brand) 18%, var(--glass-border) 82%);
+	background: color-mix(in srgb, var(--color-button-bg-hover) 40%, transparent);
+}
+
+.settings-stage__content :deep(.settings-select [role='button'] > div:first-child) {
+	min-width: 0;
+}
+
+.settings-stage__content :deep(.settings-select [role='button'] span) {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 0.9rem;
+}
+
+.settings-stage__content :deep(.settings-select svg) {
+	width: 1rem;
+	height: 1rem;
+}
+
+.settings-stage__content :deep(.iconified-input) {
+	display: flex;
+	align-items: center;
+	gap: 0.2rem;
+	min-height: 2.45rem;
+	border: 1px solid color-mix(in srgb, var(--glass-border) 64%, transparent) !important;
+	border-radius: 0.72rem !important;
+	background: color-mix(in srgb, var(--color-bg) 42%, transparent) !important;
+	box-shadow: none !important;
+	overflow: hidden;
+}
+
+.settings-stage__content :deep(.iconified-input > svg) {
+	position: static !important;
+	left: auto !important;
+	z-index: auto !important;
+	width: 1rem;
+	height: 1rem;
+	margin-left: 0.68rem;
+	color: var(--color-secondary);
+	flex-shrink: 0;
+}
+
+.settings-stage__content :deep(.iconified-input .text-input) {
+	position: relative !important;
+	flex: 1 1 auto;
+	min-width: 0;
+	min-height: 2.35rem;
+	padding: 0.48rem 0.65rem 0.48rem 0.35rem !important;
+	background: transparent !important;
+	border: 0 !important;
+	color: var(--color-contrast);
+	font-size: 0.9rem;
+}
+
+.settings-stage__content :deep(.iconified-input .r-btn) {
+	position: static !important;
+	right: auto !important;
+	z-index: auto !important;
+	align-self: stretch;
+	min-height: 2.35rem;
+	margin: 0.04rem;
+	padding: 0 0.72rem;
+	border-radius: 0.58rem;
+	box-shadow: none;
+}
+
+.settings-stage__content :deep(.iconified-input .r-btn svg) {
+	width: 1rem;
+	height: 1rem;
+}
+
+.settings-stage__content :deep(.settings-row .r-btn),
+.settings-stage__content :deep(.btn) {
+	min-height: 2.25rem;
+	border-radius: 0.68rem;
+}
+
+.settings-stage__content :deep(.settings-input),
+.settings-stage__content :deep(textarea) {
+	min-height: 2.35rem !important;
+	padding: 0.5rem 0.75rem !important;
+	border-radius: 0.68rem !important;
+	border-color: color-mix(in srgb, var(--glass-border) 64%, transparent) !important;
+	background: color-mix(in srgb, var(--color-bg) 42%, transparent) !important;
+}
+
+.settings-stage__content :deep(input.settings-input:not(.w-full)) {
+	width: clamp(7.25rem, 15vw, 12.5rem);
+	text-align: left;
+}
+
+.settings-stage__content :deep(.root-container) {
+	gap: 0.75rem;
+	align-items: center;
+	margin-top: 0.55rem;
+}
+
+.settings-stage__content :deep(.slider-component) {
+	min-width: 0;
+}
+
+.settings-stage__content :deep(.slider-input) {
+	flex: 0 0 5.4rem;
+	width: 5.4rem !important;
+	min-height: 2.25rem;
+	margin-left: 0 !important;
+	padding: 0.45rem 0.72rem !important;
+	border: 1px solid color-mix(in srgb, var(--glass-border) 64%, transparent) !important;
+	border-radius: 0.68rem !important;
+	background: color-mix(in srgb, var(--color-bg) 42%, transparent) !important;
+	color: var(--color-contrast);
+	font-weight: 700;
+}
+
+.settings-stage__content :deep(.slider-range) {
+	margin-top: 0.32rem;
+	color: var(--color-secondary);
+}
+
+.settings-stage__content :deep(.slider-range span) {
+	font-size: 0.72rem;
+	line-height: 1;
+}
+
+@media (max-width: 760px) {
+	.settings-stage__content :deep(.settings-row) {
+		align-items: stretch !important;
+		flex-direction: column;
+	}
+
+	.settings-stage__content :deep(.settings-select),
+	.settings-stage__content :deep(input.settings-input:not(.w-full)),
+	.settings-stage__content :deep(.slider-input) {
+		width: 100% !important;
+		flex-basis: auto;
+	}
+
+	.settings-stage__content :deep(.root-container) {
+		align-items: stretch;
 		flex-direction: column;
 	}
 }

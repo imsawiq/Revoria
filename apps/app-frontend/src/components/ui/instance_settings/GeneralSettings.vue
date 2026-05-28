@@ -177,6 +177,15 @@ const messages = defineMessages({
 		id: 'instance.settings.tabs.general.delete',
 		defaultMessage: 'Delete instance',
 	},
+	deleteInstanceTitle: {
+		id: 'row-display.delete-instance.title',
+		defaultMessage: 'Are you sure you want to delete this instance?',
+	},
+	deleteInstanceConfirmDescription: {
+		id: 'row-display.delete-instance.description',
+		defaultMessage:
+			'If you proceed, all data for your instance will be permanently erased, including your worlds. You will not be able to recover it.',
+	},
 	deleteInstanceDescription: {
 		id: 'instance.settings.tabs.general.delete.description',
 		defaultMessage:
@@ -209,10 +218,10 @@ const messages = defineMessages({
 <template>
 	<ConfirmModalWrapper
 		ref="deleteConfirmModal"
-		title="Are you sure you want to delete this instance?"
-		description="If you proceed, all data for your instance will be permanently erased, including your worlds. You will not be able to recover it."
+		:title="formatMessage(messages.deleteInstanceTitle)"
+		:description="formatMessage(messages.deleteInstanceConfirmDescription)"
 		:has-to-type="false"
-		proceed-label="Delete"
+		:proceed-label="formatMessage(messages.deleteInstanceButton)"
 		:show-ad-on-close="false"
 		@proceed="removeProfile"
 	/>
@@ -293,7 +302,9 @@ const messages = defineMessages({
 		</template>
 		<h2 class="m-0 mt-4 mb-1 text-lg font-extrabold text-contrast flex items-center gap-2">
 			{{ formatMessage(messages.sandbox) }}
-			<span class="text-xs font-bold px-2 py-0.5 bg-brand-highlight text-brand rounded-full leading-none">
+			<span
+				class="text-xs font-bold px-2 py-0.5 bg-brand-highlight text-brand rounded-full leading-none"
+			>
 				{{ formatMessage(messages.sandboxBeta) }}
 			</span>
 		</h2>

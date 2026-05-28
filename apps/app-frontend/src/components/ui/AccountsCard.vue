@@ -1,5 +1,8 @@
 <template>
-	<div class="accounts-shell" :class="{ expanded: mode === 'expanded', isolated: mode === 'isolated' }">
+	<div
+		class="accounts-shell"
+		:class="{ expanded: mode === 'expanded', isolated: mode === 'isolated' }"
+	>
 		<div
 			v-if="mode !== 'isolated'"
 			ref="button"
@@ -7,12 +10,18 @@
 			:class="{ expanded: mode === 'expanded' }"
 			@click="toggleMenu"
 		>
-			<Avatar
-				size="36px"
-				:src="
-					selectedAccount ? avatarUrl : 'https://launcher-files.modrinth.com/assets/steve_head.png'
-				"
-			/>
+			<Transition name="account-avatar-swap" mode="out-in">
+				<span :key="avatarKey" class="account-avatar-frame">
+					<Avatar
+						size="36px"
+						:src="
+							selectedAccount
+								? avatarUrl
+								: 'https://launcher-files.modrinth.com/assets/steve_head.png'
+						"
+					/>
+				</span>
+			</Transition>
 			<div class="account-summary">
 				<span class="account-title">
 					<component
@@ -20,7 +29,9 @@
 						v-if="selectedAccount"
 						class="vector-icon"
 					/>
-					{{ selectedAccount ? selectedAccount.profile.name : formatMessage(messages.selectAccount) }}
+					{{
+						selectedAccount ? selectedAccount.profile.name : formatMessage(messages.selectAccount)
+					}}
 				</span>
 				<span class="text-secondary text-xs account-subtitle">{{
 					formatMessage(messages.minecraftAccount)
@@ -35,90 +46,94 @@
 				class="account-card"
 				:class="{ expanded: mode === 'expanded', isolated: mode === 'isolated' }"
 			>
-			<div v-if="selectedAccount" class="selected account">
-				<Avatar size="xs" :src="avatarUrl" />
-				<div>
-					<h4>
-						<component :is="getAccountType(selectedAccount)" class="vector-icon" />
-						{{ selectedAccount.profile.name }}
-					</h4>
-					<p>{{ formatMessage(messages.selected) }}</p>
-				</div>
-				<Button
-					v-tooltip="formatMessage(messages.logOut)"
-					icon-only
-					color="raised"
-					@click="logout(selectedAccount.profile.id)"
-				>
-					<TrashIcon />
-				</Button>
-			</div>
-			<div v-else class="login-section account">
-				<h4>{{ formatMessage(messages.notSignedIn) }}</h4>
-				<Button
-					v-tooltip="formatMessage(messages.logViaMicrosoft)"
-					:disabled="microsoftLoginDisabled"
-					icon-only
-					@click="login()"
-				>
-					<MicrosoftIcon v-if="!microsoftLoginDisabled" />
-					<SpinnerIcon v-else class="animate-spin" />
-				</Button>
-				<Button
-					v-tooltip="formatMessage(messages.addOfflineAccount)"
-					icon-only
-					@click="showOfflineLoginModal()"
-				>
-					<PirateIcon />
-				</Button>
-				<Button
-					v-tooltip="formatMessage(messages.logViaElyBy)"
-					icon-only
-					@click="showElybyLoginModal()"
-				>
-					<ElyByIcon v-if="!elybyLoginDisabled" />
-					<SpinnerIcon v-else class="animate-spin" />
-				</Button>
-			</div>
-			<div v-if="displayAccounts.length > 0" class="account-group">
-				<div v-for="account in displayAccounts" :key="account.profile.id" class="account-row">
-					<Button class="option account" @click="setAccount(account)">
-						<Avatar :src="getAccountAvatarUrl(account)" class="icon" />
-						<p class="account-type">
-							<component :is="getAccountType(account)" class="vector-icon" />
-							{{ account.profile.name }}
-						</p>
-					</Button>
+				<div v-if="selectedAccount" class="selected account">
+					<Transition name="account-avatar-swap" mode="out-in">
+						<span :key="avatarKey" class="account-avatar-frame small">
+							<Avatar size="xs" :src="avatarUrl" />
+						</span>
+					</Transition>
+					<div>
+						<h4>
+							<component :is="getAccountType(selectedAccount)" class="vector-icon" />
+							{{ selectedAccount.profile.name }}
+						</h4>
+						<p>{{ formatMessage(messages.selected) }}</p>
+					</div>
 					<Button
 						v-tooltip="formatMessage(messages.logOut)"
 						icon-only
-						@click="logout(account.profile.id)"
+						color="raised"
+						@click="logout(selectedAccount.profile.id)"
 					>
 						<TrashIcon />
 					</Button>
 				</div>
-			</div>
-			<div v-if="accounts.length > 0" class="login-section account centered">
-				<Button v-tooltip="formatMessage(messages.logViaMicrosoft)" icon-only @click="login()">
-					<MicrosoftIcon v-if="!microsoftLoginDisabled" />
-					<SpinnerIcon v-else class="animate-spin" />
-				</Button>
-				<Button
-					v-tooltip="formatMessage(messages.addOfflineAccount)"
-					icon-only
-					@click="showOfflineLoginModal()"
-				>
-					<PirateIcon />
-				</Button>
-				<Button
-					v-tooltip="formatMessage(messages.logViaElyBy)"
-					icon-only
-					@click="showElybyLoginModal()"
-				>
-					<ElyByIcon v-if="!elybyLoginDisabled" />
-					<SpinnerIcon v-else class="animate-spin" />
-				</Button>
-			</div>
+				<div v-else class="login-section account">
+					<h4>{{ formatMessage(messages.notSignedIn) }}</h4>
+					<Button
+						v-tooltip="formatMessage(messages.logViaMicrosoft)"
+						:disabled="microsoftLoginDisabled"
+						icon-only
+						@click="login()"
+					>
+						<MicrosoftIcon v-if="!microsoftLoginDisabled" />
+						<SpinnerIcon v-else class="animate-spin" />
+					</Button>
+					<Button
+						v-tooltip="formatMessage(messages.addOfflineAccount)"
+						icon-only
+						@click="showOfflineLoginModal()"
+					>
+						<PirateIcon />
+					</Button>
+					<Button
+						v-tooltip="formatMessage(messages.logViaElyBy)"
+						icon-only
+						@click="showElybyLoginModal()"
+					>
+						<ElyByIcon v-if="!elybyLoginDisabled" />
+						<SpinnerIcon v-else class="animate-spin" />
+					</Button>
+				</div>
+				<div v-if="displayAccounts.length > 0" class="account-group">
+					<div v-for="account in displayAccounts" :key="account.profile.id" class="account-row">
+						<Button class="option account" @click="setAccount(account)">
+							<Avatar :src="getAccountAvatarUrl(account)" class="icon" />
+							<p class="account-type">
+								<component :is="getAccountType(account)" class="vector-icon" />
+								{{ account.profile.name }}
+							</p>
+						</Button>
+						<Button
+							v-tooltip="formatMessage(messages.logOut)"
+							icon-only
+							@click="logout(account.profile.id)"
+						>
+							<TrashIcon />
+						</Button>
+					</div>
+				</div>
+				<div v-if="accounts.length > 0" class="login-section account centered">
+					<Button v-tooltip="formatMessage(messages.logViaMicrosoft)" icon-only @click="login()">
+						<MicrosoftIcon v-if="!microsoftLoginDisabled" />
+						<SpinnerIcon v-else class="animate-spin" />
+					</Button>
+					<Button
+						v-tooltip="formatMessage(messages.addOfflineAccount)"
+						icon-only
+						@click="showOfflineLoginModal()"
+					>
+						<PirateIcon />
+					</Button>
+					<Button
+						v-tooltip="formatMessage(messages.logViaElyBy)"
+						icon-only
+						@click="showElybyLoginModal()"
+					>
+						<ElyByIcon v-if="!elybyLoginDisabled" />
+						<SpinnerIcon v-else class="animate-spin" />
+					</Button>
+				</div>
 			</Card>
 		</transition>
 		<Teleport to="body">
@@ -131,7 +146,11 @@
 					:style="teleportedCardStyle"
 				>
 					<div v-if="selectedAccount" class="selected account">
-						<Avatar size="xs" :src="avatarUrl" />
+						<Transition name="account-avatar-swap" mode="out-in">
+							<span :key="avatarKey" class="account-avatar-frame small">
+								<Avatar size="xs" :src="avatarUrl" />
+							</span>
+						</Transition>
 						<div>
 							<h4>
 								<component :is="getAccountType(selectedAccount)" class="vector-icon" />
@@ -378,7 +397,7 @@ import {
 } from '@modrinth/assets'
 import { Avatar, Button, Card, injectNotificationManager } from '@modrinth/ui'
 import { defineMessages, useVIntl } from '@vintl/vintl'
-import { computed, onBeforeUnmount, onMounted, onUnmounted, ref,Teleport } from 'vue'
+import { computed, onBeforeUnmount, onMounted, onUnmounted, ref, Teleport } from 'vue'
 
 import ModalWrapper from '@/components/ui/modal/ModalWrapper.vue'
 import { trackEvent } from '@/helpers/analytics'
@@ -691,24 +710,41 @@ function convertRawStringToUUIDv4(rawId) {
 
 const equippedSkin = ref(null)
 const headUrlCache = ref(new Map())
+let skinRefreshRequest = 0
 
 async function refreshValues() {
 	defaultUser.value = await get_default_user().catch(handleError)
 	accounts.value = await users().catch(handleError)
+	await refreshEquippedSkin()
+}
+
+async function refreshEquippedSkin() {
+	const request = ++skinRefreshRequest
+	const accountId = defaultUser.value
 
 	try {
 		const skins = await get_available_skins()
+		if (request !== skinRefreshRequest || accountId !== defaultUser.value) {
+			return
+		}
+
 		equippedSkin.value = skins.find((skin) => skin.is_equipped)
 
 		if (equippedSkin.value) {
 			try {
 				const headUrl = await getPlayerHeadUrl(equippedSkin.value)
+				if (request !== skinRefreshRequest || accountId !== defaultUser.value) {
+					return
+				}
 				headUrlCache.value.set(equippedSkin.value.texture_key, headUrl)
 			} catch (error) {
 				console.warn('Failed to get head render for equipped skin:', error)
 			}
 		}
 	} catch {
+		if (request !== skinRefreshRequest || accountId !== defaultUser.value) {
+			return
+		}
 		equippedSkin.value = null
 	}
 }
@@ -742,6 +778,10 @@ const avatarUrl = computed(() => {
 	return 'https://launcher-files.modrinth.com/assets/steve_head.png'
 })
 
+const avatarKey = computed(
+	() => `${selectedAccount.value?.profile?.id ?? 'none'}:${avatarUrl.value}`,
+)
+
 function getAccountAvatarUrl(account) {
 	if (
 		account.profile.id === selectedAccount.value?.profile?.id &&
@@ -760,8 +800,19 @@ const selectedAccount = computed(() =>
 )
 
 async function setAccount(account) {
+	const previousDefaultUser = defaultUser.value
 	defaultUser.value = account.profile.id
-	await set_default_user(account.profile.id).catch(handleError)
+	equippedSkin.value = null
+
+	try {
+		await set_default_user(account.profile.id)
+		await refreshEquippedSkin()
+	} catch (error) {
+		defaultUser.value = previousDefaultUser
+		await refreshEquippedSkin()
+		handleError(error)
+	}
+
 	emit('change')
 }
 
@@ -868,30 +919,36 @@ onUnmounted(() => {
 }
 
 .selected {
-	background:
-		linear-gradient(
-			180deg,
-			color-mix(in srgb, var(--color-brand-highlight) 82%, transparent) 0%,
-			color-mix(in srgb, var(--color-brand-highlight) 56%, var(--color-button-bg) 44%) 100%
-		);
+	background: linear-gradient(
+		180deg,
+		color-mix(in srgb, var(--color-brand-highlight) 82%, transparent) 0%,
+		color-mix(in srgb, var(--color-brand-highlight) 56%, var(--color-button-bg) 44%) 100%
+	);
 	border: 1px solid color-mix(in srgb, var(--color-brand) 28%, var(--glass-border) 72%);
 	box-shadow: var(--shadow-card);
 	border-radius: var(--radius-lg);
 	color: var(--color-contrast);
 	gap: 1rem;
+	transition:
+		transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+		border-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+		box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .login-section {
-	background:
-		linear-gradient(
-			180deg,
-			color-mix(in srgb, var(--color-glass-bg-strong) 84%, var(--color-brand-highlight) 16%) 0%,
-			color-mix(in srgb, var(--color-glass-bg) 90%, transparent) 100%
-		);
+	background: linear-gradient(
+		180deg,
+		color-mix(in srgb, var(--color-glass-bg-strong) 84%, var(--color-brand-highlight) 16%) 0%,
+		color-mix(in srgb, var(--color-glass-bg) 90%, transparent) 100%
+	);
 	border: 1px solid color-mix(in srgb, var(--color-brand-highlight) 34%, var(--glass-border) 66%);
 	box-shadow: var(--shadow-card);
 	border-radius: var(--radius-lg);
 	gap: 1rem;
+	transition:
+		transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+		border-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+		box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .vector-icon {
@@ -912,6 +969,22 @@ onUnmounted(() => {
 	height: 1.25rem;
 	display: block;
 	flex-shrink: 0;
+	transition:
+		rotate 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.account-avatar-frame {
+	display: grid;
+	place-items: center;
+	flex: 0 0 auto;
+	transition:
+		transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+		filter 220ms cubic-bezier(0.22, 1, 0.36, 1);
+
+	&.small {
+		width: max-content;
+	}
 }
 
 .account-title {
@@ -946,6 +1019,11 @@ onUnmounted(() => {
 	line-height: 1.1;
 	text-align: left;
 	padding: 0.5rem 1rem;
+	transition:
+		transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		background-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		box-shadow 180ms cubic-bezier(0.22, 1, 0.36, 1);
 
 	h4,
 	p {
@@ -963,12 +1041,11 @@ onUnmounted(() => {
 	gap: 0.5rem;
 	padding: 1rem;
 	border: 1px solid var(--glass-border);
-	background:
-		linear-gradient(
-			180deg,
-			color-mix(in srgb, var(--color-glass-bg-strong) 94%, var(--color-brand-highlight) 6%) 0%,
-			var(--color-glass-bg-strong) 100%
-		);
+	background: linear-gradient(
+		180deg,
+		color-mix(in srgb, var(--color-glass-bg-strong) 94%, var(--color-brand-highlight) 6%) 0%,
+		var(--color-glass-bg-strong) 100%
+	);
 	box-shadow: var(--glass-shadow);
 	width: min(22rem, calc(100vw - 2rem));
 	user-select: none;
@@ -976,6 +1053,7 @@ onUnmounted(() => {
 	-webkit-user-select: none;
 	max-height: min(32rem, calc(100vh - 8rem));
 	overflow-y: auto;
+	transform-origin: top right;
 
 	&::-webkit-scrollbar-track {
 		border-top-right-radius: 1rem;
@@ -1030,9 +1108,29 @@ onUnmounted(() => {
 	border: 1px solid color-mix(in srgb, var(--glass-border) 76%, var(--color-brand-highlight) 24%);
 	color: var(--color-base);
 	box-shadow: none;
+	transition:
+		transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		background 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		color 180ms cubic-bezier(0.22, 1, 0.36, 1);
 
 	img {
 		margin-right: 0.5rem;
+	}
+
+	&:hover {
+		transform: translateY(-1px);
+		background: color-mix(
+			in srgb,
+			var(--color-button-bg-hover) 82%,
+			var(--color-brand-highlight) 18%
+		);
+		border-color: color-mix(in srgb, var(--color-brand) 32%, var(--glass-border) 68%);
+		color: var(--color-contrast);
+	}
+
+	&:active {
+		transform: translateY(0) scale(0.985);
 	}
 }
 
@@ -1048,6 +1146,13 @@ onUnmounted(() => {
 	justify-content: space-between;
 	padding: 0.25rem 0.25rem 0.25rem 0;
 	border-radius: var(--radius-lg);
+	transition:
+		background-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+
+	&:hover {
+		background-color: color-mix(in srgb, var(--color-button-bg) 46%, transparent);
+	}
 }
 
 .fade-enter-active,
@@ -1063,6 +1168,26 @@ onUnmounted(() => {
 	opacity: 0;
 	translate: 0 -2rem;
 	scale: 0.9;
+}
+
+.account-avatar-swap-enter-active,
+.account-avatar-swap-leave-active {
+	transition:
+		opacity 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+		filter 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.account-avatar-swap-enter-from {
+	opacity: 0;
+	transform: translateY(4px) scale(0.88);
+	filter: blur(2px);
+}
+
+.account-avatar-swap-leave-to {
+	opacity: 0;
+	transform: translateY(-4px) scale(0.94);
+	filter: blur(2px);
 }
 
 .avatar-button {
@@ -1118,14 +1243,40 @@ onUnmounted(() => {
 }
 
 .button-base.mt-2 {
-	background:
-		linear-gradient(
-			180deg,
-			color-mix(in srgb, var(--color-glass-bg-strong) 90%, var(--color-brand-highlight) 10%) 0%,
-			color-mix(in srgb, var(--color-glass-bg) 92%, transparent) 100%
-		);
+	background: linear-gradient(
+		180deg,
+		color-mix(in srgb, var(--color-glass-bg-strong) 90%, var(--color-brand-highlight) 10%) 0%,
+		color-mix(in srgb, var(--color-glass-bg) 92%, transparent) 100%
+	);
 	border: 1px solid var(--glass-border);
 	box-shadow: var(--shadow-card);
+	transition:
+		transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		background 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		box-shadow 180ms cubic-bezier(0.22, 1, 0.36, 1);
+
+	&:hover {
+		transform: translateY(-1px);
+		border-color: color-mix(in srgb, var(--color-brand) 30%, var(--glass-border) 70%);
+		box-shadow:
+			var(--shadow-card),
+			0 0 0 1px color-mix(in srgb, var(--color-brand) 12%, transparent);
+
+		.dropdown-icon {
+			rotate: -90deg;
+			color: var(--color-contrast);
+		}
+
+		.account-avatar-frame {
+			transform: scale(1.04);
+			filter: saturate(1.08);
+		}
+	}
+
+	&:active {
+		transform: translateY(0) scale(0.985);
+	}
 }
 
 .qr-code {

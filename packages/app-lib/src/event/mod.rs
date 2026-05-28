@@ -75,6 +75,7 @@ pub struct LoadingBar {
     pub message: String,
     pub total: f64,
     pub current: f64,
+    pub cancelled: bool,
     #[serde(skip)]
     pub last_sent: f64,
     pub bar_type: LoadingBarType,
@@ -84,12 +85,16 @@ pub struct LoadingBar {
 }
 
 #[derive(Serialize, Debug, Clone)]
-pub struct LoadingBarId(Uuid);
+pub struct LoadingBarId(Arc<Uuid>);
 
 // When Loading bar id is dropped, we should remove it from the hashmap
 impl Drop for LoadingBarId {
     fn drop(&mut self) {
-        let loader_uuid = self.0;
+        if Arc::strong_count(&self.0) != 1 {
+            return;
+        }
+
+        let loader_uuid = *self.0;
         tokio::spawn(async move {
             if let Ok(event_state) = EventState::get() {
                 #[cfg(any(feature = "tauri", feature = "cli"))]

@@ -54,6 +54,7 @@ fn main() {
                     .commands(&[
                         "fetch_curseforge_profile_metadata",
                         "import_curseforge_profile",
+                        "install_curseforge_project",
                         "get_importable_instances",
                         "import_instance",
                         "is_valid_importable_instance",
@@ -265,6 +266,7 @@ fn main() {
                         "open_path",
                         "show_launcher_logs_folder",
                         "progress_bars_list",
+                        "cancel_progress_bar",
                         "get_opening_command",
                         "list_dir_files",
                         "list_dir_entries",

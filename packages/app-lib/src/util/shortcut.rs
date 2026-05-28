@@ -94,7 +94,10 @@ fn create_shortcut(
     std::fs::write(&script_path, format!("#!/bin/sh\nexec {exec}\n"))?;
 
     use std::os::unix::fs::PermissionsExt;
-    std::fs::set_permissions(&script_path, std::fs::Permissions::from_mode(0o755))?;
+    std::fs::set_permissions(
+        &script_path,
+        std::fs::Permissions::from_mode(0o755),
+    )?;
     Ok(())
 }
 

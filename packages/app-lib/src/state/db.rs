@@ -16,6 +16,7 @@ pub(crate) async fn connect() -> crate::Result<Pool<Sqlite>> {
     // have different line endings than at compile time (LF vs CRLF), the embedded
     // checksums won't match the database. We patch the DB to match the compiled checksums.
     let _ = apply_migration_fix(&pool).await;
+    let _ = repair_completed_initial_migration(&pool).await;
 
     run_migrations_with_repair(&pool).await?;
 
@@ -27,6 +28,21 @@ pub(crate) async fn connect() -> crate::Result<Pool<Sqlite>> {
 
     Ok(pool)
 }
+
+const INITIAL_MIGRATION_VERSION: i64 = 20240711194701;
+const INITIAL_SCHEMA_OBJECTS: &[(&str, &str)] = &[
+    ("table", "settings"),
+    ("table", "java_versions"),
+    ("table", "minecraft_users"),
+    ("index", "minecraft_users_active"),
+    ("table", "minecraft_device_tokens"),
+    ("table", "modrinth_users"),
+    ("index", "modrinth_users_active"),
+    ("table", "cache"),
+    ("table", "profiles"),
+    ("table", "processes"),
+    ("index", "processes_profile_path"),
+];
 
 // [AR] Feature. Implement SQLite3 connection without SQLx migrations.
 async fn connect_without_migrate() -> crate::Result<Pool<Sqlite>> {
@@ -133,6 +149,45 @@ pub async fn repair_migration_state_from_disk() -> crate::Result<bool> {
     Ok(!pool.is_closed())
 }
 
+async fn repair_completed_initial_migration(
+    pool: &Pool<Sqlite>,
+) -> crate::Result<bool> {
+    if !initial_schema_exists(pool).await? {
+        return Ok(false);
+    }
+
+    ensure_sqlx_migrations_table(pool).await?;
+
+    let exists = sqlx::query_scalar::<_, i64>(
+        "SELECT COUNT(*) FROM _sqlx_migrations WHERE version = ?1",
+    )
+    .bind(INITIAL_MIGRATION_VERSION)
+    .fetch_one(pool)
+    .await?
+        > 0;
+
+    if exists {
+        return Ok(false);
+    }
+
+    let migrator = sqlx::migrate!();
+    let Some(migration) = migrator
+        .iter()
+        .find(|migration| migration.version == INITIAL_MIGRATION_VERSION)
+    else {
+        return Ok(false);
+    };
+
+    insert_migration_state(pool, migration).await?;
+    tracing::warn!(
+        "Recovered missing SQLx state for completed initial migration {} ({})",
+        migration.version,
+        migration.description
+    );
+
+    Ok(true)
+}
+
 async fn run_migrations_with_repair(pool: &Pool<Sqlite>) -> crate::Result<()> {
     let migrator = sqlx::migrate!();
     let max_attempts = migrator.iter().count() + 1;
@@ -204,6 +259,14 @@ async fn repair_migration_state(
         if !should_mark_migration_applied(migration.version, migration_error) {
             continue;
         }
+        if migration.version == INITIAL_MIGRATION_VERSION
+            && !initial_schema_exists(pool).await?
+        {
+            tracing::warn!(
+                "Migration repair skipped for initial migration: base schema is incomplete"
+            );
+            continue;
+        }
 
         let exists = sqlx::query_scalar::<_, i64>(
             "SELECT COUNT(*) FROM _sqlx_migrations WHERE version = ?1",
@@ -217,18 +280,7 @@ async fn repair_migration_state(
             continue;
         }
 
-        sqlx::query(
-            r#"
-            INSERT INTO _sqlx_migrations
-                (version, description, success, checksum, execution_time)
-            VALUES (?1, ?2, TRUE, ?3, 0)
-            "#,
-        )
-        .bind(migration.version)
-        .bind(migration.description.to_string())
-        .bind(migration.checksum.to_vec())
-        .execute(pool)
-        .await?;
+        insert_migration_state(pool, migration).await?;
 
         tracing::warn!(
             "Marked migration {} ({}) as applied during repair",
@@ -250,4 +302,64 @@ fn should_mark_migration_applied(version: i64, migration_error: &str) -> bool {
         && (migration_error.contains("already exists")
             || migration_error.contains("duplicate column name")
             || migration_error.contains("UNIQUE constraint failed"))
+}
+
+async fn initial_schema_exists(pool: &Pool<Sqlite>) -> crate::Result<bool> {
+    for (type_, name) in INITIAL_SCHEMA_OBJECTS {
+        let exists = sqlx::query_scalar::<_, i64>(
+            "SELECT COUNT(*) FROM sqlite_master WHERE type = ?1 AND name = ?2",
+        )
+        .bind(type_)
+        .bind(name)
+        .fetch_one(pool)
+        .await?
+            > 0;
+
+        if !exists {
+            return Ok(false);
+        }
+    }
+
+    Ok(true)
+}
+
+async fn ensure_sqlx_migrations_table(
+    pool: &Pool<Sqlite>,
+) -> crate::Result<()> {
+    sqlx::query(
+        r#"
+        CREATE TABLE IF NOT EXISTS _sqlx_migrations (
+            version BIGINT PRIMARY KEY,
+            description TEXT NOT NULL,
+            installed_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            success BOOLEAN NOT NULL,
+            checksum BLOB NOT NULL,
+            execution_time BIGINT NOT NULL
+        )
+        "#,
+    )
+    .execute(pool)
+    .await?;
+
+    Ok(())
+}
+
+async fn insert_migration_state(
+    pool: &Pool<Sqlite>,
+    migration: &sqlx::migrate::Migration,
+) -> crate::Result<()> {
+    sqlx::query(
+        r#"
+        INSERT INTO _sqlx_migrations
+            (version, description, success, checksum, execution_time)
+        VALUES (?1, ?2, TRUE, ?3, 0)
+        "#,
+    )
+    .bind(migration.version)
+    .bind(migration.description.to_string())
+    .bind(migration.checksum.to_vec())
+    .execute(pool)
+    .await?;
+
+    Ok(())
 }

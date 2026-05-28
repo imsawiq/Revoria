@@ -3152,6 +3152,30 @@
 	"browse.install.title": {
 		"message": "Instalați proiectul pe instanță"
 	},
+	"loading.message.downloading-modpack": {
+		"message": "Se descarcă modpack-ul"
+	},
+	"loading.message.canceling-download": {
+		"message": "Se anulează descărcarea"
+	},
+	"running-app-bar.cancel-download": {
+		"message": "Anulează descărcarea"
+	},
+	"notification.error.unmanaged-profile": {
+		"message": "Profilul {profile} nu este gestionat de aplicație."
+	},
+	"notification.error.download-canceled": {
+		"message": "Descărcare anulată."
+	},
+	"install-modal.hide-new-instance": {
+		"message": "Ascunde instanța nouă"
+	},
+	"install-modal.no-compatible-version": {
+		"message": "Nu s-a găsit nicio versiune compatibilă"
+	},
+	"install-modal.locked-instance-tooltip": {
+		"message": "Decuplați sau deblocați o instanță pentru a adăuga moduri."
+	},
 	"hosting.content.failed-to-load-versions": {
 		"defaultMessage": "Versiunile nu au putut fi încărcate"
 	},

@@ -6,6 +6,7 @@ use theseus::pack::import::curseforge_profile::{
     CurseForgeProfileMetadata,
     fetch_curseforge_profile_metadata as fetch_cf_metadata,
     import_curseforge_profile as import_cf_profile,
+    install_curseforge_project as install_cf_project,
 };
 
 use theseus::pack::import;
@@ -19,6 +20,7 @@ pub fn init<R: tauri::Runtime>() -> tauri::plugin::TauriPlugin<R> {
             get_default_launcher_path,
             fetch_curseforge_profile_metadata,
             import_curseforge_profile,
+            install_curseforge_project,
         ])
         .build()
 }
@@ -94,5 +96,27 @@ pub async fn import_curseforge_profile(
     profile_code: String,
 ) -> Result<()> {
     import_cf_profile(&profile_code, &profile_path).await?;
+    Ok(())
+}
+
+/// Install a CurseForge project into an existing profile.
+#[tauri::command]
+pub async fn install_curseforge_project(
+    profile_path: String,
+    project_id: u32,
+    project_type: Option<String>,
+    project_name: Option<String>,
+    icon_url: Option<String>,
+    use_profile_hints: Option<bool>,
+) -> Result<()> {
+    install_cf_project(
+        &profile_path,
+        project_id,
+        project_type.as_deref(),
+        project_name.as_deref(),
+        icon_url.as_deref(),
+        use_profile_hints.unwrap_or(true),
+    )
+    .await?;
     Ok(())
 }

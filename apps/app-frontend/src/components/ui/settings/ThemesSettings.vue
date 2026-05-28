@@ -44,7 +44,8 @@ const messages = defineMessages({
 	title: { id: 'settings.theme-studio.title', defaultMessage: 'Theme studio' },
 	description: {
 		id: 'settings.theme-studio.description',
-		defaultMessage: 'Pick a base preset, create an editable copy, then tune the whole launcher palette clearly.',
+		defaultMessage:
+			'Pick a base preset, create an editable copy, then tune the whole launcher palette clearly.',
 	},
 	official: { id: 'settings.theme-studio.official', defaultMessage: 'Base presets' },
 	custom: { id: 'settings.theme-studio.custom', defaultMessage: 'Your themes' },
@@ -52,13 +53,17 @@ const messages = defineMessages({
 	importTheme: { id: 'settings.theme-studio.import-theme', defaultMessage: 'Import theme' },
 	empty: {
 		id: 'settings.theme-studio.empty',
-		defaultMessage: 'No custom themes yet. Pick a preset and create the first editable theme from it.',
+		defaultMessage:
+			'No custom themes yet. Pick a preset and create the first editable theme from it.',
 	},
 	editor: { id: 'settings.theme-studio.editor', defaultMessage: 'Editor' },
 	name: { id: 'settings.theme-studio.name', defaultMessage: 'Theme name' },
 	author: { id: 'settings.theme-studio.author', defaultMessage: 'Author' },
 	baseTheme: { id: 'settings.theme-studio.base-theme', defaultMessage: 'Base preset' },
-	descriptionLabel: { id: 'settings.theme-studio.description-label', defaultMessage: 'Description' },
+	descriptionLabel: {
+		id: 'settings.theme-studio.description-label',
+		defaultMessage: 'Description',
+	},
 	resetBase: { id: 'settings.theme-studio.reset-base', defaultMessage: 'Reset from base preset' },
 	undo: { id: 'settings.theme-studio.undo', defaultMessage: 'Отменить' },
 	redo: { id: 'settings.theme-studio.redo', defaultMessage: 'Вернуть' },
@@ -108,13 +113,28 @@ const messages = defineMessages({
 	cards: { id: 'settings.theme-studio.cards', defaultMessage: 'Карточки и крупные блоки' },
 	hoverLayer: { id: 'settings.theme-studio.hover-layer', defaultMessage: 'Слой наведения' },
 	raisedBg: { id: 'settings.theme-studio.raised-bg', defaultMessage: 'Фон внутренних панелей' },
-	raisedBgHover: { id: 'settings.theme-studio.raised-bg-hover', defaultMessage: 'Фон панелей при наведении' },
+	raisedBgHover: {
+		id: 'settings.theme-studio.raised-bg-hover',
+		defaultMessage: 'Фон панелей при наведении',
+	},
 	buttonBg: { id: 'settings.theme-studio.button-bg', defaultMessage: 'Обычные кнопки' },
-	buttonBgHover: { id: 'settings.theme-studio.button-bg-hover', defaultMessage: 'Кнопки при наведении' },
-	buttonBgActive: { id: 'settings.theme-studio.button-bg-active', defaultMessage: 'Нажатые кнопки' },
-	buttonBorder: { id: 'settings.theme-studio.button-border', defaultMessage: 'Обводка кнопок и полей' },
+	buttonBgHover: {
+		id: 'settings.theme-studio.button-bg-hover',
+		defaultMessage: 'Кнопки при наведении',
+	},
+	buttonBgActive: {
+		id: 'settings.theme-studio.button-bg-active',
+		defaultMessage: 'Нажатые кнопки',
+	},
+	buttonBorder: {
+		id: 'settings.theme-studio.button-border',
+		defaultMessage: 'Обводка кнопок и полей',
+	},
 	buttonSelected: { id: 'settings.theme-studio.button-selected', defaultMessage: 'Активный выбор' },
-	buttonSelectedText: { id: 'settings.theme-studio.button-selected-text', defaultMessage: 'Текст активного выбора' },
+	buttonSelectedText: {
+		id: 'settings.theme-studio.button-selected-text',
+		defaultMessage: 'Текст активного выбора',
+	},
 	divider: { id: 'settings.theme-studio.divider', defaultMessage: 'Разделители и тонкие линии' },
 	textPrimary: { id: 'settings.theme-studio.text-primary', defaultMessage: 'Заголовки' },
 	textDefault: { id: 'settings.theme-studio.text-default', defaultMessage: 'Основной текст' },
@@ -124,7 +144,10 @@ const messages = defineMessages({
 		id: 'settings.theme-studio.brand-tint-strength',
 		defaultMessage: 'Общая сила фирменного оттенка',
 	},
-	brandHighlight: { id: 'settings.theme-studio.brand-highlight', defaultMessage: 'Подсветка акцента' },
+	brandHighlight: {
+		id: 'settings.theme-studio.brand-highlight',
+		defaultMessage: 'Подсветка акцента',
+	},
 	brandHighlightOpacity: {
 		id: 'settings.theme-studio.brand-highlight-opacity',
 		defaultMessage: 'Прозрачность подсветки акцента',
@@ -184,8 +207,14 @@ const messages = defineMessages({
 	info: { id: 'settings.theme-studio.info', defaultMessage: 'Информация и ссылки' },
 	utility: { id: 'settings.theme-studio.utility', defaultMessage: 'Дополнительный акцент' },
 	glassTint: { id: 'settings.theme-studio.glass-tint', defaultMessage: 'Цвет стеклянной подложки' },
-	glassBorderColor: { id: 'settings.theme-studio.glass-border-color', defaultMessage: 'Цвет стеклянной обводки' },
-	buttonBgOpacity: { id: 'settings.theme-studio.button-bg-opacity', defaultMessage: 'Прозрачность обычных кнопок' },
+	glassBorderColor: {
+		id: 'settings.theme-studio.glass-border-color',
+		defaultMessage: 'Цвет стеклянной обводки',
+	},
+	buttonBgOpacity: {
+		id: 'settings.theme-studio.button-bg-opacity',
+		defaultMessage: 'Прозрачность обычных кнопок',
+	},
 	buttonBorderOpacity: {
 		id: 'settings.theme-studio.button-border-opacity',
 		defaultMessage: 'Прозрачность обводки кнопок',
@@ -194,9 +223,18 @@ const messages = defineMessages({
 		id: 'settings.theme-studio.button-selected-opacity',
 		defaultMessage: 'Прозрачность активного выбора',
 	},
-	glassOpacity: { id: 'settings.theme-studio.glass-opacity', defaultMessage: 'Прозрачность стекла' },
-	glassStrong: { id: 'settings.theme-studio.glass-strong', defaultMessage: 'Прозрачность плотного стекла' },
-	glassBorder: { id: 'settings.theme-studio.glass-border', defaultMessage: 'Прозрачность стеклянной обводки' },
+	glassOpacity: {
+		id: 'settings.theme-studio.glass-opacity',
+		defaultMessage: 'Прозрачность стекла',
+	},
+	glassStrong: {
+		id: 'settings.theme-studio.glass-strong',
+		defaultMessage: 'Прозрачность плотного стекла',
+	},
+	glassBorder: {
+		id: 'settings.theme-studio.glass-border',
+		defaultMessage: 'Прозрачность стеклянной обводки',
+	},
 })
 
 const undoHistory = ref<CustomTheme[]>([])
@@ -242,136 +280,184 @@ function setDraft(theme: CustomTheme | null, options: { resetHistory?: boolean }
 setDraft(themeStore.customThemes.find((theme) => theme.id === editorThemeId.value) ?? null)
 
 const presetThemes = getCustomThemeBaseOptions()
-const coreFields = computed(() => [
-	{ key: 'surface1', label: formatMessage(messages.canvas) },
-	{ key: 'surface2', label: formatMessage(messages.layer2) },
-	{ key: 'surface3', label: formatMessage(messages.layer3) },
-	{ key: 'surface4', label: formatMessage(messages.cards) },
-	{ key: 'surface5', label: formatMessage(messages.hoverLayer) },
-	{ key: 'textPrimary', label: formatMessage(messages.textPrimary) },
-	{ key: 'textDefault', label: formatMessage(messages.textDefault) },
-	{ key: 'textSecondary', label: formatMessage(messages.textSecondary) },
-] as const)
+const coreFields = computed(
+	() =>
+		[
+			{ key: 'surface1', label: formatMessage(messages.canvas) },
+			{ key: 'surface2', label: formatMessage(messages.layer2) },
+			{ key: 'surface3', label: formatMessage(messages.layer3) },
+			{ key: 'surface4', label: formatMessage(messages.cards) },
+			{ key: 'surface5', label: formatMessage(messages.hoverLayer) },
+			{ key: 'textPrimary', label: formatMessage(messages.textPrimary) },
+			{ key: 'textDefault', label: formatMessage(messages.textDefault) },
+			{ key: 'textSecondary', label: formatMessage(messages.textSecondary) },
+		] as const,
+)
 
-const uiFields = computed(() => [
-	{ key: 'raisedBg', label: formatMessage(messages.raisedBg) },
-	{ key: 'raisedBgHover', label: formatMessage(messages.raisedBgHover) },
-	{ key: 'buttonBg', label: formatMessage(messages.buttonBg) },
-	{ key: 'buttonBgHover', label: formatMessage(messages.buttonBgHover) },
-	{ key: 'buttonBgActive', label: formatMessage(messages.buttonBgActive) },
-	{ key: 'buttonBorder', label: formatMessage(messages.buttonBorder) },
-	{ key: 'buttonSelected', label: formatMessage(messages.buttonSelected) },
-	{ key: 'buttonSelectedText', label: formatMessage(messages.buttonSelectedText) },
-	{ key: 'divider', label: formatMessage(messages.divider) },
-] as const)
+const uiFields = computed(
+	() =>
+		[
+			{ key: 'raisedBg', label: formatMessage(messages.raisedBg) },
+			{ key: 'raisedBgHover', label: formatMessage(messages.raisedBgHover) },
+			{ key: 'buttonBg', label: formatMessage(messages.buttonBg) },
+			{ key: 'buttonBgHover', label: formatMessage(messages.buttonBgHover) },
+			{ key: 'buttonBgActive', label: formatMessage(messages.buttonBgActive) },
+			{ key: 'buttonBorder', label: formatMessage(messages.buttonBorder) },
+			{ key: 'buttonSelected', label: formatMessage(messages.buttonSelected) },
+			{ key: 'buttonSelectedText', label: formatMessage(messages.buttonSelectedText) },
+			{ key: 'divider', label: formatMessage(messages.divider) },
+		] as const,
+)
 
-const uiSliderFields = computed(() => [
-	{ key: 'buttonBgOpacity', label: formatMessage(messages.buttonBgOpacity), min: 0, max: 100, suffix: '%' },
-	{
-		key: 'buttonBorderOpacity',
-		label: formatMessage(messages.buttonBorderOpacity),
-		min: 0,
-		max: 100,
-		suffix: '%',
-	},
-	{
-		key: 'buttonSelectedOpacity',
-		label: formatMessage(messages.buttonSelectedOpacity),
-		min: 0,
-		max: 100,
-		suffix: '%',
-	},
-] as const)
+const uiSliderFields = computed(
+	() =>
+		[
+			{
+				key: 'buttonBgOpacity',
+				label: formatMessage(messages.buttonBgOpacity),
+				min: 0,
+				max: 100,
+				suffix: '%',
+			},
+			{
+				key: 'buttonBorderOpacity',
+				label: formatMessage(messages.buttonBorderOpacity),
+				min: 0,
+				max: 100,
+				suffix: '%',
+			},
+			{
+				key: 'buttonSelectedOpacity',
+				label: formatMessage(messages.buttonSelectedOpacity),
+				min: 0,
+				max: 100,
+				suffix: '%',
+			},
+		] as const,
+)
 
-const stateFields = computed(() => [
-	{ key: 'success', label: formatMessage(messages.success) },
-	{ key: 'warning', label: formatMessage(messages.warning) },
-	{ key: 'danger', label: formatMessage(messages.danger) },
-	{ key: 'info', label: formatMessage(messages.info) },
-	{ key: 'utility', label: formatMessage(messages.utility) },
-] as const)
+const stateFields = computed(
+	() =>
+		[
+			{ key: 'success', label: formatMessage(messages.success) },
+			{ key: 'warning', label: formatMessage(messages.warning) },
+			{ key: 'danger', label: formatMessage(messages.danger) },
+			{ key: 'info', label: formatMessage(messages.info) },
+			{ key: 'utility', label: formatMessage(messages.utility) },
+		] as const,
+)
 
-const accentColorFields = computed(() => [
-	{ key: 'brand', label: formatMessage(messages.brand) },
-	{ key: 'brandHighlight', label: formatMessage(messages.brandHighlight) },
-	{ key: 'brandShadow', label: formatMessage(messages.brandShadow) },
-	{ key: 'brandGradientStart', label: formatMessage(messages.brandGradientStart) },
-	{ key: 'brandGradientEnd', label: formatMessage(messages.brandGradientEnd) },
-	{ key: 'brandGradientStrongStart', label: formatMessage(messages.brandGradientStrongStart) },
-	{ key: 'brandGradientStrongEnd', label: formatMessage(messages.brandGradientStrongEnd) },
-	{ key: 'brandGradientBorderColor', label: formatMessage(messages.brandGradientBorderColor) },
-	{ key: 'loadingBarEnd', label: formatMessage(messages.loadingBarEnd) },
-] as const)
+const accentColorFields = computed(
+	() =>
+		[
+			{ key: 'brand', label: formatMessage(messages.brand) },
+			{ key: 'brandHighlight', label: formatMessage(messages.brandHighlight) },
+			{ key: 'brandShadow', label: formatMessage(messages.brandShadow) },
+			{ key: 'brandGradientStart', label: formatMessage(messages.brandGradientStart) },
+			{ key: 'brandGradientEnd', label: formatMessage(messages.brandGradientEnd) },
+			{ key: 'brandGradientStrongStart', label: formatMessage(messages.brandGradientStrongStart) },
+			{ key: 'brandGradientStrongEnd', label: formatMessage(messages.brandGradientStrongEnd) },
+			{ key: 'brandGradientBorderColor', label: formatMessage(messages.brandGradientBorderColor) },
+			{ key: 'loadingBarEnd', label: formatMessage(messages.loadingBarEnd) },
+		] as const,
+)
 
-const accentSliderFields = computed(() => [
-	{
-		key: 'brandTintStrength',
-		label: formatMessage(messages.brandTintStrength),
-		min: 0,
-		max: 100,
-		suffix: '%',
-	},
-	{
-		key: 'brandHighlightOpacity',
-		label: formatMessage(messages.brandHighlightOpacity),
-		min: 0,
-		max: 100,
-		suffix: '%',
-	},
-	{
-		key: 'brandShadowOpacity',
-		label: formatMessage(messages.brandShadowOpacity),
-		min: 0,
-		max: 100,
-		suffix: '%',
-	},
-	{
-		key: 'brandGradientStartOpacity',
-		label: formatMessage(messages.brandGradientStartOpacity),
-		min: 0,
-		max: 100,
-		suffix: '%',
-	},
-	{
-		key: 'brandGradientEndOpacity',
-		label: formatMessage(messages.brandGradientEndOpacity),
-		min: 0,
-		max: 100,
-		suffix: '%',
-	},
-	{
-		key: 'brandGradientStrongStartOpacity',
-		label: formatMessage(messages.brandGradientStrongStartOpacity),
-		min: 0,
-		max: 100,
-		suffix: '%',
-	},
-	{
-		key: 'brandGradientStrongEndOpacity',
-		label: formatMessage(messages.brandGradientStrongEndOpacity),
-		min: 0,
-		max: 100,
-		suffix: '%',
-	},
-	{
-		key: 'brandGradientBorderOpacity',
-		label: formatMessage(messages.brandGradientBorderOpacity),
-		min: 0,
-		max: 100,
-		suffix: '%',
-	},
-] as const)
+const accentSliderFields = computed(
+	() =>
+		[
+			{
+				key: 'brandTintStrength',
+				label: formatMessage(messages.brandTintStrength),
+				min: 0,
+				max: 100,
+				suffix: '%',
+			},
+			{
+				key: 'brandHighlightOpacity',
+				label: formatMessage(messages.brandHighlightOpacity),
+				min: 0,
+				max: 100,
+				suffix: '%',
+			},
+			{
+				key: 'brandShadowOpacity',
+				label: formatMessage(messages.brandShadowOpacity),
+				min: 0,
+				max: 100,
+				suffix: '%',
+			},
+			{
+				key: 'brandGradientStartOpacity',
+				label: formatMessage(messages.brandGradientStartOpacity),
+				min: 0,
+				max: 100,
+				suffix: '%',
+			},
+			{
+				key: 'brandGradientEndOpacity',
+				label: formatMessage(messages.brandGradientEndOpacity),
+				min: 0,
+				max: 100,
+				suffix: '%',
+			},
+			{
+				key: 'brandGradientStrongStartOpacity',
+				label: formatMessage(messages.brandGradientStrongStartOpacity),
+				min: 0,
+				max: 100,
+				suffix: '%',
+			},
+			{
+				key: 'brandGradientStrongEndOpacity',
+				label: formatMessage(messages.brandGradientStrongEndOpacity),
+				min: 0,
+				max: 100,
+				suffix: '%',
+			},
+			{
+				key: 'brandGradientBorderOpacity',
+				label: formatMessage(messages.brandGradientBorderOpacity),
+				min: 0,
+				max: 100,
+				suffix: '%',
+			},
+		] as const,
+)
 
-const glassColorFields = computed(() => [
-	{ key: 'glassTint', label: formatMessage(messages.glassTint) },
-	{ key: 'glassBorderColor', label: formatMessage(messages.glassBorderColor) },
-] as const)
+const glassColorFields = computed(
+	() =>
+		[
+			{ key: 'glassTint', label: formatMessage(messages.glassTint) },
+			{ key: 'glassBorderColor', label: formatMessage(messages.glassBorderColor) },
+		] as const,
+)
 
-const glassSliderFields = computed(() => [
-	{ key: 'glassOpacity', label: formatMessage(messages.glassOpacity), min: 10, max: 100, suffix: '%' },
-	{ key: 'glassStrongOpacity', label: formatMessage(messages.glassStrong), min: 10, max: 100, suffix: '%' },
-	{ key: 'glassBorderOpacity', label: formatMessage(messages.glassBorder), min: 0, max: 40, suffix: '%' },
-] as const)
+const glassSliderFields = computed(
+	() =>
+		[
+			{
+				key: 'glassOpacity',
+				label: formatMessage(messages.glassOpacity),
+				min: 10,
+				max: 100,
+				suffix: '%',
+			},
+			{
+				key: 'glassStrongOpacity',
+				label: formatMessage(messages.glassStrong),
+				min: 10,
+				max: 100,
+				suffix: '%',
+			},
+			{
+				key: 'glassBorderOpacity',
+				label: formatMessage(messages.glassBorder),
+				min: 0,
+				max: 40,
+				suffix: '%',
+			},
+		] as const,
+)
 
 function themeLabel(theme: ColorTheme) {
 	return formatMessage({ id: `settings.display.theme.${theme}`, defaultMessage: theme })
@@ -392,7 +478,10 @@ async function pickPreset(theme: CustomThemeBase) {
 }
 
 function createTheme() {
-	const theme = createEmptyCustomTheme(selectedPreset.value, snapshotPaletteFromTheme(selectedPreset.value))
+	const theme = createEmptyCustomTheme(
+		selectedPreset.value,
+		snapshotPaletteFromTheme(selectedPreset.value),
+	)
 	theme.name = `Custom ${themeStore.customThemes.length + 1}`
 	themeStore.saveCustomThemes([...themeStore.customThemes, theme])
 	editorThemeId.value = theme.id
@@ -528,12 +617,15 @@ function updatePalette(key: keyof CustomTheme['palette'], value: string | number
 		return
 	}
 
-	applyDraftEdit((theme) => ({
-		...theme,
-		palette: { ...theme.palette, [key]: value as never },
-	}), {
-		recordHistory: false,
-	})
+	applyDraftEdit(
+		(theme) => ({
+			...theme,
+			palette: { ...theme.palette, [key]: value as never },
+		}),
+		{
+			recordHistory: false,
+		},
+	)
 }
 
 function updatePaletteHex(key: keyof CustomTheme['palette'], event: Event) {
@@ -632,9 +724,19 @@ async function importTheme(event: Event) {
 	<div class="studio">
 		<header class="studio__intro studio__intro--compact">
 			<div class="studio__intro-actions">
-				<Button @click="createBlankTheme"><PlusIcon /> {{ formatMessage(messages.newTheme) }}</Button>
-				<Button @click="openImport"><UploadIcon /> {{ formatMessage(messages.importTheme) }}</Button>
-				<input ref="importInput" class="hidden" type="file" accept=".json,.revoria-theme.json" @change="importTheme" />
+				<Button @click="createBlankTheme"
+					><PlusIcon /> {{ formatMessage(messages.newTheme) }}</Button
+				>
+				<Button @click="openImport"
+					><UploadIcon /> {{ formatMessage(messages.importTheme) }}</Button
+				>
+				<input
+					ref="importInput"
+					class="hidden"
+					type="file"
+					accept=".json,.revoria-theme.json"
+					@change="importTheme"
+				/>
 			</div>
 		</header>
 
@@ -665,7 +767,9 @@ async function importTheme(event: Event) {
 					</div>
 
 					<div class="preset-actions">
-						<Button @click="createTheme"><PlusIcon /> {{ formatMessage(messages.createFromPreset) }}</Button>
+						<Button @click="createTheme"
+							><PlusIcon /> {{ formatMessage(messages.createFromPreset) }}</Button
+						>
 					</div>
 				</section>
 
@@ -673,7 +777,9 @@ async function importTheme(event: Event) {
 					<header class="studio-panel__header">
 						<div class="studio-panel__title">{{ formatMessage(messages.custom) }}</div>
 					</header>
-					<div v-if="themeStore.customThemes.length === 0" class="studio__empty">{{ formatMessage(messages.empty) }}</div>
+					<div v-if="themeStore.customThemes.length === 0" class="studio__empty">
+						{{ formatMessage(messages.empty) }}
+					</div>
 					<div v-else class="theme-library">
 						<button
 							v-for="theme in themeStore.customThemes"
@@ -682,11 +788,19 @@ async function importTheme(event: Event) {
 							:class="{ 'theme-card--active': editorThemeId === theme.id }"
 							@click="selectTheme(theme.id)"
 						>
-							<div class="theme-card__swatch" :class="getCustomThemePreviewClasses(theme.baseTheme)" :style="customThemeToCssVariables(theme)" />
+							<div
+								class="theme-card__swatch"
+								:class="getCustomThemePreviewClasses(theme.baseTheme)"
+								:style="customThemeToCssVariables(theme)"
+							/>
 							<div class="theme-card__body">
 								<div class="theme-card__title-row">
 									<div class="theme-card__title">{{ theme.name }}</div>
-									<span v-if="themeStore.activeCustomThemeId === theme.id" class="theme-card__pill">{{ formatMessage(messages.active) }}</span>
+									<span
+										v-if="themeStore.activeCustomThemeId === theme.id"
+										class="theme-card__pill"
+										>{{ formatMessage(messages.active) }}</span
+									>
 								</div>
 								<div class="theme-card__meta">{{ themeLabel(theme.baseTheme) }}</div>
 							</div>
@@ -700,11 +814,17 @@ async function importTheme(event: Event) {
 					<header class="editor__header">
 						<div>
 							<div class="editor__title">{{ draftTheme.name }}</div>
-							<div class="editor__sub">{{ formatMessage(messages.editor) }} · {{ themeLabel(draftTheme.baseTheme) }}</div>
+							<div class="editor__sub">
+								{{ formatMessage(messages.editor) }} · {{ themeLabel(draftTheme.baseTheme) }}
+							</div>
 						</div>
 						<div class="editor__header-actions">
-							<Button :disabled="undoHistory.length === 0" @click="undoDraft"><UndoIcon /> {{ formatMessage(messages.undo) }}</Button>
-							<Button :disabled="redoHistory.length === 0" @click="redoDraft"><RedoIcon /> {{ formatMessage(messages.redo) }}</Button>
+							<Button :disabled="undoHistory.length === 0" @click="undoDraft"
+								><UndoIcon /> {{ formatMessage(messages.undo) }}</Button
+							>
+							<Button :disabled="redoHistory.length === 0" @click="redoDraft"
+								><RedoIcon /> {{ formatMessage(messages.redo) }}</Button
+							>
 						</div>
 					</header>
 
@@ -714,15 +834,29 @@ async function importTheme(event: Event) {
 							<div class="editor__form">
 								<label class="field">
 									<span>{{ formatMessage(messages.name) }}</span>
-									<input :value="draftTheme.name" type="text" @input="updateField('name', ($event.target as HTMLInputElement).value)" />
+									<input
+										:value="draftTheme.name"
+										type="text"
+										@input="updateField('name', ($event.target as HTMLInputElement).value)"
+									/>
 								</label>
 								<label class="field">
 									<span>{{ formatMessage(messages.author) }}</span>
-									<input :value="draftTheme.author" type="text" @input="updateField('author', ($event.target as HTMLInputElement).value)" />
+									<input
+										:value="draftTheme.author"
+										type="text"
+										@input="updateField('author', ($event.target as HTMLInputElement).value)"
+									/>
 								</label>
 								<label class="field field--full">
 									<span>{{ formatMessage(messages.descriptionLabel) }}</span>
-									<textarea :value="draftTheme.description" rows="3" @input="updateField('description', ($event.target as HTMLTextAreaElement).value)" />
+									<textarea
+										:value="draftTheme.description"
+										rows="3"
+										@input="
+											updateField('description', ($event.target as HTMLTextAreaElement).value)
+										"
+									/>
 								</label>
 							</div>
 						</section>
@@ -731,16 +865,31 @@ async function importTheme(event: Event) {
 							<div class="editor-section__title">{{ formatMessage(messages.colorsSection) }}</div>
 							<div class="color-grid">
 								<label v-for="field in coreFields" :key="field.key" class="color-field">
-									<div class="field-heading"><span>{{ field.label }}</span></div>
+									<div class="field-heading">
+										<span>{{ field.label }}</span>
+									</div>
 									<div class="color-field__row">
 										<input
 											:value="draftTheme.palette[field.key as keyof typeof draftTheme.palette]"
 											type="color"
 											@focus="beginPaletteInteraction(field.key as keyof typeof draftTheme.palette)"
-											@input="updatePalette(field.key as keyof typeof draftTheme.palette, ($event.target as HTMLInputElement).value)"
-											@change="commitPaletteInteraction(field.key as keyof typeof draftTheme.palette)"
+											@input="
+												updatePalette(
+													field.key as keyof typeof draftTheme.palette,
+													($event.target as HTMLInputElement).value,
+												)
+											"
+											@change="
+												commitPaletteInteraction(field.key as keyof typeof draftTheme.palette)
+											"
 										/>
-										<input :value="draftTheme.palette[field.key as keyof typeof draftTheme.palette]" type="text" @change="updatePaletteHex(field.key as keyof typeof draftTheme.palette, $event)" />
+										<input
+											:value="draftTheme.palette[field.key as keyof typeof draftTheme.palette]"
+											type="text"
+											@change="
+												updatePaletteHex(field.key as keyof typeof draftTheme.palette, $event)
+											"
+										/>
 									</div>
 								</label>
 							</div>
@@ -750,29 +899,55 @@ async function importTheme(event: Event) {
 							<div class="editor-section__title">{{ formatMessage(messages.uiSection) }}</div>
 							<div class="color-grid color-grid--compact">
 								<label v-for="field in uiFields" :key="field.key" class="color-field">
-									<div class="field-heading"><span>{{ field.label }}</span></div>
+									<div class="field-heading">
+										<span>{{ field.label }}</span>
+									</div>
 									<div class="color-field__row">
 										<input
 											:value="draftTheme.palette[field.key as keyof typeof draftTheme.palette]"
 											type="color"
 											@focus="beginPaletteInteraction(field.key as keyof typeof draftTheme.palette)"
-											@input="updatePalette(field.key as keyof typeof draftTheme.palette, ($event.target as HTMLInputElement).value)"
-											@change="commitPaletteInteraction(field.key as keyof typeof draftTheme.palette)"
+											@input="
+												updatePalette(
+													field.key as keyof typeof draftTheme.palette,
+													($event.target as HTMLInputElement).value,
+												)
+											"
+											@change="
+												commitPaletteInteraction(field.key as keyof typeof draftTheme.palette)
+											"
 										/>
-										<input :value="draftTheme.palette[field.key as keyof typeof draftTheme.palette]" type="text" @change="updatePaletteHex(field.key as keyof typeof draftTheme.palette, $event)" />
+										<input
+											:value="draftTheme.palette[field.key as keyof typeof draftTheme.palette]"
+											type="text"
+											@change="
+												updatePaletteHex(field.key as keyof typeof draftTheme.palette, $event)
+											"
+										/>
 									</div>
 								</label>
 							</div>
 							<div class="slider-grid">
 								<label v-for="field in uiSliderFields" :key="field.key" class="slider-field">
-									<div><span>{{ field.label }}</span><strong>{{ draftTheme.palette[field.key as keyof typeof draftTheme.palette] }}{{ field.suffix }}</strong></div>
+									<div>
+										<span>{{ field.label }}</span
+										><strong
+											>{{ draftTheme.palette[field.key as keyof typeof draftTheme.palette]
+											}}{{ field.suffix }}</strong
+										>
+									</div>
 									<input
 										:value="draftTheme.palette[field.key as keyof typeof draftTheme.palette]"
 										type="range"
 										:min="field.min"
 										:max="field.max"
 										@focus="beginPaletteInteraction(field.key as keyof typeof draftTheme.palette)"
-										@input="updatePalette(field.key as keyof typeof draftTheme.palette, Number(($event.target as HTMLInputElement).value))"
+										@input="
+											updatePalette(
+												field.key as keyof typeof draftTheme.palette,
+												Number(($event.target as HTMLInputElement).value),
+											)
+										"
 										@change="commitPaletteInteraction(field.key as keyof typeof draftTheme.palette)"
 									/>
 								</label>
@@ -783,16 +958,31 @@ async function importTheme(event: Event) {
 							<div class="editor-section__title">{{ formatMessage(messages.stateSection) }}</div>
 							<div class="color-grid color-grid--compact">
 								<label v-for="field in stateFields" :key="field.key" class="color-field">
-									<div class="field-heading"><span>{{ field.label }}</span></div>
+									<div class="field-heading">
+										<span>{{ field.label }}</span>
+									</div>
 									<div class="color-field__row">
 										<input
 											:value="draftTheme.palette[field.key as keyof typeof draftTheme.palette]"
 											type="color"
 											@focus="beginPaletteInteraction(field.key as keyof typeof draftTheme.palette)"
-											@input="updatePalette(field.key as keyof typeof draftTheme.palette, ($event.target as HTMLInputElement).value)"
-											@change="commitPaletteInteraction(field.key as keyof typeof draftTheme.palette)"
+											@input="
+												updatePalette(
+													field.key as keyof typeof draftTheme.palette,
+													($event.target as HTMLInputElement).value,
+												)
+											"
+											@change="
+												commitPaletteInteraction(field.key as keyof typeof draftTheme.palette)
+											"
 										/>
-										<input :value="draftTheme.palette[field.key as keyof typeof draftTheme.palette]" type="text" @change="updatePaletteHex(field.key as keyof typeof draftTheme.palette, $event)" />
+										<input
+											:value="draftTheme.palette[field.key as keyof typeof draftTheme.palette]"
+											type="text"
+											@change="
+												updatePaletteHex(field.key as keyof typeof draftTheme.palette, $event)
+											"
+										/>
 									</div>
 								</label>
 							</div>
@@ -802,29 +992,55 @@ async function importTheme(event: Event) {
 							<div class="editor-section__title">{{ formatMessage(messages.accentSection) }}</div>
 							<div class="color-grid color-grid--compact">
 								<label v-for="field in accentColorFields" :key="field.key" class="color-field">
-									<div class="field-heading"><span>{{ field.label }}</span></div>
+									<div class="field-heading">
+										<span>{{ field.label }}</span>
+									</div>
 									<div class="color-field__row">
 										<input
 											:value="draftTheme.palette[field.key as keyof typeof draftTheme.palette]"
 											type="color"
 											@focus="beginPaletteInteraction(field.key as keyof typeof draftTheme.palette)"
-											@input="updatePalette(field.key as keyof typeof draftTheme.palette, ($event.target as HTMLInputElement).value)"
-											@change="commitPaletteInteraction(field.key as keyof typeof draftTheme.palette)"
+											@input="
+												updatePalette(
+													field.key as keyof typeof draftTheme.palette,
+													($event.target as HTMLInputElement).value,
+												)
+											"
+											@change="
+												commitPaletteInteraction(field.key as keyof typeof draftTheme.palette)
+											"
 										/>
-										<input :value="draftTheme.palette[field.key as keyof typeof draftTheme.palette]" type="text" @change="updatePaletteHex(field.key as keyof typeof draftTheme.palette, $event)" />
+										<input
+											:value="draftTheme.palette[field.key as keyof typeof draftTheme.palette]"
+											type="text"
+											@change="
+												updatePaletteHex(field.key as keyof typeof draftTheme.palette, $event)
+											"
+										/>
 									</div>
 								</label>
 							</div>
 							<div class="slider-grid">
 								<label v-for="field in accentSliderFields" :key="field.key" class="slider-field">
-									<div><span>{{ field.label }}</span><strong>{{ draftTheme.palette[field.key as keyof typeof draftTheme.palette] }}{{ field.suffix }}</strong></div>
+									<div>
+										<span>{{ field.label }}</span
+										><strong
+											>{{ draftTheme.palette[field.key as keyof typeof draftTheme.palette]
+											}}{{ field.suffix }}</strong
+										>
+									</div>
 									<input
 										:value="draftTheme.palette[field.key as keyof typeof draftTheme.palette]"
 										type="range"
 										:min="field.min"
 										:max="field.max"
 										@focus="beginPaletteInteraction(field.key as keyof typeof draftTheme.palette)"
-										@input="updatePalette(field.key as keyof typeof draftTheme.palette, Number(($event.target as HTMLInputElement).value))"
+										@input="
+											updatePalette(
+												field.key as keyof typeof draftTheme.palette,
+												Number(($event.target as HTMLInputElement).value),
+											)
+										"
 										@change="commitPaletteInteraction(field.key as keyof typeof draftTheme.palette)"
 									/>
 								</label>
@@ -841,21 +1057,45 @@ async function importTheme(event: Event) {
 											:value="draftTheme.palette[field.key as keyof typeof draftTheme.palette]"
 											type="color"
 											@focus="beginPaletteInteraction(field.key as keyof typeof draftTheme.palette)"
-											@input="updatePalette(field.key as keyof typeof draftTheme.palette, ($event.target as HTMLInputElement).value)"
-											@change="commitPaletteInteraction(field.key as keyof typeof draftTheme.palette)"
+											@input="
+												updatePalette(
+													field.key as keyof typeof draftTheme.palette,
+													($event.target as HTMLInputElement).value,
+												)
+											"
+											@change="
+												commitPaletteInteraction(field.key as keyof typeof draftTheme.palette)
+											"
 										/>
-										<input :value="draftTheme.palette[field.key as keyof typeof draftTheme.palette]" type="text" @change="updatePaletteHex(field.key as keyof typeof draftTheme.palette, $event)" />
+										<input
+											:value="draftTheme.palette[field.key as keyof typeof draftTheme.palette]"
+											type="text"
+											@change="
+												updatePaletteHex(field.key as keyof typeof draftTheme.palette, $event)
+											"
+										/>
 									</div>
 								</label>
 								<label v-for="field in glassSliderFields" :key="field.key" class="slider-field">
-									<div><span>{{ field.label }}</span><strong>{{ draftTheme.palette[field.key as keyof typeof draftTheme.palette] }}{{ field.suffix }}</strong></div>
+									<div>
+										<span>{{ field.label }}</span
+										><strong
+											>{{ draftTheme.palette[field.key as keyof typeof draftTheme.palette]
+											}}{{ field.suffix }}</strong
+										>
+									</div>
 									<input
 										:value="draftTheme.palette[field.key as keyof typeof draftTheme.palette]"
 										type="range"
 										:min="field.min"
 										:max="field.max"
 										@focus="beginPaletteInteraction(field.key as keyof typeof draftTheme.palette)"
-										@input="updatePalette(field.key as keyof typeof draftTheme.palette, Number(($event.target as HTMLInputElement).value))"
+										@input="
+											updatePalette(
+												field.key as keyof typeof draftTheme.palette,
+												Number(($event.target as HTMLInputElement).value),
+											)
+										"
 										@change="commitPaletteInteraction(field.key as keyof typeof draftTheme.palette)"
 									/>
 								</label>
@@ -864,17 +1104,25 @@ async function importTheme(event: Event) {
 					</div>
 
 					<footer class="editor__toolbar">
-						<Button @click="duplicateDraft"><CopyIcon /> {{ formatMessage(messages.duplicate) }}</Button>
-						<Button @click="exportDraft"><DownloadIcon /> {{ formatMessage(messages.exportTheme) }}</Button>
+						<Button @click="duplicateDraft"
+							><CopyIcon /> {{ formatMessage(messages.duplicate) }}</Button
+						>
+						<Button @click="exportDraft"
+							><DownloadIcon /> {{ formatMessage(messages.exportTheme) }}</Button
+						>
 						<Button @click="copyJson"><CopyIcon /> {{ formatMessage(messages.copyJson) }}</Button>
-						<Button class="editor__delete" @click="deleteDraft"><TrashIcon /> {{ formatMessage(messages.deleteTheme) }}</Button>
+						<Button class="editor__delete" @click="deleteDraft"
+							><TrashIcon /> {{ formatMessage(messages.deleteTheme) }}</Button
+						>
 					</footer>
 				</div>
 
 				<div v-else class="editor editor--empty">
 					<div class="editor__title">{{ formatMessage(messages.custom) }}</div>
 					<div class="editor__sub">{{ formatMessage(messages.empty) }}</div>
-					<Button @click="createTheme"><PlusIcon /> {{ formatMessage(messages.createFromPreset) }}</Button>
+					<Button @click="createTheme"
+						><PlusIcon /> {{ formatMessage(messages.createFromPreset) }}</Button
+					>
 				</div>
 			</section>
 		</div>
@@ -885,7 +1133,7 @@ async function importTheme(event: Event) {
 .studio {
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+	gap: 0.85rem;
 }
 
 .studio__intro,
@@ -905,7 +1153,7 @@ async function importTheme(event: Event) {
 .studio__title,
 .editor__title {
 	margin: 0;
-	font-size: 1.35rem;
+	font-size: 1.08rem;
 	font-weight: 900;
 	color: var(--color-contrast);
 }
@@ -917,24 +1165,25 @@ async function importTheme(event: Event) {
 .studio__empty {
 	margin: 0;
 	color: var(--color-secondary);
-	line-height: 1.5;
+	font-size: 0.84rem;
+	line-height: 1.4;
 }
 
 .studio__intro-actions,
 .editor__header-actions,
 .preset-actions {
 	display: flex;
-	gap: 0.75rem;
+	gap: 0.5rem;
 	flex-wrap: wrap;
 }
 
 .studio__notice,
 .studio__empty,
 .preset-actions {
-	padding: 0.9rem 1rem;
-	border-radius: 1rem;
-	border: 1px solid color-mix(in srgb, var(--glass-border) 78%, transparent);
-	background: color-mix(in srgb, var(--color-glass-bg-strong) 94%, transparent);
+	padding: 0.78rem 0.9rem;
+	border-radius: 0.78rem;
+	border: 1px solid color-mix(in srgb, var(--glass-border) 64%, transparent);
+	background: color-mix(in srgb, var(--color-button-bg) 34%, transparent);
 }
 
 .studio__notice--error {
@@ -943,29 +1192,28 @@ async function importTheme(event: Event) {
 
 .studio__layout {
 	display: grid;
-	grid-template-columns: minmax(320px, 365px) minmax(0, 1fr);
-	gap: 1rem;
+	grid-template-columns: minmax(18rem, 22rem) minmax(0, 1fr);
+	gap: 0.85rem;
 	align-items: start;
 }
 
 .studio__sidebar {
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+	gap: 0.85rem;
 }
 
 .studio-panel {
-	border-radius: 1.45rem;
-	border: 1px solid color-mix(in srgb, var(--glass-border) 86%, transparent);
-	background: color-mix(in srgb, var(--color-glass-bg-strong) 96%, transparent);
-	box-shadow: var(--glass-shadow);
-	backdrop-filter: blur(var(--glass-blur));
+	border-radius: 0.9rem;
+	border: 1px solid color-mix(in srgb, var(--glass-border) 64%, transparent);
+	background: color-mix(in srgb, var(--color-button-bg) 28%, transparent);
+	box-shadow: none;
 }
 
 .studio-panel--presets,
 .studio-panel--library,
 .studio-panel--editor {
-	padding: 1.1rem;
+	padding: 0.9rem;
 }
 
 .studio-panel__header {
@@ -973,14 +1221,14 @@ async function importTheme(event: Event) {
 	align-items: flex-start;
 	justify-content: space-between;
 	gap: 1rem;
-	margin-bottom: 0.95rem;
+	margin-bottom: 0.75rem;
 }
 
 .studio-panel__title,
 .editor-section__title {
-	font-size: 0.78rem;
+	font-size: 0.76rem;
 	font-weight: 800;
-	letter-spacing: 0.08em;
+	letter-spacing: 0.04em;
 	text-transform: uppercase;
 	color: var(--color-secondary);
 }
@@ -988,38 +1236,37 @@ async function importTheme(event: Event) {
 .preset-grid {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 0.7rem;
+	gap: 0.55rem;
 }
 
 .preset-tile,
 .theme-card {
 	width: 100%;
-	border: 1px solid color-mix(in srgb, var(--glass-border) 76%, transparent);
-	background: color-mix(in srgb, var(--color-button-bg) 90%, transparent);
+	border: 1px solid color-mix(in srgb, var(--glass-border) 60%, transparent);
+	background: color-mix(in srgb, var(--color-bg) 38%, transparent);
 	color: var(--color-contrast);
 	cursor: pointer;
 	text-align: left;
 	transition:
-		transform 160ms ease,
-		border-color 160ms ease,
-		background 160ms ease,
-		box-shadow 160ms ease;
+		transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		background 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .preset-tile:hover,
 .theme-card:hover {
 	transform: translateY(-1px);
-	background: color-mix(in srgb, var(--color-button-bg-hover) 92%, transparent);
-	box-shadow: 0 12px 24px color-mix(in srgb, black 12%, transparent);
+	border-color: color-mix(in srgb, var(--color-brand) 16%, var(--glass-border) 84%);
+	background: color-mix(in srgb, var(--color-button-bg-hover) 38%, transparent);
 }
 
 .preset-tile {
 	display: grid;
 	grid-template-columns: auto minmax(0, 1fr);
 	align-items: center;
-	gap: 0.85rem;
-	padding: 0.9rem;
-	border-radius: 1.1rem;
+	gap: 0.65rem;
+	padding: 0.68rem;
+	border-radius: 0.72rem;
 	min-width: 0;
 }
 
@@ -1029,11 +1276,9 @@ async function importTheme(event: Event) {
 
 .preset-tile--active,
 .theme-card--active {
-	border-color: color-mix(in srgb, var(--color-brand) 42%, var(--glass-border));
-	background: color-mix(in srgb, var(--color-button-bg-selected) 28%, var(--color-button-bg) 72%);
-	box-shadow:
-		inset 0 0 0 1px color-mix(in srgb, var(--color-brand) 20%, transparent),
-		0 16px 32px color-mix(in srgb, var(--color-brand-shadow) 16%, transparent);
+	border-color: color-mix(in srgb, var(--color-brand) 32%, var(--glass-border) 68%);
+	background: color-mix(in srgb, var(--color-button-bg-selected) 24%, var(--color-button-bg) 76%);
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-brand) 12%, transparent);
 }
 
 .preset-tile__swatch,
@@ -1043,23 +1288,23 @@ async function importTheme(event: Event) {
 }
 
 .preset-tile__swatch {
-	width: 2rem;
-	height: 2rem;
-	border-radius: 999px;
-	background:
-		linear-gradient(
-			135deg,
-			color-mix(in srgb, var(--surface-3) 88%, black 12%) 0%,
-			color-mix(in srgb, var(--surface-4) 72%, var(--color-brand) 28%) 48%,
-			var(--color-brand) 100%
-		);
+	width: 1.7rem;
+	height: 1.7rem;
+	border-radius: 0.55rem;
+	background: linear-gradient(
+		135deg,
+		color-mix(in srgb, var(--surface-3) 88%, black 12%) 0%,
+		color-mix(in srgb, var(--surface-4) 72%, var(--color-brand) 28%) 48%,
+		var(--color-brand) 100%
+	);
 	box-shadow: none;
 }
 
 .preset-tile__label {
 	display: -webkit-box;
 	font-weight: 700;
-	line-height: 1.25;
+	font-size: 0.86rem;
+	line-height: 1.22;
 	min-width: 0;
 	max-width: 100%;
 	overflow: hidden;
@@ -1073,35 +1318,34 @@ async function importTheme(event: Event) {
 }
 
 .preset-actions {
-	margin-top: 0.9rem;
+	margin-top: 0.7rem;
 }
 
 .theme-library {
 	display: flex;
 	flex-direction: column;
-	gap: 0.6rem;
+	gap: 0.48rem;
 }
 
 .theme-card {
 	display: grid;
 	grid-template-columns: auto minmax(0, 1fr);
-	gap: 0.8rem;
+	gap: 0.68rem;
 	align-items: center;
-	padding: 0.8rem;
-	border-radius: 1.1rem;
+	padding: 0.68rem;
+	border-radius: 0.72rem;
 }
 
 .theme-card__swatch {
-	width: 3.1rem;
-	height: 3rem;
-	border-radius: 1rem;
-	background:
-		linear-gradient(
-			135deg,
-			color-mix(in srgb, var(--surface-3) 90%, black 10%) 0%,
-			color-mix(in srgb, var(--surface-4) 72%, var(--color-brand) 28%) 48%,
-			var(--color-brand) 100%
-		);
+	width: 2.45rem;
+	height: 2.35rem;
+	border-radius: 0.65rem;
+	background: linear-gradient(
+		135deg,
+		color-mix(in srgb, var(--surface-3) 90%, black 10%) 0%,
+		color-mix(in srgb, var(--surface-4) 72%, var(--color-brand) 28%) 48%,
+		var(--color-brand) 100%
+	);
 	box-shadow: none;
 }
 
@@ -1118,52 +1362,53 @@ async function importTheme(event: Event) {
 
 .theme-card__title {
 	font-weight: 800;
+	font-size: 0.9rem;
 	line-height: 1.2;
 }
 
 .theme-card__pill {
 	flex-shrink: 0;
-	padding: 0.15rem 0.45rem;
+	padding: 0.12rem 0.4rem;
 	border-radius: 999px;
 	background: var(--color-button-bg-selected);
 	color: var(--color-button-text-selected);
-	font-size: 0.74rem;
+	font-size: 0.7rem;
 	font-weight: 800;
 }
 
 .editor {
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+	gap: 0.85rem;
 }
 
 .editor-grid {
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+	gap: 0.85rem;
 }
 
 .editor-section {
 	display: flex;
 	flex-direction: column;
-	gap: 0.85rem;
-	padding: 1.05rem;
-	border-radius: 1.15rem;
-	border: 1px solid color-mix(in srgb, var(--glass-border) 70%, transparent);
-	background: color-mix(in srgb, var(--color-button-bg) 74%, transparent);
+	gap: 0.72rem;
+	padding: 0.88rem;
+	border-radius: 0.78rem;
+	border: 1px solid color-mix(in srgb, var(--glass-border) 58%, transparent);
+	background: color-mix(in srgb, var(--color-bg) 30%, transparent);
 }
 
 .editor__form,
 .color-grid {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 0.85rem;
+	gap: 0.72rem;
 }
 
 .slider-grid {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 0.85rem;
+	gap: 0.72rem;
 }
 
 .editor__form--glass {
@@ -1175,13 +1420,13 @@ async function importTheme(event: Event) {
 .slider-field {
 	display: flex;
 	flex-direction: column;
-	gap: 0.45rem;
+	gap: 0.38rem;
 }
 
 .field span,
 .color-field span,
 .slider-field span {
-	font-size: 0.86rem;
+	font-size: 0.8rem;
 	font-weight: 700;
 	color: var(--color-secondary);
 }
@@ -1197,13 +1442,17 @@ async function importTheme(event: Event) {
 .field select,
 .color-field input[type='text'] {
 	width: 100%;
-	padding: 0.8rem 0.9rem;
-	border-radius: 0.95rem;
-	border: 1px solid color-mix(in srgb, var(--glass-border) 76%, transparent);
-	background: color-mix(in srgb, var(--color-raised-bg) 92%, transparent);
+	min-height: 2.35rem;
+	padding: 0.5rem 0.75rem;
+	border-radius: 0.68rem;
+	border: 1px solid color-mix(in srgb, var(--glass-border) 64%, transparent);
+	background: color-mix(in srgb, var(--color-bg) 42%, transparent);
 	color: var(--color-contrast);
 	outline: none;
-	transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+	transition:
+		border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		box-shadow 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		background 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .field input:focus,
@@ -1211,7 +1460,7 @@ async function importTheme(event: Event) {
 .field select:focus,
 .color-field input[type='text']:focus {
 	border-color: color-mix(in srgb, var(--color-brand) 42%, var(--color-button-border) 58%);
-	box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-brand-highlight) 68%, transparent);
+	box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-brand-highlight) 44%, transparent);
 }
 
 .field--full {
@@ -1220,19 +1469,19 @@ async function importTheme(event: Event) {
 
 .color-field__row {
 	display: grid;
-	grid-template-columns: 3.2rem minmax(0, 1fr);
-	gap: 0.6rem;
+	grid-template-columns: 2.55rem minmax(0, 1fr);
+	gap: 0.5rem;
 	align-items: center;
 }
 
 .color-field input[type='color'] {
-	width: 3.2rem;
-	height: 3rem;
+	width: 2.55rem;
+	height: 2.35rem;
 	padding: 0;
 	appearance: none;
 	-webkit-appearance: none;
-	border-radius: 0.95rem;
-	border: 1px solid color-mix(in srgb, var(--glass-border) 76%, transparent);
+	border-radius: 0.68rem;
+	border: 1px solid color-mix(in srgb, var(--glass-border) 64%, transparent);
 	background: transparent;
 	overflow: hidden;
 	cursor: pointer;
@@ -1244,18 +1493,18 @@ async function importTheme(event: Event) {
 
 .color-field input[type='color']::-webkit-color-swatch {
 	border: 0;
-	border-radius: 0.88rem;
+	border-radius: 0.58rem;
 }
 
 .color-field input[type='color']::-moz-color-swatch {
 	border: 0;
-	border-radius: 0.88rem;
+	border-radius: 0.58rem;
 }
 
 .slider-field div {
 	display: flex;
 	justify-content: space-between;
-	gap: 0.75rem;
+	gap: 0.65rem;
 }
 
 .slider-field input[type='range'] {

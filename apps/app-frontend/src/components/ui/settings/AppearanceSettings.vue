@@ -280,12 +280,7 @@ watch(
 		<div class="mt-3 flex items-center gap-2">
 			<div class="iconified-input flex-grow">
 				<FileImageIcon />
-				<input
-					readonly
-					:value="pageBackgroundLabel"
-					type="text"
-					class="text-input"
-				/>
+				<input readonly :value="pageBackgroundLabel" type="text" class="text-input" />
 			</div>
 			<Button class="r-btn" @click="pickPageBackground">
 				<FileImageIcon />
@@ -391,7 +386,7 @@ watch(
 			id="background-effects"
 			v-model="settings.background_effect"
 			:name="formatMessage(messages.backgroundEffectsTitle)"
-			class="w-40"
+			class="settings-select"
 			:options="backgroundEffectOptions"
 			:display-value="
 				backgroundEffectOptions.find((o) => o.value === settings.background_effect)?.label ??
@@ -444,7 +439,7 @@ watch(
 			id="opening-page"
 			v-model="settings.default_page"
 			:name="formatMessage(messages.defaultLandingTitle)"
-			class="w-40"
+			class="settings-select"
 			:options="[
 				{ value: 'home', label: formatMessage(messages.defaultLandingHome) },
 				{ value: 'library', label: formatMessage(messages.defaultLandingLibrary) },

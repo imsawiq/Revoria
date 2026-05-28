@@ -3152,6 +3152,30 @@
 	"browse.install.title": {
 		"message": "Projekt auf Instanz installieren"
 	},
+	"loading.message.downloading-modpack": {
+		"message": "Modpack wird heruntergeladen"
+	},
+	"loading.message.canceling-download": {
+		"message": "Download wird abgebrochen"
+	},
+	"running-app-bar.cancel-download": {
+		"message": "Download abbrechen"
+	},
+	"notification.error.unmanaged-profile": {
+		"message": "Profil {profile} wird nicht von der App verwaltet."
+	},
+	"notification.error.download-canceled": {
+		"message": "Download abgebrochen."
+	},
+	"install-modal.hide-new-instance": {
+		"message": "Neue Instanz ausblenden"
+	},
+	"install-modal.no-compatible-version": {
+		"message": "Keine kompatible Version gefunden"
+	},
+	"install-modal.locked-instance-tooltip": {
+		"message": "Entkopple oder entsperre eine Instanz, um Mods hinzuzufügen."
+	},
 	"hosting.content.failed-to-load-versions": {
 		"defaultMessage": "Versionen konnten nicht geladen werden"
 	},

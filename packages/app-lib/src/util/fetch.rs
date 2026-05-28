@@ -3,7 +3,7 @@ use super::io::{self, IOError};
 use crate::ErrorKind;
 use crate::LAUNCHER_USER_AGENT;
 use crate::event::LoadingBarId;
-use crate::event::emit::emit_loading;
+use crate::event::emit::{check_loading_cancelled, emit_loading};
 use crate::state::{ProxyType, Settings};
 use bytes::Bytes;
 use reqwest::{IntoUrl, Method};
@@ -253,6 +253,7 @@ pub async fn fetch_advanced(
                         let mut stream = resp.bytes_stream();
                         let mut bytes = Vec::new();
                         while let Some(item) = stream.next().await {
+                            check_loading_cancelled(bar)?;
                             let chunk = item.or(Err(ErrorKind::NoValueFor(
                                 "fetch bytes".to_string(),
                             )))?;
@@ -315,6 +316,17 @@ pub async fn fetch_mirrors(
     semaphore: &FetchSemaphore,
     exec: impl sqlx::Executor<'_, Database = sqlx::Sqlite> + Copy,
 ) -> crate::Result<Bytes> {
+    fetch_mirrors_with_loading_bar(mirrors, sha1, None, semaphore, exec).await
+}
+
+#[tracing::instrument(skip(semaphore, loading_bar))]
+pub async fn fetch_mirrors_with_loading_bar(
+    mirrors: &[&str],
+    sha1: Option<&str>,
+    loading_bar: Option<&LoadingBarId>,
+    semaphore: &FetchSemaphore,
+    exec: impl sqlx::Executor<'_, Database = sqlx::Sqlite> + Copy,
+) -> crate::Result<Bytes> {
     if mirrors.is_empty() {
         return Err(
             ErrorKind::InputError("No mirrors provided!".to_string()).into()
@@ -322,7 +334,21 @@ pub async fn fetch_mirrors(
     }
 
     for (index, mirror) in mirrors.iter().enumerate() {
-        let result = fetch(mirror, sha1, semaphore, exec).await;
+        if let Some(loading_bar) = loading_bar {
+            check_loading_cancelled(loading_bar)?;
+        }
+
+        let result = fetch_advanced(
+            Method::GET,
+            mirror,
+            sha1,
+            None,
+            None,
+            loading_bar.map(|bar| (bar, 0.0)),
+            semaphore,
+            exec,
+        )
+        .await;
 
         if result.is_ok() || (result.is_err() && index == (mirrors.len() - 1)) {
             return result;

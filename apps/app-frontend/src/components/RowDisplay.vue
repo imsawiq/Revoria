@@ -272,7 +272,7 @@ onUnmounted(() => {
 		:proceed-label="formatMessage(messages.delete)"
 		@proceed="deleteProfile"
 	/>
-	<div ref="rowContainer" class="flex flex-col gap-4">
+	<div ref="rowContainer" class="row-display flex flex-col gap-4">
 		<div v-for="row in actualInstances" ref="rows" :key="row.label" class="row">
 			<HeadingLink class="mt-1" :to="row.route">
 				{{ row.label }}
@@ -350,6 +350,7 @@ onUnmounted(() => {
 	overflow: hidden;
 	width: 100%;
 	min-width: 100%;
+	gap: 0.65rem;
 
 	&:nth-child(even) {
 		background: transparent;
@@ -393,13 +394,18 @@ onUnmounted(() => {
 	.projects {
 		display: grid;
 		width: 100%;
-		grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
-		grid-gap: 0.75rem;
+		grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr));
+		grid-gap: 0.65rem;
 
 		.item {
 			width: 100%;
 			max-width: 100%;
 		}
 	}
+}
+
+.row-display :deep(.heading-link) {
+	margin-top: 0;
+	margin-bottom: 0;
 }
 </style>

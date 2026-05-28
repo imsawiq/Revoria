@@ -4,12 +4,14 @@ import {
 	DownloadIcon,
 	PlusIcon,
 	RightArrowIcon,
+	SearchIcon,
 	UploadIcon,
 	XIcon,
 } from '@modrinth/assets'
-import { Avatar, Button, Card, injectNotificationManager } from '@modrinth/ui'
+import { Avatar, Button, ButtonStyled, Card, injectNotificationManager } from '@modrinth/ui'
 import { convertFileSrc } from '@tauri-apps/api/core'
 import { open } from '@tauri-apps/plugin-dialog'
+import { defineMessages, useVIntl } from '@vintl/vintl'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -29,7 +31,58 @@ import {
 } from '@/store/install.js'
 
 const { handleError } = injectNotificationManager()
+const { formatMessage } = useVIntl()
 const router = useRouter()
+
+const messages = defineMessages({
+	installToInstanceTitle: {
+		id: 'browse.install.title',
+		defaultMessage: 'Install project to instance',
+	},
+	installToInstanceDescription: {
+		id: 'browse.install.description',
+		defaultMessage: 'Select an instance to install',
+	},
+	searchInstancesPlaceholder: {
+		id: 'browse.install.search',
+		defaultMessage: 'Search instances...',
+	},
+	installAction: {
+		id: 'browse.install.action',
+		defaultMessage: 'Install',
+	},
+	installingAction: {
+		id: 'browse.install.installing',
+		defaultMessage: 'Installing...',
+	},
+	installedAction: {
+		id: 'browse.install.installed',
+		defaultMessage: 'Installed',
+	},
+	noCompatibleInstances: {
+		id: 'browse.install.none',
+		defaultMessage: 'No compatible instances found.',
+	},
+	noCompatibleVersion: {
+		id: 'install-modal.no-compatible-version',
+		defaultMessage: 'No compatible version found',
+	},
+	lockedInstanceTooltip: {
+		id: 'install-modal.locked-instance-tooltip',
+		defaultMessage: 'Unpair or unlock an instance to add mods.',
+	},
+	selectIcon: { id: 'instance.create.select-icon', defaultMessage: 'Select icon' },
+	removeIcon: { id: 'instance.create.remove-icon', defaultMessage: 'Remove icon' },
+	name: { id: 'instance.create.name', defaultMessage: 'Name' },
+	create: { id: 'instance.create.action.create', defaultMessage: 'Create' },
+	creating: { id: 'instance.create.action.creating', defaultMessage: 'Creating...' },
+	createInstance: { id: 'app.nav.create-instance', defaultMessage: 'Create new instance' },
+	hideNewInstance: {
+		id: 'install-modal.hide-new-instance',
+		defaultMessage: 'Hide new instance',
+	},
+	cancel: { id: 'action.cancel', defaultMessage: 'Cancel' },
+})
 
 const versions = ref()
 const project = ref()
@@ -99,7 +152,7 @@ async function install(instance) {
 
 	if (!version) {
 		instance.installing = false
-		handleError('No compatible version found')
+		handleError(formatMessage(messages.noCompatibleVersion))
 		return
 	}
 
@@ -208,50 +261,84 @@ const createInstance = async () => {
 </script>
 
 <template>
-	<ModalWrapper ref="installModal" header="Install project to instance" :on-hide="onInstall">
-		<div class="modal-body">
-			<input
-				v-model="searchFilter"
-				autocomplete="off"
-				type="text"
-				class="search"
-				placeholder="Search for an instance"
-			/>
-			<div class="profiles" :class="{ 'hide-creation': !showCreation }">
-				<div v-for="profile in shownProfiles" :key="profile.name" class="option">
+	<ModalWrapper
+		ref="installModal"
+		:header="formatMessage(messages.installToInstanceTitle)"
+		:on-hide="onInstall"
+	>
+		<div class="flex flex-col gap-4 w-[32rem] max-w-full">
+			<p class="text-secondary m-0 text-sm">
+				{{ formatMessage(messages.installToInstanceDescription) }}
+			</p>
+			<div
+				class="flex items-center gap-2 rounded-xl bg-[--color-button-bg] px-3 py-2 border border-[--glass-border]"
+			>
+				<SearchIcon aria-hidden="true" class="w-4 h-4 text-secondary shrink-0" />
+				<input
+					v-model="searchFilter"
+					autocomplete="off"
+					type="text"
+					class="w-full bg-transparent border-none outline-none text-sm text-contrast placeholder:text-secondary"
+					:placeholder="formatMessage(messages.searchInstancesPlaceholder)"
+				/>
+			</div>
+			<div class="flex flex-col gap-1 max-h-[20rem] overflow-y-auto pr-1">
+				<div
+					v-for="profile in shownProfiles"
+					:key="profile.name"
+					class="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-[--color-button-bg] group"
+				>
 					<router-link
-						class="btn btn-transparent profile-button"
+						class="flex items-center gap-3 flex-1 min-w-0 no-underline text-contrast"
 						:to="`/instance/${encodeURIComponent(profile.path)}`"
 						@click="installModal.hide()"
 					>
 						<Avatar
 							:src="profile.icon_path ? convertFileSrc(profile.icon_path) : null"
-							class="profile-image"
+							size="36px"
+							class="shrink-0 rounded-lg"
 						/>
-						{{ profile.name }}
+						<div class="flex flex-col min-w-0">
+							<span class="text-sm font-semibold text-contrast truncate">{{ profile.name }}</span>
+							<span class="text-xs text-secondary">
+								{{ profile.game_version }}
+								<template v-if="profile.loader && profile.loader !== 'vanilla'">
+									&middot; {{ profile.loader }}
+								</template>
+							</span>
+						</div>
 					</router-link>
 					<div
 						v-tooltip="
 							profile.linked_data?.locked && !profile.installedMod
-								? 'Unpair or unlock an instance to add mods.'
+								? formatMessage(messages.lockedInstanceTooltip)
 								: ''
 						"
 					>
-						<Button
-							:disabled="profile.installedMod || profile.installing"
-							@click="install(profile)"
+						<ButtonStyled
+							:color="profile.installedMod ? 'green' : 'brand'"
+							:type="profile.installedMod ? 'standard' : 'outlined'"
 						>
-							<DownloadIcon v-if="!profile.installedMod && !profile.installing" />
-							<CheckIcon v-else-if="profile.installedMod" />
-							{{
-								profile.installing
-									? 'Installing...'
-									: profile.installedMod
-										? 'Installed'
-										: 'Install'
-							}}
-						</Button>
+							<button
+								class="shrink-0 text-xs"
+								:disabled="profile.installedMod || profile.installing"
+								@click.stop="install(profile)"
+							>
+								<DownloadIcon v-if="!profile.installedMod && !profile.installing" class="w-4 h-4" />
+								<CheckIcon v-else-if="profile.installedMod" class="w-4 h-4" />
+								{{
+									profile.installing
+										? formatMessage(messages.installingAction)
+										: profile.installedMod
+											? formatMessage(messages.installedAction)
+											: formatMessage(messages.installAction)
+								}}
+							</button>
+						</ButtonStyled>
 					</div>
+				</div>
+				<div v-if="shownProfiles.length === 0" class="py-6 text-center text-secondary text-sm">
+					{{ formatMessage(messages.noCompatibleInstances) }}
 				</div>
 			</div>
 			<Card v-if="showCreation" class="creation-card">
@@ -261,11 +348,11 @@ const createInstance = async () => {
 						<div class="creation-icon__description">
 							<Button @click="upload_icon()">
 								<UploadIcon />
-								<span class="no-wrap"> Select icon </span>
+								<span class="no-wrap"> {{ formatMessage(messages.selectIcon) }} </span>
 							</Button>
 							<Button :disabled="!display_icon" @click="reset_icon()">
 								<XIcon />
-								<span class="no-wrap"> Remove icon </span>
+								<span class="no-wrap"> {{ formatMessage(messages.removeIcon) }} </span>
 							</Button>
 						</div>
 					</div>
@@ -274,22 +361,28 @@ const createInstance = async () => {
 							v-model="name"
 							autocomplete="off"
 							type="text"
-							placeholder="Name"
+							:placeholder="formatMessage(messages.name)"
 							class="creation-input"
 						/>
 						<Button :disabled="creatingInstance === true || !name" @click="createInstance()">
 							<RightArrowIcon />
-							{{ creatingInstance ? 'Creating...' : 'Create' }}
+							{{
+								creatingInstance ? formatMessage(messages.creating) : formatMessage(messages.create)
+							}}
 						</Button>
 					</div>
 				</div>
 			</Card>
-			<div class="input-group push-right">
+			<div class="flex justify-end gap-2 pt-1">
 				<Button :color="showCreation ? '' : 'primary'" @click="toggleCreation()">
 					<PlusIcon />
-					{{ showCreation ? 'Hide New Instance' : 'Create new instance' }}
+					{{
+						showCreation
+							? formatMessage(messages.hideNewInstance)
+							: formatMessage(messages.createInstance)
+					}}
 				</Button>
-				<Button @click="installModal.hide()">Cancel</Button>
+				<Button @click="installModal.hide()">{{ formatMessage(messages.cancel) }}</Button>
 			</div>
 		</div>
 	</ModalWrapper>

@@ -35,6 +35,7 @@ pub fn init<R: Runtime>() -> tauri::plugin::TauriPlugin<R> {
             open_path,
             show_launcher_logs_folder,
             progress_bars_list,
+            cancel_progress_bar,
             get_opening_command,
             list_dir_files,
             list_dir_entries,
@@ -308,6 +309,18 @@ pub async fn progress_bars_list()
 -> Result<DashMap<uuid::Uuid, theseus::LoadingBar>> {
     let res = theseus::EventState::list_progress_bars().await?;
     Ok(res)
+}
+
+#[tauri::command]
+pub async fn cancel_progress_bar(loader_uuid: String) -> Result<()> {
+    let loader_uuid = uuid::Uuid::parse_str(&loader_uuid).map_err(|err| {
+        theseus::Error::from(theseus::ErrorKind::InputError(format!(
+            "Invalid loading bar id: {err}"
+        )))
+    })?;
+
+    theseus::cancel_loading_bar(loader_uuid)?;
+    Ok(())
 }
 
 // disables mouseover and fixes a random crash error only fixed by recent versions of macos

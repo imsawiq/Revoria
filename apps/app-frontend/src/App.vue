@@ -231,6 +231,10 @@ onUnmounted(async () => {
 	document.querySelector('body').removeEventListener('click', handleClick)
 	document.querySelector('body').removeEventListener('auxclick', handleAuxClick)
 	window.removeEventListener('keydown', handleDebugShortcut)
+	if (updateCheckTimeout !== null) {
+		clearTimeout(updateCheckTimeout)
+		updateCheckTimeout = null
+	}
 	await unlistenUpdateDownload?.()
 })
 
@@ -738,6 +742,7 @@ const autoDownloadUpdates = ref(true)
 const availableUpdate = ref(null)
 const updateSize = ref(null)
 const updateToastStatus = ref('available')
+let updateCheckTimeout = null
 
 function openUpdateToast(status) {
 	updateToastStatus.value = status
@@ -770,42 +775,57 @@ if (typeof window !== 'undefined') {
 }
 
 async function checkUpdates() {
-	if (!(await areUpdatesEnabled())) {
-		console.log('Skipping update check as updates are disabled in this build or environment')
-		return
+	if (updateCheckTimeout !== null) {
+		clearTimeout(updateCheckTimeout)
+		updateCheckTimeout = null
 	}
 
-	const update = await invoke('plugin:updater|check')
-	if (!update) {
-		console.log('No update available')
-		return
+	try {
+		if (!(await areUpdatesEnabled())) {
+			console.log('Skipping update check as updates are disabled in this build or environment')
+			return
+		}
+
+		const update = await invoke('plugin:updater|check')
+		if (!update) {
+			console.log('No update available')
+			return
+		}
+
+		if (update.version === availableUpdate.value?.version) {
+			console.log('Update is already known')
+			return
+		}
+
+		const latestSettings = await getSettings()
+		autoDownloadUpdates.value = latestSettings.auto_download_updates ?? true
+
+		appUpdateDownloadProgress.value = 0
+		availableUpdate.value = update
+		updateSize.value = await getUpdateSize(update.rid).catch((error) => {
+			console.warn('Failed to get update size', error)
+			return null
+		})
+		metered.value = await isNetworkMetered().catch((error) => {
+			console.warn('Failed to detect metered network, requiring manual update download', error)
+			return true
+		})
+		const shouldAutoDownload = autoDownloadUpdates.value && !metered.value
+		openUpdateToast(shouldAutoDownload ? 'downloading' : 'available')
+
+		if (shouldAutoDownload) {
+			await downloadUpdate(update)
+		}
+	} catch (error) {
+		console.warn('Failed to check for launcher updates', error)
+	} finally {
+		updateCheckTimeout = setTimeout(
+			() => {
+				void checkUpdates()
+			},
+			5 * 60 * 1000,
+		)
 	}
-
-	if (update.version === availableUpdate.value?.version) {
-		console.log('Update is already known')
-		return
-	}
-
-	const latestSettings = await getSettings()
-	autoDownloadUpdates.value = latestSettings.auto_download_updates ?? true
-
-	appUpdateDownloadProgress.value = 0
-	availableUpdate.value = update
-	updateSize.value = await getUpdateSize(update.rid)
-	metered.value = await isNetworkMetered()
-	const shouldAutoDownload = autoDownloadUpdates.value && !metered.value
-	openUpdateToast(shouldAutoDownload ? 'downloading' : 'available')
-
-	if (shouldAutoDownload) {
-		await downloadUpdate(update)
-	}
-
-	setTimeout(
-		() => {
-			void checkUpdates()
-		},
-		5 * 60 * 1000,
-	)
 }
 
 async function downloadAvailableUpdate() {
@@ -1297,23 +1317,19 @@ async function processPendingSurveys() {
 				>
 					<div id="sidebar-teleport-target" class="sidebar-teleport-content"></div>
 					<div class="sidebar-default-content" :class="{ 'sidebar-enabled': sidebarVisible }">
-						<div class="p-3 pr-2 flex flex-col gap-3">
-							<div
-								class="rounded-xl bg-[--color-glass-bg-strong] border border-[--glass-border] shadow-[--glass-shadow] p-3"
-							>
-								<h3 class="text-base text-primary font-medium m-0">
-									{{ formatMessage(messages.sidebarPlayingAs) }}
-								</h3>
+						<div class="right-panel-shell">
+							<section class="right-panel-section right-panel-section-account">
+								<div class="right-panel-section-header">
+									<h3>{{ formatMessage(messages.sidebarPlayingAs) }}</h3>
+								</div>
 								<suspense>
 									<AccountsCard ref="accounts" mode="small" />
 								</suspense>
-							</div>
-							<div
-								class="rounded-xl bg-[--color-glass-bg-strong] border border-[--glass-border] shadow-[--glass-shadow] p-3"
-							>
-								<h3 class="text-base text-primary font-medium m-0">
-									{{ formatMessage(messages.sidebarFriends) }}
-								</h3>
+							</section>
+							<section class="right-panel-section right-panel-section-friends">
+								<div class="right-panel-section-header">
+									<h3>{{ formatMessage(messages.sidebarFriends) }}</h3>
+								</div>
 								<suspense>
 									<FriendsList
 										:credentials="credentials"
@@ -1322,7 +1338,7 @@ async function processPendingSurveys() {
 										:hide-heading="true"
 									/>
 								</suspense>
-							</div>
+							</section>
 						</div>
 					</div>
 				</div>
@@ -1521,7 +1537,13 @@ async function processPendingSurveys() {
 	width: var(--right-bar-width);
 	position: relative;
 	height: calc(100vh - var(--top-bar-height));
-	background: var(--color-glass-bg);
+	background: linear-gradient(
+		180deg,
+		color-mix(in srgb, var(--color-raised-bg) 46%, transparent) 0%,
+		color-mix(in srgb, var(--color-glass-bg) 84%, transparent) 44%,
+		color-mix(in srgb, var(--color-bg) 72%, transparent) 100%
+	);
+	border-left-color: color-mix(in srgb, var(--color-divider) 64%, transparent) !important;
 }
 
 .app-viewport {
@@ -1555,6 +1577,212 @@ async function processPendingSurveys() {
 
 .sidebar-teleport-content:empty + .sidebar-default-content.sidebar-enabled {
 	display: contents;
+}
+
+.right-panel-shell {
+	display: flex;
+	flex-direction: column;
+	gap: 0.9rem;
+	min-width: 0;
+	padding: 1rem 0.75rem 1.2rem 0.8rem;
+}
+
+.right-panel-section {
+	min-width: 0;
+	padding: 0.85rem;
+	border-radius: 0.85rem;
+	border: 1px solid color-mix(in srgb, var(--glass-border) 72%, transparent);
+	background: linear-gradient(
+		180deg,
+		color-mix(in srgb, var(--color-glass-bg-strong) 66%, transparent) 0%,
+		color-mix(in srgb, var(--color-glass-bg) 38%, transparent) 100%
+	);
+	box-shadow:
+		inset 0 1px 0 color-mix(in srgb, white 5%, transparent),
+		0 8px 22px color-mix(in srgb, black 18%, transparent);
+	transition:
+		transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+		border-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+		background 220ms cubic-bezier(0.22, 1, 0.36, 1),
+		box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.right-panel-section:hover {
+	transform: translateY(-1px);
+	border-color: color-mix(in srgb, var(--color-brand) 18%, var(--glass-border) 82%);
+	box-shadow:
+		inset 0 1px 0 color-mix(in srgb, white 6%, transparent),
+		0 11px 28px color-mix(in srgb, black 21%, transparent);
+}
+
+.right-panel-section-account {
+	padding-bottom: 0.75rem;
+}
+
+.right-panel-section-friends {
+	background: linear-gradient(
+		180deg,
+		color-mix(in srgb, var(--color-raised-bg) 24%, transparent) 0%,
+		color-mix(in srgb, var(--color-glass-bg) 36%, transparent) 100%
+	);
+	box-shadow: inset 0 1px 0 color-mix(in srgb, white 4%, transparent);
+}
+
+.right-panel-section-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 0.65rem;
+}
+
+.right-panel-section-header h3 {
+	margin: 0;
+	color: var(--color-secondary);
+	font-size: 0.72rem;
+	font-weight: 800;
+	line-height: 1.1;
+	letter-spacing: 0.045em;
+	text-transform: uppercase;
+	transition: color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.right-panel-section:hover .right-panel-section-header h3 {
+	color: color-mix(in srgb, var(--color-secondary) 76%, var(--color-contrast) 24%);
+}
+
+.sidebar-default-content :deep(.accounts-shell > .button-base.mt-2) {
+	margin-top: 0;
+	min-height: 3.15rem;
+	padding: 0.55rem 0.65rem;
+	border-radius: 0.75rem;
+	background: linear-gradient(
+		180deg,
+		color-mix(in srgb, var(--color-button-bg) 74%, var(--color-glass-bg-strong) 26%) 0%,
+		color-mix(in srgb, var(--color-button-bg) 58%, transparent) 100%
+	);
+	border-color: color-mix(in srgb, var(--glass-border) 84%, transparent);
+	box-shadow: none;
+	transition:
+		transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		background 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		box-shadow 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sidebar-default-content :deep(.accounts-shell > .button-base.mt-2:hover) {
+	transform: translateY(-1px);
+	border-color: color-mix(in srgb, var(--color-brand) 26%, var(--glass-border) 74%);
+	background: linear-gradient(
+		180deg,
+		color-mix(in srgb, var(--color-button-bg-hover) 76%, var(--color-glass-bg-strong) 24%) 0%,
+		color-mix(in srgb, var(--color-button-bg-hover) 58%, transparent) 100%
+	);
+	box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-brand) 10%, transparent);
+}
+
+.sidebar-default-content :deep(.accounts-shell > .button-base.mt-2:active) {
+	transform: translateY(0) scale(0.985);
+}
+
+.sidebar-default-content :deep(.account-title) {
+	font-size: 0.9rem;
+	font-weight: 750;
+}
+
+.sidebar-default-content :deep(.account-subtitle) {
+	font-size: 0.7rem;
+	color: var(--color-secondary);
+}
+
+.sidebar-default-content :deep(.friends-search-bar) {
+	height: 2.05rem;
+	padding: 0.45rem 0.55rem;
+	border-width: 1px !important;
+	border-radius: 0.65rem;
+	background: color-mix(in srgb, var(--color-button-bg) 42%, transparent);
+}
+
+.sidebar-default-content :deep(.rounded-xl.bg-\[--color-glass-bg-strong\]) {
+	border-radius: 0.75rem;
+	border-color: color-mix(in srgb, var(--glass-border) 70%, transparent);
+	background: color-mix(in srgb, var(--color-button-bg) 38%, transparent);
+	box-shadow: none;
+	padding: 0.85rem;
+	transition:
+		background 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		border-color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sidebar-default-content :deep(.rounded-xl.bg-\[--color-glass-bg-strong\]:hover) {
+	border-color: color-mix(in srgb, var(--color-brand) 18%, var(--glass-border) 82%);
+	background: color-mix(in srgb, var(--color-button-bg-hover) 44%, transparent);
+}
+
+.sidebar-default-content :deep(.rounded-xl.bg-\[--color-glass-bg-strong\] .w-9.h-9) {
+	width: 2rem;
+	height: 2rem;
+	border-radius: 0.65rem;
+}
+
+.sidebar-default-content :deep(.rounded-xl.bg-\[--color-glass-bg-strong\] .text-sm) {
+	color: var(--color-secondary);
+	font-size: 0.79rem;
+	line-height: 1.25;
+}
+
+.sidebar-default-content :deep(.rounded-xl.bg-\[--color-glass-bg-strong\] .text-brand) {
+	color: var(--color-brand);
+}
+
+.sidebar-default-content :deep(.accordion) {
+	min-width: 0;
+}
+
+.sidebar-default-content :deep(.accordion button) {
+	border-radius: 0.65rem;
+	transition:
+		background-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sidebar-default-content :deep(.accordion button:active) {
+	transform: scale(0.985);
+}
+
+.sidebar-default-content :deep(.accordion h3) {
+	color: var(--color-secondary);
+	font-size: 0.78rem;
+	font-weight: 750;
+}
+
+.sidebar-default-content :deep(.accordion [class*='grid-cols-']) {
+	margin-left: 0.35rem;
+	margin-right: 0;
+	padding: 0.22rem 0.28rem;
+	border-radius: 0.75rem;
+	transition:
+		transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+		background-color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sidebar-default-content :deep(.accordion [class*='grid-cols-']:hover) {
+	transform: translateX(2px);
+	background: color-mix(in srgb, var(--color-button-bg-hover) 72%, transparent);
+}
+
+.sidebar-default-content :deep(.accordion .w-12.h-12) {
+	width: 2rem;
+	height: 2rem;
+}
+
+.sidebar-default-content :deep(.accordion .text-sm) {
+	font-size: 0.8rem;
+	font-weight: 650;
+}
+
+.sidebar-default-content :deep(.accordion .text-xs) {
+	color: var(--color-secondary);
+	font-size: 0.68rem;
 }
 
 .popup-survey-enter-active {

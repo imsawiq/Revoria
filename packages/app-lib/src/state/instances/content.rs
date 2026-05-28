@@ -23,10 +23,13 @@ use crate::state::profiles::{Profile, ProfileFile, ProjectType};
 use crate::state::{CacheBehaviour, CachedEntry};
 use crate::util::fetch::{FetchSemaphore, fetch_mirrors, sha1_async};
 use async_zip::base::read::seek::ZipFileReader;
+use base64::Engine;
 use serde::{Deserialize, Serialize};
 use sqlx::SqlitePool;
 use std::collections::HashSet;
-use std::io::Cursor;
+use std::io::{Cursor, Read, Seek};
+use std::path::Path;
+use zip::ZipArchive;
 
 /// Content item with rich metadata for frontend display
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -64,6 +67,7 @@ pub struct ContentItemProject {
     pub slug: Option<String>,
     pub title: String,
     pub icon_url: Option<String>,
+    pub description: Option<String>,
 }
 
 /// Version information for content item display
@@ -370,6 +374,355 @@ struct ResolvedMetadata {
     organizations: Vec<Organization>,
 }
 
+#[derive(Debug, Default, Clone)]
+struct LocalContentMetadata {
+    title: Option<String>,
+    version_number: Option<String>,
+    author: Option<String>,
+    description: Option<String>,
+    icon_url: Option<String>,
+}
+
+fn load_local_content_metadata(path: &Path) -> Option<LocalContentMetadata> {
+    let file = std::fs::File::open(path).ok()?;
+    let mut archive = ZipArchive::new(file).ok()?;
+
+    load_fabric_like_metadata(&mut archive, "fabric.mod.json")
+        .or_else(|| load_fabric_like_metadata(&mut archive, "quilt.mod.json"))
+        .or_else(|| load_forge_metadata(&mut archive, "META-INF/mods.toml"))
+        .or_else(|| {
+            load_forge_metadata(&mut archive, "META-INF/neoforge.mods.toml")
+        })
+        .or_else(|| load_mcmod_info_metadata(&mut archive))
+        .or_else(|| load_resource_pack_metadata(&mut archive, path))
+        .or_else(|| load_manifest_metadata(&mut archive))
+}
+
+fn display_file_name(file_name: &str) -> String {
+    file_name
+        .strip_suffix(".disabled")
+        .unwrap_or(file_name)
+        .to_string()
+}
+
+fn load_fabric_like_metadata<R: Read + Seek>(
+    archive: &mut ZipArchive<R>,
+    entry_name: &str,
+) -> Option<LocalContentMetadata> {
+    let bytes = read_zip_entry(archive, entry_name)?;
+    let value: serde_json::Value = serde_json::from_slice(&bytes).ok()?;
+    let icon_path = fabric_icon_path(value.get("icon"));
+    let icon_url =
+        icon_path.and_then(|path| read_icon_data_url(archive, &path));
+
+    Some(LocalContentMetadata {
+        title: value
+            .get("name")
+            .and_then(json_string)
+            .or_else(|| value.get("id").and_then(json_string)),
+        version_number: value.get("version").and_then(json_string),
+        author: authors_from_json(value.get("authors"))
+            .or_else(|| authors_from_json(value.get("author"))),
+        description: value.get("description").and_then(json_text),
+        icon_url,
+    })
+}
+
+fn load_forge_metadata<R: Read + Seek>(
+    archive: &mut ZipArchive<R>,
+    entry_name: &str,
+) -> Option<LocalContentMetadata> {
+    let bytes = read_zip_entry(archive, entry_name)?;
+    let text = String::from_utf8_lossy(&bytes);
+    let mod_block = text.split("[[mods]]").nth(1).unwrap_or(text.as_ref());
+    let icon_path = extract_toml_string(mod_block, "logoFile");
+    let icon_url =
+        icon_path.and_then(|path| read_icon_data_url(archive, &path));
+
+    let version_number = extract_toml_string(mod_block, "version")
+        .filter(|version| !version.contains("${"));
+    let author = extract_toml_string(mod_block, "authors").or_else(|| {
+        extract_toml_array_strings(mod_block, "authors").map(|v| v.join(", "))
+    });
+
+    Some(LocalContentMetadata {
+        title: extract_toml_string(mod_block, "displayName")
+            .or_else(|| extract_toml_string(mod_block, "modId")),
+        version_number,
+        author,
+        description: extract_toml_multiline_string(mod_block, "description")
+            .or_else(|| extract_toml_string(mod_block, "description")),
+        icon_url,
+    })
+}
+
+fn load_mcmod_info_metadata<R: Read + Seek>(
+    archive: &mut ZipArchive<R>,
+) -> Option<LocalContentMetadata> {
+    let bytes = read_zip_entry(archive, "mcmod.info")?;
+    let value: serde_json::Value = serde_json::from_slice(&bytes).ok()?;
+    let entry = match &value {
+        serde_json::Value::Array(items) => items.first()?,
+        serde_json::Value::Object(_) => value
+            .get("modList")
+            .and_then(|list| list.as_array())
+            .and_then(|items| items.first())
+            .unwrap_or(&value),
+        _ => return None,
+    };
+
+    let icon_path = entry
+        .get("logoFile")
+        .and_then(json_string)
+        .or_else(|| entry.get("logo").and_then(json_string));
+    let icon_url =
+        icon_path.and_then(|path| read_icon_data_url(archive, &path));
+
+    Some(LocalContentMetadata {
+        title: entry
+            .get("name")
+            .and_then(json_string)
+            .or_else(|| entry.get("modid").and_then(json_string)),
+        version_number: entry.get("version").and_then(json_string),
+        author: authors_from_json(entry.get("authorList"))
+            .or_else(|| authors_from_json(entry.get("authors"))),
+        description: entry.get("description").and_then(json_text),
+        icon_url,
+    })
+}
+
+fn load_resource_pack_metadata<R: Read + Seek>(
+    archive: &mut ZipArchive<R>,
+    path: &Path,
+) -> Option<LocalContentMetadata> {
+    let bytes = read_zip_entry(archive, "pack.mcmeta")?;
+    let value: serde_json::Value = serde_json::from_slice(&bytes).ok()?;
+    let pack = value.get("pack")?;
+    let description = pack.get("description").and_then(json_text);
+    let icon_url = read_icon_data_url(archive, "pack.png");
+
+    Some(LocalContentMetadata {
+        title: path
+            .file_stem()
+            .and_then(|s| s.to_str())
+            .map(display_file_name),
+        version_number: None,
+        author: None,
+        description,
+        icon_url,
+    })
+}
+
+fn load_manifest_metadata<R: Read + Seek>(
+    archive: &mut ZipArchive<R>,
+) -> Option<LocalContentMetadata> {
+    let bytes = read_zip_entry(archive, "META-INF/MANIFEST.MF")?;
+    let manifest = String::from_utf8_lossy(&bytes);
+
+    let title = manifest_value(&manifest, "Implementation-Title")
+        .or_else(|| manifest_value(&manifest, "Specification-Title"))
+        .or_else(|| manifest_value(&manifest, "Automatic-Module-Name"));
+    let version_number = manifest_value(&manifest, "Implementation-Version")
+        .or_else(|| manifest_value(&manifest, "Specification-Version"));
+    let author = manifest_value(&manifest, "Implementation-Vendor")
+        .or_else(|| manifest_value(&manifest, "Specification-Vendor"));
+
+    if title.is_none() && version_number.is_none() && author.is_none() {
+        return None;
+    }
+
+    Some(LocalContentMetadata {
+        title,
+        version_number,
+        author,
+        description: None,
+        icon_url: None,
+    })
+}
+
+fn read_zip_entry<R: Read + Seek>(
+    archive: &mut ZipArchive<R>,
+    entry_name: &str,
+) -> Option<Vec<u8>> {
+    let mut file = archive.by_name(entry_name.trim_start_matches('/')).ok()?;
+    let mut bytes = Vec::new();
+    file.read_to_end(&mut bytes).ok()?;
+    Some(bytes)
+}
+
+fn read_icon_data_url<R: Read + Seek>(
+    archive: &mut ZipArchive<R>,
+    icon_path: &str,
+) -> Option<String> {
+    let icon_path = icon_path.trim().trim_start_matches('/');
+    let bytes = read_zip_entry(archive, icon_path)?;
+
+    if bytes.starts_with(b"\x89PNG\r\n\x1a\n") {
+        Some(format!(
+            "data:image/png;base64,{}",
+            base64::engine::general_purpose::STANDARD.encode(bytes)
+        ))
+    } else {
+        None
+    }
+}
+
+fn fabric_icon_path(value: Option<&serde_json::Value>) -> Option<String> {
+    match value? {
+        serde_json::Value::String(path) => non_empty(path),
+        serde_json::Value::Object(map) => map
+            .get("64")
+            .and_then(json_string)
+            .or_else(|| map.values().find_map(json_string)),
+        _ => None,
+    }
+}
+
+fn authors_from_json(value: Option<&serde_json::Value>) -> Option<String> {
+    match value? {
+        serde_json::Value::String(value) => non_empty(value),
+        serde_json::Value::Array(items) => {
+            let authors: Vec<String> = items
+                .iter()
+                .filter_map(|item| {
+                    json_string(item)
+                        .or_else(|| item.get("name").and_then(json_string))
+                })
+                .collect();
+            (!authors.is_empty()).then(|| authors.join(", "))
+        }
+        serde_json::Value::Object(map) => map.get("name").and_then(json_string),
+        _ => None,
+    }
+}
+
+fn json_string(value: &serde_json::Value) -> Option<String> {
+    match value {
+        serde_json::Value::String(value) => non_empty(value),
+        serde_json::Value::Number(value) => Some(value.to_string()),
+        serde_json::Value::Bool(value) => Some(value.to_string()),
+        _ => None,
+    }
+}
+
+fn json_text(value: &serde_json::Value) -> Option<String> {
+    match value {
+        serde_json::Value::String(value) => non_empty(value),
+        serde_json::Value::Array(items) => {
+            let text: String = items.iter().filter_map(json_text).collect();
+            non_empty(&text)
+        }
+        serde_json::Value::Object(map) => {
+            let mut text = String::new();
+            if let Some(part) = map.get("text").and_then(json_text) {
+                text.push_str(&part);
+            }
+            if let Some(extra) = map.get("extra").and_then(json_text) {
+                text.push_str(&extra);
+            }
+            non_empty(&text)
+        }
+        _ => None,
+    }
+}
+
+fn extract_toml_string(source: &str, key: &str) -> Option<String> {
+    source.lines().find_map(|line| {
+        let line = line.trim();
+        let (line_key, value) = line.split_once('=')?;
+        (line_key.trim() == key)
+            .then(|| parse_toml_string_value(value.trim()))
+            .flatten()
+    })
+}
+
+fn extract_toml_array_strings(source: &str, key: &str) -> Option<Vec<String>> {
+    let value = source.lines().find_map(|line| {
+        let line = line.trim();
+        let (line_key, value) = line.split_once('=')?;
+        (line_key.trim() == key).then_some(value.trim())
+    })?;
+    let value = value.strip_prefix('[')?.strip_suffix(']')?;
+    let values: Vec<String> = value
+        .split(',')
+        .filter_map(|part| parse_toml_string_value(part.trim()))
+        .collect();
+
+    (!values.is_empty()).then_some(values)
+}
+
+fn extract_toml_multiline_string(source: &str, key: &str) -> Option<String> {
+    let start = format!("{key} = \"\"\"");
+    let mut lines = source.lines();
+
+    while let Some(line) = lines.next() {
+        let Some(after_start) = line.trim().strip_prefix(&start) else {
+            continue;
+        };
+
+        let mut collected = Vec::new();
+        if let Some((first, _)) = after_start.split_once("\"\"\"") {
+            return non_empty(first.trim());
+        }
+        if !after_start.is_empty() {
+            collected.push(after_start.to_string());
+        }
+
+        for line in lines.by_ref() {
+            if let Some((last, _)) = line.split_once("\"\"\"") {
+                if !last.is_empty() {
+                    collected.push(last.to_string());
+                }
+                return non_empty(&collected.join("\n"));
+            }
+            collected.push(line.to_string());
+        }
+    }
+
+    None
+}
+
+fn parse_toml_string_value(value: &str) -> Option<String> {
+    let value = value.trim().trim_end_matches(',');
+    let quote = value.chars().next()?;
+    if quote != '"' && quote != '\'' {
+        return non_empty(value);
+    }
+
+    let mut escaped = false;
+    let mut output = String::new();
+    for ch in value[quote.len_utf8()..].chars() {
+        if escaped {
+            output.push(ch);
+            escaped = false;
+            continue;
+        }
+        if quote == '"' && ch == '\\' {
+            escaped = true;
+            continue;
+        }
+        if ch == quote {
+            return non_empty(output.trim());
+        }
+        output.push(ch);
+    }
+
+    non_empty(output.trim())
+}
+
+fn manifest_value(manifest: &str, key: &str) -> Option<String> {
+    let prefix = format!("{key}:");
+    manifest.lines().find_map(|line| {
+        line.strip_prefix(&prefix)
+            .and_then(|value| non_empty(value.trim()))
+    })
+}
+
+fn non_empty(value: impl AsRef<str>) -> Option<String> {
+    let value = value.as_ref().trim();
+    (!value.is_empty()).then(|| value.to_string())
+}
+
 /// Fetch project, version, team, and organization metadata in parallel batches.
 async fn resolve_metadata(
     project_ids: &HashSet<String>,
@@ -501,12 +854,22 @@ async fn profile_files_to_content_items(
     let profile_base_path =
         crate::api::profile::get_full_path(profile_path).await?;
 
-    // Batch-read file modification times off the main async runtime
     let paths: Vec<std::path::PathBuf> = files
         .iter()
         .map(|(path, _)| profile_base_path.join(path))
         .collect();
 
+    let metadata_paths = paths.clone();
+    let local_metadata: Vec<Option<LocalContentMetadata>> =
+        tokio::task::spawn_blocking(move || {
+            metadata_paths
+                .iter()
+                .map(|path| load_local_content_metadata(path))
+                .collect()
+        })
+        .await?;
+
+    // Batch-read file modification times off the main async runtime
     let modification_times: Vec<Option<String>> =
         tokio::task::spawn_blocking(move || {
             paths
@@ -527,6 +890,7 @@ async fn profile_files_to_content_items(
         .iter()
         .enumerate()
         .map(|(i, (path, file))| {
+            let local = local_metadata[i].as_ref();
             let project = file.metadata.as_ref().and_then(|m| {
                 meta.projects.iter().find(|p| p.id == m.project_id)
             });
@@ -538,6 +902,56 @@ async fn profile_files_to_content_items(
             let owner = project.and_then(|p| {
                 resolve_owner(p, &meta.teams, &meta.organizations)
             });
+            let owner = owner.or_else(|| {
+                local.and_then(|m| {
+                    m.author.as_ref().map(|author| ContentItemOwner {
+                        id: author.clone(),
+                        name: author.clone(),
+                        avatar_url: None,
+                        owner_type: OwnerType::User,
+                    })
+                })
+            });
+
+            let project = project
+                .map(|p| ContentItemProject {
+                    id: p.id.clone(),
+                    slug: p.slug.clone(),
+                    title: p.title.clone(),
+                    icon_url: p.icon_url.clone(),
+                    description: Some(p.description.clone()),
+                })
+                .or_else(|| {
+                    local.map(|m| ContentItemProject {
+                        id: String::new(),
+                        slug: None,
+                        title: m.title.clone().unwrap_or_else(|| {
+                            display_file_name(&file.file_name)
+                        }),
+                        icon_url: m.icon_url.clone(),
+                        description: m.description.clone(),
+                    })
+                });
+
+            let version = version
+                .map(|v| ContentItemVersion {
+                    id: v.id.clone(),
+                    version_number: v.version_number.clone(),
+                    file_name: file.file_name.clone(),
+                    date_published: Some(v.date_published.to_rfc3339()),
+                })
+                .or_else(|| {
+                    local.and_then(|m| {
+                        m.version_number.as_ref().map(|version_number| {
+                            ContentItemVersion {
+                                id: file.hash.clone(),
+                                version_number: version_number.clone(),
+                                file_name: file.file_name.clone(),
+                                date_published: None,
+                            }
+                        })
+                    })
+                });
 
             ContentItem {
                 file_name: file.file_name.clone(),
@@ -546,18 +960,8 @@ async fn profile_files_to_content_items(
                 size: file.size,
                 enabled: !file.file_name.ends_with(".disabled"),
                 project_type: file.project_type,
-                project: project.map(|p| ContentItemProject {
-                    id: p.id.clone(),
-                    slug: p.slug.clone(),
-                    title: p.title.clone(),
-                    icon_url: p.icon_url.clone(),
-                }),
-                version: version.map(|v| ContentItemVersion {
-                    id: v.id.clone(),
-                    version_number: v.version_number.clone(),
-                    file_name: file.file_name.clone(),
-                    date_published: Some(v.date_published.to_rfc3339()),
-                }),
+                project,
+                version,
                 owner,
                 has_update: file.update_version_id.is_some(),
                 update_version_id: file.update_version_id.clone(),
@@ -738,6 +1142,7 @@ pub async fn dependencies_to_content_items(
                     slug: project.slug.clone(),
                     title: project.title.clone(),
                     icon_url: project.icon_url.clone(),
+                    description: Some(project.description.clone()),
                 }),
                 version: version.map(|v| ContentItemVersion {
                     id: v.id.clone(),

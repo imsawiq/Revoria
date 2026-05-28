@@ -8,7 +8,7 @@ use crate::pack::install_from::{
 use crate::state::{
     CacheBehaviour, CachedEntry, ProfileInstallStage, SideType, cache_file_hash,
 };
-use crate::util::fetch::{fetch_mirrors, write};
+use crate::util::fetch::{fetch_mirrors_with_loading_bar, write};
 use crate::util::io;
 use crate::{State, profile};
 use async_zip::base::read::seek::ZipFileReader;
@@ -151,6 +151,7 @@ pub async fn install_zipped_mrpack_files(
         None,
         |project| {
             let profile_path = profile_path.clone();
+            let loading_bar = loading_bar.clone();
             async move {
                 //TODO: Future update: prompt user for optional files in a modpack
                 if let Some(env) = project.env
@@ -161,13 +162,14 @@ pub async fn install_zipped_mrpack_files(
                     return Ok(());
                 }
 
-                let file = fetch_mirrors(
+                let file = fetch_mirrors_with_loading_bar(
                     &project
                         .downloads
                         .iter()
                         .map(|x| &**x)
                         .collect::<Vec<&str>>(),
                     project.hashes.get(&PackFileHash::Sha1).map(|x| &**x),
+                    Some(&loading_bar),
                     &state.fetch_semaphore,
                     &state.pool,
                 )

@@ -37,85 +37,88 @@
 		</span>
 
 		<Teleport to="body">
-			<div
-				v-if="isOpen"
-				ref="dropdownRef"
-				class="fixed z-[10040] flex flex-col overflow-hidden rounded-[14px] border border-[--glass-border] bg-[--color-raised-bg] shadow-[--glass-shadow]"
-				:class="[
-					shouldRoundBottomCorners
-						? 'rounded-t-none'
-						: 'rounded-b-none',
-				]"
-				:style="dropdownStyle"
-				:role="listbox ? 'listbox' : 'menu'"
-				@mousedown.stop
-				@keydown="handleDropdownKeydown"
-			>
-				<div v-if="searchable" class="p-4">
-					<div class="iconified-input w-full rounded-xl border-[1px] border-solid border-[--glass-border] bg-[--color-button-bg]">
-						<SearchIcon aria-hidden="true" />
-						<input
-							ref="searchInputRef"
-							v-model="searchQuery"
-							type="text"
-							:placeholder="searchPlaceholder"
-							class=""
-							@keydown.stop="handleSearchKeydown"
-							@input="emit('searchInput', searchQuery)"
-						/>
-					</div>
-				</div>
-
-				<div v-if="searchable && filteredOptions.length > 0" class="h-px bg-[--glass-border]"></div>
-
+			<Transition :name="openDirection === 'up' ? 'combobox-dropdown-up' : 'combobox-dropdown'">
 				<div
-					v-if="filteredOptions.length > 0"
-					ref="optionsContainerRef"
-					class="flex flex-col gap-2 overflow-y-auto p-3"
-					:style="{ maxHeight: `${maxHeight}px` }"
+					v-if="isOpen"
+					ref="dropdownRef"
+					class="fixed z-[10040] flex flex-col overflow-hidden rounded-xl border border-[--glass-border] bg-[--color-raised-bg] shadow-[--glass-shadow]"
+					:class="[shouldRoundBottomCorners ? 'rounded-t-none' : 'rounded-b-none']"
+					:style="dropdownStyle"
+					:role="listbox ? 'listbox' : 'menu'"
+					@mousedown.stop
+					@keydown="handleDropdownKeydown"
 				>
-					<template v-for="(item, index) in filteredOptions" :key="item.key">
-						<div v-if="item.type === 'divider'" class="h-px bg-[--glass-border]"></div>
-						<component
-							:is="item.type === 'link' ? 'a' : 'span'"
-							v-else
-							:ref="(el: HTMLElement) => setOptionRef(el as HTMLElement, index)"
-							:href="item.type === 'link' && !item.disabled ? item.href : undefined"
-							:target="item.type === 'link' && !item.disabled ? item.target : undefined"
-							:role="listbox ? 'option' : 'menuitem'"
-							:aria-selected="listbox && item.value === modelValue"
-							:aria-disabled="item.disabled || undefined"
-							:data-focused="focusedIndex === index"
-							class="flex items-center gap-2.5 cursor-pointer rounded-xl p-3 text-left transition-colors duration-150 text-contrast hover:bg-[--color-button-bg-hover] focus:bg-[--color-button-bg-hover]"
-							:class="getOptionClasses(item, index)"
-							tabindex="-1"
-							@click="handleOptionClick(item, index)"
-							@mouseenter="!item.disabled && (focusedIndex = index)"
+					<div v-if="searchable" class="p-2">
+						<div
+							class="iconified-input w-full rounded-lg border-[1px] border-solid border-[--glass-border] bg-[--color-button-bg]"
 						>
-							<slot :name="`option-${item.value}`" :item="item">
-								<div class="flex items-center gap-2">
-									<component :is="item.icon" v-if="item.icon" class="h-5 w-5" />
-									<span
-										class="font-semibold leading-tight"
-										:class="item.value === modelValue ? 'text-contrast' : 'text-primary'"
-									>
-										{{ item.label }}
-									</span>
-								</div>
-							</slot>
-						</component>
+							<SearchIcon aria-hidden="true" />
+							<input
+								ref="searchInputRef"
+								v-model="searchQuery"
+								type="text"
+								:placeholder="searchPlaceholder"
+								class=""
+								@keydown.stop="handleSearchKeydown"
+								@input="emit('searchInput', searchQuery)"
+							/>
+						</div>
+					</div>
+
+					<div
+						v-if="searchable && filteredOptions.length > 0"
+						class="h-px bg-[--glass-border]"
+					></div>
+
+					<div
+						v-if="filteredOptions.length > 0"
+						ref="optionsContainerRef"
+						class="flex flex-col gap-1.5 overflow-y-auto p-2"
+						:style="{ maxHeight: `${maxHeight}px` }"
+					>
+						<template v-for="(item, index) in filteredOptions" :key="item.key">
+							<div v-if="item.type === 'divider'" class="h-px bg-[--glass-border]"></div>
+							<component
+								:is="item.type === 'link' ? 'a' : 'span'"
+								v-else
+								:ref="(el: HTMLElement) => setOptionRef(el as HTMLElement, index)"
+								:href="item.type === 'link' && !item.disabled ? item.href : undefined"
+								:target="item.type === 'link' && !item.disabled ? item.target : undefined"
+								:role="listbox ? 'option' : 'menuitem'"
+								:aria-selected="listbox && item.value === modelValue"
+								:aria-disabled="item.disabled || undefined"
+								:data-focused="focusedIndex === index"
+								class="flex cursor-pointer items-center gap-2.5 rounded-lg p-2.5 text-left text-contrast transition-colors duration-150 hover:bg-[--color-button-bg-hover] focus:bg-[--color-button-bg-hover]"
+								:class="getOptionClasses(item, index)"
+								tabindex="-1"
+								@click="handleOptionClick(item, index)"
+								@mouseenter="!item.disabled && (focusedIndex = index)"
+							>
+								<slot :name="`option-${item.value}`" :item="item">
+									<div class="flex min-w-0 items-center gap-2">
+										<component :is="item.icon" v-if="item.icon" class="h-4 w-4 shrink-0" />
+										<span
+											class="truncate font-semibold leading-tight"
+											:class="item.value === modelValue ? 'text-contrast' : 'text-primary'"
+										>
+											{{ item.label }}
+										</span>
+									</div>
+								</slot>
+							</component>
+						</template>
+					</div>
+
+					<div v-else-if="searchQuery" class="mb-2 p-4 text-center text-sm text-secondary">
+						{{ noOptionsMessage }}
+					</div>
+
+					<template v-if="slots['dropdown-footer']">
+						<div class="h-px bg-[--glass-border]"></div>
+						<slot name="dropdown-footer"></slot>
 					</template>
 				</div>
-
-				<div v-else-if="searchQuery" class="p-4 mb-2 text-center text-sm text-secondary">
-					{{ noOptionsMessage }}
-				</div>
-
-				<template v-if="slots['dropdown-footer']">
-					<div class="h-px bg-[--glass-border]"></div>
-					<slot name="dropdown-footer"></slot>
-				</template>
-			</div>
+			</Transition>
 		</Teleport>
 	</div>
 </template>
@@ -566,3 +569,32 @@ watch(filteredOptions, () => {
 	}
 })
 </script>
+
+<style scoped lang="scss">
+.combobox-dropdown-enter-active,
+.combobox-dropdown-leave-active,
+.combobox-dropdown-up-enter-active,
+.combobox-dropdown-up-leave-active {
+	transition:
+		opacity 140ms cubic-bezier(0.22, 1, 0.36, 1),
+		transform 140ms cubic-bezier(0.22, 1, 0.36, 1);
+	transform-origin: top center;
+}
+
+.combobox-dropdown-up-enter-active,
+.combobox-dropdown-up-leave-active {
+	transform-origin: bottom center;
+}
+
+.combobox-dropdown-enter-from,
+.combobox-dropdown-leave-to {
+	opacity: 0;
+	transform: translateY(-0.35rem) scale(0.98);
+}
+
+.combobox-dropdown-up-enter-from,
+.combobox-dropdown-up-leave-to {
+	opacity: 0;
+	transform: translateY(0.35rem) scale(0.98);
+}
+</style>
