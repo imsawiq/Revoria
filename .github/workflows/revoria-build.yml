@@ -183,8 +183,16 @@ jobs:
             "version": "${VERSION}",
             "notes": "Revoria ${VERSION}",
             "pub_date": "${PUB_DATE}",
-            "url": "${DOWNLOAD_URL}",
-            "signature": "${MAC_SIG}"
+            "platforms": {
+              "darwin-x86_64": {
+                "url": "${DOWNLOAD_URL}",
+                "signature": "${MAC_SIG}"
+              },
+              "darwin-aarch64": {
+                "url": "${DOWNLOAD_URL}",
+                "signature": "${MAC_SIG}"
+              }
+            }
           }
           EOF
 
@@ -224,8 +232,12 @@ jobs:
             "version": "${VERSION}",
             "notes": "Revoria ${VERSION}",
             "pub_date": "${PUB_DATE}",
-            "url": "${DOWNLOAD_URL}",
-            "signature": "${LINUX_SIG}"
+            "platforms": {
+              "linux-x86_64": {
+                "url": "${DOWNLOAD_URL}",
+                "signature": "${LINUX_SIG}"
+              }
+            }
           }
           EOF
 
@@ -260,8 +272,12 @@ jobs:
             "version": "$version",
             "notes": "Revoria $version",
             "pub_date": "$pubDate",
-            "url": "$downloadUrl",
-            "signature": "$sig"
+            "platforms": {
+              "windows-x86_64": {
+                "url": "$downloadUrl",
+                "signature": "$sig"
+              }
+            }
           }
           "@ | Set-Content -Path windows-x86_64.json -NoNewline
           Copy-Item windows-x86_64.json latest.json
