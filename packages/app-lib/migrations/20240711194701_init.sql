@@ -138,7 +138,6 @@ CREATE TABLE profiles (
     override_hook_pre_launch TEXT NULL,
     override_hook_wrapper TEXT NULL,
     override_hook_post_exit TEXT NULL,
-    sandbox INTEGER NOT NULL DEFAULT 0,
 
 
     PRIMARY KEY (path)

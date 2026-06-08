@@ -17,6 +17,7 @@ pub(crate) async fn connect() -> crate::Result<Pool<Sqlite>> {
     // checksums won't match the database. We patch the DB to match the compiled checksums.
     let _ = apply_migration_fix(&pool).await;
     let _ = repair_completed_initial_migration(&pool).await;
+    let _ = repair_partial_initial_migration(&pool).await;
 
     run_migrations_with_repair(&pool).await?;
 
@@ -188,6 +189,47 @@ async fn repair_completed_initial_migration(
     Ok(true)
 }
 
+async fn repair_partial_initial_migration(
+    pool: &Pool<Sqlite>,
+) -> crate::Result<bool> {
+    ensure_sqlx_migrations_table(pool).await?;
+
+    let exists = sqlx::query_scalar::<_, i64>(
+        "SELECT COUNT(*) FROM _sqlx_migrations WHERE version = ?1",
+    )
+    .bind(INITIAL_MIGRATION_VERSION)
+    .fetch_one(pool)
+    .await?
+        > 0;
+
+    if exists || !has_any_initial_schema_object(pool).await? {
+        return Ok(false);
+    }
+
+    bootstrap_initial_schema(pool).await?;
+
+    if !initial_schema_exists(pool).await? {
+        return Ok(false);
+    }
+
+    let migrator = sqlx::migrate!();
+    let Some(migration) = migrator
+        .iter()
+        .find(|migration| migration.version == INITIAL_MIGRATION_VERSION)
+    else {
+        return Ok(false);
+    };
+
+    insert_migration_state(pool, migration).await?;
+    tracing::warn!(
+        "Recovered partial SQLx state for initial migration {} ({})",
+        migration.version,
+        migration.description
+    );
+
+    Ok(true)
+}
+
 async fn run_migrations_with_repair(pool: &Pool<Sqlite>) -> crate::Result<()> {
     let migrator = sqlx::migrate!();
     let max_attempts = migrator.iter().count() + 1;
@@ -321,6 +363,227 @@ async fn initial_schema_exists(pool: &Pool<Sqlite>) -> crate::Result<bool> {
     }
 
     Ok(true)
+}
+
+async fn has_any_initial_schema_object(
+    pool: &Pool<Sqlite>,
+) -> crate::Result<bool> {
+    for (type_, name) in INITIAL_SCHEMA_OBJECTS {
+        let exists = sqlx::query_scalar::<_, i64>(
+            "SELECT COUNT(*) FROM sqlite_master WHERE type = ?1 AND name = ?2",
+        )
+        .bind(type_)
+        .bind(name)
+        .fetch_one(pool)
+        .await?
+            > 0;
+
+        if exists {
+            return Ok(true);
+        }
+    }
+
+    Ok(false)
+}
+
+async fn bootstrap_initial_schema(pool: &Pool<Sqlite>) -> crate::Result<()> {
+    let mut tx = pool.begin().await?;
+
+    sqlx::query(
+        r#"
+        CREATE TABLE IF NOT EXISTS settings (
+            id INTEGER NOT NULL CHECK (id = 0),
+            max_concurrent_downloads INTEGER NOT NULL DEFAULT 10,
+            max_concurrent_writes INTEGER NOT NULL DEFAULT 10,
+            theme TEXT NOT NULL DEFAULT 'oled',
+            default_page TEXT NOT NULL DEFAULT 'home',
+            collapsed_navigation INTEGER NOT NULL DEFAULT TRUE,
+            advanced_rendering INTEGER NOT NULL DEFAULT TRUE,
+            native_decorations INTEGER NOT NULL DEFAULT FALSE,
+            telemetry INTEGER NOT NULL DEFAULT FALSE,
+            discord_rpc INTEGER NOT NULL DEFAULT TRUE,
+            developer_mode INTEGER NOT NULL DEFAULT FALSE,
+            onboarded INTEGER NOT NULL DEFAULT FALSE,
+            extra_launch_args JSONB NOT NULL,
+            custom_env_vars JSONB NOT NULL,
+            mc_memory_max INTEGER NOT NULL DEFAULT 2048,
+            mc_force_fullscreen INTEGER NOT NULL DEFAULT FALSE,
+            mc_game_resolution_x INTEGER NOT NULL DEFAULT 854,
+            mc_game_resolution_y INTEGER NOT NULL DEFAULT 480,
+            hide_on_process_start INTEGER NOT NULL DEFAULT FALSE,
+            hook_pre_launch TEXT NULL,
+            hook_wrapper TEXT NULL,
+            hook_post_exit TEXT NULL,
+            custom_dir TEXT NULL,
+            prev_custom_dir TEXT NULL,
+            migrated INTEGER NOT NULL DEFAULT FALSE,
+            PRIMARY KEY (id)
+        );
+        "#,
+    )
+    .execute(&mut *tx)
+    .await?;
+
+    sqlx::query(
+        "INSERT OR IGNORE INTO settings (id, extra_launch_args, custom_env_vars) VALUES (0, jsonb_array(), jsonb_array())",
+    )
+    .execute(&mut *tx)
+    .await?;
+
+    sqlx::query(
+        r#"
+        CREATE TABLE IF NOT EXISTS java_versions (
+            major_version INTEGER NOT NULL,
+            full_version TEXT NOT NULL,
+            architecture TEXT NOT NULL,
+            path TEXT NOT NULL,
+            PRIMARY KEY (major_version)
+        );
+        "#,
+    )
+    .execute(&mut *tx)
+    .await?;
+
+    sqlx::query(
+        r#"
+        CREATE TABLE IF NOT EXISTS minecraft_users (
+            uuid TEXT NOT NULL,
+            active INTEGER NOT NULL DEFAULT FALSE,
+            username TEXT NOT NULL,
+            access_token TEXT NOT NULL,
+            refresh_token TEXT NOT NULL,
+            expires INTEGER NOT NULL,
+            PRIMARY KEY (uuid)
+        );
+        "#,
+    )
+    .execute(&mut *tx)
+    .await?;
+
+    sqlx::query(
+        "CREATE UNIQUE INDEX IF NOT EXISTS minecraft_users_active ON minecraft_users(active);",
+    )
+    .execute(&mut *tx)
+    .await?;
+
+    sqlx::query(
+        r#"
+        CREATE TABLE IF NOT EXISTS minecraft_device_tokens (
+            id INTEGER NOT NULL CHECK (id = 0),
+            uuid TEXT NOT NULL,
+            private_key TEXT NOT NULL,
+            x TEXT NOT NULL,
+            y TEXT NOT NULL,
+            issue_instant INTEGER NOT NULL,
+            not_after INTEGER NOT NULL,
+            token TEXT NOT NULL,
+            display_claims JSONB NOT NULL,
+            PRIMARY KEY (id)
+        );
+        "#,
+    )
+    .execute(&mut *tx)
+    .await?;
+
+    sqlx::query(
+        r#"
+        CREATE TABLE IF NOT EXISTS modrinth_users (
+            id TEXT NOT NULL,
+            active INTEGER NOT NULL DEFAULT FALSE,
+            session_id TEXT NOT NULL,
+            expires INTEGER NOT NULL,
+            PRIMARY KEY (id)
+        );
+        "#,
+    )
+    .execute(&mut *tx)
+    .await?;
+
+    sqlx::query(
+        "CREATE UNIQUE INDEX IF NOT EXISTS modrinth_users_active ON modrinth_users(active);",
+    )
+    .execute(&mut *tx)
+    .await?;
+
+    sqlx::query(
+        r#"
+        CREATE TABLE IF NOT EXISTS cache (
+            id TEXT NOT NULL,
+            data_type TEXT NOT NULL,
+            alias TEXT NULL,
+            data JSONB NULL,
+            expires INTEGER NOT NULL,
+            UNIQUE (data_type, alias),
+            PRIMARY KEY (id, data_type)
+        );
+        "#,
+    )
+    .execute(&mut *tx)
+    .await?;
+
+    sqlx::query(
+        r#"
+        CREATE TABLE IF NOT EXISTS profiles (
+            path TEXT NOT NULL,
+            install_stage TEXT NOT NULL,
+            name TEXT NOT NULL,
+            icon_path TEXT NULL,
+            game_version TEXT NOT NULL,
+            mod_loader TEXT NOT NULL,
+            mod_loader_version TEXT NULL,
+            groups JSONB NOT NULL,
+            linked_project_id TEXT NULL,
+            linked_version_id TEXT NULL,
+            locked INTEGER NULL,
+            created INTEGER NOT NULL,
+            modified INTEGER NOT NULL,
+            last_played INTEGER NULL,
+            submitted_time_played INTEGER NOT NULL DEFAULT 0,
+            recent_time_played INTEGER NOT NULL DEFAULT 0,
+            override_java_path TEXT NULL,
+            override_extra_launch_args JSONB NOT NULL,
+            override_custom_env_vars JSONB NOT NULL,
+            override_mc_memory_max INTEGER NULL,
+            override_mc_force_fullscreen INTEGER NULL,
+            override_mc_game_resolution_x INTEGER NULL,
+            override_mc_game_resolution_y INTEGER NULL,
+            override_hook_pre_launch TEXT NULL,
+            override_hook_wrapper TEXT NULL,
+            override_hook_post_exit TEXT NULL,
+            PRIMARY KEY (path)
+        );
+        "#,
+    )
+    .execute(&mut *tx)
+    .await?;
+
+    sqlx::query(
+        r#"
+        CREATE TABLE IF NOT EXISTS processes (
+            pid INTEGER NOT NULL,
+            start_time INTEGER NOT NULL,
+            name TEXT NOT NULL,
+            executable TEXT NOT NULL,
+            profile_path TEXT NOT NULL,
+            post_exit_command TEXT NULL,
+            UNIQUE (pid),
+            PRIMARY KEY (pid),
+            FOREIGN KEY (profile_path) REFERENCES profiles(path)
+        );
+        "#,
+    )
+    .execute(&mut *tx)
+    .await?;
+
+    sqlx::query(
+        "CREATE INDEX IF NOT EXISTS processes_profile_path ON processes(profile_path);",
+    )
+    .execute(&mut *tx)
+    .await?;
+
+    tx.commit().await?;
+
+    Ok(())
 }
 
 async fn ensure_sqlx_migrations_table(
