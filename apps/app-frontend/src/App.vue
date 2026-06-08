@@ -215,7 +215,9 @@ const authUnreachable = computed(() => {
 onMounted(async () => {
 	const currentWindow = getCurrentWindow()
 	await currentWindow.show()
-	await currentWindow.setFocus()
+	await currentWindow.setFocus().catch((error) => {
+		console.warn('Failed to focus main window', error)
+	})
 	await useCheckDisableMouseover()
 	await syncLauncherThemeIcon()
 	await syncDiscordRpcLanguage(launcherLanguage.value)
