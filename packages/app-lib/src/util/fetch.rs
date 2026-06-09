@@ -6,6 +6,7 @@ use crate::event::LoadingBarId;
 use crate::event::emit::{check_loading_cancelled, emit_loading};
 use crate::state::{ProxyType, Settings};
 use bytes::Bytes;
+use reqwest::header::{ACCEPT_ENCODING, HeaderValue};
 use reqwest::{IntoUrl, Method};
 use serde::de::DeserializeOwned;
 use std::ffi::OsStr;
@@ -22,21 +23,46 @@ pub struct IoSemaphore(pub Semaphore);
 pub struct FetchSemaphore(pub Semaphore);
 
 #[derive(Debug)]
-pub struct ReqwestClientHandle(RwLock<reqwest::Client>);
+pub struct ReqwestClientHandle {
+    client: RwLock<reqwest::Client>,
+    raw_client: RwLock<reqwest::Client>,
+}
 
 impl ReqwestClientHandle {
     fn new() -> Self {
-        Self(RwLock::new(
-            build_reqwest_client(None).expect("Reqwest Client Building Failed"),
-        ))
+        Self {
+            client: RwLock::new(
+                build_reqwest_client(None, false)
+                    .expect("Reqwest Client Building Failed"),
+            ),
+            raw_client: RwLock::new(
+                build_reqwest_client(None, true)
+                    .expect("Raw Reqwest Client Building Failed"),
+            ),
+        }
     }
 
     pub fn client(&self) -> reqwest::Client {
-        self.0.read().expect("Reqwest client poisoned").clone()
+        self.client.read().expect("Reqwest client poisoned").clone()
     }
 
-    pub fn replace(&self, client: reqwest::Client) {
-        *self.0.write().expect("Reqwest client poisoned") = client;
+    pub fn raw_client(&self) -> reqwest::Client {
+        self.raw_client
+            .read()
+            .expect("Raw reqwest client poisoned")
+            .clone()
+    }
+
+    pub fn replace(
+        &self,
+        client: reqwest::Client,
+        raw_client: reqwest::Client,
+    ) {
+        *self.client.write().expect("Reqwest client poisoned") = client;
+        *self
+            .raw_client
+            .write()
+            .expect("Raw reqwest client poisoned") = raw_client;
     }
 
     pub fn request<U: IntoUrl>(
@@ -45,6 +71,14 @@ impl ReqwestClientHandle {
         url: U,
     ) -> reqwest::RequestBuilder {
         self.client().request(method, url)
+    }
+
+    pub fn raw_request<U: IntoUrl>(
+        &self,
+        method: Method,
+        url: U,
+    ) -> reqwest::RequestBuilder {
+        self.raw_client().request(method, url)
     }
 
     pub fn get<U: IntoUrl>(&self, url: U) -> reqwest::RequestBuilder {
@@ -69,17 +103,25 @@ pub static REQWEST_CLIENT: LazyLock<ReqwestClientHandle> =
 
 fn build_reqwest_client(
     proxy_url: Option<&str>,
+    raw_downloads: bool,
 ) -> crate::Result<reqwest::Client> {
     let mut headers = reqwest::header::HeaderMap::new();
     let header =
         reqwest::header::HeaderValue::from_str(LAUNCHER_USER_AGENT).unwrap();
     headers.insert(reqwest::header::USER_AGENT, header);
+    if raw_downloads {
+        headers.insert(ACCEPT_ENCODING, HeaderValue::from_static("identity"));
+    }
 
     let mut builder = reqwest::Client::builder()
         .tcp_keepalive(Some(time::Duration::from_secs(10)))
         .connect_timeout(Duration::from_secs(20))
         .read_timeout(Duration::from_secs(45))
         .default_headers(headers);
+
+    if raw_downloads {
+        builder = builder.no_gzip().no_deflate();
+    }
 
     if let Some(proxy_url) = proxy_url {
         let proxy = reqwest::Proxy::all(proxy_url).map_err(|err| {
@@ -144,15 +186,19 @@ pub fn proxy_url_from_settings(
 
 pub fn build_reqwest_client_from_settings(
     settings: &Settings,
-) -> crate::Result<reqwest::Client> {
+) -> crate::Result<(reqwest::Client, reqwest::Client)> {
     let proxy_url = proxy_url_from_settings(settings)?;
-    build_reqwest_client(proxy_url.as_deref())
+    Ok((
+        build_reqwest_client(proxy_url.as_deref(), false)?,
+        build_reqwest_client(proxy_url.as_deref(), true)?,
+    ))
 }
 
 pub fn configure_reqwest_client_from_settings(
     settings: &Settings,
 ) -> crate::Result<()> {
-    REQWEST_CLIENT.replace(build_reqwest_client_from_settings(settings)?);
+    let (client, raw_client) = build_reqwest_client_from_settings(settings)?;
+    REQWEST_CLIENT.replace(client, raw_client);
     Ok(())
 }
 
@@ -220,7 +266,11 @@ pub async fn fetch_advanced(
     let mut last_error = None;
 
     for attempt in 1..=total_attempts {
-        let mut req = REQWEST_CLIENT.request(method.clone(), url);
+        let mut req = if loading_bar.is_some() {
+            REQWEST_CLIENT.raw_request(method.clone(), url)
+        } else {
+            REQWEST_CLIENT.request(method.clone(), url)
+        };
 
         if let Some(body) = json_body.clone() {
             req = req.json(&body);

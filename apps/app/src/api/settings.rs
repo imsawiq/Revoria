@@ -47,7 +47,7 @@ pub async fn settings_test_proxy(
         ip: String,
     }
 
-    let client =
+    let (client, _) =
         theseus::util::fetch::build_reqwest_client_from_settings(&settings)?;
 
     let ip = client

@@ -274,13 +274,30 @@ pub async fn install_zipped_mrpack_files(
         profile::edit_icon(&profile_path, Some(&potential_icon)).await?;
     }
 
+    crate::api::profile::edit(&profile_path, |prof| {
+        prof.install_stage = ProfileInstallStage::PackInstalled;
+        async { Ok(()) }
+    })
+    .await?;
+
     if let Some(profile_val) = profile::get(&profile_path).await? {
-        crate::launcher::install_minecraft(
+        if let Err(err) = crate::launcher::install_minecraft(
             &profile_val,
             Some(loading_bar),
             false,
         )
-        .await?;
+        .await
+        {
+            tracing::warn!(
+                "Pack files were imported for profile {}, but Minecraft installation failed: {err}",
+                profile_path
+            );
+            crate::api::profile::edit(&profile_path, |prof| {
+                prof.install_stage = ProfileInstallStage::PackInstalled;
+                async { Ok(()) }
+            })
+            .await?;
+        }
     }
 
     Ok::<String, crate::Error>(profile_path.clone())

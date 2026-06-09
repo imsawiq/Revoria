@@ -17,10 +17,10 @@ pub async fn get() -> crate::Result<Settings> {
 #[tracing::instrument]
 pub async fn set(settings: Settings) -> crate::Result<()> {
     let state = State::get().await?;
-    let client =
+    let (client, raw_client) =
         crate::util::fetch::build_reqwest_client_from_settings(&settings)?;
     settings.update(&state.pool).await?;
-    crate::util::fetch::REQWEST_CLIENT.replace(client);
+    crate::util::fetch::REQWEST_CLIENT.replace(client, raw_client);
 
     Ok(())
 }
