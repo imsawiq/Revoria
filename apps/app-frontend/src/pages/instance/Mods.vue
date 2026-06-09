@@ -696,6 +696,16 @@ function getOverflowOptions(item: ContentItem): OverflowMenuOption[] {
 
 async function initProjects(cacheBehaviour?: CacheBehaviour) {
 	if (!props.instance) return
+	if (props.instance.install_stage !== 'installed') {
+		projects.value = []
+		linkedModpackProject.value = null
+		linkedModpackVersion.value = null
+		linkedModpackOwner.value = null
+		linkedModpackHasUpdate.value = false
+		linkedModpackUpdateVersionId.value = null
+		loading.value = false
+		return
+	}
 
 	const [contentItems, modpackInfo, allCategories] = await Promise.all([
 		get_content_items(props.instance.path, cacheBehaviour).catch(handleError),

@@ -11,7 +11,7 @@ use serde::de::DeserializeOwned;
 use std::ffi::OsStr;
 use std::path::{Path, PathBuf};
 use std::sync::{LazyLock, RwLock};
-use std::time::{self};
+use std::time::{self, Duration};
 use tokio::sync::Semaphore;
 use tokio::{fs::File, io::AsyncWriteExt};
 use url::Url;
@@ -77,6 +77,8 @@ fn build_reqwest_client(
 
     let mut builder = reqwest::Client::builder()
         .tcp_keepalive(Some(time::Duration::from_secs(10)))
+        .connect_timeout(Duration::from_secs(20))
+        .read_timeout(Duration::from_secs(45))
         .default_headers(headers);
 
     if let Some(proxy_url) = proxy_url {
@@ -154,7 +156,7 @@ pub fn configure_reqwest_client_from_settings(
     Ok(())
 }
 
-const FETCH_ATTEMPTS: usize = 3;
+const FETCH_ATTEMPTS: usize = 5;
 
 #[tracing::instrument(skip(semaphore))]
 pub async fn fetch(
@@ -214,7 +216,10 @@ pub async fn fetch_advanced(
         None
     };
 
-    for attempt in 1..=(FETCH_ATTEMPTS + 1) {
+    let total_attempts = FETCH_ATTEMPTS + 1;
+    let mut last_error = None;
+
+    for attempt in 1..=total_attempts {
         let mut req = REQWEST_CLIENT.request(method.clone(), url);
 
         if let Some(body) = json_body.clone() {
@@ -234,6 +239,15 @@ pub async fn fetch_advanced(
             Ok(resp) => {
                 if resp.status().is_server_error() && attempt <= FETCH_ATTEMPTS
                 {
+                    last_error =
+                        Some(format!("server returned {}", resp.status()));
+                    wait_before_retry(
+                        url,
+                        attempt,
+                        total_attempts,
+                        last_error.as_deref(),
+                    )
+                    .await;
                     continue;
                 }
                 if resp.status().is_client_error()
@@ -254,9 +268,7 @@ pub async fn fetch_advanced(
                         let mut bytes = Vec::new();
                         while let Some(item) = stream.next().await {
                             check_loading_cancelled(bar)?;
-                            let chunk = item.or(Err(ErrorKind::NoValueFor(
-                                "fetch bytes".to_string(),
-                            )))?;
+                            let chunk = item?;
                             bytes.append(&mut chunk.to_vec());
                             emit_loading(
                                 bar,
@@ -279,6 +291,16 @@ pub async fn fetch_advanced(
                         let hash = sha1_async(bytes.clone()).await?;
                         if &*hash != sha1 {
                             if attempt <= FETCH_ATTEMPTS {
+                                last_error = Some(format!(
+                                    "sha1 mismatch: expected {sha1}, got {hash}"
+                                ));
+                                wait_before_retry(
+                                    url,
+                                    attempt,
+                                    total_attempts,
+                                    last_error.as_deref(),
+                                )
+                                .await;
                                 continue;
                             } else {
                                 return Err(ErrorKind::HashError(
@@ -293,19 +315,59 @@ pub async fn fetch_advanced(
                     tracing::trace!("Done downloading URL {url}");
                     return Ok(bytes);
                 } else if attempt <= FETCH_ATTEMPTS {
+                    if let Err(err) = bytes {
+                        last_error = Some(err.to_string());
+                        wait_before_retry(
+                            url,
+                            attempt,
+                            total_attempts,
+                            last_error.as_deref(),
+                        )
+                        .await;
+                    }
                     continue;
                 } else if let Err(err) = bytes {
                     return Err(err.into());
                 }
             }
-            Err(_) if attempt <= FETCH_ATTEMPTS => continue,
+            Err(err) if attempt <= FETCH_ATTEMPTS => {
+                last_error = Some(err.to_string());
+                wait_before_retry(
+                    url,
+                    attempt,
+                    total_attempts,
+                    last_error.as_deref(),
+                )
+                .await;
+                continue;
+            }
             Err(err) => {
                 return Err(err.into());
             }
         }
     }
 
-    unreachable!()
+    Err(ErrorKind::NoValueFor(format!(
+        "fetch bytes from {url} after {total_attempts} attempts{}",
+        last_error
+            .map(|err| format!("; last error: {err}"))
+            .unwrap_or_default()
+    ))
+    .into())
+}
+
+async fn wait_before_retry(
+    url: &str,
+    attempt: usize,
+    total_attempts: usize,
+    reason: Option<&str>,
+) {
+    tracing::warn!(
+        "Fetch attempt {attempt}/{total_attempts} failed for {url}: {}",
+        reason.unwrap_or("unknown error")
+    );
+
+    tokio::time::sleep(Duration::from_millis(250 * attempt as u64)).await;
 }
 
 /// Downloads a file from specified mirrors

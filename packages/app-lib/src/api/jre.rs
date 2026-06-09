@@ -63,17 +63,25 @@ pub async fn auto_install_java(java_version: u32) -> crate::Result<PathBuf> {
     )
     .await?;
 
+    if let Some(java) = find_filtered_jres(Some(java_version)).await?.first() {
+        tracing::info!(
+            "Using existing Java {} at {}",
+            java.parsed_version,
+            java.path
+        );
+        return Ok(PathBuf::from(&java.path));
+    }
+
     #[derive(Deserialize)]
     struct Package {
         pub download_url: String,
-        pub name: PathBuf,
     }
 
     emit_loading(&loading_bar, 0.0, Some("Fetching java version"))?;
     let packages = fetch_json::<Vec<Package>>(
                 Method::GET,
                 &format!(
-                    "https://api.azul.com/metadata/v1/zulu/packages?arch={}&java_version={}&os={}&archive_type=zip&javafx_bundled=false&java_package_type=jre&page_size=1",
+                    "https://api.azul.com/metadata/v1/zulu/packages?arch={}&java_version={}&os={}&archive_type=zip&javafx_bundled=false&java_package_type=jre&page_size=5",
                     std::env::consts::ARCH, java_version, std::env::consts::OS
                 ),
                 None,
@@ -83,8 +91,28 @@ pub async fn auto_install_java(java_version: u32) -> crate::Result<PathBuf> {
             ).await?;
     emit_loading(&loading_bar, 10.0, Some("Downloading java version"))?;
 
-    if let Some(download) = packages.first() {
-        let file = fetch_advanced(
+    if packages.is_empty() {
+        return Err(crate::ErrorKind::LauncherError(format!(
+            "No Java Version found for Java version {}, OS {}, and Architecture {}",
+            java_version,
+            std::env::consts::OS,
+            std::env::consts::ARCH,
+        ))
+        .into());
+    }
+
+    let path = state.directories.java_versions_dir();
+    let mut last_error = None;
+
+    for (index, download) in packages.iter().enumerate() {
+        let progress_message = format!(
+            "Downloading java version ({}/{})",
+            index + 1,
+            packages.len()
+        );
+        emit_loading(&loading_bar, 0.0, Some(&progress_message))?;
+
+        let file = match fetch_advanced(
             Method::GET,
             &download.download_url,
             None,
@@ -94,43 +122,69 @@ pub async fn auto_install_java(java_version: u32) -> crate::Result<PathBuf> {
             &state.fetch_semaphore,
             &state.pool,
         )
-        .await?;
-
-        let path = state.directories.java_versions_dir();
-
-        let mut archive = zip::ZipArchive::new(std::io::Cursor::new(file))
-            .map_err(|_| {
-                crate::Error::from(crate::ErrorKind::InputError(
-                    "Failed to read java zip".to_string(),
-                ))
-            })?;
-
-        // removes the old installation of java
-        if let Some(file) = archive.file_names().next()
-            && let Some(dir) = file.split('/').next()
+        .await
         {
-            let path = path.join(dir);
-
-            if path.exists() {
-                io::remove_dir_all(path).await?;
+            Ok(file) => file,
+            Err(err) => {
+                tracing::warn!(
+                    "Failed to download Java {} candidate {} from {}: {err}",
+                    java_version,
+                    index + 1,
+                    download.download_url
+                );
+                last_error = Some(err.to_string());
+                continue;
             }
+        };
+
+        let mut archive = match zip::ZipArchive::new(std::io::Cursor::new(file))
+        {
+            Ok(archive) => archive,
+            Err(err) => {
+                tracing::warn!(
+                    "Failed to read Java {} candidate {} zip: {err}",
+                    java_version,
+                    index + 1
+                );
+                last_error = Some(format!("Failed to read java zip: {err}"));
+                continue;
+            }
+        };
+
+        let Some(archive_root) = archive
+            .file_names()
+            .next()
+            .and_then(|file| file.split('/').next())
+            .filter(|dir| !dir.is_empty())
+            .map(ToOwned::to_owned)
+        else {
+            last_error =
+                Some("Java zip did not contain a root directory".to_string());
+            continue;
+        };
+
+        let install_path = path.join(&archive_root);
+
+        if install_path.exists() {
+            io::remove_dir_all(&install_path).await?;
         }
 
         emit_loading(&loading_bar, 0.0, Some("Extracting java"))?;
-        archive.extract(&path).map_err(|_| {
-            crate::Error::from(crate::ErrorKind::InputError(
-                "Failed to extract java zip".to_string(),
-            ))
-        })?;
+        if let Err(err) = archive.extract(&path) {
+            tracing::warn!(
+                "Failed to extract Java {} candidate {}: {err}",
+                java_version,
+                index + 1
+            );
+            if install_path.exists() {
+                let _ = io::remove_dir_all(&install_path).await;
+            }
+            last_error = Some(format!("Failed to extract java zip: {err}"));
+            continue;
+        }
+
         emit_loading(&loading_bar, 10.0, Some("Done extracting java"))?;
-        let mut base_path = path.join(
-            download
-                .name
-                .file_stem()
-                .unwrap_or_default()
-                .to_string_lossy()
-                .to_string(),
-        );
+        let mut base_path = install_path;
 
         #[cfg(target_os = "macos")]
         {
@@ -147,13 +201,17 @@ pub async fn auto_install_java(java_version: u32) -> crate::Result<PathBuf> {
             base_path = base_path.join("bin").join(jre::JAVA_BIN)
         }
 
-        Ok(base_path)
-    } else {
-        Err(crate::ErrorKind::LauncherError(format!(
-                    "No Java Version found for Java version {}, OS {}, and Architecture {}",
-                    java_version, std::env::consts::OS, std::env::consts::ARCH,
-                )).into())
+        return Ok(base_path);
     }
+
+    Err(crate::ErrorKind::LauncherError(format!(
+        "Failed to download Java version {java_version} from Azul after {} candidates{}",
+        packages.len(),
+        last_error
+            .map(|err| format!("; last error: {err}"))
+            .unwrap_or_default()
+    ))
+    .into())
 }
 
 // Validates JRE at a given at a given path
